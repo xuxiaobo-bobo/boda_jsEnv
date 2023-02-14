@@ -17,7 +17,7 @@ const env=require(`${config_path}/env.config`)
 
 fs.writeFileSync(`${run_path}/log.txt`,"")
 
-let bohtml_=fs.readFileSync('D:\\My_Dir\\env_xbb_lastest_jsdom\\run\\run.html').toString('utf-8')
+let bohtml_=fs.readFileSync('.\\env_xbb_lastest_jsdom\\run\\run.html').toString('utf-8')
 const dom = new JSDOM(bohtml_,
     {
         url: "http://www.fangdi.com.cn/",
