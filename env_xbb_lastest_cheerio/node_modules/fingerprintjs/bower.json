@@ -1,0 +1,6 @@
+{
+  "name": "fingerprint",
+  "version": "0.5.3",
+  "main": ["fingerprint.js"],
+  "ignore": [".travis.yml", "specs", "build", "node_modules"]
+}

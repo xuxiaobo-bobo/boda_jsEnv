@@ -1,0 +1,22 @@
+{
+  "name": "iconv",
+  "version": "3.0.1",
+  "description": "Text recoding in JavaScript for fun and profit!",
+  "homepage": "https://github.com/bnoordhuis/node-iconv",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bnoordhuis/node-iconv.git"
+  },
+  "author": {
+    "name": "Ben Noordhuis",
+    "email": "info@bnoordhuis.nl"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "license": "ISC",
+  "readmeFilename": "README.md",
+  "scripts": {
+    "test": "node test/run-tests.js"
+  }
+}

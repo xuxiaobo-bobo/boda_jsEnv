@@ -1,0 +1,25 @@
+{
+  "name": "threads",
+  "version": "0.8.0",
+  "main": "dist/threads.browser.js",
+  "homepage": "https://github.com/andywer/threads.js",
+  "authors": [
+    "Andy Wermke <andy@dev.next-step-software.com>"
+  ],
+  "description": "Easy to use, yet powerful multi-threading library for node.js and the browser!",
+  "license": "MIT",
+  "keywords": [
+    "threads",
+    "web worker",
+    "cluster",
+    "child_process",
+    "threadpool",
+    "spawn",
+    "fork",
+    "parallel"
+  ],
+  "ignore": [
+    "node_modules",
+    "test"
+  ]
+}

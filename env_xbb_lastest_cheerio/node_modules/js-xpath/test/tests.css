@@ -1,0 +1,4 @@
+#qunit-tests .fail .fail {
+    font-family: monospace;
+    white-space: pre;
+}
