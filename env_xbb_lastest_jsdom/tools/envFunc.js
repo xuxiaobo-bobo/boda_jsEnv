@@ -1,8 +1,286 @@
 // 浏览器接口具体的实现
 !function () {
-    bodavm.envFunc.window_document_get=function window_document_get(){
-        return document
+    bodavm.envFunc.XMLHttpRequestEventTarget_onabort_set=function XMLHttpRequestEventTarget_onabort_set(){
+        // debugger
+        // this._boarg=
+        if (arguments.length >1){return bodavm.toolsFunc.throwError('TypeError','XMLHttpRequestEventTarget_onabort_set')}
+        let arg=arguments[0]
+        this._boarg.onabort=arg
+        console.log(`XMLHttpRequestEventTarget_onabort_set` ,`arg->${arg}`);
+        return arg
     }
+
+    bodavm.envFunc.XMLHttpRequestEventTarget_onerror_set=function XMLHttpRequestEventTarget_onerror_set(){
+        // debugger
+        // this._boarg=
+        if (arguments.length >1){return bodavm.toolsFunc.throwError('TypeError','XMLHttpRequestEventTarget_onerror_set')}
+        let arg=arguments[0]
+        this._boarg.onerror=arg
+        console.log(`XMLHttpRequestEventTarget_onerror_set` ,`arg->${arg}`);
+        return arg
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_onload_set=function XMLHttpRequestEventTarget_onload_set(){
+        if (arguments.length >1){return bodavm.toolsFunc.throwError('TypeError','XMLHttpRequestEventTarget_onload_set')}
+        let arg=arguments[0]
+        this._boarg.onload=arg
+        console.log(`XMLHttpRequestEventTarget_onload_set` ,`arg->${arg}`);
+        return arg
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_onloadend_set=function XMLHttpRequestEventTarget_onloadend_set(){
+        if (arguments.length >1){return bodavm.toolsFunc.throwError('TypeError','XMLHttpRequestEventTarget_onloadend_set')}
+        let arg=arguments[0]
+        this._boarg.onloadend=arg
+        console.log(`XMLHttpRequestEventTarget_onloadend_set` ,`arg->${arg}`);
+        return arg
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_onloadstart_set=function XMLHttpRequestEventTarget_onloadstart_set(){
+        if (arguments.length >1){return bodavm.toolsFunc.throwError('TypeError','XMLHttpRequestEventTarget_onloadstart_set')}
+        let arg=arguments[0]
+        this._boarg.onloadstart=arg
+        console.log(`XMLHttpRequestEventTarget_onloadstart_set` ,`arg->${arg}`);
+        return arg
+    }
+
+    bodavm.envFunc.XMLHttpRequestEventTarget_onprogress_set=function XMLHttpRequestEventTarget_onprogress_set(){
+        if (arguments.length >1){return bodavm.toolsFunc.throwError('TypeError','XMLHttpRequestEventTarget_onprogress_set')}
+        let arg=arguments[0]
+        this._boarg.onprogress=arg
+        console.log(`XMLHttpRequestEventTarget_onprogress_set` ,`arg->${arg}`);
+        return arg
+    }
+
+    bodavm.envFunc.XMLHttpRequestEventTarget_ontimeout_set=function XMLHttpRequestEventTarget_ontimeout_set(){
+        if (arguments.length >1){return bodavm.toolsFunc.throwError('TypeError','XMLHttpRequestEventTarget_ontimeout_set')}
+        let arg=arguments[0]
+        this._boarg.ontimeout=arg
+        console.log(`XMLHttpRequestEventTarget_ontimeout_set` ,`arg->${arg}`);
+        return arg
+    }
+
+
+
+    bodavm.envFunc.XMLHttpRequest_upload_get=function XMLHttpRequest_upload_get(){
+        let upload=this._boarg.upload
+        console.log(`XMLHttpRequestEventTarget_upload_get ` ,`upload -> ${upload}`);
+        return upload
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_ontimeout_get=function XMLHttpRequestEventTarget_ontimeout_get(){
+        let ontimeout=this._boarg.ontimeout
+        console.log(`XMLHttpRequestEventTarget_ontimeout_get ` ,`ontimeout -> ${ontimeout}`);
+        return ontimeout
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_onprogress_get=function XMLHttpRequestEventTarget_onprogress_get(){
+        let onprogress=this._boarg.onprogress
+        console.log(`XMLHttpRequestEventTarget_onprogress_get ` ,`onprogress -> ${onprogress}`);
+        return onprogress
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_onloadend_get=function XMLHttpRequestEventTarget_onloadend_get(){
+        let onloadend=this._boarg.onloadend
+        console.log(`XMLHttpRequestEventTarget_onloadend_get ` ,`onloadend -> ${onloadend}`);
+        return onloadend
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_onloadstart_get=function XMLHttpRequestEventTarget_onloadstart_get(){
+        // debugger
+        let onloadstart=this._boarg.onloadstart
+        console.log(`XMLHttpRequestEventTarget_onloadstart_get ` ,`onloadstart -> ${onloadstart}`);
+        return onloadstart
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_onerror_get=function XMLHttpRequestEventTarget_onerror_get(){
+        let onerror=this._boarg.onerror
+        console.log(`XMLHttpRequestEventTarget_onerror_get ` ,`onerror -> ${onerror}`);
+        return onerror
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_onload_get=function XMLHttpRequestEventTarget_onload_get(){
+        let onload=this._boarg.onload
+        console.log(`XMLHttpRequestEventTarget_onload_get ` ,`onerror -> ${onload}`);
+        return onload
+    }
+    bodavm.envFunc.XMLHttpRequestEventTarget_onabort_get=function XMLHttpRequestEventTarget_onabort_get(){
+        // debugger
+        let onabort=this._boarg.onabort
+        console.log(`XMLHttpRequestEventTarget_onabort_get ` ,`onabort -> ${onabort}`);
+        return onabort
+    }
+    bodavm.envFunc.XMLHttpRequest_withCredentials_set=function XMLHttpRequest_withCredentials_set(){
+        debugger
+        let arg=arguments[0]
+        this._boarg.withCredentials =arg
+        console.log(`XMLHttpRequest_withCredentials_set ` ,`arg -> ${arg}`);
+        return arg
+    }
+    bodavm.envFunc.CanvasRenderingContext2D_shadowBlur_set=function CanvasRenderingContext2D_shadowBlur_set(){
+        // debugger
+        if (bodavm.config.isdebug) { debugger };
+        let shadowBlur=arguments[0]
+        this._bocanvas.shadowBlur=shadowBlur
+        console.log(`CanvasRenderingContext2D_shadowBlur_set `,`shadowBlur ->${shadowBlur}` );
+        return shadowBlur
+    }
+    bodavm.envFunc.CanvasRenderingContext2D_arc=function CanvasRenderingContext2D_arc(){
+        // debugger
+        let arg=arguments[0]
+        let arg1=arguments[1]
+        let arg2=arguments[2]
+        let arg3=arguments[3]
+        let arg4=arguments[4]
+        this._bocanvas.arc(arg,arg1,arg2,arg3,arg4)
+        //无返回值
+        console.log(`CanvasRenderingContext2D_arc `,`arg->${arg} arg1->${arg1} arg2->${arg2} arg2->${arg2} arg3->${arg3} arg4->${arg4}`);
+
+    }
+    bodavm.envFunc.CanvasRenderingContext2D_stroke=function CanvasRenderingContext2D_stroke(){
+        // debugger
+        //无返回值
+        this._bocanvas.stroke()
+        console.log(`CanvasRenderingContext2D_stroke `);
+    }
+    bodavm.envFunc.HTMLScriptElement_text_set=function HTMLScriptElement_text_set(){
+        if (bodavm.config.isdebug) { debugger };
+        let arg=arguments[0]
+        this._boarg.text=arg
+        console.log(`HTMLScriptElement_text_set `,`arg -> ${arg}`);
+        return arg
+    }
+
+    bodavm.envFunc.Permissions_query=function Permissions_query(){
+        // debugger
+        let query=arguments[0]
+        if (query['name'] =='geolocation'){
+            let res={}
+            res.__proto__=PermissionStatus.prototype
+            let promise = new Promise((resolve, reject) => {
+                resolve(res)
+            })
+            console.log(`Permissions_query `,`res ->${promise}`);
+            
+            return promise
+        }else{
+            console.log(`Permissions_query `,`${query} 未实现`);
+        }
+       
+
+    }
+    bodavm.envFunc.Document_images_get=function (){
+        let imgs=bodaobj.document.images
+        if (bodavm.config.isdebug) { debugger };
+
+        let res={}
+        res.__proto__=HTMLCollection.prototype
+        res._boarg=imgs
+        console.log(`Document_images_get `,`res -> ${res}`);
+        return res
+    }
+    bodavm.envFunc.Navigator_deviceMemory_get=function Navigator_deviceMemory_get(){
+        let deviceMemory=bodavm.memory.navigator['deviceMemory']
+        if (bodavm.config.isdebug) { debugger };
+
+        console.log(`Navigator_deviceMemory_get `,`deviceMemory ->${deviceMemory}`);
+        return deviceMemory
+    }
+
+    bodavm.envFunc.Navigator_credentials_get=function Navigator_credentials_get(){
+        let credentials={}
+        if (bodavm.config.isdebug) { debugger };
+
+        credentials.__proto__=CredentialsContainer.prototype
+        console.log(`Navigator_credentials_get `,`credentials ->${credentials}`);
+        return credentials
+    }
+    bodavm.envFunc.Navigator_storage_get=function Navigator_storage_get(){
+        let storage={}
+        if (bodavm.config.isdebug) { debugger };
+        storage.__proto__=StorageManager.prototype
+        console.log(`Navigator_storage_get `,`storage ->${storage}`);
+        return storage
+    }
+    bodavm.envFunc.Navigator_maxTouchPoints_get=function Navigator_maxTouchPoints_get(){
+        let maxTouchPoints=bodavm.memory.navigator['maxTouchPoints']
+        if (bodavm.config.isdebug) { debugger };
+
+        console.log(`Navigator_maxTouchPoints_get `,`maxTouchPoints ->${maxTouchPoints}`);
+        return maxTouchPoints
+    }
+    bodavm.envFunc.Navigator_bluetooth_get=function Navigator_bluetooth_get(){
+        let bluetooth={}
+        bluetooth.__proto__=Bluetooth.prototype
+        if (bodavm.config.isdebug) { debugger };
+
+        console.log(`Navigator_bluetooth_get `,`bluetooth ->${bluetooth}`);
+        return bluetooth
+    }
+    bodavm.envFunc.Navigator_vendorSub_get=function Navigator_vendorSub_get(){
+        let vendorSub=bodavm.memory.navigator['vendorSub']
+        if (bodavm.config.isdebug) { debugger };
+
+        console.log(`Navigator_vendorSub_get `,`vendorSub ->${vendorSub}`);
+        return vendorSub
+    }
+    bodavm.envFunc.Navigator_product_get=function Navigator_product_get(){
+        let product=bodavm.memory.navigator['product']
+        if (bodavm.config.isdebug) { debugger };
+
+        console.log(`Navigator_product_get `,`product ->${product}`);
+        return product
+    }
+    bodavm.envFunc.Navigator_doNotTrack_get=function Navigator_doNotTrack_get(){
+        let doNotTrack=null
+        if (bodavm.config.isdebug) { debugger };
+
+        console.log(`Navigator_doNotTrack_get `,`doNotTrack ->${doNotTrack}`);
+        return doNotTrack
+    }
+    bodavm.envFunc.RTCPeerConnection_createDataChannel = function RTCPeerConnection_createDataChannel() {
+        let label = arguments[0]
+        let options = arguments[1]
+        if (bodavm.config.isdebug) { debugger };
+        if (label =='label'){
+            let DataChannel={}
+            DataChannel.__proto__=RTCDataChannel.prototype
+            console.log(`RTCPeerConnection_createDataChannel `, `label->${label} `, `options->${options} `, `DataChannel->${DataChannel}  `);
+            return DataChannel
+        }
+        
+
+    }
+    bodavm.envFunc.RTCPeerConnection_onicegatheringstatechange_set=function RTCPeerConnection_onicegatheringstatechange_set(){
+        if (bodavm.config.isdebug) { debugger };
+
+            let change=arguments[0]
+            this._onicegatheringstatechange=change
+            console.log(`RTCPeerConnection_onicegatheringstatechange_set `,`onicegatheringstatechange ->${_onicegatheringstatechange}`);
+            return change
+    }
+    bodavm.envFunc.window_Image=function window_Image(){
+        let domimg=bodaobj.window.Image.apply(this,arguments)
+        let img={}
+        if (bodavm.config.isdebug) { debugger };
+
+        img.__proto__=HTMLImageElement.prototype
+        img._boarg=domimg
+        console.log(`window_Image `,` img->${img}`);
+        return img
+    }
+
+
+    bodavm.envFunc.WebGLRenderingContext_getContextAttributes=function WebGLRenderingContext_getContextAttributes(){
+        if (bodavm.config.isdebug) { debugger };
+
+        let context={
+            "alpha": true,
+            "antialias": true,
+            "depth": true,
+            "desynchronized": false,
+            "failIfMajorPerformanceCaveat": false,
+            "powerPreference": "default",
+            "premultipliedAlpha": true,
+            "preserveDrawingBuffer": false,
+            "stencil": false,
+            "xrCompatible": false
+        }
+        console.log(`WebGLRenderingContext_getContextAttributes `,`context->${JSON.stringify(context)}`);
+        return context
+    }
+
     bodavm.envFunc.document_write=function document_write(){
         let html=arguments[0]
         bodaobj.document.write(html)
@@ -67,12 +345,12 @@
         return database
     }
     bodavm.envFunc.window_defaultStatus_get=function window_defaultStatus_get(){
-        let defaultStatus=bodaobj.window['defaultStatus']
+        let defaultStatus=bodavm.memory.window['defaultStatus']
         console.log(`window_defaultStatus_get `,`defaultStatus ->${defaultStatus}`);
         return defaultStatus
     }
     bodavm.envFunc.window_defaultstatus_get=function window_defaultstatus_get(){
-        let defaultstatus=bodaobj.window['defaultstatus']
+        let defaultstatus=bodavm.memory.window['defaultstatus']
         console.log(`window_defaultstatus_get `,`defaultstatus ->${defaultstatus}`);
         return defaultstatus
     }
@@ -82,7 +360,7 @@
         return innerWidth
     }
     bodavm.envFunc.window_devicePixelRatio_get=function window_devicePixelRatio_get(){
-        let devicePixelRatio=bodaobj.window['devicePixelRatio']
+        let devicePixelRatio=bodavm.memory.window['devicePixelRatio']
         console.log(`window_innerWidth_get `,`devicePixelRatio ->${devicePixelRatio}`);
         return devicePixelRatio
     }
@@ -90,11 +368,6 @@
         let innerHeight=bodaobj.window['innerHeight']
         console.log(`window_innerHeight_get `,`innerHeight ->${innerHeight}`);
         return innerHeight
-    }
-    bodavm.envFunc.window_outerWidth_get=function window_outerWidth_get(){
-        let outerWidth=bodaobj.window['outerWidth']
-        console.log(`window_outerWidth_get `,`outerWidth ->${outerWidth}`);
-        return outerWidth
     }
     bodavm.envFunc.window_outerHeight_get=function window_outerHeight_get(){
         let outerHeight=bodaobj.window['outerHeight']
@@ -396,7 +669,6 @@
     bodavm.envFunc.Document_fullscreen_get = function Document_fullscreen_get() { console.log("Document_fullscreen_get  ", undefined, "未完善") }
     bodavm.envFunc.Document_fullscreenElement_get = function Document_fullscreenElement_get() { console.log("Document_fullscreenElement_get  ", undefined, "未完善") }
     bodavm.envFunc.Document_fullscreenEnabled_get = function Document_fullscreenEnabled_get() { console.log("Document_fullscreenEnabled_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_images_get = function Document_images_get() { console.log("Document_images_get  ", undefined, "未完善") }
     bodavm.envFunc.Document_lastElementChild_get = function Document_lastElementChild_get() { console.log("Document_lastElementChild_get  ", undefined, "未完善") }
     bodavm.envFunc.Document_linkColor_get = function Document_linkColor_get() { console.log("Document_linkColor_get  ", undefined, "未完善") }
     bodavm.envFunc.Document_links_get = function Document_links_get() { console.log("Document_links_get  ", undefined, "未完善") }
@@ -803,7 +1075,7 @@
 
     bodavm.envFunc.Document_designMode_set = function Document_designMode_set() {
         let designMode = arguments[0]
-       bodaobj.document["designMode"] = designMode
+        bodaobj.document["designMode"] = designMode
         console.log(`Document_designMode_set `, `${designMode}  `)
         if (bodavm.config.isdebug) { debugger }
         return designMode
@@ -951,14 +1223,13 @@
     bodavm.envFunc.Node_nodeType_get = function Node_nodeType_get() {
         if (bodavm.config.isdebug) { debugger }
 
-                console.log(`Node_nodeType_get `,`${this._boarg.type}未实现`);
-        throw(123123123123)
+            console.log(`Node_nodeType_get `,`${this._boarg.type}未完善`);
     }
     bodavm.envFunc.Node_nodeValue_get = function Node_nodeValue_get() { console.log("Node_nodeValue_get", undefined, "未完善") }
 
     bodavm.envFunc.Node_nodeName_get = function Node_nodeName_get() {
         if (bodavm.config.isdebug) { debugger }
-   
+        console.log(`Node_nodeName_get 未完善`);
         return nodeName_
     }
     bodavm.envFunc.Node_firstChild_get = function Node_firstChild_get() {
@@ -971,18 +1242,19 @@
     bodavm.envFunc.Node_insertBefore = function Node_insertBefore() {
         let newNode = arguments[0]
         let referenceNode = arguments[1]
-        throw(123)
-     
+        console.log(`Node_insertBefore `, `未完善 `);
+
 
     }
     bodavm.envFunc.Node_lastChild_get = function Node_lastChild_get() {
         if (bodavm.config.isdebug) { debugger }
  
-        console.log(`Node_lastChild_get `, `lastChild->${lastChild}  `);
+        console.log(`Node_lastChild_get `, `lastChild->${lastChild} 未完善 `);
     }
 
     bodavm.envFunc.Node_cloneNode = function Node_cloneNode() {
         let mode = arguments[0]
+        console.log(`Node_cloneNode `, `未完善 `);
 
         return cloneNode
     }
@@ -1220,19 +1492,21 @@
     }
     bodavm.envFunc.Element_removeAttribute = function Element_removeAttribute() {
         let attr = arguments[0]
+        //无返回值
         if (bodavm.config.isdebug) { debugger };;
+        this._boarg.removeAttribute(attr)
         console.log(`Element_removeAttribute `, `${attr}  `, `=============================未完善`);
         //IE 返回 boolean 类型值，其他返回 undefined
-         throw(111111111111)
     }
     bodavm.envFunc.Element_setAttribute = function Element_setAttribute() {
+        // debugger
+        if (bodavm.config.isdebug) { debugger };;
+        //无返回值
         let name = arguments[0]
         let value = arguments[1]
-        this._boarg.attribs[name]=value
-         throw(111111111111)
+        this._boarg.setAttribute(name,value)
 
         console.log(`Element_setAttribute `, `name->${name} `, `value->${value}  `);
-        if (bodavm.config.isdebug) { debugger };;
         ;
 
     }
@@ -1272,7 +1546,6 @@
     bodavm.envFunc.Element_getBoundingClientRect = function Element_getBoundingClientRect() {
         // debugger
         if (bodavm.config.isdebug) { debugger };;
-         throw(111111111111)
 
         console.log(`Element_getBoundingClientRect`, '未完善');
     }
@@ -1326,33 +1599,32 @@
     }
 
     //Navigator
-    bodavm.envFunc.Navigator_bluetooth_get = function Navigator_bluetooth_get() { console.log("Navigator_bluetooth_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_clipboard_get = function Navigator_clipboard_get() { console.log("Navigator_clipboard_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_credentials_get = function Navigator_credentials_get() { console.log("Navigator_credentials_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_deviceMemory_get = function Navigator_deviceMemory_get() { console.log("Navigator_deviceMemory_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_doNotTrack_get = function Navigator_doNotTrack_get() { console.log("Navigator_doNotTrack_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_geolocation_get = function Navigator_geolocation_get() { console.log("Navigator_geolocation_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_hid_get = function Navigator_hid_get() { console.log("Navigator_hid_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_ink_get = function Navigator_ink_get() { console.log("Navigator_ink_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_keyboard_get = function Navigator_keyboard_get() { console.log("Navigator_keyboard_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_locks_get = function Navigator_locks_get() { console.log("Navigator_locks_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_managed_get = function Navigator_managed_get() { console.log("Navigator_managed_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_maxTouchPoints_get = function Navigator_maxTouchPoints_get() { console.log("Navigator_maxTouchPoints_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_mediaCapabilities_get = function Navigator_mediaCapabilities_get() { console.log("Navigator_mediaCapabilities_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_mediaDevices_get = function Navigator_mediaDevices_get() { console.log("Navigator_mediaDevices_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_mediaSession_get = function Navigator_mediaSession_get() { console.log("Navigator_mediaSession_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_onLine_get = function Navigator_onLine_get() { console.log("Navigator_onLine_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_pdfViewerEnabled_get = function Navigator_pdfViewerEnabled_get() { console.log("Navigator_pdfViewerEnabled_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_permissions_get = function Navigator_permissions_get() { console.log("Navigator_permissions_get", undefined, "未完善") }
+    bodavm.envFunc.Navigator_permissions_get = function Navigator_permissions_get() { 
+        // debugger
+        let permissions={}
+        permissions.__proto__=Permissions.prototype
+
+        console.log("Navigator_permissions_get", `permissions->${permissions}`)
+        return permissions
+    }
     bodavm.envFunc.Navigator_presentation_get = function Navigator_presentation_get() { console.log("Navigator_presentation_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_product_get = function Navigator_product_get() { console.log("Navigator_product_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_scheduling_get = function Navigator_scheduling_get() { console.log("Navigator_scheduling_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_serial_get = function Navigator_serial_get() { console.log("Navigator_serial_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_serviceWorker_get = function Navigator_serviceWorker_get() { console.log("Navigator_serviceWorker_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_storage_get = function Navigator_storage_get() { console.log("Navigator_storage_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_usb_get = function Navigator_usb_get() { console.log("Navigator_usb_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_userActivation_get = function Navigator_userActivation_get() { console.log("Navigator_userActivation_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_vendorSub_get = function Navigator_vendorSub_get() { console.log("Navigator_vendorSub_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_virtualKeyboard_get = function Navigator_virtualKeyboard_get() { console.log("Navigator_virtualKeyboard_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_wakeLock_get = function Navigator_wakeLock_get() { console.log("Navigator_wakeLock_get", undefined, "未完善") }
     bodavm.envFunc.Navigator_webkitTemporaryStorage_get = function Navigator_webkitTemporaryStorage_get() { console.log("Navigator_webkitTemporaryStorage_get", undefined, "未完善") }
@@ -1697,6 +1969,9 @@
         
         if (bodavm.config.isdebug) { debugger }
         let fontFamily=this._boarg.style.fontFamily
+        // debugger
+        // bodavm.bbbbb.push(fontFamily)
+
         if (bodavm.memory.globalInit.fontList.indexOf(fontFamily) !== -1) {// 能够识别的字体
             let offsetHeight=bodavm.memory.fontsize[fontFamily][1]
             console.log(`HTMLElement_offsetHeight_get `, ` fontFamily->${fontFamily}->offsetHeight->${offsetHeight} 可识别的字体  `);
@@ -1712,6 +1987,7 @@
         if (bodavm.config.isdebug) { debugger }
         // debugger     
         let fontFamily=this._boarg.style.fontFamily
+        // bodavm.bbbbb.push(fontFamily)
         if (bodavm.memory.globalInit.fontList.indexOf(fontFamily) !== -1) {// 能够识别的字体
             let offsetWidth=bodavm.memory.fontsize[fontFamily][0]
             console.log(`HTMLElement_offsetWidth_get `, ` fontFamily->${fontFamily}->offsetWidth->${offsetWidth} 可识别的字体  `);
@@ -2366,14 +2642,14 @@
     }
     bodavm.envFunc.HTMLElement_onerror_set = function HTMLElement_onerror_set() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`HTMLElement_onerror_set `,);
+        console.log(`HTMLElement_onerror_set 未完善`,);
 
 
     }
     //HTMLCollection
     bodavm.envFunc.HTMLCollection_item = function HTMLCollection_item() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`HTMLCollection_item `,);
+        console.log(`HTMLCollection_item 未完善`,);
 
     }
     bodavm.envFunc.HTMLCollection_length_get=function HTMLCollection_length_get(){
@@ -2393,29 +2669,33 @@
     bodavm.envFunc.XMLHttpRequest_onreadystatechange_set = function () {
         let readyState = arguments[0]; 
         if (bodavm.config.isdebug) { debugger };
-        this.myonreadystatechange=readyState
+        this._boarg.myonreadystatechange=readyState
         console.log(`XMLHttpRequest_onreadystatechange_set `, `readyState->${readyState}  `);
         return readyState
     }
     bodavm.envFunc.XMLHttpRequest_onreadystatechange_get = function () {
-        let readyState = this.myonreadystatechange; 
+        let readyState = this._boarg.myonreadystatechange; 
         if (bodavm.config.isdebug) { debugger };
 
         console.log(`XMLHttpRequest_onreadystatechange_set `, `readyState->${readyState}  `);
         return readyState
     }
     bodavm.envFunc.XMLHttpRequest_send = function XMLHttpRequest_send() {
+        debugger
         let body = arguments[0]; if (bodavm.config.isdebug) { debugger };
-
-        console.log(`XMLHttpRequest_send `, `body->${body}  `,`待完善`);
+        console.log(`XMLHttpRequest_send `, `body->${body}  `,`未完善`);
+        // this._boarg.send(body)
+        
     }
     bodavm.envFunc.XMLHttpRequest_open = function XMLHttpRequest_open() {
         let method = arguments[0]
         let url = arguments[1];
         console.log(`XMLHttpRequest_open `, `[${method}] `,`[${url}]  `)
         if (bodavm.config.isdebug) { debugger }
-        this.mymethod=method
-        this.myurl=url
+        // this.mymethod=method
+        // this.myurl=url
+        this._boarg.method=method
+        this._boarg.url=url
     }
 
     //EventTarget
@@ -2487,12 +2767,12 @@
             case "2d":
                 // context = context.getContext('2d')
                 context._bocanvas=this._bocanvas.getContext('2d')
-                console.log(`HTMLCanvasElement_getContext `, `type->${type} `)
+                console.log(`HTMLCanvasElement_getContext `, `type->${type} `,`res -> ${context}`)
                 context.__proto__ = CanvasRenderingContext2D.prototype;
                 break
             case "webgl":
                 // context = context.getContext('2d')
-                console.log(`HTMLCanvasElement_getContext `, `type->${type} 未完善`)
+                console.log(`HTMLCanvasElement_getContext `, `type->${type} `,`res -> ${context}`)
                 context.__proto__ = WebGLRenderingContext.prototype;
                 break
             case 'experimental-webgl':
@@ -2566,7 +2846,7 @@
         let arg1=arguments[1]
         let arg2=arguments[2]
         this._bocanvas.fillText(arg0,arg1,arg2)
-        console.log(`CanvasRenderingContext2D_fillText `,`fillText->${arg0},${arg1},${arg2}`);
+        console.log(`CanvasRenderingContext2D_fillText`,`fillText->${arg0},${arg1},${arg2}`);
 
     }
 
@@ -2909,18 +3189,18 @@
     }
     bodavm.envFunc.MouseEvent_screenX_get = function MouseEvent_screenX_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_screenX_get  `);
+        console.log(`MouseEvent_screenX_get 未完善 `);
 
     }
     bodavm.envFunc.MouseEvent_screenY_get = function MouseEvent_screenY_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_screenY_get `, `  `);
+        console.log(`MouseEvent_screenY_get 未完善`, `  `);
 
 
     }
     bodavm.envFunc.MouseEvent_button_get = function MouseEvent_button_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_button_get `, `  `);
+        console.log(`MouseEvent_button_get 未完善`, `  `);
 
 
     }
@@ -2932,23 +3212,23 @@
     }
     bodavm.envFunc.MouseEvent_offsetY_get = function MouseEvent_button_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_offsetY_get  `);
+        console.log(`MouseEvent_offsetY_get 未完善`);
 
     }
 
     bodavm.envFunc.MouseEvent_x_get = function MouseEvent_button_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_x_get `,);
+        console.log(`MouseEvent_x_get 未完善`,);
 
     }
     bodavm.envFunc.MouseEvent_y_get = function MouseEvent_button_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_y_get `,);
+        console.log(`MouseEvent_y_get 未完善`,);
     }
     bodavm.envFunc.Event_type_get = function Event_type_get() {
         if (bodavm.config.isdebug) { debugger }
         let type=arguments[0]
-        console.log(`Event_type_get `,`type->${type}`);
+        console.log(`Event_type_get 未完善`,`type->${type}`);
         // debugger
         return type
 
@@ -2979,29 +3259,6 @@
 
         return true;
     }
-
-    //HTMLScriptElement
-    bodavm.envFunc.HTMLScriptElement_type_get = function HTMLScriptElement_type_get() {
-        debugger
-    }
-    bodavm.envFunc.HTMLScriptElement_type_set = function HTMLScriptElement_type_set() {
-        let type = arguments[0]
-        this._elements['0'].attr['type'] = type
-        console.log(`HTMLScriptElement_type_set `, `type->${type}  `);
-        if (bodavm.config.isdebug) { debugger }
-        return type
-    }
-    bodavm.envFunc.HTMLScriptElement_src_set = function HTMLScriptElement_src_set() {
-        let src = arguments[0];
-        let tags = bodavm.memory.tag
-        if (bodavm.config.isdebug) { debugger }
-        console.log(`HTMLScriptElement_src_set `, `${src}  `);
-        debugger
-        return src
-
-    }
-
-    //WebGLRenderingContext
     
     bodavm.envFunc.WebGLRenderingContext_drawingBufferHeight_get = function () {
         let drawingBufferHeight = 150; if (bodavm.config.isdebug) { debugger };
@@ -3019,15 +3276,13 @@
         let index = arguments[0]; if (bodavm.config.isdebug) { debugger };
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_enableVertexAttribArray `, `index:${index}  `);
+        console.log(`WebGLRenderingContext_enableVertexAttribArray 未完善`, `index:${index}  `);
 
     }
     bodavm.envFunc.WebGLRenderingContext_getUniformLocation = function WebGLRenderingContext_getUniformLocation() {
         let program = arguments[0]
         let name = arguments[1];
-        if (bodavm.config.isdebug) { debugger };
-        debugger
-        console.log(`WebGLRenderingContext_getUniformLocation `, `program:${program} name:${name}`, `未完善`);
+        if (bodavm.config.isdebug) { debugger };        console.log(`WebGLRenderingContext_getUniformLocation `, `program:${program} name:${name}`, `未完善`);
         return null
     }
     bodavm.envFunc.WebGLRenderingContext_getAttribLocation = function WebGLRenderingContext_getAttribLocation() {
@@ -3055,7 +3310,7 @@
         let v1 = arguments[2]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_uniform2f `, `location:${location} v0:${v0}  v1:${v1}  `);
+        console.log(`WebGLRenderingContext_uniform2f 未完善`, `location:${location} v0:${v0}  v1:${v1}  `);
     }
     bodavm.envFunc.WebGLRenderingContext_vertexAttribPointer = function WebGLRenderingContext_vertexAttribPointer() {
         let index = arguments[0]
@@ -3066,7 +3321,7 @@
         let offset = arguments[5]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_vertexAttribPointer `, `index:${index}  size:${size} type:${type}  normalized:${normalized}  stride:${stride}  offset${offset}   `);
+        console.log(`WebGLRenderingContext_vertexAttribPointer 未完善`, `index:${index}  size:${size} type:${type}  normalized:${normalized}  stride:${stride}  offset${offset}   `);
     }
 
     bodavm.envFunc.WebGLRenderingContext_drawArrays = function WebGLRenderingContext_drawArrays() {
@@ -3075,19 +3330,19 @@
         let count = arguments[2]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_drawArrays `, `mode:${mode}  first:${first}  count:${count}   `);
+        console.log(`WebGLRenderingContext_drawArrays 未完善`, `mode:${mode}  first:${first}  count:${count}   `);
 
     }
 
     bodavm.envFunc.WebGLRenderingContext_useProgram = function WebGLRenderingContext_useProgram() {
         let program = arguments[0]
-        console.log(`WebGLRenderingContext_useProgram `, `program:${program}  `);
+        console.log(`WebGLRenderingContext_useProgram 未完善`, `program:${program}  `);
         if (bodavm.config.isdebug) { debugger };
 
     }
     bodavm.envFunc.WebGLRenderingContext_linkProgram = function WebGLRenderingContext_linkProgram() {
         let program = arguments[0]
-        console.log(`WebGLRenderingContext_linkProgram `, `program:${program}  `);
+        console.log(`WebGLRenderingContext_linkProgram 未完善`, `program:${program}  `);
         if (bodavm.config.isdebug) { debugger };
 
 
@@ -3097,7 +3352,7 @@
         let shader = arguments[1]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_attachShader `, `program:${program}  shader:${shader}   `);
+        console.log(`WebGLRenderingContext_attachShader 未完善`, `program:${program}  shader:${shader}   `);
     }
     bodavm.envFunc.WebGLRenderingContext_createShader = function WebGLRenderingContext_createShader() {
         let type = arguments[0]
@@ -3121,14 +3376,14 @@
         let source = arguments[1]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_shaderSource `, `shader:${shader}  source:${source}  `);
+        console.log(`WebGLRenderingContext_shaderSource 未完善`, `shader:${shader}  source:${source}  `);
     }
 
     bodavm.envFunc.WebGLRenderingContext_compileShader = function WebGLRenderingContext_shaderSource() {
         let compileShader = arguments[0]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_compileShader `, `${compileShader}  `);
+        console.log(`WebGLRenderingContext_compileShader 未完善`, `${compileShader}  `);
     }
     bodavm.envFunc.WebGLRenderingContext_canvas_get = function WebGLRenderingContext_canvas_get() {
         let canvas = {}
@@ -3162,7 +3417,7 @@
         if (bodavm.config.isdebug) { debugger }
         let r1 = arguments[0]
         let r2 = arguments[1]
-        console.log(`WebGLRenderingContext_bindBuffer `, `r1:${r1}  r2:${r2}  `);
+        console.log(`WebGLRenderingContext_bindBuffer 未完善`, `r1:${r1}  r2:${r2}  `);
 
     }
     bodavm.envFunc.WebGLRenderingContext_bufferData = function WebGLRenderingContext_bufferData() {
@@ -3172,7 +3427,7 @@
         let r3 = arguments[2]
         let r4 = arguments[3]
         let r5 = arguments[4]
-        console.log(`WebGLRenderingContext_bufferData `, `r1:${r1},r2:${r2},r3:${r3},r4:${r4},r5:${r5}  `);
+        console.log(`WebGLRenderingContext_bufferData 未完善`, `r1:${r1},r2:${r2},r3:${r3},r4:${r4},r5:${r5}  `);
 
     }
     bodavm.envFunc.WebGLRenderingContext_getExtension = function WebGLRenderingContext_getExtension() {
@@ -3545,21 +3800,35 @@
     }
 
     bodavm.envFunc.WebGLRenderingContext_getParameter = function WebGLRenderingContext_getParameter() {
-        let pname = arguments[0]
+        let pname = Number(arguments[0])
         if (bodavm.config.isdebug) { debugger }
         ;
-        if (pname + '' == "37446") {
-            console.log(`WebGLRenderingContext_getParameter `, `pname->${pname} `, `'ANGLE (Intel, Intel(R) UHD Graphics 620 Direct3D11 vs_5_0 ps_5_0, D3D11)'  `);
-
-            return 'ANGLE (Intel, Intel(R) UHD Graphics 620 Direct3D11 vs_5_0 ps_5_0, D3D11)'
+        let resDict={
+            37446:`ANGLE (Intel, Intel(R) UHD Graphics 620 Direct3D11 vs_5_0 ps_5_0, D3D11)`,
+            37445:'Google Inc. (Intel)',
+            3412:8,
+            3414:24,
+            3411:8,
+            34047:null,
+            35661:32,
+            34076:16384,
+            36349:1024,
+            34024:16384,
+            34930:16,
+            3379:16384,
+            36348:30,
+            34921:16,
+            35660:16,
+            36347:4096,
+            35724:'WebGL GLSL ES 1.0 (OpenGL ES GLSL ES 1.0 Chromium)',
+            3415:0,
+            7938:'WebGL 1.0 (OpenGL ES 2.0 Chromium)'
         }
-        if (pname + '' == "37445") {
-            console.log(`WebGLRenderingContext_getParameter `, `pname->${pname} `, ` 'Google Inc. (Intel)'  `);
-            return 'Google Inc. (Intel)'
-        }
-        console.log(`WebGLRenderingContext_getParameter `, `${pname}未实现  `)
+        res=resDict[pname]
+        if (res ===undefined) return console.log(`WebGLRenderingContext_getParameter `,`${pname} 未实现`);
+        console.log(`WebGLRenderingContext_getParameter `, `${pname}  `,`res ->${res}`)
+        return res
     }
-
     //HTMLStyleElement
     bodavm.envFunc.HTMLStyleElement_sheet_get = function HTMLStyleElement_sheet_get() {
         if (bodavm.config.isdebug) { debugger }
@@ -3629,10 +3898,10 @@
     //RTCPeerConnection_onicecandidate_set
     bodavm.envFunc.RTCPeerConnection_onicecandidate_set = function RTCPeerConnection_onicecandidate_set() {
         let onicecandidate = arguments[0]
-        console.log(`RTCPeerConnection_onicecandidate_set    `, `onicecandidate->${onicecandidate}`, `未完善   `);
-
         if (bodavm.config.isdebug) { debugger };
-        bodavm.toolsFunc.symbolProperty(onicecandidate)
+        this._onicecandidate=onicecandidate
+        console.log(`RTCPeerConnection_onicecandidate_set    `, `onicecandidate->${onicecandidate}`);
+
         return onicecandidate
     }
 
@@ -3655,13 +3924,7 @@
         )
     }
 
-    bodavm.envFunc.RTCPeerConnection_createDataChannel = function RTCPeerConnection_createDataChannel() {
-        let label = arguments[0]
-        let options = arguments[1]
-        console.log(`RTCPeerConnection_createDataChannel `, `label->${label} `, `options->${options} `, `未完善  `);
-        if (bodavm.config.isdebug) { debugger };
 
-    }
 
     bodavm.envFunc.MutationObserver_observe = function () {
         if (bodavm.config.isdebug) { debugger };
@@ -3673,8 +3936,9 @@
 
     bodavm.envFunc.HTMLImageElement_src_set = function HTMLImageElement_src_set() {
         if (bodavm.config.isdebug) { debugger };
-
+        // debugger
         let img = arguments[0]
+        this._boarg.src=img
         // this._elements['0'].attr['img'] = img
         console.log(`HTMLImageElement_src_set `, `img->${img}  `);
         return img
