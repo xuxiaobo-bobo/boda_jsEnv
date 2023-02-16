@@ -73,7 +73,11 @@ bodavm.memory.navigator={
     platform:'${navigator.platform}',
     webkitPersistentStorage:${JSON.stringify(navigator.webkitPersistentStorage)},
     connection:${JSON.stringify(navigator.connection)},
-    javaEnabled:${navigator.javaEnabled()}
+    javaEnabled:${navigator.javaEnabled()},
+    product:'${navigator.product}',
+    vendorSub:${JSON.stringify(navigator.vendorSub)},
+    deviceMemory:${navigator.deviceMemory},
+    maxTouchPoints:${navigator.maxTouchPoints}
 };
 bodavm.memory.window={
     name:${JSON.stringify(window.name)},
@@ -92,7 +96,7 @@ bodavm.memory.window={
     onbeforeunload:${window.onbeforeunload},
 
 };
-// bodavm.memory.localStorage={}
+bodavm.memory.localStorage={}
 
 `
 

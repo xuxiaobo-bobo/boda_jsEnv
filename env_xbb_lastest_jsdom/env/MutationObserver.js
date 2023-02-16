@@ -1,6 +1,8 @@
 // MutationObserver对象
 MutationObserver = function MutationObserver(){
-    
+    // debugger
+    if (arguments.length >1){bodavm.toolsFunc.throwError('TypeError',`MutationObserver 参数长度过长`)}
+    this._boarg= new bodaobj.window.MutationObserver(arguments[0])
     if(arguments.length <1){
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MutationObserver': 1 argument required, but only 0 present.")}
 

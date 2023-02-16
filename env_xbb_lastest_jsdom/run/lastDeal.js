@@ -1,12 +1,12 @@
 
-;;
-function get_cookie(){
+    function get_cookie(){
     
-    a={
-        // b:new XMLHttpRequest().open(''),
-        c:document.cookie
+        a={
+            // b:new XMLHttpRequest().open(''),
+            c:document.cookie
+        }
+        
+        return a
     }
-    
-    return a
-}
-get_cookie()
+    get_cookie()
+

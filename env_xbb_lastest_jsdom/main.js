@@ -17,11 +17,11 @@ const env=require(`${config_path}/env.config`)
 
 fs.writeFileSync(`${run_path}/log.txt`,"")
 
-let bohtml_=fs.readFileSync('.\\env_xbb_lastest_jsdom\\run\\run.html').toString('utf-8')
-const dom = new JSDOM(bohtml_,
+let bohtml_=fs.readFileSync('D:\\My_Dir\\env_xbb_lastest_jsdom\\run\\run.html').toString('utf-8')
+const dom = new JSDOM(bohtml_, 
     {
-        url: "http://www.fangdi.com.cn/",
-        referrer: "http://www.fangdi.com.cn/",
+        url: "http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
+        referrer: "http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
         contentType: "text/html",
         includeNodeLocations: true,
         pretendToBeVisual: true,
@@ -57,7 +57,7 @@ const log_code=fs.readFileSync(`${tools_path}/printLog.js`)
 const globadlThis=fs.readFileSync(`${tools_path}/globalThis.js`)
 // const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globalInit}${userInit}${changeDom}${proxyObj}${jscode}${asyncCode}`+"\r\n"+"debugger";
 const last_deal=fs.readFileSync(`${run_path}/lastDeal.js`)
-const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globadlThis}${globalInit}${userInit}${proxyObj};;${jscode}${asyncCode};console.table(myloglist);debugger;;${last_deal}`;
+const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globadlThis}${globalInit}${userInit}${proxyObj};;try{;;${jscode}${asyncCode};console.table(myloglist);debugger;;}catch{${last_deal}};;`;
 // const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globadlThis}${globalInit}${userInit}${proxyObj}${jscode}${asyncCode};console.table(myloglist);`+"\r\n"+"debugger";
 
 
@@ -66,8 +66,10 @@ bodaobj={
     document:dom.window.document,
     location:dom.window.location,
     navigator:dom.window.navigator,
-
+    navigation:dom.window.navigation
 }
+var boallundefined=  new xtd;
+
 
 //沙盒创建全局
 vm.setGlobal('bofs', fs)
@@ -75,6 +77,7 @@ vm.setGlobal('bofs', fs)
 // debugger
 vm.setGlobal('bodaobj',bodaobj)
 vm.setGlobal('bocreateCanvas',createCanvas)
+vm.setGlobal('boallundefined',boallundefined)
 // let iframes=bobo$('iframe')
 // console.log('iframes的个数---->',iframes.length)
 // if (iframes.length>0){

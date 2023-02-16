@@ -1,10 +1,16 @@
 {
   "name": "webidl-conversions",
-  "version": "3.0.1",
+  "version": "7.0.0",
   "description": "Implements the WebIDL algorithms for converting to and from JavaScript values",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha test/*.js"
+    "lint": "eslint .",
+    "test": "mocha test/*.js",
+    "test-no-sab": "mocha --parallel --jobs 2 --require test/helpers/delete-sab.js test/*.js",
+    "coverage": "nyc mocha test/*.js"
+  },
+  "_scripts_comments": {
+    "test-no-sab": "Node.js internals are broken by deleting SharedArrayBuffer if you run tests on the main thread. Using Mocha's parallel mode avoids this."
   },
   "repository": "jsdom/webidl-conversions",
   "keywords": [
@@ -18,6 +24,12 @@
   "author": "Domenic Denicola <d@domenic.me> (https://domenic.me/)",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "mocha": "^1.21.4"
+    "@domenic/eslint-config": "^1.3.0",
+    "eslint": "^7.32.0",
+    "mocha": "^9.1.1",
+    "nyc": "^15.1.0"
+  },
+  "engines": {
+    "node": ">=12"
   }
 }

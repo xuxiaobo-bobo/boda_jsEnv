@@ -288,9 +288,10 @@
             },
             set(target, propKey, value, receiver) {
                 // debugger
-                if (objName=='window' && propKey){
-                    bodavm.memory.window[propKey]=value
-                }
+                // if (objName=='window' && propKey){
+                //     bodavm.memory.window[propKey]=value
+                // }
+                // debugger
                 console.log('['+objName+']', "   设置属性:   ", propKey, "   value:   ", value);
                     if (typeof value =='function' ){
                         myloglist.push({ 'type': 'set:'+ objName, 'prop0': propKey, 'prop1': value.toString() })
@@ -415,34 +416,34 @@
                 return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
             }
         }
-        try {
+        // try {
 
-            if (bodavm.config.issymbolProperty){
-                if(self[bodavm.memory.symbolProperty] ==undefined){
-                    debugger
-                    console.log(self,`  bodavm.toolsFunc.dispatch1 执行出错`,funcName);
-                    return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+            // if (bodavm.config.issymbolProperty){
+            //     if(self[bodavm.memory.symbolProperty] ==undefined){
+            //         debugger
+            //         console.log(self,`  bodavm.toolsFunc.dispatch1 执行出错`,funcName);
+            //         return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
         
-                }
-                //实现r={} ;r.__proto__=document ,r.location 报错
-                if (self.__proto__.constructor == self.__proto__.__proto__.constructor){
-                    debugger
-                    console.log(self,`  bodavm.toolsFunc.dispatch2  执行出错`,funcName);
-                    return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
-                }
+            //     }
+            //     //实现r={} ;r.__proto__=document ,r.location 报错
+            //     if (self.__proto__.constructor == self.__proto__.__proto__.constructor){
+            //         debugger
+            //         console.log(self,`  bodavm.toolsFunc.dispatch2  执行出错`,funcName);
+                    // return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+                // }
     
-            }
+            // }
      
             return bodavm.envFunc[name].apply(self, argList)
 
 
-        } catch (e) {
+        // } catch (e) {
             // 
                 // debugger
                 let log__ = `'[${name}]正在执行,错误信息${e.message}'`
                 console.log(log__);
                 bodavm.toolsFunc.printLog(log__)
-            }
+            // }
     }
 
 

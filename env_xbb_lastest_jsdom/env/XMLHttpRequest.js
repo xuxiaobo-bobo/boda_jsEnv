@@ -1,5 +1,8 @@
 // XMLHttpRequest对象
-XMLHttpRequest = function XMLHttpRequest(){}
+XMLHttpRequest = function XMLHttpRequest(){
+    if (arguments.length >1){ bodavm.toolsFunc.throwError('TypeError','XMLHttpRequest 被创建参数需注意')}
+    this._boarg= new bodaobj.window.XMLHttpRequest(arguments[0])
+}
 bodavm.toolsFunc.safeProto(XMLHttpRequest, "XMLHttpRequest");
 XMLHttpRequest.prototype.__proto__=XMLHttpRequestEventTarget.prototype;
 XMLHttpRequest.__proto__=XMLHttpRequestEventTarget;

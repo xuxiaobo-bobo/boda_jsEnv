@@ -71,7 +71,7 @@ function getCode() {
     code += getFile("TrustedTypePolicyFactory")
     code += getFile('Scheduler')
     code += getFile("CookieStore")
-
+    code+=  getFile('RTCDataChannel')
     code += getFile("CacheStorage")
     code +=getFile('Promise')
     code += getFile('OffscreenCanvasRenderingContext2D')
@@ -85,14 +85,14 @@ function getCode() {
     code += getFile('StyleMedia')
     code += getFile('Audio')
     code += getFile("Crypto")
-
+    code +=getFile('HTMLAudioElement')
     code += getFile("CDATASection")
-
+    code +=getFile('CredentialsContainer')
     code += getFile("Comment")
     code += getFile("DocumentFragment")
     code += getFile("DocumentType")
     code += getFile("DOMParser")
-
+    code +=getFile('Bluetooth')
     code += getFile("External")
     code+=getFile('PointerEvent')
     code += getFile('WebSocket')
@@ -110,6 +110,8 @@ function getCode() {
     code += getFile("NodeList")
     code += getFile("OfflineAudioContext")
     code += getFile("Path2D")
+    code +=getFile('LockManager')
+    code +=getFile('XPathExpression')
     code += getFile("Performance")
     code += getFile('ScreenOrientation')
     code += getFile("PerformanceEntry")

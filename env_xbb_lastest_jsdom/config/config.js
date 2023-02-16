@@ -13,11 +13,24 @@ var bodavm = {
 }
 
 bodavm.memory.tag = []          //存放标签
+//存储all标签
+bodavm.memory.all = []
+bodavm.memory.formlist=[
+
+] //存放form标签
 bodavm.memory.globalobj = {}    //全局对象
 bodavm.config.isdebug = false;  //是否开启debugger
-// bodavm.config.getundefined=true  //暂未实现   
-bodavm.config.isrs = true  //判断当前网站是不是瑞数
 bodavm.config.proxy = false; //是否代理
+
+// bodavm.config.getundefined=true  //暂未实现   
+
+
+//网站为r4或者r5 设置为true 否则请关闭
+bodavm.config.isrs = false  //判断当前网站是不是瑞数
+//网站为r6 设置为true body设置为0 否则请把true改为false
+bodavm.memory.rs6=true
+bodavm.memory.rs6_body=0
+
 
 bodavm.config.randomhook = false //hook随机值和时间
 bodavm.config.printLog = true; //是否打开日志
@@ -40,8 +53,6 @@ bodavm.memory.globalInit = {}
 bodavm.memory.globalInit.jsonCookie = {};// json格式的cookie
 
 bodavm.memory.userInit = {}
-//存储all标签
-bodavm.memory.all = []
 
 bodavm.memory.collection = {
 
@@ -100,97 +111,103 @@ bodavm.memory.IDBOpenDBRequest = {
 }
 
 
-// bodavm.memory.location = {
-//     origin: "http://www.fangdi.com.cn",
-//     hash: "",
-//     pathname: "/",
-//     search: ",
-//     href: "http://www.fangdi.com.cn/,
-//     port: ",
-//     protocol: "http:,
-//     host: "www.fangdi.com.cn,
-//     ancestorOrigins: "{},
-//     hostname: "www.fangdi.com.cn"
-// };
 
-// bodavm.memory.document = {
-//     URL: "http://www.fangdi.com.cn/",
-//     referrer: "",
-//     documentURI: "http://www.fangdi.com.cn/",
-//     compatMode: "CSS1Compat",
-//     dir: ",
-//     title: "网上房地产,
-//     designMode: "off,
-//     readyState: "interactive,
-//     contentType: "text/html,
-//     inputEncoding: "UTF-8,
-//     domain: "www.fangdi.com.cn,
-//     characterSet: "UTF-8,
-//     charset: "UTF-8,
-//     hidden: "false,
-//     onmousemove: null,
-//     onselectionchange: null,
 
-// };
 
-bodavm.memory.htmldivelement = {
-    align: "undefined",
+
+bodavm.memory.location={
+    origin:"https://www.ccgp-gansu.gov.cn",
+    hash:"",
+    pathname:"/web/article/40288281840982fe01842bfd2ae94487.html",
+    search:"",
+    href:"https://www.ccgp-gansu.gov.cn/web/article/40288281840982fe01842bfd2ae94487.html",
+    port:"",
+    protocol:"https:",
+    host:"www.ccgp-gansu.gov.cn",
+    ancestorOrigins:"{}",
+    hostname:"www.ccgp-gansu.gov.cn"
+};
+
+bodavm.memory.document={
+    URL:"https://www.ccgp-gansu.gov.cn/web/article/40288281840982fe01842bfd2ae94487.html",
+    referrer:"https://www.ccgp-gansu.gov.cn/web/article/40288281840982fe01842bfd2ae94487.html",
+    documentURI:"https://www.ccgp-gansu.gov.cn/web/article/40288281840982fe01842bfd2ae94487.html",
+    compatMode:"CSS1Compat",
+    dir:"",
+    title:"",
+    designMode:"off",
+    readyState:"loading",
+    contentType:"text/html",
+    inputEncoding:"UTF-8",
+    domain:"www.ccgp-gansu.gov.cn",
+    characterSet:"UTF-8",
+    charset:"UTF-8",
+    hidden:"false",
+    onmousemove:null,
+    onselectionchange:null,
+    
+};
+
+bodavm.memory.htmldivelement={
+    align:"undefined",
 
 };
 
-bodavm.memory.history = {
-    scrollRestoration: "auto"
+bodavm.memory.history={
+    scrollRestoration:"auto"
 };
 
-bodavm.memory.screen = {
-    width: 1440,
-    height: 960,
-    availWidth: 1440,
-    availHeight: 920,
-    pixelDepth: 24,
-    colorDepth: 24,
-    availLeft: 0,
-    availTop: 0,
-    isExtended: undefined,
-    orientation: {},
-    onchange: undefined,
+bodavm.memory.screen={
+    width:1440,
+    height:960,
+    availWidth:1440,
+    availHeight:920,
+    pixelDepth:24,
+    colorDepth:24,
+    availLeft:0,
+    availTop:0,
+    isExtended:false,
+    orientation:{},
+    onchange:null,
 };
 
-bodavm.memory.navigator = {
-    language: "zh-CN",
-    userAgent: "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
-    appVersion: "5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
-    vendor: "Google Inc.",
-    appName: "Netscape",
-    appCodeName: "Mozilla",
-    cookieEnabled: true,
-    languages: ["zh-CN", "zh"],
-    productSub: "20030107",
-    userAgentData: undefined,
-    xr: undefined,
-    platform: 'Win32',
-    webkitPersistentStorage: {},
-    connection: {},
-    javaEnabled: false
+bodavm.memory.navigator={
+    language:"zh-CN",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
+    appVersion:"5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
+    vendor:"Google Inc.",
+    appName:"Netscape",
+    appCodeName:"Mozilla",
+    cookieEnabled:true,
+    languages:["zh-CN","zh"],
+    productSub:"20030107",
+    userAgentData:{"brands":[{"brand":" Not A;Brand","version":"99"},{"brand":"Chromium","version":"102"},{"brand":"Google Chrome","version":"102"}],"mobile":false},
+    xr:{},
+    platform:'Win32',
+    webkitPersistentStorage:{},
+    connection:{},
+    javaEnabled:false,
+    product:'Gecko',
+    vendorSub:'',
+    deviceMemory:8,
+    maxTouchPoints:0
 };
-bodavm.memory.window = {
-    name: "",
-    innerWidth: 1440,
-    innerHeight: 817,
-    origin: "http://www.fangdi.com.cn",
-    outerWidth: 1440,
-    outerHeight: 920,
-    defaultStatus: "",
-    defaultstatus: "",
-    devicePixelRatio: 1.5,
-    isSecureContext: false,
-    length: 0,
-    status: "",
-    onmessage: null,
-    onbeforeunload: '',
-    // clientInformation:""
+bodavm.memory.window={
+    name:"",
+    innerWidth:1440,
+    innerHeight:817,
+    origin:"https://www.ccgp-gansu.gov.cn",
+    outerWidth:1440,
+    outerHeight:920,
+    defaultStatus:"",
+    defaultstatus:"",
+    devicePixelRatio:1.5,
+    isSecureContext:true,
+    length:0,
+    status:"",
+    onmessage:null,
+    onbeforeunload:null,
 
 };
-
-// bodavm.memory.localStorage={}
+bodavm.memory.localStorage={}
 

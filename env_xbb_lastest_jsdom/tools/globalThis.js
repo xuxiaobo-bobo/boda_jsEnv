@@ -93,6 +93,7 @@ bodavm.toolsFunc.defineProperty(window, "$1", {configurable:true, enumerable:fal
 bodavm.toolsFunc.defineProperty(window, "$2", {configurable:true, enumerable:false, writable:true, value:undefined});
 bodavm.toolsFunc.defineProperty(window, "$3", {configurable:true, enumerable:false, writable:true, value:undefined});
 bodavm.toolsFunc.defineProperty(window, "$4", {configurable:true, enumerable:false, writable:true, value:undefined});
+bodavm.toolsFunc.defineProperty(window, "Image", {configurable:true, enumerable:false, writable:true, value:function Image (){return bodavm.toolsFunc.dispatch(this, window, "window", "Image", arguments)}});
 
 
 
@@ -102,12 +103,12 @@ bodavm.toolsFunc.defineProperty(window, "$4", {configurable:true, enumerable:fal
 
 
 
-// var boeval = eval
-// eval = function (x) {
-//     console.log(`执行eval,参数为${x}`)
-//     return boeval.call(this, x)
-// }
-// eval.toString = function () { return 'function eval() { [native code] }' }
+var boeval = eval
+eval = function (x) {
+    console.log(`执行eval,参数为${x}`)
+    return boeval.call(this, x)
+}
+eval.toString = function () { return 'function eval() { [native code] }' }
 
 
 window.Element.prototype[Symbol.unscopables] = {

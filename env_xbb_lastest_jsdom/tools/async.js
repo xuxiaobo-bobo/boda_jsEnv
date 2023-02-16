@@ -40,7 +40,14 @@ if (bodavm.memory.asyncEvent.listener) {
             for (let i = 0; i < event.length; i++) {
                 // debugger
                 console.log(`开始执行浏览器事件==========`,`当前为事件类型为==>: ${event[i].type}`);
+
+                try{
                 window.dispatchEvent(event[i])
+                }catch{
+                    console.log(`浏览器事件执行失败==========`,`当前为事件类型为==>: ${event[i].type}`);
+
+                }
+                
 
             }
         
@@ -51,6 +58,9 @@ if (bodavm.memory.asyncEvent.listener) {
 let setTimeEvent = bodavm.memory.asyncEvent.setTimeout
 console.log(`当前setTimeEvent有===>${JSON.stringify(setTimeEvent)}`)
 if (setTimeEvent) {
+    setTimeEvent.sort((a, b) => {
+        return a.timeoutID > b.timeoutID ? 1 : -1;
+    })
     setTimeEvent.sort((a, b) => {
         return a.delay > b.delay ? 1 : -1;
     })
