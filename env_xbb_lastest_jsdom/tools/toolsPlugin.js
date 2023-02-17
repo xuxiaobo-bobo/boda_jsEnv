@@ -4,7 +4,7 @@
 // debugger
 bodavm.toolsFunc.createPluginArray = function createPluginArray(){
     let pluginArray = {};
-    pluginArray = Object.setPrototypeOf(pluginArray, PluginArray.prototype);
+    pluginArray = Object.setPrototypeOf(pluginArray, bodavm.memory.globalobj['PluginArray'].prototype);
     bodavm.toolsFunc.setProtoAttr.call(pluginArray, "length", 0);
     return pluginArray;
 }
@@ -17,7 +17,7 @@ bodavm.toolsFunc.addPlugin = function addPlugin(plugin){
     }
     let index = pluginArray.length;
     pluginArray[index] = plugin;
-    Object.defineProperty(pluginArray, plugin.name, {value: plugin, writable: false, enumerable: false, configurable: true});
+    Object.defineProperty(pluginArray, plugin.name, {value: plugin, writable: false, enumerable: false, configurable: true},'bobo');
 
     bodavm.toolsFunc.setProtoAttr.call(pluginArray, "length", index+1);
     bodavm.memory.globalInit.pluginArray = pluginArray;
@@ -26,7 +26,7 @@ bodavm.toolsFunc.addPlugin = function addPlugin(plugin){
 // 创建MimeTypeArray对象
 bodavm.toolsFunc.createMimeTypeArray = function createMimeTypeArray(){
     let mimeTypeArray = {};
-    mimeTypeArray = Object.setPrototypeOf(mimeTypeArray, MimeTypeArray.prototype);
+    mimeTypeArray = Object.setPrototypeOf(mimeTypeArray,bodavm.memory.globalobj['MimeTypeArray'].prototype);
     bodavm.toolsFunc.setProtoAttr.call(mimeTypeArray, "length", 0);
     return mimeTypeArray;
 }
@@ -42,7 +42,7 @@ bodavm.toolsFunc.addMimeType = function addMimeType(mimeType){
         enumerable:false,
         writable:false,
         configurable:false
-    })
+    },'bobo')
     let index = mimeTypeArray.length;
     let flag = true;
     for(let i=0;i<index;i++){
@@ -53,7 +53,7 @@ bodavm.toolsFunc.addMimeType = function addMimeType(mimeType){
     if(flag){
         mimeTypeArray[index] = mimeType;
 
-        Object.defineProperty(mimeTypeArray, mimeType.type, {value: mimeType, writable: false, enumerable: false, configurable: true});
+        Object.defineProperty(mimeTypeArray, mimeType.type, {value: mimeType, writable: false, enumerable: false, configurable: true},'bobo');
      
         bodavm.toolsFunc.setProtoAttr.call(mimeTypeArray, "length", index+1);
     }
@@ -65,7 +65,7 @@ bodavm.toolsFunc.addMimeType = function addMimeType(mimeType){
 bodavm.toolsFunc.createMimeType = function createMimeType(mimeTypeJson, plugin){
     // 
     let mimeType = {};
-    Object.setPrototypeOf(mimeType, MimeType.prototype);
+    Object.setPrototypeOf(mimeType, bodavm.memory.globalobj['MimeType'].prototype);
     bodavm.toolsFunc.setProtoAttr.call(mimeType, "description", mimeTypeJson.description);
     bodavm.toolsFunc.setProtoAttr.call(mimeType, "suffixes", mimeTypeJson.suffixes);
     bodavm.toolsFunc.setProtoAttr.call(mimeType, "type", mimeTypeJson.type);
@@ -76,10 +76,11 @@ bodavm.toolsFunc.createMimeType = function createMimeType(mimeTypeJson, plugin){
 
 // 创建plugin
 bodavm.toolsPlugin.createPlugin = function createPlugin(data){
+    // debugger
     let mimeTypes = data.mimeTypes;
     let plugin = {};
    
-    plugin = Object.setPrototypeOf(plugin, Plugin.prototype);
+    plugin = Object.setPrototypeOf(plugin, bodavm.memory.globalobj['Plugin'].prototype);
     bodavm.toolsFunc.setProtoAttr.call(plugin, "description", data.description);
     bodavm.toolsFunc.setProtoAttr.call(plugin, "filename", data.filename);
     bodavm.toolsFunc.setProtoAttr.call(plugin, "name", data.name);

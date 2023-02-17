@@ -1,5 +1,5 @@
 // Comment对象
-Comment = function Comment(){}
-bodavm.toolsFunc.safeProto(Comment, "Comment");
-Comment.prototype.__proto__=CharacterData.prototype;
-Comment.__proto__=CharacterData;
+bodavm.memory.globalobj['Comment'] = function Comment(){}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Comment'], "Comment");
+bodavm.memory.globalobj['Comment'].prototype.__proto__=bodavm.memory.globalobj['CharacterData'].prototype;
+bodavm.memory.globalobj['Comment'].__proto__=bodavm.memory.globalobj['CharacterData'];

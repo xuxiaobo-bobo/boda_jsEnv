@@ -1,7 +1,7 @@
-//PluginArray对象
-PluginArray=function PluginArray(){return bodavm.toolsFunc.throwError("TypeError","Illegal constructor")}
-bodavm.toolsFunc.safeProto(PluginArray,"PluginArray");
-bodavm.toolsFunc.defineProperty(PluginArray.prototype,"length",{configurable:true, enumerable:true, get:function length () {return bodavm.toolsFunc.dispatch(this,PluginArray.prototype,"PluginArray","length_get",arguments)},set:undefined});
-bodavm.toolsFunc.defineProperty(PluginArray.prototype,"item",{configurable:true, enumerable:true, writable:true, value:function item() {return bodavm.toolsFunc.dispatch(this,PluginArray.prototype,"PluginArray","item",arguments)}});
-bodavm.toolsFunc.defineProperty(PluginArray.prototype,"namedItem",{configurable:true, enumerable:true, writable:true, value:function namedItem() {return bodavm.toolsFunc.dispatch(this,PluginArray.prototype,"PluginArray","namedItem",arguments)}});
-bodavm.toolsFunc.defineProperty(PluginArray.prototype,"refresh",{configurable:true, enumerable:true, writable:true, value:function refresh() {return bodavm.toolsFunc.dispatch(this,PluginArray.prototype,"PluginArray","refresh",arguments)}});
+// PluginArray对象
+bodavm.memory.globalobj['PluginArray'] = function PluginArray(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['PluginArray'], "PluginArray");
+bodavm.toolsFunc.defineProperty('PluginArray', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PluginArray'].prototype, "PluginArray", "length_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PluginArray', "item", {configurable:true, enumerable:true, writable:true, value:function item (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PluginArray'].prototype, "PluginArray", "item", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('PluginArray', "namedItem", {configurable:true, enumerable:true, writable:true, value:function namedItem (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PluginArray'].prototype, "PluginArray", "namedItem", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('PluginArray', "refresh", {configurable:true, enumerable:true, writable:true, value:function refresh (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PluginArray'].prototype, "PluginArray", "refresh", arguments)}},'prototype');

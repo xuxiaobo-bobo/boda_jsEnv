@@ -1,22 +1,22 @@
 // Screen对象
-Screen = function Screen(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
-bodavm.toolsFunc.safeProto(Screen, "Screen");
-Screen.prototype.__proto__=EventTarget.prototype;
-Screen.__proto__=EventTarget;
-bodavm.toolsFunc.defineProperty(Screen.prototype, "availWidth", {configurable:true, enumerable:true, get:function availWidth (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "availWidth_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "availHeight", {configurable:true, enumerable:true, get:function availHeight (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "availHeight_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "width", {configurable:true, enumerable:true, get:function width (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "width_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "height", {configurable:true, enumerable:true, get:function height (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "height_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "colorDepth", {configurable:true, enumerable:true, get:function colorDepth (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "colorDepth_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "pixelDepth", {configurable:true, enumerable:true, get:function pixelDepth (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "pixelDepth_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "availLeft", {configurable:true, enumerable:true, get:function availLeft (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "availLeft_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "availTop", {configurable:true, enumerable:true, get:function availTop (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "availTop_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "orientation", {configurable:true, enumerable:true, get:function orientation (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "orientation_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "onchange_set", arguments)}});
-bodavm.toolsFunc.defineProperty(Screen.prototype, "isExtended", {configurable:true, enumerable:true, get:function isExtended (){return bodavm.toolsFunc.dispatch(this, Screen.prototype, "Screen", "isExtended_get", arguments)}, set:undefined});
-// screen对象
-var screen = {}
-screen.__proto__=Screen.prototype;
+bodavm.memory.globalobj['Screen'] = function Screen(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Screen'], "Screen");
+bodavm.memory.globalobj['Screen'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
+bodavm.memory.globalobj['Screen'].__proto__=bodavm.memory.globalobj['EventTarget'];
+bodavm.toolsFunc.defineProperty('Screen', "availWidth", {configurable:true, enumerable:true, get:function availWidth (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "availWidth_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "availHeight", {configurable:true, enumerable:true, get:function availHeight (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "availHeight_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "width", {configurable:true, enumerable:true, get:function width (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "width_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "height", {configurable:true, enumerable:true, get:function height (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "height_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "colorDepth", {configurable:true, enumerable:true, get:function colorDepth (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "colorDepth_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "pixelDepth", {configurable:true, enumerable:true, get:function pixelDepth (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "pixelDepth_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "availLeft", {configurable:true, enumerable:true, get:function availLeft (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "availLeft_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "availTop", {configurable:true, enumerable:true, get:function availTop (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "availTop_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "orientation", {configurable:true, enumerable:true, get:function orientation (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "orientation_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "onchange_set", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('Screen', "isExtended", {configurable:true, enumerable:true, get:function isExtended (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "isExtended_get", arguments)}, set:undefined},'prototype');
+
+bodavm.memory.globalobj[ 'screen']  = {}
+bodavm.memory.globalobj[ 'screen'].__proto__=bodavm.memory.globalobj['Screen'].prototype;
 
 
 

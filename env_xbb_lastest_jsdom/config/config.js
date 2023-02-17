@@ -26,7 +26,7 @@ bodavm.config.proxy = false; //是否代理
 
 
 //网站为r4或者r5 设置为true 否则请关闭
-bodavm.config.isrs = false  //判断当前网站是不是瑞数
+bodavm.config.isrs = true  //判断当前网站是不是瑞数
 //网站为r6 设置为true body设置为0 否则请把true改为false
 bodavm.memory.rs6=true
 bodavm.memory.rs6_body=0
@@ -59,9 +59,6 @@ bodavm.memory.collection = {
 }
 
 // bodavm.memory.localStorage={};
-bodavm.memory.cookie1 = ''  //用来存储555
-bodavm.memory.cookie2 = {} //用来存储"a=10"
-bodavm.memory.cookie = ''; //拼接cookie1 和cookie2
 
 bodavm.memory.asyncEvent = {
     HTMLElement: { onload: [] }
@@ -69,7 +66,11 @@ bodavm.memory.asyncEvent = {
 };
 bodavm.memory.globalInit.timeoutID = 0;
 // "Verdana;Helvetica Neue LT Pro 35 Thin;tahoma;verdana;times new roman;Courier New;Microsoft Himalaya;helvetica;LG-FZKaTong-M19-V2.2;Georgia;georgia;courier new;Arial;arial;cursive;times;fantasy;courier;serif;monospace;Times New Roman"
-bodavm.memory.globalInit.fontList = ["SimHei", "SimSun", "NSimSun", "FangSong", "KaiTi", 'Verdana', 'Helvetica Neue LT Pro 35 Thin', 'tahoma', 'verdana', 'times new roman', 'Courier New', 'Microsoft Himalaya', 'helvetica', 'LG-FZKaTong-M19-V2.2', 'Georgia', 'georgia', 'courier new', 'Arial', 'arial', 'cursive', 'times', 'fantasy', 'courier', 'serif', 'monospace', 'Times New Roman']
+bodavm.memory.globalInit.fontList = 
+["SimHei", "SimSun", "NSimSun", "FangSong", "KaiTi", 'Verdana', 'Helvetica Neue LT Pro 35 Thin',
+ 'tahoma', 'verdana', 'times new roman', 'Courier New', 'Microsoft Himalaya', 'helvetica', 'LG-FZKaTong-M19-V2.2',
+ 'Georgia', 'georgia', 'courier new', 'Arial', 'arial', 'cursive', 'times', 'fantasy', 'courier',
+  'serif', 'monospace', 'Times New Roman']
 
 bodavm.memory.fontsize = {
   'SimHei':[640,160],
@@ -113,33 +114,31 @@ bodavm.memory.IDBOpenDBRequest = {
 
 
 
-
-
 bodavm.memory.location={
-    origin:"https://www.ccgp-gansu.gov.cn",
+    origin:"http://sthjt.hubei.gov.cn",
     hash:"",
-    pathname:"/web/article/40288281840982fe01842bfd2ae94487.html",
-    search:"",
-    href:"https://www.ccgp-gansu.gov.cn/web/article/40288281840982fe01842bfd2ae94487.html",
+    pathname:"/site/sthjt/search.html",
+    search:"?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
+    href:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
     port:"",
-    protocol:"https:",
-    host:"www.ccgp-gansu.gov.cn",
+    protocol:"http:",
+    host:"sthjt.hubei.gov.cn",
     ancestorOrigins:"{}",
-    hostname:"www.ccgp-gansu.gov.cn"
+    hostname:"sthjt.hubei.gov.cn"
 };
 
 bodavm.memory.document={
-    URL:"https://www.ccgp-gansu.gov.cn/web/article/40288281840982fe01842bfd2ae94487.html",
-    referrer:"https://www.ccgp-gansu.gov.cn/web/article/40288281840982fe01842bfd2ae94487.html",
-    documentURI:"https://www.ccgp-gansu.gov.cn/web/article/40288281840982fe01842bfd2ae94487.html",
+    URL:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
+    referrer:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
+    documentURI:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
     compatMode:"CSS1Compat",
     dir:"",
-    title:"",
+    title:"湖北省生态环境厅",
     designMode:"off",
-    readyState:"loading",
+    readyState:"complete",
     contentType:"text/html",
     inputEncoding:"UTF-8",
-    domain:"www.ccgp-gansu.gov.cn",
+    domain:"sthjt.hubei.gov.cn",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
@@ -166,9 +165,9 @@ bodavm.memory.screen={
     colorDepth:24,
     availLeft:0,
     availTop:0,
-    isExtended:false,
+    isExtended:undefined,
     orientation:{},
-    onchange:null,
+    onchange:undefined,
 };
 
 bodavm.memory.navigator={
@@ -181,32 +180,32 @@ bodavm.memory.navigator={
     cookieEnabled:true,
     languages:["zh-CN","zh"],
     productSub:"20030107",
-    userAgentData:{"brands":[{"brand":" Not A;Brand","version":"99"},{"brand":"Chromium","version":"102"},{"brand":"Google Chrome","version":"102"}],"mobile":false},
-    xr:{},
+    userAgentData:undefined,
+    xr:undefined,
     platform:'Win32',
     webkitPersistentStorage:{},
     connection:{},
     javaEnabled:false,
     product:'Gecko',
-    vendorSub:'',
-    deviceMemory:8,
+    vendorSub:"",
+    deviceMemory:undefined,
     maxTouchPoints:0
 };
 bodavm.memory.window={
     name:"",
     innerWidth:1440,
     innerHeight:817,
-    origin:"https://www.ccgp-gansu.gov.cn",
+    origin:"http://sthjt.hubei.gov.cn",
     outerWidth:1440,
     outerHeight:920,
     defaultStatus:"",
     defaultstatus:"",
     devicePixelRatio:1.5,
-    isSecureContext:true,
-    length:0,
+    isSecureContext:false,
+    length:1,
     status:"",
     onmessage:null,
-    onbeforeunload:null,
+    onbeforeunload:function _$fx(_$jL){_$eA?(_$jN(new _$d0(_$hn[58],{},_$hf(_$jL[_$_8[73]]))),_$eu()):0;},
 
 };
 bodavm.memory.localStorage={}

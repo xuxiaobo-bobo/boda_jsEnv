@@ -1,6 +1,6 @@
 // HTMLDivElement对象
-HTMLDivElement = function HTMLDivElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
-bodavm.toolsFunc.safeProto(HTMLDivElement, "HTMLDivElement");
-HTMLDivElement.prototype.__proto__=HTMLElement.prototype;
-HTMLDivElement.__proto__=HTMLElement;
-bodavm.toolsFunc.defineProperty(HTMLDivElement.prototype, "align", {configurable:true, enumerable:true, get:function align (){return bodavm.toolsFunc.dispatch(this, HTMLDivElement.prototype, "HTMLDivElement", "align_get", arguments)}, set:function align (){return bodavm.toolsFunc.dispatch(this, HTMLDivElement.prototype, "HTMLDivElement", "align_set", arguments)}});
+bodavm.memory.globalobj['HTMLDivElement'] = function HTMLDivElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLDivElement'], "HTMLDivElement");
+bodavm.memory.globalobj['HTMLDivElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
+bodavm.memory.globalobj['HTMLDivElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
+bodavm.toolsFunc.defineProperty('HTMLDivElement', "align", {configurable:true, enumerable:true, get:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLDivElement'].prototype, "HTMLDivElement", "align_get", arguments)}, set:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLDivElement'].prototype, "HTMLDivElement", "align_set", arguments)}},'prototype');

@@ -1,5 +1,5 @@
 // HTMLUnknownElement对象
-HTMLUnknownElement = function HTMLUnknownElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
-bodavm.toolsFunc.safeProto(HTMLUnknownElement, "HTMLUnknownElement");
-HTMLUnknownElement.prototype.__proto__=HTMLElement.prototype;
-HTMLUnknownElement.__proto__=HTMLElement;
+bodavm.memory.globalobj['HTMLUnknownElement'] = function HTMLUnknownElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLUnknownElement'], "HTMLUnknownElement");
+bodavm.memory.globalobj['HTMLUnknownElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
+bodavm.memory.globalobj['HTMLUnknownElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

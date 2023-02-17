@@ -1,6 +1,93 @@
 // 浏览器接口具体的实现
 !function () {
+    // bodavm.envFunc.window_eval=function (){
+    //     let arg=arguments[0]
+    //     console.log(`window_eval `,`arg->${arg}`);
+    //     return bodaobj.window.eval(arg)
+    // }
+    bodavm.envFunc.window_webkitStorageInfo_get=function (){
+        let webkitStorageInfo_=bodavm.memory.globalobj['webkitStorageInfo']
+        console.log(`window_webkitStorageInfo_get `,`webkitStorageInfo->`,webkitStorageInfo_);
+        return webkitStorageInfo_
+    }
+    bodavm.envFunc.window_navigation_get=function (){
+        let navigation_=bodavm.memory.globalobj['navigation']
+        console.log(`window_navigation_get `,`navigation->`,navigation_);
+        return navigation_
+    }
+    bodavm.envFunc.window_performance_get=function (){
+        let perf=bodavm.memory.globalobj['performance']
+        console.log(`window_performance_get `,`performance->`,perf);
+        debugger
+        return perf
+    }
+    bodavm.envFunc.window_navigator_get=function (){
+        let navigator_=bodavm.memory.globalobj.navigator
+        console.log(`window_navigator_get `,`navigator->`,navigator_);
 
+        return navigator_
+    }
+    bodavm.envFunc.window_customElements_get=function (){
+        let customElements_=bodavm.memory.globalobj.customElements
+        console.log(`window_customElements_get `,`customElements->`,customElements_);
+
+        return customElements_
+    }
+    bodavm.envFunc.window_screen_get=function (){
+        let screen_=bodavm.memory.globalobj.screen
+        console.log(`window_screen_get `,`screen->`,screen_);
+
+        return screen_
+    }
+
+    
+    bodavm.envFunc.window_history_get=function (){
+        let history_=bodavm.memory.globalobj.history
+        console.log(`window_history_get `,`history->`,history_);
+
+        return history_
+    }
+    bodavm.envFunc.window_localStorage_get=function window_localStorage_get(){
+        let localStorage_=bodavm.memory.globalobj.localStorage
+        console.log(`window_localStorage_get `,`localStorage->`,localStorage_);
+
+        return localStorage_
+    }
+    bodavm.envFunc.window_indexedDB_get=function window_indexedDB_get(){
+        let indexedDB_=bodavm.memory.globalobj.indexedDB
+        console.log(`window_indexedDB_get `,`indexedDB->`,indexedDB_);
+
+        return indexedDB_
+    }
+    bodavm.envFunc.window_sessionStorage_get=function window_sessionStorage_get(){
+        let sessionStorage_=bodavm.memory.globalobj.sessionStorage
+        console.log(`window_sessionStorage_get `,`sessionStorage->`,sessionStorage_);
+
+        return sessionStorage_
+    }
+    bodavm.envFunc.window_crypto_get=function window_crypto_get(){
+        let crypto_=bodavm.memory.globalobj.crypto
+        console.log(`window_crypto_get `,`crypto->`,crypto_);
+        return crypto_
+    }
+    bodavm.envFunc.window_document_get=function window_document_get(){
+        // debugger
+        let document_=bodavm.memory.globalobj.document
+        console.log(`window_document_get `,`document->`,document_);
+        return document_
+    }
+    bodavm.envFunc.window_location_get=function window_location_get(){
+        debugger
+        let location_=bodavm.memory.globalobj.location
+        console.log(`window_location_get `,`location_->`,location_);
+        return location_
+    }
+    bodavm.envFunc.window_clientInformation_get=function window_clientInformation_get(){
+        // debugger
+        let res=navigator
+        console.log(`window_clientInformation_get `,`res- >${res}`);
+        return res
+    }
     bodavm.envFunc.HTMLAllCollection_length_get = function () {
         let length_ = bodavm.memory.all.length
         console.log(`HTMLAllCollection_length_get `, `length_ ->${length_}`);
@@ -10,11 +97,11 @@
         bodavm.memory.all = []
         let a = boallundefined
         tags = document.getElementsByTagName("*")
-        a.__proto__ = HTMLAllCollection.prototype
+        a.__proto__ = bodavm.memory.globalobj['HTMLAllCollection'].prototype
         if (bodavm.memory.rs6 && bodavm.memory.rs6_body == 0) {
             let num = 0
             for (let i=0;i<tags.length; i++) {
-                if (tags[i] instanceof HTMLBodyElement) {
+                if (tags[i] instanceof bodavm.memory.globalobj['HTMLBodyElement']) {
                 } else {
                     bodavm.memory.all[num] = tags[i]
                     num++
@@ -124,7 +211,7 @@
 
             }
         }
-        debugger
+        // debugger
         console.log(`HTMLFormElement_action_set `, `action ->${action}`);
         return action
     }
@@ -132,7 +219,7 @@
         // debugger
         let res = {}
 
-        res.__proto__ = XPathExpression.prototype
+        res.__proto__ =bodavm.memory.globalobj['XPathExpression'].prototype
         res._boarg = bodaobj.document.createExpression(arguments[0], arguments[1])
         console.log(`Document_createExpression `, `res ->${res}`);
         return res
@@ -194,7 +281,7 @@
         let arg = arguments[0]
         let res = {}
         res._media = arg
-        res.__proto__ = MediaQueryList.prototype
+        res.__proto__ = bodavm.memory.globalobj['MediaQueryList'].prototype
         console.log(`window_matchMedia `, `arg ->${arg}`, `res ->${res}`);
 
         return res
@@ -346,7 +433,7 @@
         let query = arguments[0]
         if (query['name'] == 'geolocation') {
             let res = {}
-            res.__proto__ = PermissionStatus.prototype
+            res.__proto__ = bodavm.memory.globalobj['PermissionStatus'].prototype
             let promise = new Promise((resolve, reject) => {
                 resolve(res)
             })
@@ -364,7 +451,7 @@
         if (bodavm.config.isdebug) { debugger };
 
         let res = {}
-        res.__proto__ = HTMLCollection.prototype
+        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         res._boarg = imgs
         console.log(`Document_images_get `, `res -> ${res}`);
         return res
@@ -381,14 +468,14 @@
         let credentials = {}
         if (bodavm.config.isdebug) { debugger };
 
-        credentials.__proto__ = CredentialsContainer.prototype
+        credentials.__proto__ = bodavm.memory.globalobj['CredentialsContainer'].prototype
         console.log(`Navigator_credentials_get `, `credentials ->${credentials}`);
         return credentials
     }
     bodavm.envFunc.Navigator_storage_get = function Navigator_storage_get() {
         let storage = {}
         if (bodavm.config.isdebug) { debugger };
-        storage.__proto__ = StorageManager.prototype
+        storage.__proto__ = bodavm.memory.globalobj['StorageManager'].prototype
         console.log(`Navigator_storage_get `, `storage ->${storage}`);
         return storage
     }
@@ -401,7 +488,7 @@
     }
     bodavm.envFunc.Navigator_bluetooth_get = function Navigator_bluetooth_get() {
         let bluetooth = {}
-        bluetooth.__proto__ = Bluetooth.prototype
+        bluetooth.__proto__ = bodavm.memory.globalobj['Bluetooth'].prototype
         if (bodavm.config.isdebug) { debugger };
 
         console.log(`Navigator_bluetooth_get `, `bluetooth ->${bluetooth}`);
@@ -434,7 +521,7 @@
         if (bodavm.config.isdebug) { debugger };
         if (label == 'label') {
             let DataChannel = {}
-            DataChannel.__proto__ = RTCDataChannel.prototype
+            DataChannel.__proto__ = bodavm.memory.globalobj['RTCDataChannel'].prototype
             console.log(`RTCPeerConnection_createDataChannel `, `label->${label} `, `options->${options} `, `DataChannel->${DataChannel}  `);
             return DataChannel
         }
@@ -454,7 +541,7 @@
         let img = {}
         if (bodavm.config.isdebug) { debugger };
 
-        img.__proto__ = HTMLImageElement.prototype
+        img.__proto__ = bodavm.memory.globalobj['HTMLImageElement'].prototype
         img._boarg = domimg
         console.log(`window_Image `, ` img->${img}`);
         return img
@@ -621,7 +708,7 @@
         console.log(`window_scrollY_get `, `scrollY ->${scrollY}`);
         return scrollY
     }
-    bodavm.envFunc.window_self_get = function window_top_get() {
+    bodavm.envFunc.window_self_get = function () {
         console.log(`window_self_get `, `window  `);
 
         if (bodavm.config.isdebug) { debugger };;
@@ -661,7 +748,7 @@
             "callback": func,
             "delay": delay,
             "args": argList,
-            "type": typeof func == 'function' ? 1 : 0,  //1代表函数,0代表code
+            "type": typeof func == 'function'? 1 : 0,  //1代表函数,0代表code
             "timeoutID": bodavm.memory.globalInit.timeoutID
         }
         if (bodavm.memory.asyncEvent.setTimeout === undefined) {
@@ -714,7 +801,7 @@
             "callback": func,
             "delay": delay,
             "args": argList,
-            "type": typeof func == 'function' ? 1 : 0,  //1代表函数,0代表code
+            "type": typeof func == 'function'? 1 : 0,  //1代表函数,0代表code
             "timeoutID": bodavm.memory.globalInit.timeoutID
         }
         if (bodavm.memory.asyncEvent.setTimeout === undefined) {
@@ -791,158 +878,158 @@
     }
 
     //Document
-    bodavm.envFunc.Document_onbeforecut_get = function Document_onbeforecut_get() { console.log("Document_onbeforecut_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onbeforematch_get = function Document_onbeforematch_get() { console.log("Document_onbeforematch_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onbeforexrselect_get = function Document_onbeforexrselect_get() { console.log("Document_onbeforexrselect_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onblur_get = function Document_onblur_get() { console.log("Document_onblur_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oncancel_get = function Document_oncancel_get() { console.log("Document_oncancel_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oncanplay_get = function Document_oncanplay_get() { console.log("Document_oncanplay_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_xmlVersion_get = function Document_xmlVersion_get() { console.log("Document_xmlVersion_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_xmlStandalone_get = function Document_xmlStandalone_get() { console.log("Document_xmlStandalone_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_xmlEncoding_get = function Document_xmlEncoding_get() { console.log("Document_xmlEncoding_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_webkitVisibilityState_get = function Document_webkitVisibilityState_get() { console.log("Document_webkitVisibilityState_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_webkitIsFullScreen_get = function Document_webkitIsFullScreen_get() { console.log("Document_webkitIsFullScreen_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_webkitHidden_get = function Document_webkitHidden_get() { console.log("Document_webkitHidden_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_webkitFullscreenEnabled_get = function Document_webkitFullscreenEnabled_get() { console.log("Document_webkitFullscreenEnabled_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_webkitFullscreenElement_get = function Document_webkitFullscreenElement_get() { console.log("Document_webkitFullscreenElement_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_webkitCurrentFullScreenElement_get = function Document_webkitCurrentFullScreenElement_get() { console.log("Document_webkitCurrentFullScreenElement_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_wasDiscarded_get = function Document_wasDiscarded_get() { console.log("Document_wasDiscarded_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_vlinkColor_get = function Document_vlinkColor_get() { console.log("Document_vlinkColor_get  ", undefined, "未完善") }
+    bodavm.envFunc.Document_onbeforecut_get = function Document_onbeforecut_get() { console.log("Document_onbeforecut_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onbeforematch_get = function Document_onbeforematch_get() { console.log("Document_onbeforematch_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onbeforexrselect_get = function Document_onbeforexrselect_get() { console.log("Document_onbeforexrselect_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onblur_get = function Document_onblur_get() { console.log("Document_onblur_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oncancel_get = function Document_oncancel_get() { console.log("Document_oncancel_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oncanplay_get = function Document_oncanplay_get() { console.log("Document_oncanplay_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_xmlVersion_get = function Document_xmlVersion_get() { console.log("Document_xmlVersion_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_xmlStandalone_get = function Document_xmlStandalone_get() { console.log("Document_xmlStandalone_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_xmlEncoding_get = function Document_xmlEncoding_get() { console.log("Document_xmlEncoding_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_webkitVisibilityState_get = function Document_webkitVisibilityState_get() { console.log("Document_webkitVisibilityState_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_webkitIsFullScreen_get = function Document_webkitIsFullScreen_get() { console.log("Document_webkitIsFullScreen_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_webkitHidden_get = function Document_webkitHidden_get() { console.log("Document_webkitHidden_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_webkitFullscreenEnabled_get = function Document_webkitFullscreenEnabled_get() { console.log("Document_webkitFullscreenEnabled_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_webkitFullscreenElement_get = function Document_webkitFullscreenElement_get() { console.log("Document_webkitFullscreenElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_webkitCurrentFullScreenElement_get = function Document_webkitCurrentFullScreenElement_get() { console.log("Document_webkitCurrentFullScreenElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_wasDiscarded_get = function Document_wasDiscarded_get() { console.log("Document_wasDiscarded_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_vlinkColor_get = function Document_vlinkColor_get() { console.log("Document_vlinkColor_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_visibilityState_get = function Document_visibilityState_get() {
         console.log("Document_visibilityState_get  ", 'visible',)
         return 'visible'
     }
-    bodavm.envFunc.Document_timeline_get = function Document_timeline_get() { console.log("Document_timeline_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_styleSheets_get = function Document_styleSheets_get() { console.log("Document_styleSheets_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_rootElement_get = function Document_rootElement_get() { console.log("Document_rootElement_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_pointerLockElement_get = function Document_pointerLockElement_get() { console.log("Document_pointerLockElement_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_plugins_get = function Document_plugins_get() { console.log("Document_plugins_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_pictureInPictureEnabled_get = function Document_pictureInPictureEnabled_get() { console.log("Document_pictureInPictureEnabled_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_pictureInPictureElement_get = function Document_pictureInPictureElement_get() { console.log("Document_pictureInPictureElement_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onwheel_get = function Document_onwheel_get() { console.log("Document_onwheel_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onwebkittransitionend_get = function Document_onwebkittransitionend_get() { console.log("Document_onwebkittransitionend_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onwebkitfullscreenerror_get = function Document_onwebkitfullscreenerror_get() { console.log("Document_onwebkitfullscreenerror_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onwebkitfullscreenchange_get = function Document_onwebkitfullscreenchange_get() { console.log("Document_onwebkitfullscreenchange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onwebkitanimationstart_get = function Document_onwebkitanimationstart_get() { console.log("Document_onwebkitanimationstart_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onwebkitanimationiteration_get = function Document_onwebkitanimationiteration_get() { console.log("Document_onwebkitanimationiteration_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onwebkitanimationend_get = function Document_onwebkitanimationend_get() { console.log("Document_onwebkitanimationend_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onwaiting_get = function Document_onwaiting_get() { console.log("Document_onwaiting_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onvolumechange_get = function Document_onvolumechange_get() { console.log("Document_onvolumechange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onvisibilitychange_get = function Document_onvisibilitychange_get() { console.log("Document_onvisibilitychange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ontransitionstart_get = function Document_ontransitionstart_get() { console.log("Document_ontransitionstart_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ontransitionrun_get = function Document_ontransitionrun_get() { console.log("Document_ontransitionrun_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ontransitionend_get = function Document_ontransitionend_get() { console.log("Document_ontransitionend_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ontransitioncancel_get = function Document_ontransitioncancel_get() { console.log("Document_ontransitioncancel_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ontoggle_get = function Document_ontoggle_get() { console.log("Document_ontoggle_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ontimeupdate_get = function Document_ontimeupdate_get() { console.log("Document_ontimeupdate_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onsuspend_get = function Document_onsuspend_get() { console.log("Document_onsuspend_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onsubmit_get = function Document_onsubmit_get() { console.log("Document_onsubmit_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onstalled_get = function Document_onstalled_get() { console.log("Document_onstalled_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onslotchange_get = function Document_onslotchange_get() { console.log("Document_onslotchange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onselectstart_get = function Document_onselectstart_get() { console.log("Document_onselectstart_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onselect_get = function Document_onselect_get() { console.log("Document_onselect_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onseeking_get = function Document_onseeking_get() { console.log("Document_onseeking_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onseeked_get = function Document_onseeked_get() { console.log("Document_onseeked_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onsecuritypolicyviolation_get = function Document_onsecuritypolicyviolation_get() { console.log("Document_onsecuritypolicyviolation_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onsearch_get = function Document_onsearch_get() { console.log("Document_onsearch_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onscroll_get = function Document_onscroll_get() { console.log("Document_onscroll_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onresume_get = function Document_onresume_get() { console.log("Document_onresume_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onresize_get = function Document_onresize_get() { console.log("Document_onresize_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onreset_get = function Document_onreset_get() { console.log("Document_onreset_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onreadystatechange_get = function Document_onreadystatechange_get() { console.log("Document_onreadystatechange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_activeElement_get = function Document_activeElement_get() { console.log("Document_activeElement_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_adoptedStyleSheets_get = function Document_adoptedStyleSheets_get() { console.log("Document_adoptedStyleSheets_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_alinkColor_get = function Document_alinkColor_get() { console.log("Document_alinkColor_get  ", undefined, "未完善") }
+    bodavm.envFunc.Document_timeline_get = function Document_timeline_get() { console.log("Document_timeline_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_styleSheets_get = function Document_styleSheets_get() { console.log("Document_styleSheets_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_rootElement_get = function Document_rootElement_get() { console.log("Document_rootElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_pointerLockElement_get = function Document_pointerLockElement_get() { console.log("Document_pointerLockElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_plugins_get = function Document_plugins_get() { console.log("Document_plugins_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_pictureInPictureEnabled_get = function Document_pictureInPictureEnabled_get() { console.log("Document_pictureInPictureEnabled_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_pictureInPictureElement_get = function Document_pictureInPictureElement_get() { console.log("Document_pictureInPictureElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onwheel_get = function Document_onwheel_get() { console.log("Document_onwheel_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onwebkittransitionend_get = function Document_onwebkittransitionend_get() { console.log("Document_onwebkittransitionend_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onwebkitfullscreenerror_get = function Document_onwebkitfullscreenerror_get() { console.log("Document_onwebkitfullscreenerror_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onwebkitfullscreenchange_get = function Document_onwebkitfullscreenchange_get() { console.log("Document_onwebkitfullscreenchange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onwebkitanimationstart_get = function Document_onwebkitanimationstart_get() { console.log("Document_onwebkitanimationstart_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onwebkitanimationiteration_get = function Document_onwebkitanimationiteration_get() { console.log("Document_onwebkitanimationiteration_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onwebkitanimationend_get = function Document_onwebkitanimationend_get() { console.log("Document_onwebkitanimationend_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onwaiting_get = function Document_onwaiting_get() { console.log("Document_onwaiting_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onvolumechange_get = function Document_onvolumechange_get() { console.log("Document_onvolumechange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onvisibilitychange_get = function Document_onvisibilitychange_get() { console.log("Document_onvisibilitychange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ontransitionstart_get = function Document_ontransitionstart_get() { console.log("Document_ontransitionstart_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ontransitionrun_get = function Document_ontransitionrun_get() { console.log("Document_ontransitionrun_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ontransitionend_get = function Document_ontransitionend_get() { console.log("Document_ontransitionend_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ontransitioncancel_get = function Document_ontransitioncancel_get() { console.log("Document_ontransitioncancel_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ontoggle_get = function Document_ontoggle_get() { console.log("Document_ontoggle_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ontimeupdate_get = function Document_ontimeupdate_get() { console.log("Document_ontimeupdate_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onsuspend_get = function Document_onsuspend_get() { console.log("Document_onsuspend_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onsubmit_get = function Document_onsubmit_get() { console.log("Document_onsubmit_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onstalled_get = function Document_onstalled_get() { console.log("Document_onstalled_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onslotchange_get = function Document_onslotchange_get() { console.log("Document_onslotchange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onselectstart_get = function Document_onselectstart_get() { console.log("Document_onselectstart_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onselect_get = function Document_onselect_get() { console.log("Document_onselect_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onseeking_get = function Document_onseeking_get() { console.log("Document_onseeking_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onseeked_get = function Document_onseeked_get() { console.log("Document_onseeked_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onsecuritypolicyviolation_get = function Document_onsecuritypolicyviolation_get() { console.log("Document_onsecuritypolicyviolation_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onsearch_get = function Document_onsearch_get() { console.log("Document_onsearch_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onscroll_get = function Document_onscroll_get() { console.log("Document_onscroll_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onresume_get = function Document_onresume_get() { console.log("Document_onresume_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onresize_get = function Document_onresize_get() { console.log("Document_onresize_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onreset_get = function Document_onreset_get() { console.log("Document_onreset_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onreadystatechange_get = function Document_onreadystatechange_get() { console.log("Document_onreadystatechange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_activeElement_get = function Document_activeElement_get() { console.log("Document_activeElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_adoptedStyleSheets_get = function Document_adoptedStyleSheets_get() { console.log("Document_adoptedStyleSheets_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_alinkColor_get = function Document_alinkColor_get() { console.log("Document_alinkColor_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
-    bodavm.envFunc.Document_anchors_get = function Document_anchors_get() { console.log("Document_anchors_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_applets_get = function Document_applets_get() { console.log("Document_applets_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_bgColor_get = function Document_bgColor_get() { console.log("Document_bgColor_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_childElementCount_get = function Document_childElementCount_get() { console.log("Document_childElementCount_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_children_get = function Document_children_get() { console.log("Document_children_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_currentScript_get = function Document_currentScript_get() { console.log("Document_currentScript_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_defaultView_get = function Document_defaultView_get() { console.log("Document_defaultView_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_doctype_get = function Document_doctype_get() { console.log("Document_doctype_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_embeds_get = function Document_embeds_get() { console.log("Document_embeds_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_featurePolicy_get = function Document_featurePolicy_get() { console.log("Document_featurePolicy_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_fgColor_get = function Document_fgColor_get() { console.log("Document_fgColor_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_firstElementChild_get = function Document_firstElementChild_get() { console.log("Document_firstElementChild_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_fonts_get = function Document_fonts_get() { console.log("Document_fonts_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_fragmentDirective_get = function Document_fragmentDirective_get() { console.log("Document_fragmentDirective_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_fullscreen_get = function Document_fullscreen_get() { console.log("Document_fullscreen_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_fullscreenElement_get = function Document_fullscreenElement_get() { console.log("Document_fullscreenElement_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_fullscreenEnabled_get = function Document_fullscreenEnabled_get() { console.log("Document_fullscreenEnabled_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_lastElementChild_get = function Document_lastElementChild_get() { console.log("Document_lastElementChild_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_linkColor_get = function Document_linkColor_get() { console.log("Document_linkColor_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_links_get = function Document_links_get() { console.log("Document_links_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onabort_get = function Document_onabort_get() { console.log("Document_onabort_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onanimationend_get = function Document_onanimationend_get() { console.log("Document_onanimationend_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onanimationiteration_get = function Document_onanimationiteration_get() { console.log("Document_onanimationiteration_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onanimationstart_get = function Document_onanimationstart_get() { console.log("Document_onanimationstart_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onauxclick_get = function Document_onauxclick_get() { console.log("Document_onauxclick_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onbeforecopy_get = function Document_onbeforecopy_get() { console.log("Document_onbeforecopy_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onbeforepaste_get = function Document_onbeforepaste_get() { console.log("Document_onbeforepaste_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oncanplaythrough_get = function Document_oncanplaythrough_get() { console.log("Document_oncanplaythrough_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onchange_get = function Document_onchange_get() { console.log("Document_onchange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onclick_get = function Document_onclick_get() { console.log("Document_onclick_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onclose_get = function Document_onclose_get() { console.log("Document_onclose_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oncontextlost_get = function Document_oncontextlost_get() { console.log("Document_oncontextlost_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oncontextmenu_get = function Document_oncontextmenu_get() { console.log("Document_oncontextmenu_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oncontextrestored_get = function Document_oncontextrestored_get() { console.log("Document_oncontextrestored_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oncopy_get = function Document_oncopy_get() { console.log("Document_oncopy_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oncuechange_get = function Document_oncuechange_get() { console.log("Document_oncuechange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oncut_get = function Document_oncut_get() { console.log("Document_oncut_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ondblclick_get = function Document_ondblclick_get() { console.log("Document_ondblclick_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ondrag_get = function Document_ondrag_get() { console.log("Document_ondrag_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ondragend_get = function Document_ondragend_get() { console.log("Document_ondragend_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ondragenter_get = function Document_ondragenter_get() { console.log("Document_ondragenter_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ondragleave_get = function Document_ondragleave_get() { console.log("Document_ondragleave_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ondragover_get = function Document_ondragover_get() { console.log("Document_ondragover_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ondragstart_get = function Document_ondragstart_get() { console.log("Document_ondragstart_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ondrop_get = function Document_ondrop_get() { console.log("Document_ondrop_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ondurationchange_get = function Document_ondurationchange_get() { console.log("Document_ondurationchange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onended_get = function Document_onended_get() { console.log("Document_onended_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onemptied_get = function Document_onemptied_get() { console.log("Document_onemptied_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onerror_get = function Document_onerror_get() { console.log("Document_onerror_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onfocus_get = function Document_onfocus_get() { console.log("Document_onfocus_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onformdata_get = function Document_onformdata_get() { console.log("Document_onformdata_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onfreeze_get = function Document_onfreeze_get() { console.log("Document_onfreeze_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onfullscreenchange_get = function Document_onfullscreenchange_get() { console.log("Document_onfullscreenchange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onfullscreenerror_get = function Document_onfullscreenerror_get() { console.log("Document_onfullscreenerror_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_ongotpointercapture_get = function Document_ongotpointercapture_get() { console.log("Document_ongotpointercapture_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oninput_get = function Document_oninput_get() { console.log("Document_oninput_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_oninvalid_get = function Document_oninvalid_get() { console.log("Document_oninvalid_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onkeydown_get = function Document_onkeydown_get() { console.log("Document_onkeydown_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onkeyup_get = function Document_onkeyup_get() { console.log("Document_onkeyup_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onload_get = function Document_onload_get() { console.log("Document_onload_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onloadeddata_get = function Document_onloadeddata_get() { console.log("Document_onloadeddata_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onloadedmetadata_get = function Document_onloadedmetadata_get() { console.log("Document_onloadedmetadata_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onlostpointercapture_get = function Document_onlostpointercapture_get() { console.log("Document_onlostpointercapture_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onloadstart_get = function Document_onloadstart_get() { console.log("Document_onloadstart_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onmousedown_get = function Document_onmousedown_get() { console.log("Document_onmousedown_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onmouseenter_get = function Document_onmouseenter_get() { console.log("Document_onmouseenter_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onmouseleave_get = function Document_onmouseleave_get() { console.log("Document_onmouseleave_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onmouseout_get = function Document_onmouseout_get() { console.log("Document_onmouseout_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onmouseover_get = function Document_onmouseover_get() { console.log("Document_onmouseover_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onmouseup_get = function Document_onmouseup_get() { console.log("Document_onmouseup_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onmousewheel_get = function Document_onmousewheel_get() { console.log("Document_onmousewheel_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpaste_get = function Document_onpaste_get() { console.log("Document_onpaste_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpause_get = function Document_onpause_get() { console.log("Document_onpause_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onplay_get = function Document_onplay_get() { console.log("Document_onplay_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onplaying_get = function Document_onplaying_get() { console.log("Document_onplaying_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointercancel_get = function Document_onpointercancel_get() { console.log("Document_onpointercancel_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointerdown_get = function Document_onpointerdown_get() { console.log("Document_onpointerdown_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointerenter_get = function Document_onpointerenter_get() { console.log("Document_onpointerenter_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointerleave_get = function Document_onpointerleave_get() { console.log("Document_onpointerleave_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointerlockerror_get = function Document_onpointerlockerror_get() { console.log("Document_onpointerlockerror_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointerlockchange_get = function Document_onpointerlockchange_get() { console.log("Document_onpointerlockchange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointermove_get = function Document_onpointermove_get() { console.log("Document_onpointermove_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointerout_get = function Document_onpointerout_get() { console.log("Document_onpointerout_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointerover_get = function Document_onpointerover_get() { console.log("Document_onpointerover_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointerrawupdate_get = function Document_onpointerrawupdate_get() { console.log("Document_onpointerrawupdate_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onpointerup_get = function Document_onpointerup_get() { console.log("Document_onpointerup_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onprogress_get = function Document_onprogress_get() { console.log("Document_onprogress_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_onratechange_get = function Document_onratechange_get() { console.log("Document_onratechange_get  ", undefined, "未完善") }
-    bodavm.envFunc.Document_querySelector = function Document_querySelector() { console.log("Document_querySelector", undefined, "未完善") }
+    bodavm.envFunc.Document_anchors_get = function Document_anchors_get() { console.log("Document_anchors_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_applets_get = function Document_applets_get() { console.log("Document_applets_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_bgColor_get = function Document_bgColor_get() { console.log("Document_bgColor_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_childElementCount_get = function Document_childElementCount_get() { console.log("Document_childElementCount_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_children_get = function Document_children_get() { console.log("Document_children_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_currentScript_get = function Document_currentScript_get() { console.log("Document_currentScript_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_defaultView_get = function Document_defaultView_get() { console.log("Document_defaultView_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_doctype_get = function Document_doctype_get() { console.log("Document_doctype_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_embeds_get = function Document_embeds_get() { console.log("Document_embeds_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_featurePolicy_get = function Document_featurePolicy_get() { console.log("Document_featurePolicy_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_fgColor_get = function Document_fgColor_get() { console.log("Document_fgColor_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_firstElementChild_get = function Document_firstElementChild_get() { console.log("Document_firstElementChild_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_fonts_get = function Document_fonts_get() { console.log("Document_fonts_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_fragmentDirective_get = function Document_fragmentDirective_get() { console.log("Document_fragmentDirective_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_fullscreen_get = function Document_fullscreen_get() { console.log("Document_fullscreen_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_fullscreenElement_get = function Document_fullscreenElement_get() { console.log("Document_fullscreenElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_fullscreenEnabled_get = function Document_fullscreenEnabled_get() { console.log("Document_fullscreenEnabled_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_lastElementChild_get = function Document_lastElementChild_get() { console.log("Document_lastElementChild_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_linkColor_get = function Document_linkColor_get() { console.log("Document_linkColor_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_links_get = function Document_links_get() { console.log("Document_links_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onabort_get = function Document_onabort_get() { console.log("Document_onabort_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onanimationend_get = function Document_onanimationend_get() { console.log("Document_onanimationend_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onanimationiteration_get = function Document_onanimationiteration_get() { console.log("Document_onanimationiteration_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onanimationstart_get = function Document_onanimationstart_get() { console.log("Document_onanimationstart_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onauxclick_get = function Document_onauxclick_get() { console.log("Document_onauxclick_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onbeforecopy_get = function Document_onbeforecopy_get() { console.log("Document_onbeforecopy_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onbeforepaste_get = function Document_onbeforepaste_get() { console.log("Document_onbeforepaste_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oncanplaythrough_get = function Document_oncanplaythrough_get() { console.log("Document_oncanplaythrough_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onchange_get = function Document_onchange_get() { console.log("Document_onchange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onclick_get = function Document_onclick_get() { console.log("Document_onclick_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onclose_get = function Document_onclose_get() { console.log("Document_onclose_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oncontextlost_get = function Document_oncontextlost_get() { console.log("Document_oncontextlost_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oncontextmenu_get = function Document_oncontextmenu_get() { console.log("Document_oncontextmenu_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oncontextrestored_get = function Document_oncontextrestored_get() { console.log("Document_oncontextrestored_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oncopy_get = function Document_oncopy_get() { console.log("Document_oncopy_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oncuechange_get = function Document_oncuechange_get() { console.log("Document_oncuechange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oncut_get = function Document_oncut_get() { console.log("Document_oncut_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ondblclick_get = function Document_ondblclick_get() { console.log("Document_ondblclick_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ondrag_get = function Document_ondrag_get() { console.log("Document_ondrag_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ondragend_get = function Document_ondragend_get() { console.log("Document_ondragend_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ondragenter_get = function Document_ondragenter_get() { console.log("Document_ondragenter_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ondragleave_get = function Document_ondragleave_get() { console.log("Document_ondragleave_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ondragover_get = function Document_ondragover_get() { console.log("Document_ondragover_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ondragstart_get = function Document_ondragstart_get() { console.log("Document_ondragstart_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ondrop_get = function Document_ondrop_get() { console.log("Document_ondrop_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ondurationchange_get = function Document_ondurationchange_get() { console.log("Document_ondurationchange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onended_get = function Document_onended_get() { console.log("Document_onended_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onemptied_get = function Document_onemptied_get() { console.log("Document_onemptied_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onerror_get = function Document_onerror_get() { console.log("Document_onerror_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onfocus_get = function Document_onfocus_get() { console.log("Document_onfocus_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onformdata_get = function Document_onformdata_get() { console.log("Document_onformdata_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onfreeze_get = function Document_onfreeze_get() { console.log("Document_onfreeze_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onfullscreenchange_get = function Document_onfullscreenchange_get() { console.log("Document_onfullscreenchange_get  ", undefined, "!!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onfullscreenerror_get = function Document_onfullscreenerror_get() { console.log("Document_onfullscreenerror_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_ongotpointercapture_get = function Document_ongotpointercapture_get() { console.log("Document_ongotpointercapture_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oninput_get = function Document_oninput_get() { console.log("Document_oninput_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_oninvalid_get = function Document_oninvalid_get() { console.log("Document_oninvalid_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onkeydown_get = function Document_onkeydown_get() { console.log("Document_onkeydown_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onkeyup_get = function Document_onkeyup_get() { console.log("Document_onkeyup_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onload_get = function Document_onload_get() { console.log("Document_onload_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onloadeddata_get = function Document_onloadeddata_get() { console.log("Document_onloadeddata_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onloadedmetadata_get = function Document_onloadedmetadata_get() { console.log("Document_onloadedmetadata_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onlostpointercapture_get = function Document_onlostpointercapture_get() { console.log("Document_onlostpointercapture_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onloadstart_get = function Document_onloadstart_get() { console.log("Document_onloadstart_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onmousedown_get = function Document_onmousedown_get() { console.log("Document_onmousedown_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onmouseenter_get = function Document_onmouseenter_get() { console.log("Document_onmouseenter_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onmouseleave_get = function Document_onmouseleave_get() { console.log("Document_onmouseleave_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onmouseout_get = function Document_onmouseout_get() { console.log("Document_onmouseout_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onmouseover_get = function Document_onmouseover_get() { console.log("Document_onmouseover_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onmouseup_get = function Document_onmouseup_get() { console.log("Document_onmouseup_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onmousewheel_get = function Document_onmousewheel_get() { console.log("Document_onmousewheel_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpaste_get = function Document_onpaste_get() { console.log("Document_onpaste_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpause_get = function Document_onpause_get() { console.log("Document_onpause_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onplay_get = function Document_onplay_get() { console.log("Document_onplay_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onplaying_get = function Document_onplaying_get() { console.log("Document_onplaying_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointercancel_get = function Document_onpointercancel_get() { console.log("Document_onpointercancel_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointerdown_get = function Document_onpointerdown_get() { console.log("Document_onpointerdown_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointerenter_get = function Document_onpointerenter_get() { console.log("Document_onpointerenter_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointerleave_get = function Document_onpointerleave_get() { console.log("Document_onpointerleave_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointerlockerror_get = function Document_onpointerlockerror_get() { console.log("Document_onpointerlockerror_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointerlockchange_get = function Document_onpointerlockchange_get() { console.log("Document_onpointerlockchange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointermove_get = function Document_onpointermove_get() { console.log("Document_onpointermove_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointerout_get = function Document_onpointerout_get() { console.log("Document_onpointerout_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointerover_get = function Document_onpointerover_get() { console.log("Document_onpointerover_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointerrawupdate_get = function Document_onpointerrawupdate_get() { console.log("Document_onpointerrawupdate_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onpointerup_get = function Document_onpointerup_get() { console.log("Document_onpointerup_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onprogress_get = function Document_onprogress_get() { console.log("Document_onprogress_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_onratechange_get = function Document_onratechange_get() { console.log("Document_onratechange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_querySelector = function Document_querySelector() { console.log("Document_querySelector", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
     bodavm.envFunc.Document_createEvent = function Document_createEvent() {
         // debugger
@@ -951,19 +1038,19 @@
         switch (arg) {
             case 'MOUSEEVENT':
 
-                event.__proto__ = MouseEvent.prototype
+                event.__proto__ = bodavm.memory.globalobj['MouseEvent'].prototype
                 console.log(`Document_createEvent `, event);
                 bodavm.toolsFunc.symbolProperty(event)
                 return event
             case 'EVENT':
-                event.__proto__ = Event.prototype
+                event.__proto__ = bodavm.memory.globalobj['Event'].prototype
                 console.log(`Document_createEvent `, event);
                 bodavm.toolsFunc.symbolProperty(event)
                 return event
 
             case "TOUCHEVENT":
                 console.log(`Document_createEvent  `, event, `   该事件只有在触摸平面（触摸屏、触摸板等）才会触发`);
-                bodavm.toolsFunc.throwError('DOMException', `Failed to execute 'createEvent' on 'Document': The provided event type ('TouchEvent') is invalid.`)
+                bodavm.toolsFunc.throwError('DOMException', `Failed to execute 'createEvent'on 'Document': The provided event type ('TouchEvent') is invalid.`)
             default:
                 console.log(`Document_createEvent  `, `${arg}  未实现`);
 
@@ -974,7 +1061,7 @@
     bodavm.envFunc.Document_scripts_get = function Document_scripts_get() {
         let res = {}
         let scripts = bodaobj.document.scripts
-        res.__proto__ = HTMLCollection.prototype
+        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         res._boarg = scripts
         console.log(`Document_scripts_get `, `res ->${res}`);
         return res
@@ -1006,7 +1093,7 @@
     bodavm.envFunc.Document_lastModified_get = function Document_lastModified_get() {
         let date = new Date();
         let month = date.getMonth() + 1
-        month = month > 11 ? month : '0' + month
+        month = month > 11 ? month : '0'+ month
         let day = date.getDate()
         let year = date.getFullYear()
         let hours = date.getHours()
@@ -1045,91 +1132,91 @@
         if (bodavm.config.isdebug) { debugger };
         switch (tagName) {
             case "div":
+               
                 dom._boarg = bodaobj.document.createElement('div')
-                dom = Object.setPrototypeOf(dom, HTMLDivElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLDivElement'].prototype)
                 break;
             case "meta":
-
                 dom._boarg = bodaobj.document.createElement('meta')
-                dom = Object.setPrototypeOf(dom, HTMLMetaElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLMetaElement'].prototype)
                 break;
             case "canvas":
                 dom._boarg = bodaobj.document.createElement('canvas')
                 dom._bocanvas = bocreateCanvas(300, 150)
-                dom = Object.setPrototypeOf(dom, HTMLCanvasElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLCanvasElement'].prototype)
                 break;
             case "a":
                 dom._boarg = bodaobj.document.createElement('a')
 
-                dom = Object.setPrototypeOf(dom, HTMLAnchorElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLAnchorElement'].prototype)
                 break;
             case "script":
                 dom._boarg = bodaobj.document.createElement('script')
 
-                dom = Object.setPrototypeOf(dom, HTMLScriptElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLScriptElement'].prototype)
                 break;
             case "style":
                 dom._boarg = bodaobj.document.createElement('style')
 
-                dom = Object.setPrototypeOf(dom, HTMLStyleElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLStyleElement'].prototype)
                 break;
             case "head":
                 dom._boarg = bodaobj.document.createElement('head')
 
-                dom = Object.setPrototypeOf(dom, HTMLHeadElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLHeadElement'].prototype)
                 break;
             case "body":
                 dom._boarg = bodaobj.document.createElement('body')
 
-                dom = Object.setPrototypeOf(dom, HTMLBodyElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLBodyElement'].prototype)
                 break;
             case "form":
                 dom._boarg = bodaobj.document.createElement('form')
 
-                dom = Object.setPrototypeOf(dom, HTMLFormElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLFormElement'].prototype)
                 bodavm.memory.formlist.push(dom._boarg)
                 break;
             case "p":
                 dom._boarg = bodaobj.document.createElement('p')
 
-                dom = Object.setPrototypeOf(dom, HTMLParagraphElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLParagraphElement'].prototype)
                 break;
             case "iframe":
                 dom._boarg = bodaobj.document.createElement('iframe')
 
-                dom = Object.setPrototypeOf(dom, HTMLIFrameElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLIFrameElement'].prototype)
                 break;
             case "span":
                 dom._boarg = bodaobj.document.createElement('span')
 
-                dom = Object.setPrototypeOf(dom, HTMLSpanElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLSpanElement'].prototype)
                 break;
             case "img":
                 dom._boarg = bodaobj.document.createElement('img')
 
-                dom = Object.setPrototypeOf(dom, HTMLImageElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLImageElement'].prototype)
                 break;
             case "li":
                 dom._boarg = bodaobj.document.createElement('li')
 
-                dom = Object.setPrototypeOf(dom, HTMLLIElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLLIElement'].prototype)
                 break;
             case 'h1':
                 dom._boarg = bodaobj.document.createElement('h1')
 
-                dom = Object.setPrototypeOf(dom, HTMLHeadingElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
                 break;
             case 'audio':
                 dom._boarg = bodaobj.document.createElement('audio')
-                dom = Object.setPrototypeOf(dom, HTMLAudioElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLAudioElement'].prototype)
                 break
             case 'video':
                 dom._boarg = bodaobj.document.createElement('video')
-                dom = Object.setPrototypeOf(dom, HTMLVideoElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLVideoElement'].prototype)
                 break
             case 'input':
                 dom._boarg = bodaobj.document.createElement('input')
-                dom = Object.setPrototypeOf(dom, HTMLInputElement.prototype)
+                dom = Object.setPrototypeOf(dom,bodavm.memory.globalobj['HTMLInputElement'].prototype)
                 break
             default:
                 console.log(`Document_createElement `, `${tagName}属性未实现  `);
@@ -1192,18 +1279,19 @@
         let res = {}
         if (bodavm.config.isdebug) { debugger };
         let taglist = bodaobj.document.getElementsByTagName(tagName)
+        debugger
         num = 0
         for (let i = 0; i < taglist.length; i++) {
             num++
             res[i] = bodavm.toolsFunc.setProto(taglist[i].nodeName);
             res[i]._boarg = taglist[i]
-            if (num == 2 && tagName == 'script' && bodavm.config.isrs) {
+            if (num == 2 && tagName == 'script'&& bodavm.config.isrs) {
                 // debugger
                 break
 
             }
         }
-        res.__proto__ = HTMLCollection.prototype
+        res.__proto__ =bodavm.memory.globalobj['HTMLCollection'].prototype
         res._boarg = taglist
         console.log(`Document_getElementsByTagName `, `tagName->${tagName} `, ` taglist->${taglist}`);
 
@@ -1223,7 +1311,8 @@
                 tempCookie += `${key}=${jsonCookie[key]}; `;
             }
         }
-        console.log(`Document_cookie_get `, `cookie -> ${jsonCookie}`);
+        // cookie=bodaobj.document.cookie
+        console.log(`Document_cookie_get `, `cookie -> ${tempCookie}`);
         return tempCookie;
     }
     bodavm.envFunc.Document_cookie_set = function Document_cookie_set() {
@@ -1240,6 +1329,7 @@
             let v = item[1].trim();
             bodavm.memory.globalInit.jsonCookie[k] = v;
         }
+        // bodaobj.document.cookie=cookieValue
         console.log(`Document_cookie_set `, `cookie -> ${cookieValue}`);
         return cookieValue
     }
@@ -1391,7 +1481,7 @@
         // debugger
         let content = this._boarg.content
         // let value = self.attr["content"]
-        console.log(`HTMLMetaElement_content_get `, `content->${content.length > 50 ? content.substr(0, 30) + '...' : content}  `);
+        console.log(`HTMLMetaElement_content_get `, `content->${content.length > 50 ? content.substr(0, 30) + '...': content}  `);
         return content
 
     }
@@ -1406,7 +1496,7 @@
     }
     bodavm.envFunc.HTMLMetaElement_name_set = function HTMLMetaElement_name_set() {
         var value = arguments[0]
-        console.log(`HTMLMetaElement_name_set `, `${value}  `, `未完善`)
+        console.log(`HTMLMetaElement_name_set `, `${value}  `, `!!!!!!!!!未完善!!!!!!!!!!!!`)
         this['_elements'][0].attr["name"] = value
         if (bodavm.config.isdebug) { debugger }
 
@@ -1417,7 +1507,7 @@
         let value = this['_elements'][0].attr["name"]
         if (bodavm.config.isdebug) { debugger }
 
-        console.log(`HTMLMetaElement_name_get `, `${value}  `, `未完善`);
+        console.log(`HTMLMetaElement_name_get `, `${value}  `, `!!!!!!!!!未完善!!!!!!!!!!!!`);
         return value
     }
 
@@ -1426,7 +1516,7 @@
     // Node_replaceChild
     bodavm.envFunc.Node_replaceChild = function Node_replaceChild() {
         debugger
-        console.log(`Node_replaceChild`, `未完善`);
+        console.log(`Node_replaceChild`, `!!!!!!!!!未完善!!!!!!!!!!!!`);
     }
     bodavm.envFunc.Node_textContent_get = function Node_textContent_get() {
         // debugger
@@ -1447,53 +1537,71 @@
         return content
 
     }
-    bodavm.envFunc.Node_previousSibling_get = function Node_previousSibling_get() { console.log("Node_previousSibling_get", undefined, "未完善") }
-    bodavm.envFunc.Node_ownerDocument_get = function Node_ownerDocument_get() { console.log("Node_ownerDocument_get", undefined, "未完善") }
-    bodavm.envFunc.Node_baseURI_get = function Node_baseURI_get() { console.log("Node_baseURI_get", undefined, "未完善") }
-    bodavm.envFunc.Node_childNodes_get = function Node_childNodes_get() { console.log("Nodes_get", undefined, "未完善") }
-    bodavm.envFunc.Node_isConnected_get = function Node_isConnected_get() { console.log("Node_isConnected_get", undefined, "未完善") }
+    bodavm.envFunc.Node_previousSibling_get = function Node_previousSibling_get() { console.log("Node_previousSibling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_ownerDocument_get = function Node_ownerDocument_get() { console.log("Node_ownerDocument_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_baseURI_get = function Node_baseURI_get() { console.log("Node_baseURI_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_childNodes_get = function Node_childNodes_get() { console.log("Nodes_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_isConnected_get = function Node_isConnected_get() { console.log("Node_isConnected_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Node_nextSibling_get = function Node_nextSibling_get() {
-        // debugger
-
-        console.log(`Node_nextSibling_get `, `res->${res}`);
-        res._boarg = this._boarg.next
-        return res
+        debugger
+        let res={}
+        _next =this._boarg.nextSibling
+        if (_next ==null) {
+            console.log(`Node_nextSibling_get `,`res -> null`);
+            return null
+        }else{
+            res=bodavm.toolsFunc.setProto(_next.nodeName)
+            res._boarg=_next
+        }
+       
+        console.log(`Node_nextSibling_get ` ,`res->${res}`);
+        return res    
     }
     bodavm.envFunc.Node_nodeType_get = function Node_nodeType_get() {
         if (bodavm.config.isdebug) { debugger }
-
-        console.log(`Node_nodeType_get `, `${this._boarg.type}未完善`);
+        debugger
+        let nodetype=this._boarg.nodeType
+        console.log(`Node_nodeType_get `,`nodetype ->${nodetype}`);
+        return nodetype
     }
-    bodavm.envFunc.Node_nodeValue_get = function Node_nodeValue_get() { console.log("Node_nodeValue_get", undefined, "未完善") }
+    bodavm.envFunc.Node_nodeValue_get = function Node_nodeValue_get() { console.log("Node_nodeValue_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
     bodavm.envFunc.Node_nodeName_get = function Node_nodeName_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`Node_nodeName_get 未完善`);
+        console.log(`Node_nodeName_get !!!!!!!!!未完善!!!!!!!!!!!!`);
         return nodeName_
     }
     bodavm.envFunc.Node_firstChild_get = function Node_firstChild_get() {
-        // debugger
-        let res = this._boarg.firstChild
+        debugger
+        let res={}
+        let frist_ = this._boarg.firstChild
+        if (frist_){
+            res=bodavm.toolsFunc.setProto(frist_.nodeName)
+            res._boarg=frist_
+        }else{
+            res=null
+        }
         console.log(`Node_firstChild_get `, `res->${res}`);
+
         return res
 
     }
     bodavm.envFunc.Node_insertBefore = function Node_insertBefore() {
         let newNode = arguments[0]
         let referenceNode = arguments[1]
-        console.log(`Node_insertBefore `, `未完善 `);
+        console.log(`Node_insertBefore `, `!!!!!!!!!未完善!!!!!!!!!!!! `);
 
 
     }
     bodavm.envFunc.Node_lastChild_get = function Node_lastChild_get() {
         if (bodavm.config.isdebug) { debugger }
 
-        console.log(`Node_lastChild_get `, `lastChild->${lastChild} 未完善 `);
+        console.log(`Node_lastChild_get `, `lastChild->${lastChild} !!!!!!!!!未完善!!!!!!!!!!!! `);
     }
 
     bodavm.envFunc.Node_cloneNode = function Node_cloneNode() {
         let mode = arguments[0]
-        console.log(`Node_cloneNode `, `未完善 `);
+        console.log(`Node_cloneNode `, `!!!!!!!!!未完善!!!!!!!!!!!! `);
 
         return cloneNode
     }
@@ -1564,71 +1672,71 @@
     }
 
     //Element
-    bodavm.envFunc.Element_ariaAtomic_get = function Element_ariaAtomic_get() { console.log("Element_ariaAtomic_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaAutoComplete_get = function Element_ariaAutoComplete_get() { console.log("Element_ariaAutoComplete_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaBusy_get = function Element_ariaBusy_get() { console.log("Element_ariaBusy_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaChecked_get = function Element_ariaChecked_get() { console.log("Element_ariaChecked_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaColCount_get = function Element_ariaColCount_get() { console.log("Element_ariaColCount_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaDescription_get = function Element_ariaDescription_get() { console.log("Element_ariaDescription_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaCurrent_get = function Element_ariaCurrent_get() { console.log("Element_ariaCurrent_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaColSpan_get = function Element_ariaColSpan_get() { console.log("Element_ariaColSpan_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaColIndex_get = function Element_ariaColIndex_get() { console.log("Element_ariaColIndex_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaDisabled_get = function Element_ariaDisabled_get() { console.log("Element_ariaDisabled_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaExpanded_get = function Element_ariaExpanded_get() { console.log("Element_ariaExpanded_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaHasPopup_get = function Element_ariaHasPopup_get() { console.log("Element_ariaHasPopup_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaHidden_get = function Element_ariaHidden_get() { console.log("Element_ariaHidden_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaInvalid_get = function Element_ariaInvalid_get() { console.log("Element_ariaInvalid_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaKeyShortcuts_get = function Element_ariaKeyShortcuts_get() { console.log("Element_ariaKeyShortcuts_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaLevel_get = function Element_ariaLevel_get() { console.log("Element_ariaLevel_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaLabel_get = function Element_ariaLabel_get() { console.log("Element_ariaLabel_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaLive_get = function Element_ariaLive_get() { console.log("Element_ariaLive_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaModal_get = function Element_ariaModal_get() { console.log("Element_ariaModal_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaMultiLine_get = function Element_ariaMultiLine_get() { console.log("Element_ariaMultiLine_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaMultiSelectable_get = function Element_ariaMultiSelectable_get() { console.log("Element_ariaMultiSelectable_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaOrientation_get = function Element_ariaOrientation_get() { console.log("Element_ariaOrientation_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaPlaceholder_get = function Element_ariaPlaceholder_get() { console.log("Element_ariaPlaceholder_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaPosInSet_get = function Element_ariaPosInSet_get() { console.log("Element_ariaPosInSet_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaPressed_get = function Element_ariaPressed_get() { console.log("Element_ariaPressed_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaReadOnly_get = function Element_ariaReadOnly_get() { console.log("Element_ariaReadOnly_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaRequired_get = function Element_ariaRequired_get() { console.log("Element_ariaRequired_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaRelevant_get = function Element_ariaRelevant_get() { console.log("Element_ariaRelevant_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaRoleDescription_get = function Element_ariaRoleDescription_get() { console.log("Element_ariaRoleDescription_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaRowCount_get = function Element_ariaRowCount_get() { console.log("Element_ariaRowCount_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaRowIndex_get = function Element_ariaRowIndex_get() { console.log("Element_ariaRowIndex_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaRowSpan_get = function Element_ariaRowSpan_get() { console.log("Element_ariaRowSpan_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaSelected_get = function Element_ariaSelected_get() { console.log("Element_ariaSelected_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaSort_get = function Element_ariaSort_get() { console.log("Element_ariaSort_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaSetSize_get = function Element_ariaSetSize_get() { console.log("Element_ariaSetSize_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaValueMax_get = function Element_ariaValueMax_get() { console.log("Element_ariaValueMax_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaValueMin_get = function Element_ariaValueMin_get() { console.log("Element_ariaValueMin_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaValueNow_get = function Element_ariaValueNow_get() { console.log("Element_ariaValueNow_get", undefined, "未完善") }
-    bodavm.envFunc.Element_ariaValueText_get = function Element_ariaValueText_get() { console.log("Element_ariaValueText_get", undefined, "未完善") }
-    bodavm.envFunc.Element_assignedSlot_get = function Element_assignedSlot_get() { console.log("Element_assignedSlot_get", undefined, "未完善") }
-    bodavm.envFunc.Element_attributeStyleMap_get = function Element_attributeStyleMap_get() { console.log("Element_attributeStyleMap_get", undefined, "未完善") }
-    bodavm.envFunc.Element_childElementCount_get = function Element_childElementCount_get() { console.log("ElementCount_get", undefined, "未完善") }
-    bodavm.envFunc.Element_classList_get = function Element_classList_get() { console.log("Element_classList_get", undefined, "未完善") }
-    bodavm.envFunc.Element_className_get = function Element_className_get() { console.log("Element_className_get", undefined, "未完善") }
-    bodavm.envFunc.Element_elementTiming_get = function Element_elementTiming_get() { console.log("Element_elementTiming_get", undefined, "未完善") }
-    bodavm.envFunc.Element_firstElementChild_get = function Element_firstElementChild_get() { console.log("ElementChild_get", undefined, "未完善") }
-    bodavm.envFunc.Element_lastElementChild_get = function Element_lastElementChild_get() { console.log("ElementChild_get", undefined, "未完善") }
-    bodavm.envFunc.Element_localName_get = function Element_localName_get() { console.log("Element_localName_get", undefined, "未完善") }
-    bodavm.envFunc.Element_namespaceURI_get = function Element_namespaceURI_get() { console.log("Element_namespaceURI_get", undefined, "未完善") }
-    bodavm.envFunc.Element_nextElementSibling_get = function Element_nextElementSibling_get() { console.log("ElementSibling_get", undefined, "未完善") }
-    bodavm.envFunc.Element_onbeforecopy_get = function Element_onbeforecopy_get() { console.log("Element_onbeforecopy_get", undefined, "未完善") }
-    bodavm.envFunc.Element_onbeforecut_get = function Element_onbeforecut_get() { console.log("Element_onbeforecut_get", undefined, "未完善") }
-    bodavm.envFunc.Element_onbeforepaste_get = function Element_onbeforepaste_get() { console.log("Element_onbeforepaste_get", undefined, "未完善") }
-    bodavm.envFunc.Element_onfullscreenchange_get = function Element_onfullscreenchange_get() { console.log("Element_onfullscreenchange_get", undefined, "未完善") }
-    bodavm.envFunc.Element_onfullscreenerror_get = function Element_onfullscreenerror_get() { console.log("Element_onfullscreenerror_get", undefined, "未完善") }
-    bodavm.envFunc.Element_onsearch_get = function Element_onsearch_get() { console.log("Element_onsearch_get", undefined, "未完善") }
-    bodavm.envFunc.Element_onwebkitfullscreenchange_get = function Element_onwebkitfullscreenchange_get() { console.log("Element_onwebkitfullscreenchange_get", undefined, "未完善") }
-    bodavm.envFunc.Element_onwebkitfullscreenerror_get = function Element_onwebkitfullscreenerror_get() { console.log("Element_onwebkitfullscreenerror_get", undefined, "未完善") }
-    bodavm.envFunc.Element_part_get = function Element_part_get() { console.log("Element_part_get", undefined, "未完善") }
-    bodavm.envFunc.Element_prefix_get = function Element_prefix_get() { console.log("Element_prefix_get", undefined, "未完善") }
-    bodavm.envFunc.Element_previousElementSibling_get = function Element_previousElementSibling_get() { console.log("ElementSibling_get", undefined, "未完善") }
-    bodavm.envFunc.Element_scrollHeight_get = function Element_scrollHeight_get() { console.log("Element_scrollHeight_get", undefined, "未完善") }
-    bodavm.envFunc.Element_shadowRoot_get = function Element_shadowRoot_get() { console.log("Element_shadowRoot_get", undefined, "未完善") }
-    bodavm.envFunc.Element_scrollWidth_get = function Element_scrollWidth_get() { console.log("Element_scrollWidth_get", undefined, "未完善") }
-    bodavm.envFunc.Element_slot_get = function Element_slot_get() { console.log("Element_slot_get", undefined, "未完善") }
+    bodavm.envFunc.Element_ariaAtomic_get = function Element_ariaAtomic_get() { console.log("Element_ariaAtomic_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaAutoComplete_get = function Element_ariaAutoComplete_get() { console.log("Element_ariaAutoComplete_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaBusy_get = function Element_ariaBusy_get() { console.log("Element_ariaBusy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaChecked_get = function Element_ariaChecked_get() { console.log("Element_ariaChecked_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaColCount_get = function Element_ariaColCount_get() { console.log("Element_ariaColCount_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaDescription_get = function Element_ariaDescription_get() { console.log("Element_ariaDescription_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaCurrent_get = function Element_ariaCurrent_get() { console.log("Element_ariaCurrent_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaColSpan_get = function Element_ariaColSpan_get() { console.log("Element_ariaColSpan_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaColIndex_get = function Element_ariaColIndex_get() { console.log("Element_ariaColIndex_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaDisabled_get = function Element_ariaDisabled_get() { console.log("Element_ariaDisabled_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaExpanded_get = function Element_ariaExpanded_get() { console.log("Element_ariaExpanded_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaHasPopup_get = function Element_ariaHasPopup_get() { console.log("Element_ariaHasPopup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaHidden_get = function Element_ariaHidden_get() { console.log("Element_ariaHidden_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaInvalid_get = function Element_ariaInvalid_get() { console.log("Element_ariaInvalid_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaKeyShortcuts_get = function Element_ariaKeyShortcuts_get() { console.log("Element_ariaKeyShortcuts_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaLevel_get = function Element_ariaLevel_get() { console.log("Element_ariaLevel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaLabel_get = function Element_ariaLabel_get() { console.log("Element_ariaLabel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaLive_get = function Element_ariaLive_get() { console.log("Element_ariaLive_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaModal_get = function Element_ariaModal_get() { console.log("Element_ariaModal_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaMultiLine_get = function Element_ariaMultiLine_get() { console.log("Element_ariaMultiLine_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaMultiSelectable_get = function Element_ariaMultiSelectable_get() { console.log("Element_ariaMultiSelectable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaOrientation_get = function Element_ariaOrientation_get() { console.log("Element_ariaOrientation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaPlaceholder_get = function Element_ariaPlaceholder_get() { console.log("Element_ariaPlaceholder_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaPosInSet_get = function Element_ariaPosInSet_get() { console.log("Element_ariaPosInSet_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaPressed_get = function Element_ariaPressed_get() { console.log("Element_ariaPressed_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaReadOnly_get = function Element_ariaReadOnly_get() { console.log("Element_ariaReadOnly_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRequired_get = function Element_ariaRequired_get() { console.log("Element_ariaRequired_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRelevant_get = function Element_ariaRelevant_get() { console.log("Element_ariaRelevant_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRoleDescription_get = function Element_ariaRoleDescription_get() { console.log("Element_ariaRoleDescription_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRowCount_get = function Element_ariaRowCount_get() { console.log("Element_ariaRowCount_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRowIndex_get = function Element_ariaRowIndex_get() { console.log("Element_ariaRowIndex_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRowSpan_get = function Element_ariaRowSpan_get() { console.log("Element_ariaRowSpan_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaSelected_get = function Element_ariaSelected_get() { console.log("Element_ariaSelected_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaSort_get = function Element_ariaSort_get() { console.log("Element_ariaSort_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaSetSize_get = function Element_ariaSetSize_get() { console.log("Element_ariaSetSize_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueMax_get = function Element_ariaValueMax_get() { console.log("Element_ariaValueMax_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueMin_get = function Element_ariaValueMin_get() { console.log("Element_ariaValueMin_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueNow_get = function Element_ariaValueNow_get() { console.log("Element_ariaValueNow_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueText_get = function Element_ariaValueText_get() { console.log("Element_ariaValueText_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_assignedSlot_get = function Element_assignedSlot_get() { console.log("Element_assignedSlot_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_attributeStyleMap_get = function Element_attributeStyleMap_get() { console.log("Element_attributeStyleMap_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_childElementCount_get = function Element_childElementCount_get() { console.log("ElementCount_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_classList_get = function Element_classList_get() { console.log("Element_classList_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_className_get = function Element_className_get() { console.log("Element_className_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_elementTiming_get = function Element_elementTiming_get() { console.log("Element_elementTiming_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_firstElementChild_get = function Element_firstElementChild_get() { console.log("ElementChild_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_lastElementChild_get = function Element_lastElementChild_get() { console.log("ElementChild_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_localName_get = function Element_localName_get() { console.log("Element_localName_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_namespaceURI_get = function Element_namespaceURI_get() { console.log("Element_namespaceURI_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_nextElementSibling_get = function Element_nextElementSibling_get() { console.log("ElementSibling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onbeforecopy_get = function Element_onbeforecopy_get() { console.log("Element_onbeforecopy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onbeforecut_get = function Element_onbeforecut_get() { console.log("Element_onbeforecut_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onbeforepaste_get = function Element_onbeforepaste_get() { console.log("Element_onbeforepaste_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onfullscreenchange_get = function Element_onfullscreenchange_get() { console.log("Element_onfullscreenchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onfullscreenerror_get = function Element_onfullscreenerror_get() { console.log("Element_onfullscreenerror_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onsearch_get = function Element_onsearch_get() { console.log("Element_onsearch_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onwebkitfullscreenchange_get = function Element_onwebkitfullscreenchange_get() { console.log("Element_onwebkitfullscreenchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onwebkitfullscreenerror_get = function Element_onwebkitfullscreenerror_get() { console.log("Element_onwebkitfullscreenerror_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_part_get = function Element_part_get() { console.log("Element_part_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_prefix_get = function Element_prefix_get() { console.log("Element_prefix_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_previousElementSibling_get = function Element_previousElementSibling_get() { console.log("ElementSibling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_scrollHeight_get = function Element_scrollHeight_get() { console.log("Element_scrollHeight_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_shadowRoot_get = function Element_shadowRoot_get() { console.log("Element_shadowRoot_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_scrollWidth_get = function Element_scrollWidth_get() { console.log("Element_scrollWidth_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_slot_get = function Element_slot_get() { console.log("Element_slot_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Element_tagName_get = function Element_tagName_get() {
         let tagname = this._boarg.tagName
         if (bodavm.memory.isdebug) { debugger }
@@ -1638,9 +1746,9 @@
 
     bodavm.envFunc.Element_getElementsByClassName = function Element_getElementsByClassName() {
 
-        console.log(`Element_getElementsByClassName `, `未完善  `);
+        console.log(`Element_getElementsByClassName `, `!!!!!!!!!未完善!!!!!!!!!!!!  `);
 
-        class_list.__proto__ = HTMLCollection.prototype
+        class_list.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         return class_list
 
     }
@@ -1673,7 +1781,7 @@
         // let value=arguments[0]
 
         if (bodavm.config.isdebug) { debugger }
-        debugger
+        // debugger
         // bodavm.toolsFunc.setProtoAttr.call(this,'id',id)
         this._boarg['id'] = arguments[0]
         console.log(`Element_id_set `, ` id->${arguments[0]}`);
@@ -1683,14 +1791,14 @@
         // let className = arguments[0]
         debugger
         if (bodavm.config.isdebug) { debugger }
-        console.log(`Element_className_set`, `未完善`);
+        console.log(`Element_className_set`, `!!!!!!!!!未完善!!!!!!!!!!!!`);
         bodavm.toolsFunc.setProtoAttr.call(this, 'className', className)
         return className
 
     }
     bodavm.envFunc.Element_attributes_get = function () {
         debugger
-        console.log(`Element_attributes_get `, `未完善 `);
+        console.log(`Element_attributes_get `, `!!!!!!!!!未完善!!!!!!!!!!!! `);
 
     }
     bodavm.envFunc.Element_scrollLeft_get = function Element_scrollLeft_get() {
@@ -1759,7 +1867,7 @@
         //无返回值
         if (bodavm.config.isdebug) { debugger };;
         this._boarg.removeAttribute(attr)
-        console.log(`Element_removeAttribute `, `${attr}  `, `=============================未完善`);
+        console.log(`Element_removeAttribute `, `${attr}  `, `=============================!!!!!!!!!未完善!!!!!!!!!!!!`);
         //IE 返回 boolean 类型值，其他返回 undefined
     }
     bodavm.envFunc.Element_setAttribute = function Element_setAttribute() {
@@ -1801,9 +1909,9 @@
             res[i] = bodavm.toolsFunc.setProto(taglist[i].nodeName);
             res[i]._boarg = taglist[i]
         }
-        res.__proto__ = HTMLCollection.prototype
+        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         res._boarg = taglist
-        console.log(`Document_getElementsByTagName `, ` taglist->${taglist}`);
+        console.log(`Element_children_get `, ` taglist->${taglist}`);
         return res
 
     }
@@ -1811,7 +1919,7 @@
         // debugger
         if (bodavm.config.isdebug) { debugger };;
 
-        console.log(`Element_getBoundingClientRect`, '未完善');
+        console.log(`Element_getBoundingClientRect`, '!!!!!!!!!未完善!!!!!!!!!!!!');
     }
     bodavm.envFunc.Element_innerHTML_get = function Element_innerHTML_get() {
         let res = this._boarg.innerHTML
@@ -1854,49 +1962,50 @@
             res[i] = bodavm.toolsFunc.setProto(taglist[i].nodeName);
             res[i]._boarg = taglist[i]
         }
-        res.__proto__ = HTMLCollection.prototype
+        // debugger
+        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         res._boarg = taglist
-        console.log(`Document_getElementsByTagName `, `tagName->${tagName} `, ` taglist->${taglist}`);
+        console.log(`Element_getElementsByTagName `, `tagName->${tagName} `, ` taglist->${taglist}`);
 
 
         return res
     }
 
     //Navigator
-    bodavm.envFunc.Navigator_clipboard_get = function Navigator_clipboard_get() { console.log("Navigator_clipboard_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_geolocation_get = function Navigator_geolocation_get() { console.log("Navigator_geolocation_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_hid_get = function Navigator_hid_get() { console.log("Navigator_hid_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_ink_get = function Navigator_ink_get() { console.log("Navigator_ink_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_keyboard_get = function Navigator_keyboard_get() { console.log("Navigator_keyboard_get", undefined, "未完善") }
+    bodavm.envFunc.Navigator_clipboard_get = function Navigator_clipboard_get() { console.log("Navigator_clipboard_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_geolocation_get = function Navigator_geolocation_get() { console.log("Navigator_geolocation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_hid_get = function Navigator_hid_get() { console.log("Navigator_hid_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_ink_get = function Navigator_ink_get() { console.log("Navigator_ink_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_keyboard_get = function Navigator_keyboard_get() { console.log("Navigator_keyboard_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Navigator_locks_get = function Navigator_locks_get() {
         let locks = {}
-        locks.__proto__ = LockManager.prototype
+        locks.__proto__ = bodavm.memory.globalobj['LockManager'].prototype
         console.log("Navigator_locks_get ", `locks ->${locks}`)
         return locks
     }
-    bodavm.envFunc.Navigator_managed_get = function Navigator_managed_get() { console.log("Navigator_managed_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_mediaCapabilities_get = function Navigator_mediaCapabilities_get() { console.log("Navigator_mediaCapabilities_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_mediaDevices_get = function Navigator_mediaDevices_get() { console.log("Navigator_mediaDevices_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_mediaSession_get = function Navigator_mediaSession_get() { console.log("Navigator_mediaSession_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_onLine_get = function Navigator_onLine_get() { console.log("Navigator_onLine_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_pdfViewerEnabled_get = function Navigator_pdfViewerEnabled_get() { console.log("Navigator_pdfViewerEnabled_get", undefined, "未完善") }
+    bodavm.envFunc.Navigator_managed_get = function Navigator_managed_get() { console.log("Navigator_managed_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_mediaCapabilities_get = function Navigator_mediaCapabilities_get() { console.log("Navigator_mediaCapabilities_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_mediaDevices_get = function Navigator_mediaDevices_get() { console.log("Navigator_mediaDevices_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_mediaSession_get = function Navigator_mediaSession_get() { console.log("Navigator_mediaSession_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_onLine_get = function Navigator_onLine_get() { console.log("Navigator_onLine_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_pdfViewerEnabled_get = function Navigator_pdfViewerEnabled_get() { console.log("Navigator_pdfViewerEnabled_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Navigator_permissions_get = function Navigator_permissions_get() {
         // debugger
         let permissions = {}
-        permissions.__proto__ = Permissions.prototype
+        permissions.__proto__ =bodavm.memory.globalobj[ 'Permissions'].prototype
 
         console.log("Navigator_permissions_get", `permissions->${permissions}`)
         return permissions
     }
-    bodavm.envFunc.Navigator_presentation_get = function Navigator_presentation_get() { console.log("Navigator_presentation_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_scheduling_get = function Navigator_scheduling_get() { console.log("Navigator_scheduling_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_serial_get = function Navigator_serial_get() { console.log("Navigator_serial_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_serviceWorker_get = function Navigator_serviceWorker_get() { console.log("Navigator_serviceWorker_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_usb_get = function Navigator_usb_get() { console.log("Navigator_usb_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_userActivation_get = function Navigator_userActivation_get() { console.log("Navigator_userActivation_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_virtualKeyboard_get = function Navigator_virtualKeyboard_get() { console.log("Navigator_virtualKeyboard_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_wakeLock_get = function Navigator_wakeLock_get() { console.log("Navigator_wakeLock_get", undefined, "未完善") }
-    bodavm.envFunc.Navigator_webkitTemporaryStorage_get = function Navigator_webkitTemporaryStorage_get() { console.log("Navigator_webkitTemporaryStorage_get", undefined, "未完善") }
+    bodavm.envFunc.Navigator_presentation_get = function Navigator_presentation_get() { console.log("Navigator_presentation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_scheduling_get = function Navigator_scheduling_get() { console.log("Navigator_scheduling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_serial_get = function Navigator_serial_get() { console.log("Navigator_serial_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_serviceWorker_get = function Navigator_serviceWorker_get() { console.log("Navigator_serviceWorker_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_usb_get = function Navigator_usb_get() { console.log("Navigator_usb_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_userActivation_get = function Navigator_userActivation_get() { console.log("Navigator_userActivation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_virtualKeyboard_get = function Navigator_virtualKeyboard_get() { console.log("Navigator_virtualKeyboard_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_wakeLock_get = function Navigator_wakeLock_get() { console.log("Navigator_wakeLock_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_webkitTemporaryStorage_get = function Navigator_webkitTemporaryStorage_get() { console.log("Navigator_webkitTemporaryStorage_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
 
     bodavm.envFunc.Navigator_javaEnabled = function () {
@@ -1979,13 +2088,14 @@
     bodavm.envFunc.Navigator_webkitPersistentStorage_get = function Navigator_webkitPersistentStorage_get() {
         let webkitPersistentStorage = bodavm.memory.navigator['webkitPersistentStorage']
         // DocumentFragment对象
-        DeprecatedStorageQuota = function DeprecatedStorageQuota() { }
-        bodavm.toolsFunc.safeProto(DeprecatedStorageQuota, "DeprecatedStorageQuota ");
+        // debugger
+        bodavm.memory.globalobj['DeprecatedStorageQuota'] = function DeprecatedStorageQuota() { }
+        bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['DeprecatedStorageQuota'], "DeprecatedStorageQuota");
 
-        bodavm.toolsFunc.defineProperty(DeprecatedStorageQuota.prototype, "queryUsageAndQuota", { configurable: true, enumerable: true, get: function DeprecatedStorageQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "queryUsageAndQuota_get  ", arguments) }, set: function DeprecatedStorageQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "queryUsageAndQuota_set", arguments) } });
-        bodavm.toolsFunc.defineProperty(DeprecatedStorageQuota.prototype, "requestQuota", { configurable: true, enumerable: true, get: function DeprecatedStorageQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "requestQuota_get  ", arguments) }, set: function requestQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "requestQuota_set", arguments) } });
+        bodavm.toolsFunc.defineProperty('DeprecatedStorageQuota', "queryUsageAndQuota", { configurable: true, enumerable: true, get: function DeprecatedStorageQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "queryUsageAndQuota_get  ", arguments) }, set: function DeprecatedStorageQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "queryUsageAndQuota_set", arguments) } },'prototype');
+        bodavm.toolsFunc.defineProperty('DeprecatedStorageQuota', "requestQuota", { configurable: true, enumerable: true, get: function DeprecatedStorageQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "requestQuota_get  ", arguments) }, set: function requestQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "requestQuota_set", arguments) } },'prototype');
 
-        Object.setPrototypeOf(webkitPersistentStorage, DeprecatedStorageQuota.prototype)
+        Object.setPrototypeOf(webkitPersistentStorage, bodavm.memory.globalobj['DeprecatedStorageQuota'].prototype)
         delete DeprecatedStorageQuota
         console.log(`Navigator_webkitPersistentStorage_get `, `${webkitPersistentStorage}  `)
         if (bodavm.config.isdebug) { debugger };;
@@ -2011,7 +2121,7 @@
     bodavm.envFunc.Navigator_getBattery = function Navigator_getBattery() {
         let batteryManager = {};
         console.log(`Navigator_getBattery  `, 'settimeout 添加异步电池信息');
-        batteryManager.__proto__ = BatteryManager.prototype
+        batteryManager.__proto__ = bodavm.memory.globalobj['BatteryManager'].prototype
         // debugger
         // bodavm.toolsFunc.symbolProperty(batteryManager)
         let promise = new Promise((resolve, reject) => {
@@ -2029,7 +2139,7 @@
         if (bodavm.config.isdebug) { debugger };
         let connection = bodavm.memory.navigator['connection']
         console.log(`Navigator_connection_get `, `${connection}  `)
-        Object.setPrototypeOf(connection, NetworkInformation.prototype)
+        Object.setPrototypeOf(connection, bodavm.memory.globalobj['NetworkInformation'].prototype)
         return connection
     }
     bodavm.envFunc.Navigator_cookieEnabled_get = function Navigator_cookieEnabled_get() {
@@ -2105,121 +2215,121 @@
     }
 
     //HTMLElement
-    bodavm.envFunc.HTMLElement_accessKey_get = function HTMLElement_accessKey_get() { console.log("HTMLElement_accessKey_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_autocapitalize_get = function HTMLElement_autocapitalize_get() { console.log("HTMLElement_autocapitalize_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_autofocus_get = function HTMLElement_autofocus_get() { console.log("HTMLElement_autofocus_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_contentEditable_get = function HTMLElement_contentEditable_get() { console.log("HTMLElement_contentEditable_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_dataset_get = function HTMLElement_dataset_get() { console.log("HTMLElement_dataset_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_dir_get = function HTMLElement_dir_get() { console.log("HTMLElement_dir_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_draggable_get = function HTMLElement_draggable_get() { console.log("HTMLElement_draggable_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_enterKeyHint_get = function HTMLElement_enterKeyHint_get() { console.log("HTMLElement_enterKeyHint_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_hidden_get = function HTMLElement_hidden_get() { console.log("HTMLElement_hidden_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_inputMode_get = function HTMLElement_inputMode_get() { console.log("HTMLElement_inputMode_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_inert_get = function HTMLElement_inert_get() { console.log("HTMLElement_inert_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_isContentEditable_get = function HTMLElement_isContentEditable_get() { console.log("HTMLElement_isContentEditable_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_lang_get = function HTMLElement_lang_get() { console.log("HTMLElement_lang_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_nonce_get = function HTMLElement_nonce_get() { console.log("HTMLElement_nonce_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_offsetTop_get = function HTMLElement_offsetTop_get() { console.log("HTMLElement_offsetTop_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_offsetParent_get = function HTMLElement_offsetParent_get() { console.log("HTMLElement_offsetParent_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_offsetLeft_get = function HTMLElement_offsetLeft_get() { console.log("HTMLElement_offsetLeft_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onabort_get = function HTMLElement_onabort_get() { console.log("HTMLElement_onabort_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onanimationend_get = function HTMLElement_onanimationend_get() { console.log("HTMLElement_onanimationend_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onanimationiteration_get = function HTMLElement_onanimationiteration_get() { console.log("HTMLElement_onanimationiteration_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onanimationstart_get = function HTMLElement_onanimationstart_get() { console.log("HTMLElement_onanimationstart_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onauxclick_get = function HTMLElement_onauxclick_get() { console.log("HTMLElement_onauxclick_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onbeforematch_get = function HTMLElement_onbeforematch_get() { console.log("HTMLElement_onbeforematch_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onbeforexrselect_get = function HTMLElement_onbeforexrselect_get() { console.log("HTMLElement_onbeforexrselect_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onblur_get = function HTMLElement_onblur_get() { console.log("HTMLElement_onblur_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oncancel_get = function HTMLElement_oncancel_get() { console.log("HTMLElement_oncancel_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oncanplay_get = function HTMLElement_oncanplay_get() { console.log("HTMLElement_oncanplay_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oncanplaythrough_get = function HTMLElement_oncanplaythrough_get() { console.log("HTMLElement_oncanplaythrough_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onchange_get = function HTMLElement_onchange_get() { console.log("HTMLElement_onchange_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onclick_get = function HTMLElement_onclick_get() { console.log("HTMLElement_onclick_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onclose_get = function HTMLElement_onclose_get() { console.log("HTMLElement_onclose_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oncontextlost_get = function HTMLElement_oncontextlost_get() { console.log("HTMLElement_oncontextlost_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oncontextmenu_get = function HTMLElement_oncontextmenu_get() { console.log("HTMLElement_oncontextmenu_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oncontextrestored_get = function HTMLElement_oncontextrestored_get() { console.log("HTMLElement_oncontextrestored_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oncopy_get = function HTMLElement_oncopy_get() { console.log("HTMLElement_oncopy_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oncuechange_get = function HTMLElement_oncuechange_get() { console.log("HTMLElement_oncuechange_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ondblclick_get = function HTMLElement_ondblclick_get() { console.log("HTMLElement_ondblclick_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oncut_get = function HTMLElement_oncut_get() { console.log("HTMLElement_oncut_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ondrag_get = function HTMLElement_ondrag_get() { console.log("HTMLElement_ondrag_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ondragleave_get = function HTMLElement_ondragleave_get() { console.log("HTMLElement_ondragleave_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ondragstart_get = function HTMLElement_ondragstart_get() { console.log("HTMLElement_ondragstart_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ondragenter_get = function HTMLElement_ondragenter_get() { console.log("HTMLElement_ondragenter_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ondragend_get = function HTMLElement_ondragend_get() { console.log("HTMLElement_ondragend_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ondragover_get = function HTMLElement_ondragover_get() { console.log("HTMLElement_ondragover_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ondrop_get = function HTMLElement_ondrop_get() { console.log("HTMLElement_ondrop_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ondurationchange_get = function HTMLElement_ondurationchange_get() { console.log("HTMLElement_ondurationchange_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onemptied_get = function HTMLElement_onemptied_get() { console.log("HTMLElement_onemptied_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onended_get = function HTMLElement_onended_get() { console.log("HTMLElement_onended_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onerror_get = function HTMLElement_onerror_get() { console.log("HTMLElement_onerror_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onfocus_get = function HTMLElement_onfocus_get() { console.log("HTMLElement_onfocus_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onformdata_get = function HTMLElement_onformdata_get() { console.log("HTMLElement_onformdata_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ongotpointercapture_get = function HTMLElement_ongotpointercapture_get() { console.log("HTMLElement_ongotpointercapture_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oninput_get = function HTMLElement_oninput_get() { console.log("HTMLElement_oninput_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onkeydown_get = function HTMLElement_onkeydown_get() { console.log("HTMLElement_onkeydown_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onkeypress_get = function HTMLElement_onkeypress_get() { console.log("HTMLElement_onkeypress_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onkeyup_get = function HTMLElement_onkeyup_get() { console.log("HTMLElement_onkeyup_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_oninvalid_get = function HTMLElement_oninvalid_get() { console.log("HTMLElement_oninvalid_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onload_get = function HTMLElement_onload_get() { console.log("HTMLElement_onload_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onloadedmetadata_get = function HTMLElement_onloadedmetadata_get() { console.log("HTMLElement_onloadedmetadata_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onlostpointercapture_get = function HTMLElement_onlostpointercapture_get() { console.log("HTMLElement_onlostpointercapture_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onloadeddata_get = function HTMLElement_onloadeddata_get() { console.log("HTMLElement_onloadeddata_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onloadstart_get = function HTMLElement_onloadstart_get() { console.log("HTMLElement_onloadstart_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onmousedown_get = function HTMLElement_onmousedown_get() { console.log("HTMLElement_onmousedown_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onmouseleave_get = function HTMLElement_onmouseleave_get() { console.log("HTMLElement_onmouseleave_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onmousemove_get = function HTMLElement_onmousemove_get() { console.log("HTMLElement_onmousemove_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onmouseout_get = function HTMLElement_onmouseout_get() { console.log("HTMLElement_onmouseout_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onmouseup_get = function HTMLElement_onmouseup_get() { console.log("HTMLElement_onmouseup_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onmouseover_get = function HTMLElement_onmouseover_get() { console.log("HTMLElement_onmouseover_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onmousewheel_get = function HTMLElement_onmousewheel_get() { console.log("HTMLElement_onmousewheel_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpaste_get = function HTMLElement_onpaste_get() { console.log("HTMLElement_onpaste_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpause_get = function HTMLElement_onpause_get() { console.log("HTMLElement_onpause_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onplay_get = function HTMLElement_onplay_get() { console.log("HTMLElement_onplay_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onplaying_get = function HTMLElement_onplaying_get() { console.log("HTMLElement_onplaying_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpointercancel_get = function HTMLElement_onpointercancel_get() { console.log("HTMLElement_onpointercancel_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpointerdown_get = function HTMLElement_onpointerdown_get() { console.log("HTMLElement_onpointerdown_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpointerleave_get = function HTMLElement_onpointerleave_get() { console.log("HTMLElement_onpointerleave_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpointermove_get = function HTMLElement_onpointermove_get() { console.log("HTMLElement_onpointermove_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpointerover_get = function HTMLElement_onpointerover_get() { console.log("HTMLElement_onpointerover_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpointerout_get = function HTMLElement_onpointerout_get() { console.log("HTMLElement_onpointerout_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpointerenter_get = function HTMLElement_onpointerenter_get() { console.log("HTMLElement_onpointerenter_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpointerrawupdate_get = function HTMLElement_onpointerrawupdate_get() { console.log("HTMLElement_onpointerrawupdate_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onpointerup_get = function HTMLElement_onpointerup_get() { console.log("HTMLElement_onpointerup_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onprogress_get = function HTMLElement_onprogress_get() { console.log("HTMLElement_onprogress_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onratechange_get = function HTMLElement_onratechange_get() { console.log("HTMLElement_onratechange_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onreset_get = function HTMLElement_onreset_get() { console.log("HTMLElement_onreset_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onscroll_get = function HTMLElement_onscroll_get() { console.log("HTMLElement_onscroll_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onsecuritypolicyviolation_get = function HTMLElement_onsecuritypolicyviolation_get() { console.log("HTMLElement_onsecuritypolicyviolation_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onseeked_get = function HTMLElement_onseeked_get() { console.log("HTMLElement_onseeked_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onseeking_get = function HTMLElement_onseeking_get() { console.log("HTMLElement_onseeking_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onselect_get = function HTMLElement_onselect_get() { console.log("HTMLElement_onselect_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onselectionchange_get = function HTMLElement_onselectionchange_get() { console.log("HTMLElement_onselectionchange_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onselectstart_get = function HTMLElement_onselectstart_get() { console.log("HTMLElement_onselectstart_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onslotchange_get = function HTMLElement_onslotchange_get() { console.log("HTMLElement_onslotchange_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onstalled_get = function HTMLElement_onstalled_get() { console.log("HTMLElement_onstalled_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onsuspend_get = function HTMLElement_onsuspend_get() { console.log("HTMLElement_onsuspend_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ontimeupdate_get = function HTMLElement_ontimeupdate_get() { console.log("HTMLElement_ontimeupdate_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onsubmit_get = function HTMLElement_onsubmit_get() { console.log("HTMLElement_onsubmit_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ontoggle_get = function HTMLElement_ontoggle_get() { console.log("HTMLElement_ontoggle_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ontransitioncancel_get = function HTMLElement_ontransitioncancel_get() { console.log("HTMLElement_ontransitioncancel_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ontransitionrun_get = function HTMLElement_ontransitionrun_get() { console.log("HTMLElement_ontransitionrun_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ontransitionstart_get = function HTMLElement_ontransitionstart_get() { console.log("HTMLElement_ontransitionstart_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_ontransitionend_get = function HTMLElement_ontransitionend_get() { console.log("HTMLElement_ontransitionend_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onvolumechange_get = function HTMLElement_onvolumechange_get() { console.log("HTMLElement_onvolumechange_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onwaiting_get = function HTMLElement_onwaiting_get() { console.log("HTMLElement_onwaiting_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onwebkitanimationend_get = function HTMLElement_onwebkitanimationend_get() { console.log("HTMLElement_onwebkitanimationend_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onwebkitanimationiteration_get = function HTMLElement_onwebkitanimationiteration_get() { console.log("HTMLElement_onwebkitanimationiteration_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onwebkitanimationstart_get = function HTMLElement_onwebkitanimationstart_get() { console.log("HTMLElement_onwebkitanimationstart_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onwebkittransitionend_get = function HTMLElement_onwebkittransitionend_get() { console.log("HTMLElement_onwebkittransitionend_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_onwheel_get = function HTMLElement_onwheel_get() { console.log("HTMLElement_onwheel_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_outerText_get = function HTMLElement_outerText_get() { console.log("HTMLElement_outerText_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_spellcheck_get = function HTMLElement_spellcheck_get() { console.log("HTMLElement_spellcheck_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_tabIndex_get = function HTMLElement_tabIndex_get() { console.log("HTMLElement_tabIndex_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_title_get = function HTMLElement_title_get() { console.log("HTMLElement_title_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_translate_get = function HTMLElement_translate_get() { console.log("HTMLElement_translate_get", undefined, "未完善") }
-    bodavm.envFunc.HTMLElement_virtualKeyboardPolicy_get = function HTMLElement_virtualKeyboardPolicy_get() { console.log("HTMLElement_virtualKeyboardPolicy_get", undefined, "未完善") }
+    bodavm.envFunc.HTMLElement_accessKey_get = function HTMLElement_accessKey_get() { console.log("HTMLElement_accessKey_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_autocapitalize_get = function HTMLElement_autocapitalize_get() { console.log("HTMLElement_autocapitalize_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_autofocus_get = function HTMLElement_autofocus_get() { console.log("HTMLElement_autofocus_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_contentEditable_get = function HTMLElement_contentEditable_get() { console.log("HTMLElement_contentEditable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_dataset_get = function HTMLElement_dataset_get() { console.log("HTMLElement_dataset_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_dir_get = function HTMLElement_dir_get() { console.log("HTMLElement_dir_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_draggable_get = function HTMLElement_draggable_get() { console.log("HTMLElement_draggable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_enterKeyHint_get = function HTMLElement_enterKeyHint_get() { console.log("HTMLElement_enterKeyHint_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_hidden_get = function HTMLElement_hidden_get() { console.log("HTMLElement_hidden_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_inputMode_get = function HTMLElement_inputMode_get() { console.log("HTMLElement_inputMode_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_inert_get = function HTMLElement_inert_get() { console.log("HTMLElement_inert_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_isContentEditable_get = function HTMLElement_isContentEditable_get() { console.log("HTMLElement_isContentEditable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_lang_get = function HTMLElement_lang_get() { console.log("HTMLElement_lang_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_nonce_get = function HTMLElement_nonce_get() { console.log("HTMLElement_nonce_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_offsetTop_get = function HTMLElement_offsetTop_get() { console.log("HTMLElement_offsetTop_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_offsetParent_get = function HTMLElement_offsetParent_get() { console.log("HTMLElement_offsetParent_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_offsetLeft_get = function HTMLElement_offsetLeft_get() { console.log("HTMLElement_offsetLeft_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onabort_get = function HTMLElement_onabort_get() { console.log("HTMLElement_onabort_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onanimationend_get = function HTMLElement_onanimationend_get() { console.log("HTMLElement_onanimationend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onanimationiteration_get = function HTMLElement_onanimationiteration_get() { console.log("HTMLElement_onanimationiteration_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onanimationstart_get = function HTMLElement_onanimationstart_get() { console.log("HTMLElement_onanimationstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onauxclick_get = function HTMLElement_onauxclick_get() { console.log("HTMLElement_onauxclick_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onbeforematch_get = function HTMLElement_onbeforematch_get() { console.log("HTMLElement_onbeforematch_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onbeforexrselect_get = function HTMLElement_onbeforexrselect_get() { console.log("HTMLElement_onbeforexrselect_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onblur_get = function HTMLElement_onblur_get() { console.log("HTMLElement_onblur_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncancel_get = function HTMLElement_oncancel_get() { console.log("HTMLElement_oncancel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncanplay_get = function HTMLElement_oncanplay_get() { console.log("HTMLElement_oncanplay_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncanplaythrough_get = function HTMLElement_oncanplaythrough_get() { console.log("HTMLElement_oncanplaythrough_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onchange_get = function HTMLElement_onchange_get() { console.log("HTMLElement_onchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onclick_get = function HTMLElement_onclick_get() { console.log("HTMLElement_onclick_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onclose_get = function HTMLElement_onclose_get() { console.log("HTMLElement_onclose_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncontextlost_get = function HTMLElement_oncontextlost_get() { console.log("HTMLElement_oncontextlost_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncontextmenu_get = function HTMLElement_oncontextmenu_get() { console.log("HTMLElement_oncontextmenu_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncontextrestored_get = function HTMLElement_oncontextrestored_get() { console.log("HTMLElement_oncontextrestored_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncopy_get = function HTMLElement_oncopy_get() { console.log("HTMLElement_oncopy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncuechange_get = function HTMLElement_oncuechange_get() { console.log("HTMLElement_oncuechange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondblclick_get = function HTMLElement_ondblclick_get() { console.log("HTMLElement_ondblclick_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncut_get = function HTMLElement_oncut_get() { console.log("HTMLElement_oncut_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondrag_get = function HTMLElement_ondrag_get() { console.log("HTMLElement_ondrag_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragleave_get = function HTMLElement_ondragleave_get() { console.log("HTMLElement_ondragleave_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragstart_get = function HTMLElement_ondragstart_get() { console.log("HTMLElement_ondragstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragenter_get = function HTMLElement_ondragenter_get() { console.log("HTMLElement_ondragenter_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragend_get = function HTMLElement_ondragend_get() { console.log("HTMLElement_ondragend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragover_get = function HTMLElement_ondragover_get() { console.log("HTMLElement_ondragover_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondrop_get = function HTMLElement_ondrop_get() { console.log("HTMLElement_ondrop_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondurationchange_get = function HTMLElement_ondurationchange_get() { console.log("HTMLElement_ondurationchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onemptied_get = function HTMLElement_onemptied_get() { console.log("HTMLElement_onemptied_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onended_get = function HTMLElement_onended_get() { console.log("HTMLElement_onended_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onerror_get = function HTMLElement_onerror_get() { console.log("HTMLElement_onerror_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onfocus_get = function HTMLElement_onfocus_get() { console.log("HTMLElement_onfocus_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onformdata_get = function HTMLElement_onformdata_get() { console.log("HTMLElement_onformdata_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ongotpointercapture_get = function HTMLElement_ongotpointercapture_get() { console.log("HTMLElement_ongotpointercapture_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oninput_get = function HTMLElement_oninput_get() { console.log("HTMLElement_oninput_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onkeydown_get = function HTMLElement_onkeydown_get() { console.log("HTMLElement_onkeydown_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onkeypress_get = function HTMLElement_onkeypress_get() { console.log("HTMLElement_onkeypress_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onkeyup_get = function HTMLElement_onkeyup_get() { console.log("HTMLElement_onkeyup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oninvalid_get = function HTMLElement_oninvalid_get() { console.log("HTMLElement_oninvalid_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onload_get = function HTMLElement_onload_get() { console.log("HTMLElement_onload_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onloadedmetadata_get = function HTMLElement_onloadedmetadata_get() { console.log("HTMLElement_onloadedmetadata_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onlostpointercapture_get = function HTMLElement_onlostpointercapture_get() { console.log("HTMLElement_onlostpointercapture_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onloadeddata_get = function HTMLElement_onloadeddata_get() { console.log("HTMLElement_onloadeddata_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onloadstart_get = function HTMLElement_onloadstart_get() { console.log("HTMLElement_onloadstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmousedown_get = function HTMLElement_onmousedown_get() { console.log("HTMLElement_onmousedown_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseleave_get = function HTMLElement_onmouseleave_get() { console.log("HTMLElement_onmouseleave_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmousemove_get = function HTMLElement_onmousemove_get() { console.log("HTMLElement_onmousemove_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseout_get = function HTMLElement_onmouseout_get() { console.log("HTMLElement_onmouseout_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseup_get = function HTMLElement_onmouseup_get() { console.log("HTMLElement_onmouseup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseover_get = function HTMLElement_onmouseover_get() { console.log("HTMLElement_onmouseover_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmousewheel_get = function HTMLElement_onmousewheel_get() { console.log("HTMLElement_onmousewheel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpaste_get = function HTMLElement_onpaste_get() { console.log("HTMLElement_onpaste_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpause_get = function HTMLElement_onpause_get() { console.log("HTMLElement_onpause_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onplay_get = function HTMLElement_onplay_get() { console.log("HTMLElement_onplay_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onplaying_get = function HTMLElement_onplaying_get() { console.log("HTMLElement_onplaying_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointercancel_get = function HTMLElement_onpointercancel_get() { console.log("HTMLElement_onpointercancel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerdown_get = function HTMLElement_onpointerdown_get() { console.log("HTMLElement_onpointerdown_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerleave_get = function HTMLElement_onpointerleave_get() { console.log("HTMLElement_onpointerleave_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointermove_get = function HTMLElement_onpointermove_get() { console.log("HTMLElement_onpointermove_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerover_get = function HTMLElement_onpointerover_get() { console.log("HTMLElement_onpointerover_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerout_get = function HTMLElement_onpointerout_get() { console.log("HTMLElement_onpointerout_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerenter_get = function HTMLElement_onpointerenter_get() { console.log("HTMLElement_onpointerenter_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerrawupdate_get = function HTMLElement_onpointerrawupdate_get() { console.log("HTMLElement_onpointerrawupdate_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerup_get = function HTMLElement_onpointerup_get() { console.log("HTMLElement_onpointerup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onprogress_get = function HTMLElement_onprogress_get() { console.log("HTMLElement_onprogress_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onratechange_get = function HTMLElement_onratechange_get() { console.log("HTMLElement_onratechange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onreset_get = function HTMLElement_onreset_get() { console.log("HTMLElement_onreset_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onscroll_get = function HTMLElement_onscroll_get() { console.log("HTMLElement_onscroll_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onsecuritypolicyviolation_get = function HTMLElement_onsecuritypolicyviolation_get() { console.log("HTMLElement_onsecuritypolicyviolation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onseeked_get = function HTMLElement_onseeked_get() { console.log("HTMLElement_onseeked_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onseeking_get = function HTMLElement_onseeking_get() { console.log("HTMLElement_onseeking_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onselect_get = function HTMLElement_onselect_get() { console.log("HTMLElement_onselect_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onselectionchange_get = function HTMLElement_onselectionchange_get() { console.log("HTMLElement_onselectionchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onselectstart_get = function HTMLElement_onselectstart_get() { console.log("HTMLElement_onselectstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onslotchange_get = function HTMLElement_onslotchange_get() { console.log("HTMLElement_onslotchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onstalled_get = function HTMLElement_onstalled_get() { console.log("HTMLElement_onstalled_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onsuspend_get = function HTMLElement_onsuspend_get() { console.log("HTMLElement_onsuspend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontimeupdate_get = function HTMLElement_ontimeupdate_get() { console.log("HTMLElement_ontimeupdate_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onsubmit_get = function HTMLElement_onsubmit_get() { console.log("HTMLElement_onsubmit_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontoggle_get = function HTMLElement_ontoggle_get() { console.log("HTMLElement_ontoggle_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitioncancel_get = function HTMLElement_ontransitioncancel_get() { console.log("HTMLElement_ontransitioncancel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitionrun_get = function HTMLElement_ontransitionrun_get() { console.log("HTMLElement_ontransitionrun_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitionstart_get = function HTMLElement_ontransitionstart_get() { console.log("HTMLElement_ontransitionstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitionend_get = function HTMLElement_ontransitionend_get() { console.log("HTMLElement_ontransitionend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onvolumechange_get = function HTMLElement_onvolumechange_get() { console.log("HTMLElement_onvolumechange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwaiting_get = function HTMLElement_onwaiting_get() { console.log("HTMLElement_onwaiting_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkitanimationend_get = function HTMLElement_onwebkitanimationend_get() { console.log("HTMLElement_onwebkitanimationend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkitanimationiteration_get = function HTMLElement_onwebkitanimationiteration_get() { console.log("HTMLElement_onwebkitanimationiteration_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkitanimationstart_get = function HTMLElement_onwebkitanimationstart_get() { console.log("HTMLElement_onwebkitanimationstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkittransitionend_get = function HTMLElement_onwebkittransitionend_get() { console.log("HTMLElement_onwebkittransitionend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwheel_get = function HTMLElement_onwheel_get() { console.log("HTMLElement_onwheel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_outerText_get = function HTMLElement_outerText_get() { console.log("HTMLElement_outerText_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_spellcheck_get = function HTMLElement_spellcheck_get() { console.log("HTMLElement_spellcheck_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_tabIndex_get = function HTMLElement_tabIndex_get() { console.log("HTMLElement_tabIndex_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_title_get = function HTMLElement_title_get() { console.log("HTMLElement_title_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_translate_get = function HTMLElement_translate_get() { console.log("HTMLElement_translate_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_virtualKeyboardPolicy_get = function HTMLElement_virtualKeyboardPolicy_get() { console.log("HTMLElement_virtualKeyboardPolicy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
 
     bodavm.envFunc.HTMLElement_innerText_set = function HTMLElement_innerText_set() {
@@ -2231,7 +2341,7 @@
     }
     bodavm.envFunc.HTMLElement_innerText_get = function HTMLElement_innerText_get() {
         // let value=arguments[0]
-        debugger
+        // debugger
         let inntext = undefined
         if (this instanceof HTMLFormElement) {
             for (let i = 0; i < bodavm.memory.formlist.length; i++) {
@@ -2304,593 +2414,594 @@
         let oo = this._boarg.style
 
         style._boarg = oo
-        console.log(`HTMLElement_style_get `, `style->${style}`);
         // bodavm.toolsFunc.symbolProperty(style)
-        style.__proto__ = CSSStyleDeclaration.prototype
-        bodavm.toolsFunc.defineProperty(style, "0", { configurable: true, enumerable: true, writable: false, value: "font-family" });
-        bodavm.toolsFunc.defineProperty(style, "1", { configurable: true, enumerable: true, writable: false, value: "font-size" });
-        bodavm.toolsFunc.defineProperty(style, "accentColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "additiveSymbols", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "alignContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "alignItems", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "alignSelf", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "alignmentBaseline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "all", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "animation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "animationDelay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "animationDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "animationDuration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "animationFillMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "animationIterationCount", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "animationName", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "animationPlayState", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "animationTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "appRegion", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "appearance", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "ascentOverride", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "aspectRatio", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backdropFilter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backfaceVisibility", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "background", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundAttachment", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundBlendMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundClip", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundPositionX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundPositionY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundRepeatX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundRepeatY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "backgroundSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "basePalette", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "baselineShift", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "blockSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "border", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockEndColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockEndStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockEndWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockStartColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockStartStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockStartWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBlockWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBottomColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBottomLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBottomRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBottomStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderBottomWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderCollapse", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderEndEndRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderEndStartRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderImageOutset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderImageRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderImageSlice", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderImageSource", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderImageWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineEndColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineEndStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineEndWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineStartColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineStartStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineStartWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderInlineWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderLeftColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderLeftStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderLeftWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderRightColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderRightStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderRightWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderStartEndRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderStartStartRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderTopColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderTopLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderTopRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderTopStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderTopWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "borderWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "bottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "boxShadow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "boxSizing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "breakAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "breakBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "breakInside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "bufferedRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "captionSide", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "caretColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "clear", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "clip", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "clipPath", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "clipRule", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "color", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "colorInterpolation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "colorInterpolationFilters", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "colorRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "colorScheme", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columnCount", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columnFill", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columnGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columnRule", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columnRuleColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columnRuleStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columnRuleWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columnSpan", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columnWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "columns", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "contain", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "containIntrinsicBlockSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "containIntrinsicHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "containIntrinsicInlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "containIntrinsicSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "containIntrinsicWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "content", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "contentVisibility", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "counterIncrement", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "counterReset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "counterSet", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "cursor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "cx", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "cy", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "d", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "descentOverride", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "direction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "display", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "dominantBaseline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "emptyCells", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fallback", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fill", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fillOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fillRule", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "filter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "flex", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "flexBasis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "flexDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "flexFlow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "flexGrow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "flexShrink", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "flexWrap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "float", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "floodColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "floodOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "font", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontDisplay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontFamily", { configurable: true, enumerable: true, get: function () { return bodavm.toolsFunc.dispatch(this, CSSStyleDeclaration.prototype, "CSSStyleDeclaration", "fontFamily_get  ", arguments) }, set: function () { return bodavm.toolsFunc.dispatch(this, CSSStyleDeclaration.prototype, "CSSStyleDeclaration", "fontFamily_set", arguments) } });
-        bodavm.toolsFunc.defineProperty(style, "fontFeatureSettings", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontKerning", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontOpticalSizing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontPalette", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontSize", { configurable: true, enumerable: true, writable: true, value: "160px" });
-        bodavm.toolsFunc.defineProperty(style, "fontStretch", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontSynthesis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontSynthesisSmallCaps", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontSynthesisStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontSynthesisWeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontVariant", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontVariantCaps", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontVariantEastAsian", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontVariantLigatures", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontVariantNumeric", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontVariationSettings", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "fontWeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "forcedColorAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "grid", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridArea", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridAutoColumns", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridAutoFlow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridAutoRows", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridColumn", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridColumnEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridColumnGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridColumnStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridRow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridRowEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridRowGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridRowStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridTemplate", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridTemplateAreas", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridTemplateColumns", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "gridTemplateRows", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "height", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "hyphens", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "imageOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "imageRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "inherits", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "initialValue", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "inlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "inset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "insetBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "insetBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "insetBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "insetInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "insetInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "insetInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "isolation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "justifyContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "justifyItems", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "justifySelf", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "left", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "letterSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "lightingColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "lineBreak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "lineGapOverride", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "lineHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "listStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "listStyleImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "listStylePosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "listStyleType", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "margin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marginTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "marker", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "markerEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "markerMid", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "markerStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "mask", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "maskType", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "maxBlockSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "maxHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "maxInlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "maxWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "maxZoom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "minBlockSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "minHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "minInlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "minWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "minZoom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "mixBlendMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "negative", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "objectFit", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "objectPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "offset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "offsetDistance", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "offsetPath", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "offsetRotate", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "opacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "order", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "orientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "orphans", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "outline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "outlineColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "outlineOffset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "outlineStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "outlineWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overflow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overflowAnchor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overflowClipMargin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overflowWrap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overflowX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overflowY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overrideColors", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overscrollBehavior", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overscrollBehaviorBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overscrollBehaviorInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overscrollBehaviorX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "overscrollBehaviorY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "pad", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "padding", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paddingTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "page", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "pageBreakAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "pageBreakBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "pageBreakInside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "pageOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "paintOrder", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "perspective", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "perspectiveOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "placeContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "placeItems", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "placeSelf", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "pointerEvents", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "position", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "prefix", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "quotes", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "r", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "range", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "resize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "right", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "rowGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "rubyPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "rx", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "ry", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollBehavior", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMargin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollMarginTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPadding", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollPaddingTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollSnapAlign", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollSnapStop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollSnapType", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "scrollbarGutter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "shapeImageThreshold", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "shapeMargin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "shapeOutside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "shapeRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "size", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "sizeAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "speak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "speakAs", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "src", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "stopColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "stopOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "stroke", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "strokeDasharray", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "strokeDashoffset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "strokeLinecap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "strokeLinejoin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "strokeMiterlimit", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "strokeOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "strokeWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "suffix", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "symbols", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "syntax", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "system", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "tabSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "tableLayout", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textAlign", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textAlignLast", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textAnchor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textCombineUpright", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textDecoration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textDecorationColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textDecorationLine", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textDecorationSkipInk", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textDecorationStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textDecorationThickness", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textEmphasis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textEmphasisColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textEmphasisPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textEmphasisStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textIndent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textOverflow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textShadow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textSizeAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textTransform", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textUnderlineOffset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "textUnderlinePosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "top", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "touchAction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "transform", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "transformBox", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "transformOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "transformStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "transition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "transitionDelay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "transitionDuration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "transitionProperty", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "transitionTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "unicodeBidi", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "unicodeRange", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "userSelect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "userZoom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "vectorEffect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "verticalAlign", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "visibility", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAlignContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAlignItems", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAlignSelf", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAnimation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAnimationDelay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAnimationDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAnimationDuration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAnimationFillMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAnimationIterationCount", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAnimationName", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAnimationPlayState", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAnimationTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAppRegion", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitAppearance", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBackfaceVisibility", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBackgroundClip", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBackgroundOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBackgroundSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderAfterColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderAfterStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderAfterWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderBeforeColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderBeforeStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderBeforeWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderBottomLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderBottomRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderEndColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderEndStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderEndWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderHorizontalSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderStartColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderStartStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderStartWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderTopLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderTopRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBorderVerticalSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxAlign", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxDecorationBreak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxFlex", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxOrdinalGroup", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxOrient", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxPack", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxReflect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxShadow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitBoxSizing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitClipPath", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnBreakAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnBreakBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnBreakInside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnCount", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnRule", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnRuleColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnRuleStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnRuleWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnSpan", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumnWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitColumns", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFilter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFlex", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFlexBasis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFlexDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFlexFlow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFlexGrow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFlexShrink", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFlexWrap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFontFeatureSettings", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitFontSmoothing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitHighlight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitHyphenateCharacter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitJustifyContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitLineBreak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitLineClamp", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitLocale", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitLogicalHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitLogicalWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMarginAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMarginBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMarginEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMarginStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMask", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskBoxImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskBoxImageOutset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskBoxImageRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskBoxImageSlice", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskBoxImageSource", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskBoxImageWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskClip", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskComposite", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskPositionX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskPositionY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskRepeatX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskRepeatY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaskSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaxLogicalHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMaxLogicalWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMinLogicalHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitMinLogicalWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitOrder", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitPaddingAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitPaddingBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitPaddingEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitPaddingStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitPerspective", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitPerspectiveOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitPerspectiveOriginX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitPerspectiveOriginY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitPrintColorAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitRtlOrdering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitRubyPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitShapeImageThreshold", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitShapeMargin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitShapeOutside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTapHighlightColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextCombine", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextDecorationsInEffect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextEmphasis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextEmphasisColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextEmphasisPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextEmphasisStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextFillColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextSecurity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextSizeAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextStroke", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextStrokeColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTextStrokeWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransform", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransformOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransformOriginX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransformOriginY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransformOriginZ", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransformStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransitionDelay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransitionDuration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransitionProperty", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitTransitionTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitUserDrag", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitUserModify", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitUserSelect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "webkitWritingMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "whiteSpace", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "widows", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "width", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "willChange", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "wordBreak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "wordSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "wordWrap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "writingMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "x", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "y", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "zIndex", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.defineProperty(style, "zoom", { configurable: true, enumerable: true, writable: true, value: "" });
+        style.__proto__ = bodavm.memory.globalobj['CSSStyleDeclaration'].prototype
+        console.log(`HTMLElement_style_get `, `style->${style}`);
+
+        bodavm.toolsFunc.windowdefineProperty(style, "0", { configurable: true, enumerable: true, writable: false, value: "font-family" });
+        bodavm.toolsFunc.windowdefineProperty(style, "1", { configurable: true, enumerable: true, writable: false, value: "font-size" });
+        bodavm.toolsFunc.windowdefineProperty(style, "accentColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "additiveSymbols", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "alignContent", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "alignItems", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "alignSelf", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "alignmentBaseline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "all", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "animation", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "animationDelay", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "animationDirection", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "animationDuration", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "animationFillMode", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "animationIterationCount", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "animationName", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "animationPlayState", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "animationTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "appRegion", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "appearance", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "ascentOverride", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "aspectRatio", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backdropFilter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backfaceVisibility", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "background", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundAttachment", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundBlendMode", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundClip", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundImage", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundPosition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundPositionX", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundPositionY", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundRepeatX", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundRepeatY", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "backgroundSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "basePalette", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "baselineShift", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "blockSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "border", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlock", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockEndColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockEndStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockEndWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStartColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStartStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStartWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBottom", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderCollapse", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderEndEndRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderEndStartRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderImage", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderImageOutset", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderImageRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderImageSlice", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderImageSource", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderImageWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineEndColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineEndStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineEndWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStartColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStartStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStartWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderLeft", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderLeftColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderLeftStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderLeftWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderRight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderRightColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderRightStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderRightWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderStartEndRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderStartStartRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderTop", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderTopColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderTopLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderTopRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderTopStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderTopWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "borderWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "bottom", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "boxShadow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "boxSizing", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "breakAfter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "breakBefore", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "breakInside", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "bufferedRendering", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "captionSide", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "caretColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "clear", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "clip", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "clipPath", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "clipRule", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "color", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "colorInterpolation", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "colorInterpolationFilters", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "colorRendering", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "colorScheme", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columnCount", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columnFill", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columnGap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columnRule", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columnRuleColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columnRuleStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columnRuleWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columnSpan", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columnWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "columns", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "contain", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicBlockSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicHeight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicInlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "content", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "contentVisibility", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "counterIncrement", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "counterReset", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "counterSet", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "cursor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "cx", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "cy", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "d", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "descentOverride", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "direction", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "display", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "dominantBaseline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "emptyCells", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fallback", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fill", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fillOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fillRule", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "filter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "flex", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "flexBasis", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "flexDirection", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "flexFlow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "flexGrow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "flexShrink", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "flexWrap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "float", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "floodColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "floodOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "font", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontDisplay", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontFamily", { configurable: true, enumerable: true, get: function () { return bodavm.toolsFunc.dispatch(this,bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "fontFamily_get  ", arguments) }, set: function () { return bodavm.toolsFunc.dispatch(this,bodavm.memory.globalobj[ 'CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "fontFamily_set", arguments) } });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontFeatureSettings", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontKerning", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontOpticalSizing", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontPalette", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontSize", { configurable: true, enumerable: true, writable: true, value: "160px" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontStretch", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontSynthesis", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontSynthesisSmallCaps", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontSynthesisStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontSynthesisWeight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontVariant", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontVariantCaps", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontVariantEastAsian", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontVariantLigatures", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontVariantNumeric", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontVariationSettings", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "fontWeight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "forcedColorAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "grid", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridArea", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridAutoColumns", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridAutoFlow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridAutoRows", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridColumn", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridColumnEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridColumnGap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridColumnStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridGap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridRow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridRowEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridRowGap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridRowStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridTemplate", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridTemplateAreas", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridTemplateColumns", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "gridTemplateRows", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "height", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "hyphens", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "imageOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "imageRendering", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "inherits", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "initialValue", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "inlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "inset", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "insetBlock", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "insetBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "insetBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "insetInline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "insetInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "insetInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "isolation", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "justifyContent", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "justifyItems", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "justifySelf", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "left", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "letterSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "lightingColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "lineBreak", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "lineGapOverride", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "lineHeight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "listStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "listStyleImage", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "listStylePosition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "listStyleType", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "margin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginBlock", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginBottom", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginInline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginLeft", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginRight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marginTop", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "marker", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "markerEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "markerMid", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "markerStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "mask", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "maskType", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "maxBlockSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "maxHeight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "maxInlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "maxWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "maxZoom", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "minBlockSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "minHeight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "minInlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "minWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "minZoom", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "mixBlendMode", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "negative", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "objectFit", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "objectPosition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "offset", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "offsetDistance", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "offsetPath", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "offsetRotate", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "opacity", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "order", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "orientation", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "orphans", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "outline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "outlineColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "outlineOffset", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "outlineStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "outlineWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overflow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overflowAnchor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overflowClipMargin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overflowWrap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overflowX", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overflowY", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overrideColors", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehavior", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehaviorBlock", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehaviorInline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehaviorX", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehaviorY", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "pad", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "padding", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingBlock", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingBottom", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingInline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingLeft", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingRight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paddingTop", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "page", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "pageBreakAfter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "pageBreakBefore", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "pageBreakInside", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "pageOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "paintOrder", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "perspective", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "perspectiveOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "placeContent", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "placeItems", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "placeSelf", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "pointerEvents", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "position", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "prefix", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "quotes", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "r", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "range", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "resize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "right", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "rowGap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "rubyPosition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "rx", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "ry", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollBehavior", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMargin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginBlock", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginBottom", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginInline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginLeft", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginRight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginTop", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPadding", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingBlock", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingBottom", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingInline", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingLeft", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingRight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingTop", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollSnapAlign", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollSnapStop", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollSnapType", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "scrollbarGutter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "shapeImageThreshold", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "shapeMargin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "shapeOutside", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "shapeRendering", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "size", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "sizeAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "speak", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "speakAs", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "src", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "stopColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "stopOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "stroke", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "strokeDasharray", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "strokeDashoffset", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "strokeLinecap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "strokeLinejoin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "strokeMiterlimit", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "strokeOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "strokeWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "suffix", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "symbols", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "syntax", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "system", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "tabSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "tableLayout", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textAlign", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textAlignLast", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textAnchor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textCombineUpright", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textDecoration", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationLine", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationSkipInk", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationThickness", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textEmphasis", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textEmphasisColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textEmphasisPosition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textEmphasisStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textIndent", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textOverflow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textRendering", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textShadow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textSizeAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textTransform", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textUnderlineOffset", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "textUnderlinePosition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "top", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "touchAction", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "transform", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "transformBox", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "transformOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "transformStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "transition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "transitionDelay", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "transitionDuration", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "transitionProperty", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "transitionTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "unicodeBidi", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "unicodeRange", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "userSelect", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "userZoom", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "vectorEffect", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "verticalAlign", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "visibility", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAlignContent", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAlignItems", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAlignSelf", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimation", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationDelay", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationDirection", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationDuration", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationFillMode", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationIterationCount", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationName", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationPlayState", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAppRegion", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitAppearance", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBackfaceVisibility", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBackgroundClip", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBackgroundOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBackgroundSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderAfter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderAfterColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderAfterStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderAfterWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBefore", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBeforeColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBeforeStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBeforeWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBottomLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBottomRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderEndColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderEndStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderEndWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderHorizontalSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderImage", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderStartColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderStartStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderStartWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderTopLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderTopRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderVerticalSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxAlign", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxDecorationBreak", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxDirection", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxFlex", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxOrdinalGroup", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxOrient", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxPack", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxReflect", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxShadow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxSizing", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitClipPath", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnBreakAfter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnBreakBefore", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnBreakInside", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnCount", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnGap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnRule", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnRuleColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnRuleStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnRuleWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnSpan", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumns", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFilter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlex", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexBasis", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexDirection", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexFlow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexGrow", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexShrink", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexWrap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFontFeatureSettings", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitFontSmoothing", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitHighlight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitHyphenateCharacter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitJustifyContent", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitLineBreak", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitLineClamp", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitLocale", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitLogicalHeight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitLogicalWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMarginAfter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMarginBefore", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMarginEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMarginStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMask", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImage", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageOutset", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageSlice", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageSource", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskClip", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskComposite", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskImage", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskPosition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskPositionX", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskPositionY", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskRepeatX", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskRepeatY", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskSize", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaxLogicalHeight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaxLogicalWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMinLogicalHeight", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitMinLogicalWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitOrder", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitPaddingAfter", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitPaddingBefore", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitPaddingEnd", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitPaddingStart", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitPerspective", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitPerspectiveOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitPerspectiveOriginX", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitPerspectiveOriginY", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitPrintColorAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitRtlOrdering", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitRubyPosition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitShapeImageThreshold", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitShapeMargin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitShapeOutside", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTapHighlightColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextCombine", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextDecorationsInEffect", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextEmphasis", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextEmphasisColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextEmphasisPosition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextEmphasisStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextFillColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextSecurity", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextSizeAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextStroke", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextStrokeColor", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextStrokeWidth", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransform", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformOriginX", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformOriginY", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformOriginZ", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformStyle", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransition", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransitionDelay", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransitionDuration", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransitionProperty", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransitionTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitUserDrag", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitUserModify", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitUserSelect", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "webkitWritingMode", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "whiteSpace", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "widows", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "width", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "willChange", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "wordBreak", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "wordSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "wordWrap", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "writingMode", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "x", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "y", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "zIndex", { configurable: true, enumerable: true, writable: true, value: "" });
+        bodavm.toolsFunc.windowdefineProperty(style, "zoom", { configurable: true, enumerable: true, writable: true, value: "" });
         return style
     }
 
@@ -2926,21 +3037,21 @@
     }
     bodavm.envFunc.HTMLElement_onerror_set = function HTMLElement_onerror_set() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`HTMLElement_onerror_set 未完善`,);
+        console.log(`HTMLElement_onerror_set !!!!!!!!!未完善!!!!!!!!!!!!`,);
 
 
     }
     //HTMLCollection
     bodavm.envFunc.HTMLCollection_item = function HTMLCollection_item() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`HTMLCollection_item 未完善`,);
+        console.log(`HTMLCollection_item !!!!!!!!!未完善!!!!!!!!!!!!`,);
 
     }
     bodavm.envFunc.HTMLCollection_length_get = function HTMLCollection_length_get() {
         if (bodavm.config.isdebug) { debugger }
         // debugger
-        if (bodavm.config.isrs && this[0] instanceof HTMLScriptElement) {
-            console.log(`HTMLCollection_length_get `, `length:${2}`);
+        if (bodavm.config.isrs && this[0] instanceof bodavm.memory.globalobj['HTMLScriptElement']) {
+            console.log(`HTMLCollection_length_get `, `length:${2},  rs检测点`);
             return 2
         }
         let length_ = this._boarg.length
@@ -2967,7 +3078,7 @@
     bodavm.envFunc.XMLHttpRequest_send = function XMLHttpRequest_send() {
         debugger
         let body = arguments[0]; if (bodavm.config.isdebug) { debugger };
-        console.log(`XMLHttpRequest_send `, `body->${body}  `, `未完善`);
+        console.log(`XMLHttpRequest_send `, `body->${body}  `, `!!!!!!!!!未完善!!!!!!!!!!!!`);
         // this._boarg.send(body)
 
     }
@@ -3008,18 +3119,26 @@
 
 
     }
-    bodavm.envFunc.EventTarget_dispatchEvent = function EventTarget_removeEventListener() {
+    bodavm.envFunc.EventTarget_dispatchEvent = function EventTarget_dispatchEvent() {
         if (bodavm.config.isdebug) { debugger }
         let event = arguments[0]
+        let botag=arguments[1]   //用来判断该事件是不是由我代码主动触发
+        if (botag ==undefined) {
+            console.log(`EventTarget_dispatchEvent 被网站代码主动触发`,`事件为${event.type}`)
+        }
         let type = event.type
         switch (event.type) {
             case 'click':
-                Object.setPrototypeOf(event, PointerEvent.prototype)
+                Object.setPrototypeOf(event,bodavm.memory.globalobj['PointerEvent'].prototype)
                 break
             case 'load':
-                Object.setPrototypeOf(event, Event.prototype)
+                Object.setPrototypeOf(event, bodavm.memory.globalobj['Event'].prototype)
+                break
+            case 'onload':
+                // Object.setPrototypeOf(event)
                 break
             default:
+                //无需实现的事件unload  popstate
                 console.log(`EventTarget_dispatchEvent `, `${event.type} 未实现`)
 
         }
@@ -3052,16 +3171,16 @@
                 // context = context.getContext('2d')
                 context._bocanvas = this._bocanvas.getContext('2d')
                 console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
-                context.__proto__ = CanvasRenderingContext2D.prototype;
+                context.__proto__ = bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype;
                 break
             case "webgl":
                 // context = context.getContext('2d')
                 console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
-                context.__proto__ = WebGLRenderingContext.prototype;
+                context.__proto__ = bodavm.memory.globalobj['WebGLRenderingContext'].prototype;
                 break
             case 'experimental-webgl':
-                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `context->${context} 未完善 `)
-                context.__proto__ = WebGLRenderingContext.prototype;
+                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `context->${context} !!!!!!!!!未完善!!!!!!!!!!!! `)
+                context.__proto__ = bodavm.memory.globalobj['WebGLRenderingContext'].prototype;
                 // bodavm.toolsFunc.setProtoAttr.call(context, "canvas", this);
                 // bodavm.toolsFunc.setProtoAttr.call(this, "type", type);
                 break
@@ -3156,7 +3275,7 @@
 
     bodavm.envFunc.location_ancestorOrigins_get = function location_ancestorOrigins_get() {
         let ancestorOrigins = {}
-        ancestorOrigins.__proto__ = DOMStringList.prototype
+        ancestorOrigins.__proto__ = bodavm.memory.globalobj['DOMStringList'].prototype
         console.log(`location_ancestorOrigins_get `, `${ancestorOrigins}  `)
         if (bodavm.config.isdebug) { debugger }
         return ancestorOrigins
@@ -3255,23 +3374,23 @@
         debugger
         if (bodavm.config.isdebug) { debugger }
         let r = arguments[0]
-        res = bodaobj.location.replace(r)
+        // res = bodaobj.location.replace(r)
         console.log(`location_replace `, `replace->${r}`,);
         console.log(`--------------------页面跳转停止执行--------------------`,);
         console.log(`--------------------页面跳转停止执行--------------------`,);
-        // console.log(`--------------------直接执行lastDeal--------------------`,);
-        throw ('End', `--------------------直接执行lastDeal--------------------`)
-
+        console.log(`--------------------直接执行lastDeal--------------------`,);
+        throw('End',`--------------------直接执行lastDeal--------------------`)
+        
     }
     bodavm.envFunc.location_search_set = function location_search_set() {
         let search = arguments[0]
-        bodaobj.location["search"] = search
+        bodavm.memory.location["search"] = search
         console.log(`location_search_set `, `${search}  `); if (bodavm.config.isdebug) { debugger };
 
         return search
     }
     bodavm.envFunc.location_search_get = function location_search_get() {
-        let search = bodaobj.location["search"]
+        let search = bodavm.memory.location["search"]
         console.log(`location_search_get `, `${search}  `); if (bodavm.config.isdebug) { debugger };
 
         return search
@@ -3364,7 +3483,7 @@
         let orientation = bodavm.memory.screen["orientation"]
         console.log(`Screen_orientation_get `, `${orientation}  `)
         if (bodavm.config.isdebug) { debugger }
-        Object.setPrototypeOf(orientation, ScreenOrientation.prototype)
+        Object.setPrototypeOf(orientation, bodavm.memory.globalobj['ScreenOrientation'].prototype)
         return orientation
     }
     bodavm.envFunc.Screen_isExtended_get = function Screen_isExtended_get() {
@@ -3391,7 +3510,7 @@
 
         console.log(`IDBFactory_open `, `name->${name} `, `version->${version}  `)
         let DB = {}
-        DB = Object.setPrototypeOf(DB, IDBOpenDBRequest.prototype)
+        DB = Object.setPrototypeOf(DB, bodavm.memory.globalobj['IDBOpenDBRequest'].prototype)
         if (bodavm.config.isdebug) { debugger }
 
         return DB
@@ -3399,14 +3518,14 @@
     bodavm.envFunc.IDBRequest_onerror_set = function IDBRequest_onerror_set() {
         let onerror = arguments[0]
         bodavm.memory.IDBRequest['onerror'] = onerror
-        console.log(`IDBRequest_onerror_set `, `${onerror} `, `未完善  `)
+        console.log(`IDBRequest_onerror_set `, `${onerror} `, `!!!!!!!!!未完善!!!!!!!!!!!!  `)
         if (bodavm.config.isdebug) { debugger }
         return onerror
 
     }
     bodavm.envFunc.IDBRequest_onerror_get = function IDBRequest_onerror_get() {
         let onerror = bodavm.memory.IDBRequest['onerror'] ? bodavm.memory.IDBRequest['onerror'] : undefined
-        console.log(`IDBRequest_onerror_get `, `${onerror} `, `未完善  `)
+        console.log(`IDBRequest_onerror_get `, `${onerror} `, `!!!!!!!!!未完善!!!!!!!!!!!!  `)
         if (bodavm.config.isdebug) { debugger }
         return onerror
 
@@ -3415,7 +3534,7 @@
     bodavm.envFunc.IDBOpenDBRequest_onupgradeneeded_set = function IDBOpenDBRequest_onupgradeneeded_set() {
         let onupgradeneeded = arguments[0]
         bodavm.memory.IDBOpenDBRequest['onupgradeneeded'] = onupgradeneeded
-        console.log(`IDBOpenDBRequest_onupgradeneeded_set `, `${onupgradeneeded} `, `未完善  `)
+        console.log(`IDBOpenDBRequest_onupgradeneeded_set `, `${onupgradeneeded} `, `!!!!!!!!!未完善!!!!!!!!!!!!  `)
         if (bodavm.config.isdebug) { debugger }
         return onupgradeneeded
 
@@ -3425,7 +3544,7 @@
         let onsuccess = arguments[0]
         bodavm.memory.IDBRequest['onsuccess'] = onsuccess
 
-        console.log(`IDBRequest_onsuccess_set `, `${onsuccess} `, `未完善  `)
+        console.log(`IDBRequest_onsuccess_set `, `${onsuccess} `, `!!!!!!!!!未完善!!!!!!!!!!!!  `)
         if (bodavm.config.isdebug) { debugger }
         return onsuccess
 
@@ -3434,7 +3553,7 @@
 
         let onsuccess = bodavm.memory.IDBRequest['onsuccess'] ? bodavm.memory.IDBRequest['onsuccess'] : undefined
 
-        console.log(`IDBRequest_onsuccess_get `, `${onsuccess} `, `未完善  `)
+        console.log(`IDBRequest_onsuccess_get `, `${onsuccess} `, `!!!!!!!!!未完善!!!!!!!!!!!!  `)
         if (bodavm.config.isdebug) { debugger }
         return onsuccess
 
@@ -3481,18 +3600,18 @@
     }
     bodavm.envFunc.MouseEvent_screenX_get = function MouseEvent_screenX_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_screenX_get 未完善 `);
+        console.log(`MouseEvent_screenX_get !!!!!!!!!未完善!!!!!!!!!!!! `);
 
     }
     bodavm.envFunc.MouseEvent_screenY_get = function MouseEvent_screenY_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_screenY_get 未完善`, `  `);
+        console.log(`MouseEvent_screenY_get !!!!!!!!!未完善!!!!!!!!!!!!`, `  `);
 
 
     }
     bodavm.envFunc.MouseEvent_button_get = function MouseEvent_button_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_button_get 未完善`, `  `);
+        console.log(`MouseEvent_button_get !!!!!!!!!未完善!!!!!!!!!!!!`, `  `);
 
 
     }
@@ -3504,23 +3623,23 @@
     }
     bodavm.envFunc.MouseEvent_offsetY_get = function MouseEvent_button_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_offsetY_get 未完善`);
+        console.log(`MouseEvent_offsetY_get !!!!!!!!!未完善!!!!!!!!!!!!`);
 
     }
 
     bodavm.envFunc.MouseEvent_x_get = function MouseEvent_button_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_x_get 未完善`,);
+        console.log(`MouseEvent_x_get !!!!!!!!!未完善!!!!!!!!!!!!`,);
 
     }
     bodavm.envFunc.MouseEvent_y_get = function MouseEvent_button_get() {
         if (bodavm.config.isdebug) { debugger }
-        console.log(`MouseEvent_y_get 未完善`,);
+        console.log(`MouseEvent_y_get !!!!!!!!!未完善!!!!!!!!!!!!`,);
     }
     bodavm.envFunc.Event_type_get = function Event_type_get() {
         if (bodavm.config.isdebug) { debugger }
         let type = arguments[0]
-        console.log(`Event_type_get 未完善`, `type->${type}`);
+        console.log(`Event_type_get !!!!!!!!!未完善!!!!!!!!!!!!`, `type->${type}`);
         // debugger
         return type
 
@@ -3568,19 +3687,19 @@
         let index = arguments[0]; if (bodavm.config.isdebug) { debugger };
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_enableVertexAttribArray 未完善`, `index:${index}  `);
+        console.log(`WebGLRenderingContext_enableVertexAttribArray !!!!!!!!!未完善!!!!!!!!!!!!`, `index:${index}  `);
 
     }
     bodavm.envFunc.WebGLRenderingContext_getUniformLocation = function WebGLRenderingContext_getUniformLocation() {
         let program = arguments[0]
         let name = arguments[1];
-        if (bodavm.config.isdebug) { debugger }; console.log(`WebGLRenderingContext_getUniformLocation `, `program:${program} name:${name}`, `未完善`);
+        if (bodavm.config.isdebug) { debugger }; console.log(`WebGLRenderingContext_getUniformLocation `, `program:${program} name:${name}`, `!!!!!!!!!未完善!!!!!!!!!!!!`);
         return null
     }
     bodavm.envFunc.WebGLRenderingContext_getAttribLocation = function WebGLRenderingContext_getAttribLocation() {
         let program = arguments[0]
         let name = arguments[1]
-        console.log(`WebGLRenderingContext_getAttribLocation `, `program:${program} name:${name}  `, `未完善`);
+        console.log(`WebGLRenderingContext_getAttribLocation `, `program:${program} name:${name}  `, `!!!!!!!!!未完善!!!!!!!!!!!!`);
 
         if (bodavm.config.isdebug) { debugger };
         return null
@@ -3591,7 +3710,7 @@
         console.log(`WebGLRenderingContext_getShaderPrecisionFormat `, `shaderType:${shaderType} precisionType:${precisionType}  `);
         if (shaderType == 35633 && precisionType == 36338) {
             let shade = {}
-            Object.setPrototypeOf(shade, WebGLShaderPrecisionFormat.prototype)
+            Object.setPrototypeOf(shade, bodavm.memory.globalobj['WebGLShaderPrecisionFormat'].prototype)
             // bodavm.toolsFunc.symbolProperty(shade)
             return shade
         }
@@ -3602,7 +3721,7 @@
         let v1 = arguments[2]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_uniform2f 未完善`, `location:${location} v0:${v0}  v1:${v1}  `);
+        console.log(`WebGLRenderingContext_uniform2f !!!!!!!!!未完善!!!!!!!!!!!!`, `location:${location} v0:${v0}  v1:${v1}  `);
     }
     bodavm.envFunc.WebGLRenderingContext_vertexAttribPointer = function WebGLRenderingContext_vertexAttribPointer() {
         let index = arguments[0]
@@ -3613,7 +3732,7 @@
         let offset = arguments[5]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_vertexAttribPointer 未完善`, `index:${index}  size:${size} type:${type}  normalized:${normalized}  stride:${stride}  offset${offset}   `);
+        console.log(`WebGLRenderingContext_vertexAttribPointer !!!!!!!!!未完善!!!!!!!!!!!!`, `index:${index}  size:${size} type:${type}  normalized:${normalized}  stride:${stride}  offset${offset}   `);
     }
 
     bodavm.envFunc.WebGLRenderingContext_drawArrays = function WebGLRenderingContext_drawArrays() {
@@ -3622,19 +3741,19 @@
         let count = arguments[2]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_drawArrays 未完善`, `mode:${mode}  first:${first}  count:${count}   `);
+        console.log(`WebGLRenderingContext_drawArrays !!!!!!!!!未完善!!!!!!!!!!!!`, `mode:${mode}  first:${first}  count:${count}   `);
 
     }
 
     bodavm.envFunc.WebGLRenderingContext_useProgram = function WebGLRenderingContext_useProgram() {
         let program = arguments[0]
-        console.log(`WebGLRenderingContext_useProgram 未完善`, `program:${program}  `);
+        console.log(`WebGLRenderingContext_useProgram !!!!!!!!!未完善!!!!!!!!!!!!`, `program:${program}  `);
         if (bodavm.config.isdebug) { debugger };
 
     }
     bodavm.envFunc.WebGLRenderingContext_linkProgram = function WebGLRenderingContext_linkProgram() {
         let program = arguments[0]
-        console.log(`WebGLRenderingContext_linkProgram 未完善`, `program:${program}  `);
+        console.log(`WebGLRenderingContext_linkProgram !!!!!!!!!未完善!!!!!!!!!!!!`, `program:${program}  `);
         if (bodavm.config.isdebug) { debugger };
 
 
@@ -3644,7 +3763,7 @@
         let shader = arguments[1]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_attachShader 未完善`, `program:${program}  shader:${shader}   `);
+        console.log(`WebGLRenderingContext_attachShader !!!!!!!!!未完善!!!!!!!!!!!!`, `program:${program}  shader:${shader}   `);
     }
     bodavm.envFunc.WebGLRenderingContext_createShader = function WebGLRenderingContext_createShader() {
         let type = arguments[0]
@@ -3653,12 +3772,12 @@
 
         if (type == 35633) {
             let shader = {}
-            Object.setPrototypeOf(shader, WebGLShader.prototype)
+            Object.setPrototypeOf(shader, bodavm.memory.globalobj['WebGLShader'].prototype)
             return shader
         }
         else if (type == 35632) {
             let shader = {}
-            Object.setPrototypeOf(shader, WebGLShader.prototype)
+            Object.setPrototypeOf(shader, bodavm.memory.globalobj['WebGLShader'].prototype)
             return shader
         }
     }
@@ -3668,21 +3787,21 @@
         let source = arguments[1]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_shaderSource 未完善`, `shader:${shader}  source:${source}  `);
+        console.log(`WebGLRenderingContext_shaderSource !!!!!!!!!未完善!!!!!!!!!!!!`, `shader:${shader}  source:${source}  `);
     }
 
     bodavm.envFunc.WebGLRenderingContext_compileShader = function WebGLRenderingContext_shaderSource() {
         let compileShader = arguments[0]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log(`WebGLRenderingContext_compileShader 未完善`, `${compileShader}  `);
+        console.log(`WebGLRenderingContext_compileShader !!!!!!!!!未完善!!!!!!!!!!!!`, `${compileShader}  `);
     }
     bodavm.envFunc.WebGLRenderingContext_canvas_get = function WebGLRenderingContext_canvas_get() {
         let canvas = {}
         if (bodavm.config.isdebug) { debugger };
 
         console.log(`WebGLRenderingContext_canvas_get `, `${canvas}  `);
-        canvas.__proto__ = HTMLCanvasElement.prototype
+        canvas.__proto__ = bodavm.memory.globalobj['HTMLCanvasElement'].prototype
         // bodavm.toolsFunc.symbolProperty(canvas)
         return canvas
 
@@ -3691,7 +3810,7 @@
         let program = {};
         if (bodavm.config.isdebug) { debugger };
 
-        program = Object.setPrototypeOf(program, WebGLProgram.prototype);
+        program = Object.setPrototypeOf(program, bodavm.memory.globalobj['WebGLProgram'].prototype);
         console.log(`WebGLRenderingContext_createProgram `, `${program}  `);
         return program;
     }
@@ -3699,7 +3818,7 @@
     bodavm.envFunc.WebGLRenderingContext_createBuffer = function WebGLRenderingContext_createBuffer() {
         if (bodavm.config.isdebug) { debugger }
         let buffer = {};
-        buffer = Object.setPrototypeOf(buffer, WebGLBuffer.prototype);
+        buffer = Object.setPrototypeOf(buffer, bodavm.memory.globalobj['WebGLBuffer'].prototype);
         console.log(`WebGLRenderingContext_createBuffer `, `${buffer}  `);
 
         return buffer;
@@ -3709,7 +3828,7 @@
         if (bodavm.config.isdebug) { debugger }
         let r1 = arguments[0]
         let r2 = arguments[1]
-        console.log(`WebGLRenderingContext_bindBuffer 未完善`, `r1:${r1}  r2:${r2}  `);
+        console.log(`WebGLRenderingContext_bindBuffer !!!!!!!!!未完善!!!!!!!!!!!!`, `r1:${r1}  r2:${r2}  `);
 
     }
     bodavm.envFunc.WebGLRenderingContext_bufferData = function WebGLRenderingContext_bufferData() {
@@ -3719,7 +3838,7 @@
         let r3 = arguments[2]
         let r4 = arguments[3]
         let r5 = arguments[4]
-        console.log(`WebGLRenderingContext_bufferData 未完善`, `r1:${r1},r2:${r2},r3:${r3},r4:${r4},r5:${r5}  `);
+        console.log(`WebGLRenderingContext_bufferData !!!!!!!!!未完善!!!!!!!!!!!!`, `r1:${r1},r2:${r2},r3:${r3},r4:${r4},r5:${r5}  `);
 
     }
     bodavm.envFunc.WebGLRenderingContext_getExtension = function WebGLRenderingContext_getExtension() {
@@ -3733,8 +3852,8 @@
                 WebGLDebugRendererInfo = function WebGLDebugRendererInfo() { }
                 bodavm.toolsFunc.safeProto(WebGLDebugRendererInfo, "WebGLDebugRendererInfo");
                 info = Object.setPrototypeOf(info, WebGLDebugRendererInfo.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLDebugRendererInfo.prototype, "UNMASKED_VENDOR_WEBGL", { configurable: false, enumerable: true, writable: false, value: 37445 });
-                bodavm.toolsFunc.defineProperty(WebGLDebugRendererInfo.prototype, "UNMASKED_RENDERER_WEBGL", { configurable: false, enumerable: true, writable: false, value: 37446 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDebugRendererInfo.prototype, "UNMASKED_VENDOR_WEBGL", { configurable: false, enumerable: true, writable: false, value: 37445 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDebugRendererInfo.prototype, "UNMASKED_RENDERER_WEBGL", { configurable: false, enumerable: true, writable: false, value: 37446 });
                 delete WebGLDebugRendererInfo;
                 break;
             case "ANGLE_instanced_arrays":
@@ -3742,49 +3861,49 @@
                 ANGLEInstancedArrays = function ANGLEInstancedArrays() { }
                 bodavm.toolsFunc.safeProto(ANGLEInstancedArrays, "ANGLEInstancedArrays");
                 info = Object.setPrototypeOf(info, ANGLEInstancedArrays.prototype)
-                bodavm.toolsFunc.defineProperty(ANGLEInstancedArrays.prototype, "VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE", { configurable: false, enumerable: true, writable: false, value: 35070 });
-                bodavm.toolsFunc.defineProperty(ANGLEInstancedArrays.prototype, "drawArraysInstancedANGLE", { configurable: true, enumerable: true, writable: true, value: function drawArraysInstancedANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "drawArraysInstancedANGLE", arguments) } });
-                bodavm.toolsFunc.defineProperty(ANGLEInstancedArrays.prototype, "drawElementsInstancedANGLE", { configurable: true, enumerable: true, writable: true, value: function drawElementsInstancedANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "drawElementsInstancedANGLE", arguments) } });
-                bodavm.toolsFunc.defineProperty(ANGLEInstancedArrays.prototype, "vertexAttribDivisorANGLE", { configurable: true, enumerable: true, writable: true, value: function vertexAttribDivisorANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "vertexAttribDivisorANGLE", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE", { configurable: false, enumerable: true, writable: false, value: 35070 });
+                bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "drawArraysInstancedANGLE", { configurable: true, enumerable: true, writable: true, value: function drawArraysInstancedANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "drawArraysInstancedANGLE", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "drawElementsInstancedANGLE", { configurable: true, enumerable: true, writable: true, value: function drawElementsInstancedANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "drawElementsInstancedANGLE", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "vertexAttribDivisorANGLE", { configurable: true, enumerable: true, writable: true, value: function vertexAttribDivisorANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "vertexAttribDivisorANGLE", arguments) } });
                 delete ANGLEInstancedArrays;
                 break;
             case "EXT_blend_minmax":
                 EXTBlendMinMax = function EXTBlendMinMax() { }
                 bodavm.toolsFunc.safeProto(EXTBlendMinMax, "EXTBlendMinMax");
                 info = Object.setPrototypeOf(info, EXTBlendMinMax.prototype)
-                bodavm.toolsFunc.defineProperty(EXTBlendMinMax.prototype, "MIN_EXT", { configurable: false, enumerable: true, writable: false, value: 32775 });
-                bodavm.toolsFunc.defineProperty(EXTBlendMinMax.prototype, "MAX_EXT", { configurable: false, enumerable: true, writable: false, value: 32776 });
+                bodavm.toolsFunc.windowdefineProperty(EXTBlendMinMax.prototype, "MIN_EXT", { configurable: false, enumerable: true, writable: false, value: 32775 });
+                bodavm.toolsFunc.windowdefineProperty(EXTBlendMinMax.prototype, "MAX_EXT", { configurable: false, enumerable: true, writable: false, value: 32776 });
                 delete EXTBlendMinMax
                 break;
             case "EXT_color_buffer_half_float":
                 EXTColorBufferHalfFloat = function EXTColorBufferHalfFloat() { }
                 bodavm.toolsFunc.safeProto(EXTColorBufferHalfFloat, "EXTColorBufferHalfFloat");
                 info = Object.setPrototypeOf(info, EXTColorBufferHalfFloat.prototype)
-                bodavm.toolsFunc.defineProperty(EXTColorBufferHalfFloat.prototype, "RGBA16F_EXT", { configurable: false, enumerable: true, writable: false, value: 34842 });
-                bodavm.toolsFunc.defineProperty(EXTColorBufferHalfFloat.prototype, "RGB16F_EXT", { configurable: false, enumerable: true, writable: false, value: 34843 });
-                bodavm.toolsFunc.defineProperty(EXTColorBufferHalfFloat.prototype, "FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT", { configurable: false, enumerable: true, writable: false, value: 33297 });
-                bodavm.toolsFunc.defineProperty(EXTColorBufferHalfFloat.prototype, "UNSIGNED_NORMALIZED_EXT", { configurable: false, enumerable: true, writable: false, value: 35863 });
+                bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "RGBA16F_EXT", { configurable: false, enumerable: true, writable: false, value: 34842 });
+                bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "RGB16F_EXT", { configurable: false, enumerable: true, writable: false, value: 34843 });
+                bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT", { configurable: false, enumerable: true, writable: false, value: 33297 });
+                bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "UNSIGNED_NORMALIZED_EXT", { configurable: false, enumerable: true, writable: false, value: 35863 });
                 delete EXTColorBufferHalfFloat
                 break;
             case "EXT_disjoint_timer_query":
                 EXTDisjointTimerQuery = function EXTDisjointTimerQuery() { }
                 bodavm.toolsFunc.safeProto(EXTDisjointTimerQuery, "EXTDisjointTimerQuery");
                 info = Object.setPrototypeOf(info, EXTDisjointTimerQuery.prototype)
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "QUERY_COUNTER_BITS_EXT", { configurable: false, enumerable: true, writable: false, value: 34916 });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "CURRENT_QUERY_EXT", { configurable: false, enumerable: true, writable: false, value: 34917 });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "QUERY_RESULT_EXT", { configurable: false, enumerable: true, writable: false, value: 34918 });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "QUERY_RESULT_AVAILABLE_EXT", { configurable: false, enumerable: true, writable: false, value: 34919 });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "TIME_ELAPSED_EXT", { configurable: false, enumerable: true, writable: false, value: 35007 });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "TIMESTAMP_EXT", { configurable: false, enumerable: true, writable: false, value: 36392 });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "GPU_DISJOINT_EXT", { configurable: false, enumerable: true, writable: false, value: 36795 });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "beginQueryEXT", { configurable: true, enumerable: true, writable: true, value: function beginQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "beginQueryEXT", arguments) } });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "createQueryEXT", { configurable: true, enumerable: true, writable: true, value: function createQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "createQueryEXT", arguments) } });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "deleteQueryEXT", { configurable: true, enumerable: true, writable: true, value: function deleteQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "deleteQueryEXT", arguments) } });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "endQueryEXT", { configurable: true, enumerable: true, writable: true, value: function endQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "endQueryEXT", arguments) } });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "getQueryEXT", { configurable: true, enumerable: true, writable: true, value: function getQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "getQueryEXT", arguments) } });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "getQueryObjectEXT", { configurable: true, enumerable: true, writable: true, value: function getQueryObjectEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "getQueryObjectEXT", arguments) } });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "isQueryEXT", { configurable: true, enumerable: true, writable: true, value: function isQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "isQueryEXT", arguments) } });
-                bodavm.toolsFunc.defineProperty(EXTDisjointTimerQuery.prototype, "queryCounterEXT", { configurable: true, enumerable: true, writable: true, value: function queryCounterEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "queryCounterEXT", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "QUERY_COUNTER_BITS_EXT", { configurable: false, enumerable: true, writable: false, value: 34916 });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "CURRENT_QUERY_EXT", { configurable: false, enumerable: true, writable: false, value: 34917 });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "QUERY_RESULT_EXT", { configurable: false, enumerable: true, writable: false, value: 34918 });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "QUERY_RESULT_AVAILABLE_EXT", { configurable: false, enumerable: true, writable: false, value: 34919 });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "TIME_ELAPSED_EXT", { configurable: false, enumerable: true, writable: false, value: 35007 });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "TIMESTAMP_EXT", { configurable: false, enumerable: true, writable: false, value: 36392 });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "GPU_DISJOINT_EXT", { configurable: false, enumerable: true, writable: false, value: 36795 });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "beginQueryEXT", { configurable: true, enumerable: true, writable: true, value: function beginQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "beginQueryEXT", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "createQueryEXT", { configurable: true, enumerable: true, writable: true, value: function createQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "createQueryEXT", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "deleteQueryEXT", { configurable: true, enumerable: true, writable: true, value: function deleteQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "deleteQueryEXT", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "endQueryEXT", { configurable: true, enumerable: true, writable: true, value: function endQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "endQueryEXT", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "getQueryEXT", { configurable: true, enumerable: true, writable: true, value: function getQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "getQueryEXT", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "getQueryObjectEXT", { configurable: true, enumerable: true, writable: true, value: function getQueryObjectEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "getQueryObjectEXT", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "isQueryEXT", { configurable: true, enumerable: true, writable: true, value: function isQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "isQueryEXT", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "queryCounterEXT", { configurable: true, enumerable: true, writable: true, value: function queryCounterEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "queryCounterEXT", arguments) } });
                 delete EXTDisjointTimerQuery
 
                 break;
@@ -3811,10 +3930,10 @@
                 EXTTextureCompressionBPTC = function EXTTextureCompressionBPTC() { }
                 bodavm.toolsFunc.safeProto(EXTTextureCompressionBPTC, "EXTTextureCompressionBPTC");
                 info = Object.setPrototypeOf(info, EXTTextureCompressionBPTC.prototype)
-                bodavm.toolsFunc.defineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGBA_BPTC_UNORM_EXT", { configurable: false, enumerable: true, writable: false, value: 36492 });
-                bodavm.toolsFunc.defineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_SRGB_ALPHA_BPTC_UNORM_EXT", { configurable: false, enumerable: true, writable: false, value: 36493 });
-                bodavm.toolsFunc.defineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGB_BPTC_SIGNED_FLOAT_EXT", { configurable: false, enumerable: true, writable: false, value: 36494 });
-                bodavm.toolsFunc.defineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_EXT", { configurable: false, enumerable: true, writable: false, value: 36495 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGBA_BPTC_UNORM_EXT", { configurable: false, enumerable: true, writable: false, value: 36492 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_SRGB_ALPHA_BPTC_UNORM_EXT", { configurable: false, enumerable: true, writable: false, value: 36493 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGB_BPTC_SIGNED_FLOAT_EXT", { configurable: false, enumerable: true, writable: false, value: 36494 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_EXT", { configurable: false, enumerable: true, writable: false, value: 36495 });
 
                 delete EXTTextureCompressionBPTC
                 break;
@@ -3822,10 +3941,10 @@
                 EXTTextureCompressionRGTC = function EXTTextureCompressionRGTC() { }
                 bodavm.toolsFunc.safeProto(EXTTextureCompressionRGTC, "EXTTextureCompressionRGTC");
                 info = Object.setPrototypeOf(info, EXTTextureCompressionRGTC.prototype)
-                bodavm.toolsFunc.defineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_RED_RGTC1_EXT", { configurable: false, enumerable: true, writable: false, value: 36283 });
-                bodavm.toolsFunc.defineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_SIGNED_RED_RGTC1_EXT", { configurable: false, enumerable: true, writable: false, value: 36284 });
-                bodavm.toolsFunc.defineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_RED_GREEN_RGTC2_EXT", { configurable: false, enumerable: true, writable: false, value: 36285 });
-                bodavm.toolsFunc.defineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT", { configurable: false, enumerable: true, writable: false, value: 36286 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_RED_RGTC1_EXT", { configurable: false, enumerable: true, writable: false, value: 36283 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_SIGNED_RED_RGTC1_EXT", { configurable: false, enumerable: true, writable: false, value: 36284 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_RED_GREEN_RGTC2_EXT", { configurable: false, enumerable: true, writable: false, value: 36285 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT", { configurable: false, enumerable: true, writable: false, value: 36286 });
                 delete EXTTextureCompressionRGTC;
 
                 break;
@@ -3833,33 +3952,33 @@
                 EXTTextureFilterAnisotropic = function EXTTextureFilterAnisotropic() { }
                 bodavm.toolsFunc.safeProto(EXTTextureFilterAnisotropic, "EXTTextureFilterAnisotropic");
                 info = Object.setPrototypeOf(info, EXTTextureFilterAnisotropic.prototype)
-                bodavm.toolsFunc.defineProperty(EXTTextureFilterAnisotropic.prototype, "TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34046 });
-                bodavm.toolsFunc.defineProperty(EXTTextureFilterAnisotropic.prototype, "MAX_TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34047 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34046 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "MAX_TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34047 });
                 delete EXTTextureFilterAnisotropic;
                 break;
             case "WEBKIT_EXT_texture_filter_anisotropic":
                 EXTTextureFilterAnisotropic = function EXTTextureFilterAnisotropic() { }
                 bodavm.toolsFunc.safeProto(EXTTextureFilterAnisotropic, "EXTTextureFilterAnisotropic");
                 info = Object.setPrototypeOf(info, EXTTextureFilterAnisotropic.prototype)
-                bodavm.toolsFunc.defineProperty(EXTTextureFilterAnisotropic.prototype, "TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34046 });
-                bodavm.toolsFunc.defineProperty(EXTTextureFilterAnisotropic.prototype, "MAX_TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34047 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34046 });
+                bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "MAX_TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34047 });
                 delete EXTTextureFilterAnisotropic;
                 break;
             case "EXT_sRGB":
                 EXTsRGB = function EXTsRGB() { }
                 bodavm.toolsFunc.safeProto(EXTsRGB, "EXTsRGB");
                 info = Object.setPrototypeOf(info, EXTsRGB.prototype)
-                bodavm.toolsFunc.defineProperty(EXTsRGB.prototype, "SRGB_EXT", { configurable: false, enumerable: true, writable: false, value: 35904 });
-                bodavm.toolsFunc.defineProperty(EXTsRGB.prototype, "SRGB_ALPHA_EXT", { configurable: false, enumerable: true, writable: false, value: 35906 });
-                bodavm.toolsFunc.defineProperty(EXTsRGB.prototype, "SRGB8_ALPHA8_EXT", { configurable: false, enumerable: true, writable: false, value: 35907 });
-                bodavm.toolsFunc.defineProperty(EXTsRGB.prototype, "FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT", { configurable: false, enumerable: true, writable: false, value: 33296 });
+                bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "SRGB_EXT", { configurable: false, enumerable: true, writable: false, value: 35904 });
+                bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "SRGB_ALPHA_EXT", { configurable: false, enumerable: true, writable: false, value: 35906 });
+                bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "SRGB8_ALPHA8_EXT", { configurable: false, enumerable: true, writable: false, value: 35907 });
+                bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT", { configurable: false, enumerable: true, writable: false, value: 33296 });
                 delete EXTsRGB;
                 break;
             case "KHR_parallel_shader_compile":
                 KHRParallelShaderCompile = function KHRParallelShaderCompile() { }
                 bodavm.toolsFunc.safeProto(KHRParallelShaderCompile, "KHRParallelShaderCompile");
                 info = Object.setPrototypeOf(info, KHRParallelShaderCompile.prototype)
-                bodavm.toolsFunc.defineProperty(KHRParallelShaderCompile.prototype, "COMPLETION_STATUS_KHR", { configurable: false, enumerable: true, writable: false, value: 37297 });
+                bodavm.toolsFunc.windowdefineProperty(KHRParallelShaderCompile.prototype, "COMPLETION_STATUS_KHR", { configurable: false, enumerable: true, writable: false, value: 37297 });
                 delete KHRParallelShaderCompile;
                 break;
             case "OES_element_index_uint":
@@ -3878,7 +3997,7 @@
                 OESStandardDerivatives = function OESStandardDerivatives() { }
                 bodavm.toolsFunc.safeProto(OESStandardDerivatives, "OESStandardDerivatives");
                 info = Object.setPrototypeOf(info, OESStandardDerivatives.prototype)
-                bodavm.toolsFunc.defineProperty(OESStandardDerivatives.prototype, "FRAGMENT_SHADER_DERIVATIVE_HINT_OES", { configurable: false, enumerable: true, writable: false, value: 35723 });
+                bodavm.toolsFunc.windowdefineProperty(OESStandardDerivatives.prototype, "FRAGMENT_SHADER_DERIVATIVE_HINT_OES", { configurable: false, enumerable: true, writable: false, value: 35723 });
                 delete OESStandardDerivatives;
                 break;
             case "OES_texture_float":
@@ -3897,7 +4016,7 @@
                 OESTextureHalfFloat = function OESTextureHalfFloat() { }
                 bodavm.toolsFunc.safeProto(OESTextureHalfFloat, "OESTextureHalfFloat");
                 info = Object.setPrototypeOf(info, OESTextureHalfFloat.prototype)
-                bodavm.toolsFunc.defineProperty(OESTextureHalfFloat.prototype, "HALF_FLOAT_OES", { configurable: false, enumerable: true, writable: false, value: 36193 });
+                bodavm.toolsFunc.windowdefineProperty(OESTextureHalfFloat.prototype, "HALF_FLOAT_OES", { configurable: false, enumerable: true, writable: false, value: 36193 });
                 delete OESTextureHalfFloat;
                 break;
             case "OES_texture_half_float_linear":
@@ -3910,137 +4029,137 @@
                 OESVertexArrayObject = function OESVertexArrayObject() { }
                 bodavm.toolsFunc.safeProto(OESVertexArrayObject, "OESVertexArrayObject");
                 info = Object.setPrototypeOf(info, OESVertexArrayObject.prototype)
-                bodavm.toolsFunc.defineProperty(OESVertexArrayObject.prototype, "VERTEX_ARRAY_BINDING_OES", { configurable: false, enumerable: true, writable: false, value: 34229 });
-                bodavm.toolsFunc.defineProperty(OESVertexArrayObject.prototype, "bindVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function bindVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "bindVertexArrayOES", arguments) } });
-                bodavm.toolsFunc.defineProperty(OESVertexArrayObject.prototype, "createVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function createVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "createVertexArrayOES", arguments) } });
-                bodavm.toolsFunc.defineProperty(OESVertexArrayObject.prototype, "deleteVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function deleteVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "deleteVertexArrayOES", arguments) } });
-                bodavm.toolsFunc.defineProperty(OESVertexArrayObject.prototype, "isVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function isVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "isVertexArrayOES", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "VERTEX_ARRAY_BINDING_OES", { configurable: false, enumerable: true, writable: false, value: 34229 });
+                bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "bindVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function bindVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "bindVertexArrayOES", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "createVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function createVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "createVertexArrayOES", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "deleteVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function deleteVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "deleteVertexArrayOES", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "isVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function isVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "isVertexArrayOES", arguments) } });
                 delete OESVertexArrayObject;
                 break;
             case "WEBGL_color_buffer_float":
                 WebGLColorBufferFloat = function WebGLColorBufferFloat() { }
                 bodavm.toolsFunc.safeProto(WebGLColorBufferFloat, "WebGLColorBufferFloat");
                 info = Object.setPrototypeOf(info, WebGLColorBufferFloat.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLColorBufferFloat.prototype, "RGBA32F_EXT", { configurable: false, enumerable: true, writable: false, value: 34836 });
-                bodavm.toolsFunc.defineProperty(WebGLColorBufferFloat.prototype, "FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT", { configurable: false, enumerable: true, writable: false, value: 33297 });
-                bodavm.toolsFunc.defineProperty(WebGLColorBufferFloat.prototype, "UNSIGNED_NORMALIZED_EXT", { configurable: false, enumerable: true, writable: false, value: 35863 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLColorBufferFloat.prototype, "RGBA32F_EXT", { configurable: false, enumerable: true, writable: false, value: 34836 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLColorBufferFloat.prototype, "FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT", { configurable: false, enumerable: true, writable: false, value: 33297 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLColorBufferFloat.prototype, "UNSIGNED_NORMALIZED_EXT", { configurable: false, enumerable: true, writable: false, value: 35863 });
                 delete WebGLColorBufferFloat;
                 break;
             case "WEBGL_compressed_texture_s3tc":
                 WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { }
                 bodavm.toolsFunc.safeProto(WebGLCompressedTextureS3TC, "WebGLCompressedTextureS3TC");
                 info = Object.setPrototypeOf(info, WebGLCompressedTextureS3TC.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33776 });
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33777 });
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 33778 });
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 33779 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33776 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33777 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 33778 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 33779 });
                 delete WebGLCompressedTextureS3TC;
                 break;
             case "WEBKIT_WEBGL_compressed_texture_s3tc":
                 WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { }
                 bodavm.toolsFunc.safeProto(WebGLCompressedTextureS3TC, "WebGLCompressedTextureS3TC");
                 info = Object.setPrototypeOf(info, WebGLCompressedTextureS3TC.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33776 });
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33777 });
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 33778 });
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 33779 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33776 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33777 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 33778 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 33779 });
                 delete WebGLCompressedTextureS3TC;
                 break;
             case "WEBGL_compressed_texture_s3tc_srgb":
                 WebGLCompressedTextureS3TCsRGB = function WebGLCompressedTextureS3TCsRGB() { }
                 bodavm.toolsFunc.safeProto(WebGLCompressedTextureS3TCsRGB, "WebGLCompressedTextureS3TCsRGB");
                 info = Object.setPrototypeOf(info, WebGLCompressedTextureS3TCsRGB.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 35916 });
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 35917 });
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 35918 });
-                bodavm.toolsFunc.defineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 35919 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 35916 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 35917 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 35918 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 35919 });
                 delete WebGLCompressedTextureS3TCsRGB;
                 break;
             case "WEBGL_debug_shaders":
                 WebGLDebugShaders = function WebGLDebugShaders() { }
                 bodavm.toolsFunc.safeProto(WebGLDebugShaders, "WebGLDebugShaders");
                 info = Object.setPrototypeOf(info, WebGLDebugShaders.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLDebugShaders.prototype, "getTranslatedShaderSource", { configurable: true, enumerable: true, writable: true, value: function getTranslatedShaderSource() { return bodavm.toolsFunc.dispatch(this, WebGLDebugShaders.prototype, "WebGLDebugShaders", "getTranslatedShaderSource", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDebugShaders.prototype, "getTranslatedShaderSource", { configurable: true, enumerable: true, writable: true, value: function getTranslatedShaderSource() { return bodavm.toolsFunc.dispatch(this, WebGLDebugShaders.prototype, "WebGLDebugShaders", "getTranslatedShaderSource", arguments) } });
                 delete WebGLDebugShaders;
                 break;
             case "WEBGL_depth_texture":
                 WebGLDepthTexture = function WebGLDepthTexture() { }
                 bodavm.toolsFunc.safeProto(WebGLDepthTexture, "WebGLDepthTexture");
                 info = Object.setPrototypeOf(info, WebGLDepthTexture.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLDepthTexture.prototype, "UNSIGNED_INT_24_8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34042 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDepthTexture.prototype, "UNSIGNED_INT_24_8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34042 });
                 delete WebGLDepthTexture;
                 break;
             case "WEBKIT_WEBGL_depth_texture":
                 WebGLDepthTexture = function WebGLDepthTexture() { }
                 bodavm.toolsFunc.safeProto(WebGLDepthTexture, "WebGLDepthTexture");
                 info = Object.setPrototypeOf(info, WebGLDepthTexture.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLDepthTexture.prototype, "UNSIGNED_INT_24_8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34042 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDepthTexture.prototype, "UNSIGNED_INT_24_8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34042 });
                 delete WebGLDepthTexture;
                 break;
             case "WEBGL_draw_buffers":
                 WebGLDrawBuffers = function WebGLDrawBuffers() { }
                 bodavm.toolsFunc.safeProto(WebGLDrawBuffers, "WebGLDrawBuffers");
                 info = Object.setPrototypeOf(info, WebGLDrawBuffers.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT0_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36064 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT1_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36065 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT2_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36066 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT3_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36067 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT4_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36068 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT5_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36069 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT6_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36070 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT7_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36071 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36072 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT9_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36073 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT10_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36074 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT11_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36075 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT12_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36076 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT13_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36077 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT14_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36078 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT15_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36079 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER0_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34853 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER1_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34854 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER2_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34855 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER3_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34856 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER4_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34857 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER5_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34858 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER6_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34859 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER7_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34860 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34861 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER9_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34862 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER10_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34863 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER11_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34864 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER12_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34865 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER13_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34866 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER14_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34867 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER15_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34868 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "MAX_COLOR_ATTACHMENTS_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36063 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "MAX_DRAW_BUFFERS_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34852 });
-                bodavm.toolsFunc.defineProperty(WebGLDrawBuffers.prototype, "drawBuffersWEBGL", { configurable: true, enumerable: true, writable: true, value: function drawBuffersWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLDrawBuffers.prototype, "WebGLDrawBuffers", "drawBuffersWEBGL", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT0_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36064 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT1_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36065 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT2_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36066 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT3_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36067 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT4_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36068 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT5_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36069 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT6_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36070 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT7_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36071 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36072 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT9_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36073 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT10_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36074 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT11_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36075 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT12_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36076 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT13_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36077 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT14_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36078 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT15_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36079 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER0_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34853 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER1_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34854 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER2_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34855 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER3_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34856 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER4_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34857 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER5_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34858 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER6_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34859 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER7_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34860 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34861 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER9_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34862 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER10_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34863 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER11_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34864 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER12_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34865 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER13_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34866 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER14_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34867 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "DRAW_BUFFER15_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34868 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "MAX_COLOR_ATTACHMENTS_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36063 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "MAX_DRAW_BUFFERS_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34852 });
+                bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "drawBuffersWEBGL", { configurable: true, enumerable: true, writable: true, value: function drawBuffersWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLDrawBuffers.prototype, "WebGLDrawBuffers", "drawBuffersWEBGL", arguments) } });
                 delete WebGLDrawBuffers;
                 break;
             case "WEBGL_lose_context":
                 WebGLLoseContext = function WebGLLoseContext() { }
                 bodavm.toolsFunc.safeProto(WebGLLoseContext, "WebGLLoseContext");
                 info = Object.setPrototypeOf(info, WebGLLoseContext.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLLoseContext.prototype, "loseContext", { configurable: true, enumerable: true, writable: true, value: function loseContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "loseContext", arguments) } });
-                bodavm.toolsFunc.defineProperty(WebGLLoseContext.prototype, "restoreContext", { configurable: true, enumerable: true, writable: true, value: function restoreContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "restoreContext", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "loseContext", { configurable: true, enumerable: true, writable: true, value: function loseContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "loseContext", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "restoreContext", { configurable: true, enumerable: true, writable: true, value: function restoreContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "restoreContext", arguments) } });
                 delete WebGLLoseContext;
                 break;
             case "WEBKIT_WEBGL_lose_context":
                 WebGLLoseContext = function WebGLLoseContext() { }
                 bodavm.toolsFunc.safeProto(WebGLLoseContext, "WebGLLoseContext");
                 info = Object.setPrototypeOf(info, WebGLLoseContext.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLLoseContext.prototype, "loseContext", { configurable: true, enumerable: true, writable: true, value: function loseContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "loseContext", arguments) } });
-                bodavm.toolsFunc.defineProperty(WebGLLoseContext.prototype, "restoreContext", { configurable: true, enumerable: true, writable: true, value: function restoreContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "restoreContext", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "loseContext", { configurable: true, enumerable: true, writable: true, value: function loseContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "loseContext", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "restoreContext", { configurable: true, enumerable: true, writable: true, value: function restoreContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "restoreContext", arguments) } });
                 delete WebGLLoseContext; break;
             case "WEBGL_multi_draw":
                 WebGLMultiDraw = function WebGLMultiDraw() { }
                 bodavm.toolsFunc.safeProto(WebGLMultiDraw, "WebGLMultiDraw");
                 info = Object.setPrototypeOf(info, WebGLMultiDraw.prototype)
-                bodavm.toolsFunc.defineProperty(WebGLMultiDraw.prototype, "multiDrawArraysInstancedWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawArraysInstancedWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawArraysInstancedWEBGL", arguments) } });
-                bodavm.toolsFunc.defineProperty(WebGLMultiDraw.prototype, "multiDrawArraysWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawArraysWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawArraysWEBGL", arguments) } });
-                bodavm.toolsFunc.defineProperty(WebGLMultiDraw.prototype, "multiDrawElementsInstancedWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawElementsInstancedWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawElementsInstancedWEBGL", arguments) } });
-                bodavm.toolsFunc.defineProperty(WebGLMultiDraw.prototype, "multiDrawElementsWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawElementsWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawElementsWEBGL", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawArraysInstancedWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawArraysInstancedWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawArraysInstancedWEBGL", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawArraysWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawArraysWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawArraysWEBGL", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawElementsInstancedWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawElementsInstancedWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawElementsInstancedWEBGL", arguments) } });
+                bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawElementsWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawElementsWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawElementsWEBGL", arguments) } });
                 delete WebGLMultiDraw;
                 break;
             default:
@@ -4142,7 +4261,7 @@
         contentwindow.window = contentwindow
         contentwindow.self = contentwindow
 
-        contentwindow.__proto__ = Window.prototype
+        contentwindow.__proto__ =bodavm.memory.globalobj['Window'].prototype
         // contentwindow['top']='123'
         contentwindow = bodavm.toolsFunc.proxy(contentwindow, 'contentwindow')
         //这种补法存在问题,待完善
@@ -4184,7 +4303,7 @@
     bodavm.envFunc.CSSStyleDeclaration_getPropertyValue = function CSSStyleDeclaration_getPropertyValue() {
         let getPropertyValue = arguments[0]
 
-        console.log(`CSSStyleDeclaration_getPropertyValue `, getPropertyValue, `未完善   `);
+        console.log(`CSSStyleDeclaration_getPropertyValue `, getPropertyValue, `!!!!!!!!!未完善!!!!!!!!!!!!   `);
 
     }
     //RTCPeerConnection_onicecandidate_set
@@ -4204,7 +4323,7 @@
         if (bodavm.config.isdebug) { debugger };
         bodavm.toolsFunc.symbolProperty(successCallback)
         bodavm.toolsFunc.symbolProperty(failureCallback)
-        console.log(`RTCPeerConnection_createOffer `, `successCallback->${successCallback} `, `failureCallback->${failureCallback} `, `options->${options},未完善  `);
+        console.log(`RTCPeerConnection_createOffer `, `successCallback->${successCallback} `, `failureCallback->${failureCallback} `, `options->${options},!!!!!!!!!未完善!!!!!!!!!!!!  `);
         return new Promise((successCallback, failureCallback) => {
 
         }).then(successCallback => {

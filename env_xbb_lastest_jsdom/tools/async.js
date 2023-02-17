@@ -32,17 +32,31 @@ for (const key in HTMLElement_promise) {
 //setTimeout
 
 
+noexecListener={
+    'unload':true,
+    'popstate':true,
+    'driver-evaluate':true,
+    'webdriver-evaluate':true,
+    'contextmenu':true,
+    'selenium-evaluate':true,
+    'error':true
+}
 
 // addEventListener  比settimeout先执行
 if (bodavm.memory.asyncEvent.listener) {
     for (const key in bodavm.memory.asyncEvent.listener) {
         let event = bodavm.memory.asyncEvent.listener[key]
+        debugger
             for (let i = 0; i < event.length; i++) {
                 // debugger
+                if (noexecListener[event[i].type]){
+                    console.log(`开始执行浏览器事件==========`,`当前为事件类型为==>: ${event[i].type}  无需执行`);
+                    continue
+                }
                 console.log(`开始执行浏览器事件==========`,`当前为事件类型为==>: ${event[i].type}`);
 
                 try{
-                window.dispatchEvent(event[i])
+                window.dispatchEvent(event[i],'bobobo')
                 }catch{
                     console.log(`浏览器事件执行失败==========`,`当前为事件类型为==>: ${event[i].type}`);
 
@@ -55,27 +69,28 @@ if (bodavm.memory.asyncEvent.listener) {
     }
 }
 
-let setTimeEvent = bodavm.memory.asyncEvent.setTimeout
-console.log(`当前setTimeEvent有===>${JSON.stringify(setTimeEvent)}`)
-if (setTimeEvent) {
-    setTimeEvent.sort((a, b) => {
-        return a.timeoutID > b.timeoutID ? 1 : -1;
-    })
-    setTimeEvent.sort((a, b) => {
-        return a.delay > b.delay ? 1 : -1;
-    })
-    for (let i = 0; i < setTimeEvent.length; i++) {
-        let event = setTimeEvent[i]
-        if (event == undefined) { continue }
-        console.log(`异步回调执行settime=======================================>${JSON.stringify(event)}   callback:${event.callback}`);
-        if (event.type) {
-            event.callback()
-        } else {
-            eval(event.callback)
-        }
-    }
-}
+// let setTimeEvent = bodavm.memory.asyncEvent.setTimeout
+// console.log(`当前setTimeEvent有===>${JSON.stringify(setTimeEvent)}`)
+// if (setTimeEvent) {
+//     setTimeEvent.sort((a, b) => {
+//         return a.timeoutID > b.timeoutID ? 1 : -1;
+//     })
+//     setTimeEvent.sort((a, b) => {
+//         return a.delay > b.delay ? 1 : -1;
+//     })
+//     for (let i = 0; i < setTimeEvent.length; i++) {
+//         let event = setTimeEvent[i]
+//         if (event == undefined) { continue }
+//         console.log(`异步回调执行settime=======================================>${JSON.stringify(event)}   callback:${event.callback}`);
+//         if (event.type) {
+//             event.callback()
+//         } else {
+//             eval(event.callback)
+//         }
+//     }
+// }
 
+// 鼠标事件最后执行,模仿网站加载完成后再移动鼠标触发事件
 // //鼠标轨迹,获取实际网站的
 // let mouseEvent = [
 

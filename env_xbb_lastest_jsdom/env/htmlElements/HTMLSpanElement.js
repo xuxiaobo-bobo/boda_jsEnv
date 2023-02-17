@@ -1,5 +1,5 @@
 // HTMLSpanElement对象
-HTMLSpanElement = function HTMLSpanElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
-bodavm.toolsFunc.safeProto(HTMLSpanElement, "HTMLSpanElement");
-HTMLSpanElement.prototype.__proto__=HTMLElement.prototype;
-HTMLSpanElement.__proto__=HTMLElement;
+bodavm.memory.globalobj['HTMLSpanElement'] = function HTMLSpanElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLSpanElement'], "HTMLSpanElement");
+bodavm.memory.globalobj['HTMLSpanElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
+bodavm.memory.globalobj['HTMLSpanElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

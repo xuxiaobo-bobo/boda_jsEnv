@@ -2,6 +2,12 @@
 var mytime_stamp=Date.now()
 // debugger
 !function () {
+    window.VM2_INTERNAL_STATE_DO_NOT_USE_OR_PROGRAM_WILL_FAIL && Object.defineProperty(window, 'VM2_INTERNAL_STATE_DO_NOT_USE_OR_PROGRAM_WILL_FAIL', {
+        enumerable: false,
+        configurable: false,
+        writable: false
+
+    });
 
     if (bodavm.config.randomhook) {
         //hook
@@ -71,9 +77,8 @@ var mytime_stamp=Date.now()
     
     }
 
-    JSON.stringify.toString=function (){
-        return 'function stringify() { [native code] }'
-    }
+    bodavm.toolsFunc.safefunction(JSON.stringify,'stringify')
+
 
     JSON.parse_bo= JSON.parse
     JSON.parse=function parse(){
@@ -82,9 +87,8 @@ var mytime_stamp=Date.now()
         console.log(`JSON.parse `,` arg0:${arg0.length>20?arg0.substring(0,20)+'...':arg0}`,` arg1:${arg1}`)
         return JSON.parse_bo.apply(this,arguments)
     }
-    JSON.parse.toString=function parse(){
-        return 'function parse() { [native code] }'
-    }
+    bodavm.toolsFunc.safefunction(JSON.parse,'parse')
+
 
 
     Object.getOwnPropertyDescriptor_bo=Object.getOwnPropertyDescriptor
@@ -96,146 +100,89 @@ var mytime_stamp=Date.now()
         // if (obj ==document){debugger}
             return Object.getOwnPropertyDescriptor_bo.apply(this,arguments)
         }
-        console.log(`Object.getOwnPropertyDescriptor==> `,` obj:${obj}`,`prop:${prop}`,'检测');
+        console.log(`Object.getOwnPropertyDescriptor==> `,` obj:${obj}`,`prop:${prop}`,'!!!!检测');
         return Object.getOwnPropertyDescriptor_bo.apply(this,arguments)
     }
-    Object.getOwnPropertyDescriptor.toString=function getOwnPropertyDescriptor(){ return 'function getOwnPropertyDescriptor() { [native code] }'}
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptor,'getOwnPropertyDescriptor')
 
 
     Object.getOwnPropertyDescriptors_bo=Object.getOwnPropertyDescriptors
     Object.getOwnPropertyDescriptors=function getOwnPropertyDescriptor(){
         let arg0=arguments[0]
-        console.log(`Object.getOwnPropertyDescriptors==> `,`arg0:${arg0}`,`检测`);
+        console.log(`Object.getOwnPropertyDescriptors==> `,`arg0:${arg0}`,`!!!!检测`);
         return Object.getOwnPropertyDescriptors_bo.apply(this,arguments)
     }
-    Object.getOwnPropertyDescriptors.toString=function getOwnPropertyDescriptor(){ return 'function getOwnPropertyDescriptors() { [native code] }'}
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptors,'getOwnPropertyDescriptors')
 
     Object.getOwnPropertyNames_bo=Object.getOwnPropertyNames
     Object.getOwnPropertyNames=function getOwnPropertyDescriptor(){
         let arg0=arguments[0]
-        console.log(`Object.getOwnPropertyNames==> `,` arg0:${arg0}`,'检测');
+        console.log(`Object.getOwnPropertyNames==> `,` arg0:${arg0}`,'!!!检测');
         return Object.getOwnPropertyNames_bo.apply(this,arguments)
     }
-    Object.getOwnPropertyNames.toString=function getOwnPropertyDescriptor(){ return 'function getOwnPropertyNames() { [native code] }'}
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames,'getOwnPropertyNames')
 
 
     Object.getPrototypeOf_bo=Object.getPrototypeOf
     Object.getPrototypeOf=function (obj){
-        console.log(`Object.getPrototypeOf `,`obj:${obj}`,'检测');
+        console.log(`Object.getPrototypeOf `,`obj:${obj}`,'!!!!检测');
         return Object.getPrototypeOf_bo.apply(this,arguments)
     }
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames,'getOwnPropertyNames')
 
     Object.getOwnPropertySymbols_bo=Object.getOwnPropertySymbols
     Object.getOwnPropertySymbols=function getOwnPropertySymbols(arg){
         
-        console.log('Object.getOwnPropertySymbols ',`arg:${arg}`,'检测');
+        console.log('Object.getOwnPropertySymbols ',`arg:${arg}`,'!!!!检测');
         return Object.getOwnPropertySymbols_bo.apply(this,arguments)
     }
-    Object.getOwnPropertySymbols.toString=function (){ return 'function getOwnPropertySymbols() { [native code] }'}
-
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertySymbols,'getOwnPropertySymbols')
     //Plugin
-    bodavm.toolsPlugin.createPlugin(
-        {
-            "description": "Portable Document Format",
-            'filename': "internal-pdf-viewer",
-            'name': "PDF Viewer",
-            "mimeTypes": [
-                {
-                    "type": "application/pdf",
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-                {
-                    "type": 'text/pdf',
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-            ]
-        }
-    )
-    bodavm.toolsPlugin.createPlugin(
-        {
-            "description": "Portable Document Format",
-            'filename': "internal-pdf-viewer",
-            'name': "Chrome PDF Viewer",
-            "mimeTypes": [
-                {
-                    "type": "application/pdf",
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-                {
-                    "type": 'text/pdf',
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-            ]
-        }
-    )
-    bodavm.toolsPlugin.createPlugin(
-        {
-            "description": "Portable Document Format",
-            'filename': "internal-pdf-viewer",
-            'name': "Chromium PDF Viewer",
-            "mimeTypes": [
-                {
-                    "type": "application/pdf",
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-                {
-                    "type": 'text/pdf',
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-            ]
-        }
-    )
-    bodavm.toolsPlugin.createPlugin(
-        {
-            "description": "Portable Document Format",
-            'filename': "internal-pdf-viewer",
-            'name': "Microsoft Edge PDF Viewer",
-            "mimeTypes": [
-                {
-                    "type": "application/pdf",
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-                {
-                    "type": 'text/pdf',
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-            ]
-        }
-    )
-    bodavm.toolsPlugin.createPlugin(
-        {
-            "description": "Portable Document Format",
-            'filename': "internal-pdf-viewer",
-            'name': "WebKit built-in PDF",
-            "mimeTypes": [
-                {
-                    "type": "application/pdf",
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-                {
-                    "type": 'text/pdf',
-                    "suffixes": "pdf",
-                    "description": "Portable Document Format"
-                },
-            ]
-        }
-    )
+   
 
-    // window.VM2_INTERNAL_STATE_DO_NOT_USE_OR_PROGRAM_WILL_FAIL && Object.defineProperty(window, 'VM2_INTERNAL_STATE_DO_NOT_USE_OR_PROGRAM_WILL_FAIL', {
-    //     enumerable: false,
-    //     configurable: false,
-    //     writable: false
+    Object.defineProperty_bo=Object.defineProperty
+    Object.defineProperty=function defineProperty(){
+        // debugger
+        let target=arguments[0]
+        let prop=arguments[1]
+        let obj=arguments[2]
+        let myfilter=arguments[3]
+        if (myfilter =='bobo'){return Object.defineProperty_bo.call(this,target,prop,obj)}
+        let res=Object.defineProperty_bo.call(this,target,prop,obj)
+        console.log(`Object.defineProperty `,`target ->${(target.toString())}->`,`prop->${(prop.toString())}->`,`obj ->${(obj.toString())}->`,`res ->${res.toString()}`,`!!!!!检测`)
 
-    // });
+        return res
+    }
+    bodavm.toolsFunc.safefunction(Object.defineProperty,'defineProperty')
+
+    Object.values_bo=Object.values
+    Object.values=function values(){
+        let res=Object.defineProperty_bo.apply(this,arguments)
+        console.log(`Object.values `,`ress ->${res}   !!!!!!!!!!检测`);
+        return res
+    }
+    bodavm.toolsFunc.safefunction(Object.values,'values')
+ 
+ 
+    // Object.prototype.hasOwnProperty_bo=Object.prototype.hasOwnProperty
+    // Object.prototype.hasOwnProperty=function (){
+    //     debugger
+    //     let arg=arguments[0]
+    //     let res=Object.prototype.hasOwnProperty_bo.call(this,arg)
+    //     console.log(`Object.prototype.hasOwnProperty `,`arg ->${arg}`,`res ->${res}  !!!!!!检测!!!!`)
+    //     return res
+    // }
+
+    // bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
+
+    Object.entries_bo=Object.entries
+    Object.entries=function (){
+        let obj=arguments[0]
+        let res=Object.entries_bo.call(this,obj)
+        console.log(`Object.entries `,`obj ->${obj}`,`res ->${res}  !!!!!!检测!!!!`)
+        return res
+    }
+    bodavm.toolsFunc.safefunction( Object.entries,'entries')
 
 
 }();

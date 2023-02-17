@@ -7,7 +7,7 @@ const path = require("path");
 // const bodomparse = require('xmldom').DOMParser
 const {createCanvas}=require('canvas')
 // const CryptoJS = require("crypto-js");  // npm install crypto-js
-
+const express=require('express')
 let run_path=path.resolve(__dirname, './run/');
 let config_path = path.resolve(__dirname, './config/');
 let tools_path=path.resolve(__dirname, './tools/');
@@ -20,8 +20,8 @@ fs.writeFileSync(`${run_path}/log.txt`,"")
 let bohtml_=fs.readFileSync('D:\\My_Dir\\env_xbb_lastest_jsdom\\run\\run.html').toString('utf-8')
 const dom = new JSDOM(bohtml_, 
     {
-        url: "http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
-        referrer: "http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
+        url: "https://sthjt.hubei.gov.cn/fbjd/zc/zcwj/sthjt/ehs/202302/t20230216_4550698.shtml",
+        referrer: "https://sthjt.hubei.gov.cn/",
         contentType: "text/html",
         includeNodeLocations: true,
         pretendToBeVisual: true,
@@ -57,8 +57,8 @@ const log_code=fs.readFileSync(`${tools_path}/printLog.js`)
 const globadlThis=fs.readFileSync(`${tools_path}/globalThis.js`)
 // const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globalInit}${userInit}${changeDom}${proxyObj}${jscode}${asyncCode}`+"\r\n"+"debugger";
 const last_deal=fs.readFileSync(`${run_path}/lastDeal.js`)
-const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globadlThis}${globalInit}${userInit}${proxyObj};;try{;;${jscode}${asyncCode};console.table(myloglist);debugger;;}catch{${last_deal}};;`;
-// const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globadlThis}${globalInit}${userInit}${proxyObj}${jscode}${asyncCode};console.table(myloglist);`+"\r\n"+"debugger";
+// const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${globalInit}${proxyObj};;;;debugger;try{;${jscode}${asyncCode}}catch(e){console.log(e.message,e.stack);}finally{;${last_deal}};get_cookie`;
+const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${globalInit}${proxyObj};;;;debugger;;${jscode}${asyncCode};${last_deal};get_cookie`;
 
 
 bodaobj={
@@ -94,13 +94,28 @@ vm.setGlobal('boallundefined',boallundefined)
 //     vm.setGlobal('createwindow2',window)
 
 // }
+
+
+
+
+
+
+
 const script = new VMScript(codeTest, "./debugJS.js")
 
-const result = vm.run(script);
+// const result = vm.run(script);
+var getcookieapi=vm.run(script)
 
+// const app = express()
+// app.get('./ip', async function (req, res) {
+//     val = getcookieapi()
+//     res.send(val)
+// })
+
+// app.listen(3000)
 //输出结果
-debugger
-console.log(result)
+// debugger
+console.log(getcookieapi())
 
 //
 fs.writeFileSync(`${run_path}/output.js`,codeTest)

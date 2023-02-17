@@ -1,10 +1,10 @@
 // MediaQueryList对象
-MediaQueryList = function MediaQueryList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
-bodavm.toolsFunc.safeProto(MediaQueryList, "MediaQueryList");
-MediaQueryList.prototype.__proto__=EventTarget.prototype;
-MediaQueryList.__proto__=EventTarget;
-bodavm.toolsFunc.defineProperty(MediaQueryList.prototype, "media", {configurable:true, enumerable:true, get:function media (){return bodavm.toolsFunc.dispatch(this, MediaQueryList.prototype, "MediaQueryList", "media_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(MediaQueryList.prototype, "matches", {configurable:true, enumerable:true, get:function matches (){return bodavm.toolsFunc.dispatch(this, MediaQueryList.prototype, "MediaQueryList", "matches_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(MediaQueryList.prototype, "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, MediaQueryList.prototype, "MediaQueryList", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, MediaQueryList.prototype, "MediaQueryList", "onchange_set", arguments)}});
-bodavm.toolsFunc.defineProperty(MediaQueryList.prototype, "addListener", {configurable:true, enumerable:true, writable:true, value:function addListener (){return bodavm.toolsFunc.dispatch(this, MediaQueryList.prototype, "MediaQueryList", "addListener", arguments)}});
-bodavm.toolsFunc.defineProperty(MediaQueryList.prototype, "removeListener", {configurable:true, enumerable:true, writable:true, value:function removeListener (){return bodavm.toolsFunc.dispatch(this, MediaQueryList.prototype, "MediaQueryList", "removeListener", arguments)}});
+bodavm.memory.globalobj['MediaQueryList'] = function MediaQueryList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MediaQueryList'], "MediaQueryList");
+bodavm.memory.globalobj['MediaQueryList'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
+bodavm.memory.globalobj['MediaQueryList'].__proto__=bodavm.memory.globalobj['EventTarget'];
+bodavm.toolsFunc.defineProperty('MediaQueryList', "media", {configurable:true, enumerable:true, get:function media (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaQueryList'].prototype, "MediaQueryList", "media_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('MediaQueryList', "matches", {configurable:true, enumerable:true, get:function matches (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaQueryList'].prototype, "MediaQueryList", "matches_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('MediaQueryList', "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaQueryList'].prototype, "MediaQueryList", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaQueryList'].prototype, "MediaQueryList", "onchange_set", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('MediaQueryList', "addListener", {configurable:true, enumerable:true, writable:true, value:function addListener (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaQueryList'].prototype, "MediaQueryList", "addListener", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('MediaQueryList', "removeListener", {configurable:true, enumerable:true, writable:true, value:function removeListener (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaQueryList'].prototype, "MediaQueryList", "removeListener", arguments)}},'prototype');

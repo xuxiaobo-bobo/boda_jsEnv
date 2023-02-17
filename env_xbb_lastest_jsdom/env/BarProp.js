@@ -1,18 +1,21 @@
 // BarProp对象
-BarProp = function BarProp(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
-bodavm.toolsFunc.safeProto(BarProp, "BarProp");
-bodavm.toolsFunc.defineProperty(BarProp.prototype, "visible", {configurable:true, enumerable:true, get:function visible (){return bodavm.toolsFunc.dispatch(this, BarProp.prototype, "BarProp", "visible_get", arguments)}, set:undefined});
+bodavm.memory.globalobj['BarProp'] = function BarProp(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BarProp'], "BarProp");
+bodavm.toolsFunc.defineProperty('BarProp', "visible", {configurable:true, enumerable:true, get:function visible (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BarProp'].prototype, "BarProp", "visible_get", arguments)}, set:undefined},'prototype');
+
 // locationbar对象
-var locationbar = {}
-locationbar.__proto__=BarProp.prototype;
+bodavm.memory.globalobj['locationbar'] = {}
+bodavm.memory.globalobj['locationbar'].__proto__=bodavm.memory.globalobj['BarProp'].prototype;
 
 
-var menubar={}
-menubar.__proto__= BarProp.prototype;
+bodavm.memory.globalobj['menubar'] ={}
+bodavm.memory.globalobj['menubar'].__proto__= bodavm.memory.globalobj['BarProp'].prototype;
 
-var statusbar={}
-statusbar.__proto__=BarProp.prototype
+bodavm.memory.globalobj['statusbar']  ={}
+bodavm.memory.globalobj['statusbar'].__proto__=bodavm.memory.globalobj['BarProp'].prototype
 
 
-var toolbar={}
-toolbar.__proto__=BarProp.prototype
+bodavm.memory.globalobj['toolbar']  ={}
+
+bodavm.memory.globalobj['toolbar'].__proto__=bodavm.memory.globalobj['BarProp'].prototype
+

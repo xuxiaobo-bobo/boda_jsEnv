@@ -1,3 +1,3 @@
 // WebGLProgram对象
-WebGLProgram = function WebGLProgram(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
-bodavm.toolsFunc.safeProto(WebGLProgram, "WebGLProgram");
+bodavm.memory.globalobj['WebGLProgram'] = function WebGLProgram(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['WebGLProgram'], "WebGLProgram");

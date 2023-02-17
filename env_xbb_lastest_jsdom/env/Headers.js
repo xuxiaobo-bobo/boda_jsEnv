@@ -1,12 +1,12 @@
 // Headers对象
-Headers = function Headers(){}
-bodavm.toolsFunc.safeProto(Headers, "Headers");
-bodavm.toolsFunc.defineProperty(Headers.prototype, "append", {configurable:true, enumerable:true, writable:true, value:function append (){return bodavm.toolsFunc.dispatch(this, Headers.prototype, "Headers", "append", arguments)}});
-bodavm.toolsFunc.defineProperty(Headers.prototype, "delete", {configurable:true, enumerable:true, writable:true, value:function  (){return bodavm.toolsFunc.dispatch(this, Headers.prototype, "Headers", "delete", arguments)}});
-bodavm.toolsFunc.defineProperty(Headers.prototype, "get", {configurable:true, enumerable:true, writable:true, value:function get (){return bodavm.toolsFunc.dispatch(this, Headers.prototype, "Headers", "get", arguments)}});
-bodavm.toolsFunc.defineProperty(Headers.prototype, "has", {configurable:true, enumerable:true, writable:true, value:function has (){return bodavm.toolsFunc.dispatch(this, Headers.prototype, "Headers", "has", arguments)}});
-bodavm.toolsFunc.defineProperty(Headers.prototype, "set", {configurable:true, enumerable:true, writable:true, value:function set (){return bodavm.toolsFunc.dispatch(this, Headers.prototype, "Headers", "set", arguments)}});
-bodavm.toolsFunc.defineProperty(Headers.prototype, "entries", {configurable:true, enumerable:true, writable:true, value:function entries (){return bodavm.toolsFunc.dispatch(this, Headers.prototype, "Headers", "entries", arguments)}});
-bodavm.toolsFunc.defineProperty(Headers.prototype, "forEach", {configurable:true, enumerable:true, writable:true, value:function forEach (){return bodavm.toolsFunc.dispatch(this, Headers.prototype, "Headers", "forEach", arguments)}});
-bodavm.toolsFunc.defineProperty(Headers.prototype, "keys", {configurable:true, enumerable:true, writable:true, value:function keys (){return bodavm.toolsFunc.dispatch(this, Headers.prototype, "Headers", "keys", arguments)}});
-bodavm.toolsFunc.defineProperty(Headers.prototype, "values", {configurable:true, enumerable:true, writable:true, value:function values (){return bodavm.toolsFunc.dispatch(this, Headers.prototype, "Headers", "values", arguments)}});
+bodavm.memory.globalobj['Headers'] = function Headers(){}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Headers'], "Headers");
+bodavm.toolsFunc.defineProperty('Headers', "append", {configurable:true, enumerable:true, writable:true, value:function append (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "append", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('Headers', "delete", {configurable:true, enumerable:true, writable:true, value:function  (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "delete", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('Headers', "get", {configurable:true, enumerable:true, writable:true, value:function get (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "get", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('Headers', "has", {configurable:true, enumerable:true, writable:true, value:function has (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "has", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('Headers', "set", {configurable:true, enumerable:true, writable:true, value:function set (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "set", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('Headers', "entries", {configurable:true, enumerable:true, writable:true, value:function entries (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "entries", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('Headers', "forEach", {configurable:true, enumerable:true, writable:true, value:function forEach (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "forEach", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('Headers', "keys", {configurable:true, enumerable:true, writable:true, value:function keys (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "keys", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('Headers', "values", {configurable:true, enumerable:true, writable:true, value:function values (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "values", arguments)}},'prototype');

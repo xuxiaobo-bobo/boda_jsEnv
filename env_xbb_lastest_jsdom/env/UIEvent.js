@@ -1,15 +1,16 @@
 //UIEvent对象
-UIEvent = function UIEvent() {
+bodavm.memory.globalobj['UIEvent']  = function UIEvent() {
     if (arguments.length < 1) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'UIEvent': 1 argument required, but only 0 present.")
     }
 
 }
-bodavm.toolsFunc.safeProto(UIEvent, "UIEvent");
-UIEvent.prototype.__proto__ = Event.prototype;
-UIEvent.__proto__ = Event;
-bodavm.toolsFunc.defineProperty(UIEvent.prototype, "view", { configurable: true, enumerable: true, get: function view() { return bodavm.toolsFunc.dispatch(this, UIEvent.prototype, "UIEvent", "view_get", arguments) }, set: undefined });
-bodavm.toolsFunc.defineProperty(UIEvent.prototype, "detail", { configurable: true, enumerable: true, get: function detail() { return bodavm.toolsFunc.dispatch(this, UIEvent.prototype, "UIEvent", "detail_get", arguments) }, set: undefined });
-bodavm.toolsFunc.defineProperty(UIEvent.prototype, "sourceCapabilities", { configurable: true, enumerable: true, get: function sourceCapabilities() { return bodavm.toolsFunc.dispatch(this, UIEvent.prototype, "UIEvent", "sourceCapabilities_get", arguments) }, set: undefined });
-bodavm.toolsFunc.defineProperty(UIEvent.prototype, "which", { configurable: true, enumerable: true, get: function which() { return bodavm.toolsFunc.dispatch(this, UIEvent.prototype, "UIEvent", "which_get", arguments) }, set: undefined });
-bodavm.toolsFunc.defineProperty(UIEvent.prototype, "initUIEvent", { configurable: true, enumerable: true, writable: true, value: function initUIEvent() { return bodavm.toolsFunc.dispatch(this, UIEvent.prototype, "UIEvent", "initUIEvent", arguments) } });
+// UIEvent对象
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['UIEvent'], "UIEvent");
+bodavm.memory.globalobj['UIEvent'].prototype.__proto__=bodavm.memory.globalobj['Event'].prototype;
+bodavm.memory.globalobj['UIEvent'].__proto__=bodavm.memory.globalobj['Event'];
+bodavm.toolsFunc.defineProperty('UIEvent', "view", {configurable:true, enumerable:true, get:function view (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['UIEvent'].prototype, "UIEvent", "view_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('UIEvent', "detail", {configurable:true, enumerable:true, get:function detail (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['UIEvent'].prototype, "UIEvent", "detail_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('UIEvent', "sourceCapabilities", {configurable:true, enumerable:true, get:function sourceCapabilities (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['UIEvent'].prototype, "UIEvent", "sourceCapabilities_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('UIEvent', "which", {configurable:true, enumerable:true, get:function which (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['UIEvent'].prototype, "UIEvent", "which_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('UIEvent', "initUIEvent", {configurable:true, enumerable:true, writable:true, value:function initUIEvent (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['UIEvent'].prototype, "UIEvent", "initUIEvent", arguments)}},'prototype');

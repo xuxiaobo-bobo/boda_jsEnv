@@ -54,8 +54,6 @@
         return console.log_.apply(this, arguments)
     };
    
-    console.log.toString = function log(){
-        return 'function log() { [native code] }';
-    }
+    bodavm.toolsFunc.safefunction(console.log,'log')
 }();
 

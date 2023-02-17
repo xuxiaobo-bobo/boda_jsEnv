@@ -1,13 +1,13 @@
 // CookieStore对象
-CookieStore = function CookieStore(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
-bodavm.toolsFunc.safeProto(CookieStore, "CookieStore");
-CookieStore.prototype.__proto__=EventTarget.prototype;
-CookieStore.__proto__=EventTarget;
-bodavm.toolsFunc.defineProperty(CookieStore.prototype, "delete", {configurable:true, enumerable:true, writable:true, value:function  (){return bodavm.toolsFunc.dispatch(this, CookieStore.prototype, "CookieStore", "delete", arguments)}});
-bodavm.toolsFunc.defineProperty(CookieStore.prototype, "get", {configurable:true, enumerable:true, writable:true, value:function get (){return bodavm.toolsFunc.dispatch(this, CookieStore.prototype, "CookieStore", "get", arguments)}});
-bodavm.toolsFunc.defineProperty(CookieStore.prototype, "getAll", {configurable:true, enumerable:true, writable:true, value:function getAll (){return bodavm.toolsFunc.dispatch(this, CookieStore.prototype, "CookieStore", "getAll", arguments)}});
-bodavm.toolsFunc.defineProperty(CookieStore.prototype, "set", {configurable:true, enumerable:true, writable:true, value:function set (){return bodavm.toolsFunc.dispatch(this, CookieStore.prototype, "CookieStore", "set", arguments)}});
-bodavm.toolsFunc.defineProperty(CookieStore.prototype, "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, CookieStore.prototype, "CookieStore", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, CookieStore.prototype, "CookieStore", "onchange_set", arguments)}});
-// cookieStore对象
-var cookieStore = {}
-cookieStore.__proto__=CookieStore.prototype;
+bodavm.memory.globalobj['CookieStore'] = function CookieStore(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CookieStore'], "CookieStore");
+bodavm.memory.globalobj['CookieStore'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
+bodavm.memory.globalobj['CookieStore'].__proto__=bodavm.memory.globalobj['EventTarget'];
+bodavm.toolsFunc.defineProperty('CookieStore', "delete", {configurable:true, enumerable:true, writable:true, value:function  (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CookieStore'].prototype, "CookieStore", "delete", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('CookieStore', "get", {configurable:true, enumerable:true, writable:true, value:function get (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CookieStore'].prototype, "CookieStore", "get", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('CookieStore', "getAll", {configurable:true, enumerable:true, writable:true, value:function getAll (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CookieStore'].prototype, "CookieStore", "getAll", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('CookieStore', "set", {configurable:true, enumerable:true, writable:true, value:function set (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CookieStore'].prototype, "CookieStore", "set", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('CookieStore', "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CookieStore'].prototype, "CookieStore", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CookieStore'].prototype, "CookieStore", "onchange_set", arguments)}},'prototype');
+
+bodavm.memory.globalobj[ 'cookieStore']  = {}
+bodavm.memory.globalobj[ 'cookieStore'].__proto__=bodavm.memory.globalobj['CookieStore'].prototype;

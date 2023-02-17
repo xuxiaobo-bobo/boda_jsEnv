@@ -1,12 +1,12 @@
 
     function get_cookie(){
     
-        a={
+        let res={
             // b:new XMLHttpRequest().open(''),
-            c:document.cookie
+            cookie:document.cookie
         }
         
-        return a
+        return res
     }
-    get_cookie()
+    
 
