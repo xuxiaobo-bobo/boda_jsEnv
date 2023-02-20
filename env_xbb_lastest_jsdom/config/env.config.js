@@ -66,6 +66,7 @@ function getCode() {
     code += getFile("MediaQueryList")
     code += getFile("CSSRuleList")
     code += getFile('Attr')
+    code += getFile('Option')
     code += getFile('Navigation')
     code += getFile("MediaStream")
     code += getFile("TrustedTypePolicyFactory")

@@ -1,5 +1,8 @@
 //Event对象
 bodavm.memory.globalobj['Event']=function Event(){
+    if (!(this instanceof Event)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Event': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
     if (arguments.length <1){
         return bodavm.toolsFunc.throwError("TypeError","Failed to construct 'Event': 1 argument required, but only 0 present.")
     }

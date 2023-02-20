@@ -8,6 +8,7 @@ bodavm.memory.globalobj['HTMLDocument'].__proto__=bodavm.memory.globalobj['Docum
 
 
 // document对象
-bodavm.memory.globalobj['document'] = {}
+bodavm.memory.globalobj['document'] = new bodavm.memory.globalobj['Document']()
 bodavm.memory.globalobj['document'].__proto__=bodavm.memory.globalobj['HTMLDocument'].prototype;
 bodavm.toolsFunc.defineProperty('document', "location", {configurable:false, enumerable:true, get:function location (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['document'], "document", "location_get", arguments)}, set:function location (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['document'], "document", "location_set", arguments)}});
+

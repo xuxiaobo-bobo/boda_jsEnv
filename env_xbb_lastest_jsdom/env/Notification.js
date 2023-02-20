@@ -1,5 +1,12 @@
 // Notification对象
-bodavm.memory.globalobj['Notification'] = function Notification(){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Notification': 1 argument required, but only 0 present.")}
+bodavm.memory.globalobj['Notification'] = function Notification(){
+    if (!(this instanceof Notification)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Notification': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+    if (arguments.length <1){
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Notification': 1 argument required, but only 0 present.")}
+
+    }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Notification'], "Notification");
 bodavm.memory.globalobj['Notification'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Notification'].__proto__=bodavm.memory.globalobj['EventTarget'];

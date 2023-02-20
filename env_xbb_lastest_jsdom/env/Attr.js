@@ -1,5 +1,7 @@
 // Attr对象
-bodavm.memory.globalobj['Attr'] = function Attr(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Attr'] = function Attr(){
+    
+    return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Attr'], "Attr");
 bodavm.memory.globalobj['Attr'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['Attr'].__proto__=bodavm.memory.globalobj['Node'];

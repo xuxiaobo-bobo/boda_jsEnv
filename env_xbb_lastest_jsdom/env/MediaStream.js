@@ -1,5 +1,10 @@
 // MediaStream对象
-bodavm.memory.globalobj['MediaStream'] = function MediaStream(){}
+bodavm.memory.globalobj['MediaStream'] = function MediaStream(){
+    if (!(this instanceof MediaStream)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaStream   ': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MediaStream'], "MediaStream");
 bodavm.memory.globalobj['MediaStream'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['MediaStream'].__proto__=bodavm.memory.globalobj['EventTarget'];

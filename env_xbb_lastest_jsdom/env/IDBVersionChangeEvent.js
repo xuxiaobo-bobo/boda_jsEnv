@@ -1,5 +1,12 @@
 // IDBVersionChangeEvent对象
-bodavm.memory.globalobj['IDBVersionChangeEvent'] = function IDBVersionChangeEvent(){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'IDBVersionChangeEvent': 1 argument required, but only 0 present.")}
+bodavm.memory.globalobj['IDBVersionChangeEvent'] = function IDBVersionChangeEvent(){
+    if (!(this instanceof IDBVersionChangeEvent)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'IDBVersionChangeEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+    if (arguments.length <1){
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'IDBVersionChangeEvent': 1 argument required, but only 0 present.")}
+
+    }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBVersionChangeEvent'], "IDBVersionChangeEvent");
 bodavm.memory.globalobj['IDBVersionChangeEvent'].prototype.__proto__=bodavm.memory.globalobj['Event'].prototype;
 bodavm.memory.globalobj['IDBVersionChangeEvent'].__proto__=bodavm.memory.globalobj['Event'];

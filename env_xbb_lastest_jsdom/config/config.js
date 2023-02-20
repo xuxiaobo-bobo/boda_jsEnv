@@ -28,7 +28,7 @@ bodavm.config.proxy = false; //是否代理
 //网站为r4或者r5 设置为true 否则请关闭
 bodavm.config.isrs = true  //判断当前网站是不是瑞数
 //网站为r6 设置为true body设置为0 否则请把true改为false
-bodavm.memory.rs6=true
+bodavm.memory.rs6=false
 bodavm.memory.rs6_body=0
 
 
@@ -206,6 +206,8 @@ bodavm.memory.window={
     status:"",
     onmessage:null,
     onbeforeunload:function _$fx(_$jL){_$eA?(_$jN(new _$d0(_$hn[58],{},_$hf(_$jL[_$_8[73]]))),_$eu()):0;},
+    closed:false,
+    isSecureContext:true
 
 };
 bodavm.memory.localStorage={}

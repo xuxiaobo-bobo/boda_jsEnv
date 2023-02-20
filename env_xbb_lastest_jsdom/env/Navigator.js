@@ -73,3 +73,5 @@ bodavm.memory.globalobj[ 'navigator'].__proto__=bodavm.memory.globalobj['Navigat
 // clientInformation对象
 bodavm.memory.globalobj[ 'clientInformation'] = {}
 bodavm.memory.globalobj[ 'clientInformation'] .__proto__=bodavm.memory.globalobj['Navigator'].prototype;
+
+

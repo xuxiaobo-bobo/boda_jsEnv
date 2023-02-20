@@ -1,5 +1,9 @@
 // DocumentFragment对象
-bodavm.memory.globalobj['DocumentFragment'] = function DocumentFragment(){}
+bodavm.memory.globalobj['DocumentFragment'] = function DocumentFragment(){
+    if (!(this instanceof Document)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DocumentFragment': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['DocumentFragment'], "DocumentFragment");
 bodavm.memory.globalobj['DocumentFragment'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['DocumentFragment'].__proto__=bodavm.memory.globalobj['Node'];

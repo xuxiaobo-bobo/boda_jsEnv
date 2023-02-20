@@ -1,5 +1,8 @@
 //UIEvent对象
 bodavm.memory.globalobj['UIEvent']  = function UIEvent() {
+    if (!(this instanceof UIEvent)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'UIEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    }; 
     if (arguments.length < 1) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'UIEvent': 1 argument required, but only 0 present.")
     }

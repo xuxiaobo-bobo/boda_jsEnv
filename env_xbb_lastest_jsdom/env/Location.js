@@ -23,4 +23,3 @@ bodavm.toolsFunc.defineProperty('location', "reload", {configurable:false, enume
 bodavm.toolsFunc.defineProperty('location', "replace", {configurable:false, enumerable:true, writable:false, value:function replace (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['location'], "location", "replace", arguments)}});
 bodavm.toolsFunc.defineProperty('location', "toString", {configurable:false, enumerable:true, writable:false, value:function toString (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['location'], "location", "toString", arguments)}});
 
-

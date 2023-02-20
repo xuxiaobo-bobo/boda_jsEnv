@@ -14,4 +14,3 @@ bodavm.memory.globalobj[ 'localStorage'].__proto__=bodavm.memory.globalobj['Stor
 bodavm.memory.globalobj[ 'sessionStorage']= {}
 bodavm.memory.globalobj[ 'sessionStorage'].__proto__=bodavm.memory.globalobj['Storage'] .prototype;
 // debugger;
-

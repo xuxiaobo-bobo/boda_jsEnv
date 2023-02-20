@@ -1,7 +1,9 @@
 // MouseEvent对象
 bodavm.memory.globalobj['MouseEvent'] = function MouseEvent() {
-
-    if (arguments.length < 1) {
+    if (!(this instanceof MouseEvent)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MouseEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+    if (arguments.length < 1) { 
 
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MouseEvent': 1 argument required, but only 0 present.")
     }

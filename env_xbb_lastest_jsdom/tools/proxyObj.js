@@ -3,14 +3,18 @@ window=bodavm.toolsFunc.proxy(window,"window")
 // CSS=bodavm.toolsFunc.proxy(CSS,"CSS");
 // performance=bodavm.toolsFunc.proxy(performance,'performance')
 // // Storage=bodavm.toolsFunc.proxy(Storage,Storage)
+
 // database=bodavm.toolsFunc.proxy(database,'database')
 // navigation=bodavm.toolsFunc.proxy(navigation,'navigation')
 // webkitStorageInfo=bodavm.toolsFunc.proxy(webkitStorageInfo,'webkitStorageInfo')
 // speechSynthesis=bodavm.toolsFunc.proxy(speechSynthesis,'speechSynthesis')
+
 // localStorage=bodavm.toolsFunc.proxy(localStorage,"localStorage")
 // sessionStorage=bodavm.toolsFunc.proxy(sessionStorage,"sessionStorage")
+
 // location=bodavm.toolsFunc.proxy(location,"location")
 // customElements=bodavm.toolsFunc.proxy(customElements,'customElements')
+
 // document=bodavm.toolsFunc.proxy(document,"document")
 // menubar=bodavm.toolsFunc.proxy(menubar,'menubar')
 // toolbar=bodavm.toolsFunc.proxy(toolbar,'toolbar')

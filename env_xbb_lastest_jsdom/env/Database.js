@@ -10,3 +10,4 @@ bodavm.toolsFunc.defineProperty('Database' , "changeVersion", { configurable: tr
 
 bodavm.memory.globalobj[ 'database']  = {}
 bodavm.memory.globalobj[ 'database'] .__proto__ = bodavm.memory.globalobj['Database'] .prototype
+

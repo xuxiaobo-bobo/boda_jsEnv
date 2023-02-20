@@ -1,5 +1,9 @@
 // Path2D对象
-bodavm.memory.globalobj['Path2D'] = function Path2D(){}
+bodavm.memory.globalobj['Path2D'] = function Path2D(){
+    if (!(this instanceof Path2D)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Path2D': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };   
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Path2D'], "Path2D");
 bodavm.toolsFunc.defineProperty('Path2D', "addPath", {configurable:true, enumerable:true, writable:true, value:function addPath (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Path2D'].prototype, "Path2D", "addPath", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Path2D', "roundRect", {configurable:true, enumerable:true, writable:true, value:function roundRect (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Path2D'].prototype, "Path2D", "roundRect", arguments)}},'prototype');

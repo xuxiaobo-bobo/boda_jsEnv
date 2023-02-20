@@ -6,3 +6,5 @@ bodavm.toolsFunc.defineProperty('External', "IsSearchProviderInstalled", {config
 
 bodavm.memory.globalobj[ 'external']   = {}
 bodavm.memory.globalobj[ 'external'].__proto__=bodavm.memory.globalobj['External'].prototype;
+
+

@@ -1,5 +1,10 @@
 // RTCPeerConnection对象
-bodavm.memory.globalobj['RTCPeerConnection'] = function RTCPeerConnection(){}
+bodavm.memory.globalobj['RTCPeerConnection'] = function RTCPeerConnection(){
+
+    if (!(this instanceof RTCPeerConnection)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'RTCPeerConnection': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    }; 
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['RTCPeerConnection'], "RTCPeerConnection");
 bodavm.memory.globalobj['RTCPeerConnection'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['RTCPeerConnection'].__proto__=bodavm.memory.globalobj['EventTarget'];

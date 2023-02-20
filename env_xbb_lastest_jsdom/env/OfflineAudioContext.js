@@ -1,6 +1,13 @@
 
 // OfflineAudioContext对象
-bodavm.memory.globalobj['OfflineAudioContext'] = function OfflineAudioContext(){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'OfflineAudioContext': 1 argument required, but only 0 present.")}
+bodavm.memory.globalobj['OfflineAudioContext'] = function OfflineAudioContext(){
+    if (!(this instanceof OfflineAudioContext)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'OfflineAudioContext': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+    if (arguments.length <1){
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'OfflineAudioContext': 1 argument required, but only 0 present.")}
+
+    }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['OfflineAudioContext'], "OfflineAudioContext");
 bodavm.memory.globalobj['OfflineAudioContext'].prototype.__proto__=bodavm.memory.globalobj['BaseAudioContext'].prototype;
 bodavm.memory.globalobj['OfflineAudioContext'].__proto__=bodavm.memory.globalobj['BaseAudioContext'];

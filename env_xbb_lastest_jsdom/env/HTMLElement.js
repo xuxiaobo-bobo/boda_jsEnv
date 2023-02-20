@@ -1,5 +1,10 @@
 // HTMLElement对象
-bodavm.memory.globalobj['HTMLElement'] = function HTMLElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLElement'] = function HTMLElement(){
+    if (!(this instanceof HTMLElement)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'HTMLElement': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+    
+    return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLElement'], "HTMLElement");
 bodavm.memory.globalobj['HTMLElement'].prototype.__proto__=bodavm.memory.globalobj['Element'].prototype;
 bodavm.memory.globalobj['HTMLElement'].__proto__=bodavm.memory.globalobj['Element'];

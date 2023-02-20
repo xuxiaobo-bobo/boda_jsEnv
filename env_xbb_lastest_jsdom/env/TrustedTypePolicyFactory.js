@@ -16,4 +16,3 @@ bodavm.toolsFunc.defineProperty('TrustedTypePolicyFactory', "isScriptURL", {conf
 
 bodavm.memory.globalobj[ 'trustedTypes'] = {}
 bodavm.memory.globalobj[ 'trustedTypes'].__proto__ = bodavm.memory.globalobj['TrustedTypePolicyFactory'] .prototype
-

@@ -100,8 +100,9 @@ var mytime_stamp=Date.now()
         // if (obj ==document){debugger}
             return Object.getOwnPropertyDescriptor_bo.apply(this,arguments)
         }
-        console.log(`Object.getOwnPropertyDescriptor==> `,` obj:${obj}`,`prop:${prop}`,'!!!!检测');
-        return Object.getOwnPropertyDescriptor_bo.apply(this,arguments)
+        desc_res=Object.getOwnPropertyDescriptor_bo.apply(this,arguments)
+        console.log(`Object.getOwnPropertyDescriptor==> `,` obj:${obj}`,`prop:${prop}`,`res ->${desc_res} !!!!检测`);
+        return desc_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptor,'getOwnPropertyDescriptor')
 
@@ -109,16 +110,19 @@ var mytime_stamp=Date.now()
     Object.getOwnPropertyDescriptors_bo=Object.getOwnPropertyDescriptors
     Object.getOwnPropertyDescriptors=function getOwnPropertyDescriptor(){
         let arg0=arguments[0]
-        console.log(`Object.getOwnPropertyDescriptors==> `,`arg0:${arg0}`,`!!!!检测`);
-        return Object.getOwnPropertyDescriptors_bo.apply(this,arguments)
+        debugger
+        descs_res=Object.getOwnPropertyDescriptors_bo.apply(this,arguments)
+        console.log(`Object.getOwnPropertyDescriptors==> `,`arg0:${arg0}`,`res ->${descs_res} !!!!检测`);
+        return descs_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptors,'getOwnPropertyDescriptors')
 
     Object.getOwnPropertyNames_bo=Object.getOwnPropertyNames
     Object.getOwnPropertyNames=function getOwnPropertyDescriptor(){
         let arg0=arguments[0]
-        console.log(`Object.getOwnPropertyNames==> `,` arg0:${arg0}`,'!!!检测');
-        return Object.getOwnPropertyNames_bo.apply(this,arguments)
+        let name_res=Object.getOwnPropertyNames_bo.apply(this,arguments)
+        console.log(`Object.getOwnPropertyNames==> `,` arg0:${arg0}`,`name_res->${name_res} !!!检测`);
+        return name_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames,'getOwnPropertyNames')
 
@@ -132,9 +136,9 @@ var mytime_stamp=Date.now()
 
     Object.getOwnPropertySymbols_bo=Object.getOwnPropertySymbols
     Object.getOwnPropertySymbols=function getOwnPropertySymbols(arg){
-        
-        console.log('Object.getOwnPropertySymbols ',`arg:${arg}`,'!!!!检测');
-        return Object.getOwnPropertySymbols_bo.apply(this,arguments)
+        let symbols_res=Object.getOwnPropertySymbols_bo.apply(this,arguments)
+        console.log('Object.getOwnPropertySymbols ',`arg:${arg}`,`symbols_res ->${symbols_res} !!!!检测`);
+        return symbols_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertySymbols,'getOwnPropertySymbols')
     //Plugin

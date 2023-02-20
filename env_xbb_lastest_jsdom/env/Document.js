@@ -1,5 +1,9 @@
 // Document对象
-bodavm.memory.globalobj['Document'] = function Document(){}
+bodavm.memory.globalobj['Document'] = function Document(){
+    if (!(this instanceof Document)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Document': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Document'], "Document");
 bodavm.memory.globalobj['Document'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['Document'].__proto__=bodavm.memory.globalobj['Node'];
@@ -230,3 +234,5 @@ bodavm.toolsFunc.defineProperty('Document', "pictureInPictureElement", {configur
 bodavm.toolsFunc.defineProperty('Document', "onpointerrawupdate", {configurable:true, enumerable:true, get:function onpointerrawupdate (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Document'].prototype, "Document", "onpointerrawupdate_get", arguments)}, set:function onpointerrawupdate (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Document'].prototype, "Document", "onpointerrawupdate_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Document', "exitPictureInPicture", {configurable:true, enumerable:true, writable:true, value:function exitPictureInPicture (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Document'].prototype, "Document", "exitPictureInPicture", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Document', "getAnimations", {configurable:true, enumerable:true, writable:true, value:function getAnimations (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Document'].prototype, "Document", "getAnimations", arguments)}},'prototype');
+
+// Document=bodavm.memory.globalobj['Document']

@@ -20,4 +20,3 @@ bodavm.memory.globalobj[ 'screen'].__proto__=bodavm.memory.globalobj['Screen'].p
 
 
 
-

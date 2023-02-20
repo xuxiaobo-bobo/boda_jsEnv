@@ -94,6 +94,16 @@ bodavm.memory.window={
     status:${JSON.stringify(window.status)},
     onmessage:${window.onmessage},
     onbeforeunload:${window.onbeforeunload},
+    closed:${window.closed},
+    isSecureContext:${window.isSecureContext},
+    onappinstalled:${window.onappinstalled},
+    onbeforeinstallprompt:${window.onbeforeinstallprompt},
+    onbeforexrselect:${onbeforexrselect},
+    onabort:${onabort},
+    onblur:${onblur},
+    oncancel:${oncancel},
+    oncanplay:${oncanplay},
+    oncanplaythrough:${oncanplaythrough}
 
 };
 bodavm.memory.localStorage={}

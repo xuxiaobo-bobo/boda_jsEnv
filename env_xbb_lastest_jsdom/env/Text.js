@@ -1,5 +1,9 @@
 // Text对象
-bodavm.memory.globalobj['Text'] = function Text(){}
+bodavm.memory.globalobj['Text'] = function Text(){
+    if (!(this instanceof Text)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Text': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    }; 
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Text'], "Text");
 bodavm.memory.globalobj['Text'].prototype.__proto__=bodavm.memory.globalobj['CharacterData'].prototype;
 bodavm.memory.globalobj['Text'].__proto__=bodavm.memory.globalobj['CharacterData'];

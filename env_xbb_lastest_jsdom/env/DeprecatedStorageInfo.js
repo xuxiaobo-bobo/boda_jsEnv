@@ -11,4 +11,3 @@ bodavm.toolsFunc.defineProperty('DeprecatedStorageInfo' , "requestQuota", { writ
 
 bodavm.memory.globalobj[ 'webkitStorageInfo']   = {}
 bodavm.memory.globalobj[ 'webkitStorageInfo'].__proto__ = bodavm.memory.globalobj['DeprecatedStorageInfo'].prototype
-

@@ -1,5 +1,13 @@
 // MediaEncryptedEvent对象
-bodavm.memory.globalobj['MediaEncryptedEvent'] = function MediaEncryptedEvent(){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaEncryptedEvent': 1 argument required, but only 0 present.")}
+bodavm.memory.globalobj['MediaEncryptedEvent'] = function MediaEncryptedEvent(){
+    
+    if (!(this instanceof MediaEncryptedEvent)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaEncryptedEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+    if (arguments.length <1){
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaEncryptedEvent': 1 argument required, but only 0 present.")}
+
+    }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MediaEncryptedEvent'], "MediaEncryptedEvent");
 bodavm.memory.globalobj['MediaEncryptedEvent'].prototype.__proto__=bodavm.memory.globalobj['Event'].prototype;
 bodavm.memory.globalobj['MediaEncryptedEvent'].__proto__=bodavm.memory.globalobj['Event'];

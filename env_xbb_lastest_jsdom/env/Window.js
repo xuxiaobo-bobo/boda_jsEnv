@@ -8,3 +8,4 @@ bodavm.toolsFunc.defineProperty('Window', "PERSISTENT", {configurable:false, enu
 bodavm.toolsFunc.defineProperty('Window', "TEMPORARY", {configurable:false, enumerable:true, writable:false, value:0},'prototype');
 bodavm.toolsFunc.defineProperty('Window', "PERSISTENT", {configurable:false, enumerable:true, writable:false, value:1},'prototype');
 // debugger
+

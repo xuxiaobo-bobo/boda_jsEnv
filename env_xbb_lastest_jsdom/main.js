@@ -1,4 +1,5 @@
 // debugger
+let firsttime=+new Date()
 const { VM, VMScript } = require("vm2")
 const fs = require("fs");
 const { JSDOM } = require('jsdom')
@@ -48,7 +49,7 @@ const jscode = fs.readFileSync(`${run_path}/run.js`)
 //导入异步执行的代码
 const asyncCode = tools.getFile("async");
 
-
+const globalobjInit=tools.getFile("globalobjInit");
 // bodavm.memory.tag[0].__proto__=HTMLDocument.prototype
 //整合代码
 //导入日志代码
@@ -58,7 +59,7 @@ const globadlThis=fs.readFileSync(`${tools_path}/globalThis.js`)
 // const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globalInit}${userInit}${changeDom}${proxyObj}${jscode}${asyncCode}`+"\r\n"+"debugger";
 const last_deal=fs.readFileSync(`${run_path}/lastDeal.js`)
 // const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${globalInit}${proxyObj};;;;debugger;try{;${jscode}${asyncCode}}catch(e){console.log(e.message,e.stack);}finally{;${last_deal}};get_cookie`;
-const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${globalInit}${proxyObj};;;;debugger;;${jscode}${asyncCode};${last_deal};get_cookie`;
+const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};${globalobjInit};${globadlThis}${globalInit}${proxyObj};;;;debugger;;${jscode}${asyncCode};${last_deal};get_cookie`;
 
 
 bodaobj={
@@ -116,7 +117,8 @@ var getcookieapi=vm.run(script)
 //输出结果
 // debugger
 console.log(getcookieapi())
-
+let lastime=+new Date()
+console.log('花费时间:',lastime-firsttime)
 //
 fs.writeFileSync(`${run_path}/output.js`,codeTest)
 

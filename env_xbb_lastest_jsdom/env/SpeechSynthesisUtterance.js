@@ -1,5 +1,9 @@
 // SpeechSynthesisUtterance对象
-bodavm.memory.globalobj['SpeechSynthesisUtterance'] = function SpeechSynthesisUtterance(){}
+bodavm.memory.globalobj['SpeechSynthesisUtterance'] = function SpeechSynthesisUtterance(){
+    if (!(this instanceof SpeechSynthesisUtterance)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'SpeechSynthesisUtterance': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    }; 
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SpeechSynthesisUtterance'], "SpeechSynthesisUtterance");
 bodavm.memory.globalobj['SpeechSynthesisUtterance'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['SpeechSynthesisUtterance'].__proto__=bodavm.memory.globalobj['EventTarget'];

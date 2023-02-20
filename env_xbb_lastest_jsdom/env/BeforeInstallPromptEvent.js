@@ -1,5 +1,13 @@
 // BeforeInstallPromptEvent对象
-bodavm.memory.globalobj['BeforeInstallPromptEvent'] = function BeforeInstallPromptEvent(){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BeforeInstallPromptEvent': 1 argument required, but only 0 present.")}
+bodavm.memory.globalobj['BeforeInstallPromptEvent'] = function BeforeInstallPromptEvent(){
+    if (!(this instanceof BeforeInstallPromptEvent)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BeforeInstallPromptEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function.")}
+    if (arguments.length <1){
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BeforeInstallPromptEvent': 1 argument required, but only 0 present.")}
+
+    }
+
+    
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BeforeInstallPromptEvent'], "BeforeInstallPromptEvent");
 bodavm.memory.globalobj['BeforeInstallPromptEvent'].prototype.__proto__=bodavm.memory.globalobj['Event'].prototype;
 bodavm.memory.globalobj['BeforeInstallPromptEvent'].__proto__=bodavm.memory.globalobj['Event'];

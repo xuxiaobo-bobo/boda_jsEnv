@@ -281,88 +281,6 @@
         }, 'bobo');
         return proxyObj;
     }
-
-
-    // bodavm.toolsFunc.proxy = function (obj, objName) {
-    //     // bodavm.toolsFunc.symbolProperty(obj)
-    //     bodavm.memory.globalobj[objName]=obj
-    //     if (bodavm.config.proxy == false) { return obj };
-    //     if(bodavm.memory.symbolProxy in obj){// 判断对象obj是否是已代理的对象
-    //         return obj[bodavm.memory.symbolProxy];
-    //     }
-    //     let handler = {
-    //         get(target, prop, receiver) {
-    //             if(prop =='_createHelper'){debugger}
-    //             if (prop == 'onmessage'){debugger}
-    //             let result = Reflect.get(target, prop, receiver)
-
-    //             // if (target ==window.$_ts._$Aw){return result }
-    //             if (bodavm.toolsFunc.filterProxyProp(prop)) {
-    //                 return result;
-    //             }
-    //             if (prop ==hasOwnProperty){debugger}
-    //             // let mylog=
-    //             console.log('['+objName+']', '  获取属性:   ', prop, '  value:   ', result);
-
-    //                 if (typeof result =='function'){
-    //                     myloglist.push({ 'type': 'get:'+objName , 'prop0': prop, 'prop1': result.toString() })
-
-    //                 }
-    //                 else {
-    //                     if (!result){
-    //                         myundefinedlist.push({ 'type': 'get:'+objName , 'prop0': prop, 'prop1': result })
-
-    //                     }
-    //                     myloglist.push({ 'type': 'get:'+objName , 'prop0': prop, 'prop1': result })
-
-
-    //                 }
-
-    //             if (result instanceof Object) {
-    //                     // bodavm.toolsFunc.symbolProperty(result)
-
-    //                     // return bodavm.toolsFunc.proxy(result, `${objName}.${prop.toString()}`)
-    //             }
-
-    //             return result;
-    //         },
-    //         set(target, propKey, value, receiver) {
-    //             // debugger
-    //             if (objName=='window'&& propKey){
-    //                 bodavm.memory.window[propKey]=value
-    //             }
-    //             console.log('['+objName+']', "   设置属性:   ", propKey, "   value:   ", value);
-    //                 if (typeof value =='function'){
-    //                     myloglist.push({ 'type': 'set:'+ objName, 'prop0': propKey, 'prop1': value.toString() })
-
-    //                 }
-    //                 else{
-    //                     if (!value){
-    //                         myundefinedlist.push({ 'type':'set:'+ objName , 'prop0': propKey, 'prop1': value })
-
-    //                     }
-    //                     myloglist.push({ 'type':'set:'+ objName , 'prop0': propKey, 'prop1': value })
-    //                 }
-
-    //                 let res=Reflect.set(target, propKey, value, receiver);
-    //                 // bodavm.toolsFunc.symbolProperty(res)
-    //             return res
-    //         }
-    //     };
-    //     // debugger
-    //     let proxyObj = new Proxy(obj, handler);
-    //     // Object.defineProperty(obj, bodavm.memory.symbolProxy, {
-    //     //     configurable:false,
-    //     //     enumerable:false,
-    //     //     writable:false,
-    //     //     value:proxyObj
-    //     // });
-    //     return proxyObj;
-    // }
-
-
-    // return bodavm.toolsFunc.dispatch(this,Document.prototype,"Document","implementation_get",arguments,)
-    //env函数分发器
     bodavm.toolsFunc.dispatch = function dispatch(self, obj, objName, funcName, argList, defaultValue) {
         //obj Document.prototype
         //obj loction
@@ -437,12 +355,18 @@
             }
             newDescriptior.set = set;
         }
+        // if (bodavm.memory.globalobj[prop]){
+        //     // debugger
+        //     Object.defineProperty(obj[prop], bodavm.memory.globalobj[prop]?bodavm.memory.globalobj[prop]:prop, newDescriptior, 'bobo')
 
-        Object.defineProperty(obj, prop, newDescriptior, 'bobo')
+        // }else{
+        //     // debugger
+            Object.defineProperty(obj, prop, newDescriptior, 'bobo')
 
+        }
         // let name=obj.name?obj.name:obj.constructor.name
 
-    };
+    // };
 
     //定义对象属性 defineProperty
     bodavm.toolsFunc.defineProperty = function defineProperty(obj, prop, OldDescriptior, proto) {

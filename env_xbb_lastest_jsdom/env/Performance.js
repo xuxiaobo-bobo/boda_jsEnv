@@ -24,3 +24,4 @@ bodavm.toolsFunc.defineProperty('Performance', "eventCounts", {configurable:true
 // performance对象
 bodavm.memory.globalobj[ 'performance']  = {}
 bodavm.memory.globalobj[ 'performance'].__proto__=bodavm.memory.globalobj['Performance'].prototype;
+
