@@ -5956,7 +5956,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "clearInterval", {
   writable: true,
   value: function clearInterval() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "clearInterval", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "clearTimeout", {
   configurable: true,
@@ -5964,7 +5964,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "clearTimeout", {
   writable: true,
   value: function clearTimeout() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "clearTimeout", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "close", {
   configurable: true,
@@ -6172,7 +6172,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "setInterval", {
   writable: true,
   value: function setInterval() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "setInterval", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "setTimeout", {
   configurable: true,
@@ -6180,7 +6180,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "setTimeout", {
   writable: true,
   value: function setTimeout() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "setTimeout", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "stop", {
   configurable: true,
