@@ -317,8 +317,8 @@
 
 
         } catch (e) {
-            // 
-            // debugger
+        //     // 
+        //     // debugger
             let log__ = `'[${name}]正在执行,错误信息${e.message}'`
             console.log(log__);
             bodavm.toolsFunc.printLog(log__)
@@ -495,7 +495,8 @@
         let e = new Error();
         e.message = message;
         e.name = name;
-        e.stack = `${name}: ${message}at <anonymous>:1:1`
+        e.stack = `${name}: ${message} 
+        at <anonymous>:1:1`
         throw e
     }
 

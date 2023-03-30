@@ -7,6 +7,1193 @@
 ===============================================================================================================
 ===============================================================================================================
 ===============================================================================================================
-window_document_get document->[object HTMLDocument]
-window_document_get document->[object HTMLDocument]
 window_Document res -> function Document() { [native code] }
+window_Location res -> function Location() { [native code] }
+window_BarProp res -> function BarProp() { [native code] }
+window_CustomElementRegistry res -> function CustomElementRegistry() { [native code] }
+window_Window res -> function Window() { [native code] }
+window_Screen res -> function Screen() { [native code] }
+window_Navigator res -> function Navigator() { [native code] }
+window_Performance res -> function Performance() { [native code] }
+window_Storage res -> function Storage() { [native code] }
+window_Navigation res -> function Navigation() { [native code] }
+window_VisualViewport res -> function VisualViewport() { [native code] }
+window_History res -> function History() { [native code] }
+window_IDBFactory res -> function IDBFactory() { [native code] }
+window_TrustedTypePolicyFactory res -> function TrustedTypePolicyFactory() { [native code] }
+window_CookieStore res -> function CookieStore() { [native code] }
+window_External res -> function External() { [native code] }
+window_CacheStorage res -> function CacheStorage() { [native code] }
+window_XMLHttpRequestres ->function XMLHttpRequest() { [native code] }
+window_IDBDatabaseres ->function IDBDatabase() { [native code] }
+window_Image  img->[object HTMLImageElement]
+window_Audiores ->function Audio() { [native code] }
+window_webkitURLres ->undefined
+window_webkitRTCPeerConnectionres ->undefined
+window_webkitMediaStreamres ->undefined
+window_WebKitMutationObserverres ->undefined
+window_WebKitCSSMatrixres ->undefined
+window_XPathResultres ->undefined
+window_XPathExpressionres ->function XPathExpression() { [native code] }
+window_XPathEvaluatorres ->undefined
+window_XMLSerializerres ->undefined
+window_XMLHttpRequestUploadres ->undefined
+window_XMLHttpRequestEventTargetres ->function XMLHttpRequestEventTarget() { [native code] }
+window_XMLDocumentres ->undefined
+window_WritableStreamDefaultWriterres ->undefined
+window_WritableStreamDefaultControllerres ->undefined
+window_WritableStreamres ->undefined
+window_Workerres ->undefined
+window_WheelEventres ->undefined
+window_WebSocketres ->function WebSocket() { [native code] }
+window_WebGLVertexArrayObjectres ->undefined
+window_WebGLUniformLocationres ->undefined
+window_WebGLTransformFeedbackres ->undefined
+window_WebGLTextureres ->undefined
+window_WebGLSyncres ->undefined
+window_WebGLShaderPrecisionFormatres ->function WebGLShaderPrecisionFormat() { [native code] }
+window_WebGLShaderres ->function WebGLShader() { [native code] }
+window_WebGLSamplerres ->undefined
+window_WebGLRenderingContextres ->function WebGLRenderingContext() { [native code] }
+window_WebGLRenderbufferres ->undefined
+window_WebGLQueryres ->undefined
+window_WebGLProgramres ->function WebGLProgram() { [native code] }
+window_WebGLFramebufferres ->undefined
+window_WebGLContextEventres ->undefined
+window_WebGLBufferres ->function WebGLBuffer() { [native code] }
+window_WebGLActiveInfores ->undefined
+window_WebGL2RenderingContextres ->undefined
+window_WaveShaperNoderes ->undefined
+window_ValidityStateres ->undefined
+window_VTTCueres ->undefined
+window_UserActivationres ->undefined
+window_URLSearchParamsres ->undefined
+window_URLres ->undefined
+window_UIEventres ->function UIEvent() { [native code] }
+window_TreeWalkerres ->undefined
+window_TransitionEventres ->undefined
+window_TransformStreamres ->undefined
+window_TrackEventres ->undefined
+window_TouchListres ->undefined
+window_TouchEventres ->undefined
+window_Touchres ->undefined
+window_TimeRangesres ->undefined
+window_TextTrackListres ->function TextTrackList() { [native code] }
+window_TextTrackCueListres ->undefined
+window_TextTrackCueres ->undefined
+window_TextTrackres ->undefined
+window_TextMetricsres ->undefined
+window_TextEventres ->undefined
+window_TextEncoderStreamres ->undefined
+window_TextEncoderres ->undefined
+window_TextDecoderStreamres ->undefined
+window_TextDecoderres ->undefined
+window_Textres ->function Text() { [native code] }
+window_TaskAttributionTimingres ->undefined
+window_SyncManagerres ->undefined
+window_SubmitEventres ->undefined
+window_StyleSheetListres ->undefined
+window_StyleSheetres ->undefined
+window_StylePropertyMapReadOnlyres ->undefined
+window_StylePropertyMapres ->undefined
+window_StorageEventres ->undefined
+window_StereoPannerNoderes ->undefined
+window_StaticRangeres ->undefined
+window_ShadowRootres ->undefined
+window_Selectionres ->undefined
+window_SecurityPolicyViolationEventres ->undefined
+window_ScriptProcessorNoderes ->undefined
+window_ScreenOrientationres ->function ScreenOrientation() { [native code] }
+window_SVGViewElementres ->undefined
+window_SVGUseElementres ->function SVGUseElement() { [native code] }
+window_SVGUnitTypesres ->undefined
+window_SVGTransformListres ->undefined
+window_SVGTransformres ->undefined
+window_SVGTitleElementres ->undefined
+window_SVGTextPositioningElementres ->undefined
+window_SVGTextPathElementres ->undefined
+window_SVGTextElementres ->undefined
+window_SVGTextContentElementres ->undefined
+window_SVGTSpanElementres ->undefined
+window_SVGSymbolElementres ->function SVGSymbolElement() { [native code] }
+window_SVGSwitchElementres ->undefined
+window_SVGStyleElementres ->undefined
+window_SVGStringListres ->undefined
+window_SVGStopElementres ->undefined
+window_SVGSetElementres ->undefined
+window_SVGScriptElementres ->undefined
+window_SVGSVGElementres ->function SVGSVGElement() { [native code] }
+window_SVGRectElementres ->undefined
+window_SVGRectres ->undefined
+window_SVGRadialGradientElementres ->undefined
+window_SVGPreserveAspectRatiores ->undefined
+window_SVGPolylineElementres ->undefined
+window_SVGPolygonElementres ->undefined
+window_SVGPointListres ->undefined
+window_SVGPointres ->undefined
+window_SVGPatternElementres ->function SVGPatternElement() { [native code] }
+window_SVGPathElementres ->function SVGPathElement() { [native code] }
+window_SVGNumberListres ->undefined
+window_SVGNumberres ->undefined
+window_SVGMetadataElementres ->undefined
+window_SVGMatrixres ->undefined
+window_SVGMaskElementres ->undefined
+window_SVGMarkerElementres ->undefined
+window_SVGMPathElementres ->undefined
+window_SVGLinearGradientElementres ->undefined
+window_SVGLineElementres ->undefined
+window_SVGLengthListres ->undefined
+window_SVGLengthres ->undefined
+window_SVGImageElementres ->undefined
+window_SVGGraphicsElementres ->function SVGGraphicsElement() { [native code] }
+window_SVGGradientElementres ->undefined
+window_SVGGeometryElementres ->function SVGGeometryElement() { [native code] }
+window_SVGGElementres ->function SVGGElement() { [native code] }
+window_SVGForeignObjectElementres ->undefined
+window_SVGFilterElementres ->undefined
+window_SVGFETurbulenceElementres ->undefined
+window_SVGFETileElementres ->undefined
+window_SVGFESpotLightElementres ->undefined
+window_SVGFESpecularLightingElementres ->undefined
+window_SVGFEPointLightElementres ->undefined
+window_SVGFEOffsetElementres ->undefined
+window_SVGFEMorphologyElementres ->undefined
+window_SVGFEMergeNodeElementres ->undefined
+window_SVGFEMergeElementres ->undefined
+window_SVGFEImageElementres ->undefined
+window_SVGFEGaussianBlurElementres ->undefined
+window_SVGFEFuncRElementres ->undefined
+window_SVGFEFuncGElementres ->undefined
+window_SVGFEFuncBElementres ->undefined
+window_SVGFEFuncAElementres ->undefined
+window_SVGFEFloodElementres ->undefined
+window_SVGFEDropShadowElementres ->undefined
+window_SVGFEDistantLightElementres ->undefined
+window_SVGFEDisplacementMapElementres ->undefined
+window_SVGFEDiffuseLightingElementres ->undefined
+window_SVGFEConvolveMatrixElementres ->undefined
+window_SVGFECompositeElementres ->undefined
+window_SVGFEComponentTransferElementres ->undefined
+window_SVGFEColorMatrixElementres ->undefined
+window_SVGFEBlendElementres ->undefined
+window_SVGEllipseElementres ->undefined
+window_SVGElementres ->function SVGElement() { [native code] }
+window_SVGDescElementres ->undefined
+window_SVGDefsElementres ->undefined
+window_SVGComponentTransferFunctionElementres ->undefined
+window_SVGClipPathElementres ->undefined
+window_SVGCircleElementres ->undefined
+window_SVGAnimationElementres ->undefined
+window_SVGAnimatedTransformListres ->undefined
+window_SVGAnimatedStringres ->undefined
+window_SVGAnimatedRectres ->undefined
+window_SVGAnimatedPreserveAspectRatiores ->undefined
+window_SVGAnimatedNumberListres ->undefined
+window_SVGAnimatedNumberres ->undefined
+window_SVGAnimatedLengthListres ->undefined
+window_SVGAnimatedLengthres ->undefined
+window_SVGAnimatedIntegerres ->undefined
+window_SVGAnimatedEnumerationres ->undefined
+window_SVGAnimatedBooleanres ->undefined
+window_SVGAnimatedAngleres ->undefined
+window_SVGAnimateTransformElementres ->undefined
+window_SVGAnimateMotionElementres ->undefined
+window_SVGAnimateElementres ->undefined
+window_SVGAngleres ->undefined
+window_SVGAElementres ->undefined
+window_Responseres ->undefined
+window_ResizeObserverSizeres ->undefined
+window_ResizeObserverEntryres ->undefined
+window_ResizeObserverres ->undefined
+window_Requestres ->function Request() { [native code] }
+window_ReportingObserverres ->undefined
+window_ReadableStreamDefaultReaderres ->undefined
+window_ReadableStreamDefaultControllerres ->undefined
+window_ReadableStreamBYOBRequestres ->undefined
+window_ReadableStreamBYOBReaderres ->undefined
+window_ReadableStreamres ->undefined
+window_ReadableByteStreamControllerres ->undefined
+window_Rangeres ->undefined
+window_RadioNodeListres ->undefined
+window_RTCTrackEventres ->undefined
+window_RTCStatsReportres ->undefined
+window_RTCSessionDescriptionres ->function RTCSessionDescription() { [native code] }
+window_RTCSctpTransportres ->undefined
+window_RTCRtpTransceiverres ->undefined
+window_RTCRtpSenderres ->undefined
+window_RTCRtpReceiverres ->undefined
+window_RTCPeerConnectionIceEventres ->undefined
+window_RTCPeerConnectionIceErrorEventres ->undefined
+window_RTCPeerConnectionres ->function RTCPeerConnection() { [native code] }
+window_RTCIceCandidateres ->undefined
+window_RTCErrorEventres ->undefined
+window_RTCErrorres ->undefined
+window_RTCEncodedVideoFrameres ->undefined
+window_RTCEncodedAudioFrameres ->undefined
+window_RTCDtlsTransportres ->undefined
+window_RTCDataChannelEventres ->undefined
+window_RTCDataChannelres ->function RTCDataChannel() { [native code] }
+window_RTCDTMFToneChangeEventres ->undefined
+window_RTCDTMFSenderres ->undefined
+window_RTCCertificateres ->undefined
+window_PromiseRejectionEventres ->undefined
+window_ProgressEventres ->undefined
+window_ProcessingInstructionres ->undefined
+window_PopStateEventres ->undefined
+window_PointerEventres ->function PointerEvent() { [native code] }
+window_PluginArrayres ->function PluginArray() { [native code] }
+window_Pluginres ->function Plugin() { [native code] }
+window_PeriodicWaveres ->undefined
+window_PerformanceTimingres ->undefined
+window_PerformanceServerTimingres ->undefined
+window_PerformanceResourceTimingres ->undefined
+window_PerformancePaintTimingres ->function PerformancePaintTiming() { [native code] }
+window_PerformanceObserverEntryListres ->undefined
+window_PerformanceObserverres ->undefined
+window_PerformanceNavigationTimingres ->undefined
+window_PerformanceNavigationres ->undefined
+window_PerformanceMeasureres ->undefined
+window_PerformanceMarkres ->undefined
+window_PerformanceLongTaskTimingres ->undefined
+window_PerformanceEventTimingres ->undefined
+window_PerformanceEntryres ->function PerformanceEntry() { [native code] }
+window_PerformanceElementTimingres ->undefined
+window_Path2Dres ->function Path2D() { [native code] }
+window_PannerNoderes ->undefined
+window_PageTransitionEventres ->undefined
+window_OverconstrainedErrorres ->undefined
+window_OscillatorNoderes ->undefined
+window_OffscreenCanvasRenderingContext2Dres ->function OffscreenCanvasRenderingContext2D() { [native code] }
+window_OffscreenCanvasres ->undefined
+window_OfflineAudioContextres ->function OfflineAudioContext() { [native code] }
+window_OfflineAudioCompletionEventres ->undefined
+window_NodeListres ->function NodeList() { [native code] }
+window_NodeIteratorres ->undefined
+window_NodeFilterres ->undefined
+window_Noderes ->function Node() { [native code] }
+window_NetworkInformationres ->function NetworkInformation() { [native code] }
+window_NamedNodeMapres ->function NamedNodeMap() { [native code] }
+window_MutationRecordres ->undefined
+'[window_MutationObserver]正在执行,错误信息Failed to construct 'MutationObserver': parameter 1 is not a function'
+'[window_MutationObserver]正在执行,错误信息Failed to construct 'MutationObserver': parameter 1 is not a function'
+window_MutationEventres ->undefined
+window_MouseEventres ->function MouseEvent() { [native code] }
+window_MimeTypeArrayres ->function MimeTypeArray() { [native code] }
+window_MimeTyperes ->function MimeType() { [native code] }
+window_MessagePortres ->undefined
+window_MessageEventres ->undefined
+window_MessageChannelres ->undefined
+window_MediaStreamTrackEventres ->undefined
+window_MediaStreamEventres ->undefined
+window_MediaStreamAudioSourceNoderes ->undefined
+window_MediaStreamAudioDestinationNoderes ->undefined
+window_MediaStreamres ->function MediaStream() { [native code] }
+window_MediaRecorderres ->undefined
+window_MediaQueryListEventres ->undefined
+window_MediaQueryListres ->function MediaQueryList() { [native code] }
+window_MediaListres ->undefined
+window_MediaErrorres ->undefined
+window_MediaEncryptedEventres ->function MediaEncryptedEvent() { [native code] }
+window_MediaElementAudioSourceNoderes ->undefined
+window_MediaCapabilitiesres ->undefined
+window_LayoutShiftAttributionres ->undefined
+window_LayoutShiftres ->undefined
+window_LargestContentfulPaintres ->undefined
+window_KeyframeEffectres ->undefined
+window_KeyboardEventres ->undefined
+window_IntersectionObserverEntryres ->undefined
+window_IntersectionObserverres ->undefined
+window_InputEventres ->undefined
+window_InputDeviceInfores ->undefined
+window_InputDeviceCapabilitiesres ->undefined
+window_ImageDatares ->undefined
+window_ImageCaptureres ->undefined
+window_ImageBitmapRenderingContextres ->undefined
+window_ImageBitmapres ->undefined
+window_IdleDeadlineres ->undefined
+window_IIRFilterNoderes ->undefined
+window_IDBVersionChangeEventres ->function IDBVersionChangeEvent() { [native code] }
+window_IDBTransactionres ->function IDBTransaction() { [native code] }
+window_IDBRequestres ->function IDBRequest() { [native code] }
+window_IDBOpenDBRequestres ->function IDBOpenDBRequest() { [native code] }
+window_IDBObjectStoreres ->function IDBObjectStore() { [native code] }
+window_IDBKeyRangeres ->undefined
+window_IDBIndexres ->undefined
+window_IDBCursorWithValueres ->undefined
+window_IDBCursorres ->undefined
+window_Headersres ->function Headers() { [native code] }
+window_HashChangeEventres ->undefined
+window_HTMLVideoElementres ->function HTMLVideoElement() { [native code] }
+window_HTMLUnknownElementres ->function HTMLUnknownElement() { [native code] }
+window_HTMLUListElementres ->function HTMLUListElement() { [native code] }
+window_HTMLTrackElementres ->undefined
+window_HTMLTitleElementres ->function HTMLTitleElement() { [native code] }
+window_HTMLTimeElementres ->undefined
+window_HTMLTextAreaElementres ->undefined
+window_HTMLTemplateElementres ->undefined
+window_HTMLTableSectionElementres ->undefined
+window_HTMLTableRowElementres ->undefined
+window_HTMLTableElementres ->undefined
+window_HTMLTableColElementres ->undefined
+window_HTMLTableCellElementres ->undefined
+window_HTMLTableCaptionElementres ->undefined
+window_HTMLStyleElementres ->function HTMLStyleElement() { [native code] }
+window_HTMLSpanElementres ->function HTMLSpanElement() { [native code] }
+window_HTMLSourceElementres ->undefined
+window_HTMLSlotElementres ->undefined
+window_HTMLSelectElementres ->function HTMLSelectElement() { [native code] }
+window_HTMLScriptElementres ->function HTMLScriptElement() { [native code] }
+window_HTMLQuoteElementres ->undefined
+window_HTMLProgressElementres ->undefined
+window_HTMLPreElementres ->undefined
+window_HTMLPictureElementres ->undefined
+window_HTMLParamElementres ->undefined
+window_HTMLParagraphElementres ->function HTMLParagraphElement() { [native code] }
+window_HTMLOutputElementres ->undefined
+window_HTMLOptionsCollectionres ->undefined
+window_HTMLOptionElementres ->function HTMLOptionElement() { [native code] }
+window_HTMLOptGroupElementres ->function HTMLOptGroupElement() { [native code] }
+window_HTMLObjectElementres ->undefined
+window_HTMLOListElementres ->undefined
+window_HTMLModElementres ->undefined
+window_HTMLMeterElementres ->undefined
+window_HTMLMetaElementres ->function HTMLMetaElement() { [native code] }
+window_HTMLMenuElementres ->undefined
+window_HTMLMediaElementres ->function HTMLMediaElement() { [native code] }
+window_HTMLMarqueeElementres ->function HTMLMarqueeElement() { [native code] }
+window_HTMLMapElementres ->undefined
+window_HTMLLinkElementres ->function HTMLLinkElement() { [native code] }
+window_HTMLLegendElementres ->function HTMLLegendElement() { [native code] }
+window_HTMLLabelElementres ->undefined
+window_HTMLLIElementres ->function HTMLLIElement() { [native code] }
+window_HTMLInputElementres ->function HTMLInputElement() { [native code] }
+window_HTMLImageElementres ->function HTMLImageElement() { [native code] }
+window_HTMLIFrameElementres ->function HTMLIFrameElement() { [native code] }
+window_HTMLHtmlElementres ->function HTMLHtmlElement() { [native code] }
+window_HTMLHeadingElementres ->function HTMLHeadingElement() { [native code] }
+window_HTMLHeadElementres ->function HTMLHeadElement() { [native code] }
+window_HTMLHRElementres ->undefined
+window_HTMLFrameSetElementres ->function HTMLFrameSetElement() { [native code] }
+window_HTMLFrameElementres ->undefined
+window_HTMLFormElementres ->function HTMLFormElement() { [native code] }
+window_HTMLFormControlsCollectionres ->undefined
+window_HTMLFontElementres ->function HTMLFontElement() { [native code] }
+window_HTMLFieldSetElementres ->function HTMLFieldSetElement() { [native code] }
+window_HTMLEmbedElementres ->undefined
+window_HTMLElementres ->function HTMLElement() { [native code] }
+window_HTMLDocumentres ->function HTMLDocument() { [native code] }
+window_HTMLDivElementres ->function HTMLDivElement() { [native code] }
+window_HTMLDirectoryElementres ->undefined
+window_HTMLDialogElementres ->undefined
+window_HTMLDetailsElementres ->undefined
+window_HTMLDataListElementres ->undefined
+window_HTMLDataElementres ->undefined
+window_HTMLDListElementres ->undefined
+window_HTMLCollectionres ->function HTMLCollection() { [native code] }
+window_HTMLCanvasElementres ->function HTMLCanvasElement() { [native code] }
+window_HTMLButtonElementres ->function HTMLButtonElement() { [native code] }
+window_HTMLBodyElementres ->function HTMLBodyElement() { [native code] }
+window_HTMLBaseElementres ->undefined
+window_HTMLBRElementres ->function HTMLBRElement() { [native code] }
+window_HTMLAudioElementres ->function HTMLAudioElement() { [native code] }
+window_HTMLAreaElementres ->undefined
+window_HTMLAnchorElementres ->function HTMLAnchorElement() { [native code] }
+window_HTMLAllCollectionres ->function HTMLAllCollection() { [native code] }
+window_GeolocationPositionErrorres ->undefined
+window_GeolocationPositionres ->undefined
+window_GeolocationCoordinatesres ->undefined
+window_Geolocationres ->undefined
+window_GamepadHapticActuatorres ->undefined
+window_GamepadEventres ->undefined
+window_GamepadButtonres ->undefined
+window_Gamepadres ->undefined
+window_GainNoderes ->undefined
+window_FormDataEventres ->undefined
+window_FormDatares ->undefined
+window_FontFaceSetLoadEventres ->undefined
+window_FontFaceres ->undefined
+window_FocusEventres ->undefined
+window_FileReaderres ->undefined
+window_FileListres ->undefined
+window_Fileres ->undefined
+window_FeaturePolicyres ->undefined
+window_EventTargetres ->function EventTarget() { [native code] }
+window_EventSourceres ->undefined
+window_EventCountsres ->undefined
+window_Eventres ->function Event() { [native code] }
+window_ErrorEventres ->undefined
+window_ElementInternalsres ->undefined
+window_Elementres ->function Element() { [native code] }
+window_DynamicsCompressorNoderes ->undefined
+window_DragEventres ->undefined
+window_DocumentTyperes ->function DocumentType() { [native code] }
+window_DocumentFragmentres ->function DocumentFragment() { [native code] }
+window_DelayNoderes ->undefined
+window_DecompressionStreamres ->undefined
+window_DataTransferItemListres ->undefined
+window_DataTransferItemres ->undefined
+window_DataTransferres ->undefined
+window_DOMTokenListres ->undefined
+window_DOMStringMapres ->undefined
+window_DOMStringListres ->function DOMStringList() { [native code] }
+window_DOMRectReadOnlyres ->undefined
+window_DOMRectListres ->undefined
+window_DOMRectres ->undefined
+window_DOMQuadres ->undefined
+window_DOMPointReadOnlyres ->undefined
+window_DOMPointres ->undefined
+window_DOMParserres ->function DOMParser() { [native code] }
+window_DOMMatrixReadOnlyres ->undefined
+window_DOMMatrixres ->undefined
+window_DOMImplementationres ->undefined
+window_DOMExceptionres ->undefined
+window_DOMErrorres ->undefined
+window_CustomEventres ->undefined
+window_Cryptores ->function Crypto() { [native code] }
+window_CountQueuingStrategyres ->undefined
+window_ConvolverNoderes ->undefined
+window_ConstantSourceNoderes ->undefined
+window_CompressionStreamres ->undefined
+window_CompositionEventres ->undefined
+window_Commentres ->function Comment() { [native code] }
+window_CloseEventres ->function CloseEvent() { [native code] }
+window_ClipboardEventres ->undefined
+window_CharacterDatares ->function CharacterData() { [native code] }
+window_ChannelSplitterNoderes ->undefined
+window_ChannelMergerNoderes ->undefined
+window_CanvasRenderingContext2Dres ->function CanvasRenderingContext2D() { [native code] }
+window_CanvasPatternres ->undefined
+window_CanvasGradientres ->undefined
+window_CanvasFilterres ->undefined
+window_CanvasCaptureMediaStreamTrackres ->undefined
+window_CSSVariableReferenceValueres ->undefined
+window_CSSUnparsedValueres ->undefined
+window_CSSUnitValueres ->undefined
+window_CSSTranslateres ->undefined
+window_CSSTransformValueres ->undefined
+window_CSSTransformComponentres ->undefined
+window_CSSSupportsRuleres ->undefined
+window_CSSStyleValueres ->undefined
+window_CSSStyleSheetres ->undefined
+window_CSSStyleRuleres ->undefined
+window_CSSStyleDeclarationres ->function CSSStyleDeclaration() { [native code] }
+window_CSSSkewYres ->undefined
+window_CSSSkewXres ->undefined
+window_CSSSkewres ->undefined
+window_CSSScaleres ->undefined
+window_CSSRuleListres ->function CSSRuleList() { [native code] }
+window_CSSRuleres ->undefined
+window_CSSRotateres ->undefined
+window_CSSPropertyRuleres ->undefined
+window_CSSPositionValueres ->undefined
+window_CSSPerspectiveres ->undefined
+window_CSSPageRuleres ->undefined
+window_CSSNumericValueres ->undefined
+window_CSSNumericArrayres ->undefined
+window_CSSNamespaceRuleres ->undefined
+window_CSSMediaRuleres ->undefined
+window_CSSMatrixComponentres ->undefined
+window_CSSMathValueres ->undefined
+window_CSSMathSumres ->undefined
+window_CSSMathProductres ->undefined
+window_CSSMathNegateres ->undefined
+window_CSSMathMinres ->undefined
+window_CSSMathMaxres ->undefined
+window_CSSMathInvertres ->undefined
+window_CSSMathClampres ->undefined
+window_CSSLayerStatementRuleres ->undefined
+window_CSSLayerBlockRuleres ->undefined
+window_CSSKeywordValueres ->undefined
+window_CSSKeyframesRuleres ->undefined
+window_CSSKeyframeRuleres ->undefined
+window_CSSImportRuleres ->undefined
+window_CSSImageValueres ->undefined
+window_CSSGroupingRuleres ->undefined
+window_CSSFontFaceRuleres ->undefined
+window_CSSCounterStyleRuleres ->undefined
+window_CSSConditionRuleres ->undefined
+window_CDATASectionres ->function CDATASection() { [native code] }
+window_ByteLengthQueuingStrategyres ->undefined
+window_BroadcastChannelres ->undefined
+window_BlobEventres ->undefined
+window_Blobres ->undefined
+window_BiquadFilterNoderes ->undefined
+window_BeforeUnloadEventres ->undefined
+window_BeforeInstallPromptEventres ->function BeforeInstallPromptEvent() { [native code] }
+window_BatteryManagerres ->function BatteryManager() { [native code] }
+window_BaseAudioContextres ->function BaseAudioContext() { [native code] }
+window_AudioWorkletNoderes ->undefined
+window_AudioScheduledSourceNoderes ->undefined
+window_AudioProcessingEventres ->undefined
+window_AudioParamMapres ->undefined
+window_AudioParamres ->undefined
+window_AudioNoderes ->undefined
+window_AudioListenerres ->undefined
+window_AudioDestinationNoderes ->undefined
+window_AudioContextres ->undefined
+window_AudioBufferSourceNoderes ->undefined
+window_AudioBufferres ->undefined
+window_Attrres ->function Attr() { [native code] }
+window_AnimationEventres ->undefined
+window_AnimationEffectres ->undefined
+window_Animationres ->undefined
+window_AnalyserNoderes ->undefined
+window_AbstractRangeres ->undefined
+window_AbortSignalres ->undefined
+window_AbortControllerres ->undefined
+window_cancelAnimationFrameres ->undefined
+window_cancelIdleCallbackres ->undefined
+window_captureEventsres ->undefined
+window_closeres ->undefined
+window_confirmres ->undefined
+window_createImageBitmapres ->undefined
+window_fetchres ->undefined
+window_findres ->undefined
+window_focusres ->undefined
+window_getComputedStyleres ->undefined
+window_getSelectionres ->undefined
+window_matchMedia arg ->undefinedres ->[object MediaQueryList]
+window_moveByres ->undefined
+window_moveTores ->undefined
+window_openres ->undefined
+window_postMessageres ->undefined
+window_printres ->undefined
+window_promptres ->undefined
+window_queueMicrotaskres ->undefined
+window_releaseEventsres ->undefined
+window_reportErrorres ->undefined
+window_requestAnimationFrameres ->undefined
+window_requestIdleCallbackres ->undefined
+window_resizeByres ->undefined
+window_resizeTores ->undefined
+window_scrollres ->undefined
+window_scrollByres ->undefined
+window_scrollTores ->undefined
+window_stopres ->undefined
+window_structuredCloneres ->undefined
+window_webkitCancelAnimationFrameres ->undefined
+window_webkitRequestAnimationFrameres ->undefined
+window_AbsoluteOrientationSensorres ->undefined
+window_Accelerometerres ->undefined
+window_AudioWorkletres ->undefined
+window_Cacheres ->undefined
+window_Clipboardres ->undefined
+window_ClipboardItemres ->undefined
+window_CookieChangeEventres ->undefined
+window_CookieStoreManagerres ->undefined
+window_Credentialres ->undefined
+window_CredentialsContainerres ->function CredentialsContainer() { [native code] }
+window_CryptoKeyres ->undefined
+window_DeviceMotionEventres ->undefined
+window_DeviceMotionEventAccelerationres ->undefined
+window_DeviceMotionEventRotationRateres ->undefined
+window_DeviceOrientationEventres ->function DeviceOrientationEvent() { [native code] }
+window_FederatedCredentialres ->undefined
+window_Gyroscoperes ->undefined
+window_Keyboardres ->undefined
+window_KeyboardLayoutMapres ->undefined
+window_LinearAccelerationSensorres ->undefined
+window_Lockres ->undefined
+window_LockManagerres ->function LockManager() { [native code] }
+window_MIDIAccessres ->undefined
+window_MIDIConnectionEventres ->undefined
+window_MIDIInputres ->undefined
+window_MIDIInputMapres ->undefined
+window_MIDIMessageEventres ->undefined
+window_MIDIOutputres ->undefined
+window_MIDIOutputMapres ->undefined
+window_MIDIPortres ->undefined
+window_MediaDeviceInfores ->undefined
+window_MediaDevicesres ->undefined
+window_MediaKeyMessageEventres ->undefined
+window_MediaKeySessionres ->undefined
+window_MediaKeyStatusMapres ->undefined
+window_MediaKeySystemAccessres ->undefined
+window_MediaKeysres ->undefined
+window_NavigationPreloadManagerres ->undefined
+window_NavigatorManagedDatares ->undefined
+window_OrientationSensorres ->undefined
+window_PasswordCredentialres ->undefined
+window_RTCIceTransportres ->undefined
+window_RelativeOrientationSensorres ->undefined
+window_Sensorres ->undefined
+window_SensorErrorEventres ->undefined
+window_ServiceWorkerres ->undefined
+window_ServiceWorkerContainerres ->undefined
+window_ServiceWorkerRegistrationres ->undefined
+window_StorageManagerres ->undefined
+window_SubtleCryptores ->undefined
+window_Workletres ->undefined
+window_XRDOMOverlayStateres ->undefined
+window_XRLayerres ->undefined
+window_XRWebGLBindingres ->undefined
+window_AudioDatares ->undefined
+window_EncodedAudioChunkres ->undefined
+window_EncodedVideoChunkres ->undefined
+window_ImageTrackres ->undefined
+window_ImageTrackListres ->undefined
+window_VideoColorSpaceres ->undefined
+window_VideoFrameres ->undefined
+window_AudioDecoderres ->undefined
+window_AudioEncoderres ->undefined
+window_ImageDecoderres ->undefined
+window_VideoDecoderres ->undefined
+window_VideoEncoderres ->undefined
+window_AuthenticatorAssertionResponseres ->undefined
+window_AuthenticatorAttestationResponseres ->undefined
+window_AuthenticatorResponseres ->undefined
+window_PublicKeyCredentialres ->undefined
+window_Bluetoothres ->function Bluetooth() { [native code] }
+window_BluetoothCharacteristicPropertiesres ->undefined
+window_BluetoothDeviceres ->undefined
+window_BluetoothRemoteGATTCharacteristicres ->undefined
+window_BluetoothRemoteGATTDescriptorres ->undefined
+window_BluetoothRemoteGATTServerres ->undefined
+window_BluetoothRemoteGATTServiceres ->undefined
+window_EyeDropperres ->undefined
+window_FileSystemDirectoryHandleres ->undefined
+window_FileSystemFileHandleres ->undefined
+window_FileSystemHandleres ->undefined
+window_FileSystemWritableFileStreamres ->undefined
+window_FragmentDirectiveres ->undefined
+window_GravitySensorres ->undefined
+window_HIDres ->undefined
+window_HIDConnectionEventres ->undefined
+window_HIDDeviceres ->undefined
+window_HIDInputReportEventres ->undefined
+window_IdleDetectorres ->undefined
+window_MediaStreamTrackGeneratorres ->undefined
+window_MediaStreamTrackProcessorres ->undefined
+window_OTPCredentialres ->undefined
+window_PaymentAddressres ->undefined
+window_PaymentRequestres ->undefined
+window_PaymentResponseres ->undefined
+window_PaymentMethodChangeEventres ->undefined
+window_Presentationres ->undefined
+window_PresentationAvailabilityres ->undefined
+window_PresentationConnectionres ->undefined
+window_PresentationConnectionAvailableEventres ->undefined
+window_PresentationConnectionCloseEventres ->function PresentationConnectionCloseEvent() { [native code] }
+window_PresentationConnectionListres ->undefined
+window_PresentationReceiverres ->undefined
+window_PresentationRequestres ->undefined
+window_Profilerres ->undefined
+window_Schedulingres ->undefined
+window_ScreenDetailedres ->undefined
+window_ScreenDetailsres ->undefined
+window_Serialres ->undefined
+window_SerialPortres ->undefined
+window_USBres ->undefined
+window_USBAlternateInterfaceres ->undefined
+window_USBConfigurationres ->undefined
+window_USBConnectionEventres ->undefined
+window_USBDeviceres ->undefined
+window_USBEndpointres ->undefined
+window_USBInTransferResultres ->undefined
+window_USBInterfaceres ->undefined
+window_USBIsochronousInTransferPacketres ->undefined
+window_USBIsochronousInTransferResultres ->undefined
+window_USBIsochronousOutTransferPacketres ->undefined
+window_USBIsochronousOutTransferResultres ->undefined
+window_USBOutTransferResultres ->undefined
+window_VirtualKeyboardres ->undefined
+window_WakeLockres ->undefined
+window_WakeLockSentinelres ->undefined
+window_WebTransportres ->undefined
+window_WebTransportBidirectionalStreamres ->undefined
+window_WebTransportDatagramDuplexStreamres ->undefined
+window_WebTransportErrorres ->undefined
+window_XRAnchorres ->undefined
+window_XRAnchorSetres ->undefined
+window_XRBoundedReferenceSpaceres ->undefined
+window_XRFrameres ->undefined
+window_XRInputSourceres ->undefined
+window_XRInputSourceArrayres ->undefined
+window_XRInputSourceEventres ->undefined
+window_XRInputSourcesChangeEventres ->undefined
+window_XRPoseres ->undefined
+window_XRReferenceSpaceres ->undefined
+window_XRReferenceSpaceEventres ->undefined
+window_XRRenderStateres ->undefined
+window_XRRigidTransformres ->undefined
+window_XRSessionres ->undefined
+window_XRSessionEventres ->undefined
+window_XRSpaceres ->undefined
+window_XRSystemres ->undefined
+window_XRViewres ->undefined
+window_XRViewerPoseres ->undefined
+window_XRViewportres ->undefined
+window_XRWebGLLayerres ->undefined
+window_XRCPUDepthInformationres ->undefined
+window_XRDepthInformationres ->undefined
+window_XRWebGLDepthInformationres ->undefined
+window_XRHitTestResultres ->undefined
+window_XRHitTestSourceres ->undefined
+window_XRRayres ->undefined
+window_XRTransientInputHitTestResultres ->undefined
+window_XRTransientInputHitTestSourceres ->undefined
+window_XRLightEstimateres ->undefined
+window_XRLightProberes ->undefined
+window_getScreenDetailsres ->undefined
+window_showDirectoryPickerres ->undefined
+window_showOpenFilePickerres ->undefined
+window_showSaveFilePickerres ->undefined
+window_AnimationPlaybackEventres ->undefined
+window_AnimationTimelineres ->undefined
+window_CSSAnimationres ->undefined
+window_CSSTransitionres ->undefined
+window_DocumentTimelineres ->undefined
+window_BackgroundFetchManagerres ->undefined
+window_BackgroundFetchRecordres ->undefined
+window_BackgroundFetchRegistrationres ->undefined
+window_BluetoothUUIDres ->function BluetoothUUID() { [native code] }
+window_CSSFontPaletteValuesRuleres ->undefined
+window_CaptureHandleChangeEventres ->undefined
+window_CustomStateSetres ->undefined
+window_DelegatedInkTrailPresenterres ->undefined
+window_Inkres ->undefined
+window_MediaMetadatares ->undefined
+window_MediaSessionres ->undefined
+window_MediaSourceres ->undefined
+window_SourceBufferres ->function SourceBuffer() { [native code] }
+window_SourceBufferListres ->undefined
+window_MediaStreamTrackres ->undefined
+window_NavigateEventres ->undefined
+window_NavigationCurrentEntryChangeEventres ->undefined
+window_NavigationDestinationres ->undefined
+window_NavigationHistoryEntryres ->undefined
+window_NavigationTransitionres ->undefined
+window_NavigatorUADatares ->undefined
+window_Notificationres ->function Notification() { [native code] }
+window_PaymentInstrumentsres ->undefined
+window_PaymentManagerres ->undefined
+window_PaymentRequestUpdateEventres ->undefined
+window_PeriodicSyncManagerres ->undefined
+window_PermissionStatusres ->function PermissionStatus() { [native code] }
+window_Permissionsres ->function Permissions() { [native code] }
+window_PictureInPictureEventres ->undefined
+window_PictureInPictureWindowres ->undefined
+window_PushManagerres ->undefined
+window_PushSubscriptionres ->undefined
+window_PushSubscriptionOptionsres ->undefined
+window_RemotePlaybackres ->undefined
+window_Schedulerres ->function Scheduler() { [native code] }
+window_TaskControllerres ->undefined
+window_TaskPriorityChangeEventres ->undefined
+window_TaskSignalres ->undefined
+window_SharedWorkerres ->undefined
+window_SpeechSynthesisErrorEventres ->undefined
+window_SpeechSynthesisEventres ->undefined
+window_SpeechSynthesisUtteranceres ->function SpeechSynthesisUtterance() { [native code] }
+window_TrustedHTMLres ->undefined
+window_TrustedScriptres ->undefined
+window_TrustedScriptURLres ->undefined
+window_TrustedTypePolicyres ->undefined
+window_URLPatternres ->undefined
+window_VideoPlaybackQualityres ->undefined
+window_VirtualKeyboardGeometryChangeEventres ->undefined
+window_XSLTProcessorres ->undefined
+window_webkitSpeechGrammarres ->undefined
+window_webkitSpeechGrammarListres ->undefined
+window_webkitSpeechRecognitionres ->undefined
+window_webkitSpeechRecognitionErrorres ->undefined
+window_webkitSpeechRecognitionEventres ->undefined
+window_openDatabase ->undefined->undefined->undefined->undefined database
+window.webkitRequestFileSystem  window.webkitRequestFileSystem ->undefined
+window_webkitResolveLocalFileSystemURLres ->undefined
+window_dirres ->undefined
+window_dirxmlres ->undefined
+window_profileres ->undefined
+window_profileEndres ->undefined
+window_clearres ->undefined
+window_tableres ->undefined
+window_keysres ->undefined
+window_valuesres ->undefined
+window_debugres ->undefined
+window_undebugres ->undefined
+window_monitorres ->undefined
+window_unmonitorres ->undefined
+window_inspectres ->undefined
+window_copyres ->undefined
+window_queryObjectsres ->undefined
+window_getEventListenersres ->undefined
+window_getAccessibleNameres ->undefined
+window_getAccessibleRoleres ->undefined
+window_monitorEventsres ->undefined
+window_unmonitorEventsres ->undefined
+window_$$res ->undefined
+window_$xres ->undefined
+window_self_get window  
+window_webkitStorageInfo_get webkitStorageInfo->[object DeprecatedStorageInfo]
+window_document_get document->[object HTMLDocument]
+window_location_get location_->[object Location]
+window_toolbar_get res -> [object BarProp]
+window_menubar_get res -> [object BarProp]
+window_locationbar_get res ->[object BarProp]
+window_customElements_get customElements->[object CustomElementRegistry]
+window_screen_get screen->[object Screen]
+window_navigator_get navigator->[object Navigator]
+window_performance_get performance->[object Performance]
+window_sessionStorage_get sessionStorage->[object Storage]
+window_localStorage_get localStorage->[object Storage]
+window_navigation_get navigation->[object Navigation]
+window_visualViewport_get res -> [object VisualViewport]
+window_history_get history->[object History]
+window_indexedDB_get indexedDB->[object IDBFactory]
+window_trustedTypes_get res -> [object TrustedTypePolicyFactory]
+window_cookieStore_get res -> [object CookieStore]
+window_external_get res -> [object External]
+window_caches_get res -> [object CacheStorage]
+window_webkitStorageInfo_get webkitStorageInfo->[object DeprecatedStorageInfo]
+window_speechSynthesis_get res ->[object SpeechSynthesis]
+window_self_get window  
+window_name_get name ->
+window_personalbar_get res ->[object BarProp]
+window_scrollbars_get res ->[object BarProp]
+window_statusbar_get res ->[object BarProp]
+window_status_get  返回的为jsdom中的window.status->
+window_closed_get  window.closed->false
+window_frames_get  返回的为jsdom中的window
+window_length_get  length ->1  boss直聘检测
+window_top_get window
+'[window_opener_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_opener_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_parent_get window
+'[window_frameElement_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_frameElement_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_origin_get  返回的为jsdom中的window.origin->https://www.douyin.com
+window_innerWidth_get innerWidth ->1024
+window_innerHeight_get innerHeight ->768
+window_scrollX_get scrollX ->0
+window_pageXOffset_get scrollX ->0
+window_scrollY_get scrollY ->0
+window_pageYOffset_get pageYOffset ->0
+window_screenX_get screenX ->0
+window_screenY_get screenY ->0
+window_outerWidth_get outerWidth ->1024
+window_outerHeight_get outerHeight ->768
+window_innerWidth_get devicePixelRatio ->1.5
+window_navigator_get navigator->[object Navigator]
+window_clientInformation_get res- >[object Navigator]
+window_screenLeft_get screenLeft ->0
+window_screenTop_get screenTop ->0
+window_defaultStatus_get defaultStatus ->undefined
+window_defaultstatus_get defaultstatus ->undefined
+window_styleMedia_get res ->[object StyleMedia]
+'[window_onsearch_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onsearch_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_isSecureContext_get res ->true
+'[window_onappinstalled_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onappinstalled_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onbeforeinstallprompt_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onbeforeinstallprompt_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_crypto_get crypto->[object Crypto]
+'[window_onbeforexrselect_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onbeforexrselect_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onabort_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onabort_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onblur_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onblur_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncancel_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncancel_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncanplay_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncanplay_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncanplaythrough_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncanplaythrough_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_onchange_getres ->null
+window_onclick_getres ->null
+window_onclose_getres ->null
+window_oncontextlost_getres ->null
+window_oncontextmenu_getres ->null
+window_oncontextrestored_getres ->null
+window_oncuechange_getres ->null
+window_ondblclick_getres ->null
+window_ondrag_getres ->null
+window_ondragend_getres ->null
+window_ondragenter_getres ->null
+window_ondragleave_getres ->null
+window_ondragover_getres ->null
+window_ondragstart_getres ->null
+window_ondrop_getres ->null
+window_ondurationchange_getres ->null
+window_onemptied_getres ->null
+window_onended_getres ->null
+window_onerror_getres ->null
+window_onfocus_getres ->null
+window_onformdata_getres ->null
+window_oninput_getres ->null
+window_oninvalid_getres ->null
+window_onkeydown_getres ->null
+window_onkeypress_getres ->null
+window_onkeyup_getres ->null
+window_onload_getres ->null
+window_onloadeddata_getres ->null
+window_onloadedmetadata_getres ->null
+window_onloadstart_getres ->null
+window_onmousedown_getres ->null
+window_onmouseenter_getres ->null
+window_onmouseleave_getres ->null
+window_onmousemove_getres ->null
+window_onmouseout_getres ->null
+window_onmouseover_getres ->null
+window_onmouseup_getres ->null
+window_onmousewheel_getres ->null
+window_onpause_getres ->null
+window_onplay_getres ->null
+window_onplaying_getres ->null
+window_onprogress_getres ->null
+window_onratechange_getres ->null
+window_onreset_getres ->null
+window_onresize_getres ->null
+window_onscroll_getres ->null
+window_onsecuritypolicyviolation_getres ->null
+window_onseeked_getres ->null
+window_onseeking_getres ->null
+window_onselect_getres ->null
+window_onslotchange_getres ->null
+window_onstalled_getres ->null
+window_onsubmit_getres ->null
+window_onsuspend_getres ->null
+window_ontimeupdate_getres ->null
+window_ontoggle_getres ->null
+window_onvolumechange_getres ->null
+window_onwaiting_getres ->null
+window_onwebkitanimationend_getres ->null
+window_onwebkitanimationiteration_getres ->null
+window_onwebkitanimationstart_getres ->null
+window_onwebkittransitionend_getres ->null
+window_onwheel_getres ->null
+window_onauxclick_getres ->null
+window_ongotpointercapture_getres ->null
+window_onlostpointercapture_getres ->null
+window_onpointerdown_getres ->null
+window_onpointermove_getres ->null
+window_onpointerup_getres ->null
+window_onpointercancel_getres ->null
+window_onpointerover_getres ->null
+window_onpointerout_getres ->null
+window_onpointerenter_getres ->null
+window_onpointerleave_getres ->null
+window_onselectstart_getres ->null
+window_onselectionchange_getres ->null
+window_onanimationend_getres ->null
+window_onanimationiteration_getres ->null
+window_onanimationstart_getres ->null
+window_ontransitionrun_getres ->null
+window_ontransitionstart_getres ->null
+window_ontransitionend_getres ->null
+window_ontransitioncancel_getres ->null
+window_onafterprint_getres ->null
+window_onbeforeprint_getres ->null
+window_onbeforeunload_get  返回的为jsdom中的window.onbeforeunload ->null
+window_onhashchange_getres ->null
+window_onlanguagechange_getres ->null
+window_onmessage_get  返回的为jsdom中的window.onmessage ->null
+window_onmessageerror_getres ->null
+window_onoffline_getres ->null
+window_ononline_getres ->null
+window_onpagehide_getres ->null
+window_onpageshow_getres ->null
+window_onpopstate_getres ->null
+window_onrejectionhandled_getres ->null
+window_onstorage_getres ->null
+window_onunhandledrejection_getres ->null
+window_onunload_getres ->null
+window_ondevicemotion_getres ->null
+window_ondeviceorientation_getres ->null
+window_ondeviceorientationabsolute_getres ->null
+window_onbeforematch_getres ->null
+window_originAgentCluster_getres ->null
+window_onpointerrawupdate_getres ->null
+window_crossOriginIsolated_getres ->null
+window_scheduler_getres ->[object Scheduler]
+'[window_event_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+'[window_event_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+'[window_offscreenBuffering_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+'[window_offscreenBuffering_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+window_document_get document->[object HTMLDocument]
+window_location_get location_->[object Location]
+window_toolbar_get res -> [object BarProp]
+window_menubar_get res -> [object BarProp]
+window_locationbar_get res ->[object BarProp]
+window_customElements_get customElements->[object CustomElementRegistry]
+window_screen_get screen->[object Screen]
+window_navigator_get navigator->[object Navigator]
+window_performance_get performance->[object Performance]
+window_sessionStorage_get sessionStorage->[object Storage]
+window_localStorage_get localStorage->[object Storage]
+window_navigation_get navigation->[object Navigation]
+window_visualViewport_get res -> [object VisualViewport]
+window_history_get history->[object History]
+window_indexedDB_get indexedDB->[object IDBFactory]
+window_trustedTypes_get res -> [object TrustedTypePolicyFactory]
+window_cookieStore_get res -> [object CookieStore]
+window_external_get res -> [object External]
+window_caches_get res -> [object CacheStorage]
+window_webkitStorageInfo_get webkitStorageInfo->[object DeprecatedStorageInfo]
+window_speechSynthesis_get res ->[object SpeechSynthesis]
+window_self_get window  
+window_name_get name ->
+window_personalbar_get res ->[object BarProp]
+window_scrollbars_get res ->[object BarProp]
+window_statusbar_get res ->[object BarProp]
+window_status_get  返回的为jsdom中的window.status->
+window_closed_get  window.closed->false
+window_frames_get  返回的为jsdom中的window
+window_length_get  length ->1  boss直聘检测
+window_top_get window
+'[window_opener_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_opener_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_parent_get window
+'[window_frameElement_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_frameElement_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_origin_get  返回的为jsdom中的window.origin->https://www.douyin.com
+window_innerWidth_get innerWidth ->1024
+window_innerHeight_get innerHeight ->768
+window_scrollX_get scrollX ->0
+window_pageXOffset_get scrollX ->0
+window_scrollY_get scrollY ->0
+window_pageYOffset_get pageYOffset ->0
+window_screenX_get screenX ->0
+window_screenY_get screenY ->0
+window_outerWidth_get outerWidth ->1024
+window_outerHeight_get outerHeight ->768
+window_innerWidth_get devicePixelRatio ->1.5
+window_navigator_get navigator->[object Navigator]
+window_clientInformation_get res- >[object Navigator]
+window_screenLeft_get screenLeft ->0
+window_screenTop_get screenTop ->0
+window_defaultStatus_get defaultStatus ->undefined
+window_defaultstatus_get defaultstatus ->undefined
+window_styleMedia_get res ->[object StyleMedia]
+'[window_onsearch_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onsearch_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_isSecureContext_get res ->true
+'[window_onappinstalled_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onappinstalled_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onbeforeinstallprompt_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onbeforeinstallprompt_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_crypto_get crypto->[object Crypto]
+'[window_onbeforexrselect_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onbeforexrselect_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onabort_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onabort_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onblur_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_onblur_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncancel_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncancel_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncanplay_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncanplay_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncanplaythrough_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+'[window_oncanplaythrough_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
+window_onchange_getres ->null
+window_onclick_getres ->null
+window_onclose_getres ->null
+window_oncontextlost_getres ->null
+window_oncontextmenu_getres ->null
+window_oncontextrestored_getres ->null
+window_oncuechange_getres ->null
+window_ondblclick_getres ->null
+window_ondrag_getres ->null
+window_ondragend_getres ->null
+window_ondragenter_getres ->null
+window_ondragleave_getres ->null
+window_ondragover_getres ->null
+window_ondragstart_getres ->null
+window_ondrop_getres ->null
+window_ondurationchange_getres ->null
+window_onemptied_getres ->null
+window_onended_getres ->null
+window_onerror_getres ->null
+window_onfocus_getres ->null
+window_onformdata_getres ->null
+window_oninput_getres ->null
+window_oninvalid_getres ->null
+window_onkeydown_getres ->null
+window_onkeypress_getres ->null
+window_onkeyup_getres ->null
+window_onload_getres ->null
+window_onloadeddata_getres ->null
+window_onloadedmetadata_getres ->null
+window_onloadstart_getres ->null
+window_onmousedown_getres ->null
+window_onmouseenter_getres ->null
+window_onmouseleave_getres ->null
+window_onmousemove_getres ->null
+window_onmouseout_getres ->null
+window_onmouseover_getres ->null
+window_onmouseup_getres ->null
+window_onmousewheel_getres ->null
+window_onpause_getres ->null
+window_onplay_getres ->null
+window_onplaying_getres ->null
+window_onprogress_getres ->null
+window_onratechange_getres ->null
+window_onreset_getres ->null
+window_onresize_getres ->null
+window_onscroll_getres ->null
+window_onsecuritypolicyviolation_getres ->null
+window_onseeked_getres ->null
+window_onseeking_getres ->null
+window_onselect_getres ->null
+window_onslotchange_getres ->null
+window_onstalled_getres ->null
+window_onsubmit_getres ->null
+window_onsuspend_getres ->null
+window_ontimeupdate_getres ->null
+window_ontoggle_getres ->null
+window_onvolumechange_getres ->null
+window_onwaiting_getres ->null
+window_onwebkitanimationend_getres ->null
+window_onwebkitanimationiteration_getres ->null
+window_onwebkitanimationstart_getres ->null
+window_onwebkittransitionend_getres ->null
+window_onwheel_getres ->null
+window_onauxclick_getres ->null
+window_ongotpointercapture_getres ->null
+window_onlostpointercapture_getres ->null
+window_onpointerdown_getres ->null
+window_onpointermove_getres ->null
+window_onpointerup_getres ->null
+window_onpointercancel_getres ->null
+window_onpointerover_getres ->null
+window_onpointerout_getres ->null
+window_onpointerenter_getres ->null
+window_onpointerleave_getres ->null
+window_onselectstart_getres ->null
+window_onselectionchange_getres ->null
+window_onanimationend_getres ->null
+window_onanimationiteration_getres ->null
+window_onanimationstart_getres ->null
+window_ontransitionrun_getres ->null
+window_ontransitionstart_getres ->null
+window_ontransitionend_getres ->null
+window_ontransitioncancel_getres ->null
+window_onafterprint_getres ->null
+window_onbeforeprint_getres ->null
+window_onbeforeunload_get  返回的为jsdom中的window.onbeforeunload ->null
+window_onhashchange_getres ->null
+window_onlanguagechange_getres ->null
+window_onmessage_get  返回的为jsdom中的window.onmessage ->null
+window_onmessageerror_getres ->null
+window_onoffline_getres ->null
+window_ononline_getres ->null
+window_onpagehide_getres ->null
+window_onpageshow_getres ->null
+window_onpopstate_getres ->null
+window_onrejectionhandled_getres ->null
+window_onstorage_getres ->null
+window_onunhandledrejection_getres ->null
+window_onunload_getres ->null
+window_ondevicemotion_getres ->null
+window_ondeviceorientation_getres ->null
+window_ondeviceorientationabsolute_getres ->null
+window_onbeforematch_getres ->null
+window_originAgentCluster_getres ->null
+window_onpointerrawupdate_getres ->null
+window_crossOriginIsolated_getres ->null
+window_scheduler_getres ->[object Scheduler]
+'[window_event_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+'[window_event_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+'[window_offscreenBuffering_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+'[window_offscreenBuffering_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'

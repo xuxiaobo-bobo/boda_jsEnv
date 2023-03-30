@@ -72,6 +72,7 @@ function getCode() {
     code += getFile("TrustedTypePolicyFactory")
     code += getFile('Scheduler')
     code += getFile("CookieStore")
+    code +=getFile('RTCSessionDescription')
     code+=  getFile('RTCDataChannel')
     code += getFile("CacheStorage")
     code +=getFile('Promise')

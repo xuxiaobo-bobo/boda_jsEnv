@@ -1,7 +1,11 @@
 // 浏览器接口具体的实现
 !function () {
 
-
+    bodavm.envFunc.Performance_now=function (){
+        let now=window.performance._boarg.now()
+        console.log(`Performance_now `,`res ->${now}`);
+        return now
+    }
 
     bodavm.envFunc.window_scheduler_get=function (){let arg=bodavm.memory.globalobj['scheduler']?bodavm.memory.globalobj['scheduler']:null;console.log(`window_scheduler_get`,`res ->${arg}`);return arg}
     bodavm.envFunc.window_crossOriginIsolated_get=function (){let arg=bodavm.memory.globalobj['crossOriginIsolated']?bodavm.memory.globalobj['crossOriginIsolated']:null;console.log(`window_crossOriginIsolated_get`,`res ->${arg}`);return arg}
@@ -918,92 +922,126 @@
     }
     bodavm.envFunc.window_oncanplaythrough_get = function () {
         let arg = bodavm.memory.window['oncanplaythrough']
+        arg._boarg= bodaobj.window['oncanplaythrough']
+
         console.log(`window_oncanplaythrough_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncanplay_get = function () {
         let arg = bodavm.memory.window['oncanplay']
+        arg._boarg= bodaobj.window['oncanplay']
+
         console.log(`window_oncanplay_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncancel_get = function () {
         let arg = bodavm.memory.window['oncancel']
+        arg._boarg= bodaobj.window['oncancel']
         console.log(`window_oncancel_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onblur_get = function () {
         let arg = bodavm.memory.window['onblur']
+        arg._boarg= bodaobj.window['onblur']
+
         console.log(`window_onblur_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onappinstalled_get = function () {
         let arg = bodavm.memory.window['onappinstalled']
+        arg._boarg= bodaobj.window['onappinstalled']
+
         console.log(`window_onappinstalled_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforeinstallprompt_get = function () {
         let arg = bodavm.memory.window['onbeforeinstallprompt']
+        arg._boarg= bodaobj.window['onbeforeinstallprompt']
+
         console.log(`window_onbeforeinstallprompt_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforexrselect_get = function () {
         let arg = bodavm.memory.window['onbeforexrselect']
+        arg._boarg= bodaobj.window['onbeforexrselect']
+
         console.log(`window_onbeforexrselect_get `, `res ->${arg}`);
         return arg
     }
 
     bodavm.envFunc.window_onabort_get = function () {
         let arg = bodavm.memory.window['onabort']
+        arg._boarg= bodaobj.window['onabort']
         console.log(`window_onabort_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_isSecureContext_get = function () {
         let arg = bodavm.memory.window['isSecureContext']
+        arg._boarg= bodaobj.window['isSecureContext']
+
         console.log(`window_isSecureContext_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onsearch_get = function () {
         let arg = bodavm.memory.globalobj['onsearch'] ? bodavm.memory.globalobj['onsearch'] : null
+        arg._boarg= bodaobj.window['onsearch']
+
         console.log(`window_onsearch_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_styleMedia_get = function () {
         let arg = bodavm.memory.globalobj['styleMedia'] ? bodavm.memory.globalobj['styleMedia'] : null
+        arg._boarg= bodaobj.window['styleMedia']
+
         console.log(`window_styleMedia_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_frameElement_get = function () {
         let arg = bodavm.memory.globalobj['frameElement'] ? bodavm.memory.globalobj['frameElement'] : null
+        arg._boarg= bodaobj.window['frameElement']
+
         console.log(`window_frameElement_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_opener_get = function () {
         let arg = bodavm.memory.globalobj['opener'] ? bodavm.memory.globalobj['opener'] : null
+        arg._boarg= bodaobj.window['opener']
+
         console.log(`window_opener_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_statusbar_get = function () {
         let arg = bodavm.memory.globalobj['statusbar']
+        arg._boarg= bodaobj.window['statusbar']
+
         console.log(`window_statusbar_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_scrollbars_get = function () {
         let arg = bodavm.memory.globalobj['scrollbars']
+        arg._boarg= bodaobj.window['scrollbars']
+
         console.log(`window_scrollbars_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_locationbar_get = function () {
         let arg = bodavm.memory.globalobj['locationbar']
+        arg._boarg= bodaobj.window['locationbar']
+
         console.log(`window_locationbar_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_personalbar_get = function () {
         let arg = bodavm.memory.globalobj['personalbar']
+        arg._boarg= bodaobj.window['personalbar']
+
         console.log(`window_personalbar_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_speechSynthesis_get = function () {
         let arg = bodavm.memory.globalobj['speechSynthesis']
+        arg._boarg= bodaobj.window['speechSynthesis']
+
         console.log(`window_speechSynthesis_get `, `res ->${arg}`);
         return arg
     }
@@ -1011,94 +1049,115 @@
 
     bodavm.envFunc.window_trustedTypes_get = function () {
         let arg = bodavm.memory.globalobj['trustedTypes']
+        arg._boarg= bodaobj.window['trustedTypes']
+
         console.log(`window_trustedTypes_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_cookieStore_get = function () {
         let arg = bodavm.memory.globalobj['cookieStore']
+        arg._boarg= bodaobj.window['cookieStore']
 
         console.log(`window_cookieStore_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_external_get = function () {
         let arg = bodavm.memory.globalobj['external']
+        arg._boarg= bodaobj.window['external']
 
         console.log(`window_external_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_caches_get = function () {
         let arg = bodavm.memory.globalobj['caches']
+        arg._boarg= bodaobj.window['caches']
+
         console.log(`window_caches_get `, `res -> ${arg}`);
         return arg
     }
 
     bodavm.envFunc.window_visualViewport_get = function () {
         let arg = bodavm.memory.globalobj['visualViewport']
+        arg._boarg= bodaobj.window['visualViewport']
+
         console.log(`window_visualViewport_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_menubar_get = function () {
         let arg = bodavm.memory.globalobj['menubar']
+        arg._boarg= bodaobj.window['menubar']
 
         console.log(`window_menubar_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_toolbar_get = function () {
         let arg = bodavm.memory.globalobj['toolbar']
+        arg._boarg= bodaobj.window['toolbar']
 
         console.log(`window_toolbar_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_CookieStore = function () {
         let arg = bodavm.memory.globalobj['CookieStore']
+        arg._boarg= bodaobj.window['CookieStore']
 
         console.log(`window_CookieStore `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Storage = function () {
         let arg = bodavm.memory.globalobj['Storage']
+        arg._boarg= bodaobj.window['Storage']
 
         console.log(`window_Storage `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Navigation = function () {
         let arg = bodavm.memory.globalobj['Navigation']
+        arg._boarg= bodaobj.window['Navigation']
 
         console.log(`window_Navigation `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_VisualViewport = function () {
         let arg = bodavm.memory.globalobj['VisualViewport']
+        arg._boarg= bodaobj.window['VisualViewport']
+
         console.log(`window_VisualViewport `, `res -> ${arg}`);
         return arg
     }
 
     bodavm.envFunc.window_History = function () {
         let arg = bodavm.memory.globalobj['History']
+        arg._boarg= bodaobj.window['History']
 
         console.log(`window_History `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_IDBFactory = function () {
         let arg = bodavm.memory.globalobj['IDBFactory']
+        arg._boarg= bodaobj.window['IDBFactory']
 
         console.log(`window_IDBFactory `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_TrustedTypePolicyFactory = function () {
         let arg = bodavm.memory.globalobj['TrustedTypePolicyFactory']
+        arg._boarg= bodaobj.window['TrustedTypePolicyFactory']
 
         console.log(`window_TrustedTypePolicyFactory `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_External = function () {
         let arg = bodavm.memory.globalobj['External']
+        arg._boarg= bodaobj.window['External']
 
         console.log(`window_External `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_CacheStorage = function () {
         let arg = bodavm.memory.globalobj['CacheStorage']
+        arg._boarg= bodaobj.window['CacheStorage']
+
         console.log(`window_CacheStorage `, `res -> ${arg}`);
         return arg
     }
@@ -1106,30 +1165,35 @@
 
     bodavm.envFunc.window_CustomElementRegistry = function () {
         let arg = bodavm.memory.globalobj['CustomElementRegistry']
+        arg._boarg= bodaobj.window['CustomElementRegistry']
 
         console.log(`window_CustomElementRegistry `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Window = function () {
         let arg = bodavm.memory.globalobj['Window']
+        arg._boarg= bodaobj.window['Window']
 
         console.log(`window_Window `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Screen = function () {
         let arg = bodavm.memory.globalobj['Screen']
+        arg._boarg= bodaobj.window['Screen']
 
         console.log(`window_Screen `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Navigator = function () {
         let arg = bodavm.memory.globalobj['Navigator']
+        arg._boarg= bodaobj.window['Navigator']
 
         console.log(`window_Navigator `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Performance = function () {
         let arg = bodavm.memory.globalobj['Performance']
+        arg._boarg= bodaobj.window['Performance']
 
         console.log(`window_Performance `, `res -> ${arg}`);
         return arg
@@ -1137,46 +1201,58 @@
 
     bodavm.envFunc.window_BarProp = function () {
         let arg = bodavm.memory.globalobj['BarProp']
+        arg._boarg= bodaobj.window['BarProp']
 
         console.log(`window_BarProp `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Location = function () {
         let arg = bodavm.memory.globalobj['Location']
+        arg._boarg= bodaobj.window['Location']
 
         console.log(`window_Location `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Document = function () {
         let arg = bodavm.memory.globalobj['Document']
+        arg._boarg= bodaobj.window['Document']
 
         console.log(`window_Document `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_webkitStorageInfo_get = function () {
         let webkitStorageInfo_ = bodavm.memory.globalobj['webkitStorageInfo']
+        webkitStorageInfo_._boarg= bodaobj.window['webkitStorageInfo']
+
         console.log(`window_webkitStorageInfo_get `, `webkitStorageInfo->`, webkitStorageInfo_);
         return webkitStorageInfo_
     }
     bodavm.envFunc.window_navigation_get = function () {
         let navigation_ = bodavm.memory.globalobj['navigation']
+        navigation_._boarg= bodaobj.window['navigation']
+
         console.log(`window_navigation_get `, `navigation->`, navigation_);
         return navigation_
     }
     bodavm.envFunc.window_performance_get = function () {
         let perf = bodavm.memory.globalobj['performance']
+        perf._boarg= bodaobj.window['performance']
+
         console.log(`window_performance_get `, `performance->`, perf);
-        debugger
+        // debugger
         return perf
     }
     bodavm.envFunc.window_navigator_get = function () {
         let navigator_ = bodavm.memory.globalobj.navigator
         console.log(`window_navigator_get `, `navigator->`, navigator_);
+        navigator_._boarg= bodaobj.window['navigator']
 
         return navigator_
     }
     bodavm.envFunc.window_customElements_get = function () {
         let customElements_ = bodavm.memory.globalobj.customElements
+        customElements_._boarg= bodaobj.window['customElements']
+
         console.log(`window_customElements_get `, `customElements->`, customElements_);
 
         return customElements_
@@ -1184,6 +1260,7 @@
     bodavm.envFunc.window_screen_get = function () {
         let screen_ = bodavm.memory.globalobj.screen
         console.log(`window_screen_get `, `screen->`, screen_);
+        screen_._boarg= bodaobj.window['screen']
 
         return screen_
     }
@@ -1192,47 +1269,59 @@
     bodavm.envFunc.window_history_get = function () {
         let history_ = bodavm.memory.globalobj.history
         console.log(`window_history_get `, `history->`, history_);
+        history_._boarg= bodaobj.window['history']
 
         return history_
     }
     bodavm.envFunc.window_localStorage_get = function window_localStorage_get() {
         let localStorage_ = bodavm.memory.globalobj.localStorage
         console.log(`window_localStorage_get `, `localStorage->`, localStorage_);
+        localStorage_._boarg= bodaobj.window['localStorage']
 
         return localStorage_
     }
     bodavm.envFunc.window_indexedDB_get = function window_indexedDB_get() {
         let indexedDB_ = bodavm.memory.globalobj.indexedDB
         console.log(`window_indexedDB_get `, `indexedDB->`, indexedDB_);
+        indexedDB_._boarg= bodaobj.window['indexedDB']
 
         return indexedDB_
     }
     bodavm.envFunc.window_sessionStorage_get = function window_sessionStorage_get() {
         let sessionStorage_ = bodavm.memory.globalobj.sessionStorage
         console.log(`window_sessionStorage_get `, `sessionStorage->`, sessionStorage_);
+        sessionStorage_._boarg= bodaobj.window['sessionStorage']
 
         return sessionStorage_
     }
     bodavm.envFunc.window_crypto_get = function window_crypto_get() {
         let crypto_ = bodavm.memory.globalobj.crypto
+        // crypto_._boarg= globalobj.window['crypto']
+
         console.log(`window_crypto_get `, `crypto->`, crypto_);
         return crypto_
     }
     bodavm.envFunc.window_document_get = function window_document_get() {
         // debugger
         let document_ = bodavm.memory.globalobj.document
+        document_._boarg= bodaobj.window['document']
+
         console.log(`window_document_get `, `document->`, document_);
         return document_
     }
     bodavm.envFunc.window_location_get = function window_location_get() {
         // debugger
         let location_ = bodavm.memory.globalobj.location
+        location_._boarg= bodaobj.window['location']
+
         console.log(`window_location_get `, `location_->`, location_);
         return location_
     }
     bodavm.envFunc.window_clientInformation_get = function window_clientInformation_get() {
         // debugger
         let res = navigator
+        res._boarg= bodaobj.window['navigator']
+
         console.log(`window_clientInformation_get `, `res- >${res}`);
         return res
     }
@@ -1761,7 +1850,9 @@
     }
     bodavm.envFunc.window_length_get = function window_length_get() {
         let _length = bodaobj.window.length;
-        console.log(`window_length_get `, ` 返回的为jsdom中的window.length ->${_length}`);
+    
+        console.log(`window_length_get `, ` length ->${_length}  boss直聘检测`);
+
         return _length
     }
     bodavm.envFunc.window_onbeforeunload_set = function window_onbeforeunload_set() {
@@ -1775,7 +1866,7 @@
         let arg2 = arguments[2]
         let arg3 = arguments[2]
         // let openDatabase
-        debugger
+        // debugger
         let database=bodavm.memory.globalobj['database']
         console.log(`window_openDatabase `, `->${arg}->${arg1}->${arg2}->${arg3} database`);
         return database
@@ -1944,7 +2035,7 @@
         for (let i = 2; i < length; i++) {
             argList.push(arguments[i]);
         }
-        console.log(`window_setInterval `, `func->${func} `, `delay->${delay} `, `argList->${argList}  `);
+        console.log(`window_setInterval `, `func->${func.toString().length>50?func.toString().substr(0,50)+'...':func} `, `delay->${delay} `, `argList->${argList}  `);
 
         bodavm.memory.globalInit.timeoutID += 1
         let event = {
@@ -2180,7 +2271,11 @@
     bodavm.envFunc.Document_onprogress_get = function Document_onprogress_get() { console.log("Document_onprogress_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_onratechange_get = function Document_onratechange_get() { console.log("Document_onratechange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_querySelector = function Document_querySelector() { console.log("Document_querySelector", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-
+    bodavm.envFunc.Document_write=function (){
+        let html = arguments[0]
+        bodaobj.document.write(html)
+        console.log(`Document_write `, `html ->${html}`);
+    }
     bodavm.envFunc.Document_createEvent = function Document_createEvent() {
         // debugger
         let arg = arguments[0].toUpperCase()
@@ -2200,7 +2295,7 @@
 
             case "TOUCHEVENT":
                 console.log(`Document_createEvent  `, event, `   该事件只有在触摸平面（触摸屏、触摸板等）才会触发`);
-                bodavm.toolsFunc.throwError('DOMException', `Failed to execute 'createEvent'on 'Document': The provided event type ('TouchEvent') is invalid.`)
+                return bodavm.toolsFunc.throwError('DOMException', `Failed to execute 'createEvent'on 'Document': The provided event type ('TouchEvent') is invalid.`)
             default:
                 console.log(`Document_createEvent  `, `${arg}  未实现`);
 
@@ -2693,7 +2788,7 @@
     bodavm.envFunc.Node_childNodes_get = function Node_childNodes_get() { console.log("Nodes_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Node_isConnected_get = function Node_isConnected_get() { console.log("Node_isConnected_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Node_nextSibling_get = function Node_nextSibling_get() {
-        debugger
+        // debugger
         let res = {}
         _next = this._boarg.nextSibling
         if (_next == null) {
@@ -2709,7 +2804,7 @@
     }
     bodavm.envFunc.Node_nodeType_get = function Node_nodeType_get() {
         if (bodavm.config.isdebug) { debugger }
-        debugger
+        // debugger
         let nodetype = this._boarg.nodeType
         console.log(`Node_nodeType_get `, `nodetype ->${nodetype}`);
         return nodetype
@@ -2722,7 +2817,7 @@
         return nodeName_
     }
     bodavm.envFunc.Node_firstChild_get = function Node_firstChild_get() {
-        debugger
+        // debugger
         let res = {}
         let frist_ = this._boarg.firstChild
         if (frist_) {
@@ -4263,7 +4358,7 @@
             'isTrusted': true,
             'target': this
         }
-        console.log(`EventTarget_addEventListener `, `type->${type} `, `callback->${callback} `, `options->${options ? options : []}  `)
+        console.log(`EventTarget_addEventListener `, `type->${type} `, `callback->${callback.toString().length>50?callback.toString().substr(0,50)+'...':callback} `, `options->${options ? options : []}  `)
 
         bodavm.memory.asyncEvent.listener[type].push(event);
 
@@ -4357,12 +4452,14 @@
         if (this._bocanvas) {
             let res = this._bocanvas.toDataURL()
             console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
-            return res
+            // return res
+            return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         } else {
             debugger
             res = bodavm.memory.userInit.canvas_webgl
             console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
-            return res
+            // return res
+            return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         }
 
     }
@@ -5471,18 +5568,29 @@
         let failureCallback = arguments[1]
         let options = arguments[3]
         if (bodavm.config.isdebug) { debugger };
-        bodavm.toolsFunc.symbolProperty(successCallback)
-        bodavm.toolsFunc.symbolProperty(failureCallback)
-        console.log(`RTCPeerConnection_createOffer `, `successCallback->${successCallback} `, `failureCallback->${failureCallback} `, `options->${options},!!!!!!!!!未完善!!!!!!!!!!!!  `);
-        return new Promise((successCallback, failureCallback) => {
+        // bodavm.toolsFunc.symbolProperty(successCallback)
+        // bodavm.toolsFunc.symbolProperty(failureCallback)
 
-        }).then(successCallback => {
-            successCallback()
-        },
-            failureCallback => {
-                failureCallback()
-            }
-        )
+        let  retSessionDescription = {};
+        retSessionDescription.__proto__ = bodavm.memory.globalobj['RTCSessionDescription'].prototype
+        // debugger
+        // bodavm.toolsFunc.symbolProperty(batteryManager)
+        console.log(`RTCPeerConnection_createOffer `, `successCallback->${successCallback} `, `failureCallback->${failureCallback} `, `options->${options},!!!!!!!!!未完善!!!!!!!!!!!!  `);
+
+        let promise = new Promise((resolve, reject) => {
+            resolve(retSessionDescription)
+        })
+
+        return promise
+        
+        // return new Promise((successCallback, failureCallback) => {
+        // }).then(successCallback => {
+        //     successCallback()
+        // },
+        //     failureCallback => {
+        //         failureCallback()
+        //     }
+        // )
     }
 
 

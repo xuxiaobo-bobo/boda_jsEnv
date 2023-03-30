@@ -26,7 +26,7 @@ bodavm.config.proxy = false; //是否代理
 
 
 //网站为r4或者r5 设置为true 否则请关闭
-bodavm.config.isrs = true  //判断当前网站是不是瑞数
+bodavm.config.isrs = false  //判断当前网站是不是瑞数
 //网站为r6 设置为true body设置为0 否则请把true改为false
 bodavm.memory.rs6=false
 bodavm.memory.rs6_body=0
@@ -112,33 +112,31 @@ bodavm.memory.IDBOpenDBRequest = {
 }
 
 
-
-
 bodavm.memory.location={
-    origin:"http://sthjt.hubei.gov.cn",
+    origin:"https://www.douyin.com",
     hash:"",
-    pathname:"/site/sthjt/search.html",
-    search:"?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
-    href:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
+    pathname:"/",
+    search:"",
+    href:"https://www.douyin.com/",
     port:"",
-    protocol:"http:",
-    host:"sthjt.hubei.gov.cn",
+    protocol:"https:",
+    host:"www.douyin.com",
     ancestorOrigins:"{}",
-    hostname:"sthjt.hubei.gov.cn"
+    hostname:"www.douyin.com"
 };
 
 bodavm.memory.document={
-    URL:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
-    referrer:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
-    documentURI:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
+    URL:"https://www.douyin.com/",
+    referrer:"https://www.douyin.com/",
+    documentURI:"https://www.douyin.com/",
     compatMode:"CSS1Compat",
     dir:"",
-    title:"湖北省生态环境厅",
+    title:"抖音-记录美好生活",
     designMode:"off",
     readyState:"complete",
     contentType:"text/html",
     inputEncoding:"UTF-8",
-    domain:"sthjt.hubei.gov.cn",
+    domain:"www.douyin.com",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
@@ -165,49 +163,57 @@ bodavm.memory.screen={
     colorDepth:24,
     availLeft:0,
     availTop:0,
-    isExtended:undefined,
+    isExtended:false,
     orientation:{},
-    onchange:undefined,
+    onchange:null,
 };
 
 bodavm.memory.navigator={
     language:"zh-CN",
-    userAgent:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
-    appVersion:"5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.57",
+    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.57",
     vendor:"Google Inc.",
     appName:"Netscape",
     appCodeName:"Mozilla",
     cookieEnabled:true,
-    languages:["zh-CN","zh"],
+    languages:["zh-CN","en","en-GB","en-US"],
     productSub:"20030107",
-    userAgentData:undefined,
-    xr:undefined,
+    userAgentData:{"brands":[{"brand":"Chromium","version":"110"},{"brand":"Not A(Brand","version":"24"},{"brand":"Microsoft Edge","version":"110"}],"mobile":false,"platform":"Windows"},
+    xr:{},
     platform:'Win32',
     webkitPersistentStorage:{},
     connection:{},
     javaEnabled:false,
     product:'Gecko',
     vendorSub:"",
-    deviceMemory:undefined,
+    deviceMemory:8,
     maxTouchPoints:0
 };
 bodavm.memory.window={
     name:"",
     innerWidth:1440,
     innerHeight:817,
-    origin:"http://sthjt.hubei.gov.cn",
+    origin:"https://www.douyin.com",
     outerWidth:1440,
     outerHeight:920,
-    defaultStatus:"",
-    defaultstatus:"",
+    defaultStatus:undefined,
+    defaultstatus:undefined,
     devicePixelRatio:1.5,
-    isSecureContext:false,
-    length:1,
+    isSecureContext:true,
+    length:0,
     status:"",
     onmessage:null,
-    onbeforeunload:function _$fx(_$jL){_$eA?(_$jN(new _$d0(_$hn[58],{},_$hf(_$jL[_$_8[73]]))),_$eu()):0;},
+    onbeforeunload:null,
     closed:false,
-    isSecureContext:true
+    isSecureContext:true,
+    onappinstalled:null,
+    onbeforeinstallprompt:null,
+    onbeforexrselect:null,
+    onabort:null,
+    onblur:null,
+    oncancel:null,
+    oncanplay:null,
+    oncanplaythrough:null
 
 };
 bodavm.memory.localStorage={}
@@ -531,8 +537,8 @@ bodavm.memory.localStorage={}
 
 
         } catch (e) {
-            // 
-            // debugger
+        //     // 
+        //     // debugger
             let log__ = `'[${name}]正在执行,错误信息${e.message}'`
             console.log(log__);
             bodavm.toolsFunc.printLog(log__)
@@ -709,7 +715,8 @@ bodavm.memory.localStorage={}
         let e = new Error();
         e.message = message;
         e.name = name;
-        e.stack = `${name}: ${message}at <anonymous>:1:1`
+        e.stack = `${name}: ${message} 
+        at <anonymous>:1:1`
         throw e
     }
 
@@ -1011,7 +1018,11 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 // 浏览器接口具体的实现
 !function () {
 
-
+    bodavm.envFunc.Performance_now=function (){
+        let now=window.performance._boarg.now()
+        console.log(`Performance_now `,`res ->${now}`);
+        return now
+    }
 
     bodavm.envFunc.window_scheduler_get=function (){let arg=bodavm.memory.globalobj['scheduler']?bodavm.memory.globalobj['scheduler']:null;console.log(`window_scheduler_get`,`res ->${arg}`);return arg}
     bodavm.envFunc.window_crossOriginIsolated_get=function (){let arg=bodavm.memory.globalobj['crossOriginIsolated']?bodavm.memory.globalobj['crossOriginIsolated']:null;console.log(`window_crossOriginIsolated_get`,`res ->${arg}`);return arg}
@@ -1928,92 +1939,126 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
     bodavm.envFunc.window_oncanplaythrough_get = function () {
         let arg = bodavm.memory.window['oncanplaythrough']
+        arg._boarg= bodaobj.window['oncanplaythrough']
+
         console.log(`window_oncanplaythrough_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncanplay_get = function () {
         let arg = bodavm.memory.window['oncanplay']
+        arg._boarg= bodaobj.window['oncanplay']
+
         console.log(`window_oncanplay_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncancel_get = function () {
         let arg = bodavm.memory.window['oncancel']
+        arg._boarg= bodaobj.window['oncancel']
         console.log(`window_oncancel_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onblur_get = function () {
         let arg = bodavm.memory.window['onblur']
+        arg._boarg= bodaobj.window['onblur']
+
         console.log(`window_onblur_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onappinstalled_get = function () {
         let arg = bodavm.memory.window['onappinstalled']
+        arg._boarg= bodaobj.window['onappinstalled']
+
         console.log(`window_onappinstalled_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforeinstallprompt_get = function () {
         let arg = bodavm.memory.window['onbeforeinstallprompt']
+        arg._boarg= bodaobj.window['onbeforeinstallprompt']
+
         console.log(`window_onbeforeinstallprompt_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforexrselect_get = function () {
         let arg = bodavm.memory.window['onbeforexrselect']
+        arg._boarg= bodaobj.window['onbeforexrselect']
+
         console.log(`window_onbeforexrselect_get `, `res ->${arg}`);
         return arg
     }
 
     bodavm.envFunc.window_onabort_get = function () {
         let arg = bodavm.memory.window['onabort']
+        arg._boarg= bodaobj.window['onabort']
         console.log(`window_onabort_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_isSecureContext_get = function () {
         let arg = bodavm.memory.window['isSecureContext']
+        arg._boarg= bodaobj.window['isSecureContext']
+
         console.log(`window_isSecureContext_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onsearch_get = function () {
         let arg = bodavm.memory.globalobj['onsearch'] ? bodavm.memory.globalobj['onsearch'] : null
+        arg._boarg= bodaobj.window['onsearch']
+
         console.log(`window_onsearch_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_styleMedia_get = function () {
         let arg = bodavm.memory.globalobj['styleMedia'] ? bodavm.memory.globalobj['styleMedia'] : null
+        arg._boarg= bodaobj.window['styleMedia']
+
         console.log(`window_styleMedia_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_frameElement_get = function () {
         let arg = bodavm.memory.globalobj['frameElement'] ? bodavm.memory.globalobj['frameElement'] : null
+        arg._boarg= bodaobj.window['frameElement']
+
         console.log(`window_frameElement_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_opener_get = function () {
         let arg = bodavm.memory.globalobj['opener'] ? bodavm.memory.globalobj['opener'] : null
+        arg._boarg= bodaobj.window['opener']
+
         console.log(`window_opener_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_statusbar_get = function () {
         let arg = bodavm.memory.globalobj['statusbar']
+        arg._boarg= bodaobj.window['statusbar']
+
         console.log(`window_statusbar_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_scrollbars_get = function () {
         let arg = bodavm.memory.globalobj['scrollbars']
+        arg._boarg= bodaobj.window['scrollbars']
+
         console.log(`window_scrollbars_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_locationbar_get = function () {
         let arg = bodavm.memory.globalobj['locationbar']
+        arg._boarg= bodaobj.window['locationbar']
+
         console.log(`window_locationbar_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_personalbar_get = function () {
         let arg = bodavm.memory.globalobj['personalbar']
+        arg._boarg= bodaobj.window['personalbar']
+
         console.log(`window_personalbar_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_speechSynthesis_get = function () {
         let arg = bodavm.memory.globalobj['speechSynthesis']
+        arg._boarg= bodaobj.window['speechSynthesis']
+
         console.log(`window_speechSynthesis_get `, `res ->${arg}`);
         return arg
     }
@@ -2021,94 +2066,115 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     bodavm.envFunc.window_trustedTypes_get = function () {
         let arg = bodavm.memory.globalobj['trustedTypes']
+        arg._boarg= bodaobj.window['trustedTypes']
+
         console.log(`window_trustedTypes_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_cookieStore_get = function () {
         let arg = bodavm.memory.globalobj['cookieStore']
+        arg._boarg= bodaobj.window['cookieStore']
 
         console.log(`window_cookieStore_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_external_get = function () {
         let arg = bodavm.memory.globalobj['external']
+        arg._boarg= bodaobj.window['external']
 
         console.log(`window_external_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_caches_get = function () {
         let arg = bodavm.memory.globalobj['caches']
+        arg._boarg= bodaobj.window['caches']
+
         console.log(`window_caches_get `, `res -> ${arg}`);
         return arg
     }
 
     bodavm.envFunc.window_visualViewport_get = function () {
         let arg = bodavm.memory.globalobj['visualViewport']
+        arg._boarg= bodaobj.window['visualViewport']
+
         console.log(`window_visualViewport_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_menubar_get = function () {
         let arg = bodavm.memory.globalobj['menubar']
+        arg._boarg= bodaobj.window['menubar']
 
         console.log(`window_menubar_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_toolbar_get = function () {
         let arg = bodavm.memory.globalobj['toolbar']
+        arg._boarg= bodaobj.window['toolbar']
 
         console.log(`window_toolbar_get `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_CookieStore = function () {
         let arg = bodavm.memory.globalobj['CookieStore']
+        arg._boarg= bodaobj.window['CookieStore']
 
         console.log(`window_CookieStore `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Storage = function () {
         let arg = bodavm.memory.globalobj['Storage']
+        arg._boarg= bodaobj.window['Storage']
 
         console.log(`window_Storage `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Navigation = function () {
         let arg = bodavm.memory.globalobj['Navigation']
+        arg._boarg= bodaobj.window['Navigation']
 
         console.log(`window_Navigation `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_VisualViewport = function () {
         let arg = bodavm.memory.globalobj['VisualViewport']
+        arg._boarg= bodaobj.window['VisualViewport']
+
         console.log(`window_VisualViewport `, `res -> ${arg}`);
         return arg
     }
 
     bodavm.envFunc.window_History = function () {
         let arg = bodavm.memory.globalobj['History']
+        arg._boarg= bodaobj.window['History']
 
         console.log(`window_History `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_IDBFactory = function () {
         let arg = bodavm.memory.globalobj['IDBFactory']
+        arg._boarg= bodaobj.window['IDBFactory']
 
         console.log(`window_IDBFactory `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_TrustedTypePolicyFactory = function () {
         let arg = bodavm.memory.globalobj['TrustedTypePolicyFactory']
+        arg._boarg= bodaobj.window['TrustedTypePolicyFactory']
 
         console.log(`window_TrustedTypePolicyFactory `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_External = function () {
         let arg = bodavm.memory.globalobj['External']
+        arg._boarg= bodaobj.window['External']
 
         console.log(`window_External `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_CacheStorage = function () {
         let arg = bodavm.memory.globalobj['CacheStorage']
+        arg._boarg= bodaobj.window['CacheStorage']
+
         console.log(`window_CacheStorage `, `res -> ${arg}`);
         return arg
     }
@@ -2116,30 +2182,35 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     bodavm.envFunc.window_CustomElementRegistry = function () {
         let arg = bodavm.memory.globalobj['CustomElementRegistry']
+        arg._boarg= bodaobj.window['CustomElementRegistry']
 
         console.log(`window_CustomElementRegistry `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Window = function () {
         let arg = bodavm.memory.globalobj['Window']
+        arg._boarg= bodaobj.window['Window']
 
         console.log(`window_Window `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Screen = function () {
         let arg = bodavm.memory.globalobj['Screen']
+        arg._boarg= bodaobj.window['Screen']
 
         console.log(`window_Screen `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Navigator = function () {
         let arg = bodavm.memory.globalobj['Navigator']
+        arg._boarg= bodaobj.window['Navigator']
 
         console.log(`window_Navigator `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Performance = function () {
         let arg = bodavm.memory.globalobj['Performance']
+        arg._boarg= bodaobj.window['Performance']
 
         console.log(`window_Performance `, `res -> ${arg}`);
         return arg
@@ -2147,46 +2218,58 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     bodavm.envFunc.window_BarProp = function () {
         let arg = bodavm.memory.globalobj['BarProp']
+        arg._boarg= bodaobj.window['BarProp']
 
         console.log(`window_BarProp `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Location = function () {
         let arg = bodavm.memory.globalobj['Location']
+        arg._boarg= bodaobj.window['Location']
 
         console.log(`window_Location `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Document = function () {
         let arg = bodavm.memory.globalobj['Document']
+        arg._boarg= bodaobj.window['Document']
 
         console.log(`window_Document `, `res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_webkitStorageInfo_get = function () {
         let webkitStorageInfo_ = bodavm.memory.globalobj['webkitStorageInfo']
+        webkitStorageInfo_._boarg= bodaobj.window['webkitStorageInfo']
+
         console.log(`window_webkitStorageInfo_get `, `webkitStorageInfo->`, webkitStorageInfo_);
         return webkitStorageInfo_
     }
     bodavm.envFunc.window_navigation_get = function () {
         let navigation_ = bodavm.memory.globalobj['navigation']
+        navigation_._boarg= bodaobj.window['navigation']
+
         console.log(`window_navigation_get `, `navigation->`, navigation_);
         return navigation_
     }
     bodavm.envFunc.window_performance_get = function () {
         let perf = bodavm.memory.globalobj['performance']
+        perf._boarg= bodaobj.window['performance']
+
         console.log(`window_performance_get `, `performance->`, perf);
-        debugger
+        // debugger
         return perf
     }
     bodavm.envFunc.window_navigator_get = function () {
         let navigator_ = bodavm.memory.globalobj.navigator
         console.log(`window_navigator_get `, `navigator->`, navigator_);
+        navigator_._boarg= bodaobj.window['navigator']
 
         return navigator_
     }
     bodavm.envFunc.window_customElements_get = function () {
         let customElements_ = bodavm.memory.globalobj.customElements
+        customElements_._boarg= bodaobj.window['customElements']
+
         console.log(`window_customElements_get `, `customElements->`, customElements_);
 
         return customElements_
@@ -2194,6 +2277,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.window_screen_get = function () {
         let screen_ = bodavm.memory.globalobj.screen
         console.log(`window_screen_get `, `screen->`, screen_);
+        screen_._boarg= bodaobj.window['screen']
 
         return screen_
     }
@@ -2202,47 +2286,59 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.window_history_get = function () {
         let history_ = bodavm.memory.globalobj.history
         console.log(`window_history_get `, `history->`, history_);
+        history_._boarg= bodaobj.window['history']
 
         return history_
     }
     bodavm.envFunc.window_localStorage_get = function window_localStorage_get() {
         let localStorage_ = bodavm.memory.globalobj.localStorage
         console.log(`window_localStorage_get `, `localStorage->`, localStorage_);
+        localStorage_._boarg= bodaobj.window['localStorage']
 
         return localStorage_
     }
     bodavm.envFunc.window_indexedDB_get = function window_indexedDB_get() {
         let indexedDB_ = bodavm.memory.globalobj.indexedDB
         console.log(`window_indexedDB_get `, `indexedDB->`, indexedDB_);
+        indexedDB_._boarg= bodaobj.window['indexedDB']
 
         return indexedDB_
     }
     bodavm.envFunc.window_sessionStorage_get = function window_sessionStorage_get() {
         let sessionStorage_ = bodavm.memory.globalobj.sessionStorage
         console.log(`window_sessionStorage_get `, `sessionStorage->`, sessionStorage_);
+        sessionStorage_._boarg= bodaobj.window['sessionStorage']
 
         return sessionStorage_
     }
     bodavm.envFunc.window_crypto_get = function window_crypto_get() {
         let crypto_ = bodavm.memory.globalobj.crypto
+        // crypto_._boarg= globalobj.window['crypto']
+
         console.log(`window_crypto_get `, `crypto->`, crypto_);
         return crypto_
     }
     bodavm.envFunc.window_document_get = function window_document_get() {
         // debugger
         let document_ = bodavm.memory.globalobj.document
+        document_._boarg= bodaobj.window['document']
+
         console.log(`window_document_get `, `document->`, document_);
         return document_
     }
     bodavm.envFunc.window_location_get = function window_location_get() {
         // debugger
         let location_ = bodavm.memory.globalobj.location
+        location_._boarg= bodaobj.window['location']
+
         console.log(`window_location_get `, `location_->`, location_);
         return location_
     }
     bodavm.envFunc.window_clientInformation_get = function window_clientInformation_get() {
         // debugger
         let res = navigator
+        res._boarg= bodaobj.window['navigator']
+
         console.log(`window_clientInformation_get `, `res- >${res}`);
         return res
     }
@@ -2771,7 +2867,9 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
     bodavm.envFunc.window_length_get = function window_length_get() {
         let _length = bodaobj.window.length;
-        console.log(`window_length_get `, ` 返回的为jsdom中的window.length ->${_length}`);
+    
+        console.log(`window_length_get `, ` length ->${_length}  boss直聘检测`);
+
         return _length
     }
     bodavm.envFunc.window_onbeforeunload_set = function window_onbeforeunload_set() {
@@ -2785,7 +2883,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         let arg2 = arguments[2]
         let arg3 = arguments[2]
         // let openDatabase
-        debugger
+        // debugger
         let database=bodavm.memory.globalobj['database']
         console.log(`window_openDatabase `, `->${arg}->${arg1}->${arg2}->${arg3} database`);
         return database
@@ -2954,7 +3052,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         for (let i = 2; i < length; i++) {
             argList.push(arguments[i]);
         }
-        console.log(`window_setInterval `, `func->${func} `, `delay->${delay} `, `argList->${argList}  `);
+        console.log(`window_setInterval `, `func->${func.toString().length>50?func.toString().substr(0,50)+'...':func} `, `delay->${delay} `, `argList->${argList}  `);
 
         bodavm.memory.globalInit.timeoutID += 1
         let event = {
@@ -3190,7 +3288,11 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Document_onprogress_get = function Document_onprogress_get() { console.log("Document_onprogress_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_onratechange_get = function Document_onratechange_get() { console.log("Document_onratechange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_querySelector = function Document_querySelector() { console.log("Document_querySelector", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-
+    bodavm.envFunc.Document_write=function (){
+        let html = arguments[0]
+        bodaobj.document.write(html)
+        console.log(`Document_write `, `html ->${html}`);
+    }
     bodavm.envFunc.Document_createEvent = function Document_createEvent() {
         // debugger
         let arg = arguments[0].toUpperCase()
@@ -3210,7 +3312,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
             case "TOUCHEVENT":
                 console.log(`Document_createEvent  `, event, `   该事件只有在触摸平面（触摸屏、触摸板等）才会触发`);
-                bodavm.toolsFunc.throwError('DOMException', `Failed to execute 'createEvent'on 'Document': The provided event type ('TouchEvent') is invalid.`)
+                return bodavm.toolsFunc.throwError('DOMException', `Failed to execute 'createEvent'on 'Document': The provided event type ('TouchEvent') is invalid.`)
             default:
                 console.log(`Document_createEvent  `, `${arg}  未实现`);
 
@@ -3703,7 +3805,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Node_childNodes_get = function Node_childNodes_get() { console.log("Nodes_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Node_isConnected_get = function Node_isConnected_get() { console.log("Node_isConnected_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Node_nextSibling_get = function Node_nextSibling_get() {
-        debugger
+        // debugger
         let res = {}
         _next = this._boarg.nextSibling
         if (_next == null) {
@@ -3719,7 +3821,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
     bodavm.envFunc.Node_nodeType_get = function Node_nodeType_get() {
         if (bodavm.config.isdebug) { debugger }
-        debugger
+        // debugger
         let nodetype = this._boarg.nodeType
         console.log(`Node_nodeType_get `, `nodetype ->${nodetype}`);
         return nodetype
@@ -3732,7 +3834,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         return nodeName_
     }
     bodavm.envFunc.Node_firstChild_get = function Node_firstChild_get() {
-        debugger
+        // debugger
         let res = {}
         let frist_ = this._boarg.firstChild
         if (frist_) {
@@ -5273,7 +5375,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
             'isTrusted': true,
             'target': this
         }
-        console.log(`EventTarget_addEventListener `, `type->${type} `, `callback->${callback} `, `options->${options ? options : []}  `)
+        console.log(`EventTarget_addEventListener `, `type->${type} `, `callback->${callback.toString().length>50?callback.toString().substr(0,50)+'...':callback} `, `options->${options ? options : []}  `)
 
         bodavm.memory.asyncEvent.listener[type].push(event);
 
@@ -5367,12 +5469,14 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         if (this._bocanvas) {
             let res = this._bocanvas.toDataURL()
             console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
-            return res
+            // return res
+            return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         } else {
             debugger
             res = bodavm.memory.userInit.canvas_webgl
             console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
-            return res
+            // return res
+            return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         }
 
     }
@@ -6481,18 +6585,29 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         let failureCallback = arguments[1]
         let options = arguments[3]
         if (bodavm.config.isdebug) { debugger };
-        bodavm.toolsFunc.symbolProperty(successCallback)
-        bodavm.toolsFunc.symbolProperty(failureCallback)
-        console.log(`RTCPeerConnection_createOffer `, `successCallback->${successCallback} `, `failureCallback->${failureCallback} `, `options->${options},!!!!!!!!!未完善!!!!!!!!!!!!  `);
-        return new Promise((successCallback, failureCallback) => {
+        // bodavm.toolsFunc.symbolProperty(successCallback)
+        // bodavm.toolsFunc.symbolProperty(failureCallback)
 
-        }).then(successCallback => {
-            successCallback()
-        },
-            failureCallback => {
-                failureCallback()
-            }
-        )
+        let  retSessionDescription = {};
+        retSessionDescription.__proto__ = bodavm.memory.globalobj['RTCSessionDescription'].prototype
+        // debugger
+        // bodavm.toolsFunc.symbolProperty(batteryManager)
+        console.log(`RTCPeerConnection_createOffer `, `successCallback->${successCallback} `, `failureCallback->${failureCallback} `, `options->${options},!!!!!!!!!未完善!!!!!!!!!!!!  `);
+
+        let promise = new Promise((resolve, reject) => {
+            resolve(retSessionDescription)
+        })
+
+        return promise
+        
+        // return new Promise((successCallback, failureCallback) => {
+        // }).then(successCallback => {
+        //     successCallback()
+        // },
+        //     failureCallback => {
+        //         failureCallback()
+        //     }
+        // )
     }
 
 
@@ -6835,6 +6950,7 @@ bodavm.memory.globalobj['WindowProperties'].__proto__=bodavm.memory.globalobj['E
 
 // Window对象
 bodavm.memory.globalobj['Window'] = function Window(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+// debugger
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Window'], "Window");
 bodavm.memory.globalobj['Window'].prototype.__proto__=bodavm.memory.globalobj['WindowProperties'].prototype;
 bodavm.memory.globalobj['Window'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -7713,7 +7829,7 @@ bodavm.memory.globalobj['HTMLScriptElement'] = function HTMLScriptElement(){retu
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLScriptElement'], "HTMLScriptElement");
 bodavm.memory.globalobj['HTMLScriptElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLScriptElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
-bodavm.toolsFunc.defineProperty('HTMLScriptElement', "supports", {configurable:true, enumerable:true, writable:true, value:function supports (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].undefined, "HTMLScriptElement", "supports", arguments)}});
+bodavm.toolsFunc.defineProperty('HTMLScriptElement', "supports", {configurable:true, enumerable:true, writable:true, value:function supports (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].prototype, "HTMLScriptElement", "supports", arguments)}});
 bodavm.toolsFunc.defineProperty('HTMLScriptElement', "src", {configurable:true, enumerable:true, get:function src (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].prototype, "HTMLScriptElement", "src_get", arguments)}, set:function src (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].prototype, "HTMLScriptElement", "src_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('HTMLScriptElement', "type", {configurable:true, enumerable:true, get:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].prototype, "HTMLScriptElement", "type_get", arguments)}, set:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].prototype, "HTMLScriptElement", "type_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('HTMLScriptElement', "noModule", {configurable:true, enumerable:true, get:function noModule (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].prototype, "HTMLScriptElement", "noModule_get", arguments)}, set:function noModule (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].prototype, "HTMLScriptElement", "noModule_set", arguments)}},'prototype');
@@ -8247,7 +8363,7 @@ bodavm.memory.globalobj['HTMLDocument'].__proto__=bodavm.memory.globalobj['Docum
 
 
 // document对象
-bodavm.memory.globalobj['document'] = {}
+bodavm.memory.globalobj['document'] = new bodavm.memory.globalobj['Document']()
 bodavm.memory.globalobj['document'].__proto__=bodavm.memory.globalobj['HTMLDocument'].prototype;
 bodavm.toolsFunc.defineProperty('document', "location", {configurable:false, enumerable:true, get:function location (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['document'], "document", "location_get", arguments)}, set:function location (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['document'], "document", "location_set", arguments)}});
 
@@ -8373,9 +8489,9 @@ bodavm.memory.globalobj['Notification'] = function Notification(){
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Notification'], "Notification");
 bodavm.memory.globalobj['Notification'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Notification'].__proto__=bodavm.memory.globalobj['EventTarget'];
-bodavm.toolsFunc.defineProperty('Notification', "permission", {configurable:true, enumerable:true, get:function permission (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].undefined, "Notification", "permission_get", arguments, 'default')}, set:undefined});
-bodavm.toolsFunc.defineProperty('Notification', "maxActions", {configurable:true, enumerable:true, get:function maxActions (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].undefined, "Notification", "maxActions_get", arguments, 2)}, set:undefined});
-bodavm.toolsFunc.defineProperty('Notification', "requestPermission", {configurable:true, enumerable:true, writable:true, value:function requestPermission (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].undefined, "Notification", "requestPermission", arguments)}});
+bodavm.toolsFunc.defineProperty('Notification', "permission", {configurable:true, enumerable:true, get:function permission (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "permission_get", arguments, 'default')}, set:undefined});
+bodavm.toolsFunc.defineProperty('Notification', "maxActions", {configurable:true, enumerable:true, get:function maxActions (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "maxActions_get", arguments, 2)}, set:undefined});
+bodavm.toolsFunc.defineProperty('Notification', "requestPermission", {configurable:true, enumerable:true, writable:true, value:function requestPermission (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "requestPermission", arguments)}});
 bodavm.toolsFunc.defineProperty('Notification', "onclick", {configurable:true, enumerable:true, get:function onclick (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "onclick_get", arguments)}, set:function onclick (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "onclick_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Notification', "onshow", {configurable:true, enumerable:true, get:function onshow (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "onshow_get", arguments)}, set:function onshow (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "onshow_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Notification', "onerror", {configurable:true, enumerable:true, get:function onerror (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "onerror_get", arguments)}, set:function onerror (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "onerror_set", arguments)}},'prototype');
@@ -9454,6 +9570,13 @@ bodavm.toolsFunc.defineProperty('CookieStore', "onchange", {configurable:true, e
 bodavm.memory.globalobj[ 'cookieStore']  = {}
 bodavm.memory.globalobj[ 'cookieStore'].__proto__=bodavm.memory.globalobj['CookieStore'].prototype;
 
+// RTCSessionDescription对象
+bodavm.memory.globalobj['RTCSessionDescription'] = function RTCSessionDescription(){}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['RTCSessionDescription'], "RTCSessionDescription");
+bodavm.toolsFunc.defineProperty('RTCSessionDescription', "type", {configurable:true, enumerable:true, get:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "type_get", arguments)}, set:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "type_set", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('RTCSessionDescription', "sdp", {configurable:true, enumerable:true, get:function sdp (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "sdp_get", arguments)}, set:function sdp (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "sdp_set", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('RTCSessionDescription', "toJSON", {configurable:true, enumerable:true, writable:true, value:function toJSON (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "toJSON", arguments)}},'prototype');
+
 // RTCDataChannel对象
 bodavm.memory.globalobj['RTCDataChannel'] = function RTCDataChannel(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['RTCDataChannel'], "RTCDataChannel");
@@ -9890,10 +10013,10 @@ bodavm.toolsFunc.defineProperty('BaseAudioContext', "audioWorklet", {configurabl
 // BluetoothUUID对象
 bodavm.memory.globalobj['BluetoothUUID'] = function BluetoothUUID(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BluetoothUUID'], "BluetoothUUID");
-bodavm.toolsFunc.defineProperty('BluetoothUUID', "canonicalUUID", {configurable:true, enumerable:true, writable:true, value:function canonicalUUID (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].undefined, "BluetoothUUID", "canonicalUUID", arguments)}});
-bodavm.toolsFunc.defineProperty('BluetoothUUID', "getCharacteristic", {configurable:true, enumerable:true, writable:true, value:function getCharacteristic (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].undefined, "BluetoothUUID", "getCharacteristic", arguments)}});
-bodavm.toolsFunc.defineProperty('BluetoothUUID', "getDescriptor", {configurable:true, enumerable:true, writable:true, value:function getDescriptor (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].undefined, "BluetoothUUID", "getDescriptor", arguments)}});
-bodavm.toolsFunc.defineProperty('BluetoothUUID', "getService", {configurable:true, enumerable:true, writable:true, value:function getService (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].undefined, "BluetoothUUID", "getService", arguments)}});
+bodavm.toolsFunc.defineProperty('BluetoothUUID', "canonicalUUID", {configurable:true, enumerable:true, writable:true, value:function canonicalUUID (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].prototype, "BluetoothUUID", "canonicalUUID", arguments)}});
+bodavm.toolsFunc.defineProperty('BluetoothUUID', "getCharacteristic", {configurable:true, enumerable:true, writable:true, value:function getCharacteristic (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].prototype, "BluetoothUUID", "getCharacteristic", arguments)}});
+bodavm.toolsFunc.defineProperty('BluetoothUUID', "getDescriptor", {configurable:true, enumerable:true, writable:true, value:function getDescriptor (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].prototype, "BluetoothUUID", "getDescriptor", arguments)}});
+bodavm.toolsFunc.defineProperty('BluetoothUUID', "getService", {configurable:true, enumerable:true, writable:true, value:function getService (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].prototype, "BluetoothUUID", "getService", arguments)}});
 
 
 
@@ -10725,7 +10848,7 @@ bodavm.memory.globalobj['RTCPeerConnection'] = function RTCPeerConnection(){
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['RTCPeerConnection'], "RTCPeerConnection");
 bodavm.memory.globalobj['RTCPeerConnection'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['RTCPeerConnection'].__proto__=bodavm.memory.globalobj['EventTarget'];
-bodavm.toolsFunc.defineProperty('RTCPeerConnection', "generateCertificate", {configurable:true, enumerable:true, writable:true, value:function generateCertificate (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].undefined, "RTCPeerConnection", "generateCertificate", arguments)}});
+bodavm.toolsFunc.defineProperty('RTCPeerConnection', "generateCertificate", {configurable:true, enumerable:true, writable:true, value:function generateCertificate (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "generateCertificate", arguments)}});
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "localDescription", {configurable:true, enumerable:true, get:function localDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "localDescription_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "currentLocalDescription", {configurable:true, enumerable:true, get:function currentLocalDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "currentLocalDescription_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "pendingLocalDescription", {configurable:true, enumerable:true, get:function pendingLocalDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "pendingLocalDescription_get", arguments)}, set:undefined},'prototype');
@@ -11113,7 +11236,8428 @@ bodavm.toolsFunc.defineProperty('XMLHttpRequest', "setRequestHeader", {configura
 }();
 // debugger
 
-;// // debugger
+;;// delete location
+// 删除浏览器中不存在的对象
+delete global;
+delete GLOBAL;
+delete VMError;
+delete Buffer;
+delete process;
+delete root;
+delete WindowProperties;
+delete globalThis[Symbol.toStringTag];
+window = globalThis;
+globalThis.__proto__ = bodavm.memory.globalobj['Window'].prototype;
+// document=bodavm.memory.globalobj['document']
+bodavm.memory.globalobj['window'] = window;
+bodavm.toolsFunc.windowdefineProperty(window, "atob", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function atob(str) {
+    return bodavm.toolsFunc.base64.base64decode(str);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "btoa", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function btoa(str) {
+    return bodavm.toolsFunc.base64.base64encode(str);
+  }
+});
+// window对象
+// debugger
+// window对象
+// bodavm.memory.globalobj['window'] = {}
+// bodavm.memory.globalobj['window'].__proto__=bodavm.memory.globalobj['Window'].prototype;
+console.log(`===============================================================================================================`);
+console.log(`===============================================================================================================`);
+console.log(`===============================================================================================================`);
+console.log(`===============================================================================================================`);
+console.log(`=====================================环    境    赋    值    初    始    化=====================================`);
+console.log(`===============================================================================================================`);
+console.log(`===============================================================================================================`);
+console.log(`===============================================================================================================`);
+console.log(`===============================================================================================================`);
+// debugger
+bodavm.toolsFunc.windowdefineProperty(window, "document", {
+  configurable: false,
+  enumerable: true,
+  get: function document() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "document_get", arguments);
+  },
+  set: undefined
+});
+
+// bodavm.toolsFunc.windowdefineProperty(window, "Option", {configurable:true, enumerable:false, writable:true, value:function Option (){return bodavm.toolsFunc.windowdispatch(this, window, "window", "Option", arguments)}});
+bodavm.toolsFunc.windowdefineProperty(window, "Document", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Document() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Document", arguments);
+  }()
+});
+// debugger
+bodavm.toolsFunc.windowdefineProperty(window, "location", {
+  configurable: false,
+  enumerable: true,
+  get: function location() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "location_get", arguments);
+  },
+  set: function location() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "location_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Location", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Location() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Location", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "toolbar", {
+  configurable: true,
+  enumerable: true,
+  get: function toolbar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "toolbar_get", arguments);
+  },
+  set: function toolbar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "toolbar_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "menubar", {
+  configurable: true,
+  enumerable: true,
+  get: function menubar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "menubar_get", arguments);
+  },
+  set: function menubar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "menubar_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "locationbar", {
+  configurable: true,
+  enumerable: true,
+  get: function locationbar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "locationbar_get", arguments);
+  },
+  set: function locationbar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "locationbar_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BarProp", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BarProp() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BarProp", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "customElements", {
+  configurable: true,
+  enumerable: true,
+  get: function customElements() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "customElements_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CustomElementRegistry", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CustomElementRegistry() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CustomElementRegistry", arguments);
+  }()
+});
+
+// bodavm.toolsFunc.windowdefineProperty(window, "window", {configurable:false, enumerable:true, get:function window (){return bodavm.toolsFunc.dispatch(this, window, "window", "window_get", arguments)}, set:undefined});
+bodavm.toolsFunc.windowdefineProperty(window, "Window", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Window() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Window", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "screen", {
+  configurable: true,
+  enumerable: true,
+  get: function screen() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screen_get", arguments);
+  },
+  set: function screen() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screen_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Screen", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Screen() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Screen", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "navigator", {
+  configurable: true,
+  enumerable: true,
+  get: function navigator() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "navigator_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Navigator", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Navigator() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Navigator", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "performance", {
+  configurable: true,
+  enumerable: true,
+  get: function performance() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "performance_get", arguments);
+  },
+  set: function performance() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "performance_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Performance", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Performance() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Performance", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "sessionStorage", {
+  configurable: true,
+  enumerable: true,
+  get: function sessionStorage() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "sessionStorage_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "localStorage", {
+  configurable: true,
+  enumerable: true,
+  get: function localStorage() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "localStorage_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Storage", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Storage() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Storage", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "navigation", {
+  configurable: true,
+  enumerable: true,
+  get: function navigation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "navigation_get", arguments);
+  },
+  set: function navigation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "navigation_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Navigation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Navigation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Navigation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "visualViewport", {
+  configurable: true,
+  enumerable: true,
+  get: function visualViewport() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "visualViewport_get", arguments);
+  },
+  set: function visualViewport() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "visualViewport_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "VisualViewport", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function VisualViewport() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "VisualViewport", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "history", {
+  configurable: true,
+  enumerable: true,
+  get: function history() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "history_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "History", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function History() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "History", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "indexedDB", {
+  configurable: true,
+  enumerable: true,
+  get: function indexedDB() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "indexedDB_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBFactory", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBFactory() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBFactory", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "trustedTypes", {
+  configurable: true,
+  enumerable: true,
+  get: function trustedTypes() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "trustedTypes_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TrustedTypePolicyFactory", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TrustedTypePolicyFactory() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedTypePolicyFactory", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "cookieStore", {
+  configurable: true,
+  enumerable: true,
+  get: function cookieStore() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "cookieStore_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CookieStore", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CookieStore() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CookieStore", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "external", {
+  configurable: true,
+  enumerable: true,
+  get: function external() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "external_get", arguments);
+  },
+  set: function external() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "external_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "External", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function External() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "External", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "caches", {
+  configurable: true,
+  enumerable: true,
+  get: function caches() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "caches_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CacheStorage", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CacheStorage() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CacheStorage", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XMLHttpRequest", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XMLHttpRequest() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XMLHttpRequest", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitStorageInfo", {
+  configurable: true,
+  enumerable: true,
+  get: function webkitStorageInfo() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitStorageInfo_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "speechSynthesis", {
+  configurable: true,
+  enumerable: true,
+  get: function speechSynthesis() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "speechSynthesis_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBDatabase", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBDatabase() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBDatabase", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Image", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Image() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Image", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Audio", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Audio() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Audio", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitURL", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function webkitURL() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitURL", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitRTCPeerConnection", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function webkitRTCPeerConnection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRTCPeerConnection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitMediaStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function webkitMediaStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitMediaStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebKitMutationObserver", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebKitMutationObserver() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebKitMutationObserver", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebKitCSSMatrix", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebKitCSSMatrix() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebKitCSSMatrix", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XPathResult", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XPathResult() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XPathResult", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XPathExpression", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XPathExpression() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XPathExpression", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XPathEvaluator", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XPathEvaluator() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XPathEvaluator", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XMLSerializer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XMLSerializer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XMLSerializer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XMLHttpRequestUpload", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XMLHttpRequestUpload() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XMLHttpRequestUpload", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XMLHttpRequestEventTarget", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XMLHttpRequestEventTarget() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XMLHttpRequestEventTarget", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XMLDocument", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XMLDocument() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XMLDocument", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WritableStreamDefaultWriter", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WritableStreamDefaultWriter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WritableStreamDefaultWriter", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WritableStreamDefaultController", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WritableStreamDefaultController() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WritableStreamDefaultController", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WritableStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WritableStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WritableStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Worker", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Worker() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Worker", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WheelEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WheelEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WheelEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebSocket", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebSocket() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebSocket", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLVertexArrayObject", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLVertexArrayObject() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLVertexArrayObject", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLUniformLocation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLUniformLocation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLUniformLocation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLTransformFeedback", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLTransformFeedback() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLTransformFeedback", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLTexture", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLTexture() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLTexture", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLSync", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLSync() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLSync", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLShaderPrecisionFormat", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLShaderPrecisionFormat() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLShaderPrecisionFormat", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLShader", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLShader() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLShader", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLSampler", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLSampler() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLSampler", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLRenderingContext", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLRenderingContext() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLRenderingContext", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLRenderbuffer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLRenderbuffer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLRenderbuffer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLQuery", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLQuery() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLQuery", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLProgram", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLProgram() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLProgram", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLFramebuffer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLFramebuffer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLFramebuffer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLContextEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLContextEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLContextEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLBuffer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLBuffer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLBuffer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGLActiveInfo", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGLActiveInfo() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLActiveInfo", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebGL2RenderingContext", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebGL2RenderingContext() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebGL2RenderingContext", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WaveShaperNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WaveShaperNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WaveShaperNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ValidityState", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ValidityState() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ValidityState", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "VTTCue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function VTTCue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "VTTCue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "UserActivation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function UserActivation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "UserActivation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "URLSearchParams", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function URLSearchParams() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "URLSearchParams", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "URL", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function URL() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "URL", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "UIEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function UIEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "UIEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TreeWalker", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TreeWalker() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TreeWalker", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TransitionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TransitionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TransitionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TransformStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TransformStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TransformStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TrackEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TrackEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TrackEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TouchList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TouchList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TouchList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TouchEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TouchEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TouchEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Touch", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Touch() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Touch", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TimeRanges", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TimeRanges() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TimeRanges", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextTrackList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextTrackList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextTrackList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextTrackCueList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextTrackCueList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextTrackCueList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextTrackCue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextTrackCue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextTrackCue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextTrack", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextTrack() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextTrack", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextMetrics", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextMetrics() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextMetrics", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextEncoderStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextEncoderStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextEncoderStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextEncoder", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextEncoder() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextEncoder", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextDecoderStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextDecoderStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextDecoderStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TextDecoder", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TextDecoder() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TextDecoder", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Text", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Text() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Text", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TaskAttributionTiming", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TaskAttributionTiming() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TaskAttributionTiming", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SyncManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SyncManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SyncManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SubmitEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SubmitEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SubmitEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "StyleSheetList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function StyleSheetList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "StyleSheetList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "StyleSheet", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function StyleSheet() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "StyleSheet", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "StylePropertyMapReadOnly", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function StylePropertyMapReadOnly() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "StylePropertyMapReadOnly", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "StylePropertyMap", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function StylePropertyMap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "StylePropertyMap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "StorageEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function StorageEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "StorageEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "StereoPannerNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function StereoPannerNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "StereoPannerNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "StaticRange", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function StaticRange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "StaticRange", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ShadowRoot", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ShadowRoot() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ShadowRoot", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Selection", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Selection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Selection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SecurityPolicyViolationEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SecurityPolicyViolationEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SecurityPolicyViolationEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ScriptProcessorNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ScriptProcessorNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ScriptProcessorNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ScreenOrientation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ScreenOrientation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ScreenOrientation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGViewElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGViewElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGViewElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGUseElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGUseElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGUseElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGUnitTypes", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGUnitTypes() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGUnitTypes", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGTransformList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGTransformList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTransformList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGTransform", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGTransform() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTransform", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGTitleElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGTitleElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTitleElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGTextPositioningElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGTextPositioningElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTextPositioningElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGTextPathElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGTextPathElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTextPathElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGTextElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGTextElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTextElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGTextContentElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGTextContentElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTextContentElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGTSpanElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGTSpanElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTSpanElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGSymbolElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGSymbolElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGSymbolElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGSwitchElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGSwitchElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGSwitchElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGStyleElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGStyleElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGStyleElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGStringList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGStringList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGStringList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGStopElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGStopElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGStopElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGSetElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGSetElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGSetElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGScriptElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGScriptElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGScriptElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGSVGElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGSVGElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGSVGElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGRectElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGRectElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGRectElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGRect", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGRect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGRect", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGRadialGradientElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGRadialGradientElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGRadialGradientElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGPreserveAspectRatio", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGPreserveAspectRatio() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPreserveAspectRatio", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGPolylineElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGPolylineElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPolylineElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGPolygonElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGPolygonElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPolygonElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGPointList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGPointList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPointList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGPoint", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGPoint() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPoint", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGPatternElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGPatternElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPatternElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGPathElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGPathElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPathElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGNumberList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGNumberList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGNumberList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGNumber", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGNumber() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGNumber", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGMetadataElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGMetadataElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMetadataElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGMatrix", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGMatrix() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMatrix", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGMaskElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGMaskElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMaskElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGMarkerElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGMarkerElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMarkerElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGMPathElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGMPathElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMPathElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGLinearGradientElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGLinearGradientElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGLinearGradientElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGLineElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGLineElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGLineElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGLengthList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGLengthList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGLengthList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGLength", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGLength() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGLength", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGImageElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGImageElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGImageElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGGraphicsElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGGraphicsElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGGraphicsElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGGradientElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGGradientElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGGradientElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGGeometryElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGGeometryElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGGeometryElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGGElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGGElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGGElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGForeignObjectElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGForeignObjectElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGForeignObjectElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFilterElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFilterElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFilterElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFETurbulenceElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFETurbulenceElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFETurbulenceElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFETileElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFETileElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFETileElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFESpotLightElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFESpotLightElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFESpotLightElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFESpecularLightingElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFESpecularLightingElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFESpecularLightingElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEPointLightElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEPointLightElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEPointLightElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEOffsetElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEOffsetElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEOffsetElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEMorphologyElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEMorphologyElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEMorphologyElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEMergeNodeElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEMergeNodeElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEMergeNodeElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEMergeElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEMergeElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEMergeElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEImageElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEImageElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEImageElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEGaussianBlurElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEGaussianBlurElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEGaussianBlurElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFuncRElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEFuncRElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFuncRElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFuncGElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEFuncGElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFuncGElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFuncBElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEFuncBElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFuncBElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFuncAElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEFuncAElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFuncAElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFloodElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEFloodElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFloodElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEDropShadowElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEDropShadowElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEDropShadowElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEDistantLightElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEDistantLightElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEDistantLightElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEDisplacementMapElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEDisplacementMapElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEDisplacementMapElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEDiffuseLightingElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEDiffuseLightingElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEDiffuseLightingElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEConvolveMatrixElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEConvolveMatrixElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEConvolveMatrixElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFECompositeElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFECompositeElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFECompositeElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEComponentTransferElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEComponentTransferElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEComponentTransferElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEColorMatrixElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEColorMatrixElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEColorMatrixElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGFEBlendElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGFEBlendElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEBlendElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGEllipseElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGEllipseElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGEllipseElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGDescElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGDescElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGDescElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGDefsElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGDefsElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGDefsElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGComponentTransferFunctionElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGComponentTransferFunctionElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGComponentTransferFunctionElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGClipPathElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGClipPathElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGClipPathElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGCircleElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGCircleElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGCircleElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimationElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimationElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimationElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedTransformList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedTransformList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedTransformList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedString", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedString() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedString", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedRect", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedRect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedRect", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedPreserveAspectRatio", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedPreserveAspectRatio() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedPreserveAspectRatio", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedNumberList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedNumberList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedNumberList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedNumber", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedNumber() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedNumber", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedLengthList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedLengthList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedLengthList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedLength", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedLength() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedLength", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedInteger", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedInteger() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedInteger", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedEnumeration", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedEnumeration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedEnumeration", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedBoolean", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedBoolean() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedBoolean", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedAngle", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimatedAngle() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedAngle", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimateTransformElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimateTransformElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimateTransformElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimateMotionElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimateMotionElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimateMotionElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimateElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAnimateElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimateElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAngle", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAngle() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAngle", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SVGAElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SVGAElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Response", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Response() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Response", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ResizeObserverSize", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ResizeObserverSize() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ResizeObserverSize", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ResizeObserverEntry", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ResizeObserverEntry() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ResizeObserverEntry", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ResizeObserver", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ResizeObserver() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ResizeObserver", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Request", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Request() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Request", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ReportingObserver", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ReportingObserver() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ReportingObserver", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ReadableStreamDefaultReader", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ReadableStreamDefaultReader() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStreamDefaultReader", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ReadableStreamDefaultController", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ReadableStreamDefaultController() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStreamDefaultController", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ReadableStreamBYOBRequest", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ReadableStreamBYOBRequest() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStreamBYOBRequest", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ReadableStreamBYOBReader", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ReadableStreamBYOBReader() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStreamBYOBReader", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ReadableStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ReadableStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ReadableByteStreamController", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ReadableByteStreamController() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableByteStreamController", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Range", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Range() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Range", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RadioNodeList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RadioNodeList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RadioNodeList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCTrackEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCTrackEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCTrackEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCStatsReport", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCStatsReport() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCStatsReport", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCSessionDescription", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCSessionDescription() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCSessionDescription", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCSctpTransport", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCSctpTransport() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCSctpTransport", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCRtpTransceiver", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCRtpTransceiver() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCRtpTransceiver", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCRtpSender", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCRtpSender() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCRtpSender", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCRtpReceiver", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCRtpReceiver() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCRtpReceiver", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCPeerConnectionIceEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCPeerConnectionIceEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCPeerConnectionIceEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCPeerConnectionIceErrorEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCPeerConnectionIceErrorEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCPeerConnectionIceErrorEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCPeerConnection", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCPeerConnection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCPeerConnection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCIceCandidate", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCIceCandidate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCIceCandidate", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCErrorEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCErrorEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCErrorEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCError", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCError() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCError", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCEncodedVideoFrame", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCEncodedVideoFrame() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCEncodedVideoFrame", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCEncodedAudioFrame", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCEncodedAudioFrame() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCEncodedAudioFrame", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCDtlsTransport", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCDtlsTransport() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDtlsTransport", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCDataChannelEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCDataChannelEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDataChannelEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCDataChannel", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCDataChannel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDataChannel", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCDTMFToneChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCDTMFToneChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDTMFToneChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCDTMFSender", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCDTMFSender() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDTMFSender", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCCertificate", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCCertificate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCCertificate", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PromiseRejectionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PromiseRejectionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PromiseRejectionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ProgressEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ProgressEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ProgressEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ProcessingInstruction", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ProcessingInstruction() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ProcessingInstruction", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PopStateEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PopStateEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PopStateEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PointerEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PointerEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PointerEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PluginArray", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PluginArray() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PluginArray", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Plugin", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Plugin() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Plugin", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PeriodicWave", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PeriodicWave() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PeriodicWave", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceTiming", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceTiming() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceTiming", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceServerTiming", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceServerTiming() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceServerTiming", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceResourceTiming", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceResourceTiming() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceResourceTiming", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformancePaintTiming", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformancePaintTiming() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformancePaintTiming", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceObserverEntryList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceObserverEntryList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceObserverEntryList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceObserver", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceObserver() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceObserver", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceNavigationTiming", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceNavigationTiming() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceNavigationTiming", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceNavigation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceNavigation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceNavigation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceMeasure", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceMeasure() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceMeasure", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceMark", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceMark() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceMark", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceLongTaskTiming", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceLongTaskTiming() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceLongTaskTiming", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceEventTiming", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceEventTiming() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceEventTiming", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceEntry", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceEntry() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceEntry", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PerformanceElementTiming", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PerformanceElementTiming() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceElementTiming", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Path2D", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Path2D() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Path2D", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PannerNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PannerNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PannerNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PageTransitionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PageTransitionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PageTransitionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "OverconstrainedError", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function OverconstrainedError() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "OverconstrainedError", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "OscillatorNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function OscillatorNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "OscillatorNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "OffscreenCanvasRenderingContext2D", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function OffscreenCanvasRenderingContext2D() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "OffscreenCanvasRenderingContext2D", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "OffscreenCanvas", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function OffscreenCanvas() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "OffscreenCanvas", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "OfflineAudioContext", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function OfflineAudioContext() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "OfflineAudioContext", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "OfflineAudioCompletionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function OfflineAudioCompletionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "OfflineAudioCompletionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NodeList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NodeList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NodeList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NodeIterator", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NodeIterator() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NodeIterator", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NodeFilter", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NodeFilter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NodeFilter", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Node", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Node() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Node", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NetworkInformation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NetworkInformation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NetworkInformation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NamedNodeMap", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NamedNodeMap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NamedNodeMap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MutationRecord", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MutationRecord() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MutationRecord", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MutationObserver", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MutationObserver() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MutationObserver", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MutationEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MutationEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MutationEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MouseEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MouseEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MouseEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MimeTypeArray", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MimeTypeArray() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MimeTypeArray", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MimeType", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MimeType() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MimeType", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MessagePort", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MessagePort() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MessagePort", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MessageEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MessageEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MessageEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MessageChannel", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MessageChannel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MessageChannel", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamTrackEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaStreamTrackEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamTrackEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaStreamEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamAudioSourceNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaStreamAudioSourceNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamAudioSourceNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamAudioDestinationNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaStreamAudioDestinationNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamAudioDestinationNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaRecorder", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaRecorder() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaRecorder", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaQueryListEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaQueryListEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaQueryListEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaQueryList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaQueryList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaQueryList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaError", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaError() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaError", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaEncryptedEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaEncryptedEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaEncryptedEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaElementAudioSourceNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaElementAudioSourceNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaElementAudioSourceNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaCapabilities", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaCapabilities() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaCapabilities", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "LayoutShiftAttribution", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function LayoutShiftAttribution() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "LayoutShiftAttribution", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "LayoutShift", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function LayoutShift() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "LayoutShift", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "LargestContentfulPaint", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function LargestContentfulPaint() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "LargestContentfulPaint", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "KeyframeEffect", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function KeyframeEffect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "KeyframeEffect", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "KeyboardEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function KeyboardEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "KeyboardEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IntersectionObserverEntry", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IntersectionObserverEntry() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IntersectionObserverEntry", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IntersectionObserver", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IntersectionObserver() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IntersectionObserver", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "InputEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function InputEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "InputEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "InputDeviceInfo", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function InputDeviceInfo() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "InputDeviceInfo", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "InputDeviceCapabilities", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function InputDeviceCapabilities() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "InputDeviceCapabilities", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ImageData", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ImageData() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ImageData", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ImageCapture", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ImageCapture() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ImageCapture", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ImageBitmapRenderingContext", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ImageBitmapRenderingContext() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ImageBitmapRenderingContext", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ImageBitmap", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ImageBitmap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ImageBitmap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IdleDeadline", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IdleDeadline() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IdleDeadline", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IIRFilterNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IIRFilterNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IIRFilterNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBVersionChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBVersionChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBVersionChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBTransaction", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBTransaction() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBTransaction", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBRequest", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBRequest() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBRequest", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBOpenDBRequest", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBOpenDBRequest() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBOpenDBRequest", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBObjectStore", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBObjectStore() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBObjectStore", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBKeyRange", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBKeyRange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBKeyRange", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBIndex", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBIndex() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBIndex", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBCursorWithValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBCursorWithValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBCursorWithValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IDBCursor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IDBCursor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IDBCursor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Headers", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Headers() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Headers", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HashChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HashChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HashChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLVideoElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLVideoElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLVideoElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLUnknownElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLUnknownElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLUnknownElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLUListElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLUListElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLUListElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTrackElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTrackElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTrackElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTitleElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTitleElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTitleElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTimeElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTimeElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTimeElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTextAreaElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTextAreaElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTextAreaElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTemplateElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTemplateElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTemplateElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableSectionElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTableSectionElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableSectionElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableRowElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTableRowElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableRowElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTableElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableColElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTableColElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableColElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableCellElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTableCellElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableCellElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableCaptionElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLTableCaptionElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableCaptionElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLStyleElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLStyleElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLStyleElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLSpanElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLSpanElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLSpanElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLSourceElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLSourceElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLSourceElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLSlotElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLSlotElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLSlotElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLSelectElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLSelectElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLSelectElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLScriptElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLScriptElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLScriptElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLQuoteElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLQuoteElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLQuoteElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLProgressElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLProgressElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLProgressElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLPreElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLPreElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLPreElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLPictureElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLPictureElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLPictureElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLParamElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLParamElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLParamElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLParagraphElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLParagraphElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLParagraphElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLOutputElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLOutputElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOutputElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLOptionsCollection", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLOptionsCollection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOptionsCollection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLOptionElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLOptionElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOptionElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLOptGroupElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLOptGroupElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOptGroupElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLObjectElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLObjectElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLObjectElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLOListElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLOListElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOListElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLModElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLModElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLModElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLMeterElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLMeterElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMeterElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLMetaElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLMetaElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMetaElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLMenuElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLMenuElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMenuElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLMediaElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLMediaElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMediaElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLMarqueeElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLMarqueeElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMarqueeElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLMapElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLMapElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMapElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLLinkElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLLinkElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLLinkElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLLegendElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLLegendElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLLegendElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLLabelElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLLabelElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLLabelElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLLIElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLLIElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLLIElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLInputElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLInputElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLInputElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLImageElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLImageElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLImageElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLIFrameElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLIFrameElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLIFrameElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLHtmlElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLHtmlElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLHtmlElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLHeadingElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLHeadingElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLHeadingElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLHeadElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLHeadElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLHeadElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLHRElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLHRElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLHRElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLFrameSetElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLFrameSetElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFrameSetElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLFrameElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLFrameElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFrameElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLFormElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLFormElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFormElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLFormControlsCollection", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLFormControlsCollection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFormControlsCollection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLFontElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLFontElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFontElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLFieldSetElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLFieldSetElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFieldSetElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLEmbedElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLEmbedElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLEmbedElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLDocument", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLDocument() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDocument", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLDivElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLDivElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDivElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLDirectoryElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLDirectoryElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDirectoryElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLDialogElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLDialogElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDialogElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLDetailsElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLDetailsElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDetailsElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLDataListElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLDataListElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDataListElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLDataElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLDataElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDataElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLDListElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLDListElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDListElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLCollection", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLCollection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLCollection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLCanvasElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLCanvasElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLCanvasElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLButtonElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLButtonElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLButtonElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLBodyElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLBodyElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLBodyElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLBaseElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLBaseElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLBaseElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLBRElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLBRElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLBRElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLAudioElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLAudioElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLAudioElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLAreaElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLAreaElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLAreaElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLAnchorElement", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLAnchorElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLAnchorElement", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HTMLAllCollection", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HTMLAllCollection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLAllCollection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "GeolocationPositionError", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function GeolocationPositionError() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "GeolocationPositionError", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "GeolocationPosition", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function GeolocationPosition() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "GeolocationPosition", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "GeolocationCoordinates", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function GeolocationCoordinates() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "GeolocationCoordinates", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Geolocation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Geolocation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Geolocation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "GamepadHapticActuator", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function GamepadHapticActuator() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "GamepadHapticActuator", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "GamepadEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function GamepadEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "GamepadEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "GamepadButton", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function GamepadButton() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "GamepadButton", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Gamepad", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Gamepad() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Gamepad", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "GainNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function GainNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "GainNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FormDataEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FormDataEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FormDataEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FormData", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FormData() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FormData", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FontFaceSetLoadEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FontFaceSetLoadEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FontFaceSetLoadEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FontFace", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FontFace() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FontFace", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FocusEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FocusEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FocusEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FileReader", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FileReader() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FileReader", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FileList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FileList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FileList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "File", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function File() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "File", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FeaturePolicy", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FeaturePolicy() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FeaturePolicy", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "EventTarget", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function EventTarget() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "EventTarget", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "EventSource", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function EventSource() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "EventSource", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "EventCounts", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function EventCounts() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "EventCounts", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Event", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Event() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Event", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ErrorEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ErrorEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ErrorEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ElementInternals", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ElementInternals() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ElementInternals", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Element", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Element() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Element", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DynamicsCompressorNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DynamicsCompressorNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DynamicsCompressorNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DragEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DragEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DragEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DocumentType", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DocumentType() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DocumentType", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DocumentFragment", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DocumentFragment() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DocumentFragment", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DelayNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DelayNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DelayNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DecompressionStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DecompressionStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DecompressionStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DataTransferItemList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DataTransferItemList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DataTransferItemList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DataTransferItem", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DataTransferItem() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DataTransferItem", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DataTransfer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DataTransfer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DataTransfer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMTokenList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMTokenList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMTokenList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMStringMap", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMStringMap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMStringMap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMStringList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMStringList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMStringList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMRectReadOnly", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMRectReadOnly() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMRectReadOnly", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMRectList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMRectList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMRectList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMRect", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMRect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMRect", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMQuad", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMQuad() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMQuad", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMPointReadOnly", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMPointReadOnly() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMPointReadOnly", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMPoint", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMPoint() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMPoint", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMParser", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMParser() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMParser", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMMatrixReadOnly", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMMatrixReadOnly() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMMatrixReadOnly", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMMatrix", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMMatrix() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMMatrix", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMImplementation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMImplementation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMImplementation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMException", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMException() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMException", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DOMError", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DOMError() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DOMError", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CustomEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CustomEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CustomEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Crypto", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Crypto() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Crypto", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CountQueuingStrategy", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CountQueuingStrategy() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CountQueuingStrategy", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ConvolverNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ConvolverNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ConvolverNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ConstantSourceNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ConstantSourceNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ConstantSourceNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CompressionStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CompressionStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CompressionStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CompositionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CompositionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CompositionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Comment", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Comment() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Comment", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CloseEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CloseEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CloseEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ClipboardEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ClipboardEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ClipboardEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CharacterData", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CharacterData() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CharacterData", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ChannelSplitterNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ChannelSplitterNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ChannelSplitterNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ChannelMergerNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ChannelMergerNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ChannelMergerNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CanvasRenderingContext2D", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CanvasRenderingContext2D() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasRenderingContext2D", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CanvasPattern", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CanvasPattern() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasPattern", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CanvasGradient", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CanvasGradient() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasGradient", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CanvasFilter", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CanvasFilter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasFilter", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CanvasCaptureMediaStreamTrack", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CanvasCaptureMediaStreamTrack() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasCaptureMediaStreamTrack", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSVariableReferenceValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSVariableReferenceValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSVariableReferenceValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSUnparsedValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSUnparsedValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSUnparsedValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSUnitValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSUnitValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSUnitValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSTranslate", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSTranslate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSTranslate", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSTransformValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSTransformValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSTransformValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSTransformComponent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSTransformComponent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSTransformComponent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSSupportsRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSSupportsRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSSupportsRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSStyleValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSStyleValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSStyleValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSStyleSheet", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSStyleSheet() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSStyleSheet", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSStyleRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSStyleRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSStyleRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSStyleDeclaration", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSStyleDeclaration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSStyleDeclaration", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSSkewY", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSSkewY() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSSkewY", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSSkewX", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSSkewX() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSSkewX", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSSkew", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSSkew() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSSkew", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSScale", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSScale() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSScale", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSRuleList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSRuleList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSRuleList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSRotate", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSRotate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSRotate", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSPropertyRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSPropertyRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSPropertyRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSPositionValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSPositionValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSPositionValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSPerspective", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSPerspective() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSPerspective", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSPageRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSPageRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSPageRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSNumericValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSNumericValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSNumericValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSNumericArray", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSNumericArray() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSNumericArray", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSNamespaceRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSNamespaceRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSNamespaceRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMediaRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMediaRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMediaRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMatrixComponent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMatrixComponent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMatrixComponent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMathValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMathValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMathSum", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMathSum() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathSum", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMathProduct", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMathProduct() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathProduct", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMathNegate", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMathNegate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathNegate", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMathMin", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMathMin() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathMin", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMathMax", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMathMax() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathMax", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMathInvert", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMathInvert() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathInvert", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSMathClamp", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSMathClamp() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathClamp", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSLayerStatementRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSLayerStatementRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSLayerStatementRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSLayerBlockRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSLayerBlockRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSLayerBlockRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSKeywordValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSKeywordValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSKeywordValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSKeyframesRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSKeyframesRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSKeyframesRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSKeyframeRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSKeyframeRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSKeyframeRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSImportRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSImportRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSImportRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSImageValue", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSImageValue() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSImageValue", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSGroupingRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSGroupingRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSGroupingRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSFontFaceRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSFontFaceRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSFontFaceRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSCounterStyleRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSCounterStyleRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSCounterStyleRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSConditionRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSConditionRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSConditionRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSS", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: {}
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CDATASection", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CDATASection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CDATASection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ByteLengthQueuingStrategy", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ByteLengthQueuingStrategy() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ByteLengthQueuingStrategy", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BroadcastChannel", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BroadcastChannel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BroadcastChannel", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BlobEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BlobEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BlobEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Blob", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Blob() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Blob", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BiquadFilterNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BiquadFilterNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BiquadFilterNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BeforeUnloadEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BeforeUnloadEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BeforeUnloadEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BeforeInstallPromptEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BeforeInstallPromptEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BeforeInstallPromptEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BatteryManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BatteryManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BatteryManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BaseAudioContext", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BaseAudioContext() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BaseAudioContext", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioWorkletNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioWorkletNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioWorkletNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioScheduledSourceNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioScheduledSourceNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioScheduledSourceNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioProcessingEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioProcessingEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioProcessingEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioParamMap", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioParamMap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioParamMap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioParam", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioParam() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioParam", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioListener", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioListener() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioListener", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioDestinationNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioDestinationNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioDestinationNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioContext", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioContext() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioContext", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioBufferSourceNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioBufferSourceNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioBufferSourceNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioBuffer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioBuffer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioBuffer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Attr", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Attr() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Attr", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AnimationEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AnimationEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AnimationEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AnimationEffect", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AnimationEffect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AnimationEffect", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Animation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Animation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Animation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AnalyserNode", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AnalyserNode() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AnalyserNode", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AbstractRange", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AbstractRange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AbstractRange", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AbortSignal", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AbortSignal() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AbortSignal", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AbortController", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AbortController() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AbortController", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "self", {
+  configurable: true,
+  enumerable: true,
+  get: function self() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "self_get", arguments);
+  },
+  set: function self() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "self_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "name", {
+  configurable: true,
+  enumerable: true,
+  get: function name() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "name_get", arguments, '');
+  },
+  set: function name() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "name_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "personalbar", {
+  configurable: true,
+  enumerable: true,
+  get: function personalbar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "personalbar_get", arguments);
+  },
+  set: function personalbar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "personalbar_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "scrollbars", {
+  configurable: true,
+  enumerable: true,
+  get: function scrollbars() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scrollbars_get", arguments);
+  },
+  set: function scrollbars() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scrollbars_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "statusbar", {
+  configurable: true,
+  enumerable: true,
+  get: function statusbar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "statusbar_get", arguments);
+  },
+  set: function statusbar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "statusbar_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "status", {
+  configurable: true,
+  enumerable: true,
+  get: function status() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "status_get", arguments, '');
+  },
+  set: function status() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "status_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "closed", {
+  configurable: true,
+  enumerable: true,
+  get: function closed() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "closed_get", arguments, false);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "frames", {
+  configurable: true,
+  enumerable: true,
+  get: function frames() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "frames_get", arguments);
+  },
+  set: function frames() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "frames_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "length", {
+  configurable: true,
+  enumerable: true,
+  get: function length() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "length_get", arguments, 0);
+  },
+  set: function length() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "length_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "top", {
+  configurable: false,
+  enumerable: true,
+  get: function top() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "top_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "opener", {
+  configurable: true,
+  enumerable: true,
+  get: function opener() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "opener_get", arguments, null);
+  },
+  set: function opener() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "opener_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "parent", {
+  configurable: true,
+  enumerable: true,
+  get: function parent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "parent_get", arguments);
+  },
+  set: function parent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "parent_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "frameElement", {
+  configurable: true,
+  enumerable: true,
+  get: function frameElement() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "frameElement_get", arguments, null);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "origin", {
+  configurable: true,
+  enumerable: true,
+  get: function origin() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "origin_get", arguments, 'http://127.0.0.1:5000');
+  },
+  set: function origin() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "origin_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "innerWidth", {
+  configurable: true,
+  enumerable: true,
+  get: function innerWidth() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "innerWidth_get", arguments, 1440);
+  },
+  set: function innerWidth() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "innerWidth_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "innerHeight", {
+  configurable: true,
+  enumerable: true,
+  get: function innerHeight() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "innerHeight_get", arguments, 150);
+  },
+  set: function innerHeight() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "innerHeight_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "scrollX", {
+  configurable: true,
+  enumerable: true,
+  get: function scrollX() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scrollX_get", arguments, 0);
+  },
+  set: function scrollX() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scrollX_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "pageXOffset", {
+  configurable: true,
+  enumerable: true,
+  get: function pageXOffset() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "pageXOffset_get", arguments, 0);
+  },
+  set: function pageXOffset() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "pageXOffset_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "scrollY", {
+  configurable: true,
+  enumerable: true,
+  get: function scrollY() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scrollY_get", arguments, 0);
+  },
+  set: function scrollY() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scrollY_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "pageYOffset", {
+  configurable: true,
+  enumerable: true,
+  get: function pageYOffset() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "pageYOffset_get", arguments, 0);
+  },
+  set: function pageYOffset() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "pageYOffset_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "screenX", {
+  configurable: true,
+  enumerable: true,
+  get: function screenX() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screenX_get", arguments, 0);
+  },
+  set: function screenX() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screenX_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "screenY", {
+  configurable: true,
+  enumerable: true,
+  get: function screenY() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screenY_get", arguments, 0);
+  },
+  set: function screenY() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screenY_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "outerWidth", {
+  configurable: true,
+  enumerable: true,
+  get: function outerWidth() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "outerWidth_get", arguments, 1440);
+  },
+  set: function outerWidth() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "outerWidth_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "outerHeight", {
+  configurable: true,
+  enumerable: true,
+  get: function outerHeight() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "outerHeight_get", arguments, 920);
+  },
+  set: function outerHeight() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "outerHeight_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "devicePixelRatio", {
+  configurable: true,
+  enumerable: true,
+  get: function devicePixelRatio() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_get", arguments, 1.5);
+  },
+  set: function devicePixelRatio() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "event", {
+  configurable: true,
+  enumerable: false,
+  get: function event() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "event_get", arguments);
+  },
+  set: function event() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "event_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "clientInformation", {
+  configurable: true,
+  enumerable: true,
+  get: function clientInformation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "clientInformation_get", arguments);
+  },
+  set: function clientInformation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "clientInformation_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "offscreenBuffering", {
+  configurable: true,
+  enumerable: false,
+  get: function offscreenBuffering() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "offscreenBuffering_get", arguments, true);
+  },
+  set: function offscreenBuffering() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "offscreenBuffering_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "screenLeft", {
+  configurable: true,
+  enumerable: true,
+  get: function screenLeft() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screenLeft_get", arguments, 0);
+  },
+  set: function screenLeft() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screenLeft_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "screenTop", {
+  configurable: true,
+  enumerable: true,
+  get: function screenTop() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screenTop_get", arguments, 0);
+  },
+  set: function screenTop() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "screenTop_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "defaultStatus", {
+  configurable: true,
+  enumerable: true,
+  get: function defaultStatus() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "defaultStatus_get", arguments, '');
+  },
+  set: function defaultStatus() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "defaultStatus_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "defaultstatus", {
+  configurable: true,
+  enumerable: true,
+  get: function defaultstatus() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "defaultstatus_get", arguments, '');
+  },
+  set: function defaultstatus() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "defaultstatus_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "styleMedia", {
+  configurable: true,
+  enumerable: true,
+  get: function styleMedia() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "styleMedia_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onsearch", {
+  configurable: true,
+  enumerable: true,
+  get: function onsearch() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onsearch_get", arguments, null);
+  },
+  set: function onsearch() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onsearch_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "isSecureContext", {
+  configurable: true,
+  enumerable: true,
+  get: function isSecureContext() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "isSecureContext_get", arguments, true);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onappinstalled", {
+  configurable: true,
+  enumerable: true,
+  get: function onappinstalled() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onappinstalled_get", arguments, null);
+  },
+  set: function onappinstalled() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onappinstalled_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onbeforeinstallprompt", {
+  configurable: true,
+  enumerable: true,
+  get: function onbeforeinstallprompt() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeinstallprompt_get", arguments, null);
+  },
+  set: function onbeforeinstallprompt() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeinstallprompt_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "crypto", {
+  configurable: true,
+  enumerable: true,
+  get: function crypto() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "crypto_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onbeforexrselect", {
+  configurable: true,
+  enumerable: true,
+  get: function onbeforexrselect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforexrselect_get", arguments, null);
+  },
+  set: function onbeforexrselect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforexrselect_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onabort", {
+  configurable: true,
+  enumerable: true,
+  get: function onabort() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onabort_get", arguments, null);
+  },
+  set: function onabort() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onabort_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onblur", {
+  configurable: true,
+  enumerable: true,
+  get: function onblur() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onblur_get", arguments, null);
+  },
+  set: function onblur() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onblur_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "oncancel", {
+  configurable: true,
+  enumerable: true,
+  get: function oncancel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncancel_get", arguments, null);
+  },
+  set: function oncancel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncancel_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "oncanplay", {
+  configurable: true,
+  enumerable: true,
+  get: function oncanplay() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncanplay_get", arguments, null);
+  },
+  set: function oncanplay() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncanplay_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "oncanplaythrough", {
+  configurable: true,
+  enumerable: true,
+  get: function oncanplaythrough() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncanplaythrough_get", arguments, null);
+  },
+  set: function oncanplaythrough() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncanplaythrough_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onchange", {
+  configurable: true,
+  enumerable: true,
+  get: function onchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onchange_get", arguments, null);
+  },
+  set: function onchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onchange_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onclick", {
+  configurable: true,
+  enumerable: true,
+  get: function onclick() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onclick_get", arguments, null);
+  },
+  set: function onclick() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onclick_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onclose", {
+  configurable: true,
+  enumerable: true,
+  get: function onclose() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onclose_get", arguments, null);
+  },
+  set: function onclose() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onclose_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "oncontextlost", {
+  configurable: true,
+  enumerable: true,
+  get: function oncontextlost() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextlost_get", arguments, null);
+  },
+  set: function oncontextlost() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextlost_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "oncontextmenu", {
+  configurable: true,
+  enumerable: true,
+  get: function oncontextmenu() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextmenu_get", arguments, null);
+  },
+  set: function oncontextmenu() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextmenu_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "oncontextrestored", {
+  configurable: true,
+  enumerable: true,
+  get: function oncontextrestored() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextrestored_get", arguments, null);
+  },
+  set: function oncontextrestored() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextrestored_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "oncuechange", {
+  configurable: true,
+  enumerable: true,
+  get: function oncuechange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncuechange_get", arguments, null);
+  },
+  set: function oncuechange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oncuechange_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondblclick", {
+  configurable: true,
+  enumerable: true,
+  get: function ondblclick() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondblclick_get", arguments, null);
+  },
+  set: function ondblclick() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondblclick_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondrag", {
+  configurable: true,
+  enumerable: true,
+  get: function ondrag() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondrag_get", arguments, null);
+  },
+  set: function ondrag() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondrag_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondragend", {
+  configurable: true,
+  enumerable: true,
+  get: function ondragend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragend_get", arguments, null);
+  },
+  set: function ondragend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragend_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondragenter", {
+  configurable: true,
+  enumerable: true,
+  get: function ondragenter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragenter_get", arguments, null);
+  },
+  set: function ondragenter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragenter_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondragleave", {
+  configurable: true,
+  enumerable: true,
+  get: function ondragleave() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragleave_get", arguments, null);
+  },
+  set: function ondragleave() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragleave_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondragover", {
+  configurable: true,
+  enumerable: true,
+  get: function ondragover() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragover_get", arguments, null);
+  },
+  set: function ondragover() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragover_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondragstart", {
+  configurable: true,
+  enumerable: true,
+  get: function ondragstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragstart_get", arguments, null);
+  },
+  set: function ondragstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondragstart_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondrop", {
+  configurable: true,
+  enumerable: true,
+  get: function ondrop() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondrop_get", arguments, null);
+  },
+  set: function ondrop() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondrop_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondurationchange", {
+  configurable: true,
+  enumerable: true,
+  get: function ondurationchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondurationchange_get", arguments, null);
+  },
+  set: function ondurationchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondurationchange_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onemptied", {
+  configurable: true,
+  enumerable: true,
+  get: function onemptied() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onemptied_get", arguments, null);
+  },
+  set: function onemptied() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onemptied_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onended", {
+  configurable: true,
+  enumerable: true,
+  get: function onended() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onended_get", arguments, null);
+  },
+  set: function onended() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onended_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onerror", {
+  configurable: true,
+  enumerable: true,
+  get: function onerror() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onerror_get", arguments, null);
+  },
+  set: function onerror() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onerror_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onfocus", {
+  configurable: true,
+  enumerable: true,
+  get: function onfocus() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onfocus_get", arguments, null);
+  },
+  set: function onfocus() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onfocus_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onformdata", {
+  configurable: true,
+  enumerable: true,
+  get: function onformdata() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onformdata_get", arguments, null);
+  },
+  set: function onformdata() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onformdata_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "oninput", {
+  configurable: true,
+  enumerable: true,
+  get: function oninput() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oninput_get", arguments, null);
+  },
+  set: function oninput() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oninput_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "oninvalid", {
+  configurable: true,
+  enumerable: true,
+  get: function oninvalid() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oninvalid_get", arguments, null);
+  },
+  set: function oninvalid() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "oninvalid_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onkeydown", {
+  configurable: true,
+  enumerable: true,
+  get: function onkeydown() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onkeydown_get", arguments, null);
+  },
+  set: function onkeydown() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onkeydown_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onkeypress", {
+  configurable: true,
+  enumerable: true,
+  get: function onkeypress() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onkeypress_get", arguments, null);
+  },
+  set: function onkeypress() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onkeypress_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onkeyup", {
+  configurable: true,
+  enumerable: true,
+  get: function onkeyup() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onkeyup_get", arguments, null);
+  },
+  set: function onkeyup() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onkeyup_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onload", {
+  configurable: true,
+  enumerable: true,
+  get: function onload() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onload_get", arguments, null);
+  },
+  set: function onload() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onload_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onloadeddata", {
+  configurable: true,
+  enumerable: true,
+  get: function onloadeddata() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onloadeddata_get", arguments, null);
+  },
+  set: function onloadeddata() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onloadeddata_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onloadedmetadata", {
+  configurable: true,
+  enumerable: true,
+  get: function onloadedmetadata() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onloadedmetadata_get", arguments, null);
+  },
+  set: function onloadedmetadata() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onloadedmetadata_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onloadstart", {
+  configurable: true,
+  enumerable: true,
+  get: function onloadstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onloadstart_get", arguments, null);
+  },
+  set: function onloadstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onloadstart_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmousedown", {
+  configurable: true,
+  enumerable: true,
+  get: function onmousedown() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmousedown_get", arguments, null);
+  },
+  set: function onmousedown() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmousedown_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmouseenter", {
+  configurable: true,
+  enumerable: true,
+  get: function onmouseenter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseenter_get", arguments, null);
+  },
+  set: function onmouseenter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseenter_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmouseleave", {
+  configurable: true,
+  enumerable: true,
+  get: function onmouseleave() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseleave_get", arguments, null);
+  },
+  set: function onmouseleave() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseleave_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmousemove", {
+  configurable: true,
+  enumerable: true,
+  get: function onmousemove() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmousemove_get", arguments, null);
+  },
+  set: function onmousemove() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmousemove_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmouseout", {
+  configurable: true,
+  enumerable: true,
+  get: function onmouseout() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseout_get", arguments, null);
+  },
+  set: function onmouseout() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseout_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmouseover", {
+  configurable: true,
+  enumerable: true,
+  get: function onmouseover() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseover_get", arguments, null);
+  },
+  set: function onmouseover() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseover_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmouseup", {
+  configurable: true,
+  enumerable: true,
+  get: function onmouseup() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseup_get", arguments, null);
+  },
+  set: function onmouseup() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseup_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmousewheel", {
+  configurable: true,
+  enumerable: true,
+  get: function onmousewheel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmousewheel_get", arguments, null);
+  },
+  set: function onmousewheel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmousewheel_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpause", {
+  configurable: true,
+  enumerable: true,
+  get: function onpause() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpause_get", arguments, null);
+  },
+  set: function onpause() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpause_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onplay", {
+  configurable: true,
+  enumerable: true,
+  get: function onplay() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onplay_get", arguments, null);
+  },
+  set: function onplay() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onplay_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onplaying", {
+  configurable: true,
+  enumerable: true,
+  get: function onplaying() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onplaying_get", arguments, null);
+  },
+  set: function onplaying() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onplaying_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onprogress", {
+  configurable: true,
+  enumerable: true,
+  get: function onprogress() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onprogress_get", arguments, null);
+  },
+  set: function onprogress() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onprogress_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onratechange", {
+  configurable: true,
+  enumerable: true,
+  get: function onratechange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onratechange_get", arguments, null);
+  },
+  set: function onratechange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onratechange_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onreset", {
+  configurable: true,
+  enumerable: true,
+  get: function onreset() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onreset_get", arguments, null);
+  },
+  set: function onreset() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onreset_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onresize", {
+  configurable: true,
+  enumerable: true,
+  get: function onresize() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onresize_get", arguments, null);
+  },
+  set: function onresize() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onresize_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onscroll", {
+  configurable: true,
+  enumerable: true,
+  get: function onscroll() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onscroll_get", arguments, null);
+  },
+  set: function onscroll() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onscroll_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onsecuritypolicyviolation", {
+  configurable: true,
+  enumerable: true,
+  get: function onsecuritypolicyviolation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onsecuritypolicyviolation_get", arguments, null);
+  },
+  set: function onsecuritypolicyviolation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onsecuritypolicyviolation_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onseeked", {
+  configurable: true,
+  enumerable: true,
+  get: function onseeked() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onseeked_get", arguments, null);
+  },
+  set: function onseeked() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onseeked_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onseeking", {
+  configurable: true,
+  enumerable: true,
+  get: function onseeking() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onseeking_get", arguments, null);
+  },
+  set: function onseeking() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onseeking_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onselect", {
+  configurable: true,
+  enumerable: true,
+  get: function onselect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onselect_get", arguments, null);
+  },
+  set: function onselect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onselect_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onslotchange", {
+  configurable: true,
+  enumerable: true,
+  get: function onslotchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onslotchange_get", arguments, null);
+  },
+  set: function onslotchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onslotchange_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onstalled", {
+  configurable: true,
+  enumerable: true,
+  get: function onstalled() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onstalled_get", arguments, null);
+  },
+  set: function onstalled() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onstalled_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onsubmit", {
+  configurable: true,
+  enumerable: true,
+  get: function onsubmit() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onsubmit_get", arguments, null);
+  },
+  set: function onsubmit() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onsubmit_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onsuspend", {
+  configurable: true,
+  enumerable: true,
+  get: function onsuspend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onsuspend_get", arguments, null);
+  },
+  set: function onsuspend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onsuspend_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ontimeupdate", {
+  configurable: true,
+  enumerable: true,
+  get: function ontimeupdate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontimeupdate_get", arguments, null);
+  },
+  set: function ontimeupdate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontimeupdate_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ontoggle", {
+  configurable: true,
+  enumerable: true,
+  get: function ontoggle() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontoggle_get", arguments, null);
+  },
+  set: function ontoggle() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontoggle_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onvolumechange", {
+  configurable: true,
+  enumerable: true,
+  get: function onvolumechange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onvolumechange_get", arguments, null);
+  },
+  set: function onvolumechange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onvolumechange_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onwaiting", {
+  configurable: true,
+  enumerable: true,
+  get: function onwaiting() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwaiting_get", arguments, null);
+  },
+  set: function onwaiting() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwaiting_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onwebkitanimationend", {
+  configurable: true,
+  enumerable: true,
+  get: function onwebkitanimationend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationend_get", arguments, null);
+  },
+  set: function onwebkitanimationend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationend_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onwebkitanimationiteration", {
+  configurable: true,
+  enumerable: true,
+  get: function onwebkitanimationiteration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationiteration_get", arguments, null);
+  },
+  set: function onwebkitanimationiteration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationiteration_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onwebkitanimationstart", {
+  configurable: true,
+  enumerable: true,
+  get: function onwebkitanimationstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationstart_get", arguments, null);
+  },
+  set: function onwebkitanimationstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationstart_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onwebkittransitionend", {
+  configurable: true,
+  enumerable: true,
+  get: function onwebkittransitionend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkittransitionend_get", arguments, null);
+  },
+  set: function onwebkittransitionend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkittransitionend_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onwheel", {
+  configurable: true,
+  enumerable: true,
+  get: function onwheel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwheel_get", arguments, null);
+  },
+  set: function onwheel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onwheel_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onauxclick", {
+  configurable: true,
+  enumerable: true,
+  get: function onauxclick() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onauxclick_get", arguments, null);
+  },
+  set: function onauxclick() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onauxclick_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ongotpointercapture", {
+  configurable: true,
+  enumerable: true,
+  get: function ongotpointercapture() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ongotpointercapture_get", arguments, null);
+  },
+  set: function ongotpointercapture() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ongotpointercapture_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onlostpointercapture", {
+  configurable: true,
+  enumerable: true,
+  get: function onlostpointercapture() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onlostpointercapture_get", arguments, null);
+  },
+  set: function onlostpointercapture() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onlostpointercapture_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpointerdown", {
+  configurable: true,
+  enumerable: true,
+  get: function onpointerdown() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerdown_get", arguments, null);
+  },
+  set: function onpointerdown() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerdown_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpointermove", {
+  configurable: true,
+  enumerable: true,
+  get: function onpointermove() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointermove_get", arguments, null);
+  },
+  set: function onpointermove() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointermove_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpointerup", {
+  configurable: true,
+  enumerable: true,
+  get: function onpointerup() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerup_get", arguments, null);
+  },
+  set: function onpointerup() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerup_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpointercancel", {
+  configurable: true,
+  enumerable: true,
+  get: function onpointercancel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointercancel_get", arguments, null);
+  },
+  set: function onpointercancel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointercancel_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpointerover", {
+  configurable: true,
+  enumerable: true,
+  get: function onpointerover() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerover_get", arguments, null);
+  },
+  set: function onpointerover() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerover_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpointerout", {
+  configurable: true,
+  enumerable: true,
+  get: function onpointerout() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerout_get", arguments, null);
+  },
+  set: function onpointerout() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerout_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpointerenter", {
+  configurable: true,
+  enumerable: true,
+  get: function onpointerenter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerenter_get", arguments, null);
+  },
+  set: function onpointerenter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerenter_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpointerleave", {
+  configurable: true,
+  enumerable: true,
+  get: function onpointerleave() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerleave_get", arguments, null);
+  },
+  set: function onpointerleave() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerleave_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onselectstart", {
+  configurable: true,
+  enumerable: true,
+  get: function onselectstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onselectstart_get", arguments, null);
+  },
+  set: function onselectstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onselectstart_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onselectionchange", {
+  configurable: true,
+  enumerable: true,
+  get: function onselectionchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onselectionchange_get", arguments, null);
+  },
+  set: function onselectionchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onselectionchange_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onanimationend", {
+  configurable: true,
+  enumerable: true,
+  get: function onanimationend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationend_get", arguments, null);
+  },
+  set: function onanimationend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationend_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onanimationiteration", {
+  configurable: true,
+  enumerable: true,
+  get: function onanimationiteration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationiteration_get", arguments, null);
+  },
+  set: function onanimationiteration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationiteration_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onanimationstart", {
+  configurable: true,
+  enumerable: true,
+  get: function onanimationstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationstart_get", arguments, null);
+  },
+  set: function onanimationstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationstart_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ontransitionrun", {
+  configurable: true,
+  enumerable: true,
+  get: function ontransitionrun() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionrun_get", arguments, null);
+  },
+  set: function ontransitionrun() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionrun_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ontransitionstart", {
+  configurable: true,
+  enumerable: true,
+  get: function ontransitionstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionstart_get", arguments, null);
+  },
+  set: function ontransitionstart() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionstart_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ontransitionend", {
+  configurable: true,
+  enumerable: true,
+  get: function ontransitionend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionend_get", arguments, null);
+  },
+  set: function ontransitionend() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionend_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ontransitioncancel", {
+  configurable: true,
+  enumerable: true,
+  get: function ontransitioncancel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitioncancel_get", arguments, null);
+  },
+  set: function ontransitioncancel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitioncancel_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onafterprint", {
+  configurable: true,
+  enumerable: true,
+  get: function onafterprint() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onafterprint_get", arguments, null);
+  },
+  set: function onafterprint() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onafterprint_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onbeforeprint", {
+  configurable: true,
+  enumerable: true,
+  get: function onbeforeprint() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeprint_get", arguments, null);
+  },
+  set: function onbeforeprint() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeprint_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onbeforeunload", {
+  configurable: true,
+  enumerable: true,
+  get: function onbeforeunload() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeunload_get", arguments, null);
+  },
+  set: function onbeforeunload() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeunload_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onhashchange", {
+  configurable: true,
+  enumerable: true,
+  get: function onhashchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onhashchange_get", arguments, null);
+  },
+  set: function onhashchange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onhashchange_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onlanguagechange", {
+  configurable: true,
+  enumerable: true,
+  get: function onlanguagechange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onlanguagechange_get", arguments, null);
+  },
+  set: function onlanguagechange() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onlanguagechange_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmessage", {
+  configurable: true,
+  enumerable: true,
+  get: function onmessage() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmessage_get", arguments, null);
+  },
+  set: function onmessage() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmessage_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onmessageerror", {
+  configurable: true,
+  enumerable: true,
+  get: function onmessageerror() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmessageerror_get", arguments, null);
+  },
+  set: function onmessageerror() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onmessageerror_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onoffline", {
+  configurable: true,
+  enumerable: true,
+  get: function onoffline() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onoffline_get", arguments, null);
+  },
+  set: function onoffline() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onoffline_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ononline", {
+  configurable: true,
+  enumerable: true,
+  get: function ononline() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ononline_get", arguments, null);
+  },
+  set: function ononline() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ononline_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpagehide", {
+  configurable: true,
+  enumerable: true,
+  get: function onpagehide() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpagehide_get", arguments, null);
+  },
+  set: function onpagehide() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpagehide_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpageshow", {
+  configurable: true,
+  enumerable: true,
+  get: function onpageshow() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpageshow_get", arguments, null);
+  },
+  set: function onpageshow() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpageshow_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpopstate", {
+  configurable: true,
+  enumerable: true,
+  get: function onpopstate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpopstate_get", arguments, null);
+  },
+  set: function onpopstate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpopstate_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onrejectionhandled", {
+  configurable: true,
+  enumerable: true,
+  get: function onrejectionhandled() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onrejectionhandled_get", arguments, null);
+  },
+  set: function onrejectionhandled() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onrejectionhandled_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onstorage", {
+  configurable: true,
+  enumerable: true,
+  get: function onstorage() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onstorage_get", arguments, null);
+  },
+  set: function onstorage() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onstorage_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onunhandledrejection", {
+  configurable: true,
+  enumerable: true,
+  get: function onunhandledrejection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onunhandledrejection_get", arguments, null);
+  },
+  set: function onunhandledrejection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onunhandledrejection_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onunload", {
+  configurable: true,
+  enumerable: true,
+  get: function onunload() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onunload_get", arguments, null);
+  },
+  set: function onunload() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onunload_set", arguments);
+  }
+});
+// bodavm.toolsFunc.windowdefineProperty(window, "alert", {configurable:true, enumerable:true, writable:true, value:function alert (){return bodavm.toolsFunc.dispatch(this, window, "window", "alert", arguments)}});
+// bodavm.toolsFunc.windowdefineProperty(window, "atob", {configurable:true, enumerable:true, writable:true, value:function atob (){return bodavm.toolsFunc.dispatch(this, window, "window", "atob", arguments)}});
+// bodavm.toolsFunc.windowdefineProperty(window, "blur", {configurable:true, enumerable:true, writable:true, value:function blur (){return bodavm.toolsFunc.dispatch(this, window, "window", "blur", arguments)}});
+// bodavm.toolsFunc.windowdefineProperty(window, "btoa", {configurable:true, enumerable:true, writable:true, value:function btoa (){return bodavm.toolsFunc.dispatch(this, window, "window", "btoa", arguments)}});
+bodavm.toolsFunc.windowdefineProperty(window, "cancelAnimationFrame", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function cancelAnimationFrame() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "cancelAnimationFrame", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "cancelIdleCallback", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function cancelIdleCallback() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "cancelIdleCallback", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "captureEvents", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function captureEvents() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "captureEvents", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "clearInterval", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function clearInterval() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "clearInterval", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "clearTimeout", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function clearTimeout() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "clearTimeout", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "close", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function close() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "close", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "confirm", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function confirm() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "confirm", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "createImageBitmap", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function createImageBitmap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "createImageBitmap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "fetch", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function fetch() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "fetch", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "find", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function find() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "find", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "focus", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function focus() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "focus", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "getComputedStyle", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function getComputedStyle() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "getComputedStyle", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "getSelection", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function getSelection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "getSelection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "matchMedia", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function matchMedia() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "matchMedia", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "moveBy", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function moveBy() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "moveBy", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "moveTo", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function moveTo() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "moveTo", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "open", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function open() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "open", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "postMessage", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function postMessage() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "postMessage", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "print", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function print() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "print", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "prompt", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function prompt() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "prompt", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "queueMicrotask", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function queueMicrotask() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "queueMicrotask", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "releaseEvents", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function releaseEvents() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "releaseEvents", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "reportError", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function reportError() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "reportError", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "requestAnimationFrame", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function requestAnimationFrame() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "requestAnimationFrame", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "requestIdleCallback", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function requestIdleCallback() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "requestIdleCallback", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "resizeBy", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function resizeBy() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "resizeBy", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "resizeTo", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function resizeTo() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "resizeTo", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "scroll", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function scroll() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scroll", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "scrollBy", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function scrollBy() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scrollBy", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "scrollTo", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function scrollTo() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scrollTo", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "setInterval", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function setInterval() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "setInterval", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "setTimeout", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function setTimeout() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "setTimeout", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "stop", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function stop() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "stop", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "structuredClone", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function structuredClone() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "structuredClone", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitCancelAnimationFrame", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function webkitCancelAnimationFrame() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitCancelAnimationFrame", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitRequestAnimationFrame", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function webkitRequestAnimationFrame() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestAnimationFrame", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondevicemotion", {
+  configurable: true,
+  enumerable: true,
+  get: function ondevicemotion() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondevicemotion_get", arguments, null);
+  },
+  set: function ondevicemotion() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondevicemotion_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondeviceorientation", {
+  configurable: true,
+  enumerable: true,
+  get: function ondeviceorientation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondeviceorientation_get", arguments, null);
+  },
+  set: function ondeviceorientation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondeviceorientation_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ondeviceorientationabsolute", {
+  configurable: true,
+  enumerable: true,
+  get: function ondeviceorientationabsolute() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondeviceorientationabsolute_get", arguments, null);
+  },
+  set: function ondeviceorientationabsolute() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ondeviceorientationabsolute_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onbeforematch", {
+  configurable: true,
+  enumerable: true,
+  get: function onbeforematch() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforematch_get", arguments, null);
+  },
+  set: function onbeforematch() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforematch_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AbsoluteOrientationSensor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AbsoluteOrientationSensor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AbsoluteOrientationSensor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Accelerometer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Accelerometer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Accelerometer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioWorklet", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioWorklet() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioWorklet", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Cache", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Cache() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Cache", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Clipboard", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Clipboard() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Clipboard", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ClipboardItem", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ClipboardItem() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ClipboardItem", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CookieChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CookieChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CookieChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CookieStoreManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CookieStoreManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CookieStoreManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Credential", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Credential() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Credential", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CredentialsContainer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CredentialsContainer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CredentialsContainer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CryptoKey", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CryptoKey() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CryptoKey", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DeviceMotionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DeviceMotionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DeviceMotionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DeviceMotionEventAcceleration", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DeviceMotionEventAcceleration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DeviceMotionEventAcceleration", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DeviceMotionEventRotationRate", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DeviceMotionEventRotationRate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DeviceMotionEventRotationRate", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DeviceOrientationEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DeviceOrientationEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DeviceOrientationEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FederatedCredential", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FederatedCredential() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FederatedCredential", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Gyroscope", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Gyroscope() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Gyroscope", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Keyboard", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Keyboard() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Keyboard", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "KeyboardLayoutMap", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function KeyboardLayoutMap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "KeyboardLayoutMap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "LinearAccelerationSensor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function LinearAccelerationSensor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "LinearAccelerationSensor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Lock", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Lock() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Lock", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "LockManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function LockManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "LockManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MIDIAccess", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MIDIAccess() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIAccess", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MIDIConnectionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MIDIConnectionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIConnectionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MIDIInput", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MIDIInput() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIInput", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MIDIInputMap", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MIDIInputMap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIInputMap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MIDIMessageEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MIDIMessageEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIMessageEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MIDIOutput", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MIDIOutput() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIOutput", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MIDIOutputMap", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MIDIOutputMap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIOutputMap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MIDIPort", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MIDIPort() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIPort", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaDeviceInfo", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaDeviceInfo() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaDeviceInfo", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaDevices", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaDevices() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaDevices", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaKeyMessageEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaKeyMessageEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeyMessageEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaKeySession", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaKeySession() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeySession", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaKeyStatusMap", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaKeyStatusMap() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeyStatusMap", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaKeySystemAccess", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaKeySystemAccess() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeySystemAccess", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaKeys", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaKeys() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeys", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NavigationPreloadManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NavigationPreloadManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationPreloadManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NavigatorManagedData", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NavigatorManagedData() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NavigatorManagedData", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "OrientationSensor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function OrientationSensor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "OrientationSensor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PasswordCredential", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PasswordCredential() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PasswordCredential", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RTCIceTransport", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RTCIceTransport() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RTCIceTransport", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RelativeOrientationSensor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RelativeOrientationSensor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RelativeOrientationSensor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Sensor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Sensor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Sensor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SensorErrorEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SensorErrorEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SensorErrorEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ServiceWorker", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ServiceWorker() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ServiceWorker", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ServiceWorkerContainer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ServiceWorkerContainer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ServiceWorkerContainer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ServiceWorkerRegistration", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ServiceWorkerRegistration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ServiceWorkerRegistration", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "StorageManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function StorageManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "StorageManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SubtleCrypto", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SubtleCrypto() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SubtleCrypto", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Worklet", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Worklet() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Worklet", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRDOMOverlayState", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRDOMOverlayState() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRDOMOverlayState", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRLayer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRLayer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRLayer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRWebGLBinding", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRWebGLBinding() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRWebGLBinding", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioData", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioData() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioData", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "EncodedAudioChunk", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function EncodedAudioChunk() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "EncodedAudioChunk", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "EncodedVideoChunk", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function EncodedVideoChunk() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "EncodedVideoChunk", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ImageTrack", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ImageTrack() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ImageTrack", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ImageTrackList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ImageTrackList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ImageTrackList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "VideoColorSpace", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function VideoColorSpace() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "VideoColorSpace", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "VideoFrame", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function VideoFrame() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "VideoFrame", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioDecoder", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioDecoder() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioDecoder", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AudioEncoder", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AudioEncoder() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AudioEncoder", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ImageDecoder", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ImageDecoder() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ImageDecoder", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "VideoDecoder", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function VideoDecoder() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "VideoDecoder", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "VideoEncoder", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function VideoEncoder() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "VideoEncoder", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AuthenticatorAssertionResponse", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AuthenticatorAssertionResponse() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AuthenticatorAssertionResponse", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AuthenticatorAttestationResponse", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AuthenticatorAttestationResponse() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AuthenticatorAttestationResponse", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AuthenticatorResponse", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AuthenticatorResponse() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AuthenticatorResponse", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PublicKeyCredential", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PublicKeyCredential() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PublicKeyCredential", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Bluetooth", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Bluetooth() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Bluetooth", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BluetoothCharacteristicProperties", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BluetoothCharacteristicProperties() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothCharacteristicProperties", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BluetoothDevice", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BluetoothDevice() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothDevice", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BluetoothRemoteGATTCharacteristic", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BluetoothRemoteGATTCharacteristic() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothRemoteGATTCharacteristic", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BluetoothRemoteGATTDescriptor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BluetoothRemoteGATTDescriptor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothRemoteGATTDescriptor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BluetoothRemoteGATTServer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BluetoothRemoteGATTServer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothRemoteGATTServer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BluetoothRemoteGATTService", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BluetoothRemoteGATTService() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothRemoteGATTService", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "EyeDropper", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function EyeDropper() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "EyeDropper", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FileSystemDirectoryHandle", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FileSystemDirectoryHandle() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FileSystemDirectoryHandle", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FileSystemFileHandle", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FileSystemFileHandle() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FileSystemFileHandle", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FileSystemHandle", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FileSystemHandle() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FileSystemHandle", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FileSystemWritableFileStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FileSystemWritableFileStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FileSystemWritableFileStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "FragmentDirective", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function FragmentDirective() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "FragmentDirective", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "GravitySensor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function GravitySensor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "GravitySensor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HID", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HID() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HID", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HIDConnectionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HIDConnectionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HIDConnectionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HIDDevice", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HIDDevice() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HIDDevice", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "HIDInputReportEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function HIDInputReportEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "HIDInputReportEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "IdleDetector", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function IdleDetector() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "IdleDetector", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamTrackGenerator", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaStreamTrackGenerator() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamTrackGenerator", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamTrackProcessor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaStreamTrackProcessor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamTrackProcessor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "OTPCredential", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function OTPCredential() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "OTPCredential", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PaymentAddress", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PaymentAddress() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentAddress", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PaymentRequest", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PaymentRequest() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentRequest", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PaymentResponse", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PaymentResponse() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentResponse", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PaymentMethodChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PaymentMethodChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentMethodChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Presentation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Presentation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Presentation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PresentationAvailability", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PresentationAvailability() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationAvailability", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PresentationConnection", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PresentationConnection() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationConnection", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PresentationConnectionAvailableEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PresentationConnectionAvailableEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationConnectionAvailableEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PresentationConnectionCloseEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PresentationConnectionCloseEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationConnectionCloseEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PresentationConnectionList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PresentationConnectionList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationConnectionList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PresentationReceiver", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PresentationReceiver() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationReceiver", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PresentationRequest", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PresentationRequest() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationRequest", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Profiler", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Profiler() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Profiler", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Scheduling", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Scheduling() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Scheduling", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ScreenDetailed", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ScreenDetailed() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ScreenDetailed", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "ScreenDetails", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function ScreenDetails() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "ScreenDetails", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Serial", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Serial() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Serial", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SerialPort", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SerialPort() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SerialPort", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USB", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USB() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USB", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBAlternateInterface", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBAlternateInterface() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBAlternateInterface", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBConfiguration", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBConfiguration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBConfiguration", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBConnectionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBConnectionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBConnectionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBDevice", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBDevice() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBDevice", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBEndpoint", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBEndpoint() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBEndpoint", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBInTransferResult", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBInTransferResult() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBInTransferResult", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBInterface", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBInterface() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBInterface", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBIsochronousInTransferPacket", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBIsochronousInTransferPacket() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBIsochronousInTransferPacket", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBIsochronousInTransferResult", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBIsochronousInTransferResult() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBIsochronousInTransferResult", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBIsochronousOutTransferPacket", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBIsochronousOutTransferPacket() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBIsochronousOutTransferPacket", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBIsochronousOutTransferResult", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBIsochronousOutTransferResult() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBIsochronousOutTransferResult", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "USBOutTransferResult", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function USBOutTransferResult() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "USBOutTransferResult", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "VirtualKeyboard", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function VirtualKeyboard() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "VirtualKeyboard", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WakeLock", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WakeLock() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WakeLock", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WakeLockSentinel", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WakeLockSentinel() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WakeLockSentinel", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebTransport", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebTransport() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebTransport", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebTransportBidirectionalStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebTransportBidirectionalStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebTransportBidirectionalStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebTransportDatagramDuplexStream", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebTransportDatagramDuplexStream() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebTransportDatagramDuplexStream", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "WebTransportError", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function WebTransportError() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "WebTransportError", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRAnchor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRAnchor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRAnchor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRAnchorSet", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRAnchorSet() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRAnchorSet", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRBoundedReferenceSpace", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRBoundedReferenceSpace() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRBoundedReferenceSpace", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRFrame", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRFrame() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRFrame", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRInputSource", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRInputSource() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRInputSource", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRInputSourceArray", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRInputSourceArray() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRInputSourceArray", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRInputSourceEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRInputSourceEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRInputSourceEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRInputSourcesChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRInputSourcesChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRInputSourcesChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRPose", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRPose() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRPose", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRReferenceSpace", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRReferenceSpace() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRReferenceSpace", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRReferenceSpaceEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRReferenceSpaceEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRReferenceSpaceEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRRenderState", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRRenderState() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRRenderState", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRRigidTransform", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRRigidTransform() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRRigidTransform", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRSession", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRSession() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRSession", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRSessionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRSessionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRSessionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRSpace", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRSpace() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRSpace", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRSystem", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRSystem() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRSystem", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRView", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRView() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRView", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRViewerPose", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRViewerPose() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRViewerPose", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRViewport", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRViewport() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRViewport", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRWebGLLayer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRWebGLLayer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRWebGLLayer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRCPUDepthInformation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRCPUDepthInformation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRCPUDepthInformation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRDepthInformation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRDepthInformation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRDepthInformation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRWebGLDepthInformation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRWebGLDepthInformation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRWebGLDepthInformation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRHitTestResult", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRHitTestResult() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRHitTestResult", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRHitTestSource", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRHitTestSource() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRHitTestSource", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRRay", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRRay() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRRay", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRTransientInputHitTestResult", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRTransientInputHitTestResult() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRTransientInputHitTestResult", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRTransientInputHitTestSource", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRTransientInputHitTestSource() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRTransientInputHitTestSource", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRLightEstimate", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRLightEstimate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRLightEstimate", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XRLightProbe", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XRLightProbe() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XRLightProbe", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "getScreenDetails", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function getScreenDetails() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "getScreenDetails", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "showDirectoryPicker", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function showDirectoryPicker() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "showDirectoryPicker", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "showOpenFilePicker", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function showOpenFilePicker() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "showOpenFilePicker", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "showSaveFilePicker", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function showSaveFilePicker() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "showSaveFilePicker", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "originAgentCluster", {
+  configurable: true,
+  enumerable: true,
+  get: function originAgentCluster() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "originAgentCluster_get", arguments, false);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "onpointerrawupdate", {
+  configurable: true,
+  enumerable: true,
+  get: function onpointerrawupdate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerrawupdate_get", arguments, null);
+  },
+  set: function onpointerrawupdate() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerrawupdate_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "crossOriginIsolated", {
+  configurable: true,
+  enumerable: true,
+  get: function crossOriginIsolated() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "crossOriginIsolated_get", arguments, false);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "scheduler", {
+  configurable: true,
+  enumerable: true,
+  get: function scheduler() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scheduler_get", arguments);
+  },
+  set: function scheduler() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "scheduler_set", arguments);
+  }
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AnimationPlaybackEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AnimationPlaybackEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AnimationPlaybackEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "AnimationTimeline", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function AnimationTimeline() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "AnimationTimeline", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSAnimation", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSAnimation() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSAnimation", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSTransition", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSTransition() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSTransition", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DocumentTimeline", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DocumentTimeline() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DocumentTimeline", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BackgroundFetchManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BackgroundFetchManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BackgroundFetchManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BackgroundFetchRecord", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BackgroundFetchRecord() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BackgroundFetchRecord", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BackgroundFetchRegistration", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BackgroundFetchRegistration() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BackgroundFetchRegistration", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "BluetoothUUID", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function BluetoothUUID() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothUUID", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CSSFontPaletteValuesRule", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CSSFontPaletteValuesRule() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CSSFontPaletteValuesRule", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CaptureHandleChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CaptureHandleChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CaptureHandleChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "CustomStateSet", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function CustomStateSet() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "CustomStateSet", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "DelegatedInkTrailPresenter", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function DelegatedInkTrailPresenter() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "DelegatedInkTrailPresenter", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Ink", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Ink() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Ink", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaMetadata", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaMetadata() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaMetadata", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaSession", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaSession() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaSession", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaSource", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaSource() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaSource", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SourceBuffer", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SourceBuffer() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SourceBuffer", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SourceBufferList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SourceBufferList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SourceBufferList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamTrack", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function MediaStreamTrack() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamTrack", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NavigateEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NavigateEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NavigateEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NavigationCurrentEntryChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NavigationCurrentEntryChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationCurrentEntryChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NavigationDestination", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NavigationDestination() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationDestination", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NavigationHistoryEntry", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NavigationHistoryEntry() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationHistoryEntry", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NavigationTransition", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NavigationTransition() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationTransition", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "NavigatorUAData", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function NavigatorUAData() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "NavigatorUAData", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Notification", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Notification() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Notification", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PaymentInstruments", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PaymentInstruments() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentInstruments", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PaymentManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PaymentManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PaymentRequestUpdateEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PaymentRequestUpdateEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentRequestUpdateEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PeriodicSyncManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PeriodicSyncManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PeriodicSyncManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PermissionStatus", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PermissionStatus() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PermissionStatus", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Permissions", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Permissions() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Permissions", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PictureInPictureEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PictureInPictureEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PictureInPictureEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PictureInPictureWindow", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PictureInPictureWindow() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PictureInPictureWindow", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PushManager", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PushManager() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PushManager", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PushSubscription", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PushSubscription() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PushSubscription", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "PushSubscriptionOptions", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function PushSubscriptionOptions() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "PushSubscriptionOptions", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "RemotePlayback", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function RemotePlayback() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "RemotePlayback", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "Scheduler", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function Scheduler() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "Scheduler", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TaskController", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TaskController() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TaskController", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TaskPriorityChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TaskPriorityChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TaskPriorityChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TaskSignal", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TaskSignal() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TaskSignal", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SharedWorker", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SharedWorker() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SharedWorker", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SpeechSynthesisErrorEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SpeechSynthesisErrorEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SpeechSynthesisErrorEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SpeechSynthesisEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SpeechSynthesisEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SpeechSynthesisEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "SpeechSynthesisUtterance", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function SpeechSynthesisUtterance() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "SpeechSynthesisUtterance", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TrustedHTML", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TrustedHTML() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedHTML", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TrustedScript", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TrustedScript() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedScript", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TrustedScriptURL", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TrustedScriptURL() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedScriptURL", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "TrustedTypePolicy", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function TrustedTypePolicy() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedTypePolicy", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "URLPattern", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function URLPattern() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "URLPattern", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "VideoPlaybackQuality", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function VideoPlaybackQuality() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "VideoPlaybackQuality", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "VirtualKeyboardGeometryChangeEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function VirtualKeyboardGeometryChangeEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "VirtualKeyboardGeometryChangeEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "XSLTProcessor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function XSLTProcessor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "XSLTProcessor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechGrammar", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function webkitSpeechGrammar() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechGrammar", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechGrammarList", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function webkitSpeechGrammarList() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechGrammarList", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognition", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function webkitSpeechRecognition() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechRecognition", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognitionError", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function webkitSpeechRecognitionError() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechRecognitionError", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognitionEvent", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function webkitSpeechRecognitionEvent() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechRecognitionEvent", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "openDatabase", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function openDatabase() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "openDatabase", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitRequestFileSystem", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function webkitRequestFileSystem() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestFileSystem", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "webkitResolveLocalFileSystemURL", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function webkitResolveLocalFileSystemURL() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "webkitResolveLocalFileSystemURL", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "vilame_setter", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: {}
+});
+bodavm.toolsFunc.windowdefineProperty(window, "code2", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "code1", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "dir", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function dir() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "dir", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "dirxml", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function dirxml() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "dirxml", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "profile", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function profile() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "profile", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "profileEnd", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function profileEnd() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "profileEnd", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "clear", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function clear() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "clear", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "table", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function table() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "table", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "keys", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function keys() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "keys", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "values", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function values() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "values", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "debug", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function debug() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "debug", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "undebug", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function undebug() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "undebug", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "monitor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function monitor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "monitor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "unmonitor", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function unmonitor() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "unmonitor", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "inspect", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function inspect() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "inspect", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "copy", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function copy() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "copy", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "queryObjects", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function queryObjects() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "queryObjects", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "$_", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: {}
+});
+bodavm.toolsFunc.windowdefineProperty(window, "$0", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: {}
+});
+bodavm.toolsFunc.windowdefineProperty(window, "$1", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "$2", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "$3", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "$4", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: undefined
+});
+bodavm.toolsFunc.windowdefineProperty(window, "getEventListeners", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function getEventListeners() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "getEventListeners", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "getAccessibleName", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function getAccessibleName() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "getAccessibleName", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "getAccessibleRole", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function getAccessibleRole() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "getAccessibleRole", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "monitorEvents", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function monitorEvents() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "monitorEvents", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "unmonitorEvents", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function unmonitorEvents() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "unmonitorEvents", arguments);
+  }()
+});
+// bodavm.toolsFunc.windowdefineProperty(window, "$", {configurable:true, enumerable:false, writable:true, value:function $ (){return bodavm.toolsFunc.dispatch(this, window, "window", "$", arguments)}});
+bodavm.toolsFunc.windowdefineProperty(window, "$$", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function $$() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "$$", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "$x", {
+  configurable: true,
+  enumerable: false,
+  writable: true,
+  value: function $x() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "$x", arguments);
+  }()
+});
+bodavm.toolsFunc.windowdefineProperty(window, "chrome", {
+  writable: true,
+  enumerable: true,
+  configurable: false,
+  value: {
+    app: {
+      InstallState: {
+        DISABLED: 'disabled',
+        INSTALLED: 'installed',
+        NOT_INSTALLED: 'not_installed'
+      },
+      RunningState: {
+        CANNOT_RUN: 'cannot_run',
+        READY_TO_RUN: 'ready_to_run',
+        RUNNING: 'running'
+      },
+      getDetails: function getDetails() {
+        debugger;
+      },
+      getIsInstalled: function getIsInstalled() {
+        debugger;
+      },
+      installState: function installState() {
+        debugger;
+      },
+      isInstalled: false,
+      runningState: function runningState() {
+        debugger;
+      }
+    },
+    csi: function () {
+      debugger;
+    },
+    loadTimes: function () {
+      debugger;
+    }
+  }
+});
+debugger;
+if (window.length > 0) {
+  window[0] = bodaobj.window;
+}
+var boeval = eval;
+eval = function (x) {
+  debugger;
+  console.log(`执行eval,参数为${x.length > 30 ? x.substr(0, 50) : x}`);
+  return boeval.call(this, x);
+};
+bodavm.toolsFunc.safefunction(eval);
+window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables] = {
+  after: true,
+  append: true,
+  before: true,
+  prepend: true,
+  remove: true,
+  replaceChildren: true,
+  replaceWith: true,
+  slot: true
+};
+window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables].__proto__ = null;
+// debugger
+// Object.defineProperty(this, 'window', {
+//     get: function window() {
+//         // if (bodavm.config.proxy ){
+//             // window=bodavm.toolsFunc.proxy(window,'window')
+//             // return window
+//         // }else{
+//             return this
+//         // }
+//     },
+//     // writable: false,
+//     configurable: false,
+//     enumerable:true
+// });
+// debugger// // debugger
 // Option = bodavm.memory.globalobj['Option']
 // Image = bodavm.memory.globalobj['Image']
 // Audio = bodavm.memory.globalobj['Audio']
@@ -12129,1159 +20673,8 @@ bodavm.toolsFunc.defineProperty('XMLHttpRequest', "setRequestHeader", {configura
 // $$ = bodavm.memory.globalobj['$$']
 // $x = bodavm.memory.globalobj['$x']
 
-;
-// delete location
-// 删除浏览器中不存在的对象
-delete global;
-delete GLOBAL;
-delete VMError;
-delete Buffer;
-delete process;
-delete root;
-delete WindowProperties;
-delete globalThis[Symbol.toStringTag];
-window = globalThis;
-globalThis.__proto__=bodavm.memory.globalobj['Window'].prototype
-// document=bodavm.memory.globalobj['document']
-bodavm.memory.globalobj['window']=window
-
-
-
-bodavm.toolsFunc.windowdefineProperty(window, "atob", {
-    configurable: true, enumerable: true, writable: true,
-    value: function atob(str) {
-        return bodavm.toolsFunc.base64.base64decode(str);
-    }
-});
-bodavm.toolsFunc.windowdefineProperty(window, "btoa", {
-    configurable: true,
-    enumerable: true,
-    writable: true,
-    value: function btoa(str) {
-        return bodavm.toolsFunc.base64.base64encode(str);
-    }
-});
-// window对象
-// debugger
-// window对象
-// bodavm.memory.globalobj['window'] = {}
-// bodavm.memory.globalobj['window'].__proto__=bodavm.memory.globalobj['Window'].prototype;
-console.log(`===============================================================================================================`);
-console.log(`===============================================================================================================`);
-console.log(`===============================================================================================================`);
-console.log(`===============================================================================================================`);
-console.log(`=====================================环    境    赋    值    初    始    化=====================================`);
-console.log(`===============================================================================================================`);
-console.log(`===============================================================================================================`);
-console.log(`===============================================================================================================`);
-console.log(`===============================================================================================================`);
-
-bodavm.toolsFunc.windowdefineProperty(window, "document", {configurable:false, enumerable:true, get:function document (){return bodavm.toolsFunc.dispatch(this, window, "window", "document_get", arguments)}, set:undefined});
-
-// bodavm.toolsFunc.windowdefineProperty(window, "Option", {configurable:true, enumerable:false, writable:true, value:function Option (){return bodavm.toolsFunc.windowdispatch(this, window, "window", "Option", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Document", {configurable:true, enumerable:false, writable:true, value:function Document (){return bodavm.toolsFunc.dispatch(this, window, "window", "Document", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "location", {configurable:false, enumerable:true, get:function location (){return bodavm.toolsFunc.dispatch(this, window, "window", "location_get", arguments)}, set:function location (){return bodavm.toolsFunc.dispatch(this, window, "window", "location_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Location", {configurable:true, enumerable:false, writable:true, value:function Location (){return bodavm.toolsFunc.dispatch(this, window, "window", "Location", arguments)}()});
-
-
-
-
-bodavm.toolsFunc.windowdefineProperty(window, "toolbar", {configurable:true, enumerable:true, get:function toolbar (){return bodavm.toolsFunc.dispatch(this, window, "window", "toolbar_get", arguments)}, set:function toolbar (){return bodavm.toolsFunc.dispatch(this, window, "window", "toolbar_set", arguments)}});
-
-bodavm.toolsFunc.windowdefineProperty(window, "menubar", {configurable:true, enumerable:true, get:function menubar (){return bodavm.toolsFunc.dispatch(this, window, "window", "menubar_get", arguments)}, set:function menubar (){return bodavm.toolsFunc.dispatch(this, window, "window", "menubar_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "locationbar", {configurable:true, enumerable:true, get:function locationbar (){return bodavm.toolsFunc.dispatch(this, window, "window", "locationbar_get", arguments)}, set:function locationbar (){return bodavm.toolsFunc.dispatch(this, window, "window", "locationbar_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BarProp", {configurable:true, enumerable:false, writable:true, value:function BarProp (){return bodavm.toolsFunc.dispatch(this, window, "window", "BarProp", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "customElements", {configurable:true, enumerable:true, get:function customElements (){return bodavm.toolsFunc.dispatch(this, window, "window", "customElements_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "CustomElementRegistry", {configurable:true, enumerable:false, writable:true, value:function CustomElementRegistry (){return bodavm.toolsFunc.dispatch(this, window, "window", "CustomElementRegistry", arguments)}()});
-
-
-// bodavm.toolsFunc.windowdefineProperty(window, "window", {configurable:false, enumerable:true, get:function window (){return bodavm.toolsFunc.dispatch(this, window, "window", "window_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "Window", {configurable:true, enumerable:false, writable:true, value:function Window (){return bodavm.toolsFunc.dispatch(this, window, "window", "Window", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "screen", {configurable:true, enumerable:true, get:function screen (){return bodavm.toolsFunc.dispatch(this, window, "window", "screen_get", arguments)}, set:function screen (){return bodavm.toolsFunc.dispatch(this, window, "window", "screen_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Screen", {configurable:true, enumerable:false, writable:true, value:function Screen (){return bodavm.toolsFunc.dispatch(this, window, "window", "Screen", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "navigator", {configurable:true, enumerable:true, get:function navigator (){return bodavm.toolsFunc.dispatch(this, window, "window", "navigator_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "Navigator", {configurable:true, enumerable:false, writable:true, value:function Navigator (){return bodavm.toolsFunc.dispatch(this, window, "window", "Navigator", arguments)}()});
-
-
-bodavm.toolsFunc.windowdefineProperty(window, "performance", {configurable:true, enumerable:true, get:function performance (){return bodavm.toolsFunc.dispatch(this, window, "window", "performance_get", arguments)}, set:function performance (){return bodavm.toolsFunc.dispatch(this, window, "window", "performance_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Performance", {configurable:true, enumerable:false, writable:true, value:function Performance (){return bodavm.toolsFunc.dispatch(this, window, "window", "Performance", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "sessionStorage", {configurable:true, enumerable:true, get:function sessionStorage (){return bodavm.toolsFunc.dispatch(this, window, "window", "sessionStorage_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "localStorage", {configurable:true, enumerable:true, get:function localStorage (){return bodavm.toolsFunc.dispatch(this, window, "window", "localStorage_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "Storage", {configurable:true, enumerable:false, writable:true, value:function Storage (){return bodavm.toolsFunc.dispatch(this, window, "window", "Storage", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "navigation", {configurable:true, enumerable:true, get:function navigation (){return bodavm.toolsFunc.dispatch(this, window, "window", "navigation_get", arguments)}, set:function navigation (){return bodavm.toolsFunc.dispatch(this, window, "window", "navigation_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Navigation", {configurable:true, enumerable:false, writable:true, value:function Navigation (){return bodavm.toolsFunc.dispatch(this, window, "window", "Navigation", arguments)}()});
-
-
-bodavm.toolsFunc.windowdefineProperty(window, "visualViewport", {configurable:true, enumerable:true, get:function visualViewport (){return bodavm.toolsFunc.dispatch(this, window, "window", "visualViewport_get", arguments)}, set:function visualViewport (){return bodavm.toolsFunc.dispatch(this, window, "window", "visualViewport_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "VisualViewport", {configurable:true, enumerable:false, writable:true, value:function VisualViewport (){return bodavm.toolsFunc.dispatch(this, window, "window", "VisualViewport", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "history", {configurable:true, enumerable:true, get:function history (){return bodavm.toolsFunc.dispatch(this, window, "window", "history_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "History", {configurable:true, enumerable:false, writable:true, value:function History (){return bodavm.toolsFunc.dispatch(this, window, "window", "History", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "indexedDB", {configurable:true, enumerable:true, get:function indexedDB (){return bodavm.toolsFunc.dispatch(this, window, "window", "indexedDB_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBFactory", {configurable:true, enumerable:false, writable:true, value:function IDBFactory (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBFactory", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "trustedTypes", {configurable:true, enumerable:true, get:function trustedTypes (){return bodavm.toolsFunc.dispatch(this, window, "window", "trustedTypes_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "TrustedTypePolicyFactory", {configurable:true, enumerable:false, writable:true, value:function TrustedTypePolicyFactory (){return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedTypePolicyFactory", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "cookieStore", {configurable:true, enumerable:true, get:function cookieStore (){return bodavm.toolsFunc.dispatch(this, window, "window", "cookieStore_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "CookieStore", {configurable:true, enumerable:false, writable:true, value:function CookieStore (){return bodavm.toolsFunc.dispatch(this, window, "window", "CookieStore", arguments)}()});
-
-bodavm.toolsFunc.windowdefineProperty(window, "external", {configurable:true, enumerable:true, get:function external (){return bodavm.toolsFunc.dispatch(this, window, "window", "external_get", arguments)}, set:function external (){return bodavm.toolsFunc.dispatch(this, window, "window", "external_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "External", {configurable:true, enumerable:false, writable:true, value:function External (){return bodavm.toolsFunc.dispatch(this, window, "window", "External", arguments)}()});
-
-
-bodavm.toolsFunc.windowdefineProperty(window, "caches", {configurable:true, enumerable:true, get:function caches (){return bodavm.toolsFunc.dispatch(this, window, "window", "caches_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "CacheStorage", {configurable:true, enumerable:false, writable:true, value:function CacheStorage (){return bodavm.toolsFunc.dispatch(this, window, "window", "CacheStorage", arguments)}()});
-
-
-bodavm.toolsFunc.windowdefineProperty(window, "webkitStorageInfo", {configurable:true, enumerable:true, get:function webkitStorageInfo (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitStorageInfo_get", arguments)}, set:undefined});
-
-bodavm.toolsFunc.windowdefineProperty(window, "speechSynthesis", {configurable:true, enumerable:true, get:function speechSynthesis (){return bodavm.toolsFunc.dispatch(this, window, "window", "speechSynthesis_get", arguments)}, set:undefined});
-
-
-bodavm.toolsFunc.windowdefineProperty(window, "IDBDatabase", {configurable:true, enumerable:false, writable:true, value:function IDBDatabase (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBDatabase", arguments)}()});
-
-
-bodavm.toolsFunc.windowdefineProperty(window, "Image", {configurable:true, enumerable:false, writable:true, value:function Image (){return bodavm.toolsFunc.dispatch(this, window, "window", "Image", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Audio", {configurable:true, enumerable:false, writable:true, value:function Audio (){return bodavm.toolsFunc.dispatch(this, window, "window", "Audio", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitURL", {configurable:true, enumerable:false, writable:true, value:function webkitURL (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitURL", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitRTCPeerConnection", {configurable:true, enumerable:false, writable:true, value:function webkitRTCPeerConnection (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRTCPeerConnection", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitMediaStream", {configurable:true, enumerable:false, writable:true, value:function webkitMediaStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitMediaStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebKitMutationObserver", {configurable:true, enumerable:false, writable:true, value:function WebKitMutationObserver (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebKitMutationObserver", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebKitCSSMatrix", {configurable:true, enumerable:false, writable:true, value:function WebKitCSSMatrix (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebKitCSSMatrix", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XPathResult", {configurable:true, enumerable:false, writable:true, value:function XPathResult (){return bodavm.toolsFunc.dispatch(this, window, "window", "XPathResult", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XPathExpression", {configurable:true, enumerable:false, writable:true, value:function XPathExpression (){return bodavm.toolsFunc.dispatch(this, window, "window", "XPathExpression", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XPathEvaluator", {configurable:true, enumerable:false, writable:true, value:function XPathEvaluator (){return bodavm.toolsFunc.dispatch(this, window, "window", "XPathEvaluator", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XMLSerializer", {configurable:true, enumerable:false, writable:true, value:function XMLSerializer (){return bodavm.toolsFunc.dispatch(this, window, "window", "XMLSerializer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XMLHttpRequestUpload", {configurable:true, enumerable:false, writable:true, value:function XMLHttpRequestUpload (){return bodavm.toolsFunc.dispatch(this, window, "window", "XMLHttpRequestUpload", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XMLHttpRequestEventTarget", {configurable:true, enumerable:false, writable:true, value:function XMLHttpRequestEventTarget (){return bodavm.toolsFunc.dispatch(this, window, "window", "XMLHttpRequestEventTarget", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XMLHttpRequest", {configurable:true, enumerable:false, writable:true, value:function XMLHttpRequest (){return bodavm.toolsFunc.dispatch(this, window, "window", "XMLHttpRequest", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XMLDocument", {configurable:true, enumerable:false, writable:true, value:function XMLDocument (){return bodavm.toolsFunc.dispatch(this, window, "window", "XMLDocument", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WritableStreamDefaultWriter", {configurable:true, enumerable:false, writable:true, value:function WritableStreamDefaultWriter (){return bodavm.toolsFunc.dispatch(this, window, "window", "WritableStreamDefaultWriter", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WritableStreamDefaultController", {configurable:true, enumerable:false, writable:true, value:function WritableStreamDefaultController (){return bodavm.toolsFunc.dispatch(this, window, "window", "WritableStreamDefaultController", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WritableStream", {configurable:true, enumerable:false, writable:true, value:function WritableStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "WritableStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Worker", {configurable:true, enumerable:false, writable:true, value:function Worker (){return bodavm.toolsFunc.dispatch(this, window, "window", "Worker", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WheelEvent", {configurable:true, enumerable:false, writable:true, value:function WheelEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "WheelEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebSocket", {configurable:true, enumerable:false, writable:true, value:function WebSocket (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebSocket", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLVertexArrayObject", {configurable:true, enumerable:false, writable:true, value:function WebGLVertexArrayObject (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLVertexArrayObject", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLUniformLocation", {configurable:true, enumerable:false, writable:true, value:function WebGLUniformLocation (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLUniformLocation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLTransformFeedback", {configurable:true, enumerable:false, writable:true, value:function WebGLTransformFeedback (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLTransformFeedback", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLTexture", {configurable:true, enumerable:false, writable:true, value:function WebGLTexture (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLTexture", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLSync", {configurable:true, enumerable:false, writable:true, value:function WebGLSync (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLSync", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLShaderPrecisionFormat", {configurable:true, enumerable:false, writable:true, value:function WebGLShaderPrecisionFormat (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLShaderPrecisionFormat", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLShader", {configurable:true, enumerable:false, writable:true, value:function WebGLShader (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLShader", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLSampler", {configurable:true, enumerable:false, writable:true, value:function WebGLSampler (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLSampler", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLRenderingContext", {configurable:true, enumerable:false, writable:true, value:function WebGLRenderingContext (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLRenderingContext", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLRenderbuffer", {configurable:true, enumerable:false, writable:true, value:function WebGLRenderbuffer (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLRenderbuffer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLQuery", {configurable:true, enumerable:false, writable:true, value:function WebGLQuery (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLQuery", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLProgram", {configurable:true, enumerable:false, writable:true, value:function WebGLProgram (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLProgram", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLFramebuffer", {configurable:true, enumerable:false, writable:true, value:function WebGLFramebuffer (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLFramebuffer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLContextEvent", {configurable:true, enumerable:false, writable:true, value:function WebGLContextEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLContextEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLBuffer", {configurable:true, enumerable:false, writable:true, value:function WebGLBuffer (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLBuffer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGLActiveInfo", {configurable:true, enumerable:false, writable:true, value:function WebGLActiveInfo (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGLActiveInfo", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebGL2RenderingContext", {configurable:true, enumerable:false, writable:true, value:function WebGL2RenderingContext (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebGL2RenderingContext", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WaveShaperNode", {configurable:true, enumerable:false, writable:true, value:function WaveShaperNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "WaveShaperNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ValidityState", {configurable:true, enumerable:false, writable:true, value:function ValidityState (){return bodavm.toolsFunc.dispatch(this, window, "window", "ValidityState", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "VTTCue", {configurable:true, enumerable:false, writable:true, value:function VTTCue (){return bodavm.toolsFunc.dispatch(this, window, "window", "VTTCue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "UserActivation", {configurable:true, enumerable:false, writable:true, value:function UserActivation (){return bodavm.toolsFunc.dispatch(this, window, "window", "UserActivation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "URLSearchParams", {configurable:true, enumerable:false, writable:true, value:function URLSearchParams (){return bodavm.toolsFunc.dispatch(this, window, "window", "URLSearchParams", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "URL", {configurable:true, enumerable:false, writable:true, value:function URL (){return bodavm.toolsFunc.dispatch(this, window, "window", "URL", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "UIEvent", {configurable:true, enumerable:false, writable:true, value:function UIEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "UIEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TreeWalker", {configurable:true, enumerable:false, writable:true, value:function TreeWalker (){return bodavm.toolsFunc.dispatch(this, window, "window", "TreeWalker", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TransitionEvent", {configurable:true, enumerable:false, writable:true, value:function TransitionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "TransitionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TransformStream", {configurable:true, enumerable:false, writable:true, value:function TransformStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "TransformStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TrackEvent", {configurable:true, enumerable:false, writable:true, value:function TrackEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "TrackEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TouchList", {configurable:true, enumerable:false, writable:true, value:function TouchList (){return bodavm.toolsFunc.dispatch(this, window, "window", "TouchList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TouchEvent", {configurable:true, enumerable:false, writable:true, value:function TouchEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "TouchEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Touch", {configurable:true, enumerable:false, writable:true, value:function Touch (){return bodavm.toolsFunc.dispatch(this, window, "window", "Touch", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TimeRanges", {configurable:true, enumerable:false, writable:true, value:function TimeRanges (){return bodavm.toolsFunc.dispatch(this, window, "window", "TimeRanges", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextTrackList", {configurable:true, enumerable:false, writable:true, value:function TextTrackList (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextTrackList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextTrackCueList", {configurable:true, enumerable:false, writable:true, value:function TextTrackCueList (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextTrackCueList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextTrackCue", {configurable:true, enumerable:false, writable:true, value:function TextTrackCue (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextTrackCue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextTrack", {configurable:true, enumerable:false, writable:true, value:function TextTrack (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextTrack", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextMetrics", {configurable:true, enumerable:false, writable:true, value:function TextMetrics (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextMetrics", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextEvent", {configurable:true, enumerable:false, writable:true, value:function TextEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextEncoderStream", {configurable:true, enumerable:false, writable:true, value:function TextEncoderStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextEncoderStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextEncoder", {configurable:true, enumerable:false, writable:true, value:function TextEncoder (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextEncoder", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextDecoderStream", {configurable:true, enumerable:false, writable:true, value:function TextDecoderStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextDecoderStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TextDecoder", {configurable:true, enumerable:false, writable:true, value:function TextDecoder (){return bodavm.toolsFunc.dispatch(this, window, "window", "TextDecoder", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Text", {configurable:true, enumerable:false, writable:true, value:function Text (){return bodavm.toolsFunc.dispatch(this, window, "window", "Text", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TaskAttributionTiming", {configurable:true, enumerable:false, writable:true, value:function TaskAttributionTiming (){return bodavm.toolsFunc.dispatch(this, window, "window", "TaskAttributionTiming", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SyncManager", {configurable:true, enumerable:false, writable:true, value:function SyncManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "SyncManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SubmitEvent", {configurable:true, enumerable:false, writable:true, value:function SubmitEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "SubmitEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "StyleSheetList", {configurable:true, enumerable:false, writable:true, value:function StyleSheetList (){return bodavm.toolsFunc.dispatch(this, window, "window", "StyleSheetList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "StyleSheet", {configurable:true, enumerable:false, writable:true, value:function StyleSheet (){return bodavm.toolsFunc.dispatch(this, window, "window", "StyleSheet", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "StylePropertyMapReadOnly", {configurable:true, enumerable:false, writable:true, value:function StylePropertyMapReadOnly (){return bodavm.toolsFunc.dispatch(this, window, "window", "StylePropertyMapReadOnly", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "StylePropertyMap", {configurable:true, enumerable:false, writable:true, value:function StylePropertyMap (){return bodavm.toolsFunc.dispatch(this, window, "window", "StylePropertyMap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "StorageEvent", {configurable:true, enumerable:false, writable:true, value:function StorageEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "StorageEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "StereoPannerNode", {configurable:true, enumerable:false, writable:true, value:function StereoPannerNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "StereoPannerNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "StaticRange", {configurable:true, enumerable:false, writable:true, value:function StaticRange (){return bodavm.toolsFunc.dispatch(this, window, "window", "StaticRange", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ShadowRoot", {configurable:true, enumerable:false, writable:true, value:function ShadowRoot (){return bodavm.toolsFunc.dispatch(this, window, "window", "ShadowRoot", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Selection", {configurable:true, enumerable:false, writable:true, value:function Selection (){return bodavm.toolsFunc.dispatch(this, window, "window", "Selection", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SecurityPolicyViolationEvent", {configurable:true, enumerable:false, writable:true, value:function SecurityPolicyViolationEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "SecurityPolicyViolationEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ScriptProcessorNode", {configurable:true, enumerable:false, writable:true, value:function ScriptProcessorNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "ScriptProcessorNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ScreenOrientation", {configurable:true, enumerable:false, writable:true, value:function ScreenOrientation (){return bodavm.toolsFunc.dispatch(this, window, "window", "ScreenOrientation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGViewElement", {configurable:true, enumerable:false, writable:true, value:function SVGViewElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGViewElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGUseElement", {configurable:true, enumerable:false, writable:true, value:function SVGUseElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGUseElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGUnitTypes", {configurable:true, enumerable:false, writable:true, value:function SVGUnitTypes (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGUnitTypes", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGTransformList", {configurable:true, enumerable:false, writable:true, value:function SVGTransformList (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTransformList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGTransform", {configurable:true, enumerable:false, writable:true, value:function SVGTransform (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTransform", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGTitleElement", {configurable:true, enumerable:false, writable:true, value:function SVGTitleElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTitleElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGTextPositioningElement", {configurable:true, enumerable:false, writable:true, value:function SVGTextPositioningElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTextPositioningElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGTextPathElement", {configurable:true, enumerable:false, writable:true, value:function SVGTextPathElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTextPathElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGTextElement", {configurable:true, enumerable:false, writable:true, value:function SVGTextElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTextElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGTextContentElement", {configurable:true, enumerable:false, writable:true, value:function SVGTextContentElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTextContentElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGTSpanElement", {configurable:true, enumerable:false, writable:true, value:function SVGTSpanElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGTSpanElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGSymbolElement", {configurable:true, enumerable:false, writable:true, value:function SVGSymbolElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGSymbolElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGSwitchElement", {configurable:true, enumerable:false, writable:true, value:function SVGSwitchElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGSwitchElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGStyleElement", {configurable:true, enumerable:false, writable:true, value:function SVGStyleElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGStyleElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGStringList", {configurable:true, enumerable:false, writable:true, value:function SVGStringList (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGStringList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGStopElement", {configurable:true, enumerable:false, writable:true, value:function SVGStopElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGStopElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGSetElement", {configurable:true, enumerable:false, writable:true, value:function SVGSetElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGSetElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGScriptElement", {configurable:true, enumerable:false, writable:true, value:function SVGScriptElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGScriptElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGSVGElement", {configurable:true, enumerable:false, writable:true, value:function SVGSVGElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGSVGElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGRectElement", {configurable:true, enumerable:false, writable:true, value:function SVGRectElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGRectElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGRect", {configurable:true, enumerable:false, writable:true, value:function SVGRect (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGRect", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGRadialGradientElement", {configurable:true, enumerable:false, writable:true, value:function SVGRadialGradientElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGRadialGradientElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGPreserveAspectRatio", {configurable:true, enumerable:false, writable:true, value:function SVGPreserveAspectRatio (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPreserveAspectRatio", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGPolylineElement", {configurable:true, enumerable:false, writable:true, value:function SVGPolylineElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPolylineElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGPolygonElement", {configurable:true, enumerable:false, writable:true, value:function SVGPolygonElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPolygonElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGPointList", {configurable:true, enumerable:false, writable:true, value:function SVGPointList (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPointList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGPoint", {configurable:true, enumerable:false, writable:true, value:function SVGPoint (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPoint", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGPatternElement", {configurable:true, enumerable:false, writable:true, value:function SVGPatternElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPatternElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGPathElement", {configurable:true, enumerable:false, writable:true, value:function SVGPathElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGPathElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGNumberList", {configurable:true, enumerable:false, writable:true, value:function SVGNumberList (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGNumberList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGNumber", {configurable:true, enumerable:false, writable:true, value:function SVGNumber (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGNumber", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGMetadataElement", {configurable:true, enumerable:false, writable:true, value:function SVGMetadataElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMetadataElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGMatrix", {configurable:true, enumerable:false, writable:true, value:function SVGMatrix (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMatrix", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGMaskElement", {configurable:true, enumerable:false, writable:true, value:function SVGMaskElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMaskElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGMarkerElement", {configurable:true, enumerable:false, writable:true, value:function SVGMarkerElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMarkerElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGMPathElement", {configurable:true, enumerable:false, writable:true, value:function SVGMPathElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGMPathElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGLinearGradientElement", {configurable:true, enumerable:false, writable:true, value:function SVGLinearGradientElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGLinearGradientElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGLineElement", {configurable:true, enumerable:false, writable:true, value:function SVGLineElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGLineElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGLengthList", {configurable:true, enumerable:false, writable:true, value:function SVGLengthList (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGLengthList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGLength", {configurable:true, enumerable:false, writable:true, value:function SVGLength (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGLength", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGImageElement", {configurable:true, enumerable:false, writable:true, value:function SVGImageElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGImageElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGGraphicsElement", {configurable:true, enumerable:false, writable:true, value:function SVGGraphicsElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGGraphicsElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGGradientElement", {configurable:true, enumerable:false, writable:true, value:function SVGGradientElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGGradientElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGGeometryElement", {configurable:true, enumerable:false, writable:true, value:function SVGGeometryElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGGeometryElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGGElement", {configurable:true, enumerable:false, writable:true, value:function SVGGElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGGElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGForeignObjectElement", {configurable:true, enumerable:false, writable:true, value:function SVGForeignObjectElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGForeignObjectElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFilterElement", {configurable:true, enumerable:false, writable:true, value:function SVGFilterElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFilterElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFETurbulenceElement", {configurable:true, enumerable:false, writable:true, value:function SVGFETurbulenceElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFETurbulenceElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFETileElement", {configurable:true, enumerable:false, writable:true, value:function SVGFETileElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFETileElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFESpotLightElement", {configurable:true, enumerable:false, writable:true, value:function SVGFESpotLightElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFESpotLightElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFESpecularLightingElement", {configurable:true, enumerable:false, writable:true, value:function SVGFESpecularLightingElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFESpecularLightingElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEPointLightElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEPointLightElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEPointLightElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEOffsetElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEOffsetElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEOffsetElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEMorphologyElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEMorphologyElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEMorphologyElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEMergeNodeElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEMergeNodeElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEMergeNodeElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEMergeElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEMergeElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEMergeElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEImageElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEImageElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEImageElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEGaussianBlurElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEGaussianBlurElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEGaussianBlurElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFuncRElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEFuncRElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFuncRElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFuncGElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEFuncGElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFuncGElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFuncBElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEFuncBElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFuncBElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFuncAElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEFuncAElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFuncAElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEFloodElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEFloodElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEFloodElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEDropShadowElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEDropShadowElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEDropShadowElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEDistantLightElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEDistantLightElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEDistantLightElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEDisplacementMapElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEDisplacementMapElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEDisplacementMapElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEDiffuseLightingElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEDiffuseLightingElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEDiffuseLightingElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEConvolveMatrixElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEConvolveMatrixElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEConvolveMatrixElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFECompositeElement", {configurable:true, enumerable:false, writable:true, value:function SVGFECompositeElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFECompositeElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEComponentTransferElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEComponentTransferElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEComponentTransferElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEColorMatrixElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEColorMatrixElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEColorMatrixElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGFEBlendElement", {configurable:true, enumerable:false, writable:true, value:function SVGFEBlendElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGFEBlendElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGEllipseElement", {configurable:true, enumerable:false, writable:true, value:function SVGEllipseElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGEllipseElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGElement", {configurable:true, enumerable:false, writable:true, value:function SVGElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGDescElement", {configurable:true, enumerable:false, writable:true, value:function SVGDescElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGDescElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGDefsElement", {configurable:true, enumerable:false, writable:true, value:function SVGDefsElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGDefsElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGComponentTransferFunctionElement", {configurable:true, enumerable:false, writable:true, value:function SVGComponentTransferFunctionElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGComponentTransferFunctionElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGClipPathElement", {configurable:true, enumerable:false, writable:true, value:function SVGClipPathElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGClipPathElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGCircleElement", {configurable:true, enumerable:false, writable:true, value:function SVGCircleElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGCircleElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimationElement", {configurable:true, enumerable:false, writable:true, value:function SVGAnimationElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimationElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedTransformList", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedTransformList (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedTransformList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedString", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedString (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedString", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedRect", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedRect (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedRect", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedPreserveAspectRatio", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedPreserveAspectRatio (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedPreserveAspectRatio", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedNumberList", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedNumberList (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedNumberList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedNumber", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedNumber (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedNumber", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedLengthList", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedLengthList (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedLengthList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedLength", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedLength (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedLength", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedInteger", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedInteger (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedInteger", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedEnumeration", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedEnumeration (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedEnumeration", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedBoolean", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedBoolean (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedBoolean", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimatedAngle", {configurable:true, enumerable:false, writable:true, value:function SVGAnimatedAngle (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimatedAngle", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimateTransformElement", {configurable:true, enumerable:false, writable:true, value:function SVGAnimateTransformElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimateTransformElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimateMotionElement", {configurable:true, enumerable:false, writable:true, value:function SVGAnimateMotionElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimateMotionElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAnimateElement", {configurable:true, enumerable:false, writable:true, value:function SVGAnimateElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAnimateElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAngle", {configurable:true, enumerable:false, writable:true, value:function SVGAngle (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAngle", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SVGAElement", {configurable:true, enumerable:false, writable:true, value:function SVGAElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "SVGAElement", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Response", {configurable:true, enumerable:false, writable:true, value:function Response (){return bodavm.toolsFunc.dispatch(this, window, "window", "Response", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ResizeObserverSize", {configurable:true, enumerable:false, writable:true, value:function ResizeObserverSize (){return bodavm.toolsFunc.dispatch(this, window, "window", "ResizeObserverSize", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ResizeObserverEntry", {configurable:true, enumerable:false, writable:true, value:function ResizeObserverEntry (){return bodavm.toolsFunc.dispatch(this, window, "window", "ResizeObserverEntry", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ResizeObserver", {configurable:true, enumerable:false, writable:true, value:function ResizeObserver (){return bodavm.toolsFunc.dispatch(this, window, "window", "ResizeObserver", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Request", {configurable:true, enumerable:false, writable:true, value:function Request (){return bodavm.toolsFunc.dispatch(this, window, "window", "Request", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ReportingObserver", {configurable:true, enumerable:false, writable:true, value:function ReportingObserver (){return bodavm.toolsFunc.dispatch(this, window, "window", "ReportingObserver", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ReadableStreamDefaultReader", {configurable:true, enumerable:false, writable:true, value:function ReadableStreamDefaultReader (){return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStreamDefaultReader", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ReadableStreamDefaultController", {configurable:true, enumerable:false, writable:true, value:function ReadableStreamDefaultController (){return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStreamDefaultController", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ReadableStreamBYOBRequest", {configurable:true, enumerable:false, writable:true, value:function ReadableStreamBYOBRequest (){return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStreamBYOBRequest", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ReadableStreamBYOBReader", {configurable:true, enumerable:false, writable:true, value:function ReadableStreamBYOBReader (){return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStreamBYOBReader", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ReadableStream", {configurable:true, enumerable:false, writable:true, value:function ReadableStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ReadableByteStreamController", {configurable:true, enumerable:false, writable:true, value:function ReadableByteStreamController (){return bodavm.toolsFunc.dispatch(this, window, "window", "ReadableByteStreamController", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Range", {configurable:true, enumerable:false, writable:true, value:function Range (){return bodavm.toolsFunc.dispatch(this, window, "window", "Range", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RadioNodeList", {configurable:true, enumerable:false, writable:true, value:function RadioNodeList (){return bodavm.toolsFunc.dispatch(this, window, "window", "RadioNodeList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCTrackEvent", {configurable:true, enumerable:false, writable:true, value:function RTCTrackEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCTrackEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCStatsReport", {configurable:true, enumerable:false, writable:true, value:function RTCStatsReport (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCStatsReport", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCSessionDescription", {configurable:true, enumerable:false, writable:true, value:function RTCSessionDescription (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCSessionDescription", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCSctpTransport", {configurable:true, enumerable:false, writable:true, value:function RTCSctpTransport (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCSctpTransport", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCRtpTransceiver", {configurable:true, enumerable:false, writable:true, value:function RTCRtpTransceiver (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCRtpTransceiver", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCRtpSender", {configurable:true, enumerable:false, writable:true, value:function RTCRtpSender (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCRtpSender", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCRtpReceiver", {configurable:true, enumerable:false, writable:true, value:function RTCRtpReceiver (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCRtpReceiver", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCPeerConnectionIceEvent", {configurable:true, enumerable:false, writable:true, value:function RTCPeerConnectionIceEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCPeerConnectionIceEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCPeerConnectionIceErrorEvent", {configurable:true, enumerable:false, writable:true, value:function RTCPeerConnectionIceErrorEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCPeerConnectionIceErrorEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCPeerConnection", {configurable:true, enumerable:false, writable:true, value:function RTCPeerConnection (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCPeerConnection", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCIceCandidate", {configurable:true, enumerable:false, writable:true, value:function RTCIceCandidate (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCIceCandidate", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCErrorEvent", {configurable:true, enumerable:false, writable:true, value:function RTCErrorEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCErrorEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCError", {configurable:true, enumerable:false, writable:true, value:function RTCError (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCError", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCEncodedVideoFrame", {configurable:true, enumerable:false, writable:true, value:function RTCEncodedVideoFrame (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCEncodedVideoFrame", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCEncodedAudioFrame", {configurable:true, enumerable:false, writable:true, value:function RTCEncodedAudioFrame (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCEncodedAudioFrame", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCDtlsTransport", {configurable:true, enumerable:false, writable:true, value:function RTCDtlsTransport (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDtlsTransport", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCDataChannelEvent", {configurable:true, enumerable:false, writable:true, value:function RTCDataChannelEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDataChannelEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCDataChannel", {configurable:true, enumerable:false, writable:true, value:function RTCDataChannel (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDataChannel", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCDTMFToneChangeEvent", {configurable:true, enumerable:false, writable:true, value:function RTCDTMFToneChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDTMFToneChangeEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCDTMFSender", {configurable:true, enumerable:false, writable:true, value:function RTCDTMFSender (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCDTMFSender", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCCertificate", {configurable:true, enumerable:false, writable:true, value:function RTCCertificate (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCCertificate", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PromiseRejectionEvent", {configurable:true, enumerable:false, writable:true, value:function PromiseRejectionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "PromiseRejectionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ProgressEvent", {configurable:true, enumerable:false, writable:true, value:function ProgressEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "ProgressEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ProcessingInstruction", {configurable:true, enumerable:false, writable:true, value:function ProcessingInstruction (){return bodavm.toolsFunc.dispatch(this, window, "window", "ProcessingInstruction", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PopStateEvent", {configurable:true, enumerable:false, writable:true, value:function PopStateEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "PopStateEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PointerEvent", {configurable:true, enumerable:false, writable:true, value:function PointerEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "PointerEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PluginArray", {configurable:true, enumerable:false, writable:true, value:function PluginArray (){return bodavm.toolsFunc.dispatch(this, window, "window", "PluginArray", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Plugin", {configurable:true, enumerable:false, writable:true, value:function Plugin (){return bodavm.toolsFunc.dispatch(this, window, "window", "Plugin", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PeriodicWave", {configurable:true, enumerable:false, writable:true, value:function PeriodicWave (){return bodavm.toolsFunc.dispatch(this, window, "window", "PeriodicWave", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceTiming", {configurable:true, enumerable:false, writable:true, value:function PerformanceTiming (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceTiming", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceServerTiming", {configurable:true, enumerable:false, writable:true, value:function PerformanceServerTiming (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceServerTiming", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceResourceTiming", {configurable:true, enumerable:false, writable:true, value:function PerformanceResourceTiming (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceResourceTiming", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformancePaintTiming", {configurable:true, enumerable:false, writable:true, value:function PerformancePaintTiming (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformancePaintTiming", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceObserverEntryList", {configurable:true, enumerable:false, writable:true, value:function PerformanceObserverEntryList (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceObserverEntryList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceObserver", {configurable:true, enumerable:false, writable:true, value:function PerformanceObserver (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceObserver", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceNavigationTiming", {configurable:true, enumerable:false, writable:true, value:function PerformanceNavigationTiming (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceNavigationTiming", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceNavigation", {configurable:true, enumerable:false, writable:true, value:function PerformanceNavigation (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceNavigation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceMeasure", {configurable:true, enumerable:false, writable:true, value:function PerformanceMeasure (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceMeasure", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceMark", {configurable:true, enumerable:false, writable:true, value:function PerformanceMark (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceMark", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceLongTaskTiming", {configurable:true, enumerable:false, writable:true, value:function PerformanceLongTaskTiming (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceLongTaskTiming", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceEventTiming", {configurable:true, enumerable:false, writable:true, value:function PerformanceEventTiming (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceEventTiming", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceEntry", {configurable:true, enumerable:false, writable:true, value:function PerformanceEntry (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceEntry", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PerformanceElementTiming", {configurable:true, enumerable:false, writable:true, value:function PerformanceElementTiming (){return bodavm.toolsFunc.dispatch(this, window, "window", "PerformanceElementTiming", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Path2D", {configurable:true, enumerable:false, writable:true, value:function Path2D (){return bodavm.toolsFunc.dispatch(this, window, "window", "Path2D", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PannerNode", {configurable:true, enumerable:false, writable:true, value:function PannerNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "PannerNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PageTransitionEvent", {configurable:true, enumerable:false, writable:true, value:function PageTransitionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "PageTransitionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "OverconstrainedError", {configurable:true, enumerable:false, writable:true, value:function OverconstrainedError (){return bodavm.toolsFunc.dispatch(this, window, "window", "OverconstrainedError", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "OscillatorNode", {configurable:true, enumerable:false, writable:true, value:function OscillatorNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "OscillatorNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "OffscreenCanvasRenderingContext2D", {configurable:true, enumerable:false, writable:true, value:function OffscreenCanvasRenderingContext2D (){return bodavm.toolsFunc.dispatch(this, window, "window", "OffscreenCanvasRenderingContext2D", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "OffscreenCanvas", {configurable:true, enumerable:false, writable:true, value:function OffscreenCanvas (){return bodavm.toolsFunc.dispatch(this, window, "window", "OffscreenCanvas", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "OfflineAudioContext", {configurable:true, enumerable:false, writable:true, value:function OfflineAudioContext (){return bodavm.toolsFunc.dispatch(this, window, "window", "OfflineAudioContext", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "OfflineAudioCompletionEvent", {configurable:true, enumerable:false, writable:true, value:function OfflineAudioCompletionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "OfflineAudioCompletionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NodeList", {configurable:true, enumerable:false, writable:true, value:function NodeList (){return bodavm.toolsFunc.dispatch(this, window, "window", "NodeList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NodeIterator", {configurable:true, enumerable:false, writable:true, value:function NodeIterator (){return bodavm.toolsFunc.dispatch(this, window, "window", "NodeIterator", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NodeFilter", {configurable:true, enumerable:false, writable:true, value:function NodeFilter (){return bodavm.toolsFunc.dispatch(this, window, "window", "NodeFilter", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Node", {configurable:true, enumerable:false, writable:true, value:function Node (){return bodavm.toolsFunc.dispatch(this, window, "window", "Node", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NetworkInformation", {configurable:true, enumerable:false, writable:true, value:function NetworkInformation (){return bodavm.toolsFunc.dispatch(this, window, "window", "NetworkInformation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NamedNodeMap", {configurable:true, enumerable:false, writable:true, value:function NamedNodeMap (){return bodavm.toolsFunc.dispatch(this, window, "window", "NamedNodeMap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MutationRecord", {configurable:true, enumerable:false, writable:true, value:function MutationRecord (){return bodavm.toolsFunc.dispatch(this, window, "window", "MutationRecord", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MutationObserver", {configurable:true, enumerable:false, writable:true, value:function MutationObserver (){return bodavm.toolsFunc.dispatch(this, window, "window", "MutationObserver", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MutationEvent", {configurable:true, enumerable:false, writable:true, value:function MutationEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MutationEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MouseEvent", {configurable:true, enumerable:false, writable:true, value:function MouseEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MouseEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MimeTypeArray", {configurable:true, enumerable:false, writable:true, value:function MimeTypeArray (){return bodavm.toolsFunc.dispatch(this, window, "window", "MimeTypeArray", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MimeType", {configurable:true, enumerable:false, writable:true, value:function MimeType (){return bodavm.toolsFunc.dispatch(this, window, "window", "MimeType", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MessagePort", {configurable:true, enumerable:false, writable:true, value:function MessagePort (){return bodavm.toolsFunc.dispatch(this, window, "window", "MessagePort", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MessageEvent", {configurable:true, enumerable:false, writable:true, value:function MessageEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MessageEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MessageChannel", {configurable:true, enumerable:false, writable:true, value:function MessageChannel (){return bodavm.toolsFunc.dispatch(this, window, "window", "MessageChannel", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamTrackEvent", {configurable:true, enumerable:false, writable:true, value:function MediaStreamTrackEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamTrackEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamEvent", {configurable:true, enumerable:false, writable:true, value:function MediaStreamEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamAudioSourceNode", {configurable:true, enumerable:false, writable:true, value:function MediaStreamAudioSourceNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamAudioSourceNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamAudioDestinationNode", {configurable:true, enumerable:false, writable:true, value:function MediaStreamAudioDestinationNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamAudioDestinationNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaStream", {configurable:true, enumerable:false, writable:true, value:function MediaStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaRecorder", {configurable:true, enumerable:false, writable:true, value:function MediaRecorder (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaRecorder", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaQueryListEvent", {configurable:true, enumerable:false, writable:true, value:function MediaQueryListEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaQueryListEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaQueryList", {configurable:true, enumerable:false, writable:true, value:function MediaQueryList (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaQueryList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaList", {configurable:true, enumerable:false, writable:true, value:function MediaList (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaError", {configurable:true, enumerable:false, writable:true, value:function MediaError (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaError", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaEncryptedEvent", {configurable:true, enumerable:false, writable:true, value:function MediaEncryptedEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaEncryptedEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaElementAudioSourceNode", {configurable:true, enumerable:false, writable:true, value:function MediaElementAudioSourceNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaElementAudioSourceNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaCapabilities", {configurable:true, enumerable:false, writable:true, value:function MediaCapabilities (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaCapabilities", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "LayoutShiftAttribution", {configurable:true, enumerable:false, writable:true, value:function LayoutShiftAttribution (){return bodavm.toolsFunc.dispatch(this, window, "window", "LayoutShiftAttribution", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "LayoutShift", {configurable:true, enumerable:false, writable:true, value:function LayoutShift (){return bodavm.toolsFunc.dispatch(this, window, "window", "LayoutShift", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "LargestContentfulPaint", {configurable:true, enumerable:false, writable:true, value:function LargestContentfulPaint (){return bodavm.toolsFunc.dispatch(this, window, "window", "LargestContentfulPaint", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "KeyframeEffect", {configurable:true, enumerable:false, writable:true, value:function KeyframeEffect (){return bodavm.toolsFunc.dispatch(this, window, "window", "KeyframeEffect", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "KeyboardEvent", {configurable:true, enumerable:false, writable:true, value:function KeyboardEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "KeyboardEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IntersectionObserverEntry", {configurable:true, enumerable:false, writable:true, value:function IntersectionObserverEntry (){return bodavm.toolsFunc.dispatch(this, window, "window", "IntersectionObserverEntry", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IntersectionObserver", {configurable:true, enumerable:false, writable:true, value:function IntersectionObserver (){return bodavm.toolsFunc.dispatch(this, window, "window", "IntersectionObserver", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "InputEvent", {configurable:true, enumerable:false, writable:true, value:function InputEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "InputEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "InputDeviceInfo", {configurable:true, enumerable:false, writable:true, value:function InputDeviceInfo (){return bodavm.toolsFunc.dispatch(this, window, "window", "InputDeviceInfo", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "InputDeviceCapabilities", {configurable:true, enumerable:false, writable:true, value:function InputDeviceCapabilities (){return bodavm.toolsFunc.dispatch(this, window, "window", "InputDeviceCapabilities", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ImageData", {configurable:true, enumerable:false, writable:true, value:function ImageData (){return bodavm.toolsFunc.dispatch(this, window, "window", "ImageData", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ImageCapture", {configurable:true, enumerable:false, writable:true, value:function ImageCapture (){return bodavm.toolsFunc.dispatch(this, window, "window", "ImageCapture", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ImageBitmapRenderingContext", {configurable:true, enumerable:false, writable:true, value:function ImageBitmapRenderingContext (){return bodavm.toolsFunc.dispatch(this, window, "window", "ImageBitmapRenderingContext", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ImageBitmap", {configurable:true, enumerable:false, writable:true, value:function ImageBitmap (){return bodavm.toolsFunc.dispatch(this, window, "window", "ImageBitmap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IdleDeadline", {configurable:true, enumerable:false, writable:true, value:function IdleDeadline (){return bodavm.toolsFunc.dispatch(this, window, "window", "IdleDeadline", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IIRFilterNode", {configurable:true, enumerable:false, writable:true, value:function IIRFilterNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "IIRFilterNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBVersionChangeEvent", {configurable:true, enumerable:false, writable:true, value:function IDBVersionChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBVersionChangeEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBTransaction", {configurable:true, enumerable:false, writable:true, value:function IDBTransaction (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBTransaction", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBRequest", {configurable:true, enumerable:false, writable:true, value:function IDBRequest (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBRequest", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBOpenDBRequest", {configurable:true, enumerable:false, writable:true, value:function IDBOpenDBRequest (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBOpenDBRequest", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBObjectStore", {configurable:true, enumerable:false, writable:true, value:function IDBObjectStore (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBObjectStore", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBKeyRange", {configurable:true, enumerable:false, writable:true, value:function IDBKeyRange (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBKeyRange", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBIndex", {configurable:true, enumerable:false, writable:true, value:function IDBIndex (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBIndex", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBCursorWithValue", {configurable:true, enumerable:false, writable:true, value:function IDBCursorWithValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBCursorWithValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IDBCursor", {configurable:true, enumerable:false, writable:true, value:function IDBCursor (){return bodavm.toolsFunc.dispatch(this, window, "window", "IDBCursor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Headers", {configurable:true, enumerable:false, writable:true, value:function Headers (){return bodavm.toolsFunc.dispatch(this, window, "window", "Headers", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "HashChangeEvent", {configurable:true, enumerable:false, writable:true, value:function HashChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "HashChangeEvent", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLVideoElement", {configurable:true, enumerable:false, writable:true, value:function HTMLVideoElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLVideoElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLUnknownElement", {configurable:true, enumerable:false, writable:true, value:function HTMLUnknownElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLUnknownElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLUListElement", {configurable:true, enumerable:false, writable:true, value:function HTMLUListElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLUListElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTrackElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTrackElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTrackElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTitleElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTitleElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTitleElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTimeElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTimeElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTimeElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTextAreaElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTextAreaElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTextAreaElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTemplateElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTemplateElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTemplateElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableSectionElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTableSectionElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableSectionElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableRowElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTableRowElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableRowElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTableElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableColElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTableColElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableColElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableCellElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTableCellElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableCellElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLTableCaptionElement", {configurable:true, enumerable:false, writable:true, value:function HTMLTableCaptionElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLTableCaptionElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLStyleElement", {configurable:true, enumerable:false, writable:true, value:function HTMLStyleElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLStyleElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLSpanElement", {configurable:true, enumerable:false, writable:true, value:function HTMLSpanElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLSpanElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLSourceElement", {configurable:true, enumerable:false, writable:true, value:function HTMLSourceElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLSourceElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLSlotElement", {configurable:true, enumerable:false, writable:true, value:function HTMLSlotElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLSlotElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLSelectElement", {configurable:true, enumerable:false, writable:true, value:function HTMLSelectElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLSelectElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLScriptElement", {configurable:true, enumerable:false, writable:true, value:function HTMLScriptElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLScriptElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLQuoteElement", {configurable:true, enumerable:false, writable:true, value:function HTMLQuoteElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLQuoteElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLProgressElement", {configurable:true, enumerable:false, writable:true, value:function HTMLProgressElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLProgressElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLPreElement", {configurable:true, enumerable:false, writable:true, value:function HTMLPreElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLPreElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLPictureElement", {configurable:true, enumerable:false, writable:true, value:function HTMLPictureElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLPictureElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLParamElement", {configurable:true, enumerable:false, writable:true, value:function HTMLParamElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLParamElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLParagraphElement", {configurable:true, enumerable:false, writable:true, value:function HTMLParagraphElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLParagraphElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLOutputElement", {configurable:true, enumerable:false, writable:true, value:function HTMLOutputElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOutputElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLOptionsCollection", {configurable:true, enumerable:false, writable:true, value:function HTMLOptionsCollection (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOptionsCollection", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLOptionElement", {configurable:true, enumerable:false, writable:true, value:function HTMLOptionElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOptionElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLOptGroupElement", {configurable:true, enumerable:false, writable:true, value:function HTMLOptGroupElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOptGroupElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLObjectElement", {configurable:true, enumerable:false, writable:true, value:function HTMLObjectElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLObjectElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLOListElement", {configurable:true, enumerable:false, writable:true, value:function HTMLOListElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLOListElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLModElement", {configurable:true, enumerable:false, writable:true, value:function HTMLModElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLModElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLMeterElement", {configurable:true, enumerable:false, writable:true, value:function HTMLMeterElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMeterElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLMetaElement", {configurable:true, enumerable:false, writable:true, value:function HTMLMetaElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMetaElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLMenuElement", {configurable:true, enumerable:false, writable:true, value:function HTMLMenuElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMenuElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLMediaElement", {configurable:true, enumerable:false, writable:true, value:function HTMLMediaElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMediaElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLMarqueeElement", {configurable:true, enumerable:false, writable:true, value:function HTMLMarqueeElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMarqueeElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLMapElement", {configurable:true, enumerable:false, writable:true, value:function HTMLMapElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLMapElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLLinkElement", {configurable:true, enumerable:false, writable:true, value:function HTMLLinkElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLLinkElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLLegendElement", {configurable:true, enumerable:false, writable:true, value:function HTMLLegendElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLLegendElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLLabelElement", {configurable:true, enumerable:false, writable:true, value:function HTMLLabelElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLLabelElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLLIElement", {configurable:true, enumerable:false, writable:true, value:function HTMLLIElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLLIElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLInputElement", {configurable:true, enumerable:false, writable:true, value:function HTMLInputElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLInputElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLImageElement", {configurable:true, enumerable:false, writable:true, value:function HTMLImageElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLImageElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLIFrameElement", {configurable:true, enumerable:false, writable:true, value:function HTMLIFrameElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLIFrameElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLHtmlElement", {configurable:true, enumerable:false, writable:true, value:function HTMLHtmlElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLHtmlElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLHeadingElement", {configurable:true, enumerable:false, writable:true, value:function HTMLHeadingElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLHeadingElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLHeadElement", {configurable:true, enumerable:false, writable:true, value:function HTMLHeadElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLHeadElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLHRElement", {configurable:true, enumerable:false, writable:true, value:function HTMLHRElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLHRElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLFrameSetElement", {configurable:true, enumerable:false, writable:true, value:function HTMLFrameSetElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFrameSetElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLFrameElement", {configurable:true, enumerable:false, writable:true, value:function HTMLFrameElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFrameElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLFormElement", {configurable:true, enumerable:false, writable:true, value:function HTMLFormElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFormElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLFormControlsCollection", {configurable:true, enumerable:false, writable:true, value:function HTMLFormControlsCollection (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFormControlsCollection", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLFontElement", {configurable:true, enumerable:false, writable:true, value:function HTMLFontElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFontElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLFieldSetElement", {configurable:true, enumerable:false, writable:true, value:function HTMLFieldSetElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLFieldSetElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLEmbedElement", {configurable:true, enumerable:false, writable:true, value:function HTMLEmbedElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLEmbedElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLElement", {configurable:true, enumerable:false, writable:true, value:function HTMLElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLDocument", {configurable:true, enumerable:false, writable:true, value:function HTMLDocument (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDocument", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLDivElement", {configurable:true, enumerable:false, writable:true, value:function HTMLDivElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDivElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLDirectoryElement", {configurable:true, enumerable:false, writable:true, value:function HTMLDirectoryElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDirectoryElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLDialogElement", {configurable:true, enumerable:false, writable:true, value:function HTMLDialogElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDialogElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLDetailsElement", {configurable:true, enumerable:false, writable:true, value:function HTMLDetailsElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDetailsElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLDataListElement", {configurable:true, enumerable:false, writable:true, value:function HTMLDataListElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDataListElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLDataElement", {configurable:true, enumerable:false, writable:true, value:function HTMLDataElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDataElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLDListElement", {configurable:true, enumerable:false, writable:true, value:function HTMLDListElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLDListElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLCollection", {configurable:true, enumerable:false, writable:true, value:function HTMLCollection (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLCollection", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLCanvasElement", {configurable:true, enumerable:false, writable:true, value:function HTMLCanvasElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLCanvasElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLButtonElement", {configurable:true, enumerable:false, writable:true, value:function HTMLButtonElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLButtonElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLBodyElement", {configurable:true, enumerable:false, writable:true, value:function HTMLBodyElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLBodyElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLBaseElement", {configurable:true, enumerable:false, writable:true, value:function HTMLBaseElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLBaseElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLBRElement", {configurable:true, enumerable:false, writable:true, value:function HTMLBRElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLBRElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLAudioElement", {configurable:true, enumerable:false, writable:true, value:function HTMLAudioElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLAudioElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLAreaElement", {configurable:true, enumerable:false, writable:true, value:function HTMLAreaElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLAreaElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLAnchorElement", {configurable:true, enumerable:false, writable:true, value:function HTMLAnchorElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLAnchorElement", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "HTMLAllCollection", {configurable:true, enumerable:false, writable:true, value:function HTMLAllCollection (){return bodavm.toolsFunc.dispatch(this, window, "window", "HTMLAllCollection", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "GeolocationPositionError", {configurable:true, enumerable:false, writable:true, value:function GeolocationPositionError (){return bodavm.toolsFunc.dispatch(this, window, "window", "GeolocationPositionError", arguments)}()});
-bodavm.toolsFunc.windowdefineProperty(window, "GeolocationPosition", {configurable:true, enumerable:false, writable:true, value:function GeolocationPosition (){return bodavm.toolsFunc.dispatch(this, window, "window", "GeolocationPosition", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "GeolocationCoordinates", {configurable:true, enumerable:false, writable:true, value:function GeolocationCoordinates (){return bodavm.toolsFunc.dispatch(this, window, "window", "GeolocationCoordinates", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Geolocation", {configurable:true, enumerable:false, writable:true, value:function Geolocation (){return bodavm.toolsFunc.dispatch(this, window, "window", "Geolocation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "GamepadHapticActuator", {configurable:true, enumerable:false, writable:true, value:function GamepadHapticActuator (){return bodavm.toolsFunc.dispatch(this, window, "window", "GamepadHapticActuator", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "GamepadEvent", {configurable:true, enumerable:false, writable:true, value:function GamepadEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "GamepadEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "GamepadButton", {configurable:true, enumerable:false, writable:true, value:function GamepadButton (){return bodavm.toolsFunc.dispatch(this, window, "window", "GamepadButton", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Gamepad", {configurable:true, enumerable:false, writable:true, value:function Gamepad (){return bodavm.toolsFunc.dispatch(this, window, "window", "Gamepad", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "GainNode", {configurable:true, enumerable:false, writable:true, value:function GainNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "GainNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FormDataEvent", {configurable:true, enumerable:false, writable:true, value:function FormDataEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "FormDataEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FormData", {configurable:true, enumerable:false, writable:true, value:function FormData (){return bodavm.toolsFunc.dispatch(this, window, "window", "FormData", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FontFaceSetLoadEvent", {configurable:true, enumerable:false, writable:true, value:function FontFaceSetLoadEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "FontFaceSetLoadEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FontFace", {configurable:true, enumerable:false, writable:true, value:function FontFace (){return bodavm.toolsFunc.dispatch(this, window, "window", "FontFace", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FocusEvent", {configurable:true, enumerable:false, writable:true, value:function FocusEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "FocusEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FileReader", {configurable:true, enumerable:false, writable:true, value:function FileReader (){return bodavm.toolsFunc.dispatch(this, window, "window", "FileReader", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FileList", {configurable:true, enumerable:false, writable:true, value:function FileList (){return bodavm.toolsFunc.dispatch(this, window, "window", "FileList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "File", {configurable:true, enumerable:false, writable:true, value:function File (){return bodavm.toolsFunc.dispatch(this, window, "window", "File", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FeaturePolicy", {configurable:true, enumerable:false, writable:true, value:function FeaturePolicy (){return bodavm.toolsFunc.dispatch(this, window, "window", "FeaturePolicy", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "EventTarget", {configurable:true, enumerable:false, writable:true, value:function EventTarget (){return bodavm.toolsFunc.dispatch(this, window, "window", "EventTarget", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "EventSource", {configurable:true, enumerable:false, writable:true, value:function EventSource (){return bodavm.toolsFunc.dispatch(this, window, "window", "EventSource", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "EventCounts", {configurable:true, enumerable:false, writable:true, value:function EventCounts (){return bodavm.toolsFunc.dispatch(this, window, "window", "EventCounts", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Event", {configurable:true, enumerable:false, writable:true, value:function Event (){return bodavm.toolsFunc.dispatch(this, window, "window", "Event", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ErrorEvent", {configurable:true, enumerable:false, writable:true, value:function ErrorEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "ErrorEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ElementInternals", {configurable:true, enumerable:false, writable:true, value:function ElementInternals (){return bodavm.toolsFunc.dispatch(this, window, "window", "ElementInternals", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Element", {configurable:true, enumerable:false, writable:true, value:function Element (){return bodavm.toolsFunc.dispatch(this, window, "window", "Element", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DynamicsCompressorNode", {configurable:true, enumerable:false, writable:true, value:function DynamicsCompressorNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "DynamicsCompressorNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DragEvent", {configurable:true, enumerable:false, writable:true, value:function DragEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "DragEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DocumentType", {configurable:true, enumerable:false, writable:true, value:function DocumentType (){return bodavm.toolsFunc.dispatch(this, window, "window", "DocumentType", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DocumentFragment", {configurable:true, enumerable:false, writable:true, value:function DocumentFragment (){return bodavm.toolsFunc.dispatch(this, window, "window", "DocumentFragment", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DelayNode", {configurable:true, enumerable:false, writable:true, value:function DelayNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "DelayNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DecompressionStream", {configurable:true, enumerable:false, writable:true, value:function DecompressionStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "DecompressionStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DataTransferItemList", {configurable:true, enumerable:false, writable:true, value:function DataTransferItemList (){return bodavm.toolsFunc.dispatch(this, window, "window", "DataTransferItemList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DataTransferItem", {configurable:true, enumerable:false, writable:true, value:function DataTransferItem (){return bodavm.toolsFunc.dispatch(this, window, "window", "DataTransferItem", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DataTransfer", {configurable:true, enumerable:false, writable:true, value:function DataTransfer (){return bodavm.toolsFunc.dispatch(this, window, "window", "DataTransfer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMTokenList", {configurable:true, enumerable:false, writable:true, value:function DOMTokenList (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMTokenList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMStringMap", {configurable:true, enumerable:false, writable:true, value:function DOMStringMap (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMStringMap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMStringList", {configurable:true, enumerable:false, writable:true, value:function DOMStringList (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMStringList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMRectReadOnly", {configurable:true, enumerable:false, writable:true, value:function DOMRectReadOnly (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMRectReadOnly", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMRectList", {configurable:true, enumerable:false, writable:true, value:function DOMRectList (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMRectList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMRect", {configurable:true, enumerable:false, writable:true, value:function DOMRect (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMRect", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMQuad", {configurable:true, enumerable:false, writable:true, value:function DOMQuad (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMQuad", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMPointReadOnly", {configurable:true, enumerable:false, writable:true, value:function DOMPointReadOnly (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMPointReadOnly", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMPoint", {configurable:true, enumerable:false, writable:true, value:function DOMPoint (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMPoint", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMParser", {configurable:true, enumerable:false, writable:true, value:function DOMParser (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMParser", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMMatrixReadOnly", {configurable:true, enumerable:false, writable:true, value:function DOMMatrixReadOnly (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMMatrixReadOnly", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMMatrix", {configurable:true, enumerable:false, writable:true, value:function DOMMatrix (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMMatrix", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMImplementation", {configurable:true, enumerable:false, writable:true, value:function DOMImplementation (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMImplementation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMException", {configurable:true, enumerable:false, writable:true, value:function DOMException (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMException", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DOMError", {configurable:true, enumerable:false, writable:true, value:function DOMError (){return bodavm.toolsFunc.dispatch(this, window, "window", "DOMError", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CustomEvent", {configurable:true, enumerable:false, writable:true, value:function CustomEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "CustomEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Crypto", {configurable:true, enumerable:false, writable:true, value:function Crypto (){return bodavm.toolsFunc.dispatch(this, window, "window", "Crypto", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CountQueuingStrategy", {configurable:true, enumerable:false, writable:true, value:function CountQueuingStrategy (){return bodavm.toolsFunc.dispatch(this, window, "window", "CountQueuingStrategy", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ConvolverNode", {configurable:true, enumerable:false, writable:true, value:function ConvolverNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "ConvolverNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ConstantSourceNode", {configurable:true, enumerable:false, writable:true, value:function ConstantSourceNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "ConstantSourceNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CompressionStream", {configurable:true, enumerable:false, writable:true, value:function CompressionStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "CompressionStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CompositionEvent", {configurable:true, enumerable:false, writable:true, value:function CompositionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "CompositionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Comment", {configurable:true, enumerable:false, writable:true, value:function Comment (){return bodavm.toolsFunc.dispatch(this, window, "window", "Comment", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CloseEvent", {configurable:true, enumerable:false, writable:true, value:function CloseEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "CloseEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ClipboardEvent", {configurable:true, enumerable:false, writable:true, value:function ClipboardEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "ClipboardEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CharacterData", {configurable:true, enumerable:false, writable:true, value:function CharacterData (){return bodavm.toolsFunc.dispatch(this, window, "window", "CharacterData", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ChannelSplitterNode", {configurable:true, enumerable:false, writable:true, value:function ChannelSplitterNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "ChannelSplitterNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ChannelMergerNode", {configurable:true, enumerable:false, writable:true, value:function ChannelMergerNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "ChannelMergerNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CanvasRenderingContext2D", {configurable:true, enumerable:false, writable:true, value:function CanvasRenderingContext2D (){return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasRenderingContext2D", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CanvasPattern", {configurable:true, enumerable:false, writable:true, value:function CanvasPattern (){return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasPattern", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CanvasGradient", {configurable:true, enumerable:false, writable:true, value:function CanvasGradient (){return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasGradient", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CanvasFilter", {configurable:true, enumerable:false, writable:true, value:function CanvasFilter (){return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasFilter", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CanvasCaptureMediaStreamTrack", {configurable:true, enumerable:false, writable:true, value:function CanvasCaptureMediaStreamTrack (){return bodavm.toolsFunc.dispatch(this, window, "window", "CanvasCaptureMediaStreamTrack", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSVariableReferenceValue", {configurable:true, enumerable:false, writable:true, value:function CSSVariableReferenceValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSVariableReferenceValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSUnparsedValue", {configurable:true, enumerable:false, writable:true, value:function CSSUnparsedValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSUnparsedValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSUnitValue", {configurable:true, enumerable:false, writable:true, value:function CSSUnitValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSUnitValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSTranslate", {configurable:true, enumerable:false, writable:true, value:function CSSTranslate (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSTranslate", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSTransformValue", {configurable:true, enumerable:false, writable:true, value:function CSSTransformValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSTransformValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSTransformComponent", {configurable:true, enumerable:false, writable:true, value:function CSSTransformComponent (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSTransformComponent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSSupportsRule", {configurable:true, enumerable:false, writable:true, value:function CSSSupportsRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSSupportsRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSStyleValue", {configurable:true, enumerable:false, writable:true, value:function CSSStyleValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSStyleValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSStyleSheet", {configurable:true, enumerable:false, writable:true, value:function CSSStyleSheet (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSStyleSheet", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSStyleRule", {configurable:true, enumerable:false, writable:true, value:function CSSStyleRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSStyleRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSStyleDeclaration", {configurable:true, enumerable:false, writable:true, value:function CSSStyleDeclaration (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSStyleDeclaration", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSSkewY", {configurable:true, enumerable:false, writable:true, value:function CSSSkewY (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSSkewY", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSSkewX", {configurable:true, enumerable:false, writable:true, value:function CSSSkewX (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSSkewX", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSSkew", {configurable:true, enumerable:false, writable:true, value:function CSSSkew (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSSkew", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSScale", {configurable:true, enumerable:false, writable:true, value:function CSSScale (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSScale", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSRuleList", {configurable:true, enumerable:false, writable:true, value:function CSSRuleList (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSRuleList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSRule", {configurable:true, enumerable:false, writable:true, value:function CSSRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSRotate", {configurable:true, enumerable:false, writable:true, value:function CSSRotate (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSRotate", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSPropertyRule", {configurable:true, enumerable:false, writable:true, value:function CSSPropertyRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSPropertyRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSPositionValue", {configurable:true, enumerable:false, writable:true, value:function CSSPositionValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSPositionValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSPerspective", {configurable:true, enumerable:false, writable:true, value:function CSSPerspective (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSPerspective", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSPageRule", {configurable:true, enumerable:false, writable:true, value:function CSSPageRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSPageRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSNumericValue", {configurable:true, enumerable:false, writable:true, value:function CSSNumericValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSNumericValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSNumericArray", {configurable:true, enumerable:false, writable:true, value:function CSSNumericArray (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSNumericArray", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSNamespaceRule", {configurable:true, enumerable:false, writable:true, value:function CSSNamespaceRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSNamespaceRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMediaRule", {configurable:true, enumerable:false, writable:true, value:function CSSMediaRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMediaRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMatrixComponent", {configurable:true, enumerable:false, writable:true, value:function CSSMatrixComponent (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMatrixComponent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMathValue", {configurable:true, enumerable:false, writable:true, value:function CSSMathValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMathSum", {configurable:true, enumerable:false, writable:true, value:function CSSMathSum (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathSum", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMathProduct", {configurable:true, enumerable:false, writable:true, value:function CSSMathProduct (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathProduct", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMathNegate", {configurable:true, enumerable:false, writable:true, value:function CSSMathNegate (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathNegate", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMathMin", {configurable:true, enumerable:false, writable:true, value:function CSSMathMin (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathMin", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMathMax", {configurable:true, enumerable:false, writable:true, value:function CSSMathMax (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathMax", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMathInvert", {configurable:true, enumerable:false, writable:true, value:function CSSMathInvert (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathInvert", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSMathClamp", {configurable:true, enumerable:false, writable:true, value:function CSSMathClamp (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSMathClamp", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSLayerStatementRule", {configurable:true, enumerable:false, writable:true, value:function CSSLayerStatementRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSLayerStatementRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSLayerBlockRule", {configurable:true, enumerable:false, writable:true, value:function CSSLayerBlockRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSLayerBlockRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSKeywordValue", {configurable:true, enumerable:false, writable:true, value:function CSSKeywordValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSKeywordValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSKeyframesRule", {configurable:true, enumerable:false, writable:true, value:function CSSKeyframesRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSKeyframesRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSKeyframeRule", {configurable:true, enumerable:false, writable:true, value:function CSSKeyframeRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSKeyframeRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSImportRule", {configurable:true, enumerable:false, writable:true, value:function CSSImportRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSImportRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSImageValue", {configurable:true, enumerable:false, writable:true, value:function CSSImageValue (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSImageValue", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSGroupingRule", {configurable:true, enumerable:false, writable:true, value:function CSSGroupingRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSGroupingRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSFontFaceRule", {configurable:true, enumerable:false, writable:true, value:function CSSFontFaceRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSFontFaceRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSCounterStyleRule", {configurable:true, enumerable:false, writable:true, value:function CSSCounterStyleRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSCounterStyleRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSConditionRule", {configurable:true, enumerable:false, writable:true, value:function CSSConditionRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSConditionRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSS", {configurable:true, enumerable:false, writable:true, value:{}});
-bodavm.toolsFunc.windowdefineProperty(window, "CDATASection", {configurable:true, enumerable:false, writable:true, value:function CDATASection (){return bodavm.toolsFunc.dispatch(this, window, "window", "CDATASection", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ByteLengthQueuingStrategy", {configurable:true, enumerable:false, writable:true, value:function ByteLengthQueuingStrategy (){return bodavm.toolsFunc.dispatch(this, window, "window", "ByteLengthQueuingStrategy", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BroadcastChannel", {configurable:true, enumerable:false, writable:true, value:function BroadcastChannel (){return bodavm.toolsFunc.dispatch(this, window, "window", "BroadcastChannel", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BlobEvent", {configurable:true, enumerable:false, writable:true, value:function BlobEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "BlobEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Blob", {configurable:true, enumerable:false, writable:true, value:function Blob (){return bodavm.toolsFunc.dispatch(this, window, "window", "Blob", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BiquadFilterNode", {configurable:true, enumerable:false, writable:true, value:function BiquadFilterNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "BiquadFilterNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BeforeUnloadEvent", {configurable:true, enumerable:false, writable:true, value:function BeforeUnloadEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "BeforeUnloadEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BeforeInstallPromptEvent", {configurable:true, enumerable:false, writable:true, value:function BeforeInstallPromptEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "BeforeInstallPromptEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BatteryManager", {configurable:true, enumerable:false, writable:true, value:function BatteryManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "BatteryManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BaseAudioContext", {configurable:true, enumerable:false, writable:true, value:function BaseAudioContext (){return bodavm.toolsFunc.dispatch(this, window, "window", "BaseAudioContext", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioWorkletNode", {configurable:true, enumerable:false, writable:true, value:function AudioWorkletNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioWorkletNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioScheduledSourceNode", {configurable:true, enumerable:false, writable:true, value:function AudioScheduledSourceNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioScheduledSourceNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioProcessingEvent", {configurable:true, enumerable:false, writable:true, value:function AudioProcessingEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioProcessingEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioParamMap", {configurable:true, enumerable:false, writable:true, value:function AudioParamMap (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioParamMap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioParam", {configurable:true, enumerable:false, writable:true, value:function AudioParam (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioParam", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioNode", {configurable:true, enumerable:false, writable:true, value:function AudioNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioListener", {configurable:true, enumerable:false, writable:true, value:function AudioListener (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioListener", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioDestinationNode", {configurable:true, enumerable:false, writable:true, value:function AudioDestinationNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioDestinationNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioContext", {configurable:true, enumerable:false, writable:true, value:function AudioContext (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioContext", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioBufferSourceNode", {configurable:true, enumerable:false, writable:true, value:function AudioBufferSourceNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioBufferSourceNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioBuffer", {configurable:true, enumerable:false, writable:true, value:function AudioBuffer (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioBuffer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Attr", {configurable:true, enumerable:false, writable:true, value:function Attr (){return bodavm.toolsFunc.dispatch(this, window, "window", "Attr", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AnimationEvent", {configurable:true, enumerable:false, writable:true, value:function AnimationEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "AnimationEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AnimationEffect", {configurable:true, enumerable:false, writable:true, value:function AnimationEffect (){return bodavm.toolsFunc.dispatch(this, window, "window", "AnimationEffect", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Animation", {configurable:true, enumerable:false, writable:true, value:function Animation (){return bodavm.toolsFunc.dispatch(this, window, "window", "Animation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AnalyserNode", {configurable:true, enumerable:false, writable:true, value:function AnalyserNode (){return bodavm.toolsFunc.dispatch(this, window, "window", "AnalyserNode", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AbstractRange", {configurable:true, enumerable:false, writable:true, value:function AbstractRange (){return bodavm.toolsFunc.dispatch(this, window, "window", "AbstractRange", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AbortSignal", {configurable:true, enumerable:false, writable:true, value:function AbortSignal (){return bodavm.toolsFunc.dispatch(this, window, "window", "AbortSignal", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AbortController", {configurable:true, enumerable:false, writable:true, value:function AbortController (){return bodavm.toolsFunc.dispatch(this, window, "window", "AbortController", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "self", {configurable:true, enumerable:true, get:function self (){return bodavm.toolsFunc.dispatch(this, window, "window", "self_get", arguments)}, set:function self (){return bodavm.toolsFunc.dispatch(this, window, "window", "self_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "name", {configurable:true, enumerable:true, get:function name (){return bodavm.toolsFunc.dispatch(this, window, "window", "name_get", arguments, '')}, set:function name (){return bodavm.toolsFunc.dispatch(this, window, "window", "name_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "personalbar", {configurable:true, enumerable:true, get:function personalbar (){return bodavm.toolsFunc.dispatch(this, window, "window", "personalbar_get", arguments)}, set:function personalbar (){return bodavm.toolsFunc.dispatch(this, window, "window", "personalbar_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "scrollbars", {configurable:true, enumerable:true, get:function scrollbars (){return bodavm.toolsFunc.dispatch(this, window, "window", "scrollbars_get", arguments)}, set:function scrollbars (){return bodavm.toolsFunc.dispatch(this, window, "window", "scrollbars_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "statusbar", {configurable:true, enumerable:true, get:function statusbar (){return bodavm.toolsFunc.dispatch(this, window, "window", "statusbar_get", arguments)}, set:function statusbar (){return bodavm.toolsFunc.dispatch(this, window, "window", "statusbar_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "status", {configurable:true, enumerable:true, get:function status (){return bodavm.toolsFunc.dispatch(this, window, "window", "status_get", arguments, '')}, set:function status (){return bodavm.toolsFunc.dispatch(this, window, "window", "status_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "closed", {configurable:true, enumerable:true, get:function closed (){return bodavm.toolsFunc.dispatch(this, window, "window", "closed_get", arguments, false)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "frames", {configurable:true, enumerable:true, get:function frames (){return bodavm.toolsFunc.dispatch(this, window, "window", "frames_get", arguments)}, set:function frames (){return bodavm.toolsFunc.dispatch(this, window, "window", "frames_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, window, "window", "length_get", arguments, 0)}, set:function length (){return bodavm.toolsFunc.dispatch(this, window, "window", "length_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "top", {configurable:false, enumerable:true, get:function top (){return bodavm.toolsFunc.dispatch(this, window, "window", "top_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "opener", {configurable:true, enumerable:true, get:function opener (){return bodavm.toolsFunc.dispatch(this, window, "window", "opener_get", arguments, null)}, set:function opener (){return bodavm.toolsFunc.dispatch(this, window, "window", "opener_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "parent", {configurable:true, enumerable:true, get:function parent (){return bodavm.toolsFunc.dispatch(this, window, "window", "parent_get", arguments)}, set:function parent (){return bodavm.toolsFunc.dispatch(this, window, "window", "parent_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "frameElement", {configurable:true, enumerable:true, get:function frameElement (){return bodavm.toolsFunc.dispatch(this, window, "window", "frameElement_get", arguments, null)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "origin", {configurable:true, enumerable:true, get:function origin (){return bodavm.toolsFunc.dispatch(this, window, "window", "origin_get", arguments, 'http://127.0.0.1:5000')}, set:function origin (){return bodavm.toolsFunc.dispatch(this, window, "window", "origin_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "innerWidth", {configurable:true, enumerable:true, get:function innerWidth (){return bodavm.toolsFunc.dispatch(this, window, "window", "innerWidth_get", arguments, 1440)}, set:function innerWidth (){return bodavm.toolsFunc.dispatch(this, window, "window", "innerWidth_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "innerHeight", {configurable:true, enumerable:true, get:function innerHeight (){return bodavm.toolsFunc.dispatch(this, window, "window", "innerHeight_get", arguments, 150)}, set:function innerHeight (){return bodavm.toolsFunc.dispatch(this, window, "window", "innerHeight_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "scrollX", {configurable:true, enumerable:true, get:function scrollX (){return bodavm.toolsFunc.dispatch(this, window, "window", "scrollX_get", arguments, 0)}, set:function scrollX (){return bodavm.toolsFunc.dispatch(this, window, "window", "scrollX_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "pageXOffset", {configurable:true, enumerable:true, get:function pageXOffset (){return bodavm.toolsFunc.dispatch(this, window, "window", "pageXOffset_get", arguments, 0)}, set:function pageXOffset (){return bodavm.toolsFunc.dispatch(this, window, "window", "pageXOffset_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "scrollY", {configurable:true, enumerable:true, get:function scrollY (){return bodavm.toolsFunc.dispatch(this, window, "window", "scrollY_get", arguments, 0)}, set:function scrollY (){return bodavm.toolsFunc.dispatch(this, window, "window", "scrollY_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "pageYOffset", {configurable:true, enumerable:true, get:function pageYOffset (){return bodavm.toolsFunc.dispatch(this, window, "window", "pageYOffset_get", arguments, 0)}, set:function pageYOffset (){return bodavm.toolsFunc.dispatch(this, window, "window", "pageYOffset_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "screenX", {configurable:true, enumerable:true, get:function screenX (){return bodavm.toolsFunc.dispatch(this, window, "window", "screenX_get", arguments, 0)}, set:function screenX (){return bodavm.toolsFunc.dispatch(this, window, "window", "screenX_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "screenY", {configurable:true, enumerable:true, get:function screenY (){return bodavm.toolsFunc.dispatch(this, window, "window", "screenY_get", arguments, 0)}, set:function screenY (){return bodavm.toolsFunc.dispatch(this, window, "window", "screenY_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "outerWidth", {configurable:true, enumerable:true, get:function outerWidth (){return bodavm.toolsFunc.dispatch(this, window, "window", "outerWidth_get", arguments, 1440)}, set:function outerWidth (){return bodavm.toolsFunc.dispatch(this, window, "window", "outerWidth_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "outerHeight", {configurable:true, enumerable:true, get:function outerHeight (){return bodavm.toolsFunc.dispatch(this, window, "window", "outerHeight_get", arguments, 920)}, set:function outerHeight (){return bodavm.toolsFunc.dispatch(this, window, "window", "outerHeight_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "devicePixelRatio", {configurable:true, enumerable:true, get:function devicePixelRatio (){return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_get", arguments, 1.5)}, set:function devicePixelRatio (){return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "event", {configurable:true, enumerable:false, get:function event (){return bodavm.toolsFunc.dispatch(this, window, "window", "event_get", arguments)}, set:function event (){return bodavm.toolsFunc.dispatch(this, window, "window", "event_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "clientInformation", {configurable:true, enumerable:true, get:function clientInformation (){return bodavm.toolsFunc.dispatch(this, window, "window", "clientInformation_get", arguments)}, set:function clientInformation (){return bodavm.toolsFunc.dispatch(this, window, "window", "clientInformation_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "offscreenBuffering", {configurable:true, enumerable:false, get:function offscreenBuffering (){return bodavm.toolsFunc.dispatch(this, window, "window", "offscreenBuffering_get", arguments, true)}, set:function offscreenBuffering (){return bodavm.toolsFunc.dispatch(this, window, "window", "offscreenBuffering_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "screenLeft", {configurable:true, enumerable:true, get:function screenLeft (){return bodavm.toolsFunc.dispatch(this, window, "window", "screenLeft_get", arguments, 0)}, set:function screenLeft (){return bodavm.toolsFunc.dispatch(this, window, "window", "screenLeft_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "screenTop", {configurable:true, enumerable:true, get:function screenTop (){return bodavm.toolsFunc.dispatch(this, window, "window", "screenTop_get", arguments, 0)}, set:function screenTop (){return bodavm.toolsFunc.dispatch(this, window, "window", "screenTop_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "defaultStatus", {configurable:true, enumerable:true, get:function defaultStatus (){return bodavm.toolsFunc.dispatch(this, window, "window", "defaultStatus_get", arguments, '')}, set:function defaultStatus (){return bodavm.toolsFunc.dispatch(this, window, "window", "defaultStatus_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "defaultstatus", {configurable:true, enumerable:true, get:function defaultstatus (){return bodavm.toolsFunc.dispatch(this, window, "window", "defaultstatus_get", arguments, '')}, set:function defaultstatus (){return bodavm.toolsFunc.dispatch(this, window, "window", "defaultstatus_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "styleMedia", {configurable:true, enumerable:true, get:function styleMedia (){return bodavm.toolsFunc.dispatch(this, window, "window", "styleMedia_get", arguments)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "onsearch", {configurable:true, enumerable:true, get:function onsearch (){return bodavm.toolsFunc.dispatch(this, window, "window", "onsearch_get", arguments, null)}, set:function onsearch (){return bodavm.toolsFunc.dispatch(this, window, "window", "onsearch_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "isSecureContext", {configurable:true, enumerable:true, get:function isSecureContext (){return bodavm.toolsFunc.dispatch(this, window, "window", "isSecureContext_get", arguments, true)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "onappinstalled", {configurable:true, enumerable:true, get:function onappinstalled (){return bodavm.toolsFunc.dispatch(this, window, "window", "onappinstalled_get", arguments, null)}, set:function onappinstalled (){return bodavm.toolsFunc.dispatch(this, window, "window", "onappinstalled_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onbeforeinstallprompt", {configurable:true, enumerable:true, get:function onbeforeinstallprompt (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeinstallprompt_get", arguments, null)}, set:function onbeforeinstallprompt (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeinstallprompt_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "crypto", {configurable:true, enumerable:true, get:function crypto (){return bodavm.toolsFunc.dispatch(this, window, "window", "crypto_get", arguments)}, set:undefined});
-
-bodavm.toolsFunc.windowdefineProperty(window, "onbeforexrselect", {configurable:true, enumerable:true, get:function onbeforexrselect (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforexrselect_get", arguments, null)}, set:function onbeforexrselect (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforexrselect_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onabort", {configurable:true, enumerable:true, get:function onabort (){return bodavm.toolsFunc.dispatch(this, window, "window", "onabort_get", arguments, null)}, set:function onabort (){return bodavm.toolsFunc.dispatch(this, window, "window", "onabort_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onblur", {configurable:true, enumerable:true, get:function onblur (){return bodavm.toolsFunc.dispatch(this, window, "window", "onblur_get", arguments, null)}, set:function onblur (){return bodavm.toolsFunc.dispatch(this, window, "window", "onblur_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "oncancel", {configurable:true, enumerable:true, get:function oncancel (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncancel_get", arguments, null)}, set:function oncancel (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncancel_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "oncanplay", {configurable:true, enumerable:true, get:function oncanplay (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncanplay_get", arguments, null)}, set:function oncanplay (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncanplay_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "oncanplaythrough", {configurable:true, enumerable:true, get:function oncanplaythrough (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncanplaythrough_get", arguments, null)}, set:function oncanplaythrough (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncanplaythrough_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onchange_get", arguments, null)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onchange_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onclick", {configurable:true, enumerable:true, get:function onclick (){return bodavm.toolsFunc.dispatch(this, window, "window", "onclick_get", arguments, null)}, set:function onclick (){return bodavm.toolsFunc.dispatch(this, window, "window", "onclick_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onclose", {configurable:true, enumerable:true, get:function onclose (){return bodavm.toolsFunc.dispatch(this, window, "window", "onclose_get", arguments, null)}, set:function onclose (){return bodavm.toolsFunc.dispatch(this, window, "window", "onclose_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "oncontextlost", {configurable:true, enumerable:true, get:function oncontextlost (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextlost_get", arguments, null)}, set:function oncontextlost (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextlost_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "oncontextmenu", {configurable:true, enumerable:true, get:function oncontextmenu (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextmenu_get", arguments, null)}, set:function oncontextmenu (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextmenu_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "oncontextrestored", {configurable:true, enumerable:true, get:function oncontextrestored (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextrestored_get", arguments, null)}, set:function oncontextrestored (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncontextrestored_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "oncuechange", {configurable:true, enumerable:true, get:function oncuechange (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncuechange_get", arguments, null)}, set:function oncuechange (){return bodavm.toolsFunc.dispatch(this, window, "window", "oncuechange_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondblclick", {configurable:true, enumerable:true, get:function ondblclick (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondblclick_get", arguments, null)}, set:function ondblclick (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondblclick_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondrag", {configurable:true, enumerable:true, get:function ondrag (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondrag_get", arguments, null)}, set:function ondrag (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondrag_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondragend", {configurable:true, enumerable:true, get:function ondragend (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragend_get", arguments, null)}, set:function ondragend (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragend_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondragenter", {configurable:true, enumerable:true, get:function ondragenter (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragenter_get", arguments, null)}, set:function ondragenter (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragenter_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondragleave", {configurable:true, enumerable:true, get:function ondragleave (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragleave_get", arguments, null)}, set:function ondragleave (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragleave_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondragover", {configurable:true, enumerable:true, get:function ondragover (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragover_get", arguments, null)}, set:function ondragover (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragover_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondragstart", {configurable:true, enumerable:true, get:function ondragstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragstart_get", arguments, null)}, set:function ondragstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondragstart_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondrop", {configurable:true, enumerable:true, get:function ondrop (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondrop_get", arguments, null)}, set:function ondrop (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondrop_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondurationchange", {configurable:true, enumerable:true, get:function ondurationchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondurationchange_get", arguments, null)}, set:function ondurationchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondurationchange_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onemptied", {configurable:true, enumerable:true, get:function onemptied (){return bodavm.toolsFunc.dispatch(this, window, "window", "onemptied_get", arguments, null)}, set:function onemptied (){return bodavm.toolsFunc.dispatch(this, window, "window", "onemptied_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onended", {configurable:true, enumerable:true, get:function onended (){return bodavm.toolsFunc.dispatch(this, window, "window", "onended_get", arguments, null)}, set:function onended (){return bodavm.toolsFunc.dispatch(this, window, "window", "onended_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onerror", {configurable:true, enumerable:true, get:function onerror (){return bodavm.toolsFunc.dispatch(this, window, "window", "onerror_get", arguments, null)}, set:function onerror (){return bodavm.toolsFunc.dispatch(this, window, "window", "onerror_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onfocus", {configurable:true, enumerable:true, get:function onfocus (){return bodavm.toolsFunc.dispatch(this, window, "window", "onfocus_get", arguments, null)}, set:function onfocus (){return bodavm.toolsFunc.dispatch(this, window, "window", "onfocus_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onformdata", {configurable:true, enumerable:true, get:function onformdata (){return bodavm.toolsFunc.dispatch(this, window, "window", "onformdata_get", arguments, null)}, set:function onformdata (){return bodavm.toolsFunc.dispatch(this, window, "window", "onformdata_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "oninput", {configurable:true, enumerable:true, get:function oninput (){return bodavm.toolsFunc.dispatch(this, window, "window", "oninput_get", arguments, null)}, set:function oninput (){return bodavm.toolsFunc.dispatch(this, window, "window", "oninput_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "oninvalid", {configurable:true, enumerable:true, get:function oninvalid (){return bodavm.toolsFunc.dispatch(this, window, "window", "oninvalid_get", arguments, null)}, set:function oninvalid (){return bodavm.toolsFunc.dispatch(this, window, "window", "oninvalid_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onkeydown", {configurable:true, enumerable:true, get:function onkeydown (){return bodavm.toolsFunc.dispatch(this, window, "window", "onkeydown_get", arguments, null)}, set:function onkeydown (){return bodavm.toolsFunc.dispatch(this, window, "window", "onkeydown_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onkeypress", {configurable:true, enumerable:true, get:function onkeypress (){return bodavm.toolsFunc.dispatch(this, window, "window", "onkeypress_get", arguments, null)}, set:function onkeypress (){return bodavm.toolsFunc.dispatch(this, window, "window", "onkeypress_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onkeyup", {configurable:true, enumerable:true, get:function onkeyup (){return bodavm.toolsFunc.dispatch(this, window, "window", "onkeyup_get", arguments, null)}, set:function onkeyup (){return bodavm.toolsFunc.dispatch(this, window, "window", "onkeyup_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onload", {configurable:true, enumerable:true, get:function onload (){return bodavm.toolsFunc.dispatch(this, window, "window", "onload_get", arguments, null)}, set:function onload (){return bodavm.toolsFunc.dispatch(this, window, "window", "onload_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onloadeddata", {configurable:true, enumerable:true, get:function onloadeddata (){return bodavm.toolsFunc.dispatch(this, window, "window", "onloadeddata_get", arguments, null)}, set:function onloadeddata (){return bodavm.toolsFunc.dispatch(this, window, "window", "onloadeddata_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onloadedmetadata", {configurable:true, enumerable:true, get:function onloadedmetadata (){return bodavm.toolsFunc.dispatch(this, window, "window", "onloadedmetadata_get", arguments, null)}, set:function onloadedmetadata (){return bodavm.toolsFunc.dispatch(this, window, "window", "onloadedmetadata_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onloadstart", {configurable:true, enumerable:true, get:function onloadstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "onloadstart_get", arguments, null)}, set:function onloadstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "onloadstart_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmousedown", {configurable:true, enumerable:true, get:function onmousedown (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmousedown_get", arguments, null)}, set:function onmousedown (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmousedown_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmouseenter", {configurable:true, enumerable:true, get:function onmouseenter (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseenter_get", arguments, null)}, set:function onmouseenter (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseenter_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmouseleave", {configurable:true, enumerable:true, get:function onmouseleave (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseleave_get", arguments, null)}, set:function onmouseleave (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseleave_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmousemove", {configurable:true, enumerable:true, get:function onmousemove (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmousemove_get", arguments, null)}, set:function onmousemove (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmousemove_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmouseout", {configurable:true, enumerable:true, get:function onmouseout (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseout_get", arguments, null)}, set:function onmouseout (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseout_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmouseover", {configurable:true, enumerable:true, get:function onmouseover (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseover_get", arguments, null)}, set:function onmouseover (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseover_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmouseup", {configurable:true, enumerable:true, get:function onmouseup (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseup_get", arguments, null)}, set:function onmouseup (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmouseup_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmousewheel", {configurable:true, enumerable:true, get:function onmousewheel (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmousewheel_get", arguments, null)}, set:function onmousewheel (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmousewheel_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpause", {configurable:true, enumerable:true, get:function onpause (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpause_get", arguments, null)}, set:function onpause (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpause_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onplay", {configurable:true, enumerable:true, get:function onplay (){return bodavm.toolsFunc.dispatch(this, window, "window", "onplay_get", arguments, null)}, set:function onplay (){return bodavm.toolsFunc.dispatch(this, window, "window", "onplay_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onplaying", {configurable:true, enumerable:true, get:function onplaying (){return bodavm.toolsFunc.dispatch(this, window, "window", "onplaying_get", arguments, null)}, set:function onplaying (){return bodavm.toolsFunc.dispatch(this, window, "window", "onplaying_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onprogress", {configurable:true, enumerable:true, get:function onprogress (){return bodavm.toolsFunc.dispatch(this, window, "window", "onprogress_get", arguments, null)}, set:function onprogress (){return bodavm.toolsFunc.dispatch(this, window, "window", "onprogress_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onratechange", {configurable:true, enumerable:true, get:function onratechange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onratechange_get", arguments, null)}, set:function onratechange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onratechange_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onreset", {configurable:true, enumerable:true, get:function onreset (){return bodavm.toolsFunc.dispatch(this, window, "window", "onreset_get", arguments, null)}, set:function onreset (){return bodavm.toolsFunc.dispatch(this, window, "window", "onreset_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onresize", {configurable:true, enumerable:true, get:function onresize (){return bodavm.toolsFunc.dispatch(this, window, "window", "onresize_get", arguments, null)}, set:function onresize (){return bodavm.toolsFunc.dispatch(this, window, "window", "onresize_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onscroll", {configurable:true, enumerable:true, get:function onscroll (){return bodavm.toolsFunc.dispatch(this, window, "window", "onscroll_get", arguments, null)}, set:function onscroll (){return bodavm.toolsFunc.dispatch(this, window, "window", "onscroll_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onsecuritypolicyviolation", {configurable:true, enumerable:true, get:function onsecuritypolicyviolation (){return bodavm.toolsFunc.dispatch(this, window, "window", "onsecuritypolicyviolation_get", arguments, null)}, set:function onsecuritypolicyviolation (){return bodavm.toolsFunc.dispatch(this, window, "window", "onsecuritypolicyviolation_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onseeked", {configurable:true, enumerable:true, get:function onseeked (){return bodavm.toolsFunc.dispatch(this, window, "window", "onseeked_get", arguments, null)}, set:function onseeked (){return bodavm.toolsFunc.dispatch(this, window, "window", "onseeked_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onseeking", {configurable:true, enumerable:true, get:function onseeking (){return bodavm.toolsFunc.dispatch(this, window, "window", "onseeking_get", arguments, null)}, set:function onseeking (){return bodavm.toolsFunc.dispatch(this, window, "window", "onseeking_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onselect", {configurable:true, enumerable:true, get:function onselect (){return bodavm.toolsFunc.dispatch(this, window, "window", "onselect_get", arguments, null)}, set:function onselect (){return bodavm.toolsFunc.dispatch(this, window, "window", "onselect_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onslotchange", {configurable:true, enumerable:true, get:function onslotchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onslotchange_get", arguments, null)}, set:function onslotchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onslotchange_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onstalled", {configurable:true, enumerable:true, get:function onstalled (){return bodavm.toolsFunc.dispatch(this, window, "window", "onstalled_get", arguments, null)}, set:function onstalled (){return bodavm.toolsFunc.dispatch(this, window, "window", "onstalled_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onsubmit", {configurable:true, enumerable:true, get:function onsubmit (){return bodavm.toolsFunc.dispatch(this, window, "window", "onsubmit_get", arguments, null)}, set:function onsubmit (){return bodavm.toolsFunc.dispatch(this, window, "window", "onsubmit_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onsuspend", {configurable:true, enumerable:true, get:function onsuspend (){return bodavm.toolsFunc.dispatch(this, window, "window", "onsuspend_get", arguments, null)}, set:function onsuspend (){return bodavm.toolsFunc.dispatch(this, window, "window", "onsuspend_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ontimeupdate", {configurable:true, enumerable:true, get:function ontimeupdate (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontimeupdate_get", arguments, null)}, set:function ontimeupdate (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontimeupdate_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ontoggle", {configurable:true, enumerable:true, get:function ontoggle (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontoggle_get", arguments, null)}, set:function ontoggle (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontoggle_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onvolumechange", {configurable:true, enumerable:true, get:function onvolumechange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onvolumechange_get", arguments, null)}, set:function onvolumechange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onvolumechange_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onwaiting", {configurable:true, enumerable:true, get:function onwaiting (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwaiting_get", arguments, null)}, set:function onwaiting (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwaiting_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onwebkitanimationend", {configurable:true, enumerable:true, get:function onwebkitanimationend (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationend_get", arguments, null)}, set:function onwebkitanimationend (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationend_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onwebkitanimationiteration", {configurable:true, enumerable:true, get:function onwebkitanimationiteration (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationiteration_get", arguments, null)}, set:function onwebkitanimationiteration (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationiteration_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onwebkitanimationstart", {configurable:true, enumerable:true, get:function onwebkitanimationstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationstart_get", arguments, null)}, set:function onwebkitanimationstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkitanimationstart_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onwebkittransitionend", {configurable:true, enumerable:true, get:function onwebkittransitionend (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkittransitionend_get", arguments, null)}, set:function onwebkittransitionend (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwebkittransitionend_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onwheel", {configurable:true, enumerable:true, get:function onwheel (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwheel_get", arguments, null)}, set:function onwheel (){return bodavm.toolsFunc.dispatch(this, window, "window", "onwheel_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onauxclick", {configurable:true, enumerable:true, get:function onauxclick (){return bodavm.toolsFunc.dispatch(this, window, "window", "onauxclick_get", arguments, null)}, set:function onauxclick (){return bodavm.toolsFunc.dispatch(this, window, "window", "onauxclick_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ongotpointercapture", {configurable:true, enumerable:true, get:function ongotpointercapture (){return bodavm.toolsFunc.dispatch(this, window, "window", "ongotpointercapture_get", arguments, null)}, set:function ongotpointercapture (){return bodavm.toolsFunc.dispatch(this, window, "window", "ongotpointercapture_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onlostpointercapture", {configurable:true, enumerable:true, get:function onlostpointercapture (){return bodavm.toolsFunc.dispatch(this, window, "window", "onlostpointercapture_get", arguments, null)}, set:function onlostpointercapture (){return bodavm.toolsFunc.dispatch(this, window, "window", "onlostpointercapture_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpointerdown", {configurable:true, enumerable:true, get:function onpointerdown (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerdown_get", arguments, null)}, set:function onpointerdown (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerdown_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpointermove", {configurable:true, enumerable:true, get:function onpointermove (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointermove_get", arguments, null)}, set:function onpointermove (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointermove_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpointerup", {configurable:true, enumerable:true, get:function onpointerup (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerup_get", arguments, null)}, set:function onpointerup (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerup_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpointercancel", {configurable:true, enumerable:true, get:function onpointercancel (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointercancel_get", arguments, null)}, set:function onpointercancel (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointercancel_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpointerover", {configurable:true, enumerable:true, get:function onpointerover (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerover_get", arguments, null)}, set:function onpointerover (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerover_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpointerout", {configurable:true, enumerable:true, get:function onpointerout (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerout_get", arguments, null)}, set:function onpointerout (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerout_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpointerenter", {configurable:true, enumerable:true, get:function onpointerenter (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerenter_get", arguments, null)}, set:function onpointerenter (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerenter_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpointerleave", {configurable:true, enumerable:true, get:function onpointerleave (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerleave_get", arguments, null)}, set:function onpointerleave (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerleave_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onselectstart", {configurable:true, enumerable:true, get:function onselectstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "onselectstart_get", arguments, null)}, set:function onselectstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "onselectstart_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onselectionchange", {configurable:true, enumerable:true, get:function onselectionchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onselectionchange_get", arguments, null)}, set:function onselectionchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onselectionchange_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onanimationend", {configurable:true, enumerable:true, get:function onanimationend (){return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationend_get", arguments, null)}, set:function onanimationend (){return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationend_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onanimationiteration", {configurable:true, enumerable:true, get:function onanimationiteration (){return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationiteration_get", arguments, null)}, set:function onanimationiteration (){return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationiteration_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onanimationstart", {configurable:true, enumerable:true, get:function onanimationstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationstart_get", arguments, null)}, set:function onanimationstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "onanimationstart_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ontransitionrun", {configurable:true, enumerable:true, get:function ontransitionrun (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionrun_get", arguments, null)}, set:function ontransitionrun (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionrun_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ontransitionstart", {configurable:true, enumerable:true, get:function ontransitionstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionstart_get", arguments, null)}, set:function ontransitionstart (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionstart_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ontransitionend", {configurable:true, enumerable:true, get:function ontransitionend (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionend_get", arguments, null)}, set:function ontransitionend (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitionend_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ontransitioncancel", {configurable:true, enumerable:true, get:function ontransitioncancel (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitioncancel_get", arguments, null)}, set:function ontransitioncancel (){return bodavm.toolsFunc.dispatch(this, window, "window", "ontransitioncancel_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onafterprint", {configurable:true, enumerable:true, get:function onafterprint (){return bodavm.toolsFunc.dispatch(this, window, "window", "onafterprint_get", arguments, null)}, set:function onafterprint (){return bodavm.toolsFunc.dispatch(this, window, "window", "onafterprint_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onbeforeprint", {configurable:true, enumerable:true, get:function onbeforeprint (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeprint_get", arguments, null)}, set:function onbeforeprint (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeprint_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onbeforeunload", {configurable:true, enumerable:true, get:function onbeforeunload (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeunload_get", arguments, null)}, set:function onbeforeunload (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeunload_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onhashchange", {configurable:true, enumerable:true, get:function onhashchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onhashchange_get", arguments, null)}, set:function onhashchange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onhashchange_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onlanguagechange", {configurable:true, enumerable:true, get:function onlanguagechange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onlanguagechange_get", arguments, null)}, set:function onlanguagechange (){return bodavm.toolsFunc.dispatch(this, window, "window", "onlanguagechange_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmessage", {configurable:true, enumerable:true, get:function onmessage (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmessage_get", arguments, null)}, set:function onmessage (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmessage_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onmessageerror", {configurable:true, enumerable:true, get:function onmessageerror (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmessageerror_get", arguments, null)}, set:function onmessageerror (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmessageerror_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onoffline", {configurable:true, enumerable:true, get:function onoffline (){return bodavm.toolsFunc.dispatch(this, window, "window", "onoffline_get", arguments, null)}, set:function onoffline (){return bodavm.toolsFunc.dispatch(this, window, "window", "onoffline_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ononline", {configurable:true, enumerable:true, get:function ononline (){return bodavm.toolsFunc.dispatch(this, window, "window", "ononline_get", arguments, null)}, set:function ononline (){return bodavm.toolsFunc.dispatch(this, window, "window", "ononline_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpagehide", {configurable:true, enumerable:true, get:function onpagehide (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpagehide_get", arguments, null)}, set:function onpagehide (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpagehide_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpageshow", {configurable:true, enumerable:true, get:function onpageshow (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpageshow_get", arguments, null)}, set:function onpageshow (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpageshow_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onpopstate", {configurable:true, enumerable:true, get:function onpopstate (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpopstate_get", arguments, null)}, set:function onpopstate (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpopstate_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onrejectionhandled", {configurable:true, enumerable:true, get:function onrejectionhandled (){return bodavm.toolsFunc.dispatch(this, window, "window", "onrejectionhandled_get", arguments, null)}, set:function onrejectionhandled (){return bodavm.toolsFunc.dispatch(this, window, "window", "onrejectionhandled_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onstorage", {configurable:true, enumerable:true, get:function onstorage (){return bodavm.toolsFunc.dispatch(this, window, "window", "onstorage_get", arguments, null)}, set:function onstorage (){return bodavm.toolsFunc.dispatch(this, window, "window", "onstorage_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onunhandledrejection", {configurable:true, enumerable:true, get:function onunhandledrejection (){return bodavm.toolsFunc.dispatch(this, window, "window", "onunhandledrejection_get", arguments, null)}, set:function onunhandledrejection (){return bodavm.toolsFunc.dispatch(this, window, "window", "onunhandledrejection_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onunload", {configurable:true, enumerable:true, get:function onunload (){return bodavm.toolsFunc.dispatch(this, window, "window", "onunload_get", arguments, null)}, set:function onunload (){return bodavm.toolsFunc.dispatch(this, window, "window", "onunload_set", arguments)}});
-// bodavm.toolsFunc.windowdefineProperty(window, "alert", {configurable:true, enumerable:true, writable:true, value:function alert (){return bodavm.toolsFunc.dispatch(this, window, "window", "alert", arguments)}});
-// bodavm.toolsFunc.windowdefineProperty(window, "atob", {configurable:true, enumerable:true, writable:true, value:function atob (){return bodavm.toolsFunc.dispatch(this, window, "window", "atob", arguments)}});
-// bodavm.toolsFunc.windowdefineProperty(window, "blur", {configurable:true, enumerable:true, writable:true, value:function blur (){return bodavm.toolsFunc.dispatch(this, window, "window", "blur", arguments)}});
-// bodavm.toolsFunc.windowdefineProperty(window, "btoa", {configurable:true, enumerable:true, writable:true, value:function btoa (){return bodavm.toolsFunc.dispatch(this, window, "window", "btoa", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "cancelAnimationFrame", {configurable:true, enumerable:true, writable:true, value:function cancelAnimationFrame (){return bodavm.toolsFunc.dispatch(this, window, "window", "cancelAnimationFrame", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "cancelIdleCallback", {configurable:true, enumerable:true, writable:true, value:function cancelIdleCallback (){return bodavm.toolsFunc.dispatch(this, window, "window", "cancelIdleCallback", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "captureEvents", {configurable:true, enumerable:true, writable:true, value:function captureEvents (){return bodavm.toolsFunc.dispatch(this, window, "window", "captureEvents", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "clearInterval", {configurable:true, enumerable:true, writable:true, value:function clearInterval (){return bodavm.toolsFunc.dispatch(this, window, "window", "clearInterval", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "clearTimeout", {configurable:true, enumerable:true, writable:true, value:function clearTimeout (){return bodavm.toolsFunc.dispatch(this, window, "window", "clearTimeout", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "close", {configurable:true, enumerable:true, writable:true, value:function close (){return bodavm.toolsFunc.dispatch(this, window, "window", "close", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "confirm", {configurable:true, enumerable:true, writable:true, value:function confirm (){return bodavm.toolsFunc.dispatch(this, window, "window", "confirm", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "createImageBitmap", {configurable:true, enumerable:true, writable:true, value:function createImageBitmap (){return bodavm.toolsFunc.dispatch(this, window, "window", "createImageBitmap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "fetch", {configurable:true, enumerable:true, writable:true, value:function fetch (){return bodavm.toolsFunc.dispatch(this, window, "window", "fetch", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "find", {configurable:true, enumerable:true, writable:true, value:function find (){return bodavm.toolsFunc.dispatch(this, window, "window", "find", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "focus", {configurable:true, enumerable:true, writable:true, value:function focus (){return bodavm.toolsFunc.dispatch(this, window, "window", "focus", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "getComputedStyle", {configurable:true, enumerable:true, writable:true, value:function getComputedStyle (){return bodavm.toolsFunc.dispatch(this, window, "window", "getComputedStyle", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "getSelection", {configurable:true, enumerable:true, writable:true, value:function getSelection (){return bodavm.toolsFunc.dispatch(this, window, "window", "getSelection", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "matchMedia", {configurable:true, enumerable:true, writable:true, value:function matchMedia (){return bodavm.toolsFunc.dispatch(this, window, "window", "matchMedia", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "moveBy", {configurable:true, enumerable:true, writable:true, value:function moveBy (){return bodavm.toolsFunc.dispatch(this, window, "window", "moveBy", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "moveTo", {configurable:true, enumerable:true, writable:true, value:function moveTo (){return bodavm.toolsFunc.dispatch(this, window, "window", "moveTo", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "open", {configurable:true, enumerable:true, writable:true, value:function open (){return bodavm.toolsFunc.dispatch(this, window, "window", "open", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "postMessage", {configurable:true, enumerable:true, writable:true, value:function postMessage (){return bodavm.toolsFunc.dispatch(this, window, "window", "postMessage", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "print", {configurable:true, enumerable:true, writable:true, value:function print (){return bodavm.toolsFunc.dispatch(this, window, "window", "print", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "prompt", {configurable:true, enumerable:true, writable:true, value:function prompt (){return bodavm.toolsFunc.dispatch(this, window, "window", "prompt", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "queueMicrotask", {configurable:true, enumerable:true, writable:true, value:function queueMicrotask (){return bodavm.toolsFunc.dispatch(this, window, "window", "queueMicrotask", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "releaseEvents", {configurable:true, enumerable:true, writable:true, value:function releaseEvents (){return bodavm.toolsFunc.dispatch(this, window, "window", "releaseEvents", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "reportError", {configurable:true, enumerable:true, writable:true, value:function reportError (){return bodavm.toolsFunc.dispatch(this, window, "window", "reportError", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "requestAnimationFrame", {configurable:true, enumerable:true, writable:true, value:function requestAnimationFrame (){return bodavm.toolsFunc.dispatch(this, window, "window", "requestAnimationFrame", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "requestIdleCallback", {configurable:true, enumerable:true, writable:true, value:function requestIdleCallback (){return bodavm.toolsFunc.dispatch(this, window, "window", "requestIdleCallback", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "resizeBy", {configurable:true, enumerable:true, writable:true, value:function resizeBy (){return bodavm.toolsFunc.dispatch(this, window, "window", "resizeBy", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "resizeTo", {configurable:true, enumerable:true, writable:true, value:function resizeTo (){return bodavm.toolsFunc.dispatch(this, window, "window", "resizeTo", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "scroll", {configurable:true, enumerable:true, writable:true, value:function scroll (){return bodavm.toolsFunc.dispatch(this, window, "window", "scroll", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "scrollBy", {configurable:true, enumerable:true, writable:true, value:function scrollBy (){return bodavm.toolsFunc.dispatch(this, window, "window", "scrollBy", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "scrollTo", {configurable:true, enumerable:true, writable:true, value:function scrollTo (){return bodavm.toolsFunc.dispatch(this, window, "window", "scrollTo", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "setInterval", {configurable:true, enumerable:true, writable:true, value:function setInterval (){return bodavm.toolsFunc.dispatch(this, window, "window", "setInterval", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "setTimeout", {configurable:true, enumerable:true, writable:true, value:function setTimeout (){return bodavm.toolsFunc.dispatch(this, window, "window", "setTimeout", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "stop", {configurable:true, enumerable:true, writable:true, value:function stop (){return bodavm.toolsFunc.dispatch(this, window, "window", "stop", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "structuredClone", {configurable:true, enumerable:true, writable:true, value:function structuredClone (){return bodavm.toolsFunc.dispatch(this, window, "window", "structuredClone", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitCancelAnimationFrame", {configurable:true, enumerable:true, writable:true, value:function webkitCancelAnimationFrame (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitCancelAnimationFrame", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitRequestAnimationFrame", {configurable:true, enumerable:true, writable:true, value:function webkitRequestAnimationFrame (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestAnimationFrame", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondevicemotion", {configurable:true, enumerable:true, get:function ondevicemotion (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondevicemotion_get", arguments, null)}, set:function ondevicemotion (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondevicemotion_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondeviceorientation", {configurable:true, enumerable:true, get:function ondeviceorientation (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondeviceorientation_get", arguments, null)}, set:function ondeviceorientation (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondeviceorientation_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ondeviceorientationabsolute", {configurable:true, enumerable:true, get:function ondeviceorientationabsolute (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondeviceorientationabsolute_get", arguments, null)}, set:function ondeviceorientationabsolute (){return bodavm.toolsFunc.dispatch(this, window, "window", "ondeviceorientationabsolute_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "onbeforematch", {configurable:true, enumerable:true, get:function onbeforematch (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforematch_get", arguments, null)}, set:function onbeforematch (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforematch_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AbsoluteOrientationSensor", {configurable:true, enumerable:false, writable:true, value:function AbsoluteOrientationSensor (){return bodavm.toolsFunc.dispatch(this, window, "window", "AbsoluteOrientationSensor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Accelerometer", {configurable:true, enumerable:false, writable:true, value:function Accelerometer (){return bodavm.toolsFunc.dispatch(this, window, "window", "Accelerometer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioWorklet", {configurable:true, enumerable:false, writable:true, value:function AudioWorklet (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioWorklet", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Cache", {configurable:true, enumerable:false, writable:true, value:function Cache (){return bodavm.toolsFunc.dispatch(this, window, "window", "Cache", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Clipboard", {configurable:true, enumerable:false, writable:true, value:function Clipboard (){return bodavm.toolsFunc.dispatch(this, window, "window", "Clipboard", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ClipboardItem", {configurable:true, enumerable:false, writable:true, value:function ClipboardItem (){return bodavm.toolsFunc.dispatch(this, window, "window", "ClipboardItem", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CookieChangeEvent", {configurable:true, enumerable:false, writable:true, value:function CookieChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "CookieChangeEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CookieStoreManager", {configurable:true, enumerable:false, writable:true, value:function CookieStoreManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "CookieStoreManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Credential", {configurable:true, enumerable:false, writable:true, value:function Credential (){return bodavm.toolsFunc.dispatch(this, window, "window", "Credential", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CredentialsContainer", {configurable:true, enumerable:false, writable:true, value:function CredentialsContainer (){return bodavm.toolsFunc.dispatch(this, window, "window", "CredentialsContainer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CryptoKey", {configurable:true, enumerable:false, writable:true, value:function CryptoKey (){return bodavm.toolsFunc.dispatch(this, window, "window", "CryptoKey", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DeviceMotionEvent", {configurable:true, enumerable:false, writable:true, value:function DeviceMotionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "DeviceMotionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DeviceMotionEventAcceleration", {configurable:true, enumerable:false, writable:true, value:function DeviceMotionEventAcceleration (){return bodavm.toolsFunc.dispatch(this, window, "window", "DeviceMotionEventAcceleration", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DeviceMotionEventRotationRate", {configurable:true, enumerable:false, writable:true, value:function DeviceMotionEventRotationRate (){return bodavm.toolsFunc.dispatch(this, window, "window", "DeviceMotionEventRotationRate", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DeviceOrientationEvent", {configurable:true, enumerable:false, writable:true, value:function DeviceOrientationEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "DeviceOrientationEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FederatedCredential", {configurable:true, enumerable:false, writable:true, value:function FederatedCredential (){return bodavm.toolsFunc.dispatch(this, window, "window", "FederatedCredential", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Gyroscope", {configurable:true, enumerable:false, writable:true, value:function Gyroscope (){return bodavm.toolsFunc.dispatch(this, window, "window", "Gyroscope", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Keyboard", {configurable:true, enumerable:false, writable:true, value:function Keyboard (){return bodavm.toolsFunc.dispatch(this, window, "window", "Keyboard", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "KeyboardLayoutMap", {configurable:true, enumerable:false, writable:true, value:function KeyboardLayoutMap (){return bodavm.toolsFunc.dispatch(this, window, "window", "KeyboardLayoutMap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "LinearAccelerationSensor", {configurable:true, enumerable:false, writable:true, value:function LinearAccelerationSensor (){return bodavm.toolsFunc.dispatch(this, window, "window", "LinearAccelerationSensor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Lock", {configurable:true, enumerable:false, writable:true, value:function Lock (){return bodavm.toolsFunc.dispatch(this, window, "window", "Lock", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "LockManager", {configurable:true, enumerable:false, writable:true, value:function LockManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "LockManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MIDIAccess", {configurable:true, enumerable:false, writable:true, value:function MIDIAccess (){return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIAccess", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MIDIConnectionEvent", {configurable:true, enumerable:false, writable:true, value:function MIDIConnectionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIConnectionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MIDIInput", {configurable:true, enumerable:false, writable:true, value:function MIDIInput (){return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIInput", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MIDIInputMap", {configurable:true, enumerable:false, writable:true, value:function MIDIInputMap (){return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIInputMap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MIDIMessageEvent", {configurable:true, enumerable:false, writable:true, value:function MIDIMessageEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIMessageEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MIDIOutput", {configurable:true, enumerable:false, writable:true, value:function MIDIOutput (){return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIOutput", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MIDIOutputMap", {configurable:true, enumerable:false, writable:true, value:function MIDIOutputMap (){return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIOutputMap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MIDIPort", {configurable:true, enumerable:false, writable:true, value:function MIDIPort (){return bodavm.toolsFunc.dispatch(this, window, "window", "MIDIPort", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaDeviceInfo", {configurable:true, enumerable:false, writable:true, value:function MediaDeviceInfo (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaDeviceInfo", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaDevices", {configurable:true, enumerable:false, writable:true, value:function MediaDevices (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaDevices", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaKeyMessageEvent", {configurable:true, enumerable:false, writable:true, value:function MediaKeyMessageEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeyMessageEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaKeySession", {configurable:true, enumerable:false, writable:true, value:function MediaKeySession (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeySession", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaKeyStatusMap", {configurable:true, enumerable:false, writable:true, value:function MediaKeyStatusMap (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeyStatusMap", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaKeySystemAccess", {configurable:true, enumerable:false, writable:true, value:function MediaKeySystemAccess (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeySystemAccess", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaKeys", {configurable:true, enumerable:false, writable:true, value:function MediaKeys (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaKeys", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NavigationPreloadManager", {configurable:true, enumerable:false, writable:true, value:function NavigationPreloadManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationPreloadManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NavigatorManagedData", {configurable:true, enumerable:false, writable:true, value:function NavigatorManagedData (){return bodavm.toolsFunc.dispatch(this, window, "window", "NavigatorManagedData", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "OrientationSensor", {configurable:true, enumerable:false, writable:true, value:function OrientationSensor (){return bodavm.toolsFunc.dispatch(this, window, "window", "OrientationSensor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PasswordCredential", {configurable:true, enumerable:false, writable:true, value:function PasswordCredential (){return bodavm.toolsFunc.dispatch(this, window, "window", "PasswordCredential", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RTCIceTransport", {configurable:true, enumerable:false, writable:true, value:function RTCIceTransport (){return bodavm.toolsFunc.dispatch(this, window, "window", "RTCIceTransport", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RelativeOrientationSensor", {configurable:true, enumerable:false, writable:true, value:function RelativeOrientationSensor (){return bodavm.toolsFunc.dispatch(this, window, "window", "RelativeOrientationSensor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Sensor", {configurable:true, enumerable:false, writable:true, value:function Sensor (){return bodavm.toolsFunc.dispatch(this, window, "window", "Sensor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SensorErrorEvent", {configurable:true, enumerable:false, writable:true, value:function SensorErrorEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "SensorErrorEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ServiceWorker", {configurable:true, enumerable:false, writable:true, value:function ServiceWorker (){return bodavm.toolsFunc.dispatch(this, window, "window", "ServiceWorker", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ServiceWorkerContainer", {configurable:true, enumerable:false, writable:true, value:function ServiceWorkerContainer (){return bodavm.toolsFunc.dispatch(this, window, "window", "ServiceWorkerContainer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ServiceWorkerRegistration", {configurable:true, enumerable:false, writable:true, value:function ServiceWorkerRegistration (){return bodavm.toolsFunc.dispatch(this, window, "window", "ServiceWorkerRegistration", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "StorageManager", {configurable:true, enumerable:false, writable:true, value:function StorageManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "StorageManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SubtleCrypto", {configurable:true, enumerable:false, writable:true, value:function SubtleCrypto (){return bodavm.toolsFunc.dispatch(this, window, "window", "SubtleCrypto", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Worklet", {configurable:true, enumerable:false, writable:true, value:function Worklet (){return bodavm.toolsFunc.dispatch(this, window, "window", "Worklet", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRDOMOverlayState", {configurable:true, enumerable:false, writable:true, value:function XRDOMOverlayState (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRDOMOverlayState", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRLayer", {configurable:true, enumerable:false, writable:true, value:function XRLayer (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRLayer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRWebGLBinding", {configurable:true, enumerable:false, writable:true, value:function XRWebGLBinding (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRWebGLBinding", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioData", {configurable:true, enumerable:false, writable:true, value:function AudioData (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioData", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "EncodedAudioChunk", {configurable:true, enumerable:false, writable:true, value:function EncodedAudioChunk (){return bodavm.toolsFunc.dispatch(this, window, "window", "EncodedAudioChunk", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "EncodedVideoChunk", {configurable:true, enumerable:false, writable:true, value:function EncodedVideoChunk (){return bodavm.toolsFunc.dispatch(this, window, "window", "EncodedVideoChunk", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ImageTrack", {configurable:true, enumerable:false, writable:true, value:function ImageTrack (){return bodavm.toolsFunc.dispatch(this, window, "window", "ImageTrack", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ImageTrackList", {configurable:true, enumerable:false, writable:true, value:function ImageTrackList (){return bodavm.toolsFunc.dispatch(this, window, "window", "ImageTrackList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "VideoColorSpace", {configurable:true, enumerable:false, writable:true, value:function VideoColorSpace (){return bodavm.toolsFunc.dispatch(this, window, "window", "VideoColorSpace", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "VideoFrame", {configurable:true, enumerable:false, writable:true, value:function VideoFrame (){return bodavm.toolsFunc.dispatch(this, window, "window", "VideoFrame", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioDecoder", {configurable:true, enumerable:false, writable:true, value:function AudioDecoder (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioDecoder", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AudioEncoder", {configurable:true, enumerable:false, writable:true, value:function AudioEncoder (){return bodavm.toolsFunc.dispatch(this, window, "window", "AudioEncoder", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ImageDecoder", {configurable:true, enumerable:false, writable:true, value:function ImageDecoder (){return bodavm.toolsFunc.dispatch(this, window, "window", "ImageDecoder", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "VideoDecoder", {configurable:true, enumerable:false, writable:true, value:function VideoDecoder (){return bodavm.toolsFunc.dispatch(this, window, "window", "VideoDecoder", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "VideoEncoder", {configurable:true, enumerable:false, writable:true, value:function VideoEncoder (){return bodavm.toolsFunc.dispatch(this, window, "window", "VideoEncoder", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AuthenticatorAssertionResponse", {configurable:true, enumerable:false, writable:true, value:function AuthenticatorAssertionResponse (){return bodavm.toolsFunc.dispatch(this, window, "window", "AuthenticatorAssertionResponse", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AuthenticatorAttestationResponse", {configurable:true, enumerable:false, writable:true, value:function AuthenticatorAttestationResponse (){return bodavm.toolsFunc.dispatch(this, window, "window", "AuthenticatorAttestationResponse", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AuthenticatorResponse", {configurable:true, enumerable:false, writable:true, value:function AuthenticatorResponse (){return bodavm.toolsFunc.dispatch(this, window, "window", "AuthenticatorResponse", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PublicKeyCredential", {configurable:true, enumerable:false, writable:true, value:function PublicKeyCredential (){return bodavm.toolsFunc.dispatch(this, window, "window", "PublicKeyCredential", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Bluetooth", {configurable:true, enumerable:false, writable:true, value:function Bluetooth (){return bodavm.toolsFunc.dispatch(this, window, "window", "Bluetooth", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BluetoothCharacteristicProperties", {configurable:true, enumerable:false, writable:true, value:function BluetoothCharacteristicProperties (){return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothCharacteristicProperties", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BluetoothDevice", {configurable:true, enumerable:false, writable:true, value:function BluetoothDevice (){return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothDevice", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BluetoothRemoteGATTCharacteristic", {configurable:true, enumerable:false, writable:true, value:function BluetoothRemoteGATTCharacteristic (){return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothRemoteGATTCharacteristic", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BluetoothRemoteGATTDescriptor", {configurable:true, enumerable:false, writable:true, value:function BluetoothRemoteGATTDescriptor (){return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothRemoteGATTDescriptor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BluetoothRemoteGATTServer", {configurable:true, enumerable:false, writable:true, value:function BluetoothRemoteGATTServer (){return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothRemoteGATTServer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BluetoothRemoteGATTService", {configurable:true, enumerable:false, writable:true, value:function BluetoothRemoteGATTService (){return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothRemoteGATTService", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "EyeDropper", {configurable:true, enumerable:false, writable:true, value:function EyeDropper (){return bodavm.toolsFunc.dispatch(this, window, "window", "EyeDropper", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FileSystemDirectoryHandle", {configurable:true, enumerable:false, writable:true, value:function FileSystemDirectoryHandle (){return bodavm.toolsFunc.dispatch(this, window, "window", "FileSystemDirectoryHandle", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FileSystemFileHandle", {configurable:true, enumerable:false, writable:true, value:function FileSystemFileHandle (){return bodavm.toolsFunc.dispatch(this, window, "window", "FileSystemFileHandle", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FileSystemHandle", {configurable:true, enumerable:false, writable:true, value:function FileSystemHandle (){return bodavm.toolsFunc.dispatch(this, window, "window", "FileSystemHandle", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FileSystemWritableFileStream", {configurable:true, enumerable:false, writable:true, value:function FileSystemWritableFileStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "FileSystemWritableFileStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "FragmentDirective", {configurable:true, enumerable:false, writable:true, value:function FragmentDirective (){return bodavm.toolsFunc.dispatch(this, window, "window", "FragmentDirective", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "GravitySensor", {configurable:true, enumerable:false, writable:true, value:function GravitySensor (){return bodavm.toolsFunc.dispatch(this, window, "window", "GravitySensor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "HID", {configurable:true, enumerable:false, writable:true, value:function HID (){return bodavm.toolsFunc.dispatch(this, window, "window", "HID", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "HIDConnectionEvent", {configurable:true, enumerable:false, writable:true, value:function HIDConnectionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "HIDConnectionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "HIDDevice", {configurable:true, enumerable:false, writable:true, value:function HIDDevice (){return bodavm.toolsFunc.dispatch(this, window, "window", "HIDDevice", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "HIDInputReportEvent", {configurable:true, enumerable:false, writable:true, value:function HIDInputReportEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "HIDInputReportEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "IdleDetector", {configurable:true, enumerable:false, writable:true, value:function IdleDetector (){return bodavm.toolsFunc.dispatch(this, window, "window", "IdleDetector", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamTrackGenerator", {configurable:true, enumerable:false, writable:true, value:function MediaStreamTrackGenerator (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamTrackGenerator", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamTrackProcessor", {configurable:true, enumerable:false, writable:true, value:function MediaStreamTrackProcessor (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamTrackProcessor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "OTPCredential", {configurable:true, enumerable:false, writable:true, value:function OTPCredential (){return bodavm.toolsFunc.dispatch(this, window, "window", "OTPCredential", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PaymentAddress", {configurable:true, enumerable:false, writable:true, value:function PaymentAddress (){return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentAddress", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PaymentRequest", {configurable:true, enumerable:false, writable:true, value:function PaymentRequest (){return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentRequest", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PaymentResponse", {configurable:true, enumerable:false, writable:true, value:function PaymentResponse (){return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentResponse", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PaymentMethodChangeEvent", {configurable:true, enumerable:false, writable:true, value:function PaymentMethodChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentMethodChangeEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Presentation", {configurable:true, enumerable:false, writable:true, value:function Presentation (){return bodavm.toolsFunc.dispatch(this, window, "window", "Presentation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PresentationAvailability", {configurable:true, enumerable:false, writable:true, value:function PresentationAvailability (){return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationAvailability", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PresentationConnection", {configurable:true, enumerable:false, writable:true, value:function PresentationConnection (){return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationConnection", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PresentationConnectionAvailableEvent", {configurable:true, enumerable:false, writable:true, value:function PresentationConnectionAvailableEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationConnectionAvailableEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PresentationConnectionCloseEvent", {configurable:true, enumerable:false, writable:true, value:function PresentationConnectionCloseEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationConnectionCloseEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PresentationConnectionList", {configurable:true, enumerable:false, writable:true, value:function PresentationConnectionList (){return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationConnectionList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PresentationReceiver", {configurable:true, enumerable:false, writable:true, value:function PresentationReceiver (){return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationReceiver", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PresentationRequest", {configurable:true, enumerable:false, writable:true, value:function PresentationRequest (){return bodavm.toolsFunc.dispatch(this, window, "window", "PresentationRequest", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Profiler", {configurable:true, enumerable:false, writable:true, value:function Profiler (){return bodavm.toolsFunc.dispatch(this, window, "window", "Profiler", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Scheduling", {configurable:true, enumerable:false, writable:true, value:function Scheduling (){return bodavm.toolsFunc.dispatch(this, window, "window", "Scheduling", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ScreenDetailed", {configurable:true, enumerable:false, writable:true, value:function ScreenDetailed (){return bodavm.toolsFunc.dispatch(this, window, "window", "ScreenDetailed", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "ScreenDetails", {configurable:true, enumerable:false, writable:true, value:function ScreenDetails (){return bodavm.toolsFunc.dispatch(this, window, "window", "ScreenDetails", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Serial", {configurable:true, enumerable:false, writable:true, value:function Serial (){return bodavm.toolsFunc.dispatch(this, window, "window", "Serial", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SerialPort", {configurable:true, enumerable:false, writable:true, value:function SerialPort (){return bodavm.toolsFunc.dispatch(this, window, "window", "SerialPort", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USB", {configurable:true, enumerable:false, writable:true, value:function USB (){return bodavm.toolsFunc.dispatch(this, window, "window", "USB", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBAlternateInterface", {configurable:true, enumerable:false, writable:true, value:function USBAlternateInterface (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBAlternateInterface", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBConfiguration", {configurable:true, enumerable:false, writable:true, value:function USBConfiguration (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBConfiguration", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBConnectionEvent", {configurable:true, enumerable:false, writable:true, value:function USBConnectionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBConnectionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBDevice", {configurable:true, enumerable:false, writable:true, value:function USBDevice (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBDevice", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBEndpoint", {configurable:true, enumerable:false, writable:true, value:function USBEndpoint (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBEndpoint", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBInTransferResult", {configurable:true, enumerable:false, writable:true, value:function USBInTransferResult (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBInTransferResult", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBInterface", {configurable:true, enumerable:false, writable:true, value:function USBInterface (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBInterface", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBIsochronousInTransferPacket", {configurable:true, enumerable:false, writable:true, value:function USBIsochronousInTransferPacket (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBIsochronousInTransferPacket", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBIsochronousInTransferResult", {configurable:true, enumerable:false, writable:true, value:function USBIsochronousInTransferResult (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBIsochronousInTransferResult", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBIsochronousOutTransferPacket", {configurable:true, enumerable:false, writable:true, value:function USBIsochronousOutTransferPacket (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBIsochronousOutTransferPacket", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBIsochronousOutTransferResult", {configurable:true, enumerable:false, writable:true, value:function USBIsochronousOutTransferResult (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBIsochronousOutTransferResult", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "USBOutTransferResult", {configurable:true, enumerable:false, writable:true, value:function USBOutTransferResult (){return bodavm.toolsFunc.dispatch(this, window, "window", "USBOutTransferResult", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "VirtualKeyboard", {configurable:true, enumerable:false, writable:true, value:function VirtualKeyboard (){return bodavm.toolsFunc.dispatch(this, window, "window", "VirtualKeyboard", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WakeLock", {configurable:true, enumerable:false, writable:true, value:function WakeLock (){return bodavm.toolsFunc.dispatch(this, window, "window", "WakeLock", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WakeLockSentinel", {configurable:true, enumerable:false, writable:true, value:function WakeLockSentinel (){return bodavm.toolsFunc.dispatch(this, window, "window", "WakeLockSentinel", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebTransport", {configurable:true, enumerable:false, writable:true, value:function WebTransport (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebTransport", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebTransportBidirectionalStream", {configurable:true, enumerable:false, writable:true, value:function WebTransportBidirectionalStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebTransportBidirectionalStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebTransportDatagramDuplexStream", {configurable:true, enumerable:false, writable:true, value:function WebTransportDatagramDuplexStream (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebTransportDatagramDuplexStream", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "WebTransportError", {configurable:true, enumerable:false, writable:true, value:function WebTransportError (){return bodavm.toolsFunc.dispatch(this, window, "window", "WebTransportError", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRAnchor", {configurable:true, enumerable:false, writable:true, value:function XRAnchor (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRAnchor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRAnchorSet", {configurable:true, enumerable:false, writable:true, value:function XRAnchorSet (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRAnchorSet", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRBoundedReferenceSpace", {configurable:true, enumerable:false, writable:true, value:function XRBoundedReferenceSpace (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRBoundedReferenceSpace", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRFrame", {configurable:true, enumerable:false, writable:true, value:function XRFrame (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRFrame", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRInputSource", {configurable:true, enumerable:false, writable:true, value:function XRInputSource (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRInputSource", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRInputSourceArray", {configurable:true, enumerable:false, writable:true, value:function XRInputSourceArray (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRInputSourceArray", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRInputSourceEvent", {configurable:true, enumerable:false, writable:true, value:function XRInputSourceEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRInputSourceEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRInputSourcesChangeEvent", {configurable:true, enumerable:false, writable:true, value:function XRInputSourcesChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRInputSourcesChangeEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRPose", {configurable:true, enumerable:false, writable:true, value:function XRPose (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRPose", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRReferenceSpace", {configurable:true, enumerable:false, writable:true, value:function XRReferenceSpace (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRReferenceSpace", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRReferenceSpaceEvent", {configurable:true, enumerable:false, writable:true, value:function XRReferenceSpaceEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRReferenceSpaceEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRRenderState", {configurable:true, enumerable:false, writable:true, value:function XRRenderState (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRRenderState", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRRigidTransform", {configurable:true, enumerable:false, writable:true, value:function XRRigidTransform (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRRigidTransform", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRSession", {configurable:true, enumerable:false, writable:true, value:function XRSession (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRSession", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRSessionEvent", {configurable:true, enumerable:false, writable:true, value:function XRSessionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRSessionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRSpace", {configurable:true, enumerable:false, writable:true, value:function XRSpace (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRSpace", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRSystem", {configurable:true, enumerable:false, writable:true, value:function XRSystem (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRSystem", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRView", {configurable:true, enumerable:false, writable:true, value:function XRView (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRView", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRViewerPose", {configurable:true, enumerable:false, writable:true, value:function XRViewerPose (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRViewerPose", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRViewport", {configurable:true, enumerable:false, writable:true, value:function XRViewport (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRViewport", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRWebGLLayer", {configurable:true, enumerable:false, writable:true, value:function XRWebGLLayer (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRWebGLLayer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRCPUDepthInformation", {configurable:true, enumerable:false, writable:true, value:function XRCPUDepthInformation (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRCPUDepthInformation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRDepthInformation", {configurable:true, enumerable:false, writable:true, value:function XRDepthInformation (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRDepthInformation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRWebGLDepthInformation", {configurable:true, enumerable:false, writable:true, value:function XRWebGLDepthInformation (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRWebGLDepthInformation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRHitTestResult", {configurable:true, enumerable:false, writable:true, value:function XRHitTestResult (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRHitTestResult", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRHitTestSource", {configurable:true, enumerable:false, writable:true, value:function XRHitTestSource (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRHitTestSource", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRRay", {configurable:true, enumerable:false, writable:true, value:function XRRay (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRRay", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRTransientInputHitTestResult", {configurable:true, enumerable:false, writable:true, value:function XRTransientInputHitTestResult (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRTransientInputHitTestResult", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRTransientInputHitTestSource", {configurable:true, enumerable:false, writable:true, value:function XRTransientInputHitTestSource (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRTransientInputHitTestSource", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRLightEstimate", {configurable:true, enumerable:false, writable:true, value:function XRLightEstimate (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRLightEstimate", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XRLightProbe", {configurable:true, enumerable:false, writable:true, value:function XRLightProbe (){return bodavm.toolsFunc.dispatch(this, window, "window", "XRLightProbe", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "getScreenDetails", {configurable:true, enumerable:true, writable:true, value:function getScreenDetails (){return bodavm.toolsFunc.dispatch(this, window, "window", "getScreenDetails", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "showDirectoryPicker", {configurable:true, enumerable:true, writable:true, value:function showDirectoryPicker (){return bodavm.toolsFunc.dispatch(this, window, "window", "showDirectoryPicker", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "showOpenFilePicker", {configurable:true, enumerable:true, writable:true, value:function showOpenFilePicker (){return bodavm.toolsFunc.dispatch(this, window, "window", "showOpenFilePicker", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "showSaveFilePicker", {configurable:true, enumerable:true, writable:true, value:function showSaveFilePicker (){return bodavm.toolsFunc.dispatch(this, window, "window", "showSaveFilePicker", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "originAgentCluster", {configurable:true, enumerable:true, get:function originAgentCluster (){return bodavm.toolsFunc.dispatch(this, window, "window", "originAgentCluster_get", arguments, false)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "onpointerrawupdate", {configurable:true, enumerable:true, get:function onpointerrawupdate (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerrawupdate_get", arguments, null)}, set:function onpointerrawupdate (){return bodavm.toolsFunc.dispatch(this, window, "window", "onpointerrawupdate_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "crossOriginIsolated", {configurable:true, enumerable:true, get:function crossOriginIsolated (){return bodavm.toolsFunc.dispatch(this, window, "window", "crossOriginIsolated_get", arguments, false)}, set:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "scheduler", {configurable:true, enumerable:true, get:function scheduler (){return bodavm.toolsFunc.dispatch(this, window, "window", "scheduler_get", arguments)}, set:function scheduler (){return bodavm.toolsFunc.dispatch(this, window, "window", "scheduler_set", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AnimationPlaybackEvent", {configurable:true, enumerable:false, writable:true, value:function AnimationPlaybackEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "AnimationPlaybackEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "AnimationTimeline", {configurable:true, enumerable:false, writable:true, value:function AnimationTimeline (){return bodavm.toolsFunc.dispatch(this, window, "window", "AnimationTimeline", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSAnimation", {configurable:true, enumerable:false, writable:true, value:function CSSAnimation (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSAnimation", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSTransition", {configurable:true, enumerable:false, writable:true, value:function CSSTransition (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSTransition", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DocumentTimeline", {configurable:true, enumerable:false, writable:true, value:function DocumentTimeline (){return bodavm.toolsFunc.dispatch(this, window, "window", "DocumentTimeline", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BackgroundFetchManager", {configurable:true, enumerable:false, writable:true, value:function BackgroundFetchManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "BackgroundFetchManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BackgroundFetchRecord", {configurable:true, enumerable:false, writable:true, value:function BackgroundFetchRecord (){return bodavm.toolsFunc.dispatch(this, window, "window", "BackgroundFetchRecord", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BackgroundFetchRegistration", {configurable:true, enumerable:false, writable:true, value:function BackgroundFetchRegistration (){return bodavm.toolsFunc.dispatch(this, window, "window", "BackgroundFetchRegistration", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "BluetoothUUID", {configurable:true, enumerable:false, writable:true, value:function BluetoothUUID (){return bodavm.toolsFunc.dispatch(this, window, "window", "BluetoothUUID", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CSSFontPaletteValuesRule", {configurable:true, enumerable:false, writable:true, value:function CSSFontPaletteValuesRule (){return bodavm.toolsFunc.dispatch(this, window, "window", "CSSFontPaletteValuesRule", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CaptureHandleChangeEvent", {configurable:true, enumerable:false, writable:true, value:function CaptureHandleChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "CaptureHandleChangeEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "CustomStateSet", {configurable:true, enumerable:false, writable:true, value:function CustomStateSet (){return bodavm.toolsFunc.dispatch(this, window, "window", "CustomStateSet", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "DelegatedInkTrailPresenter", {configurable:true, enumerable:false, writable:true, value:function DelegatedInkTrailPresenter (){return bodavm.toolsFunc.dispatch(this, window, "window", "DelegatedInkTrailPresenter", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Ink", {configurable:true, enumerable:false, writable:true, value:function Ink (){return bodavm.toolsFunc.dispatch(this, window, "window", "Ink", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaMetadata", {configurable:true, enumerable:false, writable:true, value:function MediaMetadata (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaMetadata", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaSession", {configurable:true, enumerable:false, writable:true, value:function MediaSession (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaSession", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaSource", {configurable:true, enumerable:false, writable:true, value:function MediaSource (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaSource", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SourceBuffer", {configurable:true, enumerable:false, writable:true, value:function SourceBuffer (){return bodavm.toolsFunc.dispatch(this, window, "window", "SourceBuffer", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SourceBufferList", {configurable:true, enumerable:false, writable:true, value:function SourceBufferList (){return bodavm.toolsFunc.dispatch(this, window, "window", "SourceBufferList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "MediaStreamTrack", {configurable:true, enumerable:false, writable:true, value:function MediaStreamTrack (){return bodavm.toolsFunc.dispatch(this, window, "window", "MediaStreamTrack", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NavigateEvent", {configurable:true, enumerable:false, writable:true, value:function NavigateEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "NavigateEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NavigationCurrentEntryChangeEvent", {configurable:true, enumerable:false, writable:true, value:function NavigationCurrentEntryChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationCurrentEntryChangeEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NavigationDestination", {configurable:true, enumerable:false, writable:true, value:function NavigationDestination (){return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationDestination", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NavigationHistoryEntry", {configurable:true, enumerable:false, writable:true, value:function NavigationHistoryEntry (){return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationHistoryEntry", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NavigationTransition", {configurable:true, enumerable:false, writable:true, value:function NavigationTransition (){return bodavm.toolsFunc.dispatch(this, window, "window", "NavigationTransition", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "NavigatorUAData", {configurable:true, enumerable:false, writable:true, value:function NavigatorUAData (){return bodavm.toolsFunc.dispatch(this, window, "window", "NavigatorUAData", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Notification", {configurable:true, enumerable:false, writable:true, value:function Notification (){return bodavm.toolsFunc.dispatch(this, window, "window", "Notification", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PaymentInstruments", {configurable:true, enumerable:false, writable:true, value:function PaymentInstruments (){return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentInstruments", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PaymentManager", {configurable:true, enumerable:false, writable:true, value:function PaymentManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PaymentRequestUpdateEvent", {configurable:true, enumerable:false, writable:true, value:function PaymentRequestUpdateEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentRequestUpdateEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PeriodicSyncManager", {configurable:true, enumerable:false, writable:true, value:function PeriodicSyncManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "PeriodicSyncManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PermissionStatus", {configurable:true, enumerable:false, writable:true, value:function PermissionStatus (){return bodavm.toolsFunc.dispatch(this, window, "window", "PermissionStatus", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Permissions", {configurable:true, enumerable:false, writable:true, value:function Permissions (){return bodavm.toolsFunc.dispatch(this, window, "window", "Permissions", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PictureInPictureEvent", {configurable:true, enumerable:false, writable:true, value:function PictureInPictureEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "PictureInPictureEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PictureInPictureWindow", {configurable:true, enumerable:false, writable:true, value:function PictureInPictureWindow (){return bodavm.toolsFunc.dispatch(this, window, "window", "PictureInPictureWindow", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PushManager", {configurable:true, enumerable:false, writable:true, value:function PushManager (){return bodavm.toolsFunc.dispatch(this, window, "window", "PushManager", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PushSubscription", {configurable:true, enumerable:false, writable:true, value:function PushSubscription (){return bodavm.toolsFunc.dispatch(this, window, "window", "PushSubscription", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "PushSubscriptionOptions", {configurable:true, enumerable:false, writable:true, value:function PushSubscriptionOptions (){return bodavm.toolsFunc.dispatch(this, window, "window", "PushSubscriptionOptions", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "RemotePlayback", {configurable:true, enumerable:false, writable:true, value:function RemotePlayback (){return bodavm.toolsFunc.dispatch(this, window, "window", "RemotePlayback", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "Scheduler", {configurable:true, enumerable:false, writable:true, value:function Scheduler (){return bodavm.toolsFunc.dispatch(this, window, "window", "Scheduler", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TaskController", {configurable:true, enumerable:false, writable:true, value:function TaskController (){return bodavm.toolsFunc.dispatch(this, window, "window", "TaskController", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TaskPriorityChangeEvent", {configurable:true, enumerable:false, writable:true, value:function TaskPriorityChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "TaskPriorityChangeEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TaskSignal", {configurable:true, enumerable:false, writable:true, value:function TaskSignal (){return bodavm.toolsFunc.dispatch(this, window, "window", "TaskSignal", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SharedWorker", {configurable:true, enumerable:false, writable:true, value:function SharedWorker (){return bodavm.toolsFunc.dispatch(this, window, "window", "SharedWorker", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SpeechSynthesisErrorEvent", {configurable:true, enumerable:false, writable:true, value:function SpeechSynthesisErrorEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "SpeechSynthesisErrorEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SpeechSynthesisEvent", {configurable:true, enumerable:false, writable:true, value:function SpeechSynthesisEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "SpeechSynthesisEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "SpeechSynthesisUtterance", {configurable:true, enumerable:false, writable:true, value:function SpeechSynthesisUtterance (){return bodavm.toolsFunc.dispatch(this, window, "window", "SpeechSynthesisUtterance", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TrustedHTML", {configurable:true, enumerable:false, writable:true, value:function TrustedHTML (){return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedHTML", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TrustedScript", {configurable:true, enumerable:false, writable:true, value:function TrustedScript (){return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedScript", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TrustedScriptURL", {configurable:true, enumerable:false, writable:true, value:function TrustedScriptURL (){return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedScriptURL", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "TrustedTypePolicy", {configurable:true, enumerable:false, writable:true, value:function TrustedTypePolicy (){return bodavm.toolsFunc.dispatch(this, window, "window", "TrustedTypePolicy", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "URLPattern", {configurable:true, enumerable:false, writable:true, value:function URLPattern (){return bodavm.toolsFunc.dispatch(this, window, "window", "URLPattern", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "VideoPlaybackQuality", {configurable:true, enumerable:false, writable:true, value:function VideoPlaybackQuality (){return bodavm.toolsFunc.dispatch(this, window, "window", "VideoPlaybackQuality", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "VirtualKeyboardGeometryChangeEvent", {configurable:true, enumerable:false, writable:true, value:function VirtualKeyboardGeometryChangeEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "VirtualKeyboardGeometryChangeEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "XSLTProcessor", {configurable:true, enumerable:false, writable:true, value:function XSLTProcessor (){return bodavm.toolsFunc.dispatch(this, window, "window", "XSLTProcessor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechGrammar", {configurable:true, enumerable:false, writable:true, value:function webkitSpeechGrammar (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechGrammar", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechGrammarList", {configurable:true, enumerable:false, writable:true, value:function webkitSpeechGrammarList (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechGrammarList", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognition", {configurable:true, enumerable:false, writable:true, value:function webkitSpeechRecognition (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechRecognition", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognitionError", {configurable:true, enumerable:false, writable:true, value:function webkitSpeechRecognitionError (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechRecognitionError", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognitionEvent", {configurable:true, enumerable:false, writable:true, value:function webkitSpeechRecognitionEvent (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechRecognitionEvent", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "openDatabase", {configurable:true, enumerable:true, writable:true, value:function openDatabase (){return bodavm.toolsFunc.dispatch(this, window, "window", "openDatabase", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitRequestFileSystem", {configurable:true, enumerable:true, writable:true, value:function webkitRequestFileSystem (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestFileSystem", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "webkitResolveLocalFileSystemURL", {configurable:true, enumerable:true, writable:true, value:function webkitResolveLocalFileSystemURL (){return bodavm.toolsFunc.dispatch(this, window, "window", "webkitResolveLocalFileSystemURL", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "vilame_setter", {configurable:true, enumerable:true, writable:true, value:{}});
-bodavm.toolsFunc.windowdefineProperty(window, "code2", {configurable:true, enumerable:true, writable:true, value:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "code1", {configurable:true, enumerable:true, writable:true, value:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "dir", {configurable:true, enumerable:false, writable:true, value:function dir (){return bodavm.toolsFunc.dispatch(this, window, "window", "dir", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "dirxml", {configurable:true, enumerable:false, writable:true, value:function dirxml (){return bodavm.toolsFunc.dispatch(this, window, "window", "dirxml", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "profile", {configurable:true, enumerable:false, writable:true, value:function profile (){return bodavm.toolsFunc.dispatch(this, window, "window", "profile", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "profileEnd", {configurable:true, enumerable:false, writable:true, value:function profileEnd (){return bodavm.toolsFunc.dispatch(this, window, "window", "profileEnd", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "clear", {configurable:true, enumerable:false, writable:true, value:function clear (){return bodavm.toolsFunc.dispatch(this, window, "window", "clear", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "table", {configurable:true, enumerable:false, writable:true, value:function table (){return bodavm.toolsFunc.dispatch(this, window, "window", "table", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "keys", {configurable:true, enumerable:false, writable:true, value:function keys (){return bodavm.toolsFunc.dispatch(this, window, "window", "keys", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "values", {configurable:true, enumerable:false, writable:true, value:function values (){return bodavm.toolsFunc.dispatch(this, window, "window", "values", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "debug", {configurable:true, enumerable:false, writable:true, value:function debug (){return bodavm.toolsFunc.dispatch(this, window, "window", "debug", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "undebug", {configurable:true, enumerable:false, writable:true, value:function undebug (){return bodavm.toolsFunc.dispatch(this, window, "window", "undebug", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "monitor", {configurable:true, enumerable:false, writable:true, value:function monitor (){return bodavm.toolsFunc.dispatch(this, window, "window", "monitor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "unmonitor", {configurable:true, enumerable:false, writable:true, value:function unmonitor (){return bodavm.toolsFunc.dispatch(this, window, "window", "unmonitor", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "inspect", {configurable:true, enumerable:false, writable:true, value:function inspect (){return bodavm.toolsFunc.dispatch(this, window, "window", "inspect", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "copy", {configurable:true, enumerable:false, writable:true, value:function copy (){return bodavm.toolsFunc.dispatch(this, window, "window", "copy", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "queryObjects", {configurable:true, enumerable:false, writable:true, value:function queryObjects (){return bodavm.toolsFunc.dispatch(this, window, "window", "queryObjects", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "$_", {configurable:true, enumerable:false, writable:true, value:{}});
-bodavm.toolsFunc.windowdefineProperty(window, "$0", {configurable:true, enumerable:false, writable:true, value:{}});
-bodavm.toolsFunc.windowdefineProperty(window, "$1", {configurable:true, enumerable:false, writable:true, value:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "$2", {configurable:true, enumerable:false, writable:true, value:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "$3", {configurable:true, enumerable:false, writable:true, value:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "$4", {configurable:true, enumerable:false, writable:true, value:undefined});
-bodavm.toolsFunc.windowdefineProperty(window, "getEventListeners", {configurable:true, enumerable:false, writable:true, value:function getEventListeners (){return bodavm.toolsFunc.dispatch(this, window, "window", "getEventListeners", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "getAccessibleName", {configurable:true, enumerable:false, writable:true, value:function getAccessibleName (){return bodavm.toolsFunc.dispatch(this, window, "window", "getAccessibleName", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "getAccessibleRole", {configurable:true, enumerable:false, writable:true, value:function getAccessibleRole (){return bodavm.toolsFunc.dispatch(this, window, "window", "getAccessibleRole", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "monitorEvents", {configurable:true, enumerable:false, writable:true, value:function monitorEvents (){return bodavm.toolsFunc.dispatch(this, window, "window", "monitorEvents", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "unmonitorEvents", {configurable:true, enumerable:false, writable:true, value:function unmonitorEvents (){return bodavm.toolsFunc.dispatch(this, window, "window", "unmonitorEvents", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "$", {configurable:true, enumerable:false, writable:true, value:function $ (){return bodavm.toolsFunc.dispatch(this, window, "window", "$", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "$$", {configurable:true, enumerable:false, writable:true, value:function $$ (){return bodavm.toolsFunc.dispatch(this, window, "window", "$$", arguments)}});
-bodavm.toolsFunc.windowdefineProperty(window, "$x", {configurable:true, enumerable:false, writable:true, value:function $x (){return bodavm.toolsFunc.dispatch(this, window, "window", "$x", arguments)}});
-
-
-bodavm.toolsFunc.windowdefineProperty(window, "chrome", {
-    writable: true, enumerable: true, configurable: false, value:
-    {
-        app: {
-            InstallState: { DISABLED: 'disabled', INSTALLED: 'installed', NOT_INSTALLED: 'not_installed' },
-            RunningState: { CANNOT_RUN: 'cannot_run', READY_TO_RUN: 'ready_to_run', RUNNING: 'running' },
-            getDetails: function getDetails() { debugger },
-            getIsInstalled: function getIsInstalled() { debugger },
-            installState: function installState() { debugger },
-            isInstalled: false,
-            runningState: function runningState() { debugger }
-        },
-        csi: function () { debugger },
-        loadTimes: function () { debugger },
-    }
-
-});
-
-
-
-
-
-
-
-
-
-
-
-var boeval = eval
-eval = function (x) {
-    console.log(`执行eval,参数为${x.length >30?x.substr(0,50):x}`)
-    return boeval.call(this, x)
-}
-eval.toString = function () { return 'function eval() { [native code] }' }
-
-
-window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables] = {
-    after: true,
-    append: true,
-    before: true,
-    prepend: true,
-    remove: true,
-    replaceChildren: true,
-    replaceWith: true,
-    slot: true,
-};
-window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables].__proto__ = null;
-// debugger
-// Object.defineProperty(this, 'window', {
-//     get: function window() {
-//         // if (bodavm.config.proxy ){
-//             // window=bodavm.toolsFunc.proxy(window,'window')
-//             // return window
-//         // }else{
-//             return this
-//         // }
-//     },
-//     // writable: false,
-//     configurable: false,
-//     enumerable:true
-// });
-// debugger// 全局变量初始化
-var mytime_stamp=Date.now()
+// 全局变量初始化
+var mytime_stamp = Date.now()
 // debugger
 !function () {
     window.VM2_INTERNAL_STATE_DO_NOT_USE_OR_PROGRAM_WILL_FAIL && Object.defineProperty(window, 'VM2_INTERNAL_STATE_DO_NOT_USE_OR_PROGRAM_WILL_FAIL', {
@@ -13297,15 +20690,15 @@ var mytime_stamp=Date.now()
             //固定时间值
             Date.now_ = Date.now
             Date.now = function () {
-                console.log(`Date.now=>被调用 `,`resulit is mytime_stamp:${mytime_stamp}`)
+                console.log(`Date.now=>被调用 `, `resulit is mytime_stamp:${mytime_stamp}`)
                 mytime_stamp++
                 return mytime_stamp
             }
             bodavm.toolsFunc.safeFunc(Date.now, 'now')
             //固定时间值
-            Date.prototype.valueOf_=Date.prototype.valueOf
-            Date.prototype.valueOf=function valueOf(){
-                console.log(`Date.prototype.valueOf=>被调用 `,`resulit is mytime_stamp:${mytime_stamp}`)
+            Date.prototype.valueOf_ = Date.prototype.valueOf
+            Date.prototype.valueOf = function valueOf() {
+                console.log(`Date.prototype.valueOf=>被调用 `, `resulit is mytime_stamp:${mytime_stamp}`)
                 mytime_stamp++
                 return mytime_stamp
             }
@@ -13313,7 +20706,7 @@ var mytime_stamp=Date.now()
 
             Date.prototype.getTime_ = Date.prototype.getTime
             Date.prototype.getTime = function () {
-                console.log(`Date.prototype.getTime=>被调用 `,`resulit is mytime_stamp:${mytime_stamp}`)
+                console.log(`Date.prototype.getTime=>被调用 `, `resulit is mytime_stamp:${mytime_stamp}`)
                 mytime_stamp++
                 return mytime_stamp
             }
@@ -13321,135 +20714,139 @@ var mytime_stamp=Date.now()
             //固定随机值
             Math.random_ = Math.random;
             Math.random = function () {
-                console.log(`Math.random=>被调用  `,`resulit is Math.random:${0.5}`)
+                console.log(`Math.random=>被调用  `, `resulit is Math.random:${0.5}`)
                 return 0.5
             }
             bodavm.toolsFunc.safeFunc(Math.random, 'random')
         }()
 
     }
-  
-    JSON.stringify_bo=JSON.stringify
-    JSON.stringify=function stringify(){
-        let arg0=arguments[0]
-        let arg1=arguments[1]
+
+    JSON.stringify_bo = JSON.stringify
+    JSON.stringify = function stringify() {
+        let arg0 = arguments[0]
+        let arg1 = arguments[1]
+        let arg2 = arguments[2]
+        if (arg2 = 'bo') {
+            return JSON.stringify_bo.call(this, arg0, arg1)
+        }
         // debugger
-        if (arg0 && arg0.length){
-            if (arg0.indexOf(console)>-1){
+        if (arg0 && arg0.length) {
+            if (arg0.indexOf(console) > -1) {
                 debugger
-                console.log('JSON.stringify  ','  console','  检测console');
-                arg0[arg0.indexOf(console)]={"memory":{}}
+                console.log('JSON.stringify  ', '  console', '  检测console');
+                arg0[arg0.indexOf(console)] = { "memory": {} }
             }
-        }else{
-            if (arg0 ==console){
-               debugger
-                console.log('JSON.stringify  ','  console','  检测console');
+        } else {
+            if (arg0 == console) {
+                debugger
+                console.log('JSON.stringify  ', '  console', '  检测console');
                 return '{"memory":{}}'
             }
-           
-        }
-        if (typeof arg0 =='string'){
-            console.log(`JSON.stringify  `, `  arg0:${arg0.length>20?arg0.substring(0,20)+'...':arg0}`, ` arg1:${arg1}`)
 
-        }else{
+        }
+        if (typeof arg0 == 'string') {
+            console.log(`JSON.stringify  `, `  arg0:${arg0.length > 20 ? arg0.substring(0, 20) + '...' : arg0}`, ` arg1:${arg1}`)
+
+        } else {
             console.log(`JSON.stringify  `, `  arg0:${arg0}`, `   arg1:${arg1}`)
 
         }
-        return JSON.stringify_bo.call(this,arg0,arg1)
-    
+        return JSON.stringify_bo.call(this, arg0, arg1)
+
     }
 
-    bodavm.toolsFunc.safefunction(JSON.stringify,'stringify')
+    bodavm.toolsFunc.safefunction(JSON.stringify, 'stringify')
 
 
-    JSON.parse_bo= JSON.parse
-    JSON.parse=function parse(){
-        let arg0=arguments[0]
-        let arg1=arguments[1]
-        console.log(`JSON.parse `,` arg0:${arg0.length>20?arg0.substring(0,20)+'...':arg0}`,` arg1:${arg1}`)
-        return JSON.parse_bo.apply(this,arguments)
+    JSON.parse_bo = JSON.parse
+    JSON.parse = function parse() {
+        let arg0 = arguments[0]
+        let arg1 = arguments[1]
+        console.log(`JSON.parse `, ` arg0:${arg0.length > 20 ? arg0.substring(0, 20) + '...' : arg0}`, ` arg1:${arg1}`)
+        return JSON.parse_bo.apply(this, arguments)
     }
-    bodavm.toolsFunc.safefunction(JSON.parse,'parse')
+    bodavm.toolsFunc.safefunction(JSON.parse, 'parse')
 
 
 
-    Object.getOwnPropertyDescriptor_bo=Object.getOwnPropertyDescriptor
-    Object.getOwnPropertyDescriptor=function getOwnPropertyDescriptor(){
-        let obj=arguments[0]
-        let prop=arguments[1]
+    Object.getOwnPropertyDescriptor_bo = Object.getOwnPropertyDescriptor
+    Object.getOwnPropertyDescriptor = function getOwnPropertyDescriptor() {
+        let obj = arguments[0]
+        let prop = arguments[1]
         // debugger
-        if (prop =='constructor'){
-        // if (obj ==document){debugger}
-            return Object.getOwnPropertyDescriptor_bo.apply(this,arguments)
+        if (prop == 'constructor') {
+            // if (obj ==document){debugger}
+            return Object.getOwnPropertyDescriptor_bo.apply(this, arguments)
         }
-        desc_res=Object.getOwnPropertyDescriptor_bo.apply(this,arguments)
-        console.log(`Object.getOwnPropertyDescriptor==> `,` obj:${obj}`,`prop:${prop}`,`res ->${desc_res} !!!!检测`);
+        desc_res = Object.getOwnPropertyDescriptor_bo.apply(this, arguments)
+        console.log(`Object.getOwnPropertyDescriptor==> `, ` obj:${obj}`, `prop:${prop}`, `res ->${desc_res} !!!!检测`);
         return desc_res
     }
-    bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptor,'getOwnPropertyDescriptor')
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptor, 'getOwnPropertyDescriptor')
 
 
-    Object.getOwnPropertyDescriptors_bo=Object.getOwnPropertyDescriptors
-    Object.getOwnPropertyDescriptors=function getOwnPropertyDescriptor(){
-        let arg0=arguments[0]
+    Object.getOwnPropertyDescriptors_bo = Object.getOwnPropertyDescriptors
+    Object.getOwnPropertyDescriptors = function getOwnPropertyDescriptor() {
+        let arg0 = arguments[0]
         debugger
-        descs_res=Object.getOwnPropertyDescriptors_bo.apply(this,arguments)
-        console.log(`Object.getOwnPropertyDescriptors==> `,`arg0:${arg0}`,`res ->${descs_res} !!!!检测`);
+        descs_res = Object.getOwnPropertyDescriptors_bo.apply(this, arguments)
+        console.log(`Object.getOwnPropertyDescriptors==> `, `arg0:${arg0}`, `res ->${descs_res} !!!!检测`);
         return descs_res
     }
-    bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptors,'getOwnPropertyDescriptors')
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptors, 'getOwnPropertyDescriptors')
 
-    Object.getOwnPropertyNames_bo=Object.getOwnPropertyNames
-    Object.getOwnPropertyNames=function getOwnPropertyDescriptor(){
-        let arg0=arguments[0]
-        let name_res=Object.getOwnPropertyNames_bo.apply(this,arguments)
-        console.log(`Object.getOwnPropertyNames==> `,` arg0:${arg0}`,`name_res->${name_res} !!!检测`);
+    Object.getOwnPropertyNames_bo = Object.getOwnPropertyNames
+    Object.getOwnPropertyNames = function getOwnPropertyDescriptor() {
+        let arg0 = arguments[0]
+        let name_res = Object.getOwnPropertyNames_bo.apply(this, arguments)
+        console.log(`Object.getOwnPropertyNames==> `, ` arg0:${arg0}`, `name_res->${name_res} !!!检测`);
         return name_res
     }
-    bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames,'getOwnPropertyNames')
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames, 'getOwnPropertyNames')
 
 
-    Object.getPrototypeOf_bo=Object.getPrototypeOf
-    Object.getPrototypeOf=function (obj){
-        console.log(`Object.getPrototypeOf `,`obj:${obj}`,'!!!!检测');
-        return Object.getPrototypeOf_bo.apply(this,arguments)
+    Object.getPrototypeOf_bo = Object.getPrototypeOf
+    Object.getPrototypeOf = function (obj) {
+        console.log(`Object.getPrototypeOf `, `obj:${obj}`, '!!!!检测');
+        return Object.getPrototypeOf_bo.apply(this, arguments)
     }
-    bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames,'getOwnPropertyNames')
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames, 'getOwnPropertyNames')
 
-    Object.getOwnPropertySymbols_bo=Object.getOwnPropertySymbols
-    Object.getOwnPropertySymbols=function getOwnPropertySymbols(arg){
-        let symbols_res=Object.getOwnPropertySymbols_bo.apply(this,arguments)
-        console.log('Object.getOwnPropertySymbols ',`arg:${arg}`,`symbols_res ->${symbols_res} !!!!检测`);
+    Object.getOwnPropertySymbols_bo = Object.getOwnPropertySymbols
+    Object.getOwnPropertySymbols = function getOwnPropertySymbols(arg) {
+        let symbols_res = Object.getOwnPropertySymbols_bo.apply(this, arguments)
+        console.log('Object.getOwnPropertySymbols ', `arg:${arg}`, `symbols_res ->${symbols_res} !!!!检测`);
         return symbols_res
     }
-    bodavm.toolsFunc.safefunction(Object.getOwnPropertySymbols,'getOwnPropertySymbols')
+    bodavm.toolsFunc.safefunction(Object.getOwnPropertySymbols, 'getOwnPropertySymbols')
     //Plugin
-   
 
-    Object.defineProperty_bo=Object.defineProperty
-    Object.defineProperty=function defineProperty(){
+
+    Object.defineProperty_bo = Object.defineProperty
+    Object.defineProperty = function defineProperty() {
         // debugger
-        let target=arguments[0]
-        let prop=arguments[1]
-        let obj=arguments[2]
-        let myfilter=arguments[3]
-        if (myfilter =='bobo'){return Object.defineProperty_bo.call(this,target,prop,obj)}
-        let res=Object.defineProperty_bo.call(this,target,prop,obj)
-        console.log(`Object.defineProperty `,`target ->${(target.toString())}->`,`prop->${(prop.toString())}->`,`obj ->${(obj.toString())}->`,`res ->${res.toString()}`,`!!!!!检测`)
+        let target = arguments[0]
+        let prop = arguments[1]
+        let obj = arguments[2]
+        let myfilter = arguments[3]
+        if (myfilter == 'bobo') { return Object.defineProperty_bo.call(this, target, prop, obj) }
+        let res = Object.defineProperty_bo.call(this, target, prop, obj)
+        console.log(`Object.defineProperty `, `target ->${(target.toString())}->`, `prop->${(prop.toString())}->`, `obj ->${(obj.toString())}->`, `res ->${res.toString()}`, `!!!!!检测`)
 
         return res
     }
-    bodavm.toolsFunc.safefunction(Object.defineProperty,'defineProperty')
+    bodavm.toolsFunc.safefunction(Object.defineProperty, 'defineProperty')
 
-    Object.values_bo=Object.values
-    Object.values=function values(){
-        let res=Object.defineProperty_bo.apply(this,arguments)
-        console.log(`Object.values `,`ress ->${res}   !!!!!!!!!!检测`);
+    Object.values_bo = Object.values
+    Object.values = function values() {
+        let res = Object.defineProperty_bo.apply(this, arguments)
+        console.log(`Object.values `, `ress ->${res}   !!!!!!!!!!检测`);
         return res
     }
-    bodavm.toolsFunc.safefunction(Object.values,'values')
- 
- 
+    bodavm.toolsFunc.safefunction(Object.values, 'values')
+
+
     // Object.prototype.hasOwnProperty_bo=Object.prototype.hasOwnProperty
     // Object.prototype.hasOwnProperty=function (){
     //     debugger
@@ -13461,16 +20858,36 @@ var mytime_stamp=Date.now()
 
     // bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
 
-    Object.entries_bo=Object.entries
-    Object.entries=function (){
-        let obj=arguments[0]
-        let res=Object.entries_bo.call(this,obj)
-        console.log(`Object.entries `,`obj ->${obj}`,`res ->${res}  !!!!!!检测!!!!`)
+    Object.entries_bo = Object.entries
+    Object.entries = function () {
+        let obj = arguments[0]
+        let res = Object.entries_bo.call(this, obj)
+        console.log(`Object.entries `, `obj ->${obj}`, `res ->${res}  !!!!!!检测!!!!`)
         return res
     }
-    bodavm.toolsFunc.safefunction( Object.entries,'entries')
+    bodavm.toolsFunc.safefunction(Object.entries, 'entries')
 
+    // Object.prototype.hasOwnProperty_ = Object.prototype.hasOwnProperty
+    // Object.prototype.hasOwnProperty = function(x) {
+    //     // debugger
+    //     if (x+''=='base64StrLength'){debugger}
+    //     res = Object.prototype.hasOwnProperty_.apply(this, arguments)
+    //     console.log('this',this, '  arg->',x ,'  res->', res)
+    //     return res
+    // }
+    // bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
 
+    // String.fromCharCode_=String.fromCharCode
+    // String.fromCharCode=function(x){
+    // res=String.fromCharCode_.apply(this,arguments)
+    // console.log('this->',JSON.stringify(this,function(k,v){
+    //     if (v ==window){
+    //         return 'window'
+    //     }else{return v}
+    // }),'  arg -> ',x,' res -> ',res)
+    // // if((x+'' =='99') && (res +'' =='c')){debugger}
+    // return res
+    // };;
 }();
 
 
@@ -13530,13 +20947,148 @@ console.log(`===================================================================
 
 // delete DeprecatedStorageInfo
 // delete Database;
-debugger;
+// debugger;
 
 
 
 
 
-;;;;debugger;;btoa('123')//异步;;;
+;;;;debugger;;chh = 1;cbbh={};cbbh.cbbNatFun = (a,b,c,d)=>{if (window.chh == 1){console.log(a.toString(),b,c,d);}};
+
+;;!function (n, e, t, r, u, i, f, o, c, d, l, a, p, s, m, g, y, h, b, v, w, k, x, O, _, j, C, I, q, R, z, A, E, F, P, S, $, B, D, M, U, G, H, J, K, L, N, Q, T, V, W, X, Y, Z, nn, en, tn, rn, un, fn, on, cn, dn, ln, an, pn, sn, mn, gn, yn, hn, bn, vn, wn, kn, xn, On, _n, jn, Cn, In, qn, Rn, zn, An, En, Fn, Pn, Sn, $n, Bn, Dn, Mn, Un, Gn, Hn, Jn, Kn, Ln, Nn, Qn, Tn, Vn, Wn, Xn, Yn, Zn, ne, ee, te, re, ue, ie, fe, oe, ce, de, le, ae, pe, se, me, ge, ye, he, be, ve, we, ke, xe, Oe, _e, je, Ce, Ie, qe, Re, ze, Ae, Ee, Fe, Pe, Se) {
+    function $e(n, e, t, r, i, f, d, s, h, v) {
+        return e == oe ? (r ? t[Mn][nn[dn]]() || t[ge][nn[dn]]() : t[Mn][nn[cn]](en) || t[ge][nn[cn]](en)) && undefined : e == ae ? (t = {}) && (t[Mn] = []) && (t[ge] = []) && ((t[Rn] = en) || tn) && t : e == sn ? t ? r[R(r) - tn] : r[R(r) - tn] = i : e == ee ? A(r, Yn) ? E(r, Yn) : A(r, yn) ? E(r, yn) : i ? K(t, r) : E(r, Ln) : e == on ? ((i = {})[nn[Zn]] = t) && i : e == he ? t[nn[Dn]] : e == In ? !(i = b[t[r]]) || r != Yn && r != Ln ? i : t[nn[ae]] ? j[t[nn[ae]]] : ((t[nn[ae]] = t[nn[rn]] + nn[ae] + (t[nn[Pn]] ^ On)) || tn) && ((j[t[nn[ae]]] = F(rn, F(tn, i), t[nn[Pn]] & ze)) || tn) && j[t[nn[ae]]] : e == Un ? (f = P(r ? t[nn[qn]](r) : t)) && [i ? null : t[nn[qn]](r + f[tn], r + f[en] + f[tn]), r + f[en] + f[tn]] : e == zn ? (I += tn) && u : e == Ce ? i && r != nn[Cn] ? q[nn[hn]](t, r) : r in t : e == ne ? ((A(t, Ln) ? Z[en][E(t, Ln)] = Z[fn][r] : A(t, An) ? Z[en][E(E(t[An], Ln), Ln)] = l(Z[fn])[nn[Hn]](Q)[nn[qn]](r) : tn) || tn) && undefined : e == Vn ? Z[fn][t] : e == de ? t == tn ? F(tn, X(un, r))[en] ^ i & ze : t == rn ? F(rn, F(tn, X(un, r)), i & ze) : t == un ? c(r[nn[Xn]](O, nn[Un])) : undefined : e == be ? i == an ? X(tn, t, r) : i == Ln ? X(un, t) : i == dn ? null : i == Yn ? X(un, t) : i == yn ? a(X(rn, t, r)) : i == Dn ? !!p(o(X(tn, t, r))) : i == en ? g(X(rn, t, r)) : i == gn ? ((f = X(rn, t, r)) || tn) && m(f[nn[qn]](en, f[nn[on]](nn[ae])), f[nn[qn]](f[nn[on]](nn[ae]) + tn)) : en : e == _e ? y++ && I++ : e == pe ? (v = [][nn[vn]](t, [Z = [{}, f, i, d, s]])) && (r !== nn[Yn] ? Z[en][r] = h : tn) && Z[tn][nn[Hn]](N) && !(n - y) && K(v, Z[rn], U()) : function w() {
+            return T(t, r, i, f, this, arguments, w)
+        }
+    }
+
+    function Be(n, e, t, r, u, i, f, c, l, a) {
+        for (e == qn ? i = R(t) - tn : e == Pn ? !(f = en) && (i = R(t) - tn) : e == je ? (u = nn[Jn]) || (i = t) : e == hn ? !(r = en) && !(c = en) && (u = t[nn[xn]](x)[en]) && ((i = u[nn[qn]](en, -tn)) || tn) && (f = u[nn[re]](R(u) - tn)) && ((r += w[nn[sn]](f)) || tn) && (l = R(i) - tn) : e == xn ? (i = []) && (f = en) : e == me ? (t = t[nn[xn]](m(x, nn[tn]))) && (r = t[nn[qn]](tn, -tn)) && (u = []) && r[nn[Hn]](function (n) {
+            for (((i = P(n)[en][nn[ln]](bn)) || tn) && !(c = en) && (f = ln - R(i)); c < f; c++) i = nn[ue] + i;
+            u[nn[cn]](i)
+        }) && !(c = en) && (l = P(t[nn[qn]](-tn)[en])[en][nn[ln]](bn)) : e == Nn && (r = S(t, en)) && ((u = r[en]) || tn) && ((i = r[tn]) || tn) && ((u = V(u)) || tn) && (n[nn[pn]] = $e[nn[In]](tn, n, _e)) && (n[nn[ln]] = $e[nn[In]](tn, n, zn)); e == qn || e == Pn ? i >= en : e == je ? i < r : e == hn ? l >= en : e == xn ? f < R(r) : e == me ? c < P(t[nn[qn]](en, tn)[en])[en] - R(r) * ln - R(l) : e == Nn ? R(u) : en; e == qn ? i-- : e == Pn ? f++ && i-- : e == je ? i++ : e == hn ? l-- : e == xn ? f++ : e == me ? c++ : en) if (e == qn ? A(t[i][en], r, tn) && (l = !0) && ((c = t[i][en][r] = u) || tn) && l : e == Pn ? f == en && ((r == nn[Yn] ? (l = !0) && (c = null) : r == nn[yn] ? (l = !0) && (c = G(tn, t)[fn]) : r == nn[Gn] ? (l = !0) && (c = t[en][dn]) : en) || tn) && l || ((i == en && r == nn[mn] ? (l = !0) && (c = t[en][en]) : A(t[i][en], r, tn) ? (l = !0) && (c = t[i][en][r]) : en) || tn) && l || i == en && ((r == nn[wn] ? (l = !0) && (c = u && typeof exports == nn[Vn] ? undefined : exports) : r == nn[gn] ? (l = !0) && (c = u && typeof module == nn[Vn] ? undefined : module) : r == nn[le] ? (l = !0) && (c = u && typeof require == nn[Vn] ? undefined : require) : ((c = t[i][en][r]) || tn) && (c || r in t[i][en]) && (l = !0)) || tn) && l : e == je ? (u += o(i)) && en : e == hn ? ((r += k[nn[sn]](i[nn[re]](l)) * s(R(k), c) * R(w)) || tn) && c++ && en : e == xn ? (i[f] = t == tn ? r[nn[bn]](f) : o(r[f] ^ u)) && en : e == me ? (l = nn[ue] + l) && en : e == Nn ? (l = p(u[nn[qn]](en, tn), bn)) && ((a = p(u[nn[qn]](tn, tn + l), bn)) || tn) && (f = tn + l) && (c = f + a) && h[nn[cn]](u[nn[qn]](f, c)) && (u = u[nn[qn]](c)) && en : en) return c;
+        if (e == Pn && !u) throw d(r + nn[Ln]);
+        return e == qn ? t[en][en][r] = u : e == je ? u : e == hn ? [r, R(u)] : e == xn ? t == tn ? i : i[nn[Nn]](nn[Jn]) : e == me ? u[nn[cn]](l) && u[nn[Nn]](nn[Jn]) : e == Nn ? t[nn[qn]](i) : void 0
+    }
+
+    function K(n, e, t, u, o, c, d, l, a, p, m, g, h, b, v, w, k, x, O, _, j, C, I, q, z, F, P, S, L, N) {
+        return (a = t[l = t[nn[rn]]]) && l == In ? function () {
+            throw K(e, a[en])
+        }() : l == Un ? function () {
+            debugger
+        }() : l == an || l == Yn || l == yn || l == Dn || l == dn || l == en || l == gn ? E(t, l) : l == Kn ? a[nn[Hn]](function (n) {
+            K(e, n)
+        }) : l == Vn ? A(a[en], Jn) ? ((q = K(e, a[tn])) || tn) && a[en][Jn][nn[Hn]](function (n, t) {
+            G(tn, e)[en][E(n, Ln)] = q[t]
+        }) : (I = E(a[en], Ln)) && ((q = K(e, a[tn])) || tn) && (A(a[tn], an) && E(a[tn], an) == Oe ? G(tn, e)[en][I] = G(tn, e)[en][I] : G(tn, e)[en][I] = q) : l == ne ? a[nn[Hn]](function (n) {
+            K(e, n, u)
+        }) : l == un ? u ? G(en, u[Mn], tn) : en : l == on ? u ? G(en, u[ge], tn) : en : l == zn || l == fn ? function (n, t, r, i, f) {
+            for (((r = l == zn ? U() : u) || tn) && !(i = en) && (t = a[nn[Fn]](function (t) {
+                return t[Zn] ? K(e, t) && null : !t[Kn] || t[Kn][nn[Hn]](function (t) {
+                    !(n = E(t[Vn][en], Ln)) && !tn || A(G(tn, e)[en], n) || (G(tn, e)[en][n] = undefined)
+                }) && !0
+            })); i < R(t); i++) {
+                if (G(tn, r[ge])) {
+                    G(en, r[ge], en);
+                    break
+                }
+                if (((f = K(e, t[i], r)) || tn) && G(tn, r[Mn])) break;
+                if (r[Rn]) return f
+            }
+        }() : l == Nn || l == Pn ? function (n, t, r) {
+            function i(n, e, t, r, u) {
+                e[t][nn[Hn]](function (e, f) {
+                    A(e, t) ? i(n, e, t, r[f], u) : A(e, Ln) && (u ? G(tn, n)[en][E(e, Ln)] = r[f] : B(n, E(e, Ln), r[f]))
+                })
+            }
+
+            function f(n, e, t, r, u) {
+                e[t][nn[Hn]](function (e) {
+                    ((u = e[Vn][en]) || tn) && A(u, Ln) ? G(tn, n)[en][E(u, Ln)] = r : A(u, Jn) && i(n, u, Jn, r, tn)
+                })
+            }
+
+            for (t in !D(u) && (n = K(e, a[tn]))) {
+                if (l == Pn && (t = n[t]) && en || A(a[en], Ln) ? B(e, E(a[en], Ln), t) : A(a[en], Jn) ? i(e, a[en], Jn, t) : A(a[en], Kn) && f(e, a[en], Kn, t), ((r = K(e, a[rn], u)) || tn) && G(tn, u[Mn])) break;
+                if (G(tn, u[ge])) G(en, u[ge], en); else if (u[Rn]) return r
+            }
+            D(u, tn)
+        }() : l == Tn ? function () {
+            for (D(u) || K(e, a[en]); K(e, a[tn]) && (!(C = K(e, a[un], u)) && !tn || !G(tn, u[Mn])); K(e, a[rn])) if (G(tn, u[ge])) G(en, u[ge], en); else if (u[Rn]) return C;
+            D(u, tn)
+        }() : l == sn || l == pn ? function (n) {
+            for ((l == pn ? n = !0 : tn) && D(u); (!n || K(e, a[en], u, en, en, tn)) && (!(C = K(e, a[tn], u)) && !tn || !G(tn, u[Mn]));) if ((n = !0) && G(tn, u[ge])) G(en, u[ge], en); else if (u[Rn]) return C;
+            D(u, tn)
+        }() : l == Mn ? function (n, t, r) {
+            try {
+                t = K(e, a[en], u)
+            } catch (i) {
+                t = K(e, a[tn], u, i)
+            } finally {
+                return ((n = u[Rn]) || tn) && !(u[Rn] = en) && ((r = K(e, a[rn], u)) || tn) && u[Rn] ? r : (u[Rn] = n) && t
+            }
+        }() : l == On ? function (n, t, r, i, f, o, c, d) {
+            for ((t = a[nn[qn]](tn)) && !(r = !1) && !(i = !1) && !(f = en) && ((n = K(e, a[en])) || tn) && D(u); f < R(t) && !G(tn, u[ge]); f++) if ((((c = K(e, t[f], n)) || tn) && n === c[en] ? r = !0 : tn) && r) {
+                for (o = en; o < R(c[tn]); o++) {
+                    if (((d = K(e, c[tn][o], u)) || tn) && G(tn, u[Mn])) {
+                        i = !0;
+                        break
+                    }
+                    if (u[Rn]) return d
+                }
+                if (i) break
+            }
+            D(u, tn)
+        }() : l == Qn ? [A(a[en], Ln) && E(a[en], Ln) == nn[Yn] ? u : K(e, a[en]), a[nn[qn]](tn)] : l == Ln ? $(e, E(t, l)) : l == Rn ? (p = {}) && ((p[E(a[en], Ln)] = o) || tn) && e[nn[cn]]([p, null]) && ((C = K(e, a[tn], u)) || tn) && (e[nn[dn]]() || tn) && (u[Rn] ? C : undefined) : l == En ? a[nn[Hn]](function (n) {
+            return K(e, n)[nn[ln]]()
+        })[nn[Nn]](nn[Jn]) : l == qn ? K(e, a[en]) : l == ln ? ((b = E(a[en], an)) || tn) && (g = a[tn]) && (h = function (n, e, t, r, u, i, f, o) {
+            return (((A(t, bn) ? (i = !0) && (o = t[bn]) && (f = K(n, o[en])) && (o = H(n, o[tn], K(n, o[rn]) == xe)) : t = E(t, Ln)) || u) && (r = K(n, r)) || tn) && (e == fe ? i ? f[o] = r : B(n, t, r) : e == Wn ? i ? f[o] += r : B(n, t, $(n, t) + r) : e == en ? i ? f[o] -= r : B(n, t, $(n, t) - r) : e == dn ? i ? f[o] *= r : B(n, t, $(n, t) * r) : e == gn ? i ? f[o] /= r : B(n, t, $(n, t) / r) : e == Dn ? i ? f[o] %= r : B(n, t, $(n, t) % r) : e == ye ? i ? f[o] <<= r : B(n, t, $(n, t) << r) : e == Hn ? i ? f[o] >>= r : B(n, t, $(n, t) >> r) : e == En ? i ? f[o] >>>= r : B(n, t, $(n, t) >>> r) : e == an ? i ? f[o] &= r : B(n, t, $(n, t) & r) : e == Xn ? i ? f[o] |= r : B(n, t, $(n, t) | r) : e == tn ? i ? f[o] ^= r : B(n, t, $(n, t) ^ r) : e == yn ? i ? f[o] = s(f[o], r) : B(n, t, s($(n, t), r)) : undefined)
+        }) && (A(g, Jn) ? (m = K(e, a[rn]))[Jn][nn[Hn]](function (n, t) {
+            return h(e, b, n, m[t])
+        }) : h(e, b, g, a[rn], tn)) : l == jn ? K(e, a[en]) : l == Wn ? function (n, t, r, u, i) {
+            for ((n = []) && !(t = en) && (u = en); t < R(a); t++) if (!A(a[t], tn)) if (A(a[t], jn)) {
+                for (!(r = en) && (i = K(e, a[t])); r < R(i); r++) n[t + u + r] = i[r];
+                u += r - tn
+            } else n[t + u] = K(e, a[t]);
+            return n
+        }() : l == Fn ? ((b = E(a[en], an)) || tn) && ((v = K(e, a[tn])) || tn) && ((O = K(e, a[rn])) || tn) && (b == Ln ? v + O : b == ce ? v - O : b == cn ? v / O : b == ln ? v * O : b == fn ? s(v, O) : b == kn ? v % O : b == bn ? v < O : b == we ? v <= O : b == ie ? v > O : b == Qn ? v >= O : b == _n ? v in O : b == ue ? v & O : b == pn ? v != O : b == On ? v !== O : b == Fn ? v | O : b == vn ? v ^ O : b == Sn ? v == O : b == Jn ? v === O : b == rn ? v << O : b == ke ? v >> O : b == Tn ? v >>> O : b == te ? v instanceof O : undefined) : l == kn ? (u && (u[Rn] = tn), G(tn, a[nn[Hn]](function (n) {
+            return K(e, n)
+        }))) : l == mn ? ((C = {}) && a[nn[Hn]](function (n) {
+            (w = K(e, n)) && ((I = w[en]) || tn) && ((q = w[tn]) || tn) && (w[rn] ? (k = {}) && (k[nn[Wn]] = !0) && (k[nn[Sn]] = !0) && w[rn] == tn ? ((k[nn[Qn]] = q) || tn) && i[nn[En]][nn[Rn]](C, I, k) : w[rn] == rn && ((k[nn[ne]] = q) || tn) && i[nn[En]][nn[Rn]](C, I, k) : C[I] = q)
+        }), C) : l == Bn ? [H(e, a[en], K(e, G(tn, a)) == xe), K(e, a[tn])] : l == Cn ? (((x = K(e, G(tn, a))) == An ? O = tn : x == jn && (O = rn)) || tn) && (a = a[nn[qn]](en, -tn)) && ((_ = K(e, G(tn, a)) == xe) || tn) && (a = a[nn[qn]](en, -tn)) && ((I = H(e, G(tn, a), _)) || tn) && ((q = a[R(a) - rn]) || tn) && ((j = a[nn[qn]](en, R(a) - rn)) || tn) && ((F = J(M(e, I, q, j), I)[nn[Zn]]) || tn) && [I, F, O] : l == cn ? G(tn, a[nn[Hn]](function (n) {
+            return K(e, n)
+        })) : l == Xn ? ((C = K(e, a[en]) ? K(e, a[tn], u) : K(e, a[rn], u)) || tn) && u[Rn] ? C : undefined : l == vn ? function (n, e, t, r, u, i) {
+            return e == le ? A(r, bn) ? ((i = r[bn]) || tn) && ((u = K(n, i[en])) || tn) && ((i = H(n, i[tn], K(n, i[rn]) == xe)) || tn) && (t == xe ? ++u[i] : u[i]++) : ((i = K(n, r)) || tn) && (A(r, Ln) && B(n, E(r, Ln), i + tn) || tn) && (t == xe ? i + tn : i) : e == Zn ? A(r, bn) ? ((i = r[bn]) || tn) && ((u = K(n, i[en])) || tn) && ((i = H(n, i[tn], K(n, i[rn]) == xe)) || tn) && (t == xe ? --u[i] : u[i]--) : ((i = K(n, r)) || tn) && (A(r, Ln) && B(n, E(r, Ln), i - tn) || tn) && (t == xe ? i - tn : i) : void 0
+        }(e, K(e, a[en]), K(e, a[tn]), a[rn]) : l == Zn ? R(a) <= rn && A(a[en], yn) ? G(tn, e)[en][E(G(tn, a), Ln)] = r[K(e, a[en])] : (I = E(G(tn, a), Ln)) && (G(tn, e)[en][I] = J(M(e, I, a[R(a) - rn], a[nn[qn]](en, R(a) - rn)), I)[nn[Zn]]) : l == Sn ? K(e, a[en]) ? K(e, a[tn]) : K(e, a[rn]) : l == wn ? function (n, e, t, r, u, i) {
+            return e == Ln ? +K(n, t) : e == ce ? -K(n, t) : e == Kn ? !K(n, t) : e == mn ? ~K(n, t) : e == Bn ? A(t, Ln) ? typeof $(n, E(t, Ln), tn) : typeof K(n, t) : e != se ? e == ve ? A(t, Ln) ? A(G(tn, n)[en], E(t, Ln)) ? delete G(tn, n)[en][E(t, Ln)] : (i = E(t, Ln)) != nn[gn] && i != nn[wn] && !nn[le] : A(t, bn) ? (u = t[bn], delete K(n, u[en])[u = H(n, u[tn], K(n, u[rn]) == xe)]) : (K(n, t), !0) : void 0 : void K(n, t)
+        }(e, K(e, a[en]), a[tn]) : l == Gn ? function (n, e, t, r) {
+            return e == wn ? t || K(n, r) : e == $n ? t && K(n, r) : void 0
+        }(e, K(e, a[en]), K(e, a[tn]), a[rn]) : l == rn ? R(a) <= rn && A(a[en], yn) ? r[K(e, a[en])] : J(M(e, E(G(tn, a), Ln), a[R(a) - rn], a[nn[qn]](en, R(a) - rn)))[nn[Zn]] : l == Hn ? J(M(e, nn[Yn], G(tn, a), a[nn[qn]](en, R(a) - tn)))[nn[Zn]] : l == xn ? G(tn, e)[un] : l == bn ? ((q = H(e, a[tn], K(e, a[rn]) == xe)) || tn) && ((F = K(e, a[en], typeof u != nn[an] ? tn : u + tn, z = o || [], c)) || tn) && (!u || d ? z[nn[Hn]](function (n) {
+            return F = F[en], n
+        })[nn[Hn]](function (n) {
+            F = F[n]
+        }) && c && c[Gn] ? function () {
+            return f[nn[Tn]][nn[Mn]][nn[hn]](F[q], F, arguments)
+        } : F[q] : z[nn[cn]](q) && [F, F[q]]) : l == _n ? (P = typeof u == nn[te] ? u : {}) && (P[Gn] = tn) && (S = K(e, G(tn, a), en, en, P)) && (N = a[nn[qn]](en, -tn)[nn[Hn]](function (n) {
+            return A(n, jn) ? L = K(e, n) : K(e, n)
+        })) && (N = L ? N[nn[qn]](en, R(N) - tn)[nn[vn]](L) : N) && !(n > y) && f[nn[Tn]][nn[Mn]][nn[hn]](S, undefined, N) : l == $n ? new (f[nn[Tn]][nn[In]][nn[Mn]](K(e, G(tn, a)), [en][nn[vn]](a[nn[qn]](en, R(a) - tn)[nn[Hn]](function (n) {
+            return K(e, n)
+        })))) : void 0
+    }
+
+    (Rn = 27) && (on = 5) && (pn = 10) && (En = 30) && (vn = 17) && (Fn = 31) && (ln = 8) && (bn = 16) && (Dn = 36) && (xn = 20) && (ue = 56) && (Gn = 39) && (an = 9) && (kn = 19) && (Bn = 35) && (Un = 38) && (mn = 12) && (Hn = 40) && (Xn = 49) && (rn = 2) && (le = 62) && (Tn = 46) && (Cn = 24) && (Vn = 47) && (tn = 1) && !(en = 0) && (An = 29) && (zn = 28) && (un = 3) && (qn = 26) && (_n = 22) && (sn = 11) && (In = 25) && ($n = 34) && (Pn = 32) && (yn = 14) && (cn = 6) && (Mn = 37) && (Jn = 41) && (Ln = 43) && (Sn = 33) && (Re = 123) && (re = 55) && (fn = 4) && (ke = 73) && (me = 66) && (ae = 63) && (ne = 52) && (fe = 58) && (On = 21) && (Zn = 51) && (hn = 15) && (dn = 7) && (je = 78) && (be = 70) && (ee = 53) && (ye = 68) && (pe = 64) && (Nn = 44) && (_e = 77) && (he = 69) && (gn = 13) && (de = 61) && (se = 65) && (Yn = 50) && (ze = 127) && (Oe = 76) && (ve = 71) && (wn = 18) && (Ie = 91) && (Qn = 45) && (ge = 67) && (oe = 59) && (Ce = 79) && (te = 54) && (xe = 74) && (jn = 23) && (Kn = 42) && (ie = 57) && (Wn = 48) && (qe = 97) && (we = 72) && (ce = 60) && (nn = "ReferenceError(g(c(call([(lastIndexOf(push(pop(toString(number(valueOf(indexOf(window(module(arguments(cilame_call(charCodeAt(concat(exports(pow(match([0-9a-f]{2}(Date(Math(hasOwnProperty(bind(slice(defineProperty(BigInt(parseFloat(Object(filter(v(configurable(String(keys(length(apply(%$&(vmpzl_arguments(map((]( is not defined(join(get(prototype(undefined(enumerable(replace(null(_(set(decodeURIComponent(object(charAt(0(parseInt(RegExp(Function(fromCharCode(*(require($".split("(")) && (i = typeof global == nn[Vn] ? window : global) && (L = new i[nn[_n]]) && (R = $e[nn[In]](tn, L, he)) && (E = $e[nn[In]](tn, L, In)) && (S = $e[nn[In]](tn, L, Un)) && (A = $e[nn[In]](tn, L, Ce)) && (D = $e[nn[In]](tn, L, oe)) && (M = $e[nn[In]](tn, L, Yn)) && (U = $e[nn[In]](tn, L, ae)) && (G = $e[nn[In]](tn, L, sn)) && (H = $e[nn[In]](tn, L, ee)) && (J = $e[nn[In]](tn, L, on)) && (N = $e[nn[In]](tn, L, ne)) && (Q = $e[nn[In]](tn, L, Vn)) && (T = $e[nn[In]](tn, L, pe)) && (X = $e[nn[In]](tn, L, de)) && (Y = $e[nn[In]](tn, L, be)) && (f = i[nn[oe]]) && (o = i[nn[$n]][nn[ce]]) && (c = i[nn[ee]]) && (d = i[nn[en]]) && (l = i[nn[En]][nn[Bn]]) && (a = i[nn[An]]) && (p = i[nn[ie]]) && (s = i[nn[jn]][nn[kn]]) && (m = i[nn[fe]]) && (f[nn[Tn]][nn[hn]] = f[nn[Tn]][nn[un]]) && (q = i[nn[En]][nn[Tn]][nn[Cn]]) && (y = tn) && (I = tn) && (h = []) && (b = []) && ((g = i[nn[zn]]) || tn) && (z = Be[nn[In]](tn, L, je)) && (F = Be[nn[In]](tn, L, xn)) && (P = Be[nn[In]](tn, L, hn)) && ($ = Be[nn[In]](tn, L, Pn)) && (B = Be[nn[In]](tn, L, qn)) && (V = Be[nn[In]](tn, L, me)) && (W = Be[nn[In]](tn, L, Nn)) && (K = K[nn[In]](tn, L)) && (v = z(Re, ze) + z(Bn, Gn) + z(Hn, Ie) + z(qe, Re)) && (w = z(Hn, Ie)) && (k = z(Re, ze) + z(Bn, Gn) + z(qe, Re)) && (x = nn[fn] + k + nn[Kn] + nn[de] + nn[fn] + w + nn[Kn]) && (O = m(nn[On], nn[tn])) && (_ = [[i, null, null, e, t, en, en, arguments, {}, L]]) && (j = _[en][ln]) && K(_, function De(n, e, t) {
+        return function (n, e, t, r, u, i, f, o, c, d) {
+            if (t == an || t == Ln || t == dn || t == Yn || t == yn || t == Dn || t == en || t == gn) return (r = {}) && ((r[nn[rn]] = t) || tn) && (u = function (n, e, t) {
+                return (t = P(e)) && [Y(h[t[en]], t[en], n), t[en], t[tn]]
+            }(t, e[nn[qn]](y, pn))) && ((r[t] = u[en]) || tn) && [function (n, e, t, r) {
+                return ((r = b[nn[sn]](n[e])) || tn) && ((r == -tn ? b[nn[cn]](n[e]) && (n[e] = R(b) - tn) : n[e] = r) || tn) && ((n[nn[Pn]] = t) || tn) && n
+            }(r, t, u[tn]), u[rn]];
+            for ((f = []) && (r = {}) && (i = S(e, y)[en]); R(i);) (o = v[nn[sn]](i[nn[qn]](en, y))) != an && o != Ln && o != dn && o != Yn && o != yn && o != Dn && o != en && o != gn ? (d = S(i, y, tn)) && f[nn[cn]](De(n, i)) && (i = i[nn[qn]](d[tn])) : (c = De(n, i)) && f[nn[cn]](c[en]) && (i = i[nn[qn]](y + c[tn]));
+            return (r[t] = f) && ((r[nn[rn]] = t) || tn) && r
+        }(n, e, v[nn[sn]](e[nn[qn]](en, y)))
+    }(L, W(u)))
+}("jsvmpzl:ver.1.5.1", this, typeof arguments != "undefined" ? arguments : void 0, [], "~|)~xT#hh|qI#iio}5sh|j|Ss%wp|;#io%$,#hzyuKt%cetOs#}}{)vnzgc4}&xg$+vthwu/gkfvt?awfq|>isdwj4jjj}mR$itim/jkkjhCpwyxa8q#bbwMrl##i*#|%v%Xn||co(qnlg{Pkcdur2#i}%~=d~qqqOnecppW|oria}@xy&zb9|l{ea|6|h$kkpN|d|x#%D|jjjrg5|%k|ee4|ohux|DaokndS#izk%HjchaeLph&lg/jt&dpW%$urb1gc|nh+rqaqo(k{}vc8|}ryz#2ivzzeN|#ad}5|sevqm4af$uj*oqhdw4oqmtbIitljmVjcoug/|sbytO||s}$Ceal$kEizoba;yuikrFed~|&-i}weqAi}qntQjl|hy*#js{|Ynigtk2jl}ixOm&cl%1o&s&sXox%&mHozfjv?#jrz#V#zyh{Poz}paFogabxGuda&lPjjxf)azcbjN&gt#|Y&xcj#)#z$z|/f$ioyPutxfe5a#d#{M|%d%jyTubjvh+|bx|#y.ehuduL|o{pyw,|}gd&wB|byl#hPb&wqm=bo||zVxwytg/uiwmd:qlj$o6qf&#{VjmcaQeuug%.glhg&?a$sfe)sssa<qcnuw-|c#ckuRafoi$K#e}pr-pp}s}L|bvfft<t~whoSby~eYs$coAh~pn#4gde}iTs%okn=d#|r$/#z&w{9a$dcbGyc~wg)er&||Fm}qryU|nrtxo>c$}$t2devwwLdvgg}5&%c%pJderfeNe~%zrJy$xw{:|o{$&dS|joqkw5|jw{&wF|$wipnY&#qoi:|qmiiYaon}~Z|rsehl8|sd%%&AeuewyPbwoj$Na$dvaXy{&|>|%da|y*}i#avI~zjosV${ajp>a#&nl=|m%m0lqy4dxxth=|nie}u)djnn8y{ofe6%g{n~>gcfjoPc~awd=~qdeu:&%kun*~ic~&Y||wyazU}ohoD|n#uqnYm#a{w?|novraBrj}|B&nk{e,&g}kbBdlfzv5|j%wn=bbq#W%gpkzU|nlk|dAh%l|-#y}su9|iwvcD#%e{n6ruex?afofq2h$xoX~%mbE#dmntB&zk|yRcm|}}E$p}}q+aah|lV||uwch7q&xob>##avmN&oaj%*&nv$|Oeukc{O~ypyc@%$mo~Qkr%l|TxykzxNu|&o~0xp#xl.i#rt}D|$mktl.$p$imHftc}p*&ffcd8#&wrlL|rc~ze*xtc~h+a#a#d0xsxf~Murr}yKar$v%J|kw|t?|d${jnQ|sqfb&7v&mjd?nga}n>sxuwh5sp${#TtwxunWuwr&eCqfdjx1wt&%yQvocijSsn|cb3nb$blJ|%vmxz7|d|xe~R|$wnjv<qzbnbTns%$y0udn$m0|ozur&+|gyqso@|sqheu:$jrdc3rwqrsSqqkwi+adrmsU|ordx&B|p{f{}Lz|deuVm%zlu5w#rkmRs%uk~N%iqwt?wlpc&Pfpa&mQn%z&nYbn%t#<%{myyYvwklbTtoolrOq$dqnD|cum$~W|lmh{Lqputx(r#ckiIw$|pr@qpervPafqvw+s&ebxJvnur%2ibx}j?ayqx=lqa##7${xolKsvmvy@bvhlz/$k~l%.%{iii6t~rrl+|h{cz}*|%zb~cE|&$|bw9reoz&.lbl&v,lb|ewSyrvnaC#zoek?z&jvt9ib%syVilmfoKj}olaLjkwrx.icxnvKl&nmdPnirpfBhuikhXlyn}m(a#eet4|sn&csWmzlqi0|}vj$m+||yo|dZjtmstIl{yytTa&lqyPne&bhU|cfuctG|rjmwr6|ctjtmH&hpey=l|e$sMiczyv:oqwqjKadrtuDfjjua*|cumiq7bealaDy|}{p?kkd~a5s$ocuTnjanhFoovuq/hu$eqMb&{io3|khgd}5mq$wu6nqoyq<imjg}Xa$f|sEf&kea=uqb|y;yv{hv)ww&jpTrhba}9vwumt*|{lprV|cv}tvU|uhwm;|gy&t%B%jsl%4ry#rd5ryvcy.ruynk+|p{cxlCjb$rp@|&dc&y.i&k$v(urvkk6|brwe$7|co&o%/ypsn})|nf&xhVatauxK|$ps#rVrfenf<psbifVyb|g#Fib}#f8cvdzq-$px#l+%xj~~Tbfb|~VkfutEqf&hs6|bv%nj+hl}b$,$%x}lReueqrTbvwus-~qvatLaiv#t6mjfm&Iap~j}0c$~}}9beuoh.fu%c~7e~%v$=#gsda(qkhfgN#ipeb,hbvuxGdevsi8bnt$aAa%kf}3nkm%o9|db&tdZ|fr&ze2||ibxc7|fynggPqc|e%Dly$f.yd#myJibjnrDeulcvFanwi&Bfd%apDqm|$l8|caoooM|%$wt|E#iqkg9gdhfl5bnj#hByd#}m;|%y{dr-q{$$v*ecms}Hq#ukp:|c~cba@ax%%|Tb#wjc>ca~}Rb#rzs+q$x#zTy}stt?$yuoqHg|h|%C%gpra3cn{~n2iiw#s,|ga}pa0|bifumK|fshmvMaohgdH}|{vdOao{pqI|rvyr|9yhv%&5t$y&8h|vm$Ag}o#v*ddtabBgd}uwGemxffKgtzqf:&gj~eGk}%R||oluk6|n%xluP#zght4~ht%}N~hdlrWh{ux$*ahtpt2afyt,#|ny|B~$&#.|$p#%c?#hyv#G|yzqeHbmuujIb~b|S$gc&|Ts}}&2}&v{y1admeq@||jw%a,|rgbiuYig%{c2ebkwz1|niw%uYm|%v{+|noe{mW|ikmf+%h{pfE}hs}vV&yiws6pq#haH#z~e$>~i#gbPzr%#Uxy{~dUxlyay3|beq}u9|rm}gf8~i%ksS%$co&Ke~~gq<&$}xzE$oucw<%ocpr>|}frq#Zem|##Z~zgg&B&f&r{KjuopX|fd%wk.|buerr8twxu{Mu~{bk+%xxeoLrdq#O%wvwnS|j~hb1~z#v}<unlbr,|rugdf;n}sbsOuguep?ibjn$Zayido(q~ailY|jpafw;un{jw0#yl~zBeix{x+|rebpj@|jiduy0yqtn$(e&egvF|ne%u#L||satxK&fy$hNdmc}u9#h%b|+#%kqg4a&egj*fnmxB|feozpE|jmnfmB|jhcga2|sm&mt-prb$x=sp&fnDu~}ibNvfr&gP%iucfXth|&i+s%llk,pzqsj($n#sb=vijdyL#z|abHeekub.evbzlMqq%me/%ho|t.gltntVbof#g)x##cx8x#jly?jcoi~.|sqdncO|ssk{g<z|b$|*|~fw}yJmbs|%=xe%|bGx#qhj<q&ursHwwdyvTsxtfe1t%r%fKwt}vs5qqtf|=ufxtgDantfqAr&mrjErhbao5xeua~@qsxy{Zbn$%uC$cqa{:#jz}fHr&f&b9w#g$}0xe$zx0%jhi#3qo%hlQuzqtsTul}w~/|%ps&ySuzqtaHq{|$aQuno&iKwkz{f<fmp$t)|%ztekE|spw}cE|omajr.|bumsfDryynm4nsbjd8x#{wbXimigh/vtu|&<frw%gP|ku}fbI#jmvpZspcqv;txctpH|&#jxfQrdslfFfkm~b=#jfzeSmjwqtFil&u$)mrbsnNyrvs$M|kfuuaA|%w$g}Fewgs$(icqz~Cl{q#&Gm{be~,kc~zoLa$iycVqz#qgK$}tdt1qzckb*mrjqa.aespiJb{arg>|ctyvz3|%hybl5b%e%r.yprm~:|cvhjtM%g#qqA~ys%cO&$tkqY|jmlaiU|jnm%o;|buicn(lb~u}Fri{pxZ%jarq9jt|ljUbcnfdD|p}xv#>|}mkeu(#z$dv@|%khqbG%$zzd)&oibr/qa{gj/acpyu5ivjxj<yynqy1iseck(#{uhp4qyfg{Ni|#gu=yuhxqW|fsj{Vr~ejt7sgmyiZxdmzwGnj%ekJi}xdn4rgfuvC|&~xujUurclg.#jexy;itr{%Dmjes{)f#vs%Cex|~x:bc#xk-|}v{nk@jlynjPrhsqkTnatubQkkpby@oqumcKlk&qsVofy}u;}yveq(auhdVlkam#N}qediQ}&ocfR}i|zxV#gyes-#ibyfY#xstl1}yqyg(}qr|a1$|ddxCtpg$#4v$epg=pwifaE|uipvZqhtwzG$hxv$Sa#mfiKv$jt{Rbxy$&@amjlhCq%ymbHqfr|y@|bym&v)|$xp}zO|}a{dmPqaj%d-q%fns3enkk~9qfr|y@#id$$*m&yua3ic%%qFu%fus8|cwjlo*|bvzeo0xxzrt?|jqs$q+awghnWtxx&vGww&nfG%jlx{Ewnmv}Fugl{sA#ispj*jl#|aYzevzi-|fps|i4|g&{rzY~zzeyIgtl{sOgkqvs@agh}j,aaizk?|o}aiwQkds#/miul$Y#po%w=u~dh#,dvqf|5|iaobYgu&ez5h}d$w3aitibLybmm{K|}%z&~I~xygq*|h|sbnUtt{u8glm{l8dtriaH$i|c~<gdeyn<a$bl#9yc}uwQu$fhd,|%&j%jPmhd{%L|fwlar;|k#ehfLg}fdc7df}g}Eglp%|TfddukV$xixyP$xovp7sh{|$Oemqs~X#im|rX|rjhasO|bppa$Ntvx&kMe}$%xK|rb|lfK|bhbksJtnnlq-|k~ena=|}bmmn<mhum{;#o}lf9|juyxv9|}|%xa<|ov~uh=|&|dtu<r&mzi@ebkc~6xj%cT|fscy$=|r}roY#xof#?|a{xk=mynu}3xx~ie=utymj5bgqwaAbw{}wIdmw~mYa$p{|Jlz}i}UajgkP$wwx|X}{~itU|knnw~(|r&{jj9|nnnrgI|af&#XtnjraFba|laRavida4}jotz3$%tnxHf}mtp-awo$yHnhhix*an#}#8ysxfiIekxy|T|d{{$3||lh%kEesq&v,|%scnqTfvoidAee}dyXc~qklOddkie0%p%sq>~sdgr8|&vg#Y|ojyndCafww3y}stqW|fdp{x?|$ssx#/ibzbyJ}{yf%Cbe}viFc$#e&/%r{v|Aedhya1nj{mr/psuxg)y|okf7|ftunvPyic%fEpwfdj,|rjl&zAdvhgi=&otkv3gkvgoB~&yr$Q}squK}alo&Llz~a|)|%ppva(ls%rb@|gn|}tH|r$w~$*|jmm&o-|%n$x%8cnqvk0gdg}b8$xk{gOfl%lxRbvpbgQh}~im;b&xrl0|rn|rvX|ohw$lQ|o#colE||lyl%Nmm|sa=xlmtlV|cqvp$Uqlidx4|fb#al8|rq&&tYysbq&H|rkh{uQ|fm{u};}}L<aw.J}m>O}m:KXG}m4)|BKX6}m+K|N}}lWK|NK|Z#}lKJ/O-KU)|8Q|(GD)|/?6)}V2.)|EK~QR|Z0/K~QKU)(#9T7(5)*KU0/K~QKU)(K,Q|(GD)|/?6)}V2.)|EK~RR|Z0/K~RKU)(#9T7(5)*KU0/K~RKU)(K,Q|3GO)|/GA)|/2,)JKU?6)}V2.)|EK~SR|Z0/K~SKU)(#9T7(5)*KU0/K~SKU)(K,Q|0GA)|/2,)JKU?6)}@2.)|EK#XR~T#DEB#7T5(3)*KU6-RUK#X;-K~+#(K,K,J~7O~4K~U}~.#~)Q}OKU#}HQ|6?<)}@24)|E0/KUK#Y)(R~T#OEM#B3@0>68B-.BK%:0/KUK#Y)(.4));-K~+#(K,K,Q|4?<)}@24)|E0/KUK#Z)(R~T#MEK#@3>6<0:63.80/KUK#Z)(K%;)(;-K~+#(K,K,K,90B.R%<K$(K,J}8O}5KYG}0)|B0/K%=KY)(6|T}|Q#|LS-#(K}X3|B}|?K$)#|7J0O.K|-)|8T9(7)*00K}XK~-)(K$)T4(2)*K|-B+K}XT8(6)*00K}XK~-)(&,3+K|-K,K,J.O,KR,(J;O9KS(5)*0/KRK}E)(,(Jc)ObYK|+(bS)*0/KSK|+)(6bE}bB#b=3b:,b7C#6KF}#/K~V#~ZJ5O3K|-6.4*K+KYQ@K~V#9T765K~V00K|-K~.)(K,Q}/GU)|B28)J64RN00K|-K~W)(?>)}@004*K+KN)(0/K|-KN)(#|.T|+(|()*0/K|-KN)(}N#JTH6F4*K+K$*0=0600K|-K$+)(KN)(K$,)(K,K,T?(=)*060/K|-KN)(K~-)(K|-T:(8)*00K|-K$+)(4*K+3+K|-K,)(C|2KY}|+#ZJ9O7K~/62004*K+KF)(T@6>K~/K$*060/K~/KN)(K$,)(3+K~/K,)(C2KN},#(K,)(C}DK~.}}<K}4#}4L|4J0O.K~0)|8K}4#XQV65K~000K}4K~W)(#CTA(?)*014*K+K~0))00K}4K~0))K,QV65R|>00K}4K~W)(#CTA(?)*014*K+K|>)(00K}4K|>)(K,K,)(CRK|3}K#G3E6C4*K+0=07004*K+KN)(K~-)(KF)(K,)(K,Jr8Or5K|((r/)*0/KSK|()(6qT,qHC}3KN}},K2K?#|VTE(C)*K2(=)*004*K+K2)(G/)|BK2P(Q|4?0)%>K?K|Z#:T8(6)*004*K+K?)(K?#GTE(C)*004*K+K?)(?5);0/K2K}()(.8K,)(CPK|>}IK$-#B3@6>4*K+08G1)|BK$-K~PK|O)(K,)(C&-K}F}%XKV#%QJ7O5K~X004*K+K2)(J5O3K~Y0.KVK2)(J7O5K}G004*K+K?)(J5O3K~10.KVK?)(T563014*K+K~Z)(Q#L?/)QK}G.8#}UN}RJ.O,K..4?/)KK.K~11.)O)(K.#}6JZOXK$.?S)-?M)/05K~Y?.)/K..G))?:)L.<?4);?.)QK..8.-.6T|2(|/)B0<K~X?5)/?/)@K}GK..G))?H)3K$.?A)L.<?;);?5)Q?/)@K}GK..8.-#|CN|@J/O-K|*.4?0)KK|*K~1(/)4K|*.8#UTS(Q)*0=K~X?6)/?0)@K}GK|*.G))06K~Y?/)/K|*.G))T9(7)4004*K+K?)(K~13,4*K+K,)(C}DK~Z}}<#}7J6O4K2004*K+K2)(J6O4K?004*K+K?)(TW(U)%104K2?.)/K?.G))?B)3.$/?;)L.|Y?4);?.)QK?.8.-TJ(H)*0/K2K}()(6;?/)|4K?.800K|NK$0)(K,)(C|IK|3}|A#|<JDOBK|36=4*K+0700K|+K|3)(K|?)(TJ(H)*0/K|3K2)(6;.407004*K+K2)(K}H)(3+K|3K,)(Cc(K~2}bSK|P#bKJ.O,K2P(J#RO#OK#U}#IK})##AJ0O.K})K})J0O.K}I.%?J0O.K~3.$/3~S}~P#~KTU(S)*K}I?L)-?E)@?7);.%@?0)-K}I.$1?0)#SK}I.CK~3TU(S)*K})?L)-?E)@?7);.%A?0)-K}).$1?0)#SK}).CK~3JDOBK~4?=)-?6)@?/)3K}I.CK})K~3T3(1)%BK~4.#(T2(0)4K~4.$23M?K);K~4AD?:)#R6200K|NK~2)(.$2.B2,)L.BK,K,J8O.K#)D%/O.K~5)|8EF#;T-6+K~UT2(0)*K#)D%0;-K~+#(K,N~5J6O,K..4O.K#*)|8?/)KK.K|P(.)4K..8#}DQ}/2-)JK#)#|VTO(M)*K~56F?A);G:)|BK#*6200K|NK~2)(.#(K#UT;(9)*K#*?2);6+K~5.%CTE6C?8)=?2);6+K~5.#(.40/K2K|M)($*K,K,T8666+K~U0/K2K|M)(38B6K2K|P0/K|(KN)(K,)(0/K|+KF)(J<O:K|G(5)*0/KRK|H)(,(Ja0Oa-K~P(&Z)*00K|GK~P)(,&KC#7K|O}#/KV##(J4O2K20.KVK2)(J4O2K?0.KVK?)(J/O-K~6P(N}UJ.O,K..4?.)KK.K?1.)O)(K.#}:JYOWK}D?R)-?L)/04K2?.)/K..G))?:)L.<?4);?.)QK..8.-.6TH6F6:.C06?/)/K}D.8K|>)(00K~6K|M)(TI6G6;.C07?0)-K}D.%3K|>)(00K~6K|M)(3765R~J00K~6K#+)(K,)(C~6K|,}~.K#,#}YJ7O5K#-00K#,K}()(J.O,K2P(N|WJ.O,K..4?/)KK.K#-(.)4K..G#|;T|8(|5)B05K2?/)/K..|5))?U)36=66K..G00K#,K%D)(.CK%E?:)L.<?4);?.)QK..-.83?B=K2?0)|4K#-.G0/K|(KN)(K,)(J&0O&-K~7(%Z)*00K|GK~7)(,%KC~BK|O}~:KV#~3J4O2K20.KVK2)(J4O2K?0.KVK?)(J/O-K#.P(N}-J.O,K..4?.)KK.K?1.)O)(K.#|EJYOWK}D?R)-?L)/04K2?.)/K..G))?:)L.<?4);?.)QK..8.-.6TC6A65K}D00K%FK%G)(00K#.K|M)(3765R~J00K#.K#+)(K,)(C~+K|,}}VK#/#}NJ7O5K#000K#/K}()(J.O,K2P(N|SJ.O,K..4?/)KK.K#01.)O)(K.#|7T|4(|1)B04K2?.)/K..G))?R)3?:)-64K.00K#/K~8)(.6?:)L.<?4);?.)QK..8.-38B6K2K#00/K|(KN)(K,)(J}GO}DK|7(}>)*00K|GK|7)(,}/C|4K|O}|,KV#YEW#B3@6>6964KV00K~7K|O)(K%HK%I;7K#T#290B.R%JK$(K,K,)(CQK|,}JK$3#C3A6?636.K$3K%KK%L00K~7K|,)(K,)(Jf8Of5K|Q(f/)*0/KSK|Q)(6eT,eHC|0K|I}|(#WTB(@)*014*K+K}5)(B10/K|(KN)(T9(7)*014*K+K$4)(.4K,)(C}-K}J}|XKZ#|QQQ?5)|D2-)|EKZR#1#>T<(:)*KZ64KZ00K|7K|,)(K,T>6<KZ08014*K+K}5)(K}F)(T?(=)4014*K+K$4)(0.KZK?)(K,)(C&8K}6}&0K$5#&(J0O.K#2)|8J7O5KZ014*K+K}5)(J5O3K#30.KZK2)(J5O3K#40.KZK?)(J6O4KM004*K+KM)(J5O3K}K?.);KM.8J8O6K}7?1)|4K#4K}KQ|CK$5#@T>(<)*K}765K}700K|NK$0)(#WTU(S)*K}76L?>)L?/)=K}7.4014*K+K#5)(.400K|NK%M)(J6O4K}L?/);K}7KMJEOCK#66>?/);K}L.8K#400K|NK%N)(Q|ZK}L#|RNWJ.O,K:.4?/)KK:K}L(.)4K:KM#<T:68K#3K:014*K+K$6)(T@(>)*K#267.4K}L00K#3K$7)(T8(6)~K0.KZK?)(K#6K,39B7K#2K#60/K|(KN)(K,)(C|IK|3}|A#|<JDOBK|36=4*K+0700K|+K|3)(K|?)(TJ(H)*00K|3K}5)(6:08014*K+K}5)(K|3)(3+K|3K,)(C/K#5.4)(0/K|+KF)(JaKOaHK$8(aB)*0/KSK$8)(6a4,a(C7K0610/K|+KF)()(C|6KN}|/K0#|(TJ(H)*004*K+K0)(6:K006004*K+K0)(KF)(T563014*K+K|I)(K,)(C|(K|I}T#PT?6=4*K+0700K|QK|I)(K|?)(T563014*K+K#7)(K,)(C|*K%O}VK}M#OT866K}M014*K+K}J)(T563014*K+K}6)(3,4*K+K,)(C|9K}8}|1K}M#|)QAK}M#:T866K}M014*K+K}J)(K,J:O8K#W63014*K+K~9)(3+K#WK,)(C7KM?1)|4.%9.|Y)(C|+K#8}WK|@#P3N}LK|AK0#C3A6?K|A0:B3K00/K|@KN)(K}8)(K,K,)(C|6K%P}|.K|@#Z3X}VK|AK>#M3K6IK|A0DB=K|@K>0600K}9K%Q)(KN)(K}8)(K,K,)(0/K|QKF)(J<O:K}9(5)*0/KRK#9)(,(3*KRK,TpH6pE}pB#p=J.O,KRKXJ5O3KS0/KRK}E)(J6O4K|(0/KSK|()(J6O4K|G0/KRK|H)(JiUOiRK}:(iL)*00K|GK}:)(,i=CcCK|O}c;KV#c4J4O2K20.KVK2)(J4O2K?0.KVK?)(J8O6K}*014*K+K#:)(T3610/KVK~Z)(J/O-K}NP(N&1J.O,K..4?.)KK.K?(/)4K..|5#%HJYOWK$9?R)-?L)/04K2?.)/K..G))?:)L.<?4);?.)QK..8.-.6J|4O|1K$:?|+)-?X)/0:K2?4)/?.)@K..B.G))?@)L.<?:);?4)Q?.)@K..B.8.-.6J|4O|1K$;?|+)-?X)/0:K2?4)/?.)@K..G.G))?@)L.<?:);?4)Q?.)@K..G.8.-.6JJOHK$<?C)=?<)=?/)3K$9.C?/)3K$:.-K$;N}6J/O-K|*.4GJ)|/?/)KK|*.8?<)K?6)@K.?0);K|*.%RK?1/)O)(K|*#|0T|-6|*6Q?E)-?>)/K$<?7);.}W?0)L.|5K|*.%600K}*K#;)(00K}NK|M)(J<O:K};65.}Y00K}*K#;)(QTK};#M*K?6)Q00K}NK}()(.8#9T765K};00K}NK|M)(K,3765R~J00K}NK#+)(K,)(C$EK|,}$=K}+#$5J7O5K}O00K}+K}()(J8O6K}*014*K+K#:)(J8O6K|R014*K+K$=)(Q}/2-)JK|R#|VT@(>)*K|R(7)*014*K+K$=)(P(N|9J/O-K|*.4?7)KK|*00K}*K}()(1/)O)(K|*#GTE(C)*0<K|R65K|*00K}*K~8)())K|*K,J<O:K};65.}Y00K}*K#;)(Q|3K};#|+J<O:K#<65K};00K}+K%S)(QF?4)}VK#<2,)L.B#4T2(0)*K}OK#<K,K,3664K}+K}OK|RK$>K,)(C0K#:R%T)(S$9K}+K}OK|R#$*J.O,K2P(J/O-K|P.4N#7J.O,K..4?/)KK.K}O1.)O)(K.#~NQ~K?.)QK..8#~>JZOXK$??S)30AK|R6:?.)LK..B00K}+K~8)())?4);?.)QK..8.GJ|(OYK$@?T)/0;K|R64K.00K}+K~8)())?;)L.}W?4);?.)QK..8.GT|,(|))B05K2?/)/K|P.G))?I)3?0)=K$?K$@?;)L.<?5);?/)QK|P.8.-T11/)O)(K|PK,3866K2K|P0/K|(KY)(K$>K,T}oRG}oN)|B060/KXK}E)(K},)(6}o7}}o3K|Z#}o*J.O,KRKXJ5O3KS0/KRK}E)(J6O4K|+0/KSK|+)(J6O4K|(0/KSK|()(J6O4K|Q0/KSK|Q)(J6O4K|G0/KRK|H)(J7O5K|700K|GK|7)(J7O5K}:00K|GK}:)(J6O4K}90/KRK#9)(J7O5K~:00K}9K~:)(JeQOeNK},(eH)*0/KSK},)(6e:,e.C7K0610/K|+KF)()(CTK~;}MK>K0#E3C6A014*K+K~<)(K>K0004*K+KY)(K,)(CTK~=}MK>K0#E3C6A014*K+K$A)(K>K0004*K+KY)(K,)(C}/KN}}(K$BK>K0#|OTJ(H)*004*K+K0)(6:K006004*K+K0)(KF)(T:(8)*014*K+K#=)(K$BT9(7)*014*K+K#>)(K>T563014*K+K|I)(K,)(C|(K|I}T#PT?6=4*K+0700K|QK|I)(K|?)(T563014*K+K#7)(K,)(CWK%U}PK}P#IT866K}P014*K+K}J)(3563014*K+K}6)(K,)(C|9K}8}|1K}P#|)QAK}P#:T866K}P014*K+K}J)(K,J:O8K$C63014*K+K~9)(3+K$CK,)(C7KW?1)|4.}B.|Y)(C8K}-?1)|4.}B.|Y)(C/K~<.B)(C/K$A.G)(C~6K#86~.}~+#}YSNK>#GQE?5)|D2-)|EK>R#1#-3+K#?#-3+K}.K#@3}.}}+KE#|W3|T,|QCUK}<}NK|AK>K0#C3A6?KEK|AK>K0046-K>K#@K}<)(K,)(CSK|S}LKDK>K0#B3@6>KEKDK>K0046-K>K#@K|S)(K,)(K,K,)(0/K|QKF)(J|QO|NK$D(|H)*0/KSK$D)(6|:,|.CWK~9}P#LJEOCK}/6>21)J2-)JR#A014*K+K}6)(3+K}/K,)(C.KM.B)(0/K},KF)(J<O:K$E(5)*0/KRK|.)(,(J~=O~:K#B(~4)*0/KSK#B)(6}Y,}MCPK~;}IKEKH#A3?6=KEKH07014*K+K$F)(KY)(K,)(CPK~=}IKEKH#A3?6=KEKH07014*K+K$G)(KY)(K,)(C|)KN}VKEKH#NT9(7)*014*K+K#C)(KET9(7)*014*K+K#D)(KHK,)(0/K|+KF)(JcROcOK|6(cI)*00K$EK|6)(6c:}c7#c2J8O6K|6610/K#BKF)(T~/(~,)*00K|6K$F)(6}P,}DC}AK#E}}9K2K:#}0J7O5KE014*K+K#C)(J4O2KM0.KEKM)(T>6<4*K+K2K:KM00K#FK|?)(T765K2K:0/KEK$H)(TL(J)*014*K+K#G)(6;K:?.)@K:KM0/K2K}H)(K,)(0/K|6KF)(T~9(~6)*00K|6K$G)(6}Z,}NC}KK#E}}CK2K:#}:J7O5KE014*K+K#C)(J4O2KM0.KEKM)(JBO@K$I6;K:?.)@K:KM0/K2K}H)(T765K2K:0/KEK$J)(T>6<4*K+K2K:KM00K#FK|?)(T:(8)*014*K+K#G)(K$IK,)(0/K|6KF)(S~-K2K:KM#}TJ0O.K~>)|8J7O5KH014*K+K#D)(Q|.KH#GT1(/)*K~>KHT:(8)*014*K+K#D)(K|Z#<T:(8)*K~>014*K+K#G)(N|-J.O,K..4?.)KK.KM1.)O)(K.#FTD(B)~L04K2?.)@K:K.))0/K~>K.))K#F3+K|6K,J<O:K$K(5)*0/KRK}C)(,(J%/O%,K}Q($Y)*00K$KK}Q)(,$JC#)K}C}~TKZKM#~KJ5O3K}K?.);KM.8JCOAK|J?<)LK}K?5)Q0.KZK?)(K}KJWOUK$L?P)=?I)=?<)=?/)3K|J.<?/)3K|J.C?/)3K|J.-K|JJ/O-K#HP(NTJ.O,K..4?/)KK.K|J(.)4K..8#9T765K$L00K#HK|M)(J>O<K|967K#HK|J0/K|(KY)(T664K|90/KZK}F)(K,)(C|CK$M}|;KZ#|4JSOQK|J?L)-0F0.KZK2)(?:)/?4)L0.KZK?)(.B.G)).6T8(6)~K0.KZK?)(K|JK,)(JfQOfNK}=(fH)*0/KSK}=)(6f:,f.CSK06M,<C0K|.K|6)(C0K|9K}Q)(050/K},K0)(KF)()(C%WK|I}%O#%JJ0O.K}>)|8T?6=4*K+0700K},K|I)(K|?)(J6O4K0004*K+K0)(J4O2KH0.K0KH)(J6O4K|.0/K0K|.)(Q|M?A)|D014*K+K#=)(014*K+K~<)(#;T9(7)*K}>00K|.K~;)(#NT9(7)*K}>00K|.K~=)(T9(7)*014*K+K#5)(.BQ~4GP)|/014*K+K}?)(?@)|D08014*K+K}?)(K$N)(K}>#PTN6L4*K+G5)|/KH0.KHK2)(07014*K+K}?)(KN)(#|CTY(W)*014*K+K}?)(6HK|.4*K+G5)|/KH0.KHK2)(00K}>K|?)(TA(?)*08014*K+K}?)(K$N)(K}>K,)(CQK$6}JK2K:#BT@6>K2K:08014*K+K}?)(K#E)(K,)(C#)K~9}~T#~OJ0O.K}/)|8J>O<K|907004*K+K0)(K|9)(Q}X?A)|D014*K+K#=)(014*K+K~<)(#|9TI6G014*K+K}5)(004*K+KM)(00K|9K}C)(TG(E)*K}/6>21)J2-)JR#A014*K+K}6)(#ZTG(E)*K}/6>21)J2-)JR#A014*K+K}6)(T765K}/00K|9K$M)(3+K}/K,)(C7KM?1)|4.}B.|Y)(0/K},KF)(J}8O}5K}R(}/)*0/KSK}R)(6|T,|HCGKN}AK}S#:T866K}S014*K+K~.)(K,)(CXK|>}QK~?#J3H6F4*K+0@G9)|BK~?014*K+K~?)(K|O)(K,)(0/K|+KF)(J<O:K$O(5)*0/KRK}0)(,(J&EO&BK$P(&<)*00K$OK$Q)(,&-C}QK|O}}IK}S#}AJ/O-KV)|8J5O3KD0/K}SKD)(J7O5K|)00K}SK|))(Q|8K|)#ZTX(V)*KV6PKD0L6EK|)0@69P..$R.$S0/K|(KY)(K}F)(K}F)(#2T0(.)*KVKD3664K}:0/KVK|>)(K,)(C#1K|,}#)K$T#~TJ0O.K|))|8J;O9KD65K$T00K}:K|,)(J5O3K}T0.KDK2)(Q}5GM)|/?7)|D0/K}T.4)).$R?7)|D0/K}T.B)).$S#|<TJ(H)*K|)6A66.G.800K}TK}H)(0/K|(KY)(T866.4.800K}TK$7)(T7(5)~K0.KDK?)(.CK,3G6E,:C.KDKD)(C0K|)K|))(0/K}RKY)(K,)(JbHObEK}.(b?)*0/KSK}.)(6b1,aXCCK06=,2C0K}0K$P)(0/K|+KF)()(C#CK}<}#;KEK|AK>K0##-TB(@)*K06:K006004*K+K0)(KF)(J<O:K#I65K>K00/KEK~;)(J;O9KD65K|A00K#IK}8)(J6O4K~@0/K#IK0)(3}96}6,}*C.KDKD)(C.K>K>)(C5KH0/K~@KH)()(C/K%VKE)(C7K|.00K~@K|.)()(C7K|900K~@K|9)()(C4KM0.KEKM)()(C6K~?0/K0K}0)()(0/K}RKY)(K,)(C}?K|S}}7KEKDK>K0#}*TB(@)*K06:K006004*K+K0)(KF)(TF(D)*KD6>KD0/K0K}0)(014*K+K#J)(JMOKK~A6F0.KDKD)(0<65K>K00/KEK~=)(K}8)(3+K~AK,)(C|3K#J}|+KDK}0#UQS?5)|D2-)|EKDR#1#<3:68KD4*K+00K}0K|,)(#,3*KDK,)(0/K|+KF)(J<O:K$U(5)*0/KRK~B)(,(J%BO%?K$V(%9)*00K$UK$Q)(,%*C$ZK#K}$RK}1KWK}-K|)K|@#$?QR2-)JK|)#GTE(C)*K|)6<?0)|4.}Y.-00K|(K~2)(K,Q}=2-)JK|@#YJWOUK>6QK}1K|)0I6B,7C5KW?/)@KWK}-)(0/K~:KY)(K$W)(#|3J|0O|-K>6|(K}1K|)0S6L,AC5KW?/)@KWK}-)(C0K|@K|@)(0/K~:KY)(K$W)(JSOQKH6M69KW050.K>K2)(K}H)(?/);K}-.80/K|(KY)(T<(:)*0.K>K?)(?.);KW.83O6M,BC.K>K>)(C.KHKH)(C0K|)K|))(0/K}RKY)(K,)(JbSObPK#?(bJ)*0/KSK#?)(6b<,b0CIK06C,2C0K~BK$V)(050/K}.K0)(KF)()(C#)K}<}~TKEK|AK}1K0#~ETB(@)*K06:K006004*K+K0)(KF)(J|4O|1K}26|+K}10.KEKW)(0/KEK}-)(0/K0K|))(0/K0K|@)(060/K0K~B)(K#K)(T=(;)*0.K0KH)(0/K}2KH)(JSOQKD6M4*K+KEK|A0/K}2K>)(K00700K}.K}<)(K|?)(T664K}20/KDK~.)(3*KDK,)(C#9K|S}#1KEKDK}1K0#~VTB(@)*K06:K006004*K+K0)(KF)(TF(D)*KD6>KD0/K0K}0)(014*K+K#J)(J|4O|1K}26|+K}10.KEKW)(0/KEK}-)(0/KDK|))(0/K0K|@)(060/K0K~B)(K#K)(T=(;)*0.K0KH)(0/K}2KH)(JSOQK~A6L4*K+KEKD0/K}2K>)(K00700K}.K|S)(K|?)(3+K~AK,)(0/K}.KF)(K,T}$,6}$(}}#W#}#QJ.O,KRKXJ5O3KS0/KRK}E)(J6O4K}=0/KSK}=)(J6O4K}90/KRK#9)(J.O,KAP(J/O-K#LP(J/O-K|TP(J/O-K|UP(J/O-K|VP(J/O-K|WP(J/O-K~CP(J/O-K~DP(J/O-K~EP(J/O-K~FP(Ti)6hY}hV#hQJ/O-K|0P(N|VJ.O,K..4?/)KK..~O1.)O)(K.#|:Q|7?/)KK..}B#?T=(;)*0/K|0K.))?.)3K..B#FTD(B)*0/K|0K.))?5)7?.)3K..B.%8J/O-K|1.4J/O-K|F.4Nf5J.O,K..4?/)KK..~O1.)O)(K.#eLJ|4O|1K|2?|+)7?Q)7?C)7?6)7K|F?/)3K|F.B?/)3K|F.G?0)3K|F.|5?/)3K|F.8TL(J)*K|2?C)7?<)7?/)/K|2.-?/)-K|2.6.%7T8(6)*0/KAK|1))K|2T9(7)*00K#LK|2))K|1J7O5K}A00K|0K|1))J7O5K~M00K|0K}A))J7O5K~N00K|0K~M))JKOIK5?E)7?7);00K|0K|2)).#V?0);K|2.$XTJ(H)*00K|TK|1))?:)=?.)3K5.<?.)/K5.-TJ(H)*00K|UK|1))?:)=?.)3K5.C?.)/K5.CTJ(H)*00K|VK|1))?:)=?.)3K5.-?.)/K5.<T8(6)*00K|WK|1))K5J|.O|+K5?Z)7?L)7?>)7?0);K~N.%W?0);K~M.%X?0);K}A.#V?0);K|1.$XTJ(H)*00K~CK|2))?:)=?.)3K5.<?.)/K5.-TJ(H)*00K~DK|2))?:)=?.)3K5.C?.)/K5.CTJ(H)*00K~EK|2))?:)=?.)3K5.-?.)/K5.<T8(6)*00K~FK|2))K5Q}*2-)JK|1#:T8(6)*K|1(/)*K|F.B#|?TU(S)*K|1?L)7K}A0EK|00>K|007K|0?0)7K~NK}A))))))TA(?)~LK|F07K|000K|0K|F))))K,JJOHK$YPC.4.B.G.8.-.C.|Y.}Y.}B.%4.%5J|kCO|k?K}3(|k8)*00K}9K}3)(6|k(,|jNCl/K#7}kZ#kUQ|(GQ)|/014*K+K#M)(?A)}@014*K+K$Z)(014*K+K#>)(#,3*K,K,JFODK>(@)*014*K+K$Z)(014*K+K#>)(J5O3K%(0.K>K2)(J;O9KW?5)|40.K>K?)(.8JEOCK~G(>)*014*K+K#M)(?/)@KW.}WJ<O:K~H?5);?/)@K~G.B.8J=O;KT(7)*014*K+K%))(P(Nb+J.O,KI.4?/)KKIK~H1.)O)(KI#aBQa??.)KKIKW#?T=(;)*0.KTKI))0/K%(KI))#&NJ:O8K504KT?.)LKI.B))Q%H22)J?.)QKIKW#~>TB(@)*K5?:)=?.)3K5.-?.)/K5.<T}-(}*)*K5?|V)=?|C)=?X)=?:)304KA?.)/K5.<)).<?@)30:KA?4)-?.)/K5.C.6)).C?@)30:KA?4)-?.)/K5.-.6)).-04KA?.)-K5.6))TK(I)~LK5?B)30<K$Y?5)=?/)|4KIKW.4)).<Q}SGD)|/?0)#RKW.}W?5)|D?.)QKIKW.8#}0T}-(}*)*K5?|V)=?|C)=?X)=?:)304KA?.)/K5.<)).<?@)30:KA?4)-?.)/K5.C.6)).C?@)30:KA?4)-?.)/K5.-.6)).-04KA?.)-K5.6))K,TH(F)*0.KTKI))?:)704KT?.)LKIKW))K5J>O<K#N(7)*014*K+K%*)(P(N$:J/O-K|X.4?0)KK|XK~H1/)O)(K|X##NJ6O4KI?0)LK~HK|XQW?/)QK|X.8#6J4O2K50.KTKI))#<J:O8K504KT?.)LKI.8))Q~=G=)|B?/)KK|X.8?/)%2KI.8#:T8(6)*00K#NK|X))K5#}BT}?(}<)*00K#NK|X))?}-)7?|F)7?Z)70;K~C04KA?.)/K5.<))))0AK~D0:KA?4)-?.)/K5.C.6))))0AK~E0:KA?4)-?.)/K5.-.6))))0;K~F04KA?.)-K5.6))))K,)(C|1K$H}|)KPK:#TTR6PKPK:014*K+K%))(K|TK|UK|VK|WKA014*K+K#O)(K,)(C#6K$J}#.KPK:#~XJ:O8K504KP?.)@K:.B))TI(G)*04KP?.)@K:.B))05KP?/)@K:.|5))T=(;)*05KP?/)@K:.|5))K5TS6QKPK:014*K+K%*)(K~CK~DK~EK~FK#L014*K+K#O)(J:O8K504KP?.)@K:.B))TI(G)*04KP?.)@K:.B))05KP?/)@K:.|5))T=(;)*05KP?/)@K:.|5))K5K,)(CsFK#O}s>KPK:KTK|TK|UK|VK|WKA#rXJ8O6K~G014*K+K#M)(JAO?K|:?:)70.KPK:))0.KT.4))JGOEK|;?@)704KP?.)@K:.B))0.KT.B))JGOEK|<?@)704KP?.)@K:.G))0.KT.G))JIOGK|=?B)705KP?/)@K:.|5))0/KT.|5))J.O,KI.8NcQJ/O-K#P.B?0)KK#PK~G1/)O)(K#P#c2J}5O}2K}Z?},)7?|L)7?|7)7?P)706K|T?/)/K|:.<))0<K|U?5)-?/)/K|;.C.6))0<K|V?5)-?/)/K|<.-.6))06K|W?/)-K|=.6))04KT1.)O)(KI))J}5O}2K~(?},)7?|L)7?|7)7?P)706K|T?/)/K|;.<))0<K|U?5)-?/)/K|<.C.6))0<K|V?5)-?/)/K|=.-.6))06K|W?/)-K|:.6))04KT1.)O)(KI))J}5O}2K~)?},)7?|L)7?|7)7?P)706K|T?/)/K|<.<))0<K|U?5)-?/)/K|=.C.6))0<K|V?5)-?/)/K|:.-.6))06K|W?/)-K|;.6))04KT1.)O)(KI))J}5O}2K~*?},)7?|L)7?|7)7?P)706K|T?/)/K|=.<))0<K|U?5)-?/)/K|:.C.6))0<K|V?5)-?/)/K|;.-.6))06K|W?/)-K|<.6))04KT1.)O)(KI))T2(0)*K|:K}ZT2(0)*K|;K~(T2(0)*K|<K~)T2(0)*K|=K~*J}CO}@K}Z?}:)7?|Z)=?|F)=?Z)=?;)305KA?/)/K|:.<)).<?A)30;KA?5)-?/)/K|;.C.6)).C?A)30;KA?5)-?/)/K|<.-.6)).-05KA?/)-K|=.6))04KT1.)O)(KI))J}CO}@K~(?}:)7?|Z)=?|F)=?Z)=?;)305KA?/)/K|;.<)).<?A)30;KA?5)-?/)/K|<.C.6)).C?A)30;KA?5)-?/)/K|=.-.6)).-05KA?/)-K|:.6))04KT1.)O)(KI))J}CO}@K~)?}:)7?|Z)=?|F)=?Z)=?;)305KA?/)/K|<.<)).<?A)30;KA?5)-?/)/K|=.C.6)).C?A)30;KA?5)-?/)/K|:.-.6)).-05KA?/)-K|;.6))04KT1.)O)(KI))J}CO}@K~*?}:)7?|Z)=?|F)=?Z)=?;)305KA?/)/K|=.<)).<?A)30;KA?5)-?/)/K|:.C.6)).C?A)30;KA?5)-?/)/K|;.-.6)).-05KA?/)-K|<.6))04KT1.)O)(KI))T7(5)*0.KPK:))K}ZT=(;)*04KP?.)@K:.B))K~(T=(;)*04KP?.)@K:.G))K~)T>(<)*05KP?/)@K:.|5))K~*K,)(C7KW?1)|4.~O.|Y)(0/K}=KF)(TD(B)*0/KRK}3)(65K}300K}=K#8)(K,T#7(#4)*014*K+K%+)(}~WK~I#~NJIOGK~,6BK~I0=060/KXK|H)(K|7)(K|,)(J}MO}JK%,6}DK~,6BR%-0=060/KXK|H)(K|7)(K|,)(,|ECHKH6BR%.0=060/KXK|H)(K|7)(K|,)()(C=K|.060/KXK|.)(K|6)()(C=K|9060/KXK}C)(K}Q)()(060/KXK}3)(K}<)(346200K%,K|>)(K%+T#,(#))*004*K+K9)(}~MK~I#~EJ0O.K~,K~IJ}MO}JK|S6}DK~,6BR%-0=060/KXK|H)(K|7)(K|,)(,|ECHKH6BR%.0=060/KXK|H)(K|7)(K|,)()(C=K|.060/KXK|.)(K|6)()(C=K|9060/KXK}C)(K}Q)()(060/KXK}3)(K|S)(3D6B060/KXK|H)(K|7)(00K|SK|>)(K9Ej8#j,JHOFK16B65R%Y004*K+R9))014*K+K%Z)(Q|L2|.)J?|))|C63R&(0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&)0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&*0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&+0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&,0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&-0.K1R9))0J09K163R#Q0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&.0.K1R9))0J09K163R#Q0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&/0.K1R9))0J09K163R#Q0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&00.K1R9))0J09K163R&10.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,TA6?63R&20.K1R9))00K&3K&4)(;-K#T#(K,")
+console.log("通过了");//异步;;;
 // 宏队列，macrotask,也叫tasks.一些异步任务的回调会依次进入 macro task queue，等待后渎被调用，这些异步任务包括：
 
 // setTimeout
@@ -13584,7 +21136,7 @@ noexecListener={
 if (bodavm.memory.asyncEvent.listener) {
     for (const key in bodavm.memory.asyncEvent.listener) {
         let event = bodavm.memory.asyncEvent.listener[key]
-        debugger
+        // debugger
             for (let i = 0; i < event.length; i++) {
                 // debugger
                 if (noexecListener[event[i].type]){
@@ -13607,26 +21159,28 @@ if (bodavm.memory.asyncEvent.listener) {
     }
 }
 
-// let setTimeEvent = bodavm.memory.asyncEvent.setTimeout
-// console.log(`当前setTimeEvent有===>${JSON.stringify(setTimeEvent)}`)
-// if (setTimeEvent) {
-//     setTimeEvent.sort((a, b) => {
-//         return a.timeoutID > b.timeoutID ? 1 : -1;
-//     })
-//     setTimeEvent.sort((a, b) => {
-//         return a.delay > b.delay ? 1 : -1;
-//     })
-//     for (let i = 0; i < setTimeEvent.length; i++) {
-//         let event = setTimeEvent[i]
-//         if (event == undefined) { continue }
-//         console.log(`异步回调执行settime=======================================>${JSON.stringify(event)}   callback:${event.callback}`);
-//         if (event.type) {
-//             event.callback()
-//         } else {
-//             eval(event.callback)
-//         }
-//     }
-// }
+let setTimeEvent = bodavm.memory.asyncEvent.setTimeout
+
+console.log(`当前setTimeEvent有===>${JSON.stringify(setTimeEvent)}`)
+if (setTimeEvent) {
+    setTimeEvent.sort((a, b) => {
+        return a.timeoutID > b.timeoutID ? 1 : -1;
+    })
+
+    setTimeEvent.sort((a, b) => {
+        return a.delay > b.delay ? 1 : -1;
+    })
+    for (let i = 0; i < setTimeEvent.length; i++) {
+        let event = setTimeEvent[i]
+        if (event == undefined) { continue }
+        console.log(`异步回调执行settime=======================================>${JSON.stringify(event)}   callback:${event.callback+''.length>50?event.callback+''.substring(0,50):event.callback+''}`);
+        if (event.type) {
+            event.callback()
+        } else {
+            eval(event.callback)
+        }
+    }
+}
 
 // 鼠标事件最后执行,模仿网站加载完成后再移动鼠标触发事件
 // //鼠标轨迹,获取实际网站的
@@ -13783,10 +21337,25 @@ if (bodavm.memory.asyncEvent.listener) {
 
 ;
     function get_cookie(){
-    
+        debugger
+        // let boxhr=new XMLHttpRequest()
+        // boxhr.open('get' , "searchParamModel=%7B%22ObjectType%22%3A1%2C%22SearchKeyList%22%3A%5B%5D%2C%22SearchExpression%22%3Anull%2C%22BeginYear%22%3Anull%2C%22EndYear%22%3Anull%2C%22UpdateTimeType%22%3Anull%2C%22JournalRange%22%3Anull%2C%22DomainRange%22%3Anull%2C%22ClusterFilter%22%3A%22%22%2C%22ClusterLimit%22%3A0%2C%22ClusterUseType%22%3A%22Article%22%2C%22UrlParam%22%3A%22%22%2C%22Sort%22%3A%220%22%2C%22SortField%22%3Anull%2C%22UserID%22%3A%220%22%2C%22PageNum%22%3A2%2C%22PageSize%22%3A20%2C%22SType%22%3Anull%2C%22StrIds%22%3Anull%2C%22IsRefOrBy%22%3A0%2C%22ShowRules%22%3A%22%22%2C%22IsNoteHistory%22%3A0%2C%22AdvShowTitle%22%3Anull%2C%22ObjectId%22%3Anull%2C%22ObjectSearchType%22%3A0%2C%22ChineseEnglishExtend%22%3A0%2C%22SynonymExtend%22%3A0%2C%22ShowTotalCount%22%3A73734952%2C%22AdvTabGuid%22%3A%22%22%7D" || null)
+        // let aaa=boxhr.send(true &&  "searchParamModel=%7B%22ObjectType%22%3A1%2C%22SearchKeyList%22%3A%5B%5D%2C%22SearchExpression%22%3Anull%2C%22BeginYear%22%3Anull%2C%22EndYear%22%3Anull%2C%22UpdateTimeType%22%3Anull%2C%22JournalRange%22%3Anull%2C%22DomainRange%22%3Anull%2C%22ClusterFilter%22%3A%22%22%2C%22ClusterLimit%22%3A0%2C%22ClusterUseType%22%3A%22Article%22%2C%22UrlParam%22%3A%22%22%2C%22Sort%22%3A%220%22%2C%22SortField%22%3Anull%2C%22UserID%22%3A%220%22%2C%22PageNum%22%3A2%2C%22PageSize%22%3A20%2C%22SType%22%3Anull%2C%22StrIds%22%3Anull%2C%22IsRefOrBy%22%3A0%2C%22ShowRules%22%3A%22%22%2C%22IsNoteHistory%22%3A0%2C%22AdvShowTitle%22%3Anull%2C%22ObjectId%22%3Anull%2C%22ObjectSearchType%22%3A0%2C%22ChineseEnglishExtend%22%3A0%2C%22SynonymExtend%22%3A0%2C%22ShowTotalCount%22%3A73734952%2C%22AdvTabGuid%22%3A%22%22%7D")
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'somewhere', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            // do something to response
+            console.log(this.responseText);
+        };
+        xhr.send('user=person&pwd=password&organization=place&requiredkey=key');
+                
+        
+        
         let res={
             // b:new XMLHttpRequest().open(''),
-            cookie:document.cookie
+            cookie:document.cookie,
+            // result:aaa
         }
         
         return res

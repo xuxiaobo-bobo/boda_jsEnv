@@ -26,7 +26,7 @@ bodavm.config.proxy = false; //是否代理
 
 
 //网站为r4或者r5 设置为true 否则请关闭
-bodavm.config.isrs = true  //判断当前网站是不是瑞数
+bodavm.config.isrs = false  //判断当前网站是不是瑞数
 //网站为r6 设置为true body设置为0 否则请把true改为false
 bodavm.memory.rs6=false
 bodavm.memory.rs6_body=0
@@ -112,33 +112,31 @@ bodavm.memory.IDBOpenDBRequest = {
 }
 
 
-
-
 bodavm.memory.location={
-    origin:"http://sthjt.hubei.gov.cn",
+    origin:"https://www.douyin.com",
     hash:"",
-    pathname:"/site/sthjt/search.html",
-    search:"?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
-    href:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
+    pathname:"/",
+    search:"",
+    href:"https://www.douyin.com/",
     port:"",
-    protocol:"http:",
-    host:"sthjt.hubei.gov.cn",
+    protocol:"https:",
+    host:"www.douyin.com",
     ancestorOrigins:"{}",
-    hostname:"sthjt.hubei.gov.cn"
+    hostname:"www.douyin.com"
 };
 
 bodavm.memory.document={
-    URL:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
-    referrer:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
-    documentURI:"http://sthjt.hubei.gov.cn/site/sthjt/search.html?searchWord=%E7%A2%B3%E6%8E%92%E6%94%BE&siteId=41&pageSize=10",
+    URL:"https://www.douyin.com/",
+    referrer:"https://www.douyin.com/",
+    documentURI:"https://www.douyin.com/",
     compatMode:"CSS1Compat",
     dir:"",
-    title:"湖北省生态环境厅",
+    title:"抖音-记录美好生活",
     designMode:"off",
     readyState:"complete",
     contentType:"text/html",
     inputEncoding:"UTF-8",
-    domain:"sthjt.hubei.gov.cn",
+    domain:"www.douyin.com",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
@@ -165,49 +163,57 @@ bodavm.memory.screen={
     colorDepth:24,
     availLeft:0,
     availTop:0,
-    isExtended:undefined,
+    isExtended:false,
     orientation:{},
-    onchange:undefined,
+    onchange:null,
 };
 
 bodavm.memory.navigator={
     language:"zh-CN",
-    userAgent:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
-    appVersion:"5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.57",
+    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.57",
     vendor:"Google Inc.",
     appName:"Netscape",
     appCodeName:"Mozilla",
     cookieEnabled:true,
-    languages:["zh-CN","zh"],
+    languages:["zh-CN","en","en-GB","en-US"],
     productSub:"20030107",
-    userAgentData:undefined,
-    xr:undefined,
+    userAgentData:{"brands":[{"brand":"Chromium","version":"110"},{"brand":"Not A(Brand","version":"24"},{"brand":"Microsoft Edge","version":"110"}],"mobile":false,"platform":"Windows"},
+    xr:{},
     platform:'Win32',
     webkitPersistentStorage:{},
     connection:{},
     javaEnabled:false,
     product:'Gecko',
     vendorSub:"",
-    deviceMemory:undefined,
+    deviceMemory:8,
     maxTouchPoints:0
 };
 bodavm.memory.window={
     name:"",
     innerWidth:1440,
     innerHeight:817,
-    origin:"http://sthjt.hubei.gov.cn",
+    origin:"https://www.douyin.com",
     outerWidth:1440,
     outerHeight:920,
-    defaultStatus:"",
-    defaultstatus:"",
+    defaultStatus:undefined,
+    defaultstatus:undefined,
     devicePixelRatio:1.5,
-    isSecureContext:false,
-    length:1,
+    isSecureContext:true,
+    length:0,
     status:"",
     onmessage:null,
-    onbeforeunload:function _$fx(_$jL){_$eA?(_$jN(new _$d0(_$hn[58],{},_$hf(_$jL[_$_8[73]]))),_$eu()):0;},
+    onbeforeunload:null,
     closed:false,
-    isSecureContext:true
+    isSecureContext:true,
+    onappinstalled:null,
+    onbeforeinstallprompt:null,
+    onbeforexrselect:null,
+    onabort:null,
+    onblur:null,
+    oncancel:null,
+    oncanplay:null,
+    oncanplaythrough:null
 
 };
 bodavm.memory.localStorage={}
