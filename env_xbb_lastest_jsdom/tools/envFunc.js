@@ -7,6 +7,13 @@
         return now
     }
 
+    bodavm.envFunc.window_Image = function window_Image() {
+        let arg=bodavm.memory.globalobj['Image']
+        arg._boarg=bodaobj.window.Image
+        console.log(`window_Document `, `res -> ${arg}`);
+
+        return arg
+    }
     bodavm.envFunc.window_scheduler_get=function (){let arg=bodavm.memory.globalobj['scheduler']?bodavm.memory.globalobj['scheduler']:null;console.log(`window_scheduler_get`,`res ->${arg}`);return arg}
     bodavm.envFunc.window_crossOriginIsolated_get=function (){let arg=bodavm.memory.globalobj['crossOriginIsolated']?bodavm.memory.globalobj['crossOriginIsolated']:null;console.log(`window_crossOriginIsolated_get`,`res ->${arg}`);return arg}
     bodavm.envFunc.window_onpointerrawupdate_get=function (){let arg=bodavm.memory.globalobj['onpointerrawupdate']?bodavm.memory.globalobj['onpointerrawupdate']:null;console.log(`window_onpointerrawupdate_get`,`res ->${arg}`);return arg}
@@ -914,7 +921,7 @@
 
 
     bodavm.envFunc.window_MutationObserver = function () {
-        debugger
+        // debugger
         let arg = new bodavm.memory.globalobj['MutationObserver'](arguments[0])
         arg._boarg=new bodaobj.window.MutationObserver(arguments[0])
         console.log(`window_MutationObserver `, `res ->${arg}`);
@@ -1773,16 +1780,7 @@
         console.log(`RTCPeerConnection_onicegatheringstatechange_set `, `onicegatheringstatechange ->${_onicegatheringstatechange}`);
         return change
     }
-    bodavm.envFunc.window_Image = function window_Image() {
-        let domimg = bodaobj.window.Image.apply(this, arguments)
-        let img = {}
-        if (bodavm.config.isdebug) { debugger };
 
-        img.__proto__ = bodavm.memory.globalobj['HTMLImageElement'].prototype
-        img._boarg = domimg
-        console.log(`window_Image `, ` img->${img}`);
-        return img
-    }
 
 
     bodavm.envFunc.WebGLRenderingContext_getContextAttributes = function WebGLRenderingContext_getContextAttributes() {
@@ -3326,6 +3324,7 @@
     }
     bodavm.envFunc.Navigator_userAgent_get = function Navigator_userAgent_get() {
         let ua = bodavm.memory.navigator["userAgent"]
+        debugger
         console.log(`Navigator_userAgent_get `, `${ua}  `)
         // debugger
         return ua
