@@ -1,5 +1,5 @@
 // PresentationConnectionCloseEvent对象
-bodavm.memory.globalobj['PresentationConnectionCloseEvent'] = function PresentationConnectionCloseEvent(){
+bodavm.memory.globalobj['PresentationConnectionCloseEvent'] = function PresentationConnectionCloseEvent(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof PresentationConnectionCloseEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PresentationConnectionCloseEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 

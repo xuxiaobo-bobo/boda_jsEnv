@@ -8,6 +8,7 @@ delete process;
 delete root;
 delete WindowProperties;
 delete globalThis[Symbol.toStringTag];
+// debugger
 window = globalThis;
 globalThis.__proto__ = bodavm.memory.globalobj['Window'].prototype;
 // document=bodavm.memory.globalobj['document']
@@ -43,6 +44,7 @@ console.log(`===================================================================
 console.log(`===============================================================================================================`);
 console.log(`===============================================================================================================`);
 // debugger
+window._boisinit=bodavm.config.isinit
 bodavm.toolsFunc.windowdefineProperty(window, "document", {
   configurable: false,
   enumerable: true,
@@ -418,6 +420,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitRTCPeerConnection", {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRTCPeerConnection", arguments);
   }()
 });
+
 bodavm.toolsFunc.windowdefineProperty(window, "webkitMediaStream", {
   configurable: true,
   enumerable: false,
@@ -2370,6 +2373,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "MutationRecord", {
     return bodavm.toolsFunc.dispatch(this, window, "window", "MutationRecord", arguments);
   }()
 });
+//此处取消自执行调用value
 bodavm.toolsFunc.windowdefineProperty(window, "MutationObserver", {
   configurable: true,
   enumerable: false,
@@ -6036,7 +6040,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "matchMedia", {
   writable: true,
   value: function matchMedia() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "matchMedia", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "moveBy", {
   configurable: true,
@@ -8236,14 +8240,14 @@ bodavm.toolsFunc.windowdefineProperty(window, "inspect", {
     return bodavm.toolsFunc.dispatch(this, window, "window", "inspect", arguments);
   }()
 });
-bodavm.toolsFunc.windowdefineProperty(window, "copy", {
-  configurable: true,
-  enumerable: false,
-  writable: true,
-  value: function copy() {
-    return bodavm.toolsFunc.dispatch(this, window, "window", "copy", arguments);
-  }()
-});
+// bodavm.toolsFunc.windowdefineProperty(window, "copy", {
+//   configurable: true,
+//   enumerable: false,
+//   writable: true,
+//   value: function copy() {
+//     return bodavm.toolsFunc.dispatch(this, window, "window", "copy", arguments);
+//   }()
+// });
 bodavm.toolsFunc.windowdefineProperty(window, "queryObjects", {
   configurable: true,
   enumerable: false,
@@ -8389,6 +8393,7 @@ if (window.length > 0) {
 }
 var boeval = eval;
 eval = function (x) {
+  if (x=='debugger'){return {}}
   debugger;
   console.log(`执行eval,参数为${x.length > 30 ? x.substr(0, 50) : x}`);
   return boeval.call(this, x);
@@ -8406,17 +8411,22 @@ window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables] = {
 };
 window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables].__proto__ = null;
 // debugger
-// Object.defineProperty(this, 'window', {
-//     get: function window() {
-//         // if (bodavm.config.proxy ){
-//             // window=bodavm.toolsFunc.proxy(window,'window')
-//             // return window
-//         // }else{
-//             return this
-//         // }
-//     },
-//     // writable: false,
-//     configurable: false,
-//     enumerable:true
-// });
+Object.defineProperty(globalThis, 'window', {
+    get: function window() {
+        // if (bodavm.config.proxy ){
+            // window=bodavm.toolsFunc.proxy(window,'window')
+            // return window
+        // }else{
+            return globalThis
+        // }
+    },
+    // writable: false,
+    configurable: false,
+    enumerable:true
+});
 // debugger
+
+// window.webkitRTCPeerConnection=RTCPeerConnection
+// bodavm.config.isinit=false
+
+

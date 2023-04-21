@@ -1,5 +1,5 @@
 // Option对象
-bodavm.memory.globalobj['Option'] = function Option(){}
+bodavm.memory.globalobj['Option'] = function Option(){this._boisinit=bodavm.config.isinit;}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Option'], "Option");
 bodavm.memory.globalobj['Option'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.toolsFunc.defineProperty('Option', "disabled", {configurable:true, enumerable:true, get:function disabled (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Option'].prototype, "Option", "disabled_get", arguments)}, set:function disabled (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Option'].prototype, "Option", "disabled_set", arguments)}},'prototype');

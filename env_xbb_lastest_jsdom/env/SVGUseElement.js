@@ -1,5 +1,5 @@
 // SVGUseElement对象
-bodavm.memory.globalobj['SVGUseElement'] = function SVGUseElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGUseElement'] = function SVGUseElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGUseElement'], "SVGUseElement");
 bodavm.memory.globalobj['SVGUseElement'].prototype.__proto__=bodavm.memory.globalobj['SVGGraphicsElement'].prototype;
 bodavm.memory.globalobj['SVGUseElement'].__proto__=bodavm.memory.globalobj['SVGGraphicsElement'];

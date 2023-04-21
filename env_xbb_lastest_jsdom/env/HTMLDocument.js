@@ -1,5 +1,6 @@
 // HTMLDocument对象
-bodavm.memory.globalobj['HTMLDocument'] = function HTMLDocument(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLDocument'] = function HTMLDocument(){this._boisinit=bodavm.config.isinit;
+    return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLDocument'], "HTMLDocument");
 bodavm.memory.globalobj['HTMLDocument'].prototype.__proto__=bodavm.memory.globalobj['Document'].prototype;
 bodavm.memory.globalobj['HTMLDocument'].__proto__=bodavm.memory.globalobj['Document'];

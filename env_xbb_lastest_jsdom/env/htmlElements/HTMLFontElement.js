@@ -1,5 +1,5 @@
 // HTMLFontElement对象
-bodavm.memory.globalobj['HTMLFontElement'] = function HTMLFontElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLFontElement'] = function HTMLFontElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLFontElement'], "HTMLFontElement");
 bodavm.memory.globalobj['HTMLFontElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLFontElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

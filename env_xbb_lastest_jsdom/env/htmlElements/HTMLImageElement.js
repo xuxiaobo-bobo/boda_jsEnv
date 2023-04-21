@@ -1,5 +1,5 @@
 // HTMLImageElement对象
-bodavm.memory.globalobj['HTMLImageElement'] = function HTMLImageElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLImageElement'] = function HTMLImageElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLImageElement'], "HTMLImageElement");
 bodavm.memory.globalobj['HTMLImageElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLImageElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

@@ -1,5 +1,5 @@
 // PluginArray对象
-bodavm.memory.globalobj['PluginArray'] = function PluginArray(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['PluginArray'] = function PluginArray(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['PluginArray'], "PluginArray");
 bodavm.toolsFunc.defineProperty('PluginArray', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PluginArray'].prototype, "PluginArray", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('PluginArray', "item", {configurable:true, enumerable:true, writable:true, value:function item (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PluginArray'].prototype, "PluginArray", "item", arguments)}},'prototype');

@@ -1,5 +1,5 @@
 // Navigator对象
-bodavm.memory.globalobj['Navigator'] = function Navigator(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Navigator'] = function Navigator(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Navigator'], "Navigator");
 bodavm.toolsFunc.defineProperty('Navigator', "vendorSub", {configurable:true, enumerable:true, get:function vendorSub (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Navigator'].prototype, "Navigator", "vendorSub_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('Navigator', "productSub", {configurable:true, enumerable:true, get:function productSub (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Navigator'].prototype, "Navigator", "productSub_get", arguments)}, set:undefined},'prototype');
@@ -68,10 +68,10 @@ bodavm.toolsFunc.defineProperty('Navigator', "unregisterProtocolHandler", {confi
 
 
 // navigator对象
-bodavm.memory.globalobj[ 'navigator'] = {}
+bodavm.memory.globalobj[ 'navigator'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'navigator'].__proto__=bodavm.memory.globalobj['Navigator'].prototype;
 // clientInformation对象
-bodavm.memory.globalobj[ 'clientInformation'] = {}
+bodavm.memory.globalobj[ 'clientInformation'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'clientInformation'] .__proto__=bodavm.memory.globalobj['Navigator'].prototype;
 
 

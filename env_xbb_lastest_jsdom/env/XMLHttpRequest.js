@@ -1,5 +1,5 @@
 // XMLHttpRequest对象
-bodavm.memory.globalobj['XMLHttpRequest'] = function XMLHttpRequest(){
+bodavm.memory.globalobj['XMLHttpRequest'] = function XMLHttpRequest(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof XMLHttpRequest)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'XMLHttpRequest': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 

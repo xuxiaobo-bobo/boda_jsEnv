@@ -1,6 +1,6 @@
 // DeviceOrientationEvent对象
 bodavm.memory.globalobj['DeviceOrientationEvent'] = function DeviceOrientationEvent() {
-
+    this._boisinit=bodavm.config.isinit;
     if (!(this instanceof DeviceOrientationEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DeviceOrientationEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };

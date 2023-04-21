@@ -1,4 +1,4 @@
-bodavm.memory.globalobj['WindowProperties'] = function WindowProperties() {
+bodavm.memory.globalobj['WindowProperties'] = function WindowProperties() {this._boisinit=bodavm.config.isinit;
     return bodavm.toolsFunc.throwError("TypeError","Illegal constructor")
     // throw ReferenceError(`WindowProperties is not defined
     // at <anonymous>:1:100`)

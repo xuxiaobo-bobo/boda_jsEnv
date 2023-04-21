@@ -1,5 +1,5 @@
 // Notification对象
-bodavm.memory.globalobj['Notification'] = function Notification(){
+bodavm.memory.globalobj['Notification'] = function Notification(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Notification)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Notification': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };

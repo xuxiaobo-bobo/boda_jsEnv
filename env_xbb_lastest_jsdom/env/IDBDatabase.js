@@ -1,5 +1,5 @@
 // IDBDatabase对象
-bodavm.memory.globalobj['IDBDatabase'] = function IDBDatabase(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBDatabase'] = function IDBDatabase(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBDatabase'], "IDBDatabase");
 bodavm.memory.globalobj['IDBDatabase'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['IDBDatabase'].__proto__=bodavm.memory.globalobj['EventTarget'];

@@ -1,5 +1,5 @@
 // PermissionStatus对象
-bodavm.memory.globalobj['PermissionStatus'] = function PermissionStatus(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['PermissionStatus'] = function PermissionStatus(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['PermissionStatus'], "PermissionStatus");
 bodavm.memory.globalobj['PermissionStatus'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['PermissionStatus'].__proto__=bodavm.memory.globalobj['EventTarget'];

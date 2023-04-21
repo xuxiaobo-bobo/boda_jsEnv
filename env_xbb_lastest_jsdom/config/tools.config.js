@@ -1,5 +1,5 @@
-const fs=require("fs");
-const path = require("path");
+var  fs=require("fs");
+var  path = require("path");
 
 
 function getFile(name) {
@@ -18,7 +18,7 @@ function getCode(){
     let code=""
     code+=getFile("toolsFunc")
     // code+=getFile("toolsJsSoup")
-    code+=getFile("toolsParseHtml")
+    // code+=getFile("toolsParseHtml")
     code+=getFile("envFunc")
     code+=getFile("toolsPlugin")
     return code

@@ -1,5 +1,5 @@
 // HTMLParagraphElement对象
-bodavm.memory.globalobj['HTMLParagraphElement'] = function HTMLParagraphElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLParagraphElement'] = function HTMLParagraphElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLParagraphElement'], "HTMLParagraphElement");
 bodavm.memory.globalobj['HTMLParagraphElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLParagraphElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

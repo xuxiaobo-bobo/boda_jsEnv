@@ -1,5 +1,5 @@
 // MediaQueryList对象
-bodavm.memory.globalobj['MediaQueryList'] = function MediaQueryList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['MediaQueryList'] = function MediaQueryList(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MediaQueryList'], "MediaQueryList");
 bodavm.memory.globalobj['MediaQueryList'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['MediaQueryList'].__proto__=bodavm.memory.globalobj['EventTarget'];

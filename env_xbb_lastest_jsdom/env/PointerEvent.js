@@ -1,5 +1,5 @@
 // PointerEvent对象
-bodavm.memory.globalobj['PointerEvent']  = function PointerEvent(){
+bodavm.memory.globalobj['PointerEvent']  = function PointerEvent(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof PointerEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PointerEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };   

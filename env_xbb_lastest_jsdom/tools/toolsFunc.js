@@ -7,160 +7,166 @@
 ;;
 !function () {
 
-    bodavm.toolsFunc.setProto = function setpro(dom) {
+    bodavm.toolsFunc.setProto = function setpro(dom,ele) {
         //设置原型链
-        let ele = {}
+        if (!ele){
+            ele={}
+        }
+        // let ele = {}
         let tagpro = dom.toUpperCase()
         switch (tagpro) {
             case "DIV":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLDivElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLDivElement'].prototype)
                 return ele
             case "SCRIPT":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLScriptElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLScriptElement'].prototype)
 
                 return ele
             case "TITLE":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLTitleElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLTitleElement'].prototype)
 
                 return ele
             case "HEAD":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHeadElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHeadElement'].prototype)
 
                 return ele
             case 'META':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLMetaElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLMetaElement'].prototype)
 
                 return ele
             case 'LINK':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLLinkElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLLinkElement'].prototype)
 
                 return ele
             case "A":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLAnchorElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLAnchorElement'].prototype)
 
                 return ele
             case "SPAN":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLSpanElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLSpanElement'].prototype)
 
                 return ele
             case "P":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLParagraphElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLParagraphElement'].prototype)
 
                 return ele
             case "LI":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLLIElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLLIElement'].prototype)
 
                 return ele
             case "UL":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLUListElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLUListElement'].prototype)
 
                 return ele
             case 'IFRAME':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLIFrameElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLIFrameElement'].prototype)
 
                 return ele
             case 'IMG':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLImageElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLImageElement'].prototype)
 
                 return ele
             case "H1":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
 
                 return ele
             case "H2":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
 
                 return ele
             case "NOSCRIPT":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
 
                 return ele
             case 'INPUT':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLInputElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLInputElement'].prototype)
 
                 return ele
             case 'FORM':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLFormElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLFormElement'].prototype)
 
                 return ele
             case 'STYLE':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLStyleElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLStyleElement'].prototype)
 
                 return ele
             case 'VIDEO':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLVideoElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLVideoElement'].prototype)
                 return ele
             case 'BODY':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLBodyElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLBodyElement'].prototype)
                 return ele
             case 'HTML':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHtmlElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHtmlElement'].prototype)
                 return ele
             case "CANVAS":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLCanvasElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLCanvasElement'].prototype)
                 return ele
             case "SECTION":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
                 return ele
             case "I":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
 
                 return ele
             case "FONT":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLFontElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLFontElement'].prototype)
 
                 return ele
             case "EM":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
 
                 return ele
             case "H6":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
 
                 return ele
             case "OPTION":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLOptionElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLOptionElement'].prototype)
 
                 return ele
             case "SELECT":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLSelectElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLSelectElement'].prototype)
 
                 return ele
             case "BR":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLBRElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLBRElement'].prototype)
 
                 return ele
             case "CLOB":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLUnknownElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLUnknownElement'].prototype)
 
                 return ele
             case "MARQUEE":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLMarqueeElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLMarqueeElement'].prototype)
 
                 return ele
             case "STRONG":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
 
                 return ele
             case "BUTTON":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLButtonElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLButtonElement'].prototype)
 
                 return ele
             case 'LEGEND':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLLegendElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLLegendElement'].prototype)
 
                 return ele
             case 'OPTGROUP':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLOptGroupElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLOptGroupElement'].prototype)
 
                 return ele
             case "FIELDSET":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLFieldSetElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLFieldSetElement'].prototype)
 
                 return ele
             case '#TEXT':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['Text'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['Text'].prototype)
 
+                return ele
+            case "#DOCUMENT":
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLDocument'].prototype)
                 return ele
             default:
                 console.log(`setProto属性${tagpro}未实现`)
@@ -206,7 +212,7 @@
     }
 
 
-    // //proxy代理
+    // // //proxy代理
     bodavm.toolsFunc.proxy = function (obj, objName) {
         // bodavm.toolsFunc.symbolProperty(obj)
         // bodavm.memory.globalobj[objName]=obj
@@ -227,14 +233,14 @@
                 }
                 if (prop == hasOwnProperty) { debugger }
                 // let mylog=
-                console.log('['+ objName + ']', '  获取属性:   ', prop, '  value:   ', result);
+                console.log('[' + objName + ']', '  获取属性:   ', prop, '  value:   ', result);
 
                 if (typeof result == 'function') {
-                    myloglist.push({ 'type': 'get:'+ objName, 'prop0': prop, 'prop1': result.toString() })
+                    myloglist.push({ 'type': 'get:' + objName, 'prop0': prop, 'prop1': result.toString() })
 
                 }
                 else {
-                    myloglist.push({ 'type': 'get:'+ objName, 'prop0': prop, 'prop1': result })
+                    myloglist.push({ 'type': 'get:' + objName, 'prop0': prop, 'prop1': result })
 
                 }
 
@@ -253,17 +259,17 @@
                 //     bodavm.memory.window[propKey]=value
                 // }
                 // debugger
-                console.log('['+ objName + ']', "   设置属性:   ", propKey, "   value:   ", value);
+                console.log('[' + objName + ']', "   设置属性:   ", propKey, "   value:   ", value);
                 if (typeof value == 'function') {
-                    myloglist.push({ 'type': 'set:'+ objName, 'prop0': propKey, 'prop1': value.toString() })
+                    myloglist.push({ 'type': 'set:' + objName, 'prop0': propKey, 'prop1': value.toString() })
 
                 }
                 else {
                     if (!value) {
-                        myundefinedlist.push({ 'type': 'set:'+ objName, 'prop0': propKey, 'prop1': value })
+                        myundefinedlist.push({ 'type': 'set:' + objName, 'prop0': propKey, 'prop1': value })
 
                     }
-                    myloglist.push({ 'type': 'set:'+ objName, 'prop0': propKey, 'prop1': value })
+                    myloglist.push({ 'type': 'set:' + objName, 'prop0': propKey, 'prop1': value })
                 }
 
                 let res = Reflect.set(target, propKey, value, receiver);
@@ -288,37 +294,66 @@
         //bodavm.toolsFunc.dispatch(this,Document.prototype,"Document","write",arguments)}});
         let name = `${objName}_${funcName}`
         //实现r={} ,r.__proto__=Document.prototype ,r.location 报错
-
+        // debugger
         //实现Document.prototype.activeElement()调用报错
         if (Object.getOwnPropertyDescriptor(obj, "constructor") !== undefined) {
             if (Object.getOwnPropertyDescriptor(self, "constructor") !== undefined) {
                 return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
             }
         }
+
+        // 实现r={} ;r.__proto__=document ,r.location 报错
+        if (self.__proto__.constructor == self.__proto__.__proto__.constructor) {
+            debugger
+            console.log(self, `  bodavm.toolsFunc.dispatch 执行出错`, funcName);
+            return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+        }
+        if (!(self._boisinit) && !(self._boarg)) {
+            debugger
+            console.log(self, `  bodavm.toolsFunc.dispatch isinit  执行出错`, funcName);
+            return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+        }
+
         try {
 
-            // if (bodavm.config.issymbolProperty){
-            //     if(self[bodavm.memory.symbolProperty] ==undefined){
-            //         debugger
-            //         console.log(self,`  bodavm.toolsFunc.dispatch1 执行出错`,funcName);
-            //         return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
-
-            //     }
-            //     //实现r={} ;r.__proto__=document ,r.location 报错
-            //     if (self.__proto__.constructor == self.__proto__.__proto__.constructor){
-            //         debugger
-            //         console.log(self,`  bodavm.toolsFunc.dispatch2  执行出错`,funcName);
-            // return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+            // if (bodavm.memory.cache[name] ==self){
+            //     return bodavm.memory.cache[name].apply(self, argList)
+            // }else{
+            //     bodavm.memory.cache[name]=self
+            // }
+            // bodavm.memory.cache[name]=bodavm.envFunc[name].apply(self, argList)
+            // if(bodavm.memory.cache[name]){
+            //     debugger
+            //     return bodavm.memory.cache[name]
+            // }
+            // args=''
+            // for (let i = 0; i< argList.length; i++) {
+            //     args += (argList[i])
+               
             // }
 
+            // if (bodavm.memory.cache[name]
+            //     && bodavm.memory.cache[name].arg==args
+            //      ) {
+            //     debugger
+            //     let res = bodavm.memory.cache[name]['res']
+            //     console.log(name, '已经存在于cache中,从cache取值 res -> ', res)
+            //     return res
             // }
+            
+            // bodavm.memory.cache[name] = {
+            //     // 'this': self,
+            //     'res': {},
+            //     'arg': ''
+            // }
+
 
             return bodavm.envFunc[name].apply(self, argList)
 
 
         } catch (e) {
-        //     // 
-        //     // debugger
+            //     // 
+            //     // debugger
             let log__ = `'[${name}]正在执行,错误信息${e.message}'`
             console.log(log__);
             bodavm.toolsFunc.printLog(log__)
@@ -331,24 +366,24 @@
         let newDescriptior = {};
         newDescriptior.configurable = bodavm.config.proxy || OldDescriptior.configurable;//如果开启代理必须是true
         newDescriptior.enumerable = OldDescriptior.enumerable;
-        if (OldDescriptior.hasOwnProperty("writable")) {
+        if (OldDescriptior.hasOwnProperty("writable",'boboflag')) {
             newDescriptior.writable = bodavm.config.proxy || OldDescriptior.writable;//如果开启代理必须是true
         }
-        if (OldDescriptior.hasOwnProperty("value")) {
+        if (OldDescriptior.hasOwnProperty("value",'boboflag')) {
             let value = OldDescriptior.value;
             if (typeof value == "function") {
                 bodavm.toolsFunc.safeFunc(value, prop)
             }
             newDescriptior.value = value;
         }
-        if (OldDescriptior.hasOwnProperty("get")) {
+        if (OldDescriptior.hasOwnProperty("get",'boboflag')) {
             let get = OldDescriptior.get;
             if (typeof get == "function") {
                 bodavm.toolsFunc.safeFunc(get, `get ${prop}`)
             }
             newDescriptior.get = get;
         }
-        if (OldDescriptior.hasOwnProperty("set")) {
+        if (OldDescriptior.hasOwnProperty("set",'boboflag')) {
             let set = OldDescriptior.set;
             if (typeof set == "function") {
                 bodavm.toolsFunc.safeFunc(set, `set ${prop}`)
@@ -361,10 +396,10 @@
 
         // }else{
         //     // debugger
-            Object.defineProperty(obj, prop, newDescriptior, 'bobo')
+        Object.defineProperty(obj, prop, newDescriptior, 'bobo')
 
-        }
-        // let name=obj.name?obj.name:obj.constructor.name
+    }
+    // let name=obj.name?obj.name:obj.constructor.name
 
     // };
 
@@ -374,24 +409,24 @@
         let newDescriptior = {};
         newDescriptior.configurable = bodavm.config.proxy || OldDescriptior.configurable;//如果开启代理必须是true
         newDescriptior.enumerable = OldDescriptior.enumerable;
-        if (OldDescriptior.hasOwnProperty("writable")) {
+        if (OldDescriptior.hasOwnProperty("writable",'boboflag')) {
             newDescriptior.writable = bodavm.config.proxy || OldDescriptior.writable;//如果开启代理必须是true
         }
-        if (OldDescriptior.hasOwnProperty("value")) {
+        if (OldDescriptior.hasOwnProperty("value",'boboflag')) {
             let value = OldDescriptior.value;
             if (typeof value == "function") {
                 bodavm.toolsFunc.safeFunc(value, prop)
             }
             newDescriptior.value = value;
         }
-        if (OldDescriptior.hasOwnProperty("get")) {
+        if (OldDescriptior.hasOwnProperty("get",'boboflag')) {
             let get = OldDescriptior.get;
             if (typeof get == "function") {
                 bodavm.toolsFunc.safeFunc(get, `get ${prop}`)
             }
             newDescriptior.get = get;
         }
-        if (OldDescriptior.hasOwnProperty("set")) {
+        if (OldDescriptior.hasOwnProperty("set",'boboflag')) {
             let set = OldDescriptior.set;
             if (typeof set == "function") {
                 bodavm.toolsFunc.safeFunc(set, `set ${prop}`)
@@ -411,9 +446,9 @@
     //保护函数
     (() => {
         "use strict";
-        const $toString = Function.toString;  //hook Function.toString 且命名为myToString
+        var  $toString = Function.toString;  //hook Function.toString 且命名为myToString
         //变量名取随机数防检测
-        const myFunction_toString_symbol = Symbol('('.concat('', ')_', (Math.random() + '').toString(36)));
+        var  myFunction_toString_symbol = Symbol('('.concat('', ')_', (Math.random() + '').toString(36)));
 
         //自定义函数
         //逻辑与短路运算      &&    如果表达式1结果为真,则返回表达式2,
@@ -429,8 +464,8 @@
 
         //$toString.call(this)就是对原函数调用
 
-        const myToString = function () {
-            return typeof this == 'function'&& this[myFunction_toString_symbol] || $toString.call(this);   //谁调用这个方法,this就是谁,比如boda调用,这个this就是boda
+        var  myToString = function () {
+            return typeof this == 'function' && this[myFunction_toString_symbol] || $toString.call(this);   //谁调用这个方法,this就是谁,比如boda调用,这个this就是boda
         };
 
 

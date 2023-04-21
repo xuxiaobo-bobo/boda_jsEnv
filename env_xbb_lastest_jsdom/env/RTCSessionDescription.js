@@ -1,5 +1,5 @@
 // RTCSessionDescription对象
-bodavm.memory.globalobj['RTCSessionDescription'] = function RTCSessionDescription(){}
+bodavm.memory.globalobj['RTCSessionDescription'] = function RTCSessionDescription(){this._boisinit=bodavm.config.isinit;}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['RTCSessionDescription'], "RTCSessionDescription");
 bodavm.toolsFunc.defineProperty('RTCSessionDescription', "type", {configurable:true, enumerable:true, get:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "type_get", arguments)}, set:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "type_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('RTCSessionDescription', "sdp", {configurable:true, enumerable:true, get:function sdp (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "sdp_get", arguments)}, set:function sdp (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "sdp_set", arguments)}},'prototype');

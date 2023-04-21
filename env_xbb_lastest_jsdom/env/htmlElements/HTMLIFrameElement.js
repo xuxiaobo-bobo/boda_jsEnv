@@ -1,5 +1,5 @@
 // HTMLIFrameElement对象
-bodavm.memory.globalobj['HTMLIFrameElement'] = function HTMLIFrameElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLIFrameElement'] = function HTMLIFrameElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLIFrameElement'], "HTMLIFrameElement");
 bodavm.memory.globalobj['HTMLIFrameElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLIFrameElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

@@ -1,5 +1,5 @@
 // HTMLElement对象
-bodavm.memory.globalobj['HTMLElement'] = function HTMLElement(){
+bodavm.memory.globalobj['HTMLElement'] = function HTMLElement(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof HTMLElement)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'HTMLElement': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };

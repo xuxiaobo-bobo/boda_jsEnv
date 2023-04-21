@@ -1,5 +1,5 @@
 // HTMLButtonElement对象
-bodavm.memory.globalobj['HTMLButtonElement'] = function HTMLButtonElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLButtonElement'] = function HTMLButtonElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLButtonElement'], "HTMLButtonElement");
 bodavm.memory.globalobj['HTMLButtonElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLButtonElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

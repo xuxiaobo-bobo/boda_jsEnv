@@ -1,5 +1,5 @@
 // SVGPatternElement对象
-bodavm.memory.globalobj['SVGPatternElement'] = function SVGPatternElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGPatternElement'] = function SVGPatternElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGPatternElement'], "SVGPatternElement");
 bodavm.memory.globalobj['SVGPatternElement'].prototype.__proto__=bodavm.memory.globalobj['SVGElement'].prototype;
 bodavm.memory.globalobj['SVGPatternElement'].__proto__=bodavm.memory.globalobj['SVGElement'];

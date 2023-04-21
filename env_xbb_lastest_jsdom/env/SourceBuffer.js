@@ -1,5 +1,5 @@
 // SourceBuffer对象
-bodavm.memory.globalobj['SourceBuffer'] = function SourceBuffer(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SourceBuffer'] = function SourceBuffer(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SourceBuffer'], "SourceBuffer");
 bodavm.memory.globalobj['SourceBuffer'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['SourceBuffer'].__proto__=bodavm.memory.globalobj['EventTarget'];

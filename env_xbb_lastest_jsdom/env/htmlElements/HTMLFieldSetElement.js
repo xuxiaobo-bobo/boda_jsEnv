@@ -1,5 +1,5 @@
 // HTMLFieldSetElement对象
-bodavm.memory.globalobj['HTMLFieldSetElement'] = function HTMLFieldSetElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLFieldSetElement'] = function HTMLFieldSetElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLFieldSetElement'], "HTMLFieldSetElement");
 bodavm.memory.globalobj['HTMLFieldSetElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLFieldSetElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

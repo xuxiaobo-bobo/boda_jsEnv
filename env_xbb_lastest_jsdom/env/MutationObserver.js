@@ -1,11 +1,12 @@
 // MutationObserver对象
-bodavm.memory.globalobj['MutationObserver'] = function MutationObserver(){
+bodavm.memory.globalobj['MutationObserver'] = function MutationObserver(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof MutationObserver)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MutationObserver': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
     if (arguments.length <1){
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MutationObserver': 1 argument required, but only 0 present.")}
-
+    
+    this._boarg=new bodaobj.window.MutationObserver(arguments[0])
     }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MutationObserver'], "MutationObserver");
 bodavm.toolsFunc.defineProperty('MutationObserver', "disconnect", {configurable:true, enumerable:true, writable:true, value:function disconnect (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MutationObserver'].prototype, "MutationObserver", "disconnect", arguments)}},'prototype');

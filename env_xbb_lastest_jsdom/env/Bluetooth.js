@@ -1,5 +1,5 @@
 // Bluetooth对象
-bodavm.memory.globalobj['Bluetooth'] = function Bluetooth(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Bluetooth'] = function Bluetooth(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Bluetooth'], "Bluetooth");
 bodavm.memory.globalobj['Bluetooth'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Bluetooth'].__proto__=bodavm.memory.globalobj['EventTarget'];

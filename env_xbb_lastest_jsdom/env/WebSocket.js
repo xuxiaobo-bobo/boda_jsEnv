@@ -1,5 +1,5 @@
 // WebSocket对象
-bodavm.memory.globalobj['WebSocket'] = function WebSocket(){
+bodavm.memory.globalobj['WebSocket'] = function WebSocket(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof WebSocket)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WebSocket': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 

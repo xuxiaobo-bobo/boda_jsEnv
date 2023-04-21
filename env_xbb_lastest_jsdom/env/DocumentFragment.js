@@ -1,5 +1,6 @@
 // DocumentFragment对象
 bodavm.memory.globalobj['DocumentFragment'] = function DocumentFragment(){
+    this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Document)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DocumentFragment': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };

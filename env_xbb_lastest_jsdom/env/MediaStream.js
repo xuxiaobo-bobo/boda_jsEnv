@@ -1,5 +1,5 @@
 // MediaStream对象
-bodavm.memory.globalobj['MediaStream'] = function MediaStream(){
+bodavm.memory.globalobj['MediaStream'] = function MediaStream(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof MediaStream)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaStream   ': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };

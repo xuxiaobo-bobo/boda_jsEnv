@@ -21,7 +21,7 @@ bodavm.memory.document={
     documentURI:"${document.documentURI}",
     compatMode:"${document.compatMode}",
     dir:"${document.dir}",
-    title:"${document.title}",
+    title:'${document.title}',
     designMode:"${document.designMode}",
     readyState:"${document.readyState}",
     contentType:"${document.contentType}",
@@ -103,10 +103,22 @@ bodavm.memory.window={
     onblur:${onblur},
     oncancel:${oncancel},
     oncanplay:${oncanplay},
-    oncanplaythrough:${oncanplaythrough}
+    oncanplaythrough:${oncanplaythrough},
+    onsearch:${onsearch},
+    opener:${opener},
+    frameElement:${frameElement},
+    
 
 };
 bodavm.memory.localStorage={}
+
+bodavm.memory.Performance={
+    'getEntriesByType':${JSON.stringify(performance.getEntriesByType('resource'))},
+    'timeOrigin':${performance.timeOrigin}
+
+
+
+};
 
 `
 

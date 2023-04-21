@@ -1,5 +1,5 @@
 // HTMLSelectElement对象
-bodavm.memory.globalobj['HTMLSelectElement'] = function HTMLSelectElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLSelectElement'] = function HTMLSelectElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLSelectElement'], "HTMLSelectElement");
 bodavm.memory.globalobj['HTMLSelectElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLSelectElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

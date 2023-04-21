@@ -8,7 +8,7 @@ bodavm.memory.globalobj['CloseEvent'] = function CloseEvent() {
     if (arguments.length < 1) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CloseEvent': 1 argument required, but only 0 present.")
     }
-
+    this._boisinit=bodavm.config.isinit;
 }
 
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CloseEvent'], "CloseEvent");

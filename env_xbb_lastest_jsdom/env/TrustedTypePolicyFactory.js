@@ -1,5 +1,5 @@
 // TrustedTypePolicyFactory对象
-bodavm.memory.globalobj['TrustedTypePolicyFactory'] = function TrustedTypePolicyFactory(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['TrustedTypePolicyFactory'] = function TrustedTypePolicyFactory(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['TrustedTypePolicyFactory'], "TrustedTypePolicyFactory");
 bodavm.memory.globalobj['TrustedTypePolicyFactory'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['TrustedTypePolicyFactory'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -14,5 +14,5 @@ bodavm.toolsFunc.defineProperty('TrustedTypePolicyFactory', "isHTML", {configura
 bodavm.toolsFunc.defineProperty('TrustedTypePolicyFactory', "isScript", {configurable:true, enumerable:true, writable:true, value:function isScript (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['TrustedTypePolicyFactory'].prototype, "TrustedTypePolicyFactory", "isScript", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('TrustedTypePolicyFactory', "isScriptURL", {configurable:true, enumerable:true, writable:true, value:function isScriptURL (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['TrustedTypePolicyFactory'].prototype, "TrustedTypePolicyFactory", "isScriptURL", arguments)}},'prototype');
 
-bodavm.memory.globalobj[ 'trustedTypes'] = {}
+bodavm.memory.globalobj[ 'trustedTypes'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'trustedTypes'].__proto__ = bodavm.memory.globalobj['TrustedTypePolicyFactory'] .prototype

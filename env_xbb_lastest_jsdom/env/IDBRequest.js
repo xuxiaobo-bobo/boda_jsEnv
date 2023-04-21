@@ -1,5 +1,5 @@
 // IDBRequest对象
-bodavm.memory.globalobj['IDBRequest'] = function IDBRequest(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBRequest'] = function IDBRequest(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBRequest'], "IDBRequest");
 bodavm.memory.globalobj['IDBRequest'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['IDBRequest'].__proto__=bodavm.memory.globalobj['EventTarget'];

@@ -1,5 +1,5 @@
 // RTCDataChannel对象
-bodavm.memory.globalobj['RTCDataChannel'] = function RTCDataChannel(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['RTCDataChannel'] = function RTCDataChannel(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['RTCDataChannel'], "RTCDataChannel");
 bodavm.memory.globalobj['RTCDataChannel'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['RTCDataChannel'].__proto__=bodavm.memory.globalobj['EventTarget'];

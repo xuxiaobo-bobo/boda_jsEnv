@@ -1,5 +1,5 @@
 // ScreenOrientation对象
-bodavm.memory.globalobj['ScreenOrientation'] = function ScreenOrientation(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['ScreenOrientation'] = function ScreenOrientation(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['ScreenOrientation'], "ScreenOrientation");
 bodavm.memory.globalobj['ScreenOrientation'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['ScreenOrientation'].__proto__=bodavm.memory.globalobj['EventTarget'];

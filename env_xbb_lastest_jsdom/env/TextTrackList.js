@@ -1,5 +1,5 @@
 // TextTrackList对象
-bodavm.memory.globalobj['TextTrackList'] = function TextTrackList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['TextTrackList'] = function TextTrackList(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['TextTrackList'], "TextTrackList");
 bodavm.memory.globalobj['TextTrackList'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['TextTrackList'].__proto__=bodavm.memory.globalobj['EventTarget'];

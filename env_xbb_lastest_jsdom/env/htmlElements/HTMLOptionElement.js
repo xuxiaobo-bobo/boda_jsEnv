@@ -1,5 +1,5 @@
 // HTMLOptionElement对象
-bodavm.memory.globalobj['HTMLOptionElement'] = function HTMLOptionElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLOptionElement'] = function HTMLOptionElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLOptionElement'], "HTMLOptionElement");
 bodavm.memory.globalobj['HTMLOptionElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLOptionElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

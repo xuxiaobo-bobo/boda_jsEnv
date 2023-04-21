@@ -1,193 +1,174 @@
-const PENDING = 'pending';
-const FULFILLED = 'fulfilled';
-const REJECTED = 'rejected';
+function Promise(fn) {
+  var self = this;
+  self.value = null;
+  self.error = null;
+  self.status = 'pending';
+  self.onFulfilled = [];
+  self.onRejected = [];
 
-function Promise(executor) {
-  this.state = PENDING;
-  this.value = null;
-  this.reason = null;
-  this.onFulfilledCallbacks = [];
-  this.onRejectedCallbacks = [];
-
-  const resolve = (value) => {
-    if (this.state === PENDING) {
-      this.state = FULFILLED;
-      this.value = value;
-      this.onFulfilledCallbacks.forEach((fun) => {
-        fun();
-      });
+  function resolve(value) {
+    if (self.status === 'pending') {
+      self.status = 'fulfilled';
+      self.value = value;
+      for (var i = 0; i < self.onFulfilled.length; i++) {
+        setTimeout(function() {
+          self.onFulfilled[i](self.value);
+        }, 0);
+      }
     }
-  };
-
-  const reject = (reason) => {
-    if (this.state === PENDING) {
-      this.state = REJECTED;
-      this.reason = reason;
-      this.onRejectedCallbacks.forEach((fun) => {
-        fun();
-      });
-    }
-  };
-
-  try {
-    executor(resolve, reject);
-  } catch (reason) {
-    reject(reason);
   }
+  function reject(error) {
+    if (self.status === 'pending') {
+      self.status = 'rejected';
+      self.error = error;
+      for (var i = 0; i < self.onRejected.length; i++) {
+        setTimeout(function() {
+          self.onRejected[i](self.error);
+        }, 0);
+      }
+    }
+  }
+
+  fn(resolve, reject);
 }
-bodavm.toolsFunc.safeProto(Promise,"Promise");
+bodavm.toolsFunc.safeFunc(Promise,'Promise')
 
 
+Promise.prototype.then = function(onFulfilled, onRejected) {
+  var self = this;
+  var promise = new Promise(function(resolve, reject) {
+    function handle(value) {
+      try {
+        var result = onFulfilled(value);
+        if (result instanceof Promise) {
+          result.then(resolve, reject);
+        } else {
+          resolve(result);
+        }
+      } catch (error) {
+        reject(error);
+      }
+    }
 
-//原型上面的方法
-//用settimeout来模拟异步调用,保证链式调用，即then方法中要返回一个新的promise，并将then方法的返回值进行resolve
-Promise.prototype.then = function (onFulfilled, onRejected) {
-  if (typeof onFulfilled != 'function') {
-    onFulfilled = function (value) {
-      return value;
-    };
-  }
-  if (typeof onRejected != 'function') {
-    onRejected = function (reason) {
-      throw reason;
-    };
-  }
-  const promise2 = new Promise((resolve, reject) => {
-    switch (this.state) {
-      case FULFILLED:
-        setTimeout(() => {
-          try {
-            const x = onFulfilled(this.value);
-            resolve(x);
-          } catch (reason) {
-            reject(reason);
-          }
-        }, 0);
-        break;
-      case REJECTED:
-        setTimeout(() => {
-          try {
-            const x = onRejected(this.reason);
-            resolve(x);
-          } catch (reason) {
-            reject(reason);
-          }
-        }, 0);
-        break;
-      case PENDING:
-        this.onFulfilledCallbacks.push(() => {
-          setTimeout(() => {
-            try {
-              const x = onFulfilled(this.value);
-              resolve(x);
-            } catch (reason) {
-              reject(reason);
-            }
-          }, 0);
-        });
-        this.onRejectedCallbacks.push(() => {
-          setTimeout(() => {
-            try {
-              const x = onRejected(this.reason);
-              resolve(x);
-            } catch (reason) {
-              reject(reason);
-            }
-          }, 0);
-        });
-        break;
+    function handleError(error) {
+      try {
+        var result = onRejected(error);
+        if (result instanceof Promise) {
+          result.then(resolve, reject);
+        } else {
+          resolve(result);
+        }
+      } catch (error) {
+        reject(error);
+      }
+    }
+
+    if (self.status === 'fulfilled') {
+      setTimeout(function() {
+        handle(self.value);
+      }, 0);
+    } else if (self.status === 'rejected') {
+      setTimeout(function() {
+        handleError(self.error);
+      }, 0);
+    } else {
+      self.onFulfilled.push(handle);
+      self.onRejected.push(handleError);
     }
   });
-  return promise2;
-};
-bodavm.toolsFunc.safeFunc(Promise.prototype.then,'then')
 
-Promise.prototype.catch = function (onRejected) {
+  return promise;
+};
+bodavm.toolsFunc.safeFunc(Promise.prototype.then ,'then')
+
+Promise.prototype.catch = function(onRejected) {
   return this.then(null, onRejected);
 };
 bodavm.toolsFunc.safeFunc(Promise.prototype.catch,'catch')
 
-
-Promise.prototype.finally = function (fn) {
+Promise.prototype.finally = function(onFinally) {
   return this.then(
-    (value) => {
-      fn();
-      return value;
+    function(value) {
+      return Promise.resolve(onFinally()).then(function() {
+        return value;
+      });
     },
-    (reason) => {
-      fn();
-      throw reason;
+    function(error) {
+      return Promise.resolve(onFinally()).then(function() {
+        throw error;
+      });
     }
   );
 };
 bodavm.toolsFunc.safeFunc(Promise.prototype.finally,'finally')
 
-
-//静态方法
-Promise.resolve = function (value) {
-  return new Promise((resolve, reject) => {
+Promise.resolve = function(value) {
+  return new Promise(function(resolve) {
     resolve(value);
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.resolve,'resolve')
+bodavm.toolsFunc.safeFunc(Promise.resolve ,'resolve')
 
-Promise.reject = function (reason) {
-  return new Promise((resolve, reject) => {
-    reject(reason);
+Promise.reject = function(error) {
+  return new Promise(function(resolve, reject) {
+    reject(error);
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.reject,'reject')
+bodavm.toolsFunc.safeFunc(Promise.reject ,'reject')
 
-//接受一个promise数组，当所有promise状态resolve后，执行resolve
-Promise.all = function (promises) {
-  return new Promise((resolve, reject) => {
-    if (promises.length === 0) {
-      resolve([]);
-    } else {
-      let result = [];
-      let index = 0;
-      for (let i = 0; i < promises.length; i++) {
-        promises[i].then(
-          (data) => {
-            result[i] = data;
-            if (++index === promises.length) {
-              resolve(result);
-            }
-          },
-          (err) => {
-            reject(err);
-            return;
-          }
-        );
+Promise.all = function(promises) {
+  return new Promise(function(resolve, reject) {
+    var results = [];
+    var count = 0;
+
+    function handle(i, value) {
+      results[i] = value;
+      count++;
+
+      if (count === promises.length) {
+        resolve(results);
       }
+    }
+
+    for (var i = 0; i < promises.length; i++) {
+      promises[i].then(handle.bind(null, i), reject);
     }
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.all,'all')
+bodavm.toolsFunc.safeFunc(Promise.all ,'all')
 
-//接受一个promise数组，当有一个promise状态resolve后，执行resolve
-Promise.race = function (promises) {
-  return new Promise((resolve, reject) => {
-    if (promises.length === 0) {
-      resolve();
-    } else {
-      let index = 0;
-      for (let i = 0; i < promises.length; i++) {
-        promises[i].then(
-          (data) => {
-            resolve(data);
-          },
-          (err) => {
-            reject(err);
-            return;
-          }
-        );
-      }
+Promise.race = function(promises) {
+  return new Promise(function(resolve, reject) {
+    for (var i = 0; i < promises.length; i++) {
+      promises[i].then(resolve, reject);
     }
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.race,'race')
+bodavm.toolsFunc.safeFunc(Promise.race ,'race')
 
-bodavm.toolsFunc.safeFunc(Promise)
+Promise.allSettled = function(promises) {
+  return new Promise(function(resolve) {
+    var results = [];
+    var count = 0;
+
+    function handle(i, status) {
+      return function(value) {
+        results[i] = { status: status, value: value };
+        count++;
+
+        if (count === promises.length) {
+          resolve(results);
+        }
+      };
+    }
+
+    for (var i = 0; i < promises.length; i++) {
+      promises[i].then(handle(i, 'fulfilled'), handle(i, 'rejected'));
+    }
+  });
+};
+bodavm.toolsFunc.safeFunc(Promise.allSettled ,'allSettled')
+
+// bodavm.toolsFunc.safeFunc(Promise)
 // globalMy.rename(Promise.prototype,"Promise")
 

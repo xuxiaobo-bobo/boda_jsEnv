@@ -6,6 +6,7 @@ let mylist2 = ''
 let name_ = []
 function getFile(name) {
     try {
+        // name_.push(name)
         return fs.readFileSync(`${env_path}/${name}.js`) + "\r\n";
 
     } catch (e) {
@@ -20,6 +21,7 @@ function getHtmlElement() {
         let filelist = fs.readdirSync(`${env_path}/htmlElements`)
         for (let i = 0; i < filelist.length; i++) {
             code += fs.readFileSync(`${env_path}/htmlElements/${filelist[i]}`) + "\r\n"
+            // name_.push(filelist[i])
 
         }
         return code
@@ -36,6 +38,7 @@ function getCode() {
     code += getFile("WindowProperties")
     code += getFile("Window")
     code += getFile("Node")
+    code +=getFile('StorageManager')
     code += getFile("Element")
     code += getFile("HTMLElement")
     code += getFile("HTMLCollection")
@@ -64,6 +67,8 @@ function getCode() {
     code += getFile("CanvasRenderingContext2D")
     code += getFile("WebGLRenderingContext")
     code += getFile("MediaQueryList")
+    
+    // code += getFile("matchMedia")
     code += getFile("CSSRuleList")
     code += getFile('Attr')
     code += getFile('Option')
@@ -118,6 +123,7 @@ function getCode() {
     code += getFile('ScreenOrientation')
     code += getFile("PerformanceEntry")
     code += getFile("PerformancePaintTiming")
+    code +=getFile("PerformanceResourceTiming")
     code += getFile("Permissions")
     code += getFile("PermissionStatus")
     code += getFile("Request")
@@ -152,7 +158,8 @@ function getCode() {
     code += getFile("XMLHttpRequest")
 
     // code += getFile("globalThis") //全局环境放在最后
-
+    // console.log('name_',name_)
+    // debugger
     return code
 }
 module.exports = {

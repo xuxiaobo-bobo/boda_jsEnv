@@ -19,20 +19,278 @@ bodavm.memory.formlist=[
 
 ] //存放form标签
 bodavm.memory.globalobj = {}    //全局对象
+bodavm.memory.cache={
+    Navigator_storage_get:{
+    },
+    Navigator_bluetooth_get:{
+    },
+    Document_documentElement_get:{
+    },
+    Navigator_credentials_get:{},
+    Document_body_get:{},
+    Navigator_permissions_get:{},
+    Navigator_locks_get:{},
+    Navigator_getBattery:{},
+    HTMLElement_style_get:{
+        'this':''
+    },
+    Node_parentNode_get:{
+        'res':{},
+        'parent':''
+    },
+    Node_nextSibling_get:{},
+    Document_head_get:{},
+    Document_scrollingElement_get:{},
+    HTMLIFrameElement_contentDocument_get:{}
+
+}
+bodavm.memory.collection={
+    
+}
+// for (let che in bodavm.memory.cache){
+//     bodavm.memory.cache[che]['this']=''
+//     bodavm.memory.cache[che]['res']={}
+// }
+
+// debugger
 bodavm.config.isdebug = false;  //是否开启debugger
 bodavm.config.proxy = false; //是否代理
-
+bodavm.config.settime_on=true   //是否开启settime
+bodavm.config.isinit=true   //实现 var bobo__2 = {};bobo__2.__proto__ = Document.prototype;bobo__2.activeElement
 // bodavm.config.getundefined=true  //暂未实现   
 
 
 //网站为r4或者r5 设置为true 否则请关闭
-bodavm.config.isrs = false  //判断当前网站是不是瑞数
+bodavm.config.isrs = true  //判断当前网站是不是瑞数
 //网站为r6 设置为true body设置为0 否则请把true改为false
 bodavm.memory.rs6=false
 bodavm.memory.rs6_body=0
 
+bodavm.memory.contentWindow_keys=    [
+    "window",
+    "self",
+    "document",
+    "name",
+    "location",
+    "customElements",
+    "history",
+    "navigation",
+    "locationbar",
+    "menubar",
+    "personalbar",
+    "scrollbars",
+    "statusbar",
+    "toolbar",
+    "status",
+    "closed",
+    "frames",
+    "length",
+    "top",
+    "opener",
+    "parent",
+    "frameElement",
+    "navigator",
+    "origin",
+    "external",
+    "screen",
+    "innerWidth",
+    "innerHeight",
+    "scrollX",
+    "pageXOffset",
+    "scrollY",
+    "pageYOffset",
+    "visualViewport",
+    "screenX",
+    "screenY",
+    "outerWidth",
+    "outerHeight",
+    "devicePixelRatio",
+    "clientInformation",
+    "screenLeft",
+    "screenTop",
+    "styleMedia",
+    "onsearch",
+    "isSecureContext",
+    "trustedTypes",
+    "performance",
+    "onappinstalled",
+    "onbeforeinstallprompt",
+    "crypto",
+    "indexedDB",
+    "sessionStorage",
+    "localStorage",
+    "onbeforexrselect",
+    "onabort",
+    "onbeforeinput",
+    "onblur",
+    "oncancel",
+    "oncanplay",
+    "oncanplaythrough",
+    "onchange",
+    "onclick",
+    "onclose",
+    "oncontextlost",
+    "oncontextmenu",
+    "oncontextrestored",
+    "oncuechange",
+    "ondblclick",
+    "ondrag",
+    "ondragend",
+    "ondragenter",
+    "ondragleave",
+    "ondragover",
+    "ondragstart",
+    "ondrop",
+    "ondurationchange",
+    "onemptied",
+    "onended",
+    "onerror",
+    "onfocus",
+    "onformdata",
+    "oninput",
+    "oninvalid",
+    "onkeydown",
+    "onkeypress",
+    "onkeyup",
+    "onload",
+    "onloadeddata",
+    "onloadedmetadata",
+    "onloadstart",
+    "onmousedown",
+    "onmouseenter",
+    "onmouseleave",
+    "onmousemove",
+    "onmouseout",
+    "onmouseover",
+    "onmouseup",
+    "onmousewheel",
+    "onpause",
+    "onplay",
+    "onplaying",
+    "onprogress",
+    "onratechange",
+    "onreset",
+    "onresize",
+    "onscroll",
+    "onsecuritypolicyviolation",
+    "onseeked",
+    "onseeking",
+    "onselect",
+    "onslotchange",
+    "onstalled",
+    "onsubmit",
+    "onsuspend",
+    "ontimeupdate",
+    "ontoggle",
+    "onvolumechange",
+    "onwaiting",
+    "onwebkitanimationend",
+    "onwebkitanimationiteration",
+    "onwebkitanimationstart",
+    "onwebkittransitionend",
+    "onwheel",
+    "onauxclick",
+    "ongotpointercapture",
+    "onlostpointercapture",
+    "onpointerdown",
+    "onpointermove",
+    "onpointerrawupdate",
+    "onpointerup",
+    "onpointercancel",
+    "onpointerover",
+    "onpointerout",
+    "onpointerenter",
+    "onpointerleave",
+    "onselectstart",
+    "onselectionchange",
+    "onanimationend",
+    "onanimationiteration",
+    "onanimationstart",
+    "ontransitionrun",
+    "ontransitionstart",
+    "ontransitionend",
+    "ontransitioncancel",
+    "onafterprint",
+    "onbeforeprint",
+    "onbeforeunload",
+    "onhashchange",
+    "onlanguagechange",
+    "onmessage",
+    "onmessageerror",
+    "onoffline",
+    "ononline",
+    "onpagehide",
+    "onpageshow",
+    "onpopstate",
+    "onrejectionhandled",
+    "onstorage",
+    "onunhandledrejection",
+    "onunload",
+    "crossOriginIsolated",
+    "scheduler",
+    "alert",
+    "atob",
+    "blur",
+    "btoa",
+    "cancelAnimationFrame",
+    "cancelIdleCallback",
+    "captureEvents",
+    "clearInterval",
+    "clearTimeout",
+    "close",
+    "confirm",
+    "createImageBitmap",
+    "fetch",
+    "find",
+    "focus",
+    "getComputedStyle",
+    "getSelection",
+    "matchMedia",
+    "moveBy",
+    "moveTo",
+    "open",
+    "postMessage",
+    "print",
+    "prompt",
+    "queueMicrotask",
+    "releaseEvents",
+    "reportError",
+    "requestAnimationFrame",
+    "requestIdleCallback",
+    "resizeBy",
+    "resizeTo",
+    "scroll",
+    "scrollBy",
+    "scrollTo",
+    "setInterval",
+    "setTimeout",
+    "stop",
+    "structuredClone",
+    "webkitCancelAnimationFrame",
+    "webkitRequestAnimationFrame",
+    "chrome",
+    "credentialless",
+    "caches",
+    "cookieStore",
+    "ondevicemotion",
+    "ondeviceorientation",
+    "ondeviceorientationabsolute",
+    "launchQueue",
+    "onbeforematch",
+    "getScreenDetails",
+    "queryLocalFonts",
+    "showDirectoryPicker",
+    "showOpenFilePicker",
+    "showSaveFilePicker",
+    "originAgentCluster",
+    "speechSynthesis",
+    "oncontentvisibilityautostatechange",
+    "openDatabase",
+    "webkitRequestFileSystem",
+    "webkitResolveLocalFileSystemURL"
+]  //过检测 Object.keys(iframe.contentWindow).length
 
-bodavm.config.randomhook = false //hook随机值和时间
+bodavm.config.randomhook = true //hook随机值和时间
 bodavm.config.printLog = true; //是否打开日志
 // bodavm.memory.isproxy= {}
 bodavm.memory.symbolProxy = Symbol("proxy")
@@ -61,7 +319,9 @@ bodavm.memory.collection = {
 // bodavm.memory.localStorage={};
 
 bodavm.memory.asyncEvent = {
-    HTMLElement: { onload: [] }
+    HTMLElement: { onload: [
+        function(){console.log(1111)},
+    ] }
 
 };
 bodavm.memory.globalInit.timeoutID = 0;
@@ -110,33 +370,39 @@ bodavm.memory.IDBOpenDBRequest = {
     onupgradeneeded: '',
 
 }
+bodavm.memory.estimate={
+    quota: 51539605094,
+    usage: 341236,
+    indexedDB:341236
+    
+}
 
 
 bodavm.memory.location={
-    origin:"https://www.douyin.com",
+    origin:"file://",
     hash:"",
-    pathname:"/",
+    pathname:"/C:/Users/bobo/Desktop/%E9%98%BF%E9%87%8C%E6%BB%91%E5%9D%97.html",
     search:"",
-    href:"https://www.douyin.com/",
+    href:"file:///C:/Users/bobo/Desktop/%E9%98%BF%E9%87%8C%E6%BB%91%E5%9D%97.html",
     port:"",
-    protocol:"https:",
-    host:"www.douyin.com",
+    protocol:"file:",
+    host:"",
     ancestorOrigins:"{}",
-    hostname:"www.douyin.com"
+    hostname:""
 };
 
 bodavm.memory.document={
-    URL:"https://www.douyin.com/",
-    referrer:"https://www.douyin.com/",
-    documentURI:"https://www.douyin.com/",
+    URL:"file:///C:/Users/bobo/Desktop/%E9%98%BF%E9%87%8C%E6%BB%91%E5%9D%97.html",
+    referrer:"",
+    documentURI:"file:///C:/Users/bobo/Desktop/%E9%98%BF%E9%87%8C%E6%BB%91%E5%9D%97.html",
     compatMode:"CSS1Compat",
     dir:"",
-    title:"抖音-记录美好生活",
+    title:'Document',
     designMode:"off",
     readyState:"complete",
     contentType:"text/html",
     inputEncoding:"UTF-8",
-    domain:"www.douyin.com",
+    domain:"",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
@@ -170,15 +436,15 @@ bodavm.memory.screen={
 
 bodavm.memory.navigator={
     language:"zh-CN",
-    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.57",
-    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.57",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
     vendor:"Google Inc.",
     appName:"Netscape",
     appCodeName:"Mozilla",
     cookieEnabled:true,
-    languages:["zh-CN","en","en-GB","en-US"],
+    languages:["zh-CN","zh"],
     productSub:"20030107",
-    userAgentData:{"brands":[{"brand":"Chromium","version":"110"},{"brand":"Not A(Brand","version":"24"},{"brand":"Microsoft Edge","version":"110"}],"mobile":false,"platform":"Windows"},
+    userAgentData:{"brands":[{"brand":"Chromium","version":"112"},{"brand":"Google Chrome","version":"112"},{"brand":"Not:A-Brand","version":"99"}],"mobile":false,"platform":"Windows"},
     xr:{},
     platform:'Win32',
     webkitPersistentStorage:{},
@@ -193,7 +459,7 @@ bodavm.memory.window={
     name:"",
     innerWidth:1440,
     innerHeight:817,
-    origin:"https://www.douyin.com",
+    origin:"null",
     outerWidth:1440,
     outerHeight:920,
     defaultStatus:undefined,
@@ -213,10 +479,22 @@ bodavm.memory.window={
     onblur:null,
     oncancel:null,
     oncanplay:null,
-    oncanplaythrough:null
+    oncanplaythrough:null,
+    onsearch:null,
+    opener:null,
+    frameElement:null,
+    
 
 };
 bodavm.memory.localStorage={}
+
+bodavm.memory.Performance={
+    'getEntriesByType':[{"name":"https://g.alicdn.com/sd/ncpc/nc.js?t=1678759200000","entryType":"resource","startTime":169.20000000018626,"duration":19.600000000093132,"initiatorType":"script","nextHopProtocol":"h2","renderBlockingStatus":"blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":169.20000000018626,"domainLookupStart":169.20000000018626,"domainLookupEnd":169.20000000018626,"connectStart":169.20000000018626,"secureConnectionStart":169.20000000018626,"connectEnd":169.20000000018626,"requestStart":173.70000000018626,"responseStart":184.89999999990687,"responseEnd":188.8000000002794,"transferSize":0,"encodedBodySize":57254,"decodedBodySize":220966,"responseStatus":0,"serverTiming":[]},{"name":"https://g.alicdn.com/sd/nch5/index.js?t=1678759200000","entryType":"resource","startTime":169.89999999990687,"duration":131.3000000002794,"initiatorType":"script","nextHopProtocol":"h2","renderBlockingStatus":"blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":169.89999999990687,"domainLookupStart":184.20000000018626,"domainLookupEnd":195.89999999990687,"connectStart":195.89999999990687,"secureConnectionStart":216.60000000009313,"connectEnd":247.89999999990687,"requestStart":248.10000000009313,"responseStart":283.89999999990687,"responseEnd":301.20000000018626,"transferSize":44312,"encodedBodySize":44012,"decodedBodySize":138349,"responseStatus":0,"serverTiming":[]},{"name":"https://g.alicdn.com/AWSC/AWSC/awsc.js","entryType":"resource","startTime":313,"duration":8.399999999906868,"initiatorType":"script","nextHopProtocol":"h2","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":313,"domainLookupStart":313,"domainLookupEnd":313,"connectStart":313,"secureConnectionStart":313,"connectEnd":313,"requestStart":315.5,"responseStart":320.20000000018626,"responseEnd":321.39999999990687,"transferSize":0,"encodedBodySize":3547,"decodedBodySize":11985,"responseStatus":0,"serverTiming":[]},{"name":"https://gm.mmstat.com/fsp.1.1?code=13&msg=init%20monitor%3B&pid=sufeiPunish&page=file%3A%2F%2F%2FC%3A%2FUsers%2Fbobo%2FDesktop%2F%25E9%2598%25BF%25E9%2587%258C%25E6%25BB%2591%25E5%259D%2597.html&query=&hash=&referrer=&title=Document&ua=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F112.0.0.0%20Safari%2F537.36&c1=FFFF0N0N000000009594%3A1682047685984%3A0.48000457320939005&c2=FFFF0N0N000000009594","entryType":"resource","startTime":313.60000000009313,"duration":56.89999999990687,"initiatorType":"img","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":313.60000000009313,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"responseEnd":370.5,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":0,"serverTiming":[]},{"name":"https://gm.mmstat.com/fsp.1.1?code=13&msg=class%3D_nc%3Dnc_1-stage-1class%3Dstagestage1style%3Dsplay%3Ablock%3Bclass%3Dslerclass%3Dlabel%E5%8A%A0%E8%BD%BD%E4%B8%AD...class%3Dtrackclass%3Dbg-greenclass%3Dbuttonclass%3Dconnc-loangnc-confontcon-loa-c%3Dnc_1_n1t%3Dnc_1-stage-2class%3Dstagestage2style%3Dsplay%3Anone%3Bclass%3Dtextboxnputclass%3Dnputtype%3Dtextmaxlength%3D6autocomplete%3Doffautocorrect%3Doffautocaptalze%3Doffspellcheck%3Dfalseclass%3Dplaceholer%E9%AA%8C%E8%AF%81%E7%A0%81class%3Dcontpnc-confontcon-messageclass%3Dconclearnc-confontcon-close-whteclass%3Dconrefreshnc-confontcon-refreshmgclass%3Dcoewth%3D100heght%3D30alt%3Dclass%3Dopebuttonclass%3Dbtn-ok%E7%A1%AE%E5%AE%9Abuttonclass%3Dtps%E9%AA%8C%E8%AF%81%E7%A0%81%E9%94%99%E8%AF%AF%EF%BC%8C%E8%AF%B7%E9%87%8D%E6%96%B0%E8%BE%93%E5%85%A5%3Dnc_1-stage-3class%3Dstagestage3style%3Dsplay%3Anone%3Bclass%3Dttle%E9%9D%9E%E5%B8%B8%E6%8A%B1%E6%AD%89%EF%BC%8C%E8%BF%99%E5%87%BA%E9%94%99%E4%BA%86span%3Dnc_1_refresh1class%3Dmenurefreshspan%3Dnc_1_refresh2class%3Dconnc-confontcon-refreshspanspan%3Dnc_1_refresh3class%3Dlabel%E5%88%B7%E6%96%B0spanspanspanclass%3Dmenunc-sepspanspanclass%3Dmenufeebackspanclass%3Dconnc-confontcon-messagespanspanclass%3Dlabel%E5%8F%8D%E9%A6%88spanspan%3B&pid=sufeiPunish&page=file%3A%2F%2F%2FC%3A%2FUsers%2Fbobo%2FDesktop%2F%25E9%2598%25BF%25E9%2587%258C%25E6%25BB%2591%25E5%259D%2597.html&query=&hash=&referrer=&title=Document&ua=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20Chrome%2F112.0.0.0%20Safari%2F537.36&c1=FFFF0N0N000000009594%3A1682047685984%3A0.48000457320939005&c2=FFFF0N0N000000009594","entryType":"resource","startTime":314.60000000009313,"duration":56.89999999990687,"initiatorType":"img","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":314.60000000009313,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"responseEnd":371.5,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":0,"serverTiming":[]},{"name":"file://at.alicdn.com/t/font_skgl4wg07pgv6lxr.woff","entryType":"resource","startTime":315.70000000018626,"duration":22155.5,"initiatorType":"css","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":315.70000000018626,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"responseEnd":22471.200000000186,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":0,"serverTiming":[]},{"name":"https://cf.aliyun.com/nocaptcha/initialize.jsonp?a=FFFF0N0N000000009594&t=FFFF0N0N000000009594%3A1682047685984%3A0.48000457320939005&scene=nc_register_h5&lang=cn&v=v1.2.21&href=file%3A%2F%2F%2FC%3A%2FUsers%2Fbobo%2FDesktop%2F%25E9%2598%25BF%25E9%2587%258C%25E6%25BB%2591%25E5%259D%2597.html&comm=%7B%22cntp%22%3A%22undefined%22%2C%22cneftp%22%3A%224g%22%2C%22btryc%22%3Atrue%2C%22btryl%22%3A0.17%7D&callback=__jsonp_933972498","entryType":"resource","startTime":328.20000000018626,"duration":148.60000000009313,"initiatorType":"script","nextHopProtocol":"h2","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":328.20000000018626,"domainLookupStart":347.8000000002794,"domainLookupEnd":359.5,"connectStart":359.5,"secureConnectionStart":389.70000000018626,"connectEnd":437,"requestStart":437.20000000018626,"responseStart":473.60000000009313,"responseEnd":476.8000000002794,"transferSize":378,"encodedBodySize":78,"decodedBodySize":78,"responseStatus":0,"serverTiming":[]},{"name":"https://g.alicdn.com/AWSC/uab/1.140.0/collina.js","entryType":"resource","startTime":334,"duration":22.5,"initiatorType":"script","nextHopProtocol":"h2","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":334,"domainLookupStart":334,"domainLookupEnd":334,"connectStart":334,"secureConnectionStart":334,"connectEnd":334,"requestStart":349,"responseStart":350,"responseEnd":356.5,"transferSize":0,"encodedBodySize":105494,"decodedBodySize":248730,"responseStatus":0,"serverTiming":[]},{"name":"https://g.alicdn.com/AWSC/WebUMID/1.93.0/um.js","entryType":"resource","startTime":334.5,"duration":19.600000000093132,"initiatorType":"script","nextHopProtocol":"h2","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":334.5,"domainLookupStart":334.5,"domainLookupEnd":334.5,"connectStart":334.5,"secureConnectionStart":334.5,"connectEnd":334.5,"requestStart":349.10000000009313,"responseStart":350.10000000009313,"responseEnd":354.10000000009313,"transferSize":0,"encodedBodySize":67905,"decodedBodySize":177654,"responseStatus":0,"serverTiming":[]},{"name":"https://ynuf.aliapp.org/service/um.json","entryType":"resource","startTime":663.5,"duration":132.8000000002794,"initiatorType":"xmlhttprequest","nextHopProtocol":"h2","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":663.5,"domainLookupStart":665.3000000002794,"domainLookupEnd":676.5,"connectStart":676.5,"secureConnectionStart":709.2000000001863,"connectEnd":754.3999999999069,"requestStart":754.6000000000931,"responseStart":794.8999999999069,"responseEnd":796.3000000002794,"transferSize":436,"encodedBodySize":136,"decodedBodySize":136,"responseStatus":200,"serverTiming":[]},{"name":"file://at.alicdn.com/t/font_skgl4wg07pgv6lxr.ttf","entryType":"resource","startTime":22471.600000000093,"duration":4.600000000093132,"initiatorType":"css","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":22471.600000000093,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"responseEnd":22476.200000000186,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":0,"serverTiming":[]}],
+    'timeOrigin':1682047685677.3
+
+
+
+};
 
 ;;//主要用来保护伪造的函数 让其更难被识破
 /*
@@ -227,160 +505,166 @@ bodavm.memory.localStorage={}
 ;;
 !function () {
 
-    bodavm.toolsFunc.setProto = function setpro(dom) {
+    bodavm.toolsFunc.setProto = function setpro(dom,ele) {
         //设置原型链
-        let ele = {}
+        if (!ele){
+            ele={}
+        }
+        // let ele = {}
         let tagpro = dom.toUpperCase()
         switch (tagpro) {
             case "DIV":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLDivElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLDivElement'].prototype)
                 return ele
             case "SCRIPT":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLScriptElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLScriptElement'].prototype)
 
                 return ele
             case "TITLE":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLTitleElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLTitleElement'].prototype)
 
                 return ele
             case "HEAD":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHeadElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHeadElement'].prototype)
 
                 return ele
             case 'META':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLMetaElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLMetaElement'].prototype)
 
                 return ele
             case 'LINK':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLLinkElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLLinkElement'].prototype)
 
                 return ele
             case "A":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLAnchorElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLAnchorElement'].prototype)
 
                 return ele
             case "SPAN":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLSpanElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLSpanElement'].prototype)
 
                 return ele
             case "P":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLParagraphElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLParagraphElement'].prototype)
 
                 return ele
             case "LI":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLLIElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLLIElement'].prototype)
 
                 return ele
             case "UL":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLUListElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLUListElement'].prototype)
 
                 return ele
             case 'IFRAME':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLIFrameElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLIFrameElement'].prototype)
 
                 return ele
             case 'IMG':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLImageElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLImageElement'].prototype)
 
                 return ele
             case "H1":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
 
                 return ele
             case "H2":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
 
                 return ele
             case "NOSCRIPT":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
 
                 return ele
             case 'INPUT':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLInputElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLInputElement'].prototype)
 
                 return ele
             case 'FORM':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLFormElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLFormElement'].prototype)
 
                 return ele
             case 'STYLE':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLStyleElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLStyleElement'].prototype)
 
                 return ele
             case 'VIDEO':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLVideoElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLVideoElement'].prototype)
                 return ele
             case 'BODY':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLBodyElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLBodyElement'].prototype)
                 return ele
             case 'HTML':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHtmlElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHtmlElement'].prototype)
                 return ele
             case "CANVAS":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLCanvasElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLCanvasElement'].prototype)
                 return ele
             case "SECTION":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
                 return ele
             case "I":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
 
                 return ele
             case "FONT":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLFontElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLFontElement'].prototype)
 
                 return ele
             case "EM":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
 
                 return ele
             case "H6":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
 
                 return ele
             case "OPTION":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLOptionElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLOptionElement'].prototype)
 
                 return ele
             case "SELECT":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLSelectElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLSelectElement'].prototype)
 
                 return ele
             case "BR":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLBRElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLBRElement'].prototype)
 
                 return ele
             case "CLOB":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLUnknownElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLUnknownElement'].prototype)
 
                 return ele
             case "MARQUEE":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLMarqueeElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLMarqueeElement'].prototype)
 
                 return ele
             case "STRONG":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
 
                 return ele
             case "BUTTON":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLButtonElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLButtonElement'].prototype)
 
                 return ele
             case 'LEGEND':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLLegendElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLLegendElement'].prototype)
 
                 return ele
             case 'OPTGROUP':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLOptGroupElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLOptGroupElement'].prototype)
 
                 return ele
             case "FIELDSET":
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['HTMLFieldSetElement'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLFieldSetElement'].prototype)
 
                 return ele
             case '#TEXT':
-                Object.setPrototypeOf(ele,bodavm.memory.globalobj['Text'].prototype)
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['Text'].prototype)
 
+                return ele
+            case "#DOCUMENT":
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLDocument'].prototype)
                 return ele
             default:
                 console.log(`setProto属性${tagpro}未实现`)
@@ -426,7 +710,7 @@ bodavm.memory.localStorage={}
     }
 
 
-    // //proxy代理
+    // // //proxy代理
     bodavm.toolsFunc.proxy = function (obj, objName) {
         // bodavm.toolsFunc.symbolProperty(obj)
         // bodavm.memory.globalobj[objName]=obj
@@ -447,14 +731,14 @@ bodavm.memory.localStorage={}
                 }
                 if (prop == hasOwnProperty) { debugger }
                 // let mylog=
-                console.log('['+ objName + ']', '  获取属性:   ', prop, '  value:   ', result);
+                console.log('[' + objName + ']', '  获取属性:   ', prop, '  value:   ', result);
 
                 if (typeof result == 'function') {
-                    myloglist.push({ 'type': 'get:'+ objName, 'prop0': prop, 'prop1': result.toString() })
+                    myloglist.push({ 'type': 'get:' + objName, 'prop0': prop, 'prop1': result.toString() })
 
                 }
                 else {
-                    myloglist.push({ 'type': 'get:'+ objName, 'prop0': prop, 'prop1': result })
+                    myloglist.push({ 'type': 'get:' + objName, 'prop0': prop, 'prop1': result })
 
                 }
 
@@ -473,17 +757,17 @@ bodavm.memory.localStorage={}
                 //     bodavm.memory.window[propKey]=value
                 // }
                 // debugger
-                console.log('['+ objName + ']', "   设置属性:   ", propKey, "   value:   ", value);
+                console.log('[' + objName + ']', "   设置属性:   ", propKey, "   value:   ", value);
                 if (typeof value == 'function') {
-                    myloglist.push({ 'type': 'set:'+ objName, 'prop0': propKey, 'prop1': value.toString() })
+                    myloglist.push({ 'type': 'set:' + objName, 'prop0': propKey, 'prop1': value.toString() })
 
                 }
                 else {
                     if (!value) {
-                        myundefinedlist.push({ 'type': 'set:'+ objName, 'prop0': propKey, 'prop1': value })
+                        myundefinedlist.push({ 'type': 'set:' + objName, 'prop0': propKey, 'prop1': value })
 
                     }
-                    myloglist.push({ 'type': 'set:'+ objName, 'prop0': propKey, 'prop1': value })
+                    myloglist.push({ 'type': 'set:' + objName, 'prop0': propKey, 'prop1': value })
                 }
 
                 let res = Reflect.set(target, propKey, value, receiver);
@@ -508,37 +792,66 @@ bodavm.memory.localStorage={}
         //bodavm.toolsFunc.dispatch(this,Document.prototype,"Document","write",arguments)}});
         let name = `${objName}_${funcName}`
         //实现r={} ,r.__proto__=Document.prototype ,r.location 报错
-
+        // debugger
         //实现Document.prototype.activeElement()调用报错
         if (Object.getOwnPropertyDescriptor(obj, "constructor") !== undefined) {
             if (Object.getOwnPropertyDescriptor(self, "constructor") !== undefined) {
                 return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
             }
         }
+
+        // 实现r={} ;r.__proto__=document ,r.location 报错
+        if (self.__proto__.constructor == self.__proto__.__proto__.constructor) {
+            debugger
+            console.log(self, `  bodavm.toolsFunc.dispatch 执行出错`, funcName);
+            return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+        }
+        if (!(self._boisinit) && !(self._boarg)) {
+            debugger
+            console.log(self, `  bodavm.toolsFunc.dispatch isinit  执行出错`, funcName);
+            return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+        }
+
         try {
 
-            // if (bodavm.config.issymbolProperty){
-            //     if(self[bodavm.memory.symbolProperty] ==undefined){
-            //         debugger
-            //         console.log(self,`  bodavm.toolsFunc.dispatch1 执行出错`,funcName);
-            //         return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
-
-            //     }
-            //     //实现r={} ;r.__proto__=document ,r.location 报错
-            //     if (self.__proto__.constructor == self.__proto__.__proto__.constructor){
-            //         debugger
-            //         console.log(self,`  bodavm.toolsFunc.dispatch2  执行出错`,funcName);
-            // return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+            // if (bodavm.memory.cache[name] ==self){
+            //     return bodavm.memory.cache[name].apply(self, argList)
+            // }else{
+            //     bodavm.memory.cache[name]=self
+            // }
+            // bodavm.memory.cache[name]=bodavm.envFunc[name].apply(self, argList)
+            // if(bodavm.memory.cache[name]){
+            //     debugger
+            //     return bodavm.memory.cache[name]
+            // }
+            // args=''
+            // for (let i = 0; i< argList.length; i++) {
+            //     args += (argList[i])
+               
             // }
 
+            // if (bodavm.memory.cache[name]
+            //     && bodavm.memory.cache[name].arg==args
+            //      ) {
+            //     debugger
+            //     let res = bodavm.memory.cache[name]['res']
+            //     console.log(name, '已经存在于cache中,从cache取值 res -> ', res)
+            //     return res
             // }
+            
+            // bodavm.memory.cache[name] = {
+            //     // 'this': self,
+            //     'res': {},
+            //     'arg': ''
+            // }
+
 
             return bodavm.envFunc[name].apply(self, argList)
 
 
         } catch (e) {
-        //     // 
-        //     // debugger
+            //     // 
+            //     // debugger
             let log__ = `'[${name}]正在执行,错误信息${e.message}'`
             console.log(log__);
             bodavm.toolsFunc.printLog(log__)
@@ -551,24 +864,24 @@ bodavm.memory.localStorage={}
         let newDescriptior = {};
         newDescriptior.configurable = bodavm.config.proxy || OldDescriptior.configurable;//如果开启代理必须是true
         newDescriptior.enumerable = OldDescriptior.enumerable;
-        if (OldDescriptior.hasOwnProperty("writable")) {
+        if (OldDescriptior.hasOwnProperty("writable",'boboflag')) {
             newDescriptior.writable = bodavm.config.proxy || OldDescriptior.writable;//如果开启代理必须是true
         }
-        if (OldDescriptior.hasOwnProperty("value")) {
+        if (OldDescriptior.hasOwnProperty("value",'boboflag')) {
             let value = OldDescriptior.value;
             if (typeof value == "function") {
                 bodavm.toolsFunc.safeFunc(value, prop)
             }
             newDescriptior.value = value;
         }
-        if (OldDescriptior.hasOwnProperty("get")) {
+        if (OldDescriptior.hasOwnProperty("get",'boboflag')) {
             let get = OldDescriptior.get;
             if (typeof get == "function") {
                 bodavm.toolsFunc.safeFunc(get, `get ${prop}`)
             }
             newDescriptior.get = get;
         }
-        if (OldDescriptior.hasOwnProperty("set")) {
+        if (OldDescriptior.hasOwnProperty("set",'boboflag')) {
             let set = OldDescriptior.set;
             if (typeof set == "function") {
                 bodavm.toolsFunc.safeFunc(set, `set ${prop}`)
@@ -581,10 +894,10 @@ bodavm.memory.localStorage={}
 
         // }else{
         //     // debugger
-            Object.defineProperty(obj, prop, newDescriptior, 'bobo')
+        Object.defineProperty(obj, prop, newDescriptior, 'bobo')
 
-        }
-        // let name=obj.name?obj.name:obj.constructor.name
+    }
+    // let name=obj.name?obj.name:obj.constructor.name
 
     // };
 
@@ -594,24 +907,24 @@ bodavm.memory.localStorage={}
         let newDescriptior = {};
         newDescriptior.configurable = bodavm.config.proxy || OldDescriptior.configurable;//如果开启代理必须是true
         newDescriptior.enumerable = OldDescriptior.enumerable;
-        if (OldDescriptior.hasOwnProperty("writable")) {
+        if (OldDescriptior.hasOwnProperty("writable",'boboflag')) {
             newDescriptior.writable = bodavm.config.proxy || OldDescriptior.writable;//如果开启代理必须是true
         }
-        if (OldDescriptior.hasOwnProperty("value")) {
+        if (OldDescriptior.hasOwnProperty("value",'boboflag')) {
             let value = OldDescriptior.value;
             if (typeof value == "function") {
                 bodavm.toolsFunc.safeFunc(value, prop)
             }
             newDescriptior.value = value;
         }
-        if (OldDescriptior.hasOwnProperty("get")) {
+        if (OldDescriptior.hasOwnProperty("get",'boboflag')) {
             let get = OldDescriptior.get;
             if (typeof get == "function") {
                 bodavm.toolsFunc.safeFunc(get, `get ${prop}`)
             }
             newDescriptior.get = get;
         }
-        if (OldDescriptior.hasOwnProperty("set")) {
+        if (OldDescriptior.hasOwnProperty("set",'boboflag')) {
             let set = OldDescriptior.set;
             if (typeof set == "function") {
                 bodavm.toolsFunc.safeFunc(set, `set ${prop}`)
@@ -631,9 +944,9 @@ bodavm.memory.localStorage={}
     //保护函数
     (() => {
         "use strict";
-        const $toString = Function.toString;  //hook Function.toString 且命名为myToString
+        var  $toString = Function.toString;  //hook Function.toString 且命名为myToString
         //变量名取随机数防检测
-        const myFunction_toString_symbol = Symbol('('.concat('', ')_', (Math.random() + '').toString(36)));
+        var  myFunction_toString_symbol = Symbol('('.concat('', ')_', (Math.random() + '').toString(36)));
 
         //自定义函数
         //逻辑与短路运算      &&    如果表达式1结果为真,则返回表达式2,
@@ -649,8 +962,8 @@ bodavm.memory.localStorage={}
 
         //$toString.call(this)就是对原函数调用
 
-        const myToString = function () {
-            return typeof this == 'function'&& this[myFunction_toString_symbol] || $toString.call(this);   //谁调用这个方法,this就是谁,比如boda调用,这个this就是boda
+        var  myToString = function () {
+            return typeof this == 'function' && this[myFunction_toString_symbol] || $toString.call(this);   //谁调用这个方法,this就是谁,比如boda调用,这个this就是boda
         };
 
 
@@ -810,220 +1123,122 @@ bodavm.memory.localStorage={}
 
 
 
-bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
-    let data_=data
-    data=data.replace(/<!-[\s\S]*?-->/g,'').replace(/\/\/[\s\S]*?\n/g,'')
-    // debugger
-    let tempdata;
-    if(data.length <1){
-         tempdata=data_
-    }
-    // debugger
-    // 最外层模拟的节点
-    const nodeType = {
-        TEXT: 'text',
-        ELEMENT: 'element',
-    };
-    // 最外层增加一个模拟的根节点标签
-    const frameflag = 'rootnode';
-    // 计算一个完整标签的范围，eg. [0, 50]
-    const createRange = (startPos, endPos) => {
-        // 因为最外层模拟了 <rootnode>，所以需要将这部分长度减掉
-        const frameFlagOffset = frameflag.length + 2;
-        return [startPos - frameFlagOffset, endPos - frameFlagOffset]
-    };
-
-    const root = {
-        _tagName: '#document',
-        _children: [],
-        _idelements: {},
-        _className: {},
-        _tagelements: {},
-        _innerHtml:[]
-    };
-
-    // 设置 root 为父节点
-    let currentParent = root;
-    // 栈管理
-    const stack = [root];
-    let lastTextPos = -1;
-
-    // 找到数组的最后一项
-    function arrBack(arr) {
-        return arr[arr.length - 1];
-    }
-
-    // ...开始遍历  /解析
-
-
-    // 将模拟的根节点和需要解析的 html 拼接
-    data = `<${frameflag}>${data}</${frameflag}>`;
-
-    const kMarkupPattern = /<(\/?)([a-zA-Z][-.:0-9_a-zA-Z]*)((?:\s+[^>]*?(?:(?:'[^']*')|(?:"[^"]*"))?)*)\s*(\/?)>/g;
-    while ((match = kMarkupPattern.exec(data))) {
-        /**
-          * matchText: 匹配的字符  eg. <span id="xxx">
-          * leadingSlash: 是否为闭合标签 eg. /
-          * tagName: 标签名 eg. span
-          * attributes: 属性 eg. id="xxx"
-          * closingSlash: 是否为自闭合 eg. /
-          */
-        let { 0: matchText, 1: leadingSlash, 2: tagName, 3: attributes, 4: closingSlash } = match;
-        // 本次匹配到的字符串
-        const matchLength = matchText.length;
-        // 本次匹配的起始位置
-        const tagStartPos = kMarkupPattern.lastIndex - matchLength;
-        // 本次匹配的末尾位置
-        const tagEndPos = kMarkupPattern.lastIndex;
-
-        if (lastTextPos > -1) {
-            // 处理文本，eg. hello world
-            // 上次匹配的末尾位置 + 本次匹配的字符长度 小于 本次匹配的末尾位置就说明中间有 text，这个稍微想下其实还是比较好理解的
-            // 如果没有 text，lastTextPos + matchLength 都会等于 tagEndPos
-                // 上次匹配的末尾位置到本次匹配的起始位置
-                const text = data.substring(lastTextPos, tagStartPos);
-                // if (text.indexOf('<!') == -1 || text.indexOf('->') == -1) {
-                    //过滤innerHTML中的特殊字符
-                    let text_filter = text.replace(/\n/g, '').replace(/\t/g, '')
-                    if (text_filter.length > 0) {
-                        currentParent._innerHtml.push({
-                            type: nodeType.TEXT,
-                            range: createRange(lastTextPos, tagStartPos),
-                            value: text_filter,
-                        });
-                    }
-
-                // }
-            }else if(tempdata){
-                currentParent._innerHtml.push({
-                    type: nodeType.TEXT,
-                    range: [0,0],
-                    value: tempdata,
-                });
-                tempdata=undefined
-            }
-        
-        
-
-        // 记录上次匹配的位置
-        lastTextPos = kMarkupPattern.lastIndex;
-
-        // 如果匹配到的标签是模拟标签，就跳过
-        if (tagName === frameflag) continue;
-
-        // ...处理 nodeType 为 element 逻辑
-        if (!leadingSlash) {
-            const attrs = {};
-            // 解析 id、class 属性，并且挂到 attrs 对象下
-            const kAttributePattern = /(?:^|\s)(id|type|href|value|class|style|src|content|target|onClick|r|rel|name|http-equiv|charset)\s*=\s*((?:'[^']*')|(?:"[^"]*")|\S+)/gi;
-            for (let attMatch; (attMatch = kAttributePattern.exec(attributes));) {
-                const { 1: key, 2: val } = attMatch;
-                // 属性值是否带引号
-                const isQuoted = val[0] === `'` || val[0] === `"`;
-                attrs[key.toLowerCase()] = isQuoted ? val.slice(1, val.length - 1) : val;
-
-            }
-
-            // debugger
-            const currentNode = {
-                _tagName: tagName,
-                _attrs: attrs,
-                _rawAttrs: attributes.slice(1),
-                _type: nodeType.ELEMENT,
-                // 这里的 range 不一定是正确的 range，需要匹配到闭标签以后更新
-                _range: createRange(tagStartPos, tagEndPos),
-                _children: [],
-                _parentNode: currentParent,
-                _innerHtml:[]
-            };
-            // if(currentNode._tagName=='script'){debugger}
-            // console.log('标签',currentNode._tagName)
-            currentNode.__proto__ = bodavm.toolsFunc.setProto(currentNode._tagName)
-            // debugger
-            // currentNode
-            if (attrs['id']) {
-                root._idelements[attrs['id']] = currentNode
-            }
-
-            if (attrs['class']) {
-                if (root['_className'][attrs['class']] == undefined) {
-                    root['_className'][attrs['class']] = []
-                }
-                // debugger
-                root._className[attrs['class']].push(currentNode)
-
-            }
-            let root_tagelement = root._tagelements[tagName]
-            if (root_tagelement) {
-                root._tagelements[tagName].push(currentNode)
-            } else {
-                root._tagelements[tagName] = []
-                root._tagelements[tagName].push(currentNode)
-            }
-            // if (currentNode.tagName=='head'){debugger}
-            // 将当前节点信息放入到 currentParent 的 children 中
-            currentParent._children.push(currentNode);
-            // 重置 currentParent 节点为当前节点
-            currentParent = currentNode;
-            // 将每个节点依次塞到栈中，然后在后面的闭标签中以栈的方式释放
-            stack.push(currentParent);
-            // debugger
-        }
-
-        // 自闭合元素
-        const kSelfClosingElements = {
-            // area: true,
-            // img: true,
-            // meta:true,
-            // frame:true,
-            // embed:true,
-            // keygen:true,
-            // source:true,
-            // base:true,
-            // hr:true,
-            // br:true,
-            input:true,
-            // link:true, area: true,
-            img: true,
-            meta: true,
-            link: true,
-            area: true,
-            br:true,
-            // '!DOCTYPE':true,
-            // '!--':true
-            // ...省略了部分标签
-        };
-        if (leadingSlash || closingSlash || kSelfClosingElements[tagName]) {
-            // 开闭标签名是否匹配，比如有可能写成 <div></div1>，这种就需要异常处理
-            if (currentParent._tagName === tagName) {
-                // debugger
-                // 更新 range，之前处理开标签算出的 range 是不包含闭标签的
-                currentParent._range[1] = createRange(-1, Math.max(lastTextPos, tagEndPos))[1];
-                // 将处理完的开闭标签踢出
-                stack.pop();
-                // 将 stack 的最后一个节点赋值给 currentParent
-                currentParent = arrBack(stack);
-            } else {
-                // <div></div1>，异常直接从栈中踢出，不更新 range
-                stack.pop();
-                currentParent = arrBack(stack);
-            }
-        }
-    }
-    // 通过处理，将 stack 返回就是最终的结果
-    // debugger
-    return stack;
-}
-
 // 浏览器接口具体的实现
 !function () {
+    bodavm.envFunc.Node_contains=function (){
+        debugger
+        let arg=arguments[0]
+        let cont=this._boarg.contains(arg._boarg)
+        console.log(`Node_contains ->`,`res ->${cont}`);
+        return cont
+    }
+    bodavm.envFunc.HTMLIFrameElement_contentDocument_get=function (){
+        let res=bodavm.memory.cache['HTMLIFrameElement_contentDocument_get']
+        // debugger
+        res._boarg=this._boarg.contentDocument
+        res.__proto__=HTMLDocument.prototype
+        res._boisinit=true
+        res._contentiframe=true
+        console.log(`HTMLIFrameElement_contentDocument_get ->`,`res ->${res} 获取iframe下的document !!!!`);
+        return res
+    }
+    bodavm.envFunc.Document_head_get=function (){
+        res=bodavm.memory.cache['Document_head_get']
+        
+        res._boarg=bodaobj.window.document.head
+        res.__proto__=HTMLHeadElement.prototype
+        console.log(`Document_head_get ->`,`res ->${res}`);
+        return res
+    }
 
+    bodavm.envFunc.HTMLAllCollection_item=function (){
+        // debugger
+        let arg=arguments[0]
+        res=this[arg]
+        console.log(`HTMLAllCollection_item ->`,`arg ->${arg} `,`res -> ${res}`);
+        return res
+    }
+    bodavm.envFunc.location_valueOf=function (){
+        // debugger
+        // res=window.location
+        console.log(`location_valueOf `, `res ->`,location);
+        return location
+    }
+
+    bodavm.envFunc.StorageManager_estimate=function (){
+        // debugger
+        
+            let res = {
+                quota:bodavm.memory.estimate['quota'],
+                usage:bodavm.memory.estimate['usage'],
+                usageDetails:{indexedDB:bodavm.memory.estimate['indexedDB']}
+            }
+            let promise = new Promise((resolve, reject) => {
+                resolve(res)
+            })
+            console.log(`StorageManager_estimate `, `res ->${promise}`);
+
+            return promise
+
+    }
+    bodavm.envFunc.HTMLScriptElement_src_set=function (){
+        // debugger
+        this._boarg.src=arguments[0]
+        let res=this._boarg.src
+        console.log(`HTMLScriptElement_src_set ->`,`res->${res}`);
+        return res
+    }
+    bodavm.envFunc.PerformanceEntry_name_get=function (){
+        // debugger
+        let name=this.name
+        console.log(`PerformanceEntry_name_get ->`,`res ->${name}`);
+        return name
+    }
+    bodavm.envFunc.Performance_getEntriesByType=function (){
+        let type=arguments[0]
+        if (type =='resource'){
+            let reslist=bodavm.memory.Performance['getEntriesByType']
+            reslist._boisinit=bodavm.config.isinit
+            for (let i of reslist){
+                i._boisinit=bodavm.config.isinit
+                i.__proto__ =PerformanceResourceTiming.prototype
+            }
+            //  debugger
+            console.log(`Performance_getEntriesByType- >`,`arg->${type}`,`res ->${reslist}`);
+            return reslist
+        }
+
+    }
+    bodavm.envFunc.Document_hasFocus=function (){
+        console.log(`Document_hasFocus ->`,`当前页面有没有获取焦点,默认返回true`)
+        return true
+    }
+    bodavm.envFunc.Performance_timeOrigin_get=function (){
+        let date=bodavm.memory.Performance['timeOrigin']
+        console.log(`Performance_timeOrigin_get-> `,`res ->${date}`);
+        return date
+    }
+
+    bodavm.envFunc.Image_src_set=function (){
+        // debugger
+        console.log(`Image_src_set->`,`res ->${arguments[0]}`);
+        this._boarg.src=arguments[0]
+        return this._boarg.src
+    }
     bodavm.envFunc.Performance_now=function (){
         let now=window.performance._boarg.now()
         console.log(`Performance_now `,`res ->${now}`);
         return now
     }
 
+    bodavm.envFunc.window_Image = function window_Image() {
+        // debugger
+        let arg=bodavm.memory.globalobj['Image']
+        arg._boarg=bodaobj.window.Image
+        console.log(`window_Image `, `res -> ${arg}`);
+
+        return arg
+    }
     bodavm.envFunc.window_scheduler_get=function (){let arg=bodavm.memory.globalobj['scheduler']?bodavm.memory.globalobj['scheduler']:null;console.log(`window_scheduler_get`,`res ->${arg}`);return arg}
     bodavm.envFunc.window_crossOriginIsolated_get=function (){let arg=bodavm.memory.globalobj['crossOriginIsolated']?bodavm.memory.globalobj['crossOriginIsolated']:null;console.log(`window_crossOriginIsolated_get`,`res ->${arg}`);return arg}
     bodavm.envFunc.window_onpointerrawupdate_get=function (){let arg=bodavm.memory.globalobj['onpointerrawupdate']?bodavm.memory.globalobj['onpointerrawupdate']:null;console.log(`window_onpointerrawupdate_get`,`res ->${arg}`);return arg}
@@ -1922,7 +2137,10 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.window_WebKitCSSMatrix = function () { let arg = bodavm.memory.globalobj['WebKitCSSMatrix']; console.log(`window_WebKitCSSMatrix`, `res ->${arg}`); return arg }
     bodavm.envFunc.window_WebKitMutationObserver = function () { let arg = bodavm.memory.globalobj['WebKitMutationObserver']; console.log(`window_WebKitMutationObserver`, `res ->${arg}`); return arg }
     bodavm.envFunc.window_webkitMediaStream = function () { let arg = bodavm.memory.globalobj['webkitMediaStream']; console.log(`window_webkitMediaStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitRTCPeerConnection = function () { let arg = bodavm.memory.globalobj['webkitRTCPeerConnection']; console.log(`window_webkitRTCPeerConnection`, `res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitRTCPeerConnection = function () { 
+        let arg = bodavm.memory.globalobj['webkitRTCPeerConnection']; console.log(`window_webkitRTCPeerConnection`, `res ->${arg}`
+        
+        ); return arg }
     bodavm.envFunc.window_webkitURL = function () { let arg = bodavm.memory.globalobj['webkitURL']; console.log(`window_webkitURL`, `res ->${arg}`); return arg }
     bodavm.envFunc.window_Audio = function () { let arg = bodavm.memory.globalobj['Audio']; console.log(`window_Audio`, `res ->${arg}`); return arg }
     bodavm.envFunc.window_IDBDatabase = function () { let arg = bodavm.memory.globalobj['IDBDatabase']; console.log(`window_IDBDatabase`, `res ->${arg}`); return arg }
@@ -1931,56 +2149,59 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
 
     bodavm.envFunc.window_MutationObserver = function () {
-        debugger
-        let arg = new bodavm.memory.globalobj['MutationObserver'](arguments[0])
-        arg._boarg=new bodaobj.window.MutationObserver(arguments[0])
+        // debugger
+        // if (arguments.length<1) {
+            // arguments[0]=function (){}
+        // }
+        let arg =bodavm.memory.globalobj['MutationObserver']
+        // arg._boarg=new bodaobj.window.MutationObserver(arguments[0])
         console.log(`window_MutationObserver `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncanplaythrough_get = function () {
         let arg = bodavm.memory.window['oncanplaythrough']
-        arg._boarg= bodaobj.window['oncanplaythrough']
+        // arg._boarg= bodaobj.window['oncanplaythrough']
 
         console.log(`window_oncanplaythrough_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncanplay_get = function () {
         let arg = bodavm.memory.window['oncanplay']
-        arg._boarg= bodaobj.window['oncanplay']
+        // arg._boarg= bodaobj.window['oncanplay']
 
         console.log(`window_oncanplay_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncancel_get = function () {
         let arg = bodavm.memory.window['oncancel']
-        arg._boarg= bodaobj.window['oncancel']
+        // arg._boarg= bodaobj.window['oncancel']
         console.log(`window_oncancel_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onblur_get = function () {
         let arg = bodavm.memory.window['onblur']
-        arg._boarg= bodaobj.window['onblur']
+        // arg._boarg= bodaobj.window['onblur']
 
         console.log(`window_onblur_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onappinstalled_get = function () {
         let arg = bodavm.memory.window['onappinstalled']
-        arg._boarg= bodaobj.window['onappinstalled']
+        // arg._boarg= bodaobj.window['onappinstalled']
 
         console.log(`window_onappinstalled_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforeinstallprompt_get = function () {
         let arg = bodavm.memory.window['onbeforeinstallprompt']
-        arg._boarg= bodaobj.window['onbeforeinstallprompt']
+        // arg._boarg= bodaobj.window['onbeforeinstallprompt']
 
         console.log(`window_onbeforeinstallprompt_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforexrselect_get = function () {
         let arg = bodavm.memory.window['onbeforexrselect']
-        arg._boarg= bodaobj.window['onbeforexrselect']
+        // arg._boarg= bodaobj.window['onbeforexrselect']
 
         console.log(`window_onbeforexrselect_get `, `res ->${arg}`);
         return arg
@@ -1988,7 +2209,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     bodavm.envFunc.window_onabort_get = function () {
         let arg = bodavm.memory.window['onabort']
-        arg._boarg= bodaobj.window['onabort']
+        // arg._boarg= bodaobj.window['onabort']
         console.log(`window_onabort_get `, `res ->${arg}`);
         return arg
     }
@@ -2000,9 +2221,9 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         return arg
     }
     bodavm.envFunc.window_onsearch_get = function () {
-        let arg = bodavm.memory.globalobj['onsearch'] ? bodavm.memory.globalobj['onsearch'] : null
-        arg._boarg= bodaobj.window['onsearch']
-
+        // let arg = bodavm.memory.globalobj['onsearch'] ? bodavm.memory.globalobj['onsearch'] : null
+        // arg._boarg= bodaobj.window['onsearch']
+        let arg = bodavm.memory.window['onsearch']
         console.log(`window_onsearch_get `, `res ->${arg}`);
         return arg
     }
@@ -2014,16 +2235,18 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         return arg
     }
     bodavm.envFunc.window_frameElement_get = function () {
-        let arg = bodavm.memory.globalobj['frameElement'] ? bodavm.memory.globalobj['frameElement'] : null
-        arg._boarg= bodaobj.window['frameElement']
+        let arg = bodavm.memory.window['frameElement'] 
+        // arg._boarg= bodaobj.window['frameElement']
+
+
 
         console.log(`window_frameElement_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_opener_get = function () {
-        let arg = bodavm.memory.globalobj['opener'] ? bodavm.memory.globalobj['opener'] : null
-        arg._boarg= bodaobj.window['opener']
-
+        let arg = bodavm.memory.window['opener']
+        // arg._boarg= bodaobj.window['opener']
+        // let arg= bodaobj.window['opener']
         console.log(`window_opener_get `, `res ->${arg}`);
         return arg
     }
@@ -2293,8 +2516,9 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.window_localStorage_get = function window_localStorage_get() {
         let localStorage_ = bodavm.memory.globalobj.localStorage
         console.log(`window_localStorage_get `, `localStorage->`, localStorage_);
-        localStorage_._boarg= bodaobj.window['localStorage']
+        // debugger
 
+        // localStorage_._boarg= bodaobj.window['localStorage']
         return localStorage_
     }
     bodavm.envFunc.window_indexedDB_get = function window_indexedDB_get() {
@@ -2307,7 +2531,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.window_sessionStorage_get = function window_sessionStorage_get() {
         let sessionStorage_ = bodavm.memory.globalobj.sessionStorage
         console.log(`window_sessionStorage_get `, `sessionStorage->`, sessionStorage_);
-        sessionStorage_._boarg= bodaobj.window['sessionStorage']
+        // sessionStorage_._boarg= bodaobj.window['sessionStorage']
 
         return sessionStorage_
     }
@@ -2343,6 +2567,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         return res
     }
     bodavm.envFunc.HTMLAllCollection_length_get = function () {
+        debugger
         let length_ = bodavm.memory.all.length
         console.log(`HTMLAllCollection_length_get `, `length_ ->${length_}`);
         return length_
@@ -2352,23 +2577,34 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         let a = boallundefined
         tags = document.getElementsByTagName("*")
         a.__proto__ = bodavm.memory.globalobj['HTMLAllCollection'].prototype
-        if (bodavm.memory.rs6 && bodavm.memory.rs6_body == 0) {
-            let num = 0
-            for (let i = 0; i < tags.length; i++) {
-                if (tags[i] instanceof bodavm.memory.globalobj['HTMLBodyElement']) {
-                } else {
-                    bodavm.memory.all[num] = tags[i]
-                    num++
-                }
-            }
-        } else {
+        // if (bodavm.memory.rs6 && bodavm.memory.rs6_body == 0) {
+        //     let num = 0
+        //     for (let i = 0; i < tags.length; i++) {
+        //         if (tags[i] instanceof bodavm.memory.globalobj['HTMLBodyElement']) {
+
+        //         } else {
+        //             bodavm.memory.all[num] = tags[i]
+        //             num++
+        //         }
+        //     }
+        // } else {
             for (let i2 = 0; i2 < tags.length; i2++) {
-                bodavm.memory.all[i2] = tags[i2];
+                // bodavm.memory.all[i2] = tags[i2];
+                a[i2]=tags[i2]
+                bodavm.memory.all.push(tags[i2])
             }
 
-        }
+        // let arg=arguments[0]
+        // debugger
+        // if (arg){
+        //     res=a[arg]
+        //     console.log(`Document_all_get ->`,`arg :${arg} `,`res -> ${res}`)
+        //     return res
+        // }
 
 
+        // debugger
+        a._boarg=true
         a.__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
         console.log("Document_all_get  ", `all ->${a}`)
         return a
@@ -2429,7 +2665,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     bodavm.envFunc.HTMLFormElement_action_get = function HTMLFormElement_action_get() {
         let action = ''
-        debugger
+        // debugger
         for (let i = 0; i < bodavm.memory.formlist.length; i++) {
             if (bodavm.memory.formlist[i] == this._boarg) {
                 for (let j = 0; j < bodavm.memory.formlist[i]['child'].length; j++) {
@@ -2444,6 +2680,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
             }
         }
+        // action=this._boarg.action
         // debugger
 
         console.log(`HTMLFormElement_action_get `, `action ->${action}`, `r6检测点`);
@@ -2472,9 +2709,9 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Document_createExpression = function Document_createExpression() {
         // debugger
         let res = {}
-
-        res.__proto__ = bodavm.memory.globalobj['XPathExpression'].prototype
         res._boarg = bodaobj.document.createExpression(arguments[0], arguments[1])
+        res.__proto__ = bodavm.memory.globalobj['XPathExpression'].prototype
+        
         console.log(`Document_createExpression `, `res ->${res}`);
         return res
     }
@@ -2482,7 +2719,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.BarProp_visible_get = function BarProp_visible_get() {
         // debugger
         let boolres = true
-        console.log(`BarProp_visible_get `, `boolres ->${boolres}`);
+        console.log(`BarProp_visible_get `, `boolres ->${boolres}`,`未完善`);
         return boolres
     }
     bodavm.envFunc.HTMLMediaElement_canPlayType = function HTMLMediaElement_canPlayType() {
@@ -2536,6 +2773,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         let res = {}
         res._media = arg
         res.__proto__ = bodavm.memory.globalobj['MediaQueryList'].prototype
+        res._boisinit=true
         console.log(`window_matchMedia `, `arg ->${arg}`, `res ->${res}`);
 
         return res
@@ -2546,7 +2784,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         if (arguments.length > 1) { return bodavm.toolsFunc.throwError('TypeError', 'XMLHttpRequestEventTarget_onabort_set') }
         let arg = arguments[0]
         this._boarg.onabort = arg
-        console.log(`XMLHttpRequestEventTarget_onabort_set`, `arg->${arg}`);
+        console.log(`XMLHttpRequestEventTarget_onabort_set `, `arg->${arg}`);
         return arg
     }
 
@@ -2701,14 +2939,37 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     }
     bodavm.envFunc.Document_images_get = function () {
-        let imgs = bodaobj.document.images
+        // let imgs = 
         if (bodavm.config.isdebug) { debugger };
+        if (bodavm.memory.collection["IMG"]){
+            res=bodavm.memory.collection["IMG"]
+            console.log(`Document_images_get  bodavm.memory.collection["IMG"]已存在,直接返回`);
+            return res
+        }
 
-        let res = {}
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = imgs
-        console.log(`Document_images_get `, `res -> ${res}`);
-        return res
+        if (!bodavm.memory.collection["IMG"]){
+            bodavm.memory.collection["IMG"]=[]
+        }
+        // else if (bodavm.memory.collection["IMG"]){
+        //     console.log(`Document_images_get `, `已存在bodavm.memory.collection中直接返回 imgs -> ${bodavm.memory.collection["IMG"]}`);
+        //     return bodavm.memory.collection["IMG"]
+        // }
+        // debugger
+        taglist = bodaobj.document.images
+        for (let i = 0; i < taglist.length; i++) {
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection["IMG"].__proto__=Array.prototype
+
+            // if (bodavm.memory.collection["IMG"].indexOf(res)==-1){
+                bodavm.memory.collection["IMG"].push(res)
+            // }
+        }
+        bodavm.memory.collection["IMG"].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection["IMG"]._boarg = taglist
+        bodavm.memory.collection["IMG"].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        console.log(`Document_images_get `, `imgs -> ${bodavm.memory.collection["IMG"]}`);
+        return bodavm.memory.collection["IMG"]
     }
     bodavm.envFunc.Navigator_deviceMemory_get = function Navigator_deviceMemory_get() {
         let deviceMemory = bodavm.memory.navigator['deviceMemory']
@@ -2719,7 +2980,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
 
     bodavm.envFunc.Navigator_credentials_get = function Navigator_credentials_get() {
-        let credentials = {}
+        let credentials = bodavm.memory.cache['Navigator_credentials_get']
         if (bodavm.config.isdebug) { debugger };
 
         credentials.__proto__ = bodavm.memory.globalobj['CredentialsContainer'].prototype
@@ -2727,8 +2988,10 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         return credentials
     }
     bodavm.envFunc.Navigator_storage_get = function Navigator_storage_get() {
-        let storage = {}
+        let storage = bodavm.memory.cache['Navigator_storage_get']
+        // debugger
         if (bodavm.config.isdebug) { debugger };
+        storage._boisinit=true
         storage.__proto__ = bodavm.memory.globalobj['StorageManager'].prototype
         console.log(`Navigator_storage_get `, `storage ->${storage}`);
         return storage
@@ -2741,7 +3004,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         return maxTouchPoints
     }
     bodavm.envFunc.Navigator_bluetooth_get = function Navigator_bluetooth_get() {
-        let bluetooth = {}
+        let bluetooth = bodavm.memory.cache['Navigator_bluetooth_get']
         bluetooth.__proto__ = bodavm.memory.globalobj['Bluetooth'].prototype
         if (bodavm.config.isdebug) { debugger };
 
@@ -2790,16 +3053,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         console.log(`RTCPeerConnection_onicegatheringstatechange_set `, `onicegatheringstatechange ->${_onicegatheringstatechange}`);
         return change
     }
-    bodavm.envFunc.window_Image = function window_Image() {
-        let domimg = bodaobj.window.Image.apply(this, arguments)
-        let img = {}
-        if (bodavm.config.isdebug) { debugger };
 
-        img.__proto__ = bodavm.memory.globalobj['HTMLImageElement'].prototype
-        img._boarg = domimg
-        console.log(`window_Image `, ` img->${img}`);
-        return img
-    }
 
 
     bodavm.envFunc.WebGLRenderingContext_getContextAttributes = function WebGLRenderingContext_getContextAttributes() {
@@ -2828,8 +3082,9 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
     bodavm.envFunc.window_frames_get = function window_frames_get() {
         let iframe = bodaobj.window
-        console.log(`window_frames_get `, ` 返回的为jsdom中的window`);
-        iframe = bodavm.toolsFunc.proxy(iframe, 'iframewinodow')
+        console.log(`window_frames_get `, ` 返回的为jsdom中的window`,`需要关注具体方法`);
+        // iframe = bodavm.toolsFunc.proxy(iframe, 'iframewinodow')
+
         return iframe
     }
     bodavm.envFunc.window_closed_get = function window_closed_get() {
@@ -2993,6 +3248,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         return name
     }
     bodavm.envFunc.window_setTimeout = function window_setTimeout() {
+        // debugger
         let func = arguments[0];
         let delay = arguments[1] || 0;
         let length = arguments.length;
@@ -3106,7 +3362,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         let index = arguments[0];
         let i = 0;
         console.log(`Storage_key `, `index${index}  `)
-        for (const key in this) {
+        for (var key in this) {
             if (i === index) {
                 return this[key]
             }
@@ -3127,7 +3383,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         let i = 0;
         if (bodavm.config.isdebug) { debugger }
         debugger
-        for (const key in Object.getOwnPropertyDescriptors(this)) {
+        for (var key in Object.getOwnPropertyDescriptors(this)) {
             i++
         }
         console.log(`Storage_length_get `, `length->${i}   `);
@@ -3151,7 +3407,11 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Document_webkitFullscreenEnabled_get = function Document_webkitFullscreenEnabled_get() { console.log("Document_webkitFullscreenEnabled_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_webkitFullscreenElement_get = function Document_webkitFullscreenElement_get() { console.log("Document_webkitFullscreenElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_webkitCurrentFullScreenElement_get = function Document_webkitCurrentFullScreenElement_get() { console.log("Document_webkitCurrentFullScreenElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Document_wasDiscarded_get = function Document_wasDiscarded_get() { console.log("Document_wasDiscarded_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_wasDiscarded_get = function Document_wasDiscarded_get() { 
+        
+        console.log("Document_wasDiscarded_get  ", false, "!!!!!!!!!未完善!!!!!!!!!!!!")
+        return false
+    }
     bodavm.envFunc.Document_vlinkColor_get = function Document_vlinkColor_get() { console.log("Document_vlinkColor_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_visibilityState_get = function Document_visibilityState_get() {
         console.log("Document_visibilityState_get  ", 'visible',)
@@ -3204,7 +3464,12 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Document_bgColor_get = function Document_bgColor_get() { console.log("Document_bgColor_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_childElementCount_get = function Document_childElementCount_get() { console.log("Document_childElementCount_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_children_get = function Document_children_get() { console.log("Document_children_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Document_currentScript_get = function Document_currentScript_get() { console.log("Document_currentScript_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_currentScript_get = function Document_currentScript_get() { 
+        // debugger
+        let res=this._boarg.currentScript
+        console.log("Document_currentScript_get  ", `res ->${res}`, "!!!!!!!!!未完善!!!!!!!!!!!!")
+        return res
+    }
     bodavm.envFunc.Document_defaultView_get = function Document_defaultView_get() { console.log("Document_defaultView_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_doctype_get = function Document_doctype_get() { console.log("Document_doctype_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_embeds_get = function Document_embeds_get() { console.log("Document_embeds_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
@@ -3287,7 +3552,13 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Document_onpointerup_get = function Document_onpointerup_get() { console.log("Document_onpointerup_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_onprogress_get = function Document_onprogress_get() { console.log("Document_onprogress_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_onratechange_get = function Document_onratechange_get() { console.log("Document_onratechange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Document_querySelector = function Document_querySelector() { console.log("Document_querySelector", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_querySelector = function Document_querySelector() { 
+        
+        let res=this._boarg.querySelector(arguments[0])
+        console.log("Document_querySelector ->",`res ->${res}`)
+        if (res){debugger}
+        return res
+    }
     bodavm.envFunc.Document_write=function (){
         let html = arguments[0]
         bodaobj.document.write(html)
@@ -3321,12 +3592,31 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     }
     bodavm.envFunc.Document_scripts_get = function Document_scripts_get() {
-        let res = {}
-        let scripts = bodaobj.document.scripts
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = scripts
-        console.log(`Document_scripts_get `, `res ->${res}`);
-        return res
+        if (bodavm.memory.collection["scripts"]){
+            console.log(`Document_scripts_get 在bodavm.memory.collection[${"scripts"}] 已存在,直接返回`)
+            return bodavm.memory.collection["scripts"]
+        }
+        // let res = {}
+        if (!bodavm.memory.collection["scripts"]){
+            bodavm.memory.collection["scripts"]=[]
+        }
+        taglist = bodaobj.document.scripts
+
+        for (let i = 0; i < taglist.length; i++) {
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection["scripts"].__proto__=Array.prototype
+
+            // if (bodavm.memory.collection["scripts"].indexOf(res)==-1){
+                bodavm.memory.collection["scripts"].push(res)
+            // }
+        }
+        bodavm.memory.collection["scripts"].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection["scripts"]._boarg = taglist
+
+        console.log(`Document_scripts_get `, `res ->${bodavm.memory.collection["scripts"]}`);
+        bodavm.memory.collection["scripts"].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        return bodavm.memory.collection["scripts"]
     }
     bodavm.envFunc.Document_body_set = function Document_body_set() {
 
@@ -3496,8 +3786,9 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
             console.log(`Document_body_get `, `当前网站为r6使用该功能,否则请关闭`, `body->${null}  `);
             return null
         }
-        let res = bodavm.toolsFunc.setProto('body')
+        let res =bodavm.memory.cache['Document_body_get']
         res._boarg = bodaobj.document.body
+        res.__proto__=HTMLBodyElement.prototype
         console.log(`Document_body_get `, `body->${res}  `);
         return res
 
@@ -3537,36 +3828,52 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     //'[{"type":"node","tag":"meta",attrs:{"id":id}},{"type":"node","tag":"canvas"},{"type":"node","tag":"a"},{"type":"node","tag":"script"},{"type":"node","tag":"style"}]'
     bodavm.envFunc.Document_getElementsByTagName = function Document_getElementsByTagName() {
-        var tagName = arguments[0].toLowerCase()
-        let res = {}
-        if (bodavm.config.isdebug) { debugger };
-        let taglist = bodaobj.document.getElementsByTagName(tagName)
+        var tagName = arguments[0].toUpperCase()
         // debugger
+
+        if (bodavm.memory.collection[tagName] && bodavm.memory.collection[tagName].length){
+            console.log(`Document_getElementsByTagName 在bodavm.memory.collection[${tagName}] 已存在,直接返回`)
+            return bodavm.memory.collection[tagName]
+        }
+
+        if (!bodavm.memory.collection[tagName]){
+            bodavm.memory.collection[tagName]=[]
+        }
+        
+        let taglist = bodaobj.document.getElementsByTagName(tagName)
         num = 0
         for (let i = 0; i < taglist.length; i++) {
             num++
-            res[i] = bodavm.toolsFunc.setProto(taglist[i].nodeName);
-            res[i]._boarg = taglist[i]
-            if (num == 2 && tagName == 'script' && bodavm.config.isrs) {
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection[tagName].__proto__=Array.prototype
+            bodavm.memory.collection[tagName].push(res)
+            if (num == 2 && tagName == 'SCRIPT' && bodavm.config.isrs) {
                 // debugger
                 break
 
             }
         }
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = taglist
+
+        
+        bodavm.memory.collection[tagName].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection[tagName]._boarg = taglist
         console.log(`Document_getElementsByTagName `, `tagName->${tagName} `, ` taglist->${taglist}`);
-
-
-        return res
+        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        // taglist._boisinit=true
+        return bodavm.memory.collection[tagName]
 
     }
 
     bodavm.envFunc.Document_cookie_get = function Document_cookie_get() {
         // debugger
+        if (this._contentiframe){
+            console.log(`iframe下的document获取cookie,直接返回''`);
+            return ''
+        }
         let jsonCookie = bodavm.memory.globalInit.jsonCookie;
         let tempCookie = "";
-        for (const key in jsonCookie) {
+        for (var  key in jsonCookie) {
             if (key === "") {
                 tempCookie += `${jsonCookie[key]}; `;
             } else {
@@ -3662,9 +3969,15 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Document_documentElement_get = function Document_documentElement_get() {
         if (bodavm.config.isdebug) { debugger }
         // debugger
+        // let htmlElement={}
+        
         let html = bodaobj.document.documentElement
-        let res = bodavm.toolsFunc.setProto(html.nodeName)
-        res._boarg = html
+        res=bodavm.memory.cache['Document_documentElement_get']
+        res._boarg=html
+        res.__proto__=HTMLHtmlElement.prototype
+        // res._boarg=html
+        res._boisinit=bodavm.config.isinit
+
         console.log(`Document_documentElement_get `, `html->${res}  `);
         return res
 
@@ -3709,14 +4022,13 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     bodavm.envFunc.Document_scrollingElement_get = function Document_scrollingElement_get() {
         if (bodavm.config.isdebug) { debugger }
-        let res = {}
+        let res = bodavm.memory.cache['Document_scrollingElement_get']
         let html = bodaobj.document.documentElement
-
         res = bodavm.toolsFunc.setProto('html')
-        res._boarg = html
+        res._boarg = html    
         // return onselectionchange
-        console.log(`Document_scrollingElement_get==> `, `html->${res}`);
-        return res
+        console.log(`Document_scrollingElement_get==> `, `html->${html}`);
+        return html
     }
 
 
@@ -3794,26 +4106,36 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
                     }
                 }
             }
+        }else{
+            content=this._boarg.textContent
         }
-        console.log("Node_textContent_get", `content ->${content}`, `r6检测点`)
+        console.log("Node_textContent_get ", `content ->${content}`, `r6检测点`)
         return content
 
     }
-    bodavm.envFunc.Node_previousSibling_get = function Node_previousSibling_get() { console.log("Node_previousSibling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Node_ownerDocument_get = function Node_ownerDocument_get() { console.log("Node_ownerDocument_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Node_baseURI_get = function Node_baseURI_get() { console.log("Node_baseURI_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Node_childNodes_get = function Node_childNodes_get() { console.log("Nodes_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Node_isConnected_get = function Node_isConnected_get() { console.log("Node_isConnected_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_previousSibling_get = function Node_previousSibling_get() { console.log("Node_previousSibling_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_ownerDocument_get = function Node_ownerDocument_get() { console.log("Node_ownerDocument_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_baseURI_get = function Node_baseURI_get() { console.log("Node_baseURI_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_childNodes_get = function Node_childNodes_get() { 
+        // debugger
+        let Nodelists={}
+        Nodelists._boarg=this._boarg.childNodes
+        Nodelists.__proto__=NodeList.prototype
+        console.log("Node_childNodes_get ->",`res->${Nodelists}`) 
+        return Nodelists
+    }
+    bodavm.envFunc.Node_isConnected_get = function Node_isConnected_get() { console.log("Node_isConnected_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Node_nextSibling_get = function Node_nextSibling_get() {
         // debugger
-        let res = {}
-        _next = this._boarg.nextSibling
+         res = bodavm.memory.cache['Node_nextSibling_get']
+         let _next = this._boarg.nextSibling
         if (_next == null) {
             console.log(`Node_nextSibling_get `, `res -> null`);
             return null
         } else {
             res = bodavm.toolsFunc.setProto(_next.nodeName)
             res._boarg = _next
+            res._boisinit=bodavm.config.isinit
         }
 
         console.log(`Node_nextSibling_get `, `res->${res}`);
@@ -3826,16 +4148,20 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         console.log(`Node_nodeType_get `, `nodetype ->${nodetype}`);
         return nodetype
     }
-    bodavm.envFunc.Node_nodeValue_get = function Node_nodeValue_get() { console.log("Node_nodeValue_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_nodeValue_get = function Node_nodeValue_get() { console.log("Node_nodeValue_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
     bodavm.envFunc.Node_nodeName_get = function Node_nodeName_get() {
+        // debugger
+        nodeName_=this._boarg.nodeName
         if (bodavm.config.isdebug) { debugger }
-        console.log(`Node_nodeName_get !!!!!!!!!未完善!!!!!!!!!!!!`);
+        console.log(`Node_nodeName_get ->`,` res -> ${ nodeName_}`);
         return nodeName_
     }
     bodavm.envFunc.Node_firstChild_get = function Node_firstChild_get() {
         // debugger
-        let res = {}
+        let res = {
+            _boisinit:bodavm.config.isinit
+        }
         let frist_ = this._boarg.firstChild
         if (frist_) {
             res = bodavm.toolsFunc.setProto(frist_.nodeName)
@@ -3870,27 +4196,62 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Node_parentNode_get = function Node_parentNode_get() {
         //获取父节点
         // debugger
+        
         if (bodavm.config.isdebug) { debugger }
         let parent = this._boarg.parentNode
-        let res = bodavm.toolsFunc.setProto(parent.nodeName)
-        res._boarg = parent
-        // if (Object.prototype.toString.call(parent) == '[object Object]') {
-        //     console.log(`Node_parentNode_get `, `parent->${null}  `);
-        //     return null
-        // }
-        // parent.__proto__ = bodavm.toolsFunc.setProto(parent._nodeName)
+        if (bodavm.memory.cache['Node_parentNode_get']['parent']==parent){
+            console.log(`Node_parentNode_get parent在bodavm.memory.cache['Node_parentNode_get']['parent']已存在,直接返回`);
+            return bodavm.memory.cache['Node_parentNode_get']['res']
+        }
+        let res=bodavm.memory.cache['Node_parentNode_get']['res']
+        
+        if (parent){
+            // if (!(bodavm.memory.cache['Node_parentNode_get']['parent'])){
+            //     bodavm.memory.cache['Node_parentNode_get']['parent']=parent
+            // }else{
+                // 
+            // }
+           
+            res = bodavm.toolsFunc.setProto(parent.nodeName)
+            res._boarg = parent
+            bodavm.memory.cache['Node_parentNode_get']['parent']=parent
+
+            bodavm.memory.cache['Node_parentNode_get']['res']=res
+            // if (parent.nodeName)
+            // if (Object.prototype.toString.call(parent) == '[object Object]') {
+            //     console.log(`Node_parentNode_get `, `parent->${null}  `);
+            //     return null
+            // }
+            // parent.__proto__ = bodavm.toolsFunc.setProto(parent._nodeName)
+        }else{
+            res=null
+        }
+        
         console.log(`Node_parentNode_get `, `parent->${res}  `);
         return res;
     }
     bodavm.envFunc.Node_removeChild = function Node_removeChild() {
         //删除子节点
-        // debugger
+        debugger
         if (bodavm.config.isdebug) { debugger };;
 
         let child = arguments[0]
         this._boarg.removeChild(child._boarg)
+        let tagname=child._boarg.nodeName
         console.log(`Node_removeChild `, `child->${child}`);
-
+        if (bodavm.memory.collection[tagname]){
+            for (let i = 0; i < bodavm.memory.collection[tagname].length; i++) {
+                if (child ==bodavm.memory.collection[tagname][i]){
+    
+                    console.log(`当前对象 tagname:${tagname},child:${child} 存在bodavm.memory.collection ,重置bodavm.memory.collection[${tagname}]`)
+                    bodavm.memory.collection[tagname].__proto__=Array.prototype
+                    bodavm.memory.collection[tagname].splice(i,1)
+                    bodavm.memory.collection[tagname].__proto__=bodavm.memory.globalobj['HTMLCollection'].prototype
+                }
+                
+            }
+        }
+        
         // debugger
 
         return child
@@ -3903,9 +4264,13 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         let parent = {}
         // debugger
         let temp = this._boarg.parentElement
-        parent = bodavm.toolsFunc.setProto(temp.nodeName)
-        parent._boarg = temp
-        console.log(`Node_parentElement_get `, `parent${temp} `);
+        if (temp){
+            parent = bodavm.toolsFunc.setProto(temp.nodeName)
+            parent._boarg = temp
+        }else{
+            parent=null
+        }
+        console.log(`Node_parentElement_get ->`, `parent ->${parent} `);
 
 
         return parent;
@@ -3934,71 +4299,71 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
 
     //Element
-    bodavm.envFunc.Element_ariaAtomic_get = function Element_ariaAtomic_get() { console.log("Element_ariaAtomic_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaAutoComplete_get = function Element_ariaAutoComplete_get() { console.log("Element_ariaAutoComplete_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaBusy_get = function Element_ariaBusy_get() { console.log("Element_ariaBusy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaChecked_get = function Element_ariaChecked_get() { console.log("Element_ariaChecked_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaColCount_get = function Element_ariaColCount_get() { console.log("Element_ariaColCount_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaDescription_get = function Element_ariaDescription_get() { console.log("Element_ariaDescription_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaCurrent_get = function Element_ariaCurrent_get() { console.log("Element_ariaCurrent_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaColSpan_get = function Element_ariaColSpan_get() { console.log("Element_ariaColSpan_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaColIndex_get = function Element_ariaColIndex_get() { console.log("Element_ariaColIndex_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaDisabled_get = function Element_ariaDisabled_get() { console.log("Element_ariaDisabled_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaExpanded_get = function Element_ariaExpanded_get() { console.log("Element_ariaExpanded_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaHasPopup_get = function Element_ariaHasPopup_get() { console.log("Element_ariaHasPopup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaHidden_get = function Element_ariaHidden_get() { console.log("Element_ariaHidden_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaInvalid_get = function Element_ariaInvalid_get() { console.log("Element_ariaInvalid_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaKeyShortcuts_get = function Element_ariaKeyShortcuts_get() { console.log("Element_ariaKeyShortcuts_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaLevel_get = function Element_ariaLevel_get() { console.log("Element_ariaLevel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaLabel_get = function Element_ariaLabel_get() { console.log("Element_ariaLabel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaLive_get = function Element_ariaLive_get() { console.log("Element_ariaLive_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaModal_get = function Element_ariaModal_get() { console.log("Element_ariaModal_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaMultiLine_get = function Element_ariaMultiLine_get() { console.log("Element_ariaMultiLine_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaMultiSelectable_get = function Element_ariaMultiSelectable_get() { console.log("Element_ariaMultiSelectable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaOrientation_get = function Element_ariaOrientation_get() { console.log("Element_ariaOrientation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaPlaceholder_get = function Element_ariaPlaceholder_get() { console.log("Element_ariaPlaceholder_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaPosInSet_get = function Element_ariaPosInSet_get() { console.log("Element_ariaPosInSet_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaPressed_get = function Element_ariaPressed_get() { console.log("Element_ariaPressed_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaReadOnly_get = function Element_ariaReadOnly_get() { console.log("Element_ariaReadOnly_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRequired_get = function Element_ariaRequired_get() { console.log("Element_ariaRequired_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRelevant_get = function Element_ariaRelevant_get() { console.log("Element_ariaRelevant_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRoleDescription_get = function Element_ariaRoleDescription_get() { console.log("Element_ariaRoleDescription_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRowCount_get = function Element_ariaRowCount_get() { console.log("Element_ariaRowCount_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRowIndex_get = function Element_ariaRowIndex_get() { console.log("Element_ariaRowIndex_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRowSpan_get = function Element_ariaRowSpan_get() { console.log("Element_ariaRowSpan_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaSelected_get = function Element_ariaSelected_get() { console.log("Element_ariaSelected_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaSort_get = function Element_ariaSort_get() { console.log("Element_ariaSort_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaSetSize_get = function Element_ariaSetSize_get() { console.log("Element_ariaSetSize_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaValueMax_get = function Element_ariaValueMax_get() { console.log("Element_ariaValueMax_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaValueMin_get = function Element_ariaValueMin_get() { console.log("Element_ariaValueMin_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaValueNow_get = function Element_ariaValueNow_get() { console.log("Element_ariaValueNow_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaValueText_get = function Element_ariaValueText_get() { console.log("Element_ariaValueText_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_assignedSlot_get = function Element_assignedSlot_get() { console.log("Element_assignedSlot_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_attributeStyleMap_get = function Element_attributeStyleMap_get() { console.log("Element_attributeStyleMap_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_childElementCount_get = function Element_childElementCount_get() { console.log("ElementCount_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_classList_get = function Element_classList_get() { console.log("Element_classList_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_className_get = function Element_className_get() { console.log("Element_className_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_elementTiming_get = function Element_elementTiming_get() { console.log("Element_elementTiming_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_firstElementChild_get = function Element_firstElementChild_get() { console.log("ElementChild_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_lastElementChild_get = function Element_lastElementChild_get() { console.log("ElementChild_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_localName_get = function Element_localName_get() { console.log("Element_localName_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_namespaceURI_get = function Element_namespaceURI_get() { console.log("Element_namespaceURI_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_nextElementSibling_get = function Element_nextElementSibling_get() { console.log("ElementSibling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onbeforecopy_get = function Element_onbeforecopy_get() { console.log("Element_onbeforecopy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onbeforecut_get = function Element_onbeforecut_get() { console.log("Element_onbeforecut_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onbeforepaste_get = function Element_onbeforepaste_get() { console.log("Element_onbeforepaste_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onfullscreenchange_get = function Element_onfullscreenchange_get() { console.log("Element_onfullscreenchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onfullscreenerror_get = function Element_onfullscreenerror_get() { console.log("Element_onfullscreenerror_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onsearch_get = function Element_onsearch_get() { console.log("Element_onsearch_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onwebkitfullscreenchange_get = function Element_onwebkitfullscreenchange_get() { console.log("Element_onwebkitfullscreenchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onwebkitfullscreenerror_get = function Element_onwebkitfullscreenerror_get() { console.log("Element_onwebkitfullscreenerror_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_part_get = function Element_part_get() { console.log("Element_part_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_prefix_get = function Element_prefix_get() { console.log("Element_prefix_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_previousElementSibling_get = function Element_previousElementSibling_get() { console.log("ElementSibling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_scrollHeight_get = function Element_scrollHeight_get() { console.log("Element_scrollHeight_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_shadowRoot_get = function Element_shadowRoot_get() { console.log("Element_shadowRoot_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_scrollWidth_get = function Element_scrollWidth_get() { console.log("Element_scrollWidth_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_slot_get = function Element_slot_get() { console.log("Element_slot_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaAtomic_get = function Element_ariaAtomic_get() { console.log("Element_ariaAtomic_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaAutoComplete_get = function Element_ariaAutoComplete_get() { console.log("Element_ariaAutoComplete_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaBusy_get = function Element_ariaBusy_get() { console.log("Element_ariaBusy_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaChecked_get = function Element_ariaChecked_get() { console.log("Element_ariaChecked_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaColCount_get = function Element_ariaColCount_get() { console.log("Element_ariaColCount_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaDescription_get = function Element_ariaDescription_get() { console.log("Element_ariaDescription_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaCurrent_get = function Element_ariaCurrent_get() { console.log("Element_ariaCurrent_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaColSpan_get = function Element_ariaColSpan_get() { console.log("Element_ariaColSpan_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaColIndex_get = function Element_ariaColIndex_get() { console.log("Element_ariaColIndex_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaDisabled_get = function Element_ariaDisabled_get() { console.log("Element_ariaDisabled_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaExpanded_get = function Element_ariaExpanded_get() { console.log("Element_ariaExpanded_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaHasPopup_get = function Element_ariaHasPopup_get() { console.log("Element_ariaHasPopup_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaHidden_get = function Element_ariaHidden_get() { console.log("Element_ariaHidden_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaInvalid_get = function Element_ariaInvalid_get() { console.log("Element_ariaInvalid_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaKeyShortcuts_get = function Element_ariaKeyShortcuts_get() { console.log("Element_ariaKeyShortcuts_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaLevel_get = function Element_ariaLevel_get() { console.log("Element_ariaLevel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaLabel_get = function Element_ariaLabel_get() { console.log("Element_ariaLabel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaLive_get = function Element_ariaLive_get() { console.log("Element_ariaLive_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaModal_get = function Element_ariaModal_get() { console.log("Element_ariaModal_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaMultiLine_get = function Element_ariaMultiLine_get() { console.log("Element_ariaMultiLine_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaMultiSelectable_get = function Element_ariaMultiSelectable_get() { console.log("Element_ariaMultiSelectable_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaOrientation_get = function Element_ariaOrientation_get() { console.log("Element_ariaOrientation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaPlaceholder_get = function Element_ariaPlaceholder_get() { console.log("Element_ariaPlaceholder_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaPosInSet_get = function Element_ariaPosInSet_get() { console.log("Element_ariaPosInSet_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaPressed_get = function Element_ariaPressed_get() { console.log("Element_ariaPressed_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaReadOnly_get = function Element_ariaReadOnly_get() { console.log("Element_ariaReadOnly_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRequired_get = function Element_ariaRequired_get() { console.log("Element_ariaRequired_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRelevant_get = function Element_ariaRelevant_get() { console.log("Element_ariaRelevant_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRoleDescription_get = function Element_ariaRoleDescription_get() { console.log("Element_ariaRoleDescription_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRowCount_get = function Element_ariaRowCount_get() { console.log("Element_ariaRowCount_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRowIndex_get = function Element_ariaRowIndex_get() { console.log("Element_ariaRowIndex_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRowSpan_get = function Element_ariaRowSpan_get() { console.log("Element_ariaRowSpan_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaSelected_get = function Element_ariaSelected_get() { console.log("Element_ariaSelected_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaSort_get = function Element_ariaSort_get() { console.log("Element_ariaSort_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaSetSize_get = function Element_ariaSetSize_get() { console.log("Element_ariaSetSize_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueMax_get = function Element_ariaValueMax_get() { console.log("Element_ariaValueMax_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueMin_get = function Element_ariaValueMin_get() { console.log("Element_ariaValueMin_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueNow_get = function Element_ariaValueNow_get() { console.log("Element_ariaValueNow_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueText_get = function Element_ariaValueText_get() { console.log("Element_ariaValueText_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_assignedSlot_get = function Element_assignedSlot_get() { console.log("Element_assignedSlot_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_attributeStyleMap_get = function Element_attributeStyleMap_get() { console.log("Element_attributeStyleMap_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_childElementCount_get = function Element_childElementCount_get() { console.log("ElementCount_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_classList_get = function Element_classList_get() { console.log("Element_classList_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_className_get = function Element_className_get() { console.log("Element_className_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_elementTiming_get = function Element_elementTiming_get() { console.log("Element_elementTiming_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_firstElementChild_get = function Element_firstElementChild_get() { console.log("ElementChild_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_lastElementChild_get = function Element_lastElementChild_get() { console.log("ElementChild_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_localName_get = function Element_localName_get() { console.log("Element_localName_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_namespaceURI_get = function Element_namespaceURI_get() { console.log("Element_namespaceURI_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_nextElementSibling_get = function Element_nextElementSibling_get() { console.log("ElementSibling_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onbeforecopy_get = function Element_onbeforecopy_get() { console.log("Element_onbeforecopy_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onbeforecut_get = function Element_onbeforecut_get() { console.log("Element_onbeforecut_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onbeforepaste_get = function Element_onbeforepaste_get() { console.log("Element_onbeforepaste_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onfullscreenchange_get = function Element_onfullscreenchange_get() { console.log("Element_onfullscreenchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onfullscreenerror_get = function Element_onfullscreenerror_get() { console.log("Element_onfullscreenerror_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onsearch_get = function Element_onsearch_get() { console.log("Element_onsearch_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onwebkitfullscreenchange_get = function Element_onwebkitfullscreenchange_get() { console.log("Element_onwebkitfullscreenchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onwebkitfullscreenerror_get = function Element_onwebkitfullscreenerror_get() { console.log("Element_onwebkitfullscreenerror_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_part_get = function Element_part_get() { console.log("Element_part_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_prefix_get = function Element_prefix_get() { console.log("Element_prefix_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_previousElementSibling_get = function Element_previousElementSibling_get() { console.log("ElementSibling_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_scrollHeight_get = function Element_scrollHeight_get() { console.log("Element_scrollHeight_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_shadowRoot_get = function Element_shadowRoot_get() { console.log("Element_shadowRoot_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_scrollWidth_get = function Element_scrollWidth_get() { console.log("Element_scrollWidth_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_slot_get = function Element_slot_get() { console.log("Element_slot_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Element_tagName_get = function Element_tagName_get() {
         let tagname = this._boarg.tagName
         if (bodavm.memory.isdebug) { debugger }
@@ -4007,7 +4372,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
 
     bodavm.envFunc.Element_getElementsByClassName = function Element_getElementsByClassName() {
-
+        class_list={}
         console.log(`Element_getElementsByClassName `, `!!!!!!!!!未完善!!!!!!!!!!!!  `);
 
         class_list.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
@@ -4017,26 +4382,27 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Element_append = function Element_append() {
         let child = arguments[0]
         console.log(`Element_append `, `child->${child}`);
-        bobo$(this._boarg).append(child._boarg)
+        this._boarg.append(child._boarg)
         // debugger
 
     }
     bodavm.envFunc.Element_id_get = function () {
         if (bodavm.config.isdebug) { debugger }
-        let content = undefined
+        let id = this._boarg.id
+        // debugger
         if (this instanceof HTMLFormElement) {
             for (let i = 0; i < bodavm.memory.formlist.length; i++) {
                 if (bodavm.memory.formlist[i] == this._boarg) {
                     for (let j = 0; j < bodavm.memory.formlist[i]['child'].length; j++) {
                         if (bodavm.memory.formlist[i]['child'][j]._boarg.name == 'id') {
-                            content = bodavm.memory.formlist[i]['child'][j]
+                            id = bodavm.memory.formlist[i]['child'][j]
                         }
                     }
                 }
             }
         }
-        console.log("Element_id_get", `content ->${content}`, `r6检测点`)
-        return content
+        console.log("Element_id_get ", `id ->${id}`, `r6检测点`)
+        return id
 
     }
     bodavm.envFunc.Element_id_set = function Element_id_set() {
@@ -4153,7 +4519,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Element_outerHTML_get = function Element_outerHTML_get() {
 
         // let outerHtml = this._elements[0].outerHTML
-        let outhtml = bobo$(this._boarg).html()
+        let outhtml = this._boarg.outerHTML
         console.log(`Element_outerHTML_get==> `, `outhtml->${outhtml}`,);
         if (bodavm.config.isdebug) { debugger };;
         //腾讯qq邮箱hk
@@ -4164,17 +4530,32 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Element_children_get = function Element_children_get() {
         if (bodavm.config.isdebug) { debugger };;
 
-        let res = {}
+        tagName=this._boarg.nodeName
+        if (bodavm.memory.collection[tagName]){
+            console.log(`Element_children_get `, `bodavm.memory.collection[${tagName}]已存在直接返回`);
+            return bodavm.memory.collection[tagName]
+        }
+        if (!bodavm.memory.collection[tagName]){
+            bodavm.memory.collection[tagName]=[]
+        }
+
         if (bodavm.config.isdebug) { debugger };
         let taglist = this._boarg.children
         for (let i = 0; i < taglist.length; i++) {
-            res[i] = bodavm.toolsFunc.setProto(taglist[i].nodeName);
-            res[i]._boarg = taglist[i]
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection[tagName].__proto__=Array.prototype
+            // if (bodavm.memory.collection[tagName].indexOf(res)==-1){
+                bodavm.memory.collection[tagName].push(res)
+            // }
+
         }
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = taglist
+        bodavm.memory.collection[tagName].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection[tagName]._boarg = taglist
         console.log(`Element_children_get `, ` taglist->${taglist}`);
-        return res
+        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
+        return bodavm.memory.collection[tagName]
 
     }
     bodavm.envFunc.Element_getBoundingClientRect = function Element_getBoundingClientRect() {
@@ -4214,60 +4595,71 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.Element_getElementsByTagName = function Element_getElementsByTagName() {
         if (bodavm.config.isdebug) { debugger; }
         // debugger
-        let tagName = arguments[0].toLowerCase();
-
-        let res = {}
+        let tagName = arguments[0].toUpperCase();
+        if (bodavm.memory.collection[tagName]){
+            console.log(`Element_getElementsByTagName`,`bodavm.memory.collection[${tagName}] 已存在直接返回`)
+            return bodavm.memory.collection[tagName]
+        }
+        if (!bodavm.memory.collection[tagName]){
+            bodavm.memory.collection[tagName]=[]
+        }
         if (bodavm.config.isdebug) { debugger };
         let taglist = this._boarg.getElementsByTagName(tagName)
 
         for (let i = 0; i < taglist.length; i++) {
-            res[i] = bodavm.toolsFunc.setProto(taglist[i].nodeName);
-            res[i]._boarg = taglist[i]
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection[tagName].__proto__=Array.prototype
+
+            // if (bodavm.memory.collection[tagName].indexOf(res)==-1){
+                bodavm.memory.collection[tagName].push(res)
+            // }
         }
         // debugger
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = taglist
+        bodavm.memory.collection[tagName].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection[tagName]._boarg = taglist
         console.log(`Element_getElementsByTagName `, `tagName->${tagName} `, ` taglist->${taglist}`);
+        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
 
 
-        return res
+        return bodavm.memory.collection[tagName]
     }
 
     //Navigator
-    bodavm.envFunc.Navigator_clipboard_get = function Navigator_clipboard_get() { console.log("Navigator_clipboard_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_geolocation_get = function Navigator_geolocation_get() { console.log("Navigator_geolocation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_hid_get = function Navigator_hid_get() { console.log("Navigator_hid_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_ink_get = function Navigator_ink_get() { console.log("Navigator_ink_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_keyboard_get = function Navigator_keyboard_get() { console.log("Navigator_keyboard_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_clipboard_get = function Navigator_clipboard_get() { console.log("Navigator_clipboard_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_geolocation_get = function Navigator_geolocation_get() { console.log("Navigator_geolocation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_hid_get = function Navigator_hid_get() { console.log("Navigator_hid_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_ink_get = function Navigator_ink_get() { console.log("Navigator_ink_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_keyboard_get = function Navigator_keyboard_get() { console.log("Navigator_keyboard_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Navigator_locks_get = function Navigator_locks_get() {
-        let locks = {}
+        let locks = bodavm.memory.cache['Navigator_locks_get']
         locks.__proto__ = bodavm.memory.globalobj['LockManager'].prototype
         console.log("Navigator_locks_get ", `locks ->${locks}`)
         return locks
     }
-    bodavm.envFunc.Navigator_managed_get = function Navigator_managed_get() { console.log("Navigator_managed_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_mediaCapabilities_get = function Navigator_mediaCapabilities_get() { console.log("Navigator_mediaCapabilities_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_mediaDevices_get = function Navigator_mediaDevices_get() { console.log("Navigator_mediaDevices_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_mediaSession_get = function Navigator_mediaSession_get() { console.log("Navigator_mediaSession_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_onLine_get = function Navigator_onLine_get() { console.log("Navigator_onLine_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_pdfViewerEnabled_get = function Navigator_pdfViewerEnabled_get() { console.log("Navigator_pdfViewerEnabled_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_managed_get = function Navigator_managed_get() { console.log("Navigator_managed_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_mediaCapabilities_get = function Navigator_mediaCapabilities_get() { console.log("Navigator_mediaCapabilities_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_mediaDevices_get = function Navigator_mediaDevices_get() { console.log("Navigator_mediaDevices_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_mediaSession_get = function Navigator_mediaSession_get() { console.log("Navigator_mediaSession_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_onLine_get = function Navigator_onLine_get() { console.log("Navigator_onLine_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_pdfViewerEnabled_get = function Navigator_pdfViewerEnabled_get() { console.log("Navigator_pdfViewerEnabled_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Navigator_permissions_get = function Navigator_permissions_get() {
         // debugger
-        let permissions = {}
+        let permissions = bodavm.memory.cache['Navigator_permissions_get']
         permissions.__proto__ = bodavm.memory.globalobj['Permissions'].prototype
 
-        console.log("Navigator_permissions_get", `permissions->${permissions}`)
+        console.log("Navigator_permissions_get ", `permissions->${permissions}`)
         return permissions
     }
-    bodavm.envFunc.Navigator_presentation_get = function Navigator_presentation_get() { console.log("Navigator_presentation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_scheduling_get = function Navigator_scheduling_get() { console.log("Navigator_scheduling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_serial_get = function Navigator_serial_get() { console.log("Navigator_serial_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_serviceWorker_get = function Navigator_serviceWorker_get() { console.log("Navigator_serviceWorker_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_usb_get = function Navigator_usb_get() { console.log("Navigator_usb_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_userActivation_get = function Navigator_userActivation_get() { console.log("Navigator_userActivation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_virtualKeyboard_get = function Navigator_virtualKeyboard_get() { console.log("Navigator_virtualKeyboard_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_wakeLock_get = function Navigator_wakeLock_get() { console.log("Navigator_wakeLock_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_webkitTemporaryStorage_get = function Navigator_webkitTemporaryStorage_get() { console.log("Navigator_webkitTemporaryStorage_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_presentation_get = function Navigator_presentation_get() { console.log("Navigator_presentation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_scheduling_get = function Navigator_scheduling_get() { console.log("Navigator_scheduling_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_serial_get = function Navigator_serial_get() { console.log("Navigator_serial_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_serviceWorker_get = function Navigator_serviceWorker_get() { console.log("Navigator_serviceWorker_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_usb_get = function Navigator_usb_get() { console.log("Navigator_usb_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_userActivation_get = function Navigator_userActivation_get() { console.log("Navigator_userActivation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_virtualKeyboard_get = function Navigator_virtualKeyboard_get() { console.log("Navigator_virtualKeyboard_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_wakeLock_get = function Navigator_wakeLock_get() { console.log("Navigator_wakeLock_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_webkitTemporaryStorage_get = function Navigator_webkitTemporaryStorage_get() { console.log("Navigator_webkitTemporaryStorage_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
 
     bodavm.envFunc.Navigator_javaEnabled = function () {
@@ -4343,6 +4735,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
     bodavm.envFunc.Navigator_userAgent_get = function Navigator_userAgent_get() {
         let ua = bodavm.memory.navigator["userAgent"]
+        // debugger
         console.log(`Navigator_userAgent_get `, `${ua}  `)
         // debugger
         return ua
@@ -4358,7 +4751,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         bodavm.toolsFunc.defineProperty('DeprecatedStorageQuota', "requestQuota", { configurable: true, enumerable: true, get: function DeprecatedStorageQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "requestQuota_get  ", arguments) }, set: function requestQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "requestQuota_set", arguments) } }, 'prototype');
 
         Object.setPrototypeOf(webkitPersistentStorage, bodavm.memory.globalobj['DeprecatedStorageQuota'].prototype)
-        delete DeprecatedStorageQuota
+        delete bodavm.memory.globalobj['DeprecatedStorageQuota'].prototype.constructor;
         console.log(`Navigator_webkitPersistentStorage_get `, `${webkitPersistentStorage}  `)
         if (bodavm.config.isdebug) { debugger };;
 
@@ -4381,7 +4774,8 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         return appVersion
     }
     bodavm.envFunc.Navigator_getBattery = function Navigator_getBattery() {
-        let batteryManager = {};
+        let batteryManager = bodavm.memory.cache['Navigator_getBattery'];
+        batteryManager._boisinit=true
         console.log(`Navigator_getBattery  `, 'settimeout 添加异步电池信息');
         batteryManager.__proto__ = bodavm.memory.globalobj['BatteryManager'].prototype
         // debugger
@@ -4394,7 +4788,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
     bodavm.envFunc.Navigator_webdriver_get = function Navigator_webdriver_get() {
         if (bodavm.config.isdebug) { debugger };;
-        console.log(`Navigator_webdriver_get== `, `false  `);
+        console.log(`Navigator_webdriver_get `, `false  `);
         return false
     }
     bodavm.envFunc.Navigator_connection_get = function Navigator_connection_get() {
@@ -4406,7 +4800,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
     bodavm.envFunc.Navigator_cookieEnabled_get = function Navigator_cookieEnabled_get() {
         let cookieEnabled = bodavm.memory.navigator['cookieEnabled']
-        console.log(`Navigator_cookieEnabled_get= `, `${cookieEnabled}  `)
+        console.log(`Navigator_cookieEnabled_get`, `${cookieEnabled}  `)
 
         return cookieEnabled
     }
@@ -4477,121 +4871,121 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
 
     //HTMLElement
-    bodavm.envFunc.HTMLElement_accessKey_get = function HTMLElement_accessKey_get() { console.log("HTMLElement_accessKey_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_autocapitalize_get = function HTMLElement_autocapitalize_get() { console.log("HTMLElement_autocapitalize_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_autofocus_get = function HTMLElement_autofocus_get() { console.log("HTMLElement_autofocus_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_contentEditable_get = function HTMLElement_contentEditable_get() { console.log("HTMLElement_contentEditable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_dataset_get = function HTMLElement_dataset_get() { console.log("HTMLElement_dataset_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_dir_get = function HTMLElement_dir_get() { console.log("HTMLElement_dir_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_draggable_get = function HTMLElement_draggable_get() { console.log("HTMLElement_draggable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_enterKeyHint_get = function HTMLElement_enterKeyHint_get() { console.log("HTMLElement_enterKeyHint_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_hidden_get = function HTMLElement_hidden_get() { console.log("HTMLElement_hidden_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_inputMode_get = function HTMLElement_inputMode_get() { console.log("HTMLElement_inputMode_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_inert_get = function HTMLElement_inert_get() { console.log("HTMLElement_inert_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_isContentEditable_get = function HTMLElement_isContentEditable_get() { console.log("HTMLElement_isContentEditable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_lang_get = function HTMLElement_lang_get() { console.log("HTMLElement_lang_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_nonce_get = function HTMLElement_nonce_get() { console.log("HTMLElement_nonce_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_offsetTop_get = function HTMLElement_offsetTop_get() { console.log("HTMLElement_offsetTop_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_offsetParent_get = function HTMLElement_offsetParent_get() { console.log("HTMLElement_offsetParent_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_offsetLeft_get = function HTMLElement_offsetLeft_get() { console.log("HTMLElement_offsetLeft_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onabort_get = function HTMLElement_onabort_get() { console.log("HTMLElement_onabort_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onanimationend_get = function HTMLElement_onanimationend_get() { console.log("HTMLElement_onanimationend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onanimationiteration_get = function HTMLElement_onanimationiteration_get() { console.log("HTMLElement_onanimationiteration_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onanimationstart_get = function HTMLElement_onanimationstart_get() { console.log("HTMLElement_onanimationstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onauxclick_get = function HTMLElement_onauxclick_get() { console.log("HTMLElement_onauxclick_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onbeforematch_get = function HTMLElement_onbeforematch_get() { console.log("HTMLElement_onbeforematch_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onbeforexrselect_get = function HTMLElement_onbeforexrselect_get() { console.log("HTMLElement_onbeforexrselect_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onblur_get = function HTMLElement_onblur_get() { console.log("HTMLElement_onblur_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncancel_get = function HTMLElement_oncancel_get() { console.log("HTMLElement_oncancel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncanplay_get = function HTMLElement_oncanplay_get() { console.log("HTMLElement_oncanplay_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncanplaythrough_get = function HTMLElement_oncanplaythrough_get() { console.log("HTMLElement_oncanplaythrough_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onchange_get = function HTMLElement_onchange_get() { console.log("HTMLElement_onchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onclick_get = function HTMLElement_onclick_get() { console.log("HTMLElement_onclick_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onclose_get = function HTMLElement_onclose_get() { console.log("HTMLElement_onclose_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncontextlost_get = function HTMLElement_oncontextlost_get() { console.log("HTMLElement_oncontextlost_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncontextmenu_get = function HTMLElement_oncontextmenu_get() { console.log("HTMLElement_oncontextmenu_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncontextrestored_get = function HTMLElement_oncontextrestored_get() { console.log("HTMLElement_oncontextrestored_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncopy_get = function HTMLElement_oncopy_get() { console.log("HTMLElement_oncopy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncuechange_get = function HTMLElement_oncuechange_get() { console.log("HTMLElement_oncuechange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondblclick_get = function HTMLElement_ondblclick_get() { console.log("HTMLElement_ondblclick_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncut_get = function HTMLElement_oncut_get() { console.log("HTMLElement_oncut_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondrag_get = function HTMLElement_ondrag_get() { console.log("HTMLElement_ondrag_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragleave_get = function HTMLElement_ondragleave_get() { console.log("HTMLElement_ondragleave_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragstart_get = function HTMLElement_ondragstart_get() { console.log("HTMLElement_ondragstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragenter_get = function HTMLElement_ondragenter_get() { console.log("HTMLElement_ondragenter_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragend_get = function HTMLElement_ondragend_get() { console.log("HTMLElement_ondragend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragover_get = function HTMLElement_ondragover_get() { console.log("HTMLElement_ondragover_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondrop_get = function HTMLElement_ondrop_get() { console.log("HTMLElement_ondrop_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondurationchange_get = function HTMLElement_ondurationchange_get() { console.log("HTMLElement_ondurationchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onemptied_get = function HTMLElement_onemptied_get() { console.log("HTMLElement_onemptied_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onended_get = function HTMLElement_onended_get() { console.log("HTMLElement_onended_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onerror_get = function HTMLElement_onerror_get() { console.log("HTMLElement_onerror_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onfocus_get = function HTMLElement_onfocus_get() { console.log("HTMLElement_onfocus_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onformdata_get = function HTMLElement_onformdata_get() { console.log("HTMLElement_onformdata_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ongotpointercapture_get = function HTMLElement_ongotpointercapture_get() { console.log("HTMLElement_ongotpointercapture_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oninput_get = function HTMLElement_oninput_get() { console.log("HTMLElement_oninput_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onkeydown_get = function HTMLElement_onkeydown_get() { console.log("HTMLElement_onkeydown_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onkeypress_get = function HTMLElement_onkeypress_get() { console.log("HTMLElement_onkeypress_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onkeyup_get = function HTMLElement_onkeyup_get() { console.log("HTMLElement_onkeyup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oninvalid_get = function HTMLElement_oninvalid_get() { console.log("HTMLElement_oninvalid_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onload_get = function HTMLElement_onload_get() { console.log("HTMLElement_onload_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onloadedmetadata_get = function HTMLElement_onloadedmetadata_get() { console.log("HTMLElement_onloadedmetadata_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onlostpointercapture_get = function HTMLElement_onlostpointercapture_get() { console.log("HTMLElement_onlostpointercapture_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onloadeddata_get = function HTMLElement_onloadeddata_get() { console.log("HTMLElement_onloadeddata_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onloadstart_get = function HTMLElement_onloadstart_get() { console.log("HTMLElement_onloadstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmousedown_get = function HTMLElement_onmousedown_get() { console.log("HTMLElement_onmousedown_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmouseleave_get = function HTMLElement_onmouseleave_get() { console.log("HTMLElement_onmouseleave_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmousemove_get = function HTMLElement_onmousemove_get() { console.log("HTMLElement_onmousemove_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmouseout_get = function HTMLElement_onmouseout_get() { console.log("HTMLElement_onmouseout_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmouseup_get = function HTMLElement_onmouseup_get() { console.log("HTMLElement_onmouseup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmouseover_get = function HTMLElement_onmouseover_get() { console.log("HTMLElement_onmouseover_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmousewheel_get = function HTMLElement_onmousewheel_get() { console.log("HTMLElement_onmousewheel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpaste_get = function HTMLElement_onpaste_get() { console.log("HTMLElement_onpaste_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpause_get = function HTMLElement_onpause_get() { console.log("HTMLElement_onpause_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onplay_get = function HTMLElement_onplay_get() { console.log("HTMLElement_onplay_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onplaying_get = function HTMLElement_onplaying_get() { console.log("HTMLElement_onplaying_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointercancel_get = function HTMLElement_onpointercancel_get() { console.log("HTMLElement_onpointercancel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerdown_get = function HTMLElement_onpointerdown_get() { console.log("HTMLElement_onpointerdown_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerleave_get = function HTMLElement_onpointerleave_get() { console.log("HTMLElement_onpointerleave_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointermove_get = function HTMLElement_onpointermove_get() { console.log("HTMLElement_onpointermove_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerover_get = function HTMLElement_onpointerover_get() { console.log("HTMLElement_onpointerover_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerout_get = function HTMLElement_onpointerout_get() { console.log("HTMLElement_onpointerout_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerenter_get = function HTMLElement_onpointerenter_get() { console.log("HTMLElement_onpointerenter_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerrawupdate_get = function HTMLElement_onpointerrawupdate_get() { console.log("HTMLElement_onpointerrawupdate_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerup_get = function HTMLElement_onpointerup_get() { console.log("HTMLElement_onpointerup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onprogress_get = function HTMLElement_onprogress_get() { console.log("HTMLElement_onprogress_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onratechange_get = function HTMLElement_onratechange_get() { console.log("HTMLElement_onratechange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onreset_get = function HTMLElement_onreset_get() { console.log("HTMLElement_onreset_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onscroll_get = function HTMLElement_onscroll_get() { console.log("HTMLElement_onscroll_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onsecuritypolicyviolation_get = function HTMLElement_onsecuritypolicyviolation_get() { console.log("HTMLElement_onsecuritypolicyviolation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onseeked_get = function HTMLElement_onseeked_get() { console.log("HTMLElement_onseeked_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onseeking_get = function HTMLElement_onseeking_get() { console.log("HTMLElement_onseeking_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onselect_get = function HTMLElement_onselect_get() { console.log("HTMLElement_onselect_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onselectionchange_get = function HTMLElement_onselectionchange_get() { console.log("HTMLElement_onselectionchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onselectstart_get = function HTMLElement_onselectstart_get() { console.log("HTMLElement_onselectstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onslotchange_get = function HTMLElement_onslotchange_get() { console.log("HTMLElement_onslotchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onstalled_get = function HTMLElement_onstalled_get() { console.log("HTMLElement_onstalled_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onsuspend_get = function HTMLElement_onsuspend_get() { console.log("HTMLElement_onsuspend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontimeupdate_get = function HTMLElement_ontimeupdate_get() { console.log("HTMLElement_ontimeupdate_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onsubmit_get = function HTMLElement_onsubmit_get() { console.log("HTMLElement_onsubmit_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontoggle_get = function HTMLElement_ontoggle_get() { console.log("HTMLElement_ontoggle_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontransitioncancel_get = function HTMLElement_ontransitioncancel_get() { console.log("HTMLElement_ontransitioncancel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontransitionrun_get = function HTMLElement_ontransitionrun_get() { console.log("HTMLElement_ontransitionrun_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontransitionstart_get = function HTMLElement_ontransitionstart_get() { console.log("HTMLElement_ontransitionstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontransitionend_get = function HTMLElement_ontransitionend_get() { console.log("HTMLElement_ontransitionend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onvolumechange_get = function HTMLElement_onvolumechange_get() { console.log("HTMLElement_onvolumechange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwaiting_get = function HTMLElement_onwaiting_get() { console.log("HTMLElement_onwaiting_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwebkitanimationend_get = function HTMLElement_onwebkitanimationend_get() { console.log("HTMLElement_onwebkitanimationend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwebkitanimationiteration_get = function HTMLElement_onwebkitanimationiteration_get() { console.log("HTMLElement_onwebkitanimationiteration_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwebkitanimationstart_get = function HTMLElement_onwebkitanimationstart_get() { console.log("HTMLElement_onwebkitanimationstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwebkittransitionend_get = function HTMLElement_onwebkittransitionend_get() { console.log("HTMLElement_onwebkittransitionend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwheel_get = function HTMLElement_onwheel_get() { console.log("HTMLElement_onwheel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_outerText_get = function HTMLElement_outerText_get() { console.log("HTMLElement_outerText_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_spellcheck_get = function HTMLElement_spellcheck_get() { console.log("HTMLElement_spellcheck_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_tabIndex_get = function HTMLElement_tabIndex_get() { console.log("HTMLElement_tabIndex_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_title_get = function HTMLElement_title_get() { console.log("HTMLElement_title_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_translate_get = function HTMLElement_translate_get() { console.log("HTMLElement_translate_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_virtualKeyboardPolicy_get = function HTMLElement_virtualKeyboardPolicy_get() { console.log("HTMLElement_virtualKeyboardPolicy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_accessKey_get = function HTMLElement_accessKey_get() { console.log("HTMLElement_accessKey_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_autocapitalize_get = function HTMLElement_autocapitalize_get() { console.log("HTMLElement_autocapitalize_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_autofocus_get = function HTMLElement_autofocus_get() { console.log("HTMLElement_autofocus_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_contentEditable_get = function HTMLElement_contentEditable_get() { console.log("HTMLElement_contentEditable_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_dataset_get = function HTMLElement_dataset_get() { console.log("HTMLElement_dataset_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_dir_get = function HTMLElement_dir_get() { console.log("HTMLElement_dir_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_draggable_get = function HTMLElement_draggable_get() { console.log("HTMLElement_draggable_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_enterKeyHint_get = function HTMLElement_enterKeyHint_get() { console.log("HTMLElement_enterKeyHint_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_hidden_get = function HTMLElement_hidden_get() { console.log("HTMLElement_hidden_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_inputMode_get = function HTMLElement_inputMode_get() { console.log("HTMLElement_inputMode_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_inert_get = function HTMLElement_inert_get() { console.log("HTMLElement_inert_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_isContentEditable_get = function HTMLElement_isContentEditable_get() { console.log("HTMLElement_isContentEditable_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_lang_get = function HTMLElement_lang_get() { console.log("HTMLElement_lang_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_nonce_get = function HTMLElement_nonce_get() { console.log("HTMLElement_nonce_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_offsetTop_get = function HTMLElement_offsetTop_get() { console.log("HTMLElement_offsetTop_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_offsetParent_get = function HTMLElement_offsetParent_get() { console.log("HTMLElement_offsetParent_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_offsetLeft_get = function HTMLElement_offsetLeft_get() { console.log("HTMLElement_offsetLeft_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onabort_get = function HTMLElement_onabort_get() { console.log("HTMLElement_onabort_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onanimationend_get = function HTMLElement_onanimationend_get() { console.log("HTMLElement_onanimationend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onanimationiteration_get = function HTMLElement_onanimationiteration_get() { console.log("HTMLElement_onanimationiteration_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onanimationstart_get = function HTMLElement_onanimationstart_get() { console.log("HTMLElement_onanimationstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onauxclick_get = function HTMLElement_onauxclick_get() { console.log("HTMLElement_onauxclick_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onbeforematch_get = function HTMLElement_onbeforematch_get() { console.log("HTMLElement_onbeforematch_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onbeforexrselect_get = function HTMLElement_onbeforexrselect_get() { console.log("HTMLElement_onbeforexrselect_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onblur_get = function HTMLElement_onblur_get() { console.log("HTMLElement_onblur_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncancel_get = function HTMLElement_oncancel_get() { console.log("HTMLElement_oncancel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncanplay_get = function HTMLElement_oncanplay_get() { console.log("HTMLElement_oncanplay_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncanplaythrough_get = function HTMLElement_oncanplaythrough_get() { console.log("HTMLElement_oncanplaythrough_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onchange_get = function HTMLElement_onchange_get() { console.log("HTMLElement_onchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onclick_get = function HTMLElement_onclick_get() { console.log("HTMLElement_onclick_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onclose_get = function HTMLElement_onclose_get() { console.log("HTMLElement_onclose_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncontextlost_get = function HTMLElement_oncontextlost_get() { console.log("HTMLElement_oncontextlost_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncontextmenu_get = function HTMLElement_oncontextmenu_get() { console.log("HTMLElement_oncontextmenu_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncontextrestored_get = function HTMLElement_oncontextrestored_get() { console.log("HTMLElement_oncontextrestored_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncopy_get = function HTMLElement_oncopy_get() { console.log("HTMLElement_oncopy_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncuechange_get = function HTMLElement_oncuechange_get() { console.log("HTMLElement_oncuechange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondblclick_get = function HTMLElement_ondblclick_get() { console.log("HTMLElement_ondblclick_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncut_get = function HTMLElement_oncut_get() { console.log("HTMLElement_oncut_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondrag_get = function HTMLElement_ondrag_get() { console.log("HTMLElement_ondrag_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragleave_get = function HTMLElement_ondragleave_get() { console.log("HTMLElement_ondragleave_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragstart_get = function HTMLElement_ondragstart_get() { console.log("HTMLElement_ondragstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragenter_get = function HTMLElement_ondragenter_get() { console.log("HTMLElement_ondragenter_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragend_get = function HTMLElement_ondragend_get() { console.log("HTMLElement_ondragend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragover_get = function HTMLElement_ondragover_get() { console.log("HTMLElement_ondragover_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondrop_get = function HTMLElement_ondrop_get() { console.log("HTMLElement_ondrop_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondurationchange_get = function HTMLElement_ondurationchange_get() { console.log("HTMLElement_ondurationchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onemptied_get = function HTMLElement_onemptied_get() { console.log("HTMLElement_onemptied_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onended_get = function HTMLElement_onended_get() { console.log("HTMLElement_onended_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onerror_get = function HTMLElement_onerror_get() { console.log("HTMLElement_onerror_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onfocus_get = function HTMLElement_onfocus_get() { console.log("HTMLElement_onfocus_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onformdata_get = function HTMLElement_onformdata_get() { console.log("HTMLElement_onformdata_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ongotpointercapture_get = function HTMLElement_ongotpointercapture_get() { console.log("HTMLElement_ongotpointercapture_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oninput_get = function HTMLElement_oninput_get() { console.log("HTMLElement_oninput_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onkeydown_get = function HTMLElement_onkeydown_get() { console.log("HTMLElement_onkeydown_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onkeypress_get = function HTMLElement_onkeypress_get() { console.log("HTMLElement_onkeypress_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onkeyup_get = function HTMLElement_onkeyup_get() { console.log("HTMLElement_onkeyup_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oninvalid_get = function HTMLElement_oninvalid_get() { console.log("HTMLElement_oninvalid_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onload_get = function HTMLElement_onload_get() { console.log("HTMLElement_onload_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onloadedmetadata_get = function HTMLElement_onloadedmetadata_get() { console.log("HTMLElement_onloadedmetadata_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onlostpointercapture_get = function HTMLElement_onlostpointercapture_get() { console.log("HTMLElement_onlostpointercapture_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onloadeddata_get = function HTMLElement_onloadeddata_get() { console.log("HTMLElement_onloadeddata_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onloadstart_get = function HTMLElement_onloadstart_get() { console.log("HTMLElement_onloadstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmousedown_get = function HTMLElement_onmousedown_get() { console.log("HTMLElement_onmousedown_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseleave_get = function HTMLElement_onmouseleave_get() { console.log("HTMLElement_onmouseleave_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmousemove_get = function HTMLElement_onmousemove_get() { console.log("HTMLElement_onmousemove_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseout_get = function HTMLElement_onmouseout_get() { console.log("HTMLElement_onmouseout_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseup_get = function HTMLElement_onmouseup_get() { console.log("HTMLElement_onmouseup_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseover_get = function HTMLElement_onmouseover_get() { console.log("HTMLElement_onmouseover_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmousewheel_get = function HTMLElement_onmousewheel_get() { console.log("HTMLElement_onmousewheel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpaste_get = function HTMLElement_onpaste_get() { console.log("HTMLElement_onpaste_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpause_get = function HTMLElement_onpause_get() { console.log("HTMLElement_onpause_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onplay_get = function HTMLElement_onplay_get() { console.log("HTMLElement_onplay_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onplaying_get = function HTMLElement_onplaying_get() { console.log("HTMLElement_onplaying_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointercancel_get = function HTMLElement_onpointercancel_get() { console.log("HTMLElement_onpointercancel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerdown_get = function HTMLElement_onpointerdown_get() { console.log("HTMLElement_onpointerdown_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerleave_get = function HTMLElement_onpointerleave_get() { console.log("HTMLElement_onpointerleave_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointermove_get = function HTMLElement_onpointermove_get() { console.log("HTMLElement_onpointermove_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerover_get = function HTMLElement_onpointerover_get() { console.log("HTMLElement_onpointerover_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerout_get = function HTMLElement_onpointerout_get() { console.log("HTMLElement_onpointerout_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerenter_get = function HTMLElement_onpointerenter_get() { console.log("HTMLElement_onpointerenter_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerrawupdate_get = function HTMLElement_onpointerrawupdate_get() { console.log("HTMLElement_onpointerrawupdate_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerup_get = function HTMLElement_onpointerup_get() { console.log("HTMLElement_onpointerup_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onprogress_get = function HTMLElement_onprogress_get() { console.log("HTMLElement_onprogress_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onratechange_get = function HTMLElement_onratechange_get() { console.log("HTMLElement_onratechange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onreset_get = function HTMLElement_onreset_get() { console.log("HTMLElement_onreset_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onscroll_get = function HTMLElement_onscroll_get() { console.log("HTMLElement_onscroll_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onsecuritypolicyviolation_get = function HTMLElement_onsecuritypolicyviolation_get() { console.log("HTMLElement_onsecuritypolicyviolation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onseeked_get = function HTMLElement_onseeked_get() { console.log("HTMLElement_onseeked_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onseeking_get = function HTMLElement_onseeking_get() { console.log("HTMLElement_onseeking_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onselect_get = function HTMLElement_onselect_get() { console.log("HTMLElement_onselect_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onselectionchange_get = function HTMLElement_onselectionchange_get() { console.log("HTMLElement_onselectionchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onselectstart_get = function HTMLElement_onselectstart_get() { console.log("HTMLElement_onselectstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onslotchange_get = function HTMLElement_onslotchange_get() { console.log("HTMLElement_onslotchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onstalled_get = function HTMLElement_onstalled_get() { console.log("HTMLElement_onstalled_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onsuspend_get = function HTMLElement_onsuspend_get() { console.log("HTMLElement_onsuspend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontimeupdate_get = function HTMLElement_ontimeupdate_get() { console.log("HTMLElement_ontimeupdate_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onsubmit_get = function HTMLElement_onsubmit_get() { console.log("HTMLElement_onsubmit_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontoggle_get = function HTMLElement_ontoggle_get() { console.log("HTMLElement_ontoggle_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitioncancel_get = function HTMLElement_ontransitioncancel_get() { console.log("HTMLElement_ontransitioncancel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitionrun_get = function HTMLElement_ontransitionrun_get() { console.log("HTMLElement_ontransitionrun_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitionstart_get = function HTMLElement_ontransitionstart_get() { console.log("HTMLElement_ontransitionstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitionend_get = function HTMLElement_ontransitionend_get() { console.log("HTMLElement_ontransitionend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onvolumechange_get = function HTMLElement_onvolumechange_get() { console.log("HTMLElement_onvolumechange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwaiting_get = function HTMLElement_onwaiting_get() { console.log("HTMLElement_onwaiting_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkitanimationend_get = function HTMLElement_onwebkitanimationend_get() { console.log("HTMLElement_onwebkitanimationend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkitanimationiteration_get = function HTMLElement_onwebkitanimationiteration_get() { console.log("HTMLElement_onwebkitanimationiteration_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkitanimationstart_get = function HTMLElement_onwebkitanimationstart_get() { console.log("HTMLElement_onwebkitanimationstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkittransitionend_get = function HTMLElement_onwebkittransitionend_get() { console.log("HTMLElement_onwebkittransitionend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwheel_get = function HTMLElement_onwheel_get() { console.log("HTMLElement_onwheel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_outerText_get = function HTMLElement_outerText_get() { console.log("HTMLElement_outerText_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_spellcheck_get = function HTMLElement_spellcheck_get() { console.log("HTMLElement_spellcheck_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_tabIndex_get = function HTMLElement_tabIndex_get() { console.log("HTMLElement_tabIndex_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_title_get = function HTMLElement_title_get() { console.log("HTMLElement_title_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_translate_get = function HTMLElement_translate_get() { console.log("HTMLElement_translate_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_virtualKeyboardPolicy_get = function HTMLElement_virtualKeyboardPolicy_get() { console.log("HTMLElement_virtualKeyboardPolicy_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
 
     bodavm.envFunc.HTMLElement_innerText_set = function HTMLElement_innerText_set() {
@@ -4670,8 +5064,12 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
     bodavm.envFunc.HTMLElement_style_get = function HTMLElement_style_get() {
         if (bodavm.config.isdebug) { debugger }
-
-        let style = {}
+        if (!(bodavm.memory.cache['HTMLElement_style_get'][this])){
+            bodavm.memory.cache['HTMLElement_style_get'][this]={}
+        }
+       
+        
+        let style = bodavm.memory.cache['HTMLElement_style_get'][this]
         // debugger
         let oo = this._boarg.style
 
@@ -5300,7 +5698,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.HTMLElement_onerror_set = function HTMLElement_onerror_set() {
         if (bodavm.config.isdebug) { debugger }
         console.log(`HTMLElement_onerror_set !!!!!!!!!未完善!!!!!!!!!!!!`,);
-
+        this._onerror=arguments[0]
 
     }
     //HTMLCollection
@@ -5316,6 +5714,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
             console.log(`HTMLCollection_length_get `, `length:${2},  rs检测点`);
             return 2
         }
+        debugger
         let length_ = this._boarg.length
         console.log(`HTMLCollection_length_get `, `length:${length_}`);
         return length_
@@ -5349,8 +5748,8 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         let url = arguments[1];
         console.log(`XMLHttpRequest_open `, `[${method}] `, `[${url}]  `)
         if (bodavm.config.isdebug) { debugger }
-        // this.mymethod=method
-        // this.myurl=url
+        this.mymethod=method
+        this.myurl=url
         this._boarg.method = method
         this._boarg.url = url
     }
@@ -5373,7 +5772,8 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
             "options": options,
             "callback": callback,
             'isTrusted': true,
-            'target': this
+            'target': this,
+            '_boisinit':bodavm.config.isinit
         }
         console.log(`EventTarget_addEventListener `, `type->${type} `, `callback->${callback.toString().length>50?callback.toString().substr(0,50)+'...':callback} `, `options->${options ? options : []}  `)
 
@@ -5426,19 +5826,21 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     bodavm.envFunc.HTMLCanvasElement_getContext = function HTMLCanvasElement_getContext() {
         let type = arguments[0];
-        let context = {};
+        let context = {_boisinit:bodavm.config.isinit};
         if (bodavm.config.isdebug) { debugger }
         switch (type) {
             case "2d":
                 // context = context.getContext('2d')
                 context._bocanvas = this._bocanvas.getContext('2d')
-                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
                 context.__proto__ = bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype;
+                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
+
                 break
             case "webgl":
                 // context = context.getContext('2d')
-                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
                 context.__proto__ = bodavm.memory.globalobj['WebGLRenderingContext'].prototype;
+                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
+
                 break
             case 'experimental-webgl':
                 console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `context->${context} !!!!!!!!!未完善!!!!!!!!!!!! `)
@@ -5468,15 +5870,17 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.HTMLCanvasElement_toDataURL = function HTMLCanvasElement_toDataURL() {
         if (this._bocanvas) {
             let res = this._bocanvas.toDataURL()
+            res._boisinit=true
             console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
-            // return res
-            return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
+            return res
+            // return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         } else {
             debugger
             res = bodavm.memory.userInit.canvas_webgl
+            res._boisinit=true
             console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
-            // return res
-            return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
+            return res
+            // return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         }
 
     }
@@ -5546,10 +5950,10 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     }
 
     bodavm.envFunc.location_toString = function location_toString() {
-        let href = bodaobj.location.toString()
-        console.log(`location_toString `, `${href}   `)
+        let href_ = bodaobj.location.toString()
+        console.log(`location_toString `, `${href_}   `)
         if (bodavm.config.isdebug) { debugger }
-        return href
+        return href_
     }
     bodavm.envFunc.location_href_get = function location_href_get() {
         let href = bodaobj.location.href
@@ -5643,7 +6047,9 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         console.log(`--------------------页面跳转停止执行--------------------`,);
         console.log(`--------------------页面跳转停止执行--------------------`,);
         console.log(`--------------------直接执行lastDeal--------------------`,);
+        console.log(document.cookie)
         throw ('End', `--------------------直接执行lastDeal--------------------`)
+
 
     }
     bodavm.envFunc.location_search_set = function location_search_set() {
@@ -5773,7 +6179,9 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         let version = arguments[1]
 
         console.log(`IDBFactory_open `, `name->${name} `, `version->${version}  `)
-        let DB = {}
+        let DB = {
+            _boisinit:bodavm.config.isinit
+        }
         DB = Object.setPrototypeOf(DB, bodavm.memory.globalobj['IDBOpenDBRequest'].prototype)
         if (bodavm.config.isdebug) { debugger }
 
@@ -5974,6 +6382,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         console.log(`WebGLRenderingContext_getShaderPrecisionFormat `, `shaderType:${shaderType} precisionType:${precisionType}  `);
         if (shaderType == 35633 && precisionType == 36338) {
             let shade = {}
+            shade._boisinit=true
             Object.setPrototypeOf(shade, bodavm.memory.globalobj['WebGLShaderPrecisionFormat'].prototype)
             // bodavm.toolsFunc.symbolProperty(shade)
             return shade
@@ -6063,7 +6472,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.WebGLRenderingContext_canvas_get = function WebGLRenderingContext_canvas_get() {
         let canvas = {}
         if (bodavm.config.isdebug) { debugger };
-
+        canvas._boisinit=true
         console.log(`WebGLRenderingContext_canvas_get `, `${canvas}  `);
         canvas.__proto__ = bodavm.memory.globalobj['HTMLCanvasElement'].prototype
         // bodavm.toolsFunc.symbolProperty(canvas)
@@ -6109,48 +6518,48 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
         if (bodavm.config.isdebug) { debugger }
         let getExtension = arguments[0]
         console.log(`WebGLRenderingContext_getExtension `, `${getExtension}  `);
-        let info = {}
+        let info = {_boisinit:bodavm.config.isinit}
         switch (getExtension) {
             case "WEBGL_debug_renderer_info":
 
-                WebGLDebugRendererInfo = function WebGLDebugRendererInfo() { }
+                WebGLDebugRendererInfo = function WebGLDebugRendererInfo() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(WebGLDebugRendererInfo, "WebGLDebugRendererInfo");
                 info = Object.setPrototypeOf(info, WebGLDebugRendererInfo.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDebugRendererInfo.prototype, "UNMASKED_VENDOR_WEBGL", { configurable: false, enumerable: true, writable: false, value: 37445 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLDebugRendererInfo.prototype, "UNMASKED_RENDERER_WEBGL", { configurable: false, enumerable: true, writable: false, value: 37446 });
-                delete WebGLDebugRendererInfo;
+                delete WebGLDebugRendererInfo.prototype.constructor;
                 break;
             case "ANGLE_instanced_arrays":
 
-                ANGLEInstancedArrays = function ANGLEInstancedArrays() { }
+                ANGLEInstancedArrays = function ANGLEInstancedArrays() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(ANGLEInstancedArrays, "ANGLEInstancedArrays");
                 info = Object.setPrototypeOf(info, ANGLEInstancedArrays.prototype)
                 bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE", { configurable: false, enumerable: true, writable: false, value: 35070 });
                 bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "drawArraysInstancedANGLE", { configurable: true, enumerable: true, writable: true, value: function drawArraysInstancedANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "drawArraysInstancedANGLE", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "drawElementsInstancedANGLE", { configurable: true, enumerable: true, writable: true, value: function drawElementsInstancedANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "drawElementsInstancedANGLE", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "vertexAttribDivisorANGLE", { configurable: true, enumerable: true, writable: true, value: function vertexAttribDivisorANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "vertexAttribDivisorANGLE", arguments) } });
-                delete ANGLEInstancedArrays;
+                delete ANGLEInstancedArrays.prototype.constructor;;
                 break;
             case "EXT_blend_minmax":
-                EXTBlendMinMax = function EXTBlendMinMax() { }
+                EXTBlendMinMax = function EXTBlendMinMax() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTBlendMinMax, "EXTBlendMinMax");
                 info = Object.setPrototypeOf(info, EXTBlendMinMax.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTBlendMinMax.prototype, "MIN_EXT", { configurable: false, enumerable: true, writable: false, value: 32775 });
                 bodavm.toolsFunc.windowdefineProperty(EXTBlendMinMax.prototype, "MAX_EXT", { configurable: false, enumerable: true, writable: false, value: 32776 });
-                delete EXTBlendMinMax
+                delete EXTBlendMinMax.prototype.constructor;
                 break;
             case "EXT_color_buffer_half_float":
-                EXTColorBufferHalfFloat = function EXTColorBufferHalfFloat() { }
+                EXTColorBufferHalfFloat = function EXTColorBufferHalfFloat() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(EXTColorBufferHalfFloat, "EXTColorBufferHalfFloat");
                 info = Object.setPrototypeOf(info, EXTColorBufferHalfFloat.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "RGBA16F_EXT", { configurable: false, enumerable: true, writable: false, value: 34842 });
                 bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "RGB16F_EXT", { configurable: false, enumerable: true, writable: false, value: 34843 });
                 bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT", { configurable: false, enumerable: true, writable: false, value: 33297 });
                 bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "UNSIGNED_NORMALIZED_EXT", { configurable: false, enumerable: true, writable: false, value: 35863 });
-                delete EXTColorBufferHalfFloat
+                delete EXTColorBufferHalfFloat.prototype.constructor;
                 break;
             case "EXT_disjoint_timer_query":
-                EXTDisjointTimerQuery = function EXTDisjointTimerQuery() { }
+                EXTDisjointTimerQuery = function EXTDisjointTimerQuery() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(EXTDisjointTimerQuery, "EXTDisjointTimerQuery");
                 info = Object.setPrototypeOf(info, EXTDisjointTimerQuery.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "QUERY_COUNTER_BITS_EXT", { configurable: false, enumerable: true, writable: false, value: 34916 });
@@ -6168,30 +6577,30 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
                 bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "getQueryObjectEXT", { configurable: true, enumerable: true, writable: true, value: function getQueryObjectEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "getQueryObjectEXT", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "isQueryEXT", { configurable: true, enumerable: true, writable: true, value: function isQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "isQueryEXT", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "queryCounterEXT", { configurable: true, enumerable: true, writable: true, value: function queryCounterEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "queryCounterEXT", arguments) } });
-                delete EXTDisjointTimerQuery
+                delete EXTDisjointTimerQuery.prototype.constructor;
 
                 break;
             case "EXT_float_blend":
-                EXTFloatBlend = function EXTFloatBlend() { }
+                EXTFloatBlend = function EXTFloatBlend() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(EXTFloatBlend, "EXTFloatBlend");
                 info = Object.setPrototypeOf(info, EXTFloatBlend.prototype)
-                delete EXTFloatBlend
+                delete EXTFloatBlend.prototype.constructor;
                 break;
             case "EXT_shader_texture_lod":
-                EXTShaderTextureLOD = function EXTShaderTextureLOD() { }
+                EXTShaderTextureLOD = function EXTShaderTextureLOD() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTShaderTextureLOD, "EXTShaderTextureLOD");
                 info = Object.setPrototypeOf(info, EXTShaderTextureLOD.prototype)
-                delete EXTShaderTextureLOD
+                delete EXTShaderTextureLOD.prototype.constructor;
                 break;
             case "EXT_frag_depth":
-                EXTFragDepth = function EXTFragDepth() { }
+                EXTFragDepth = function EXTFragDepth() { this._boisinit=bodavm.config.isinit}
 
                 bodavm.toolsFunc.safeProto(EXTFragDepth, "EXTFragDepth");
                 info = Object.setPrototypeOf(info, EXTFragDepth.prototype)
-                delete EXTFragDepth
+                delete EXTFragDepth.prototype.constructor;
                 break;
             case "EXT_texture_compression_bptc":
-                EXTTextureCompressionBPTC = function EXTTextureCompressionBPTC() { }
+                EXTTextureCompressionBPTC = function EXTTextureCompressionBPTC() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTTextureCompressionBPTC, "EXTTextureCompressionBPTC");
                 info = Object.setPrototypeOf(info, EXTTextureCompressionBPTC.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGBA_BPTC_UNORM_EXT", { configurable: false, enumerable: true, writable: false, value: 36492 });
@@ -6199,26 +6608,26 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGB_BPTC_SIGNED_FLOAT_EXT", { configurable: false, enumerable: true, writable: false, value: 36494 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_EXT", { configurable: false, enumerable: true, writable: false, value: 36495 });
 
-                delete EXTTextureCompressionBPTC
+                delete EXTTextureCompressionBPTC.prototype.constructor;
                 break;
             case "EXT_texture_compression_rgtc":
-                EXTTextureCompressionRGTC = function EXTTextureCompressionRGTC() { }
+                EXTTextureCompressionRGTC = function EXTTextureCompressionRGTC() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(EXTTextureCompressionRGTC, "EXTTextureCompressionRGTC");
                 info = Object.setPrototypeOf(info, EXTTextureCompressionRGTC.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_RED_RGTC1_EXT", { configurable: false, enumerable: true, writable: false, value: 36283 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_SIGNED_RED_RGTC1_EXT", { configurable: false, enumerable: true, writable: false, value: 36284 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_RED_GREEN_RGTC2_EXT", { configurable: false, enumerable: true, writable: false, value: 36285 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT", { configurable: false, enumerable: true, writable: false, value: 36286 });
-                delete EXTTextureCompressionRGTC;
+                delete EXTTextureCompressionRGTC.prototype.constructor;;
 
                 break;
             case "EXT_texture_filter_anisotropic":
-                EXTTextureFilterAnisotropic = function EXTTextureFilterAnisotropic() { }
+                EXTTextureFilterAnisotropic = function EXTTextureFilterAnisotropic() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTTextureFilterAnisotropic, "EXTTextureFilterAnisotropic");
                 info = Object.setPrototypeOf(info, EXTTextureFilterAnisotropic.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34046 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "MAX_TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34047 });
-                delete EXTTextureFilterAnisotropic;
+                delete EXTTextureFilterAnisotropic.prototype.constructor;;
                 break;
             case "WEBKIT_EXT_texture_filter_anisotropic":
                 EXTTextureFilterAnisotropic = function EXTTextureFilterAnisotropic() { }
@@ -6226,71 +6635,71 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
                 info = Object.setPrototypeOf(info, EXTTextureFilterAnisotropic.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34046 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "MAX_TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34047 });
-                delete EXTTextureFilterAnisotropic;
+                delete EXTTextureFilterAnisotropic.prototype.constructor;;
                 break;
             case "EXT_sRGB":
-                EXTsRGB = function EXTsRGB() { }
+                EXTsRGB = function EXTsRGB() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTsRGB, "EXTsRGB");
                 info = Object.setPrototypeOf(info, EXTsRGB.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "SRGB_EXT", { configurable: false, enumerable: true, writable: false, value: 35904 });
                 bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "SRGB_ALPHA_EXT", { configurable: false, enumerable: true, writable: false, value: 35906 });
                 bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "SRGB8_ALPHA8_EXT", { configurable: false, enumerable: true, writable: false, value: 35907 });
                 bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT", { configurable: false, enumerable: true, writable: false, value: 33296 });
-                delete EXTsRGB;
+                delete EXTsRGB.prototype.constructor;;
                 break;
             case "KHR_parallel_shader_compile":
-                KHRParallelShaderCompile = function KHRParallelShaderCompile() { }
+                KHRParallelShaderCompile = function KHRParallelShaderCompile() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(KHRParallelShaderCompile, "KHRParallelShaderCompile");
                 info = Object.setPrototypeOf(info, KHRParallelShaderCompile.prototype)
                 bodavm.toolsFunc.windowdefineProperty(KHRParallelShaderCompile.prototype, "COMPLETION_STATUS_KHR", { configurable: false, enumerable: true, writable: false, value: 37297 });
-                delete KHRParallelShaderCompile;
+                delete KHRParallelShaderCompile.prototype.constructor;;
                 break;
             case "OES_element_index_uint":
-                OESElementIndexUint = function OESElementIndexUint() { }
+                OESElementIndexUint = function OESElementIndexUint() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESElementIndexUint, "OESElementIndexUint");
                 info = Object.setPrototypeOf(info, OESElementIndexUint.prototype)
-                delete OESElementIndexUint;
+                delete OESElementIndexUint.prototype.constructor;;
                 break;
             case "OES_fbo_render_mipmap":
-                OESFboRenderMipmap = function OESFboRenderMipmap() { }
+                OESFboRenderMipmap = function OESFboRenderMipmap() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(OESFboRenderMipmap, "OESFboRenderMipmap");
                 info = Object.setPrototypeOf(info, OESFboRenderMipmap.prototype)
-                delete OESFboRenderMipmap;
+                delete OESFboRenderMipmap.prototype.constructor;;
                 break;
             case "OES_standard_derivatives":
-                OESStandardDerivatives = function OESStandardDerivatives() { }
+                OESStandardDerivatives = function OESStandardDerivatives() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(OESStandardDerivatives, "OESStandardDerivatives");
                 info = Object.setPrototypeOf(info, OESStandardDerivatives.prototype)
                 bodavm.toolsFunc.windowdefineProperty(OESStandardDerivatives.prototype, "FRAGMENT_SHADER_DERIVATIVE_HINT_OES", { configurable: false, enumerable: true, writable: false, value: 35723 });
-                delete OESStandardDerivatives;
+                delete OESStandardDerivatives.prototype.constructor;;
                 break;
             case "OES_texture_float":
-                OESTextureFloat = function OESTextureFloat() { }
+                OESTextureFloat = function OESTextureFloat() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESTextureFloat, "OESTextureFloat");
                 info = Object.setPrototypeOf(info, OESTextureFloat.prototype)
-                delete OESTextureFloat;
+                delete OESTextureFloat.prototype.constructor;;
                 break;
             case "OES_texture_float_linear":
-                OESTextureFloatLinear = function OESTextureFloatLinear() { }
+                OESTextureFloatLinear = function OESTextureFloatLinear() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESTextureFloatLinear, "OESTextureFloatLinear");
                 info = Object.setPrototypeOf(info, OESTextureFloatLinear.prototype)
-                delete OESTextureFloatLinear;
+                delete OESTextureFloatLinear.prototype.constructor;;
                 break;
             case "OES_texture_half_float":
-                OESTextureHalfFloat = function OESTextureHalfFloat() { }
+                OESTextureHalfFloat = function OESTextureHalfFloat() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESTextureHalfFloat, "OESTextureHalfFloat");
                 info = Object.setPrototypeOf(info, OESTextureHalfFloat.prototype)
                 bodavm.toolsFunc.windowdefineProperty(OESTextureHalfFloat.prototype, "HALF_FLOAT_OES", { configurable: false, enumerable: true, writable: false, value: 36193 });
                 delete OESTextureHalfFloat;
                 break;
             case "OES_texture_half_float_linear":
-                OESTextureHalfFloatLinear = function OESTextureHalfFloatLinear() { }
+                OESTextureHalfFloatLinear = function OESTextureHalfFloatLinear() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESTextureHalfFloatLinear, "OESTextureHalfFloatLinear");
                 info = Object.setPrototypeOf(info, OESTextureHalfFloatLinear.prototype)
-                delete OESTextureHalfFloatLinear;
+                delete OESTextureHalfFloatLinear.prototype.constructor;;
                 break;
             case "OES_vertex_array_object":
-                OESVertexArrayObject = function OESVertexArrayObject() { }
+                OESVertexArrayObject = function OESVertexArrayObject() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESVertexArrayObject, "OESVertexArrayObject");
                 info = Object.setPrototypeOf(info, OESVertexArrayObject.prototype)
                 bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "VERTEX_ARRAY_BINDING_OES", { configurable: false, enumerable: true, writable: false, value: 34229 });
@@ -6298,70 +6707,70 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
                 bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "createVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function createVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "createVertexArrayOES", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "deleteVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function deleteVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "deleteVertexArrayOES", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "isVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function isVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "isVertexArrayOES", arguments) } });
-                delete OESVertexArrayObject;
+                delete OESVertexArrayObject.prototype.constructor;;
                 break;
             case "WEBGL_color_buffer_float":
-                WebGLColorBufferFloat = function WebGLColorBufferFloat() { }
+                WebGLColorBufferFloat = function WebGLColorBufferFloat() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(WebGLColorBufferFloat, "WebGLColorBufferFloat");
                 info = Object.setPrototypeOf(info, WebGLColorBufferFloat.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLColorBufferFloat.prototype, "RGBA32F_EXT", { configurable: false, enumerable: true, writable: false, value: 34836 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLColorBufferFloat.prototype, "FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT", { configurable: false, enumerable: true, writable: false, value: 33297 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLColorBufferFloat.prototype, "UNSIGNED_NORMALIZED_EXT", { configurable: false, enumerable: true, writable: false, value: 35863 });
-                delete WebGLColorBufferFloat;
+                delete WebGLColorBufferFloat.prototype.constructor;;
                 break;
             case "WEBGL_compressed_texture_s3tc":
-                WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { }
+                WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLCompressedTextureS3TC, "WebGLCompressedTextureS3TC");
                 info = Object.setPrototypeOf(info, WebGLCompressedTextureS3TC.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33776 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33777 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 33778 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 33779 });
-                delete WebGLCompressedTextureS3TC;
+                delete WebGLCompressedTextureS3TC.prototype.constructor;;
                 break;
             case "WEBKIT_WEBGL_compressed_texture_s3tc":
-                WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { }
+                WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLCompressedTextureS3TC, "WebGLCompressedTextureS3TC");
                 info = Object.setPrototypeOf(info, WebGLCompressedTextureS3TC.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33776 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33777 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 33778 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 33779 });
-                delete WebGLCompressedTextureS3TC;
+                delete WebGLCompressedTextureS3TC.prototype.constructor;;
                 break;
             case "WEBGL_compressed_texture_s3tc_srgb":
-                WebGLCompressedTextureS3TCsRGB = function WebGLCompressedTextureS3TCsRGB() { }
+                WebGLCompressedTextureS3TCsRGB = function WebGLCompressedTextureS3TCsRGB() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLCompressedTextureS3TCsRGB, "WebGLCompressedTextureS3TCsRGB");
                 info = Object.setPrototypeOf(info, WebGLCompressedTextureS3TCsRGB.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 35916 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 35917 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 35918 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 35919 });
-                delete WebGLCompressedTextureS3TCsRGB;
+                delete WebGLCompressedTextureS3TCsRGB.prototype.constructor;;
                 break;
             case "WEBGL_debug_shaders":
-                WebGLDebugShaders = function WebGLDebugShaders() { }
+                WebGLDebugShaders = function WebGLDebugShaders() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(WebGLDebugShaders, "WebGLDebugShaders");
                 info = Object.setPrototypeOf(info, WebGLDebugShaders.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDebugShaders.prototype, "getTranslatedShaderSource", { configurable: true, enumerable: true, writable: true, value: function getTranslatedShaderSource() { return bodavm.toolsFunc.dispatch(this, WebGLDebugShaders.prototype, "WebGLDebugShaders", "getTranslatedShaderSource", arguments) } });
-                delete WebGLDebugShaders;
+                delete WebGLDebugShaders.prototype.constructor;;
                 break;
             case "WEBGL_depth_texture":
-                WebGLDepthTexture = function WebGLDepthTexture() { }
+                WebGLDepthTexture = function WebGLDepthTexture() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLDepthTexture, "WebGLDepthTexture");
                 info = Object.setPrototypeOf(info, WebGLDepthTexture.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDepthTexture.prototype, "UNSIGNED_INT_24_8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34042 });
-                delete WebGLDepthTexture;
+                delete WebGLDepthTexture.prototype.constructor;;
                 break;
             case "WEBKIT_WEBGL_depth_texture":
-                WebGLDepthTexture = function WebGLDepthTexture() { }
+                WebGLDepthTexture = function WebGLDepthTexture() {this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLDepthTexture, "WebGLDepthTexture");
                 info = Object.setPrototypeOf(info, WebGLDepthTexture.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDepthTexture.prototype, "UNSIGNED_INT_24_8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34042 });
-                delete WebGLDepthTexture;
+                delete WebGLDepthTexture.prototype.constructor;;
                 break;
             case "WEBGL_draw_buffers":
-                WebGLDrawBuffers = function WebGLDrawBuffers() { }
+                WebGLDrawBuffers = function WebGLDrawBuffers() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLDrawBuffers, "WebGLDrawBuffers");
                 info = Object.setPrototypeOf(info, WebGLDrawBuffers.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT0_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36064 });
@@ -6399,32 +6808,32 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
                 bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "MAX_COLOR_ATTACHMENTS_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36063 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "MAX_DRAW_BUFFERS_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34852 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "drawBuffersWEBGL", { configurable: true, enumerable: true, writable: true, value: function drawBuffersWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLDrawBuffers.prototype, "WebGLDrawBuffers", "drawBuffersWEBGL", arguments) } });
-                delete WebGLDrawBuffers;
+                delete WebGLDrawBuffers.prototype.constructor;;
                 break;
             case "WEBGL_lose_context":
-                WebGLLoseContext = function WebGLLoseContext() { }
+                WebGLLoseContext = function WebGLLoseContext() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(WebGLLoseContext, "WebGLLoseContext");
                 info = Object.setPrototypeOf(info, WebGLLoseContext.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "loseContext", { configurable: true, enumerable: true, writable: true, value: function loseContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "loseContext", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "restoreContext", { configurable: true, enumerable: true, writable: true, value: function restoreContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "restoreContext", arguments) } });
-                delete WebGLLoseContext;
+                delete WebGLLoseContext.prototype.constructor;;
                 break;
             case "WEBKIT_WEBGL_lose_context":
-                WebGLLoseContext = function WebGLLoseContext() { }
+                WebGLLoseContext = function WebGLLoseContext() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLLoseContext, "WebGLLoseContext");
                 info = Object.setPrototypeOf(info, WebGLLoseContext.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "loseContext", { configurable: true, enumerable: true, writable: true, value: function loseContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "loseContext", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "restoreContext", { configurable: true, enumerable: true, writable: true, value: function restoreContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "restoreContext", arguments) } });
-                delete WebGLLoseContext; break;
+                delete WebGLLoseContext.prototype.constructor;; break;
             case "WEBGL_multi_draw":
-                WebGLMultiDraw = function WebGLMultiDraw() { }
+                WebGLMultiDraw = function WebGLMultiDraw() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLMultiDraw, "WebGLMultiDraw");
                 info = Object.setPrototypeOf(info, WebGLMultiDraw.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawArraysInstancedWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawArraysInstancedWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawArraysInstancedWEBGL", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawArraysWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawArraysWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawArraysWEBGL", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawElementsInstancedWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawElementsInstancedWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawElementsInstancedWEBGL", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawElementsWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawElementsWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawElementsWEBGL", arguments) } });
-                delete WebGLMultiDraw;
+                delete WebGLMultiDraw.prototype.constructor;;
                 break;
             default:
                 console.log(`WebGLRenderingContext_getExtension `, `${getExtension}属性未实现  `);
@@ -6513,21 +6922,17 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
     //HTMLIFrameElement
     bodavm.envFunc.HTMLIFrameElement_contentWindow_get = function HTMLIFrameElement_contentWindow_get() {
-        console.log(`HTMLIFrameElement_contentWindow_get `, `这种补法存在问题,待完善`);
         // debugger;
         if (bodavm.config.isdebug) { debugger }
 
-        contentwindow = {
-
+        contentwindow = this._boarg.contentWindow
+        if (contentwindow){
+            contentwindow._contentiframe=true
         }
-        contentwindow.top = contentwindow
-        contentwindow.parent = contentwindow
-        contentwindow.window = contentwindow
-        contentwindow.self = contentwindow
+        console.log(`HTMLIFrameElement_contentWindow_get `, `res ->${contentwindow}`,`获取iframe下的window!!!`);
 
-        contentwindow.__proto__ = bodavm.memory.globalobj['Window'].prototype
+        // contentwindow.__proto__ = bodavm.memory.globalobj['Window'].prototype
         // contentwindow['top']='123'
-        contentwindow = bodavm.toolsFunc.proxy(contentwindow, 'contentwindow')
         //这种补法存在问题,待完善
         return contentwindow
     }
@@ -6613,7 +7018,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 
 
     bodavm.envFunc.MutationObserver_observe = function () {
-        debugger
+        // debugger
         if (bodavm.config.isdebug) { debugger };
         let target = arguments[0]
         let options = arguments[1]
@@ -6743,13 +7148,13 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     //HTMLInputElement
     bodavm.envFunc.HTMLInputElement_type_get = function HTMLInputElement_type_get() {
         // debugger
-        let tpye = this._boarg.attribs['type']
+        let tpye = this._boarg.type
         console.log(`HTMLInputElement_type_get `, `type->${tpye}`);
         return tpye
     }
     bodavm.envFunc.HTMLInputElement_name_get = function HTMLInputElement_name_get() {
         // debugger
-        let name_ = this._boarg.attribs['name']
+        let name_ = this._boarg.name
         if (bodavm.config.isdebug) { debugger };
         console.log(`HTMLInputElement_name_get `, ` name->${name_}`);
         return name_
@@ -6757,7 +7162,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
     bodavm.envFunc.HTMLInputElement_value_get = function HTMLInputElement_value_get() {
         // debugger
 
-        let value_ = this._boarg.attribs['value']
+        let value_ = this._boarg.value
         if (bodavm.config.isdebug) { debugger };
         console.log(`HTMLInputElement_value_get `, ` value_->${value_}`);
         return value_
@@ -6769,7 +7174,7 @@ bodavm.toolsFunc.HTMLParser = function HTMLParser(data) {
 // 创建pluginArray
 // debugger
 bodavm.toolsFunc.createPluginArray = function createPluginArray(){
-    let pluginArray = {};
+    let pluginArray = { _boisinit:bodavm.config.isinit};
     pluginArray = Object.setPrototypeOf(pluginArray, bodavm.memory.globalobj['PluginArray'].prototype);
     bodavm.toolsFunc.setProtoAttr.call(pluginArray, "length", 0);
     return pluginArray;
@@ -6791,7 +7196,7 @@ bodavm.toolsFunc.addPlugin = function addPlugin(plugin){
 }
 // 创建MimeTypeArray对象
 bodavm.toolsFunc.createMimeTypeArray = function createMimeTypeArray(){
-    let mimeTypeArray = {};
+    let mimeTypeArray = { _boisinit:bodavm.config.isinit};
     mimeTypeArray = Object.setPrototypeOf(mimeTypeArray,bodavm.memory.globalobj['MimeTypeArray'].prototype);
     bodavm.toolsFunc.setProtoAttr.call(mimeTypeArray, "length", 0);
     return mimeTypeArray;
@@ -6830,7 +7235,7 @@ bodavm.toolsFunc.addMimeType = function addMimeType(mimeType){
 // 创建MimeType
 bodavm.toolsFunc.createMimeType = function createMimeType(mimeTypeJson, plugin){
     // 
-    let mimeType = {};
+    let mimeType = { _boisinit:bodavm.config.isinit};
     Object.setPrototypeOf(mimeType, bodavm.memory.globalobj['MimeType'].prototype);
     bodavm.toolsFunc.setProtoAttr.call(mimeType, "description", mimeTypeJson.description);
     bodavm.toolsFunc.setProtoAttr.call(mimeType, "suffixes", mimeTypeJson.suffixes);
@@ -6844,7 +7249,7 @@ bodavm.toolsFunc.createMimeType = function createMimeType(mimeTypeJson, plugin){
 bodavm.toolsPlugin.createPlugin = function createPlugin(data){
     // debugger
     let mimeTypes = data.mimeTypes;
-    let plugin = {};
+    let plugin = { _boisinit:bodavm.config.isinit};
    
     plugin = Object.setPrototypeOf(plugin, bodavm.memory.globalobj['Plugin'].prototype);
     bodavm.toolsFunc.setProtoAttr.call(plugin, "description", data.description);
@@ -6890,23 +7295,25 @@ bodavm.toolsPlugin.createPlugin = function createPlugin(data){
     console.log_ = console.log;
     console.log = function log(type,...args) {
 
-        let index=args[0]?args[0]:args
-        if (typeof index =='string'&&  index.indexOf('属性:')!=-1){
-        }else{
-        // debugger
-            let arglenth=args.length
-            let obj={'type':'env:'+type}
+        // let index=args[0]?args[0]:args
+        // if (typeof index =='string'&&  index.indexOf('属性:')!=-1){    
+        // }else{
+        // // debugger
+        //     let arglenth=args.length
+        //     let obj={'type':'env:'+type}
 
-            for (let i = 0; i < arglenth; i++) {
+        //     for (let i = 0; i < arglenth; i++) {
                 
-                obj['prop'+i]=args[i]
-                // if (args[i] ==undefined || args[i] ==null){
-                //     myundefinedlist.push(obj)
-                // }
-            }
-            // debugger
-            myloglist.push(obj)
-        }
+        //         obj['prop'+i]=args[i]
+        //         // if (args[i] ==undefined || args[i] ==null){
+        //         //     myundefinedlist.push(obj)
+        //         // }
+        //     }
+        //     // debugger
+        //     myloglist.push(obj)
+        // }
+
+
         // if (bodavm.memory.getundefined){
         //     if (arguments.indexOf(undefined) >0 || arguments.indexOf(null) >0){
         //         myundefinedlist.push(arguments)
@@ -6931,14 +7338,14 @@ bodavm.memory.globalobj['EventTarget'] = function EventTarget(){
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'EventTarget': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
 
-
+    this._boisinit=bodavm.config.isinit;
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['EventTarget'], "EventTarget");
 bodavm.toolsFunc.defineProperty('EventTarget', "addEventListener", {configurable:true, enumerable:true, writable:true, value:function addEventListener (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['EventTarget'].prototype, "EventTarget", "addEventListener", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('EventTarget', "dispatchEvent", {configurable:true, enumerable:true, writable:true, value:function dispatchEvent (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['EventTarget'].prototype, "EventTarget", "dispatchEvent", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('EventTarget', "removeEventListener", {configurable:true, enumerable:true, writable:true, value:function removeEventListener (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['EventTarget'].prototype, "EventTarget", "removeEventListener", arguments)}},'prototype');
 
-bodavm.memory.globalobj['WindowProperties'] = function WindowProperties() {
+bodavm.memory.globalobj['WindowProperties'] = function WindowProperties() {this._boisinit=bodavm.config.isinit;
     return bodavm.toolsFunc.throwError("TypeError","Illegal constructor")
     // throw ReferenceError(`WindowProperties is not defined
     // at <anonymous>:1:100`)
@@ -6949,7 +7356,7 @@ bodavm.memory.globalobj['WindowProperties'].prototype.__proto__=bodavm.memory.gl
 bodavm.memory.globalobj['WindowProperties'].__proto__=bodavm.memory.globalobj['EventTarget'];
 
 // Window对象
-bodavm.memory.globalobj['Window'] = function Window(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Window'] = function Window(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 // debugger
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Window'], "Window");
 bodavm.memory.globalobj['Window'].prototype.__proto__=bodavm.memory.globalobj['WindowProperties'].prototype;
@@ -6962,7 +7369,7 @@ bodavm.toolsFunc.defineProperty('Window', "PERSISTENT", {configurable:false, enu
 
 
 // Node对象
-bodavm.memory.globalobj['Node'] = function Node(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Node'] = function Node(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Node'], "Node");
 bodavm.memory.globalobj['Node'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Node'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -7032,8 +7439,18 @@ bodavm.toolsFunc.defineProperty('Node', "normalize", {configurable:true, enumera
 bodavm.toolsFunc.defineProperty('Node', "removeChild", {configurable:true, enumerable:true, writable:true, value:function removeChild (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Node'].prototype, "Node", "removeChild", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Node', "replaceChild", {configurable:true, enumerable:true, writable:true, value:function replaceChild (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Node'].prototype, "Node", "replaceChild", arguments)}},'prototype');
 
+// StorageManager对象
+bodavm.memory.globalobj['StorageManager'] = function StorageManager(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['StorageManager'], "StorageManager");
+bodavm.memory.globalobj['StorageManager'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
+bodavm.memory.globalobj['StorageManager'].__proto__=bodavm.memory.globalobj['EventTarget'];
+bodavm.toolsFunc.defineProperty('StorageManager', "estimate", {configurable:true, enumerable:true, writable:true, value:function estimate (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['StorageManager'].prototype, "StorageManager", "estimate", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('StorageManager', "persisted", {configurable:true, enumerable:true, writable:true, value:function persisted (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['StorageManager'].prototype, "StorageManager", "persisted", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('StorageManager', "getDirectory", {configurable:true, enumerable:true, writable:true, value:function getDirectory (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['StorageManager'].prototype, "StorageManager", "getDirectory", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('StorageManager', "persist", {configurable:true, enumerable:true, writable:true, value:function persist (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['StorageManager'].prototype, "StorageManager", "persist", arguments)}},'prototype');
+
 // Element对象
-bodavm.memory.globalobj['Element'] = function Element(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Element'] = function Element(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Element'], "Element");
 bodavm.memory.globalobj['Element'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['Element'].__proto__=bodavm.memory.globalobj['Node'];
@@ -7169,7 +7586,7 @@ bodavm.toolsFunc.defineProperty('Element', "ariaValueText", {configurable:true, 
 bodavm.toolsFunc.defineProperty('Element', "getAnimations", {configurable:true, enumerable:true, writable:true, value:function getAnimations (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Element'].prototype, "Element", "getAnimations", arguments)}},'prototype');
 
 // HTMLElement对象
-bodavm.memory.globalobj['HTMLElement'] = function HTMLElement(){
+bodavm.memory.globalobj['HTMLElement'] = function HTMLElement(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof HTMLElement)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'HTMLElement': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
@@ -7305,21 +7722,24 @@ bodavm.toolsFunc.defineProperty('HTMLElement', "onpointerrawupdate", {configurab
 bodavm.toolsFunc.defineProperty('HTMLElement', "onbeforematch", {configurable:true, enumerable:true, get:function onbeforematch (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLElement'].prototype, "HTMLElement", "onbeforematch_get", arguments)}, set:function onbeforematch (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLElement'].prototype, "HTMLElement", "onbeforematch_set", arguments)}},'prototype');
 
 // HTMLCollection对象
-bodavm.memory.globalobj['HTMLCollection'] = function HTMLCollection(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLCollection'] = function HTMLCollection(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLCollection'], "HTMLCollection");
 bodavm.toolsFunc.defineProperty('HTMLCollection', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLCollection'].prototype, "HTMLCollection", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('HTMLCollection', "item", {configurable:true, enumerable:true, writable:true, value:function item (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLCollection'].prototype, "HTMLCollection", "item", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('HTMLCollection', "namedItem", {configurable:true, enumerable:true, writable:true, value:function namedItem (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLCollection'].prototype, "HTMLCollection", "namedItem", arguments)}},'prototype');
 
 // HTMLAllCollection对象
-bodavm.memory.globalobj['HTMLAllCollection'] = function HTMLAllCollection(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLAllCollection'] = function HTMLAllCollection(){
+    this._boisinit=bodavm.config.isinit;
+    return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLAllCollection'], "HTMLAllCollection");
 bodavm.toolsFunc.defineProperty('HTMLAllCollection', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLAllCollection'].prototype, "HTMLAllCollection", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('HTMLAllCollection', "item", {configurable:true, enumerable:true, writable:true, value:function item (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLAllCollection'].prototype, "HTMLAllCollection", "item", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('HTMLAllCollection', "namedItem", {configurable:true, enumerable:true, writable:true, value:function namedItem (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLAllCollection'].prototype, "HTMLAllCollection", "namedItem", arguments)}},'prototype');
 
 // HTMLAnchorElement对象
-bodavm.memory.globalobj['HTMLAnchorElement'] = function HTMLAnchorElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLAnchorElement'] = function HTMLAnchorElement(){    this._boisinit=bodavm.config.isinit;
+    return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLAnchorElement'], "HTMLAnchorElement");
 bodavm.memory.globalobj['HTMLAnchorElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLAnchorElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7352,7 +7772,7 @@ bodavm.toolsFunc.defineProperty('HTMLAnchorElement', "toString", {configurable:t
 bodavm.toolsFunc.defineProperty('HTMLAnchorElement', "hrefTranslate", {configurable:true, enumerable:true, get:function hrefTranslate (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLAnchorElement'].prototype, "HTMLAnchorElement", "hrefTranslate_get", arguments)}, set:function hrefTranslate (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLAnchorElement'].prototype, "HTMLAnchorElement", "hrefTranslate_set", arguments)}},'prototype');
 
 // HTMLBodyElement对象
-bodavm.memory.globalobj['HTMLBodyElement'] = function HTMLBodyElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLBodyElement'] = function HTMLBodyElement(){ this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLBodyElement'], "HTMLBodyElement");
 bodavm.memory.globalobj['HTMLBodyElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLBodyElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7386,14 +7806,14 @@ bodavm.toolsFunc.defineProperty('HTMLBodyElement', "onunhandledrejection", {conf
 bodavm.toolsFunc.defineProperty('HTMLBodyElement', "onunload", {configurable:true, enumerable:true, get:function onunload (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLBodyElement'].prototype, "HTMLBodyElement", "onunload_get", arguments)}, set:function onunload (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLBodyElement'].prototype, "HTMLBodyElement", "onunload_set", arguments)}},'prototype');
 
 // HTMLBRElement对象
-bodavm.memory.globalobj['HTMLBRElement'] = function HTMLBRElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLBRElement'] = function HTMLBRElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLBRElement'], "HTMLBRElement");
 bodavm.memory.globalobj['HTMLBRElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLBRElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
 bodavm.toolsFunc.defineProperty('HTMLBRElement', "clear", {configurable:true, enumerable:true, get:function clear (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLBRElement'].prototype, "HTMLBRElement", "clear_get", arguments)}, set:function clear (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLBRElement'].prototype, "HTMLBRElement", "clear_set", arguments)}},'prototype');
 
 // HTMLButtonElement对象
-bodavm.memory.globalobj['HTMLButtonElement'] = function HTMLButtonElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLButtonElement'] = function HTMLButtonElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLButtonElement'], "HTMLButtonElement");
 bodavm.memory.globalobj['HTMLButtonElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLButtonElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7416,7 +7836,7 @@ bodavm.toolsFunc.defineProperty('HTMLButtonElement', "reportValidity", {configur
 bodavm.toolsFunc.defineProperty('HTMLButtonElement', "setCustomValidity", {configurable:true, enumerable:true, writable:true, value:function setCustomValidity (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLButtonElement'].prototype, "HTMLButtonElement", "setCustomValidity", arguments)}},'prototype');
 
 // HTMLCanvasElement对象
-bodavm.memory.globalobj['HTMLCanvasElement'] = function HTMLCanvasElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLCanvasElement'] = function HTMLCanvasElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLCanvasElement'], "HTMLCanvasElement");
 bodavm.memory.globalobj['HTMLCanvasElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLCanvasElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7429,14 +7849,14 @@ bodavm.toolsFunc.defineProperty('HTMLCanvasElement', "toDataURL", {configurable:
 bodavm.toolsFunc.defineProperty('HTMLCanvasElement', "transferControlToOffscreen", {configurable:true, enumerable:true, writable:true, value:function transferControlToOffscreen (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLCanvasElement'].prototype, "HTMLCanvasElement", "transferControlToOffscreen", arguments)}},'prototype');
 
 // HTMLDivElement对象
-bodavm.memory.globalobj['HTMLDivElement'] = function HTMLDivElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLDivElement'] = function HTMLDivElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLDivElement'], "HTMLDivElement");
 bodavm.memory.globalobj['HTMLDivElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLDivElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
 bodavm.toolsFunc.defineProperty('HTMLDivElement', "align", {configurable:true, enumerable:true, get:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLDivElement'].prototype, "HTMLDivElement", "align_get", arguments)}, set:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLDivElement'].prototype, "HTMLDivElement", "align_set", arguments)}},'prototype');
 
 // HTMLFieldSetElement对象
-bodavm.memory.globalobj['HTMLFieldSetElement'] = function HTMLFieldSetElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLFieldSetElement'] = function HTMLFieldSetElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLFieldSetElement'], "HTMLFieldSetElement");
 bodavm.memory.globalobj['HTMLFieldSetElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLFieldSetElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7453,7 +7873,7 @@ bodavm.toolsFunc.defineProperty('HTMLFieldSetElement', "reportValidity", {config
 bodavm.toolsFunc.defineProperty('HTMLFieldSetElement', "setCustomValidity", {configurable:true, enumerable:true, writable:true, value:function setCustomValidity (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLFieldSetElement'].prototype, "HTMLFieldSetElement", "setCustomValidity", arguments)}},'prototype');
 
 // HTMLFontElement对象
-bodavm.memory.globalobj['HTMLFontElement'] = function HTMLFontElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLFontElement'] = function HTMLFontElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLFontElement'], "HTMLFontElement");
 bodavm.memory.globalobj['HTMLFontElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLFontElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7462,7 +7882,7 @@ bodavm.toolsFunc.defineProperty('HTMLFontElement', "face", {configurable:true, e
 bodavm.toolsFunc.defineProperty('HTMLFontElement', "size", {configurable:true, enumerable:true, get:function size (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLFontElement'].prototype, "HTMLFontElement", "size_get", arguments)}, set:function size (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLFontElement'].prototype, "HTMLFontElement", "size_set", arguments)}},'prototype');
 
 // HTMLFormElement对象
-bodavm.memory.globalobj['HTMLFormElement'] = function HTMLFormElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLFormElement'] = function HTMLFormElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLFormElement'], "HTMLFormElement");
 bodavm.memory.globalobj['HTMLFormElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLFormElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7484,7 +7904,7 @@ bodavm.toolsFunc.defineProperty('HTMLFormElement', "reset", {configurable:true, 
 bodavm.toolsFunc.defineProperty('HTMLFormElement', "submit", {configurable:true, enumerable:true, writable:true, value:function submit (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLFormElement'].prototype, "HTMLFormElement", "submit", arguments)}},'prototype');
 
 // HTMLFrameSetElement对象
-bodavm.memory.globalobj['HTMLFrameSetElement'] = function HTMLFrameSetElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLFrameSetElement'] = function HTMLFrameSetElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLFrameSetElement'], "HTMLFrameSetElement");
 bodavm.memory.globalobj['HTMLFrameSetElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLFrameSetElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7514,27 +7934,27 @@ bodavm.toolsFunc.defineProperty('HTMLFrameSetElement', "onunhandledrejection", {
 bodavm.toolsFunc.defineProperty('HTMLFrameSetElement', "onunload", {configurable:true, enumerable:true, get:function onunload (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLFrameSetElement'].prototype, "HTMLFrameSetElement", "onunload_get", arguments)}, set:function onunload (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLFrameSetElement'].prototype, "HTMLFrameSetElement", "onunload_set", arguments)}},'prototype');
 
 // HTMLHeadElement对象
-bodavm.memory.globalobj['HTMLHeadElement'] = function HTMLHeadElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLHeadElement'] = function HTMLHeadElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLHeadElement'], "HTMLHeadElement");
 bodavm.memory.globalobj['HTMLHeadElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLHeadElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
 
 // HTMLHeadingElement对象
-bodavm.memory.globalobj['HTMLHeadingElement'] = function HTMLHeadingElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLHeadingElement'] = function HTMLHeadingElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLHeadingElement'], "HTMLHeadingElement");
 bodavm.memory.globalobj['HTMLHeadingElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLHeadingElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
 bodavm.toolsFunc.defineProperty('HTMLHeadingElement', "align", {configurable:true, enumerable:true, get:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLHeadingElement'].prototype, "HTMLHeadingElement", "align_get", arguments)}, set:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLHeadingElement'].prototype, "HTMLHeadingElement", "align_set", arguments)}},'prototype');
 
 // HTMLHtmlElement对象
-bodavm.memory.globalobj['HTMLHtmlElement'] = function HTMLHtmlElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLHtmlElement'] = function HTMLHtmlElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLHtmlElement'], "HTMLHtmlElement");
 bodavm.memory.globalobj['HTMLHtmlElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLHtmlElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
 bodavm.toolsFunc.defineProperty('HTMLHtmlElement', "version", {configurable:true, enumerable:true, get:function version (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLHtmlElement'].prototype, "HTMLHtmlElement", "version_get", arguments)}, set:function version (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLHtmlElement'].prototype, "HTMLHtmlElement", "version_set", arguments)}},'prototype');
 
 // HTMLIFrameElement对象
-bodavm.memory.globalobj['HTMLIFrameElement'] = function HTMLIFrameElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLIFrameElement'] = function HTMLIFrameElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLIFrameElement'], "HTMLIFrameElement");
 bodavm.memory.globalobj['HTMLIFrameElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLIFrameElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7562,7 +7982,7 @@ bodavm.toolsFunc.defineProperty('HTMLIFrameElement', "loading", {configurable:tr
 bodavm.toolsFunc.defineProperty('HTMLIFrameElement', "allowPaymentRequest", {configurable:true, enumerable:true, get:function allowPaymentRequest (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLIFrameElement'].prototype, "HTMLIFrameElement", "allowPaymentRequest_get", arguments)}, set:function allowPaymentRequest (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLIFrameElement'].prototype, "HTMLIFrameElement", "allowPaymentRequest_set", arguments)}},'prototype');
 
 // HTMLImageElement对象
-bodavm.memory.globalobj['HTMLImageElement'] = function HTMLImageElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLImageElement'] = function HTMLImageElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLImageElement'], "HTMLImageElement");
 bodavm.memory.globalobj['HTMLImageElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLImageElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7595,7 +8015,7 @@ bodavm.toolsFunc.defineProperty('HTMLImageElement', "fetchPriority", {configurab
 bodavm.toolsFunc.defineProperty('HTMLImageElement', "loading", {configurable:true, enumerable:true, get:function loading (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLImageElement'].prototype, "HTMLImageElement", "loading_get", arguments)}, set:function loading (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLImageElement'].prototype, "HTMLImageElement", "loading_set", arguments)}},'prototype');
 
 // HTMLInputElement对象
-bodavm.memory.globalobj['HTMLInputElement'] = function HTMLInputElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLInputElement'] = function HTMLInputElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLInputElement'], "HTMLInputElement");
 bodavm.memory.globalobj['HTMLInputElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLInputElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7658,7 +8078,7 @@ bodavm.toolsFunc.defineProperty('HTMLInputElement', "webkitEntries", {configurab
 bodavm.toolsFunc.defineProperty('HTMLInputElement', "showPicker", {configurable:true, enumerable:true, writable:true, value:function showPicker (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLInputElement'].prototype, "HTMLInputElement", "showPicker", arguments)}},'prototype');
 
 // HTMLLegendElement对象
-bodavm.memory.globalobj['HTMLLegendElement'] = function HTMLLegendElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLLegendElement'] = function HTMLLegendElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLLegendElement'], "HTMLLegendElement");
 bodavm.memory.globalobj['HTMLLegendElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLLegendElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7666,7 +8086,7 @@ bodavm.toolsFunc.defineProperty('HTMLLegendElement', "form", {configurable:true,
 bodavm.toolsFunc.defineProperty('HTMLLegendElement', "align", {configurable:true, enumerable:true, get:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLLegendElement'].prototype, "HTMLLegendElement", "align_get", arguments)}, set:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLLegendElement'].prototype, "HTMLLegendElement", "align_set", arguments)}},'prototype');
 
 // HTMLLIElement对象
-bodavm.memory.globalobj['HTMLLIElement'] = function HTMLLIElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLLIElement'] = function HTMLLIElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLLIElement'], "HTMLLIElement");
 bodavm.memory.globalobj['HTMLLIElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLLIElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7674,7 +8094,7 @@ bodavm.toolsFunc.defineProperty('HTMLLIElement', "value", {configurable:true, en
 bodavm.toolsFunc.defineProperty('HTMLLIElement', "type", {configurable:true, enumerable:true, get:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLLIElement'].prototype, "HTMLLIElement", "type_get", arguments)}, set:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLLIElement'].prototype, "HTMLLIElement", "type_set", arguments)}},'prototype');
 
 // HTMLLinkElement对象
-bodavm.memory.globalobj['HTMLLinkElement'] = function HTMLLinkElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLLinkElement'] = function HTMLLinkElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLLinkElement'], "HTMLLinkElement");
 bodavm.memory.globalobj['HTMLLinkElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLLinkElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7699,7 +8119,7 @@ bodavm.toolsFunc.defineProperty('HTMLLinkElement', "integrity", {configurable:tr
 bodavm.toolsFunc.defineProperty('HTMLLinkElement', "fetchPriority", {configurable:true, enumerable:true, get:function fetchPriority (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLLinkElement'].prototype, "HTMLLinkElement", "fetchPriority_get", arguments)}, set:function fetchPriority (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLLinkElement'].prototype, "HTMLLinkElement", "fetchPriority_set", arguments)}},'prototype');
 
 // HTMLMarqueeElement对象
-bodavm.memory.globalobj['HTMLMarqueeElement'] = function HTMLMarqueeElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLMarqueeElement'] = function HTMLMarqueeElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLMarqueeElement'], "HTMLMarqueeElement");
 bodavm.memory.globalobj['HTMLMarqueeElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLMarqueeElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7718,7 +8138,7 @@ bodavm.toolsFunc.defineProperty('HTMLMarqueeElement', "start", {configurable:tru
 bodavm.toolsFunc.defineProperty('HTMLMarqueeElement', "stop", {configurable:true, enumerable:true, writable:true, value:function stop (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLMarqueeElement'].prototype, "HTMLMarqueeElement", "stop", arguments)}},'prototype');
 
 // HTMLMediaElement对象
-bodavm.memory.globalobj['HTMLMediaElement'] = function HTMLMediaElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLMediaElement'] = function HTMLMediaElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLMediaElement'], "HTMLMediaElement");
 bodavm.memory.globalobj['HTMLMediaElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLMediaElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7785,7 +8205,7 @@ bodavm.toolsFunc.defineProperty('HTMLMediaElement', "mediaKeys", {configurable:t
 bodavm.toolsFunc.defineProperty('HTMLMediaElement', "setMediaKeys", {configurable:true, enumerable:true, writable:true, value:function setMediaKeys (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLMediaElement'].prototype, "HTMLMediaElement", "setMediaKeys", arguments)}},'prototype');
 
 // HTMLMetaElement对象
-bodavm.memory.globalobj['HTMLMetaElement'] = function HTMLMetaElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLMetaElement'] = function HTMLMetaElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLMetaElement'], "HTMLMetaElement");
 bodavm.memory.globalobj['HTMLMetaElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLMetaElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7796,7 +8216,7 @@ bodavm.toolsFunc.defineProperty('HTMLMetaElement', "scheme", {configurable:true,
 bodavm.toolsFunc.defineProperty('HTMLMetaElement', "media", {configurable:true, enumerable:true, get:function media (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLMetaElement'].prototype, "HTMLMetaElement", "media_get", arguments)}, set:function media (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLMetaElement'].prototype, "HTMLMetaElement", "media_set", arguments)}},'prototype');
 
 // HTMLOptGroupElement对象
-bodavm.memory.globalobj['HTMLOptGroupElement'] = function HTMLOptGroupElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLOptGroupElement'] = function HTMLOptGroupElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLOptGroupElement'], "HTMLOptGroupElement");
 bodavm.memory.globalobj['HTMLOptGroupElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLOptGroupElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7804,7 +8224,7 @@ bodavm.toolsFunc.defineProperty('HTMLOptGroupElement', "disabled", {configurable
 bodavm.toolsFunc.defineProperty('HTMLOptGroupElement', "label", {configurable:true, enumerable:true, get:function label (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLOptGroupElement'].prototype, "HTMLOptGroupElement", "label_get", arguments)}, set:function label (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLOptGroupElement'].prototype, "HTMLOptGroupElement", "label_set", arguments)}},'prototype');
 
 // HTMLOptionElement对象
-bodavm.memory.globalobj['HTMLOptionElement'] = function HTMLOptionElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLOptionElement'] = function HTMLOptionElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLOptionElement'], "HTMLOptionElement");
 bodavm.memory.globalobj['HTMLOptionElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLOptionElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7818,14 +8238,14 @@ bodavm.toolsFunc.defineProperty('HTMLOptionElement', "text", {configurable:true,
 bodavm.toolsFunc.defineProperty('HTMLOptionElement', "index", {configurable:true, enumerable:true, get:function index (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLOptionElement'].prototype, "HTMLOptionElement", "index_get", arguments)}, set:undefined},'prototype');
 
 // HTMLParagraphElement对象
-bodavm.memory.globalobj['HTMLParagraphElement'] = function HTMLParagraphElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLParagraphElement'] = function HTMLParagraphElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLParagraphElement'], "HTMLParagraphElement");
 bodavm.memory.globalobj['HTMLParagraphElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLParagraphElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
 bodavm.toolsFunc.defineProperty('HTMLParagraphElement', "align", {configurable:true, enumerable:true, get:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLParagraphElement'].prototype, "HTMLParagraphElement", "align_get", arguments)}, set:function align (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLParagraphElement'].prototype, "HTMLParagraphElement", "align_set", arguments)}},'prototype');
 
 // HTMLScriptElement对象
-bodavm.memory.globalobj['HTMLScriptElement'] = function HTMLScriptElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLScriptElement'] = function HTMLScriptElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLScriptElement'], "HTMLScriptElement");
 bodavm.memory.globalobj['HTMLScriptElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLScriptElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7845,7 +8265,7 @@ bodavm.toolsFunc.defineProperty('HTMLScriptElement', "integrity", {configurable:
 bodavm.toolsFunc.defineProperty('HTMLScriptElement', "fetchPriority", {configurable:true, enumerable:true, get:function fetchPriority (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].prototype, "HTMLScriptElement", "fetchPriority_get", arguments)}, set:function fetchPriority (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLScriptElement'].prototype, "HTMLScriptElement", "fetchPriority_set", arguments)}},'prototype');
 
 // HTMLSelectElement对象
-bodavm.memory.globalobj['HTMLSelectElement'] = function HTMLSelectElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLSelectElement'] = function HTMLSelectElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLSelectElement'], "HTMLSelectElement");
 bodavm.memory.globalobj['HTMLSelectElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLSelectElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7875,13 +8295,13 @@ bodavm.toolsFunc.defineProperty('HTMLSelectElement', "reportValidity", {configur
 bodavm.toolsFunc.defineProperty('HTMLSelectElement', "setCustomValidity", {configurable:true, enumerable:true, writable:true, value:function setCustomValidity (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLSelectElement'].prototype, "HTMLSelectElement", "setCustomValidity", arguments)}},'prototype');
 
 // HTMLSpanElement对象
-bodavm.memory.globalobj['HTMLSpanElement'] = function HTMLSpanElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLSpanElement'] = function HTMLSpanElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLSpanElement'], "HTMLSpanElement");
 bodavm.memory.globalobj['HTMLSpanElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLSpanElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
 
 // HTMLStyleElement对象
-bodavm.memory.globalobj['HTMLStyleElement'] = function HTMLStyleElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLStyleElement'] = function HTMLStyleElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLStyleElement'], "HTMLStyleElement");
 bodavm.memory.globalobj['HTMLStyleElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLStyleElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7891,14 +8311,14 @@ bodavm.toolsFunc.defineProperty('HTMLStyleElement', "type", {configurable:true, 
 bodavm.toolsFunc.defineProperty('HTMLStyleElement', "sheet", {configurable:true, enumerable:true, get:function sheet (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLStyleElement'].prototype, "HTMLStyleElement", "sheet_get", arguments)}, set:undefined},'prototype');
 
 // HTMLTitleElement对象
-bodavm.memory.globalobj['HTMLTitleElement'] = function HTMLTitleElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLTitleElement'] = function HTMLTitleElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLTitleElement'], "HTMLTitleElement");
 bodavm.memory.globalobj['HTMLTitleElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLTitleElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
 bodavm.toolsFunc.defineProperty('HTMLTitleElement', "text", {configurable:true, enumerable:true, get:function text (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLTitleElement'].prototype, "HTMLTitleElement", "text_get", arguments)}, set:function text (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLTitleElement'].prototype, "HTMLTitleElement", "text_set", arguments)}},'prototype');
 
 // HTMLUListElement对象
-bodavm.memory.globalobj['HTMLUListElement'] = function HTMLUListElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLUListElement'] = function HTMLUListElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLUListElement'], "HTMLUListElement");
 bodavm.memory.globalobj['HTMLUListElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLUListElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
@@ -7906,13 +8326,13 @@ bodavm.toolsFunc.defineProperty('HTMLUListElement', "compact", {configurable:tru
 bodavm.toolsFunc.defineProperty('HTMLUListElement', "type", {configurable:true, enumerable:true, get:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLUListElement'].prototype, "HTMLUListElement", "type_get", arguments)}, set:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLUListElement'].prototype, "HTMLUListElement", "type_set", arguments)}},'prototype');
 
 // HTMLUnknownElement对象
-bodavm.memory.globalobj['HTMLUnknownElement'] = function HTMLUnknownElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLUnknownElement'] = function HTMLUnknownElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLUnknownElement'], "HTMLUnknownElement");
 bodavm.memory.globalobj['HTMLUnknownElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLUnknownElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];
 
 // HTMLVideoElement对象
-bodavm.memory.globalobj['HTMLVideoElement'] = function HTMLVideoElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLVideoElement'] = function HTMLVideoElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLVideoElement'], "HTMLVideoElement");
 bodavm.memory.globalobj['HTMLVideoElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLMediaElement'].prototype;
 bodavm.memory.globalobj['HTMLVideoElement'].__proto__=bodavm.memory.globalobj['HTMLMediaElement'];
@@ -7939,8 +8359,15 @@ bodavm.toolsFunc.defineProperty('HTMLVideoElement', "webkitExitFullScreen", {con
 bodavm.toolsFunc.defineProperty('HTMLVideoElement', "webkitExitFullscreen", {configurable:true, enumerable:true, writable:true, value:function webkitExitFullscreen (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['HTMLVideoElement'].prototype, "HTMLVideoElement", "webkitExitFullscreen", arguments)}},'prototype');
 
 // Image对象
-bodavm.memory.globalobj['Image'] = function Image(){}
+bodavm.memory.globalobj['Image'] = function Image(){
+    if (!(this instanceof Image)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Image': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+    this._boisinit=bodavm.config.isinit;
+    this._boarg=new bodaobj.window.Image(arguments[0],arguments[1])
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Image'], "Image");
+bodavm.memory.globalobj['Image'].prototype=bodavm.memory.globalobj['HTMLImageElement'].prototype;
 bodavm.memory.globalobj['Image'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.toolsFunc.defineProperty('Image', "alt", {configurable:true, enumerable:true, get:function alt (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "alt_get", arguments)}, set:function alt (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "alt_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Image', "src", {configurable:true, enumerable:true, get:function src (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "src_get", arguments)}, set:function src (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "src_set", arguments)}},'prototype');
@@ -7971,7 +8398,7 @@ bodavm.toolsFunc.defineProperty('Image', "fetchPriority", {configurable:true, en
 bodavm.toolsFunc.defineProperty('Image', "loading", {configurable:true, enumerable:true, get:function loading (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "loading_get", arguments)}, set:function loading (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "loading_set", arguments)}},'prototype');
 
 // Option对象
-bodavm.memory.globalobj['Option'] = function Option(){}
+bodavm.memory.globalobj['Option'] = function Option(){this._boisinit=bodavm.config.isinit;}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Option'], "Option");
 bodavm.memory.globalobj['Option'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.toolsFunc.defineProperty('Option', "disabled", {configurable:true, enumerable:true, get:function disabled (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Option'].prototype, "Option", "disabled_get", arguments)}, set:function disabled (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Option'].prototype, "Option", "disabled_set", arguments)}},'prototype');
@@ -7984,7 +8411,7 @@ bodavm.toolsFunc.defineProperty('Option', "text", {configurable:true, enumerable
 bodavm.toolsFunc.defineProperty('Option', "index", {configurable:true, enumerable:true, get:function index (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Option'].prototype, "Option", "index_get", arguments)}, set:undefined},'prototype');
 
 // NetworkInformation对象
-bodavm.memory.globalobj['NetworkInformation'] = function NetworkInformation(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['NetworkInformation'] = function NetworkInformation(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['NetworkInformation'], "NetworkInformation");
 bodavm.memory.globalobj['NetworkInformation'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['NetworkInformation'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -7995,7 +8422,7 @@ bodavm.toolsFunc.defineProperty('NetworkInformation', "downlink", {configurable:
 bodavm.toolsFunc.defineProperty('NetworkInformation', "saveData", {configurable:true, enumerable:true, get:function saveData (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NetworkInformation'].prototype, "NetworkInformation", "saveData_get", arguments)}, set:undefined},'prototype');
 
 // CustomElementRegistry对象
-bodavm.memory.globalobj['CustomElementRegistry'] = function CustomElementRegistry(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CustomElementRegistry'] = function CustomElementRegistry(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CustomElementRegistry'], "CustomElementRegistry");
 bodavm.toolsFunc.defineProperty('CustomElementRegistry', "define", {configurable:true, enumerable:true, writable:true, value:function define (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CustomElementRegistry'].prototype, "CustomElementRegistry", "define", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('CustomElementRegistry', "get", {configurable:true, enumerable:true, writable:true, value:function get (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CustomElementRegistry'].prototype, "CustomElementRegistry", "get", arguments)}},'prototype');
@@ -8003,11 +8430,12 @@ bodavm.toolsFunc.defineProperty('CustomElementRegistry', "upgrade", {configurabl
 bodavm.toolsFunc.defineProperty('CustomElementRegistry', "whenDefined", {configurable:true, enumerable:true, writable:true, value:function whenDefined (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CustomElementRegistry'].prototype, "CustomElementRegistry", "whenDefined", arguments)}},'prototype');
 
 // customElements对象
-bodavm.memory.globalobj[ 'customElements']  = {}
+bodavm.memory.globalobj[ 'customElements']  = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'customElements'].__proto__=bodavm.memory.globalobj['CustomElementRegistry'].prototype;
 
 //Event对象
 bodavm.memory.globalobj['Event']=function Event(){
+    this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Event)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Event': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
@@ -8054,7 +8482,7 @@ bodavm.toolsFunc.defineProperty('Event', "stopPropagation", {configurable:true, 
 bodavm.toolsFunc.defineProperty('Event', "path", {configurable:true, enumerable:true, get:function path (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Event'].prototype, "Event", "path_get", arguments)}, set:undefined},'prototype');
 
 //UIEvent对象
-bodavm.memory.globalobj['UIEvent']  = function UIEvent() {
+bodavm.memory.globalobj['UIEvent']  = function UIEvent() {this._boisinit=bodavm.config.isinit;
     if (!(this instanceof UIEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'UIEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 
@@ -8074,7 +8502,7 @@ bodavm.toolsFunc.defineProperty('UIEvent', "which", {configurable:true, enumerab
 bodavm.toolsFunc.defineProperty('UIEvent', "initUIEvent", {configurable:true, enumerable:true, writable:true, value:function initUIEvent (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['UIEvent'].prototype, "UIEvent", "initUIEvent", arguments)}},'prototype');
 
 // MouseEvent对象
-bodavm.memory.globalobj['MouseEvent'] = function MouseEvent() {
+bodavm.memory.globalobj['MouseEvent'] = function MouseEvent() {this._boisinit=bodavm.config.isinit;
     if (!(this instanceof MouseEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MouseEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
@@ -8119,6 +8547,7 @@ bodavm.memory.globalobj['Document'] = function Document(){
     if (!(this instanceof Document)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Document': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
+    this._boisinit=bodavm.config.isinit;
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Document'], "Document");
 bodavm.memory.globalobj['Document'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
@@ -8354,7 +8783,8 @@ bodavm.toolsFunc.defineProperty('Document', "getAnimations", {configurable:true,
 // Document=bodavm.memory.globalobj['Document']
 
 // HTMLDocument对象
-bodavm.memory.globalobj['HTMLDocument'] = function HTMLDocument(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLDocument'] = function HTMLDocument(){this._boisinit=bodavm.config.isinit;
+    return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLDocument'], "HTMLDocument");
 bodavm.memory.globalobj['HTMLDocument'].prototype.__proto__=bodavm.memory.globalobj['Document'].prototype;
 bodavm.memory.globalobj['HTMLDocument'].__proto__=bodavm.memory.globalobj['Document'];
@@ -8369,13 +8799,13 @@ bodavm.toolsFunc.defineProperty('document', "location", {configurable:false, enu
 
 
 // Location对象
-bodavm.memory.globalobj['Location'] = function Location(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Location'] = function Location(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Location'], "Location");
 
 // debugger
 // location对象
 // location对象
-bodavm.memory.globalobj['location'] = {}
+bodavm.memory.globalobj['location'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj['location'].__proto__=bodavm.memory.globalobj['Location'].prototype;
 bodavm.toolsFunc.defineProperty('location', "valueOf", {configurable:false, enumerable:false, writable:false, value:function valueOf (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['location'], "location", "valueOf", arguments)}});
 bodavm.toolsFunc.defineProperty('location', "ancestorOrigins", {configurable:false, enumerable:true, get:function ancestorOrigins (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['location'], "location", "ancestorOrigins_get", arguments)}, set:undefined});
@@ -8395,7 +8825,7 @@ bodavm.toolsFunc.defineProperty('location', "toString", {configurable:false, enu
 
 
 // Storage对象
-bodavm.memory.globalobj['Storage'] = function Storage(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Storage'] = function Storage(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Storage'], "Storage");
 bodavm.toolsFunc.defineProperty('Storage', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Storage'].prototype, "Storage", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('Storage', "clear", {configurable:true, enumerable:true, writable:true, value:function clear (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Storage'].prototype, "Storage", "clear", arguments)}},'prototype');
@@ -8404,15 +8834,17 @@ bodavm.toolsFunc.defineProperty('Storage', "key", {configurable:true, enumerable
 bodavm.toolsFunc.defineProperty('Storage', "removeItem", {configurable:true, enumerable:true, writable:true, value:function removeItem (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Storage'].prototype, "Storage", "removeItem", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Storage', "setItem", {configurable:true, enumerable:true, writable:true, value:function setItem (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Storage'].prototype, "Storage", "setItem", arguments)}},'prototype');
 
-bodavm.memory.globalobj[ 'localStorage']= {}
+bodavm.memory.globalobj[ 'localStorage']= {
+    _boisinit:bodavm.config.isinit
+}
 bodavm.memory.globalobj[ 'localStorage'].__proto__=bodavm.memory.globalobj['Storage'] .prototype;
 // sessionStorage对象
-bodavm.memory.globalobj[ 'sessionStorage']= {}
+bodavm.memory.globalobj[ 'sessionStorage']= { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'sessionStorage'].__proto__=bodavm.memory.globalobj['Storage'] .prototype;
 // debugger;
 
 // CharacterData对象
-bodavm.memory.globalobj['CharacterData'] = function CharacterData(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CharacterData'] = function CharacterData(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CharacterData'], "CharacterData");
 bodavm.memory.globalobj['CharacterData'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['CharacterData'].__proto__=bodavm.memory.globalobj['Node'];
@@ -8431,7 +8863,7 @@ bodavm.toolsFunc.defineProperty('CharacterData', "replaceWith", {configurable:tr
 bodavm.toolsFunc.defineProperty('CharacterData', "substringData", {configurable:true, enumerable:true, writable:true, value:function substringData (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CharacterData'].prototype, "CharacterData", "substringData", arguments)}},'prototype');
 
 // Text对象
-bodavm.memory.globalobj['Text'] = function Text(){
+bodavm.memory.globalobj['Text'] = function Text(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Text)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Text': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 
@@ -8446,14 +8878,14 @@ bodavm.toolsFunc.defineProperty('Text', "splitText", {configurable:true, enumera
 
 
 // BarProp对象
-bodavm.memory.globalobj['Database'] = function Database() { return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor") }
+bodavm.memory.globalobj['Database'] = function Database() { this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor") }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Database'] , "Database");
 bodavm.toolsFunc.defineProperty('Database' , "version", { configurable: true, enumerable: true, get: function version() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Database'].prototype, "Database", "version", arguments) }, set: undefined },'prototype');
 bodavm.toolsFunc.defineProperty('Database' , "readTransaction", { configurable: true, enumerable: true, writable: true, value: function readTransaction() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Database'].prototype, "Database", "readTransaction", arguments) } },'prototype');
 bodavm.toolsFunc.defineProperty('Database' , "transaction", { configurable: true, enumerable: true, writable: true, value: function transaction() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Database'].prototype, "Database", "transaction", arguments) } },'prototype');
 bodavm.toolsFunc.defineProperty('Database' , "changeVersion", { configurable: true, enumerable: true, writable: true, value: function changeVersion() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Database'].prototype, "Database", "changeVersion", arguments) } },'prototype');
 
-bodavm.memory.globalobj[ 'database']  = {}
+bodavm.memory.globalobj[ 'database']  = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'database'] .__proto__ = bodavm.memory.globalobj['Database'] .prototype
 
 
@@ -8467,7 +8899,7 @@ bodavm.memory.globalobj['CloseEvent'] = function CloseEvent() {
     if (arguments.length < 1) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CloseEvent': 1 argument required, but only 0 present.")
     }
-
+    this._boisinit=bodavm.config.isinit;
 }
 
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CloseEvent'], "CloseEvent");
@@ -8478,7 +8910,7 @@ bodavm.toolsFunc.defineProperty('CloseEvent', "code", { configurable: true, enum
 bodavm.toolsFunc.defineProperty('CloseEvent', "reason", { configurable: true, enumerable: true, get: function reason() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CloseEvent'].prototype, "CloseEvent", "reason_get", arguments) }, set: undefined }, 'prototype');
 
 // Notification对象
-bodavm.memory.globalobj['Notification'] = function Notification(){
+bodavm.memory.globalobj['Notification'] = function Notification(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Notification)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Notification': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
@@ -8514,7 +8946,7 @@ bodavm.toolsFunc.defineProperty('Notification', "close", {configurable:true, enu
 bodavm.toolsFunc.defineProperty('Notification', "image", {configurable:true, enumerable:true, get:function image (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Notification'].prototype, "Notification", "image_get", arguments)}, set:undefined},'prototype');
 
 // IDBDatabase对象
-bodavm.memory.globalobj['IDBDatabase'] = function IDBDatabase(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBDatabase'] = function IDBDatabase(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBDatabase'], "IDBDatabase");
 bodavm.memory.globalobj['IDBDatabase'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['IDBDatabase'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -8531,7 +8963,7 @@ bodavm.toolsFunc.defineProperty('IDBDatabase', "deleteObjectStore", {configurabl
 bodavm.toolsFunc.defineProperty('IDBDatabase', "transaction", {configurable:true, enumerable:true, writable:true, value:function transaction (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBDatabase'].prototype, "IDBDatabase", "transaction", arguments)}},'prototype');
 
 // IDBRequest对象
-bodavm.memory.globalobj['IDBRequest'] = function IDBRequest(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBRequest'] = function IDBRequest(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBRequest'], "IDBRequest");
 bodavm.memory.globalobj['IDBRequest'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['IDBRequest'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -8544,7 +8976,7 @@ bodavm.toolsFunc.defineProperty('IDBRequest', "onsuccess", {configurable:true, e
 bodavm.toolsFunc.defineProperty('IDBRequest', "onerror", {configurable:true, enumerable:true, get:function onerror (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBRequest'].prototype, "IDBRequest", "onerror_get", arguments)}, set:function onerror (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBRequest'].prototype, "IDBRequest", "onerror_set", arguments)}},'prototype');
 
 // IDBOpenDBRequest对象
-bodavm.memory.globalobj['IDBOpenDBRequest'] = function IDBOpenDBRequest(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBOpenDBRequest'] = function IDBOpenDBRequest(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBOpenDBRequest'], "IDBOpenDBRequest");
 bodavm.memory.globalobj['IDBOpenDBRequest'].prototype.__proto__=bodavm.memory.globalobj['IDBRequest'].prototype;
 bodavm.memory.globalobj['IDBOpenDBRequest'].__proto__=bodavm.memory.globalobj['IDBRequest'];
@@ -8552,7 +8984,7 @@ bodavm.toolsFunc.defineProperty('IDBOpenDBRequest', "onblocked", {configurable:t
 bodavm.toolsFunc.defineProperty('IDBOpenDBRequest', "onupgradeneeded", {configurable:true, enumerable:true, get:function onupgradeneeded (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBOpenDBRequest'].prototype, "IDBOpenDBRequest", "onupgradeneeded_get", arguments)}, set:function onupgradeneeded (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBOpenDBRequest'].prototype, "IDBOpenDBRequest", "onupgradeneeded_set", arguments)}},'prototype');
 
 // IDBFactory对象
-bodavm.memory.globalobj['IDBFactory'] = function IDBFactory(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBFactory'] = function IDBFactory(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBFactory'], "IDBFactory");
 bodavm.toolsFunc.defineProperty('IDBFactory', "cmp", {configurable:true, enumerable:true, writable:true, value:function cmp (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBFactory'].prototype, "IDBFactory", "cmp", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('IDBFactory', "databases", {configurable:true, enumerable:true, writable:true, value:function databases (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBFactory'].prototype, "IDBFactory", "databases", arguments)}},'prototype');
@@ -8561,11 +8993,11 @@ bodavm.toolsFunc.defineProperty('IDBFactory', "open", {configurable:true, enumer
 
 
 // indexedDB对象
-bodavm.memory.globalobj[ 'indexedDB']  = {}
+bodavm.memory.globalobj[ 'indexedDB']  = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'indexedDB'].__proto__=bodavm.memory.globalobj['IDBFactory'].prototype;
 
 // History对象
-bodavm.memory.globalobj['History'] = function History(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['History'] = function History(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['History'], "History");
 bodavm.toolsFunc.defineProperty('History', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['History'].prototype, "History", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('History', "scrollRestoration", {configurable:true, enumerable:true, get:function scrollRestoration (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['History'].prototype, "History", "scrollRestoration_get", arguments)}, set:function scrollRestoration (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['History'].prototype, "History", "scrollRestoration_set", arguments)}},'prototype');
@@ -8576,11 +9008,11 @@ bodavm.toolsFunc.defineProperty('History', "go", {configurable:true, enumerable:
 bodavm.toolsFunc.defineProperty('History', "pushState", {configurable:true, enumerable:true, writable:true, value:function pushState (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['History'].prototype, "History", "pushState", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('History', "replaceState", {configurable:true, enumerable:true, writable:true, value:function replaceState (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['History'].prototype, "History", "replaceState", arguments)}},'prototype');
 
-bodavm.memory.globalobj[ 'history'] = {}
+bodavm.memory.globalobj[ 'history'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'history'].__proto__= bodavm.memory.globalobj['History'].prototype;
 
 // Screen对象
-bodavm.memory.globalobj['Screen'] = function Screen(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Screen'] = function Screen(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Screen'], "Screen");
 bodavm.memory.globalobj['Screen'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Screen'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -8596,14 +9028,14 @@ bodavm.toolsFunc.defineProperty('Screen', "orientation", {configurable:true, enu
 bodavm.toolsFunc.defineProperty('Screen', "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "onchange_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Screen', "isExtended", {configurable:true, enumerable:true, get:function isExtended (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "isExtended_get", arguments)}, set:undefined},'prototype');
 
-bodavm.memory.globalobj[ 'screen']  = {}
+bodavm.memory.globalobj[ 'screen']  = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'screen'].__proto__=bodavm.memory.globalobj['Screen'].prototype;
 
 
 
 
 // CSSStyleDeclaration对象
-bodavm.memory.globalobj['CSSStyleDeclaration'] = function CSSStyleDeclaration(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CSSStyleDeclaration'] = function CSSStyleDeclaration(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CSSStyleDeclaration'], "CSSStyleDeclaration");
 bodavm.toolsFunc.defineProperty('CSSStyleDeclaration', "cssText", {configurable:true, enumerable:true, get:function cssText (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "cssText_get", arguments)}, set:function cssText (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "cssText_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('CSSStyleDeclaration', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "length_get", arguments)}, set:undefined},'prototype');
@@ -8616,7 +9048,7 @@ bodavm.toolsFunc.defineProperty('CSSStyleDeclaration', "removeProperty", {config
 bodavm.toolsFunc.defineProperty('CSSStyleDeclaration', "setProperty", {configurable:true, enumerable:true, writable:true, value:function setProperty (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "setProperty", arguments)}},'prototype');
 
 // CanvasRenderingContext2D对象
-bodavm.memory.globalobj['CanvasRenderingContext2D'] = function CanvasRenderingContext2D(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CanvasRenderingContext2D'] = function CanvasRenderingContext2D(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CanvasRenderingContext2D'], "CanvasRenderingContext2D");
 bodavm.toolsFunc.defineProperty('CanvasRenderingContext2D', "canvas", {configurable:true, enumerable:true, get:function canvas (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype, "CanvasRenderingContext2D", "canvas_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('CanvasRenderingContext2D', "globalAlpha", {configurable:true, enumerable:true, get:function globalAlpha (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype, "CanvasRenderingContext2D", "globalAlpha_get", arguments)}, set:function globalAlpha (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype, "CanvasRenderingContext2D", "globalAlpha_set", arguments)}},'prototype');
@@ -8692,7 +9124,7 @@ bodavm.toolsFunc.defineProperty('CanvasRenderingContext2D', "rotate", {configura
 bodavm.toolsFunc.defineProperty('CanvasRenderingContext2D', "strokeRect", {configurable:true, enumerable:true, writable:true, value:function strokeRect (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype, "CanvasRenderingContext2D", "strokeRect", arguments)}},'prototype');
 
 // WebGLRenderingContext对象
-bodavm.memory.globalobj['WebGLRenderingContext'] = function WebGLRenderingContext(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['WebGLRenderingContext'] = function WebGLRenderingContext(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['WebGLRenderingContext'], "WebGLRenderingContext");
 bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "DEPTH_BUFFER_BIT", {configurable:false, enumerable:true, writable:false, value:256});
 bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "STENCIL_BUFFER_BIT", {configurable:false, enumerable:true, writable:false, value:1024});
@@ -8993,6 +9425,8 @@ bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "BROWSER_DEFAULT_WEBGL"
 bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "canvas", {configurable:true, enumerable:true, get:function canvas (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLRenderingContext'].prototype, "WebGLRenderingContext", "canvas_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "drawingBufferWidth", {configurable:true, enumerable:true, get:function drawingBufferWidth (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLRenderingContext'].prototype, "WebGLRenderingContext", "drawingBufferWidth_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "drawingBufferHeight", {configurable:true, enumerable:true, get:function drawingBufferHeight (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLRenderingContext'].prototype, "WebGLRenderingContext", "drawingBufferHeight_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "drawingBufferColorSpace", {configurable:true, enumerable:true, get:function drawingBufferColorSpace (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLRenderingContext'].prototype, "WebGLRenderingContext", "drawingBufferColorSpace_get", arguments)}, set:function drawingBufferColorSpace (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLRenderingContext'].prototype, "WebGLRenderingContext", "drawingBufferColorSpace_set", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "unpackColorSpace", {configurable:true, enumerable:true, get:function unpackColorSpace (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLRenderingContext'].prototype, "WebGLRenderingContext", "unpackColorSpace_get", arguments)}, set:function unpackColorSpace (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLRenderingContext'].prototype, "WebGLRenderingContext", "unpackColorSpace_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "DEPTH_BUFFER_BIT", {configurable:false, enumerable:true, writable:false, value:256},'prototype');
 bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "STENCIL_BUFFER_BIT", {configurable:false, enumerable:true, writable:false, value:1024},'prototype');
 bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "COLOR_BUFFER_BIT", {configurable:false, enumerable:true, writable:false, value:16384},'prototype');
@@ -9428,7 +9862,7 @@ bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "viewport", {configurab
 bodavm.toolsFunc.defineProperty('WebGLRenderingContext', "makeXRCompatible", {configurable:true, enumerable:true, writable:true, value:function makeXRCompatible (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLRenderingContext'].prototype, "WebGLRenderingContext", "makeXRCompatible", arguments)}},'prototype');
 
 // MediaQueryList对象
-bodavm.memory.globalobj['MediaQueryList'] = function MediaQueryList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['MediaQueryList'] = function MediaQueryList(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MediaQueryList'], "MediaQueryList");
 bodavm.memory.globalobj['MediaQueryList'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['MediaQueryList'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -9439,15 +9873,17 @@ bodavm.toolsFunc.defineProperty('MediaQueryList', "addListener", {configurable:t
 bodavm.toolsFunc.defineProperty('MediaQueryList', "removeListener", {configurable:true, enumerable:true, writable:true, value:function removeListener (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaQueryList'].prototype, "MediaQueryList", "removeListener", arguments)}},'prototype');
 
 // CSSRuleList对象
-bodavm.memory.globalobj['CSSRuleList'] = function CSSRuleList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CSSRuleList'] = function CSSRuleList(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CSSRuleList'], "CSSRuleList");
 bodavm.toolsFunc.defineProperty('CSSRuleList', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSRuleList'].prototype, "CSSRuleList", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('CSSRuleList', "item", {configurable:true, enumerable:true, writable:true, value:function item (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSRuleList'].prototype, "CSSRuleList", "item", arguments)}},'prototype');
 
 // Attr对象
 bodavm.memory.globalobj['Attr'] = function Attr(){
-    
-    return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+    this._boisinit=bodavm.config.isinit;
+    return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")
+    // this.isinit=bodavm.config.isinit
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Attr'], "Attr");
 bodavm.memory.globalobj['Attr'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['Attr'].__proto__=bodavm.memory.globalobj['Node'];
@@ -9460,7 +9896,7 @@ bodavm.toolsFunc.defineProperty('Attr', "ownerElement", {configurable:true, enum
 bodavm.toolsFunc.defineProperty('Attr', "specified", {configurable:true, enumerable:true, get:function specified (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Attr'].prototype, "Attr", "specified_get", arguments)}, set:undefined},'prototype');
 
 // Option对象
-bodavm.memory.globalobj['Option'] = function Option(){
+bodavm.memory.globalobj['Option'] = function Option(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Option)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Option': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };   
@@ -9478,7 +9914,7 @@ bodavm.toolsFunc.defineProperty('Option', "text", {configurable:true, enumerable
 bodavm.toolsFunc.defineProperty('Option', "index", {configurable:true, enumerable:true, get:function index (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Option'].prototype, "Option", "index_get", arguments)}, set:undefined},'prototype');
 
 // Navigation对象
-bodavm.memory.globalobj['Navigation'] = function Navigation(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Navigation'] = function Navigation(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Navigation'], "Navigation");
 bodavm.memory.globalobj['Navigation'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Navigation'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -9500,12 +9936,12 @@ bodavm.toolsFunc.defineProperty('Navigation', "updateCurrentEntry", {configurabl
 
 
 
-bodavm.memory.globalobj[ 'navigation']  ={}
+bodavm.memory.globalobj[ 'navigation']  ={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'navigation'].__proto__=bodavm.memory.globalobj['Navigation'].prototype
 
 
 // MediaStream对象
-bodavm.memory.globalobj['MediaStream'] = function MediaStream(){
+bodavm.memory.globalobj['MediaStream'] = function MediaStream(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof MediaStream)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaStream   ': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
@@ -9529,7 +9965,7 @@ bodavm.toolsFunc.defineProperty('MediaStream', "getVideoTracks", {configurable:t
 bodavm.toolsFunc.defineProperty('MediaStream', "removeTrack", {configurable:true, enumerable:true, writable:true, value:function removeTrack (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaStream'].prototype, "MediaStream", "removeTrack", arguments)}},'prototype');
 
 // TrustedTypePolicyFactory对象
-bodavm.memory.globalobj['TrustedTypePolicyFactory'] = function TrustedTypePolicyFactory(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['TrustedTypePolicyFactory'] = function TrustedTypePolicyFactory(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['TrustedTypePolicyFactory'], "TrustedTypePolicyFactory");
 bodavm.memory.globalobj['TrustedTypePolicyFactory'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['TrustedTypePolicyFactory'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -9544,20 +9980,20 @@ bodavm.toolsFunc.defineProperty('TrustedTypePolicyFactory', "isHTML", {configura
 bodavm.toolsFunc.defineProperty('TrustedTypePolicyFactory', "isScript", {configurable:true, enumerable:true, writable:true, value:function isScript (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['TrustedTypePolicyFactory'].prototype, "TrustedTypePolicyFactory", "isScript", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('TrustedTypePolicyFactory', "isScriptURL", {configurable:true, enumerable:true, writable:true, value:function isScriptURL (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['TrustedTypePolicyFactory'].prototype, "TrustedTypePolicyFactory", "isScriptURL", arguments)}},'prototype');
 
-bodavm.memory.globalobj[ 'trustedTypes'] = {}
+bodavm.memory.globalobj[ 'trustedTypes'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'trustedTypes'].__proto__ = bodavm.memory.globalobj['TrustedTypePolicyFactory'] .prototype
 
 // Scheduler对象
-bodavm.memory.globalobj['Scheduler'] = function Scheduler(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Scheduler'] = function Scheduler(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Scheduler'], "Scheduler");
 bodavm.toolsFunc.defineProperty('Scheduler', "postTask", {configurable:true, enumerable:true, writable:true, value:function postTask (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Scheduler'].prototype, "Scheduler", "postTask", arguments)}},'prototype');
 
 // scheduler对象
-bodavm.memory.globalobj[ 'scheduler'] = {}
+bodavm.memory.globalobj[ 'scheduler'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'scheduler'] .__proto__=bodavm.memory.globalobj['Scheduler'].prototype;
 
 // CookieStore对象
-bodavm.memory.globalobj['CookieStore'] = function CookieStore(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CookieStore'] = function CookieStore(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CookieStore'], "CookieStore");
 bodavm.memory.globalobj['CookieStore'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['CookieStore'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -9567,18 +10003,18 @@ bodavm.toolsFunc.defineProperty('CookieStore', "getAll", {configurable:true, enu
 bodavm.toolsFunc.defineProperty('CookieStore', "set", {configurable:true, enumerable:true, writable:true, value:function set (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CookieStore'].prototype, "CookieStore", "set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('CookieStore', "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CookieStore'].prototype, "CookieStore", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CookieStore'].prototype, "CookieStore", "onchange_set", arguments)}},'prototype');
 
-bodavm.memory.globalobj[ 'cookieStore']  = {}
+bodavm.memory.globalobj[ 'cookieStore']  = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'cookieStore'].__proto__=bodavm.memory.globalobj['CookieStore'].prototype;
 
 // RTCSessionDescription对象
-bodavm.memory.globalobj['RTCSessionDescription'] = function RTCSessionDescription(){}
+bodavm.memory.globalobj['RTCSessionDescription'] = function RTCSessionDescription(){this._boisinit=bodavm.config.isinit;}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['RTCSessionDescription'], "RTCSessionDescription");
 bodavm.toolsFunc.defineProperty('RTCSessionDescription', "type", {configurable:true, enumerable:true, get:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "type_get", arguments)}, set:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "type_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('RTCSessionDescription', "sdp", {configurable:true, enumerable:true, get:function sdp (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "sdp_get", arguments)}, set:function sdp (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "sdp_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('RTCSessionDescription', "toJSON", {configurable:true, enumerable:true, writable:true, value:function toJSON (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCSessionDescription'].prototype, "RTCSessionDescription", "toJSON", arguments)}},'prototype');
 
 // RTCDataChannel对象
-bodavm.memory.globalobj['RTCDataChannel'] = function RTCDataChannel(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['RTCDataChannel'] = function RTCDataChannel(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['RTCDataChannel'], "RTCDataChannel");
 bodavm.memory.globalobj['RTCDataChannel'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['RTCDataChannel'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -9604,7 +10040,7 @@ bodavm.toolsFunc.defineProperty('RTCDataChannel', "close", {configurable:true, e
 bodavm.toolsFunc.defineProperty('RTCDataChannel', "send", {configurable:true, enumerable:true, writable:true, value:function send (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCDataChannel'].prototype, "RTCDataChannel", "send", arguments)}},'prototype');
 
 // CacheStorage对象
-bodavm.memory.globalobj['CacheStorage'] = function CacheStorage(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CacheStorage'] = function CacheStorage(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CacheStorage'], "CacheStorage");
 bodavm.toolsFunc.defineProperty('CacheStorage', "delete", {configurable:true, enumerable:true, writable:true, value:function  (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CacheStorage'].prototype, "CacheStorage", "delete", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('CacheStorage', "has", {configurable:true, enumerable:true, writable:true, value:function has (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CacheStorage'].prototype, "CacheStorage", "has", arguments)}},'prototype');
@@ -9612,205 +10048,186 @@ bodavm.toolsFunc.defineProperty('CacheStorage', "keys", {configurable:true, enum
 bodavm.toolsFunc.defineProperty('CacheStorage', "match", {configurable:true, enumerable:true, writable:true, value:function match (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CacheStorage'].prototype, "CacheStorage", "match", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('CacheStorage', "open", {configurable:true, enumerable:true, writable:true, value:function open (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CacheStorage'].prototype, "CacheStorage", "open", arguments)}},'prototype');
 
-bodavm.memory.globalobj[ 'caches'] = {}
+bodavm.memory.globalobj[ 'caches'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'caches'].__proto__=bodavm.memory.globalobj['CacheStorage'].prototype;
 
-const PENDING = 'pending';
-const FULFILLED = 'fulfilled';
-const REJECTED = 'rejected';
+function Promise(fn) {
+  var self = this;
+  self.value = null;
+  self.error = null;
+  self.status = 'pending';
+  self.onFulfilled = [];
+  self.onRejected = [];
 
-function Promise(executor) {
-  this.state = PENDING;
-  this.value = null;
-  this.reason = null;
-  this.onFulfilledCallbacks = [];
-  this.onRejectedCallbacks = [];
-
-  const resolve = (value) => {
-    if (this.state === PENDING) {
-      this.state = FULFILLED;
-      this.value = value;
-      this.onFulfilledCallbacks.forEach((fun) => {
-        fun();
-      });
+  function resolve(value) {
+    if (self.status === 'pending') {
+      self.status = 'fulfilled';
+      self.value = value;
+      for (var i = 0; i < self.onFulfilled.length; i++) {
+        setTimeout(function() {
+          self.onFulfilled[i](self.value);
+        }, 0);
+      }
     }
-  };
-
-  const reject = (reason) => {
-    if (this.state === PENDING) {
-      this.state = REJECTED;
-      this.reason = reason;
-      this.onRejectedCallbacks.forEach((fun) => {
-        fun();
-      });
-    }
-  };
-
-  try {
-    executor(resolve, reject);
-  } catch (reason) {
-    reject(reason);
   }
+  function reject(error) {
+    if (self.status === 'pending') {
+      self.status = 'rejected';
+      self.error = error;
+      for (var i = 0; i < self.onRejected.length; i++) {
+        setTimeout(function() {
+          self.onRejected[i](self.error);
+        }, 0);
+      }
+    }
+  }
+
+  fn(resolve, reject);
 }
-bodavm.toolsFunc.safeProto(Promise,"Promise");
+bodavm.toolsFunc.safeFunc(Promise,'Promise')
 
 
+Promise.prototype.then = function(onFulfilled, onRejected) {
+  var self = this;
+  var promise = new Promise(function(resolve, reject) {
+    function handle(value) {
+      try {
+        var result = onFulfilled(value);
+        if (result instanceof Promise) {
+          result.then(resolve, reject);
+        } else {
+          resolve(result);
+        }
+      } catch (error) {
+        reject(error);
+      }
+    }
 
-//原型上面的方法
-//用settimeout来模拟异步调用,保证链式调用，即then方法中要返回一个新的promise，并将then方法的返回值进行resolve
-Promise.prototype.then = function (onFulfilled, onRejected) {
-  if (typeof onFulfilled != 'function') {
-    onFulfilled = function (value) {
-      return value;
-    };
-  }
-  if (typeof onRejected != 'function') {
-    onRejected = function (reason) {
-      throw reason;
-    };
-  }
-  const promise2 = new Promise((resolve, reject) => {
-    switch (this.state) {
-      case FULFILLED:
-        setTimeout(() => {
-          try {
-            const x = onFulfilled(this.value);
-            resolve(x);
-          } catch (reason) {
-            reject(reason);
-          }
-        }, 0);
-        break;
-      case REJECTED:
-        setTimeout(() => {
-          try {
-            const x = onRejected(this.reason);
-            resolve(x);
-          } catch (reason) {
-            reject(reason);
-          }
-        }, 0);
-        break;
-      case PENDING:
-        this.onFulfilledCallbacks.push(() => {
-          setTimeout(() => {
-            try {
-              const x = onFulfilled(this.value);
-              resolve(x);
-            } catch (reason) {
-              reject(reason);
-            }
-          }, 0);
-        });
-        this.onRejectedCallbacks.push(() => {
-          setTimeout(() => {
-            try {
-              const x = onRejected(this.reason);
-              resolve(x);
-            } catch (reason) {
-              reject(reason);
-            }
-          }, 0);
-        });
-        break;
+    function handleError(error) {
+      try {
+        var result = onRejected(error);
+        if (result instanceof Promise) {
+          result.then(resolve, reject);
+        } else {
+          resolve(result);
+        }
+      } catch (error) {
+        reject(error);
+      }
+    }
+
+    if (self.status === 'fulfilled') {
+      setTimeout(function() {
+        handle(self.value);
+      }, 0);
+    } else if (self.status === 'rejected') {
+      setTimeout(function() {
+        handleError(self.error);
+      }, 0);
+    } else {
+      self.onFulfilled.push(handle);
+      self.onRejected.push(handleError);
     }
   });
-  return promise2;
-};
-bodavm.toolsFunc.safeFunc(Promise.prototype.then,'then')
 
-Promise.prototype.catch = function (onRejected) {
+  return promise;
+};
+bodavm.toolsFunc.safeFunc(Promise.prototype.then ,'then')
+
+Promise.prototype.catch = function(onRejected) {
   return this.then(null, onRejected);
 };
 bodavm.toolsFunc.safeFunc(Promise.prototype.catch,'catch')
 
-
-Promise.prototype.finally = function (fn) {
+Promise.prototype.finally = function(onFinally) {
   return this.then(
-    (value) => {
-      fn();
-      return value;
+    function(value) {
+      return Promise.resolve(onFinally()).then(function() {
+        return value;
+      });
     },
-    (reason) => {
-      fn();
-      throw reason;
+    function(error) {
+      return Promise.resolve(onFinally()).then(function() {
+        throw error;
+      });
     }
   );
 };
 bodavm.toolsFunc.safeFunc(Promise.prototype.finally,'finally')
 
-
-//静态方法
-Promise.resolve = function (value) {
-  return new Promise((resolve, reject) => {
+Promise.resolve = function(value) {
+  return new Promise(function(resolve) {
     resolve(value);
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.resolve,'resolve')
+bodavm.toolsFunc.safeFunc(Promise.resolve ,'resolve')
 
-Promise.reject = function (reason) {
-  return new Promise((resolve, reject) => {
-    reject(reason);
+Promise.reject = function(error) {
+  return new Promise(function(resolve, reject) {
+    reject(error);
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.reject,'reject')
+bodavm.toolsFunc.safeFunc(Promise.reject ,'reject')
 
-//接受一个promise数组，当所有promise状态resolve后，执行resolve
-Promise.all = function (promises) {
-  return new Promise((resolve, reject) => {
-    if (promises.length === 0) {
-      resolve([]);
-    } else {
-      let result = [];
-      let index = 0;
-      for (let i = 0; i < promises.length; i++) {
-        promises[i].then(
-          (data) => {
-            result[i] = data;
-            if (++index === promises.length) {
-              resolve(result);
-            }
-          },
-          (err) => {
-            reject(err);
-            return;
-          }
-        );
+Promise.all = function(promises) {
+  return new Promise(function(resolve, reject) {
+    var results = [];
+    var count = 0;
+
+    function handle(i, value) {
+      results[i] = value;
+      count++;
+
+      if (count === promises.length) {
+        resolve(results);
       }
+    }
+
+    for (var i = 0; i < promises.length; i++) {
+      promises[i].then(handle.bind(null, i), reject);
     }
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.all,'all')
+bodavm.toolsFunc.safeFunc(Promise.all ,'all')
 
-//接受一个promise数组，当有一个promise状态resolve后，执行resolve
-Promise.race = function (promises) {
-  return new Promise((resolve, reject) => {
-    if (promises.length === 0) {
-      resolve();
-    } else {
-      let index = 0;
-      for (let i = 0; i < promises.length; i++) {
-        promises[i].then(
-          (data) => {
-            resolve(data);
-          },
-          (err) => {
-            reject(err);
-            return;
-          }
-        );
-      }
+Promise.race = function(promises) {
+  return new Promise(function(resolve, reject) {
+    for (var i = 0; i < promises.length; i++) {
+      promises[i].then(resolve, reject);
     }
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.race,'race')
+bodavm.toolsFunc.safeFunc(Promise.race ,'race')
 
-bodavm.toolsFunc.safeFunc(Promise)
+Promise.allSettled = function(promises) {
+  return new Promise(function(resolve) {
+    var results = [];
+    var count = 0;
+
+    function handle(i, status) {
+      return function(value) {
+        results[i] = { status: status, value: value };
+        count++;
+
+        if (count === promises.length) {
+          resolve(results);
+        }
+      };
+    }
+
+    for (var i = 0; i < promises.length; i++) {
+      promises[i].then(handle(i, 'fulfilled'), handle(i, 'rejected'));
+    }
+  });
+};
+bodavm.toolsFunc.safeFunc(Promise.allSettled ,'allSettled')
+
+// bodavm.toolsFunc.safeFunc(Promise)
 // globalMy.rename(Promise.prototype,"Promise")
 
 
 // OffscreenCanvasRenderingContext2D对象
-bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D'] = function OffscreenCanvasRenderingContext2D(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D'] = function OffscreenCanvasRenderingContext2D(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D'], "OffscreenCanvasRenderingContext2D");
 bodavm.toolsFunc.defineProperty('OffscreenCanvasRenderingContext2D', "canvas", {configurable:true, enumerable:true, get:function canvas (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D'].prototype, "OffscreenCanvasRenderingContext2D", "canvas_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('OffscreenCanvasRenderingContext2D', "globalAlpha", {configurable:true, enumerable:true, get:function globalAlpha (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D'].prototype, "OffscreenCanvasRenderingContext2D", "globalAlpha_get", arguments)}, set:function globalAlpha (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D'].prototype, "OffscreenCanvasRenderingContext2D", "globalAlpha_set", arguments)}},'prototype');
@@ -9884,7 +10301,7 @@ bodavm.toolsFunc.defineProperty('OffscreenCanvasRenderingContext2D', "rotate", {
 bodavm.toolsFunc.defineProperty('OffscreenCanvasRenderingContext2D', "strokeRect", {configurable:true, enumerable:true, writable:true, value:function strokeRect (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D'].prototype, "OffscreenCanvasRenderingContext2D", "strokeRect", arguments)}},'prototype');
 
 
-bodavm.memory.globalobj['DeprecatedStorageInfo'] = function DeprecatedStorageInfo() { }
+bodavm.memory.globalobj['DeprecatedStorageInfo'] = function DeprecatedStorageInfo() { this._boisinit=bodavm.config.isinit;}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['DeprecatedStorageInfo'] , "DeprecatedStorageInfo");
 
 bodavm.toolsFunc.defineProperty('DeprecatedStorageInfo' , "TEMPORARY", { configurable: false, enumerable: true, writable: false, value: 0 });
@@ -9894,10 +10311,10 @@ bodavm.toolsFunc.defineProperty('DeprecatedStorageInfo' , "PERSISTENT", { config
 bodavm.toolsFunc.defineProperty('DeprecatedStorageInfo' , "queryUsageAndQuota", { writable: true, enumerable: true, configurable: true, value: function queryUsageAndQuota() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['DeprecatedStorageInfo'] .prototype, "DeprecatedStorageInfo", "queryUsageAndQuota", arguments) } },'prototype');
 bodavm.toolsFunc.defineProperty('DeprecatedStorageInfo' , "requestQuota", { writable: true, enumerable: true, configurable: true, value: function requestQuota() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['DeprecatedStorageInfo'] .prototype, "DeprecatedStorageInfo", "requestQuota", arguments) } },'prototype');
 
-bodavm.memory.globalobj[ 'webkitStorageInfo']   = {}
+bodavm.memory.globalobj[ 'webkitStorageInfo']   = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'webkitStorageInfo'].__proto__ = bodavm.memory.globalobj['DeprecatedStorageInfo'].prototype
 
-bodavm.memory.globalobj['SpeechSynthesis'] = function SpeechSynthesis() { return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor") }
+bodavm.memory.globalobj['SpeechSynthesis'] = function SpeechSynthesis() {this._boisinit=bodavm.config.isinit; return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor") }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SpeechSynthesis'], "SpeechSynthesis");
 bodavm.toolsFunc.defineProperty('SpeechSynthesis', "cancel", { writable: true, enumerable: true, configurable: true, value: function cancel() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechSynthesis'] .prototype, "SpeechSynthesis", "cancel", arguments) } },'prototype');
 bodavm.toolsFunc.defineProperty('SpeechSynthesis', "getVoices", { writable: true, enumerable: true, configurable: true, value: function getVoices() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechSynthesis'] .prototype, "SpeechSynthesis", "getVoices", arguments) } },'prototype');
@@ -9911,11 +10328,11 @@ bodavm.toolsFunc.defineProperty('SpeechSynthesis', "onvoiceschanged", { configur
 
 
 // speechSynthesis对象
-bodavm.memory.globalobj[ 'speechSynthesis'] = {}
+bodavm.memory.globalobj[ 'speechSynthesis'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'speechSynthesis'].__proto__=bodavm.memory.globalobj['SpeechSynthesis'] .prototype;
 delete SpeechSynthesis
 // VisualViewport对象
-bodavm.memory.globalobj['VisualViewport'] = function VisualViewport(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['VisualViewport'] = function VisualViewport(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['VisualViewport'], "VisualViewport");
 bodavm.memory.globalobj['VisualViewport'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['VisualViewport'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -9929,7 +10346,7 @@ bodavm.toolsFunc.defineProperty('VisualViewport', "scale", {configurable:true, e
 bodavm.toolsFunc.defineProperty('VisualViewport', "onresize", {configurable:true, enumerable:true, get:function onresize (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['VisualViewport'].prototype, "VisualViewport", "onresize_get", arguments)}, set:function onresize (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['VisualViewport'].prototype, "VisualViewport", "onresize_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('VisualViewport', "onscroll", {configurable:true, enumerable:true, get:function onscroll (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['VisualViewport'].prototype, "VisualViewport", "onscroll_get", arguments)}, set:function onscroll (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['VisualViewport'].prototype, "VisualViewport", "onscroll_set", arguments)}},'prototype');
 
-bodavm.memory.globalobj[ 'visualViewport']={}
+bodavm.memory.globalobj[ 'visualViewport']={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'visualViewport'].__proto__ = bodavm.memory.globalobj['VisualViewport'] .prototype
 
 
@@ -9942,7 +10359,7 @@ bodavm.memory.globalobj['BeforeInstallPromptEvent'] = function BeforeInstallProm
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BeforeInstallPromptEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function.")}
     if (arguments.length <1){
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BeforeInstallPromptEvent': 1 argument required, but only 0 present.")}
-
+        this._boisinit=bodavm.config.isinit;
     }
 
     
@@ -9955,31 +10372,33 @@ bodavm.toolsFunc.defineProperty('BeforeInstallPromptEvent', "prompt", {configura
 
 // BarProp对象
 bodavm.memory.globalobj['BarProp'] = function BarProp(){
-    
+    this._boisinit=bodavm.config.isinit;
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BarProp'], "BarProp");
 bodavm.toolsFunc.defineProperty('BarProp', "visible", {configurable:true, enumerable:true, get:function visible (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BarProp'].prototype, "BarProp", "visible_get", arguments)}, set:undefined},'prototype');
 
 // locationbar对象
-bodavm.memory.globalobj['locationbar'] = {}
+bodavm.memory.globalobj['locationbar'] = {
+    _boisinit:bodavm.config.isinit
+}
 bodavm.memory.globalobj['locationbar'].__proto__=bodavm.memory.globalobj['BarProp'].prototype;
 
-bodavm.memory.globalobj['menubar'] ={}
+bodavm.memory.globalobj['menubar'] ={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj['menubar'].__proto__= bodavm.memory.globalobj['BarProp'].prototype;
 
-bodavm.memory.globalobj['statusbar']  ={}
+bodavm.memory.globalobj['statusbar']  ={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj['statusbar'].__proto__=bodavm.memory.globalobj['BarProp'].prototype
 
-bodavm.memory.globalobj['toolbar']  ={}
+bodavm.memory.globalobj['toolbar']  ={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj['toolbar'].__proto__=bodavm.memory.globalobj['BarProp'].prototype
 
-bodavm.memory.globalobj['personalbar']  ={}
+bodavm.memory.globalobj['personalbar']  ={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj['personalbar'].__proto__=bodavm.memory.globalobj['BarProp'].prototype
 
-bodavm.memory.globalobj['scrollbars']  ={}
+bodavm.memory.globalobj['scrollbars']  ={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj['scrollbars'].__proto__=bodavm.memory.globalobj['BarProp'].prototype
 // BaseAudioContext对象
-bodavm.memory.globalobj['BaseAudioContext'] = function BaseAudioContext(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['BaseAudioContext'] = function BaseAudioContext(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BaseAudioContext'], "BaseAudioContext");
 bodavm.memory.globalobj['BaseAudioContext'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['BaseAudioContext'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -10011,7 +10430,7 @@ bodavm.toolsFunc.defineProperty('BaseAudioContext', "decodeAudioData", {configur
 bodavm.toolsFunc.defineProperty('BaseAudioContext', "audioWorklet", {configurable:true, enumerable:true, get:function audioWorklet (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BaseAudioContext'].prototype, "BaseAudioContext", "audioWorklet_get", arguments)}, set:undefined},'prototype');
 
 // BluetoothUUID对象
-bodavm.memory.globalobj['BluetoothUUID'] = function BluetoothUUID(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['BluetoothUUID'] = function BluetoothUUID(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BluetoothUUID'], "BluetoothUUID");
 bodavm.toolsFunc.defineProperty('BluetoothUUID', "canonicalUUID", {configurable:true, enumerable:true, writable:true, value:function canonicalUUID (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].prototype, "BluetoothUUID", "canonicalUUID", arguments)}});
 bodavm.toolsFunc.defineProperty('BluetoothUUID', "getCharacteristic", {configurable:true, enumerable:true, writable:true, value:function getCharacteristic (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BluetoothUUID'].prototype, "BluetoothUUID", "getCharacteristic", arguments)}});
@@ -10020,12 +10439,12 @@ bodavm.toolsFunc.defineProperty('BluetoothUUID', "getService", {configurable:tru
 
 
 
-bodavm.memory.globalobj['StyleMedia'] = function StyleMedia() { return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor") }
+bodavm.memory.globalobj['StyleMedia'] = function StyleMedia() { this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor") }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['StyleMedia'] , "StyleMedia");
 bodavm.toolsFunc.defineProperty('StyleMedia', "matchMedium", { configurable: true, enumerable: true, get: function matchMedium() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['StyleMedia'].prototype, "StyleMedia", "matchMedium", arguments) }, set: undefined },'prototype');
 
 // styleMedia对象
-bodavm.memory.globalobj[ 'styleMedia']= {}
+bodavm.memory.globalobj[ 'styleMedia']= { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'styleMedia'].__proto__=bodavm.memory.globalobj['StyleMedia'] .prototype;
 
 // Audio对象
@@ -10034,29 +10453,31 @@ bodavm.memory.globalobj['Audio'] = function Audio(){
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Audio': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
 
-
+    this._boisinit=bodavm.config.isinit;
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Audio'], "Audio");
 bodavm.memory.globalobj['Audio'].prototype.__proto__=bodavm.memory.globalobj['HTMLMediaElement'].prototype;
 
 // Crypto对象
-bodavm.memory.globalobj['Crypto'] = function Crypto(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Crypto'] = function Crypto(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Crypto'], "Crypto");
 bodavm.toolsFunc.defineProperty('Crypto', "getRandomValues", {configurable:true, enumerable:true, writable:true, value:function getRandomValues (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Crypto'].prototype, "Crypto", "getRandomValues", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Crypto', "subtle", {configurable:true, enumerable:true, get:function subtle (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Crypto'].prototype, "Crypto", "subtle_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('Crypto', "randomUUID", {configurable:true, enumerable:true, writable:true, value:function randomUUID (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Crypto'].prototype, "Crypto", "randomUUID", arguments)}},'prototype');
 
 
-bodavm.memory.globalobj[ 'crypto']  ={}
+bodavm.memory.globalobj[ 'crypto']  ={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'crypto'].__proto__ = bodavm.memory.globalobj['Crypto'] .prototype
 
 // HTMLAudioElement对象
 bodavm.memory.globalobj['HTMLAudioElement'] = function HTMLAudioElement(){
+    this._boisinit=bodavm.config.isinit;
     if (!(this instanceof HTMLAudioElement)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'HTMLAudioElement': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
     
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")
+
 
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLAudioElement'], "HTMLAudioElement");
@@ -10064,13 +10485,13 @@ bodavm.memory.globalobj['HTMLAudioElement'].prototype.__proto__=bodavm.memory.gl
 bodavm.memory.globalobj['HTMLAudioElement'].__proto__=bodavm.memory.globalobj['HTMLMediaElement'];
 
 // CDATASection对象
-bodavm.memory.globalobj['CDATASection'] = function CDATASection(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CDATASection'] = function CDATASection(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CDATASection'], "CDATASection");
 bodavm.memory.globalobj['CDATASection'].prototype.__proto__=bodavm.memory.globalobj['Text'].prototype;
 bodavm.memory.globalobj['CDATASection'].__proto__=bodavm.memory.globalobj['Text'];
 
 // CredentialsContainer对象
-bodavm.memory.globalobj['CredentialsContainer'] = function CredentialsContainer(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CredentialsContainer'] = function CredentialsContainer(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CredentialsContainer'], "CredentialsContainer");
 bodavm.toolsFunc.defineProperty('CredentialsContainer', "create", {configurable:true, enumerable:true, writable:true, value:function create (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CredentialsContainer'].prototype, "CredentialsContainer", "create", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('CredentialsContainer', "get", {configurable:true, enumerable:true, writable:true, value:function get (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CredentialsContainer'].prototype, "CredentialsContainer", "get", arguments)}},'prototype');
@@ -10082,7 +10503,7 @@ bodavm.memory.globalobj['Comment'] = function Comment(){
     if (!(this instanceof Comment)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Comment': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }
-
+    this._boisinit=bodavm.config.isinit;
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Comment'], "Comment");
 bodavm.memory.globalobj['Comment'].prototype.__proto__=bodavm.memory.globalobj['CharacterData'].prototype;
@@ -10090,6 +10511,7 @@ bodavm.memory.globalobj['Comment'].__proto__=bodavm.memory.globalobj['CharacterD
 
 // DocumentFragment对象
 bodavm.memory.globalobj['DocumentFragment'] = function DocumentFragment(){
+    this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Document)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DocumentFragment': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
@@ -10109,7 +10531,7 @@ bodavm.toolsFunc.defineProperty('DocumentFragment', "querySelectorAll", {configu
 bodavm.toolsFunc.defineProperty('DocumentFragment', "replaceChildren", {configurable:true, enumerable:true, writable:true, value:function replaceChildren (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['DocumentFragment'].prototype, "DocumentFragment", "replaceChildren", arguments)}},'prototype');
 
 // DocumentType对象
-bodavm.memory.globalobj['DocumentType'] = function DocumentType(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['DocumentType'] = function DocumentType(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['DocumentType'], "DocumentType");
 bodavm.memory.globalobj['DocumentType'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['DocumentType'].__proto__=bodavm.memory.globalobj['Node'];
@@ -10126,13 +10548,13 @@ bodavm.memory.globalobj['DOMParser'] = function DOMParser(){
     if (!(this instanceof Document)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DOMParser': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
-
+    this._boisinit=bodavm.config.isinit;
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['DOMParser'], "DOMParser");
 bodavm.toolsFunc.defineProperty('DOMParser', "parseFromString", {configurable:true, enumerable:true, writable:true, value:function parseFromString (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['DOMParser'].prototype, "DOMParser", "parseFromString", arguments)}},'prototype');
 
 // Bluetooth对象
-bodavm.memory.globalobj['Bluetooth'] = function Bluetooth(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Bluetooth'] = function Bluetooth(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Bluetooth'], "Bluetooth");
 bodavm.memory.globalobj['Bluetooth'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Bluetooth'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -10140,18 +10562,18 @@ bodavm.toolsFunc.defineProperty('Bluetooth', "getAvailability", {configurable:tr
 bodavm.toolsFunc.defineProperty('Bluetooth', "requestDevice", {configurable:true, enumerable:true, writable:true, value:function requestDevice (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Bluetooth'].prototype, "Bluetooth", "requestDevice", arguments)}},'prototype');
 
 // External对象
-bodavm.memory.globalobj['External'] = function External(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['External'] = function External(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['External'], "External");
 bodavm.toolsFunc.defineProperty('External', "AddSearchProvider", {configurable:true, enumerable:true, writable:true, value:function AddSearchProvider (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['External'].prototype, "External", "AddSearchProvider", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('External', "IsSearchProviderInstalled", {configurable:true, enumerable:true, writable:true, value:function IsSearchProviderInstalled (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['External'].prototype, "External", "IsSearchProviderInstalled", arguments)}},'prototype');
 
-bodavm.memory.globalobj[ 'external']   = {}
+bodavm.memory.globalobj[ 'external']   = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'external'].__proto__=bodavm.memory.globalobj['External'].prototype;
 
 
 
 // PointerEvent对象
-bodavm.memory.globalobj['PointerEvent']  = function PointerEvent(){
+bodavm.memory.globalobj['PointerEvent']  = function PointerEvent(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof PointerEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PointerEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };   
@@ -10189,7 +10611,7 @@ bodavm.toolsFunc.defineProperty('PointerEvent', "getCoalescedEvents", {configura
 bodavm.toolsFunc.defineProperty('PointerEvent', "getPredictedEvents", {configurable:true, enumerable:true, writable:true, value:function getPredictedEvents (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PointerEvent'].prototype, "PointerEvent", "getPredictedEvents", arguments)}},'prototype');
 
 // WebSocket对象
-bodavm.memory.globalobj['WebSocket'] = function WebSocket(){
+bodavm.memory.globalobj['WebSocket'] = function WebSocket(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof WebSocket)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WebSocket': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 
@@ -10228,7 +10650,7 @@ bodavm.toolsFunc.defineProperty('WebSocket', "send", {configurable:true, enumera
 
 
 // SourceBuffer对象
-bodavm.memory.globalobj['SourceBuffer'] = function SourceBuffer(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SourceBuffer'] = function SourceBuffer(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SourceBuffer'], "SourceBuffer");
 bodavm.memory.globalobj['SourceBuffer'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['SourceBuffer'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -10249,7 +10671,7 @@ bodavm.toolsFunc.defineProperty('SourceBuffer', "changeType", {configurable:true
 bodavm.toolsFunc.defineProperty('SourceBuffer', "remove", {configurable:true, enumerable:true, writable:true, value:function remove (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SourceBuffer'].prototype, "SourceBuffer", "remove", arguments)}},'prototype');
 
 // DOMStringList对象
-bodavm.memory.globalobj['DOMStringList'] = function DOMStringList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['DOMStringList'] = function DOMStringList(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['DOMStringList'], "DOMStringList");
 bodavm.toolsFunc.defineProperty('DOMStringList', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['DOMStringList'].prototype, "DOMStringList", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('DOMStringList', "contains", {configurable:true, enumerable:true, writable:true, value:function contains (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['DOMStringList'].prototype, "DOMStringList", "contains", arguments)}},'prototype');
@@ -10259,7 +10681,7 @@ bodavm.toolsFunc.defineProperty('DOMStringList', "item", {configurable:true, enu
 bodavm.memory.globalobj['Headers'] = function Headers(){
     if (!(this instanceof Headers)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Headers': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
-    };
+    };this._boisinit=bodavm.config.isinit;
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Headers'], "Headers");
 bodavm.toolsFunc.defineProperty('Headers', "append", {configurable:true, enumerable:true, writable:true, value:function append (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "append", arguments)}},'prototype');
@@ -10273,7 +10695,7 @@ bodavm.toolsFunc.defineProperty('Headers', "keys", {configurable:true, enumerabl
 bodavm.toolsFunc.defineProperty('Headers', "values", {configurable:true, enumerable:true, writable:true, value:function values (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "values", arguments)}},'prototype');
 
 // IDBObjectStore对象
-bodavm.memory.globalobj['IDBObjectStore'] = function IDBObjectStore(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBObjectStore'] = function IDBObjectStore(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBObjectStore'], "IDBObjectStore");
 bodavm.toolsFunc.defineProperty('IDBObjectStore', "name", {configurable:true, enumerable:true, get:function name (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBObjectStore'].prototype, "IDBObjectStore", "name_get", arguments)}, set:function name (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBObjectStore'].prototype, "IDBObjectStore", "name_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('IDBObjectStore', "keyPath", {configurable:true, enumerable:true, get:function keyPath (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBObjectStore'].prototype, "IDBObjectStore", "keyPath_get", arguments)}, set:undefined},'prototype');
@@ -10296,7 +10718,7 @@ bodavm.toolsFunc.defineProperty('IDBObjectStore', "openKeyCursor", {configurable
 bodavm.toolsFunc.defineProperty('IDBObjectStore', "put", {configurable:true, enumerable:true, writable:true, value:function put (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBObjectStore'].prototype, "IDBObjectStore", "put", arguments)}},'prototype');
 
 // IDBTransaction对象
-bodavm.memory.globalobj['IDBTransaction'] = function IDBTransaction(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBTransaction'] = function IDBTransaction(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBTransaction'], "IDBTransaction");
 bodavm.memory.globalobj['IDBTransaction'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['IDBTransaction'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -10313,7 +10735,7 @@ bodavm.toolsFunc.defineProperty('IDBTransaction', "commit", {configurable:true, 
 bodavm.toolsFunc.defineProperty('IDBTransaction', "objectStore", {configurable:true, enumerable:true, writable:true, value:function objectStore (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBTransaction'].prototype, "IDBTransaction", "objectStore", arguments)}},'prototype');
 
 // IDBVersionChangeEvent对象
-bodavm.memory.globalobj['IDBVersionChangeEvent'] = function IDBVersionChangeEvent(){
+bodavm.memory.globalobj['IDBVersionChangeEvent'] = function IDBVersionChangeEvent(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof IDBVersionChangeEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'IDBVersionChangeEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
@@ -10330,7 +10752,7 @@ bodavm.toolsFunc.defineProperty('IDBVersionChangeEvent', "dataLoss", {configurab
 bodavm.toolsFunc.defineProperty('IDBVersionChangeEvent', "dataLossMessage", {configurable:true, enumerable:true, get:function dataLossMessage (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBVersionChangeEvent'].prototype, "IDBVersionChangeEvent", "dataLossMessage_get", arguments)}, set:undefined},'prototype');
 
 // TextTrackList对象
-bodavm.memory.globalobj['TextTrackList'] = function TextTrackList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['TextTrackList'] = function TextTrackList(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['TextTrackList'], "TextTrackList");
 bodavm.memory.globalobj['TextTrackList'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['TextTrackList'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -10341,7 +10763,7 @@ bodavm.toolsFunc.defineProperty('TextTrackList', "onremovetrack", {configurable:
 bodavm.toolsFunc.defineProperty('TextTrackList', "getTrackById", {configurable:true, enumerable:true, writable:true, value:function getTrackById (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['TextTrackList'].prototype, "TextTrackList", "getTrackById", arguments)}},'prototype');
 
 // SpeechSynthesisUtterance对象
-bodavm.memory.globalobj['SpeechSynthesisUtterance'] = function SpeechSynthesisUtterance(){
+bodavm.memory.globalobj['SpeechSynthesisUtterance'] = function SpeechSynthesisUtterance(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof SpeechSynthesisUtterance)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'SpeechSynthesisUtterance': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 
@@ -10364,7 +10786,7 @@ bodavm.toolsFunc.defineProperty('SpeechSynthesisUtterance', "onmark", {configura
 bodavm.toolsFunc.defineProperty('SpeechSynthesisUtterance', "onboundary", {configurable:true, enumerable:true, get:function onboundary (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechSynthesisUtterance'].prototype, "SpeechSynthesisUtterance", "onboundary_get", arguments)}, set:function onboundary (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechSynthesisUtterance'].prototype, "SpeechSynthesisUtterance", "onboundary_set", arguments)}},'prototype');
 
 // MediaEncryptedEvent对象
-bodavm.memory.globalobj['MediaEncryptedEvent'] = function MediaEncryptedEvent(){
+bodavm.memory.globalobj['MediaEncryptedEvent'] = function MediaEncryptedEvent(){this._boisinit=bodavm.config.isinit;
     
     if (!(this instanceof MediaEncryptedEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaEncryptedEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
@@ -10380,13 +10802,14 @@ bodavm.toolsFunc.defineProperty('MediaEncryptedEvent', "initDataType", {configur
 bodavm.toolsFunc.defineProperty('MediaEncryptedEvent', "initData", {configurable:true, enumerable:true, get:function initData (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaEncryptedEvent'].prototype, "MediaEncryptedEvent", "initData_get", arguments)}, set:undefined},'prototype');
 
 // MutationObserver对象
-bodavm.memory.globalobj['MutationObserver'] = function MutationObserver(){
+bodavm.memory.globalobj['MutationObserver'] = function MutationObserver(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof MutationObserver)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MutationObserver': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
     if (arguments.length <1){
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MutationObserver': 1 argument required, but only 0 present.")}
-
+    
+    this._boarg=new bodaobj.window.MutationObserver(arguments[0])
     }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MutationObserver'], "MutationObserver");
 bodavm.toolsFunc.defineProperty('MutationObserver', "disconnect", {configurable:true, enumerable:true, writable:true, value:function disconnect (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MutationObserver'].prototype, "MutationObserver", "disconnect", arguments)}},'prototype');
@@ -10394,7 +10817,7 @@ bodavm.toolsFunc.defineProperty('MutationObserver', "observe", {configurable:tru
 bodavm.toolsFunc.defineProperty('MutationObserver', "takeRecords", {configurable:true, enumerable:true, writable:true, value:function takeRecords (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MutationObserver'].prototype, "MutationObserver", "takeRecords", arguments)}},'prototype');
 
 // NamedNodeMap对象
-bodavm.memory.globalobj['NamedNodeMap'] = function NamedNodeMap(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['NamedNodeMap'] = function NamedNodeMap(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['NamedNodeMap'], "NamedNodeMap");
 bodavm.toolsFunc.defineProperty('NamedNodeMap', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NamedNodeMap'].prototype, "NamedNodeMap", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('NamedNodeMap', "getNamedItem", {configurable:true, enumerable:true, writable:true, value:function getNamedItem (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NamedNodeMap'].prototype, "NamedNodeMap", "getNamedItem", arguments)}},'prototype');
@@ -10406,7 +10829,7 @@ bodavm.toolsFunc.defineProperty('NamedNodeMap', "setNamedItem", {configurable:tr
 bodavm.toolsFunc.defineProperty('NamedNodeMap', "setNamedItemNS", {configurable:true, enumerable:true, writable:true, value:function setNamedItemNS (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NamedNodeMap'].prototype, "NamedNodeMap", "setNamedItemNS", arguments)}},'prototype');
 
 // NodeList对象
-bodavm.memory.globalobj['NodeList'] = function NodeList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['NodeList'] = function NodeList(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['NodeList'], "NodeList");
 bodavm.toolsFunc.defineProperty('NodeList', "entries", {configurable:true, enumerable:true, writable:true, value:function entries (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NodeList'].prototype, "NodeList", "entries", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('NodeList', "keys", {configurable:true, enumerable:true, writable:true, value:function keys (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NodeList'].prototype, "NodeList", "keys", arguments)}},'prototype');
@@ -10417,7 +10840,7 @@ bodavm.toolsFunc.defineProperty('NodeList', "item", {configurable:true, enumerab
 
 
 // OfflineAudioContext对象
-bodavm.memory.globalobj['OfflineAudioContext'] = function OfflineAudioContext(){
+bodavm.memory.globalobj['OfflineAudioContext'] = function OfflineAudioContext(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof OfflineAudioContext)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'OfflineAudioContext': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
@@ -10435,7 +10858,7 @@ bodavm.toolsFunc.defineProperty('OfflineAudioContext', "startRendering", {config
 bodavm.toolsFunc.defineProperty('OfflineAudioContext', "suspend", {configurable:true, enumerable:true, writable:true, value:function suspend (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['OfflineAudioContext'].prototype, "OfflineAudioContext", "suspend", arguments)}},'prototype');
 
 // Path2D对象
-bodavm.memory.globalobj['Path2D'] = function Path2D(){
+bodavm.memory.globalobj['Path2D'] = function Path2D(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Path2D)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Path2D': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };   
@@ -10454,18 +10877,18 @@ bodavm.toolsFunc.defineProperty('Path2D', "quadraticCurveTo", {configurable:true
 bodavm.toolsFunc.defineProperty('Path2D', "rect", {configurable:true, enumerable:true, writable:true, value:function rect (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Path2D'].prototype, "Path2D", "rect", arguments)}},'prototype');
 
 // LockManager对象
-bodavm.memory.globalobj['LockManager'] = function LockManager(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['LockManager'] = function LockManager(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['LockManager'], "LockManager");
 bodavm.toolsFunc.defineProperty('LockManager', "query", {configurable:true, enumerable:true, writable:true, value:function query (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['LockManager'].prototype, "LockManager", "query", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('LockManager', "request", {configurable:true, enumerable:true, writable:true, value:function request (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['LockManager'].prototype, "LockManager", "request", arguments)}},'prototype');
 
 // XPathExpression对象
-bodavm.memory.globalobj['XPathExpression'] = function XPathExpression(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['XPathExpression'] = function XPathExpression(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['XPathExpression'], "XPathExpression");
 bodavm.toolsFunc.defineProperty('XPathExpression', "evaluate", {configurable:true, enumerable:true, writable:true, value:function evaluate (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['XPathExpression'].prototype, "XPathExpression", "evaluate", arguments)}},'prototype');
 
 // Performance对象
-bodavm.memory.globalobj['Performance'] = function Performance(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Performance'] = function Performance(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Performance'], "Performance");
 bodavm.memory.globalobj['Performance'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Performance'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -10488,12 +10911,12 @@ bodavm.toolsFunc.defineProperty('Performance', "memory", {configurable:true, enu
 bodavm.toolsFunc.defineProperty('Performance', "eventCounts", {configurable:true, enumerable:true, get:function eventCounts (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Performance'].prototype, "Performance", "eventCounts_get", arguments)}, set:undefined},'prototype');
 
 // performance对象
-bodavm.memory.globalobj[ 'performance']  = {}
+bodavm.memory.globalobj[ 'performance']  = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'performance'].__proto__=bodavm.memory.globalobj['Performance'].prototype;
 
 
 // ScreenOrientation对象
-bodavm.memory.globalobj['ScreenOrientation'] = function ScreenOrientation(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['ScreenOrientation'] = function ScreenOrientation(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['ScreenOrientation'], "ScreenOrientation");
 bodavm.memory.globalobj['ScreenOrientation'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['ScreenOrientation'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -10504,7 +10927,7 @@ bodavm.toolsFunc.defineProperty('ScreenOrientation', "lock", {configurable:true,
 bodavm.toolsFunc.defineProperty('ScreenOrientation', "unlock", {configurable:true, enumerable:true, writable:true, value:function unlock (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['ScreenOrientation'].prototype, "ScreenOrientation", "unlock", arguments)}},'prototype');
 
 // PerformanceEntry对象
-bodavm.memory.globalobj['PerformanceEntry'] = function PerformanceEntry(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['PerformanceEntry'] = function PerformanceEntry(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['PerformanceEntry'], "PerformanceEntry");
 bodavm.toolsFunc.defineProperty('PerformanceEntry', "name", {configurable:true, enumerable:true, get:function name (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceEntry'].prototype, "PerformanceEntry", "name_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('PerformanceEntry', "entryType", {configurable:true, enumerable:true, get:function entryType (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceEntry'].prototype, "PerformanceEntry", "entryType_get", arguments)}, set:undefined},'prototype');
@@ -10513,18 +10936,45 @@ bodavm.toolsFunc.defineProperty('PerformanceEntry', "duration", {configurable:tr
 bodavm.toolsFunc.defineProperty('PerformanceEntry', "toJSON", {configurable:true, enumerable:true, writable:true, value:function toJSON (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceEntry'].prototype, "PerformanceEntry", "toJSON", arguments)}},'prototype');
 
 // PerformancePaintTiming对象
-bodavm.memory.globalobj['PerformancePaintTiming'] = function PerformancePaintTiming(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['PerformancePaintTiming'] = function PerformancePaintTiming(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['PerformancePaintTiming'], "PerformancePaintTiming");
 bodavm.memory.globalobj['PerformancePaintTiming'].prototype.__proto__=bodavm.memory.globalobj['PerformanceEntry'].prototype;
 bodavm.memory.globalobj['PerformancePaintTiming'].__proto__=bodavm.memory.globalobj['PerformanceEntry'];
 
+// PerformanceResourceTiming对象
+bodavm.memory.globalobj['PerformanceResourceTiming'] = function PerformanceResourceTiming(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['PerformanceResourceTiming'], "PerformanceResourceTiming");
+bodavm.memory.globalobj['PerformanceResourceTiming'].prototype.__proto__=bodavm.memory.globalobj['PerformanceEntry'].prototype;
+bodavm.memory.globalobj['PerformanceResourceTiming'].__proto__=bodavm.memory.globalobj['PerformanceEntry'];
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "initiatorType", {configurable:true, enumerable:true, get:function initiatorType (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "initiatorType_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "nextHopProtocol", {configurable:true, enumerable:true, get:function nextHopProtocol (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "nextHopProtocol_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "workerStart", {configurable:true, enumerable:true, get:function workerStart (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "workerStart_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "redirectStart", {configurable:true, enumerable:true, get:function redirectStart (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "redirectStart_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "redirectEnd", {configurable:true, enumerable:true, get:function redirectEnd (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "redirectEnd_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "fetchStart", {configurable:true, enumerable:true, get:function fetchStart (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "fetchStart_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "domainLookupStart", {configurable:true, enumerable:true, get:function domainLookupStart (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "domainLookupStart_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "domainLookupEnd", {configurable:true, enumerable:true, get:function domainLookupEnd (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "domainLookupEnd_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "connectStart", {configurable:true, enumerable:true, get:function connectStart (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "connectStart_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "connectEnd", {configurable:true, enumerable:true, get:function connectEnd (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "connectEnd_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "secureConnectionStart", {configurable:true, enumerable:true, get:function secureConnectionStart (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "secureConnectionStart_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "requestStart", {configurable:true, enumerable:true, get:function requestStart (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "requestStart_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "responseStart", {configurable:true, enumerable:true, get:function responseStart (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "responseStart_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "responseEnd", {configurable:true, enumerable:true, get:function responseEnd (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "responseEnd_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "transferSize", {configurable:true, enumerable:true, get:function transferSize (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "transferSize_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "encodedBodySize", {configurable:true, enumerable:true, get:function encodedBodySize (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "encodedBodySize_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "decodedBodySize", {configurable:true, enumerable:true, get:function decodedBodySize (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "decodedBodySize_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "serverTiming", {configurable:true, enumerable:true, get:function serverTiming (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "serverTiming_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "toJSON", {configurable:true, enumerable:true, writable:true, value:function toJSON (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "toJSON", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "renderBlockingStatus", {configurable:true, enumerable:true, get:function renderBlockingStatus (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "renderBlockingStatus_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('PerformanceResourceTiming', "responseStatus", {configurable:true, enumerable:true, get:function responseStatus (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PerformanceResourceTiming'].prototype, "PerformanceResourceTiming", "responseStatus_get", arguments)}, set:undefined},'prototype');
+
 // Permissions对象
-bodavm.memory.globalobj['Permissions'] = function Permissions(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Permissions'] = function Permissions(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Permissions'], "Permissions");
 bodavm.toolsFunc.defineProperty('Permissions', "query", {configurable:true, enumerable:true, writable:true, value:function query (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Permissions'].prototype, "Permissions", "query", arguments)}},'prototype');
 
 // PermissionStatus对象
-bodavm.memory.globalobj['PermissionStatus'] = function PermissionStatus(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['PermissionStatus'] = function PermissionStatus(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['PermissionStatus'], "PermissionStatus");
 bodavm.memory.globalobj['PermissionStatus'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['PermissionStatus'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -10533,7 +10983,7 @@ bodavm.toolsFunc.defineProperty('PermissionStatus', "state", {configurable:true,
 bodavm.toolsFunc.defineProperty('PermissionStatus', "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PermissionStatus'].prototype, "PermissionStatus", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PermissionStatus'].prototype, "PermissionStatus", "onchange_set", arguments)}},'prototype');
 
 // Request对象
-bodavm.memory.globalobj['Request'] = function Request(){
+bodavm.memory.globalobj['Request'] = function Request(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Request)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Request': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 
@@ -10566,7 +11016,7 @@ bodavm.toolsFunc.defineProperty('Request', "json", {configurable:true, enumerabl
 bodavm.toolsFunc.defineProperty('Request', "text", {configurable:true, enumerable:true, writable:true, value:function text (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Request'].prototype, "Request", "text", arguments)}},'prototype');
 
 // SVGElement对象
-bodavm.memory.globalobj['SVGElement'] = function SVGElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGElement'] = function SVGElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGElement'], "SVGElement");
 bodavm.memory.globalobj['SVGElement'].prototype.__proto__=bodavm.memory.globalobj['Element'].prototype;
 bodavm.memory.globalobj['SVGElement'].__proto__=bodavm.memory.globalobj['Element'];
@@ -10677,7 +11127,7 @@ bodavm.toolsFunc.defineProperty('SVGElement', "onbeforematch", {configurable:tru
 
 // DeviceOrientationEvent对象
 bodavm.memory.globalobj['DeviceOrientationEvent'] = function DeviceOrientationEvent() {
-
+    this._boisinit=bodavm.config.isinit;
     if (!(this instanceof DeviceOrientationEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DeviceOrientationEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
@@ -10695,7 +11145,7 @@ bodavm.toolsFunc.defineProperty('DeviceOrientationEvent', "gamma", { configurabl
 bodavm.toolsFunc.defineProperty('DeviceOrientationEvent', "absolute", { configurable: true, enumerable: true, get: function absolute() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['DeviceOrientationEvent'].prototype, "DeviceOrientationEvent", "absolute_get", arguments) }, set: undefined }, 'prototype');
 
 // PresentationConnectionCloseEvent对象
-bodavm.memory.globalobj['PresentationConnectionCloseEvent'] = function PresentationConnectionCloseEvent(){
+bodavm.memory.globalobj['PresentationConnectionCloseEvent'] = function PresentationConnectionCloseEvent(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof PresentationConnectionCloseEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PresentationConnectionCloseEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 
@@ -10710,7 +11160,7 @@ bodavm.toolsFunc.defineProperty('PresentationConnectionCloseEvent', "reason", {c
 bodavm.toolsFunc.defineProperty('PresentationConnectionCloseEvent', "message", {configurable:true, enumerable:true, get:function message (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PresentationConnectionCloseEvent'].prototype, "PresentationConnectionCloseEvent", "message_get", arguments)}, set:undefined},'prototype');
 
 // SVGGraphicsElement对象
-bodavm.memory.globalobj['SVGGraphicsElement'] = function SVGGraphicsElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGGraphicsElement'] = function SVGGraphicsElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGGraphicsElement'], "SVGGraphicsElement");
 bodavm.memory.globalobj['SVGGraphicsElement'].prototype.__proto__=bodavm.memory.globalobj['SVGElement'].prototype;
 bodavm.memory.globalobj['SVGGraphicsElement'].__proto__=bodavm.memory.globalobj['SVGElement'];
@@ -10724,13 +11174,13 @@ bodavm.toolsFunc.defineProperty('SVGGraphicsElement', "getCTM", {configurable:tr
 bodavm.toolsFunc.defineProperty('SVGGraphicsElement', "getScreenCTM", {configurable:true, enumerable:true, writable:true, value:function getScreenCTM (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SVGGraphicsElement'].prototype, "SVGGraphicsElement", "getScreenCTM", arguments)}},'prototype');
 
 // SVGGElement对象
-bodavm.memory.globalobj['SVGGElement'] = function SVGGElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGGElement'] = function SVGGElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGGElement'], "SVGGElement");
 bodavm.memory.globalobj['SVGGElement'].prototype.__proto__=bodavm.memory.globalobj['SVGGraphicsElement'].prototype;
 bodavm.memory.globalobj['SVGGElement'].__proto__=bodavm.memory.globalobj['SVGGraphicsElement'];
 
 // SVGPatternElement对象
-bodavm.memory.globalobj['SVGPatternElement'] = function SVGPatternElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGPatternElement'] = function SVGPatternElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGPatternElement'], "SVGPatternElement");
 bodavm.memory.globalobj['SVGPatternElement'].prototype.__proto__=bodavm.memory.globalobj['SVGElement'].prototype;
 bodavm.memory.globalobj['SVGPatternElement'].__proto__=bodavm.memory.globalobj['SVGElement'];
@@ -10748,7 +11198,7 @@ bodavm.toolsFunc.defineProperty('SVGPatternElement', "requiredExtensions", {conf
 bodavm.toolsFunc.defineProperty('SVGPatternElement', "systemLanguage", {configurable:true, enumerable:true, get:function systemLanguage (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SVGPatternElement'].prototype, "SVGPatternElement", "systemLanguage_get", arguments)}, set:undefined},'prototype');
 
 // SVGGeometryElement对象
-bodavm.memory.globalobj['SVGGeometryElement'] = function SVGGeometryElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGGeometryElement'] = function SVGGeometryElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGGeometryElement'], "SVGGeometryElement");
 bodavm.memory.globalobj['SVGGeometryElement'].prototype.__proto__=bodavm.memory.globalobj['SVGGraphicsElement'].prototype;
 bodavm.memory.globalobj['SVGGeometryElement'].__proto__=bodavm.memory.globalobj['SVGGraphicsElement'];
@@ -10759,13 +11209,13 @@ bodavm.toolsFunc.defineProperty('SVGGeometryElement', "isPointInFill", {configur
 bodavm.toolsFunc.defineProperty('SVGGeometryElement', "isPointInStroke", {configurable:true, enumerable:true, writable:true, value:function isPointInStroke (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SVGGeometryElement'].prototype, "SVGGeometryElement", "isPointInStroke", arguments)}},'prototype');
 
 // SVGPathElement对象
-bodavm.memory.globalobj['SVGPathElement'] = function SVGPathElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGPathElement'] = function SVGPathElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGPathElement'], "SVGPathElement");
 bodavm.memory.globalobj['SVGPathElement'].prototype.__proto__=bodavm.memory.globalobj['SVGGeometryElement'].prototype;
 bodavm.memory.globalobj['SVGPathElement'].__proto__=bodavm.memory.globalobj['SVGGeometryElement'];
 
 // SVGSVGElement对象
-bodavm.memory.globalobj['SVGSVGElement'] = function SVGSVGElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGSVGElement'] = function SVGSVGElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGSVGElement'], "SVGSVGElement");
 bodavm.memory.globalobj['SVGSVGElement'].prototype.__proto__=bodavm.memory.globalobj['SVGGraphicsElement'].prototype;
 bodavm.memory.globalobj['SVGSVGElement'].__proto__=bodavm.memory.globalobj['SVGGraphicsElement'];
@@ -10809,7 +11259,7 @@ bodavm.toolsFunc.defineProperty('SVGSVGElement', "unsuspendRedraw", {configurabl
 bodavm.toolsFunc.defineProperty('SVGSVGElement', "unsuspendRedrawAll", {configurable:true, enumerable:true, writable:true, value:function unsuspendRedrawAll (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SVGSVGElement'].prototype, "SVGSVGElement", "unsuspendRedrawAll", arguments)}},'prototype');
 
 // SVGSymbolElement对象
-bodavm.memory.globalobj['SVGSymbolElement'] = function SVGSymbolElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGSymbolElement'] = function SVGSymbolElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGSymbolElement'], "SVGSymbolElement");
 bodavm.memory.globalobj['SVGSymbolElement'].prototype.__proto__=bodavm.memory.globalobj['SVGElement'].prototype;
 bodavm.memory.globalobj['SVGSymbolElement'].__proto__=bodavm.memory.globalobj['SVGElement'];
@@ -10817,7 +11267,7 @@ bodavm.toolsFunc.defineProperty('SVGSymbolElement', "viewBox", {configurable:tru
 bodavm.toolsFunc.defineProperty('SVGSymbolElement', "preserveAspectRatio", {configurable:true, enumerable:true, get:function preserveAspectRatio (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SVGSymbolElement'].prototype, "SVGSymbolElement", "preserveAspectRatio_get", arguments)}, set:undefined},'prototype');
 
 // SVGUseElement对象
-bodavm.memory.globalobj['SVGUseElement'] = function SVGUseElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGUseElement'] = function SVGUseElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGUseElement'], "SVGUseElement");
 bodavm.memory.globalobj['SVGUseElement'].prototype.__proto__=bodavm.memory.globalobj['SVGGraphicsElement'].prototype;
 bodavm.memory.globalobj['SVGUseElement'].__proto__=bodavm.memory.globalobj['SVGGraphicsElement'];
@@ -10828,18 +11278,18 @@ bodavm.toolsFunc.defineProperty('SVGUseElement', "height", {configurable:true, e
 bodavm.toolsFunc.defineProperty('SVGUseElement', "href", {configurable:true, enumerable:true, get:function href (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SVGUseElement'].prototype, "SVGUseElement", "href_get", arguments)}, set:undefined},'prototype');
 
 // WebGLShader对象
-bodavm.memory.globalobj['WebGLShader'] = function WebGLShader(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['WebGLShader'] = function WebGLShader(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['WebGLShader'], "WebGLShader");
 
 // WebGLShaderPrecisionFormat对象
-bodavm.memory.globalobj['WebGLShaderPrecisionFormat'] = function WebGLShaderPrecisionFormat(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['WebGLShaderPrecisionFormat'] = function WebGLShaderPrecisionFormat(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['WebGLShaderPrecisionFormat'], "WebGLShaderPrecisionFormat");
 bodavm.toolsFunc.defineProperty('WebGLShaderPrecisionFormat', "rangeMin", {configurable:true, enumerable:true, get:function rangeMin (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLShaderPrecisionFormat'].prototype, "WebGLShaderPrecisionFormat", "rangeMin_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('WebGLShaderPrecisionFormat', "rangeMax", {configurable:true, enumerable:true, get:function rangeMax (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLShaderPrecisionFormat'].prototype, "WebGLShaderPrecisionFormat", "rangeMax_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('WebGLShaderPrecisionFormat', "precision", {configurable:true, enumerable:true, get:function precision (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['WebGLShaderPrecisionFormat'].prototype, "WebGLShaderPrecisionFormat", "precision_get", arguments)}, set:undefined},'prototype');
 
 // RTCPeerConnection对象
-bodavm.memory.globalobj['RTCPeerConnection'] = function RTCPeerConnection(){
+bodavm.memory.globalobj['RTCPeerConnection'] = function RTCPeerConnection(){this._boisinit=bodavm.config.isinit;
 
     if (!(this instanceof RTCPeerConnection)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'RTCPeerConnection': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
@@ -10895,17 +11345,21 @@ bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setConfiguration", {config
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setLocalDescription", {configurable:true, enumerable:true, writable:true, value:function setLocalDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "setLocalDescription", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setRemoteDescription", {configurable:true, enumerable:true, writable:true, value:function setRemoteDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "setRemoteDescription", arguments)}},'prototype');
 
+
+// bodavm.memory.globalobj['webkitRTCPeerConnection']=bodavm.memory.globalobj['RTCPeerConnection']
+
+
 // WebGLBuffer对象
-bodavm.memory.globalobj['WebGLBuffer'] = function WebGLBuffer(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['WebGLBuffer'] = function WebGLBuffer(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['WebGLBuffer'], "WebGLBuffer");
 
 // WebGLProgram对象
-bodavm.memory.globalobj['WebGLProgram'] = function WebGLProgram(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['WebGLProgram'] = function WebGLProgram(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['WebGLProgram'], "WebGLProgram");
 
 // CSS对象
 
-bodavm.memory.globalobj['CSS'] = {}
+bodavm.memory.globalobj['CSS'] = { _boisinit:bodavm.config.isinit}
 bodavm.toolsFunc.defineProperty('CSS' , "Hz", {configurable:true, enumerable:true, writable:true, value:function Hz (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSS'], "CSS", "Hz", arguments)}});
 bodavm.toolsFunc.defineProperty('CSS' , "Q", {configurable:true, enumerable:true, writable:true, value:function Q (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSS'], "CSS", "Q", arguments)}});
 bodavm.toolsFunc.defineProperty('CSS' , "ch", {configurable:true, enumerable:true, writable:true, value:function ch (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSS'], "CSS", "ch", arguments)}});
@@ -10941,7 +11395,7 @@ bodavm.toolsFunc.defineProperty('CSS' , "vw", {configurable:true, enumerable:tru
 bodavm.toolsFunc.defineProperty('CSS' , "paintWorklet", {configurable:true, enumerable:true, get:function paintWorklet (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSS'], "CSS", "paintWorklet_get", arguments)}, set:undefined});
 
 // Navigator对象
-bodavm.memory.globalobj['Navigator'] = function Navigator(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Navigator'] = function Navigator(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Navigator'], "Navigator");
 bodavm.toolsFunc.defineProperty('Navigator', "vendorSub", {configurable:true, enumerable:true, get:function vendorSub (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Navigator'].prototype, "Navigator", "vendorSub_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('Navigator', "productSub", {configurable:true, enumerable:true, get:function productSub (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Navigator'].prototype, "Navigator", "productSub_get", arguments)}, set:undefined},'prototype');
@@ -11010,16 +11464,16 @@ bodavm.toolsFunc.defineProperty('Navigator', "unregisterProtocolHandler", {confi
 
 
 // navigator对象
-bodavm.memory.globalobj[ 'navigator'] = {}
+bodavm.memory.globalobj[ 'navigator'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'navigator'].__proto__=bodavm.memory.globalobj['Navigator'].prototype;
 // clientInformation对象
-bodavm.memory.globalobj[ 'clientInformation'] = {}
+bodavm.memory.globalobj[ 'clientInformation'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'clientInformation'] .__proto__=bodavm.memory.globalobj['Navigator'].prototype;
 
 
 
 // BatteryManager对象
-bodavm.memory.globalobj['BatteryManager'] = function BatteryManager(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['BatteryManager'] = function BatteryManager(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BatteryManager'], "BatteryManager");
 bodavm.memory.globalobj['BatteryManager'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['BatteryManager'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -11033,7 +11487,7 @@ bodavm.toolsFunc.defineProperty('BatteryManager', "ondischargingtimechange", {co
 bodavm.toolsFunc.defineProperty('BatteryManager', "onlevelchange", {configurable:true, enumerable:true, get:function onlevelchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BatteryManager'].prototype, "BatteryManager", "onlevelchange_get", arguments)}, set:function onlevelchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BatteryManager'].prototype, "BatteryManager", "onlevelchange_set", arguments)}},'prototype');
 
 // Plugin对象
-bodavm.memory.globalobj['Plugin'] = function Plugin(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Plugin'] = function Plugin(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Plugin'], "Plugin");
 bodavm.toolsFunc.defineProperty('Plugin', "name", {configurable:true, enumerable:true, get:function name (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Plugin'].prototype, "Plugin", "name_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('Plugin', "filename", {configurable:true, enumerable:true, get:function filename (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Plugin'].prototype, "Plugin", "filename_get", arguments)}, set:undefined},'prototype');
@@ -11043,7 +11497,7 @@ bodavm.toolsFunc.defineProperty('Plugin', "item", {configurable:true, enumerable
 bodavm.toolsFunc.defineProperty('Plugin', "namedItem", {configurable:true, enumerable:true, writable:true, value:function namedItem (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Plugin'].prototype, "Plugin", "namedItem", arguments)}},'prototype');
 
 // PluginArray对象
-bodavm.memory.globalobj['PluginArray'] = function PluginArray(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['PluginArray'] = function PluginArray(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['PluginArray'], "PluginArray");
 bodavm.toolsFunc.defineProperty('PluginArray', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PluginArray'].prototype, "PluginArray", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('PluginArray', "item", {configurable:true, enumerable:true, writable:true, value:function item (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PluginArray'].prototype, "PluginArray", "item", arguments)}},'prototype');
@@ -11051,7 +11505,7 @@ bodavm.toolsFunc.defineProperty('PluginArray', "namedItem", {configurable:true, 
 bodavm.toolsFunc.defineProperty('PluginArray', "refresh", {configurable:true, enumerable:true, writable:true, value:function refresh (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['PluginArray'].prototype, "PluginArray", "refresh", arguments)}},'prototype');
 
 // MimeType对象
-bodavm.memory.globalobj['MimeType'] = function MimeType(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['MimeType'] = function MimeType(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MimeType'], "MimeType");
 bodavm.toolsFunc.defineProperty('MimeType', "type", {configurable:true, enumerable:true, get:function type (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MimeType'].prototype, "MimeType", "type_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('MimeType', "suffixes", {configurable:true, enumerable:true, get:function suffixes (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MimeType'].prototype, "MimeType", "suffixes_get", arguments)}, set:undefined},'prototype');
@@ -11059,14 +11513,14 @@ bodavm.toolsFunc.defineProperty('MimeType', "description", {configurable:true, e
 bodavm.toolsFunc.defineProperty('MimeType', "enabledPlugin", {configurable:true, enumerable:true, get:function enabledPlugin (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MimeType'].prototype, "MimeType", "enabledPlugin_get", arguments)}, set:undefined},'prototype');
 
 // MimeTypeArray对象
-bodavm.memory.globalobj['MimeTypeArray'] = function MimeTypeArray(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['MimeTypeArray'] = function MimeTypeArray(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MimeTypeArray'], "MimeTypeArray");
 bodavm.toolsFunc.defineProperty('MimeTypeArray', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MimeTypeArray'].prototype, "MimeTypeArray", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('MimeTypeArray', "item", {configurable:true, enumerable:true, writable:true, value:function item (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MimeTypeArray'].prototype, "MimeTypeArray", "item", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('MimeTypeArray', "namedItem", {configurable:true, enumerable:true, writable:true, value:function namedItem (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MimeTypeArray'].prototype, "MimeTypeArray", "namedItem", arguments)}},'prototype');
 
 // XMLHttpRequestEventTarget对象
-bodavm.memory.globalobj['XMLHttpRequestEventTarget'] = function XMLHttpRequestEventTarget(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['XMLHttpRequestEventTarget'] = function XMLHttpRequestEventTarget(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['XMLHttpRequestEventTarget'], "XMLHttpRequestEventTarget");
 bodavm.memory.globalobj['XMLHttpRequestEventTarget'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['XMLHttpRequestEventTarget'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -11079,7 +11533,7 @@ bodavm.toolsFunc.defineProperty('XMLHttpRequestEventTarget', "ontimeout", {confi
 bodavm.toolsFunc.defineProperty('XMLHttpRequestEventTarget', "onloadend", {configurable:true, enumerable:true, get:function onloadend (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['XMLHttpRequestEventTarget'].prototype, "XMLHttpRequestEventTarget", "onloadend_get", arguments)}, set:function onloadend (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['XMLHttpRequestEventTarget'].prototype, "XMLHttpRequestEventTarget", "onloadend_set", arguments)}},'prototype');
 
 // XMLHttpRequest对象
-bodavm.memory.globalobj['XMLHttpRequest'] = function XMLHttpRequest(){
+bodavm.memory.globalobj['XMLHttpRequest'] = function XMLHttpRequest(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof XMLHttpRequest)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'XMLHttpRequest': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 
@@ -11246,6 +11700,7 @@ delete process;
 delete root;
 delete WindowProperties;
 delete globalThis[Symbol.toStringTag];
+// debugger
 window = globalThis;
 globalThis.__proto__ = bodavm.memory.globalobj['Window'].prototype;
 // document=bodavm.memory.globalobj['document']
@@ -11281,6 +11736,7 @@ console.log(`===================================================================
 console.log(`===============================================================================================================`);
 console.log(`===============================================================================================================`);
 // debugger
+window._boisinit=bodavm.config.isinit
 bodavm.toolsFunc.windowdefineProperty(window, "document", {
   configurable: false,
   enumerable: true,
@@ -11656,6 +12112,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitRTCPeerConnection", {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRTCPeerConnection", arguments);
   }()
 });
+
 bodavm.toolsFunc.windowdefineProperty(window, "webkitMediaStream", {
   configurable: true,
   enumerable: false,
@@ -13608,6 +14065,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "MutationRecord", {
     return bodavm.toolsFunc.dispatch(this, window, "window", "MutationRecord", arguments);
   }()
 });
+//此处取消自执行调用value
 bodavm.toolsFunc.windowdefineProperty(window, "MutationObserver", {
   configurable: true,
   enumerable: false,
@@ -17274,7 +17732,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "matchMedia", {
   writable: true,
   value: function matchMedia() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "matchMedia", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "moveBy", {
   configurable: true,
@@ -19474,14 +19932,14 @@ bodavm.toolsFunc.windowdefineProperty(window, "inspect", {
     return bodavm.toolsFunc.dispatch(this, window, "window", "inspect", arguments);
   }()
 });
-bodavm.toolsFunc.windowdefineProperty(window, "copy", {
-  configurable: true,
-  enumerable: false,
-  writable: true,
-  value: function copy() {
-    return bodavm.toolsFunc.dispatch(this, window, "window", "copy", arguments);
-  }()
-});
+// bodavm.toolsFunc.windowdefineProperty(window, "copy", {
+//   configurable: true,
+//   enumerable: false,
+//   writable: true,
+//   value: function copy() {
+//     return bodavm.toolsFunc.dispatch(this, window, "window", "copy", arguments);
+//   }()
+// });
 bodavm.toolsFunc.windowdefineProperty(window, "queryObjects", {
   configurable: true,
   enumerable: false,
@@ -19627,6 +20085,7 @@ if (window.length > 0) {
 }
 var boeval = eval;
 eval = function (x) {
+  if (x=='debugger'){return {}}
   debugger;
   console.log(`执行eval,参数为${x.length > 30 ? x.substr(0, 50) : x}`);
   return boeval.call(this, x);
@@ -19644,1034 +20103,24 @@ window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables] = {
 };
 window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables].__proto__ = null;
 // debugger
-// Object.defineProperty(this, 'window', {
-//     get: function window() {
-//         // if (bodavm.config.proxy ){
-//             // window=bodavm.toolsFunc.proxy(window,'window')
-//             // return window
-//         // }else{
-//             return this
-//         // }
-//     },
-//     // writable: false,
-//     configurable: false,
-//     enumerable:true
-// });
-// debugger// // debugger
-// Option = bodavm.memory.globalobj['Option']
-// Image = bodavm.memory.globalobj['Image']
-// Audio = bodavm.memory.globalobj['Audio']
-// webkitURL = bodavm.memory.globalobj['webkitURL']
-// webkitRTCPeerConnection = bodavm.memory.globalobj['webkitRTCPeerConnection']
-// webkitMediaStream = bodavm.memory.globalobj['webkitMediaStream']
-// WebKitMutationObserver = bodavm.memory.globalobj['WebKitMutationObserver']
-// WebKitCSSMatrix = bodavm.memory.globalobj['WebKitCSSMatrix']
-// XPathResult = bodavm.memory.globalobj['XPathResult']
-// XPathExpression = bodavm.memory.globalobj['XPathExpression']
-// XPathEvaluator = bodavm.memory.globalobj['XPathEvaluator']
-// XMLSerializer = bodavm.memory.globalobj['XMLSerializer']
-// XMLHttpRequestUpload = bodavm.memory.globalobj['XMLHttpRequestUpload']
-// XMLHttpRequestEventTarget = bodavm.memory.globalobj['XMLHttpRequestEventTarget']
-// XMLHttpRequest = bodavm.memory.globalobj['XMLHttpRequest']
-// XMLDocument = bodavm.memory.globalobj['XMLDocument']
-// WritableStreamDefaultWriter = bodavm.memory.globalobj['WritableStreamDefaultWriter']
-// WritableStreamDefaultController = bodavm.memory.globalobj['WritableStreamDefaultController']
-// WritableStream = bodavm.memory.globalobj['WritableStream']
-// Worker = bodavm.memory.globalobj['Worker']
-// Window = bodavm.memory.globalobj['Window']
-// WheelEvent = bodavm.memory.globalobj['WheelEvent']
-// WebSocket = bodavm.memory.globalobj['WebSocket']
-// WebGLVertexArrayObject = bodavm.memory.globalobj['WebGLVertexArrayObject']
-// WebGLUniformLocation = bodavm.memory.globalobj['WebGLUniformLocation']
-// WebGLTransformFeedback = bodavm.memory.globalobj['WebGLTransformFeedback']
-// WebGLTexture = bodavm.memory.globalobj['WebGLTexture']
-// WebGLSync = bodavm.memory.globalobj['WebGLSync']
-// WebGLShaderPrecisionFormat = bodavm.memory.globalobj['WebGLShaderPrecisionFormat']
-// WebGLShader = bodavm.memory.globalobj['WebGLShader']
-// WebGLSampler = bodavm.memory.globalobj['WebGLSampler']
-// WebGLRenderingContext = bodavm.memory.globalobj['WebGLRenderingContext']
-// WebGLRenderbuffer = bodavm.memory.globalobj['WebGLRenderbuffer']
-// WebGLQuery = bodavm.memory.globalobj['WebGLQuery']
-// WebGLProgram = bodavm.memory.globalobj['WebGLProgram']
-// WebGLFramebuffer = bodavm.memory.globalobj['WebGLFramebuffer']
-// WebGLContextEvent = bodavm.memory.globalobj['WebGLContextEvent']
-// WebGLBuffer = bodavm.memory.globalobj['WebGLBuffer']
-// WebGLActiveInfo = bodavm.memory.globalobj['WebGLActiveInfo']
-// WebGL2RenderingContext = bodavm.memory.globalobj['WebGL2RenderingContext']
-// WaveShaperNode = bodavm.memory.globalobj['WaveShaperNode']
-// VisualViewport = bodavm.memory.globalobj['VisualViewport']
-// ValidityState = bodavm.memory.globalobj['ValidityState']
-// VTTCue = bodavm.memory.globalobj['VTTCue']
-// UserActivation = bodavm.memory.globalobj['UserActivation']
-// URLSearchParams = bodavm.memory.globalobj['URLSearchParams']
-// URL = bodavm.memory.globalobj['URL']
-// UIEvent = bodavm.memory.globalobj['UIEvent']
-// TreeWalker = bodavm.memory.globalobj['TreeWalker']
-// TransitionEvent = bodavm.memory.globalobj['TransitionEvent']
-// TransformStream = bodavm.memory.globalobj['TransformStream']
-// TrackEvent = bodavm.memory.globalobj['TrackEvent']
-// TouchList = bodavm.memory.globalobj['TouchList']
-// TouchEvent = bodavm.memory.globalobj['TouchEvent']
-// Touch = bodavm.memory.globalobj['Touch']
-// TimeRanges = bodavm.memory.globalobj['TimeRanges']
-// TextTrackList = bodavm.memory.globalobj['TextTrackList']
-// TextTrackCueList = bodavm.memory.globalobj['TextTrackCueList']
-// TextTrackCue = bodavm.memory.globalobj['TextTrackCue']
-// TextTrack = bodavm.memory.globalobj['TextTrack']
-// TextMetrics = bodavm.memory.globalobj['TextMetrics']
-// TextEvent = bodavm.memory.globalobj['TextEvent']
-// TextEncoderStream = bodavm.memory.globalobj['TextEncoderStream']
-// TextEncoder = bodavm.memory.globalobj['TextEncoder']
-// TextDecoderStream = bodavm.memory.globalobj['TextDecoderStream']
-// TextDecoder = bodavm.memory.globalobj['TextDecoder']
-// Text = bodavm.memory.globalobj['Text']
-// TaskAttributionTiming = bodavm.memory.globalobj['TaskAttributionTiming']
-// SyncManager = bodavm.memory.globalobj['SyncManager']
-// SubmitEvent = bodavm.memory.globalobj['SubmitEvent']
-// StyleSheetList = bodavm.memory.globalobj['StyleSheetList']
-// StyleSheet = bodavm.memory.globalobj['StyleSheet']
-// StylePropertyMapReadOnly = bodavm.memory.globalobj['StylePropertyMapReadOnly']
-// StylePropertyMap = bodavm.memory.globalobj['StylePropertyMap']
-// StorageEvent = bodavm.memory.globalobj['StorageEvent']
-// Storage = bodavm.memory.globalobj['Storage']
-// StereoPannerNode = bodavm.memory.globalobj['StereoPannerNode']
-// StaticRange = bodavm.memory.globalobj['StaticRange']
-// ShadowRoot = bodavm.memory.globalobj['ShadowRoot']
-// Selection = bodavm.memory.globalobj['Selection']
-// SecurityPolicyViolationEvent = bodavm.memory.globalobj['SecurityPolicyViolationEvent']
-// ScriptProcessorNode = bodavm.memory.globalobj['ScriptProcessorNode']
-// ScreenOrientation = bodavm.memory.globalobj['ScreenOrientation']
-// Screen = bodavm.memory.globalobj['Screen']
-// SVGViewElement = bodavm.memory.globalobj['SVGViewElement']
-// SVGUseElement = bodavm.memory.globalobj['SVGUseElement']
-// SVGUnitTypes = bodavm.memory.globalobj['SVGUnitTypes']
-// SVGTransformList = bodavm.memory.globalobj['SVGTransformList']
-// SVGTransform = bodavm.memory.globalobj['SVGTransform']
-// SVGTitleElement = bodavm.memory.globalobj['SVGTitleElement']
-// SVGTextPositioningElement = bodavm.memory.globalobj['SVGTextPositioningElement']
-// SVGTextPathElement = bodavm.memory.globalobj['SVGTextPathElement']
-// SVGTextElement = bodavm.memory.globalobj['SVGTextElement']
-// SVGTextContentElement = bodavm.memory.globalobj['SVGTextContentElement']
-// SVGTSpanElement = bodavm.memory.globalobj['SVGTSpanElement']
-// SVGSymbolElement = bodavm.memory.globalobj['SVGSymbolElement']
-// SVGSwitchElement = bodavm.memory.globalobj['SVGSwitchElement']
-// SVGStyleElement = bodavm.memory.globalobj['SVGStyleElement']
-// SVGStringList = bodavm.memory.globalobj['SVGStringList']
-// SVGStopElement = bodavm.memory.globalobj['SVGStopElement']
-// SVGSetElement = bodavm.memory.globalobj['SVGSetElement']
-// SVGScriptElement = bodavm.memory.globalobj['SVGScriptElement']
-// SVGSVGElement = bodavm.memory.globalobj['SVGSVGElement']
-// SVGRectElement = bodavm.memory.globalobj['SVGRectElement']
-// SVGRect = bodavm.memory.globalobj['SVGRect']
-// SVGRadialGradientElement = bodavm.memory.globalobj['SVGRadialGradientElement']
-// SVGPreserveAspectRatio = bodavm.memory.globalobj['SVGPreserveAspectRatio']
-// SVGPolylineElement = bodavm.memory.globalobj['SVGPolylineElement']
-// SVGPolygonElement = bodavm.memory.globalobj['SVGPolygonElement']
-// SVGPointList = bodavm.memory.globalobj['SVGPointList']
-// SVGPoint = bodavm.memory.globalobj['SVGPoint']
-// SVGPatternElement = bodavm.memory.globalobj['SVGPatternElement']
-// SVGPathElement = bodavm.memory.globalobj['SVGPathElement']
-// SVGNumberList = bodavm.memory.globalobj['SVGNumberList']
-// SVGNumber = bodavm.memory.globalobj['SVGNumber']
-// SVGMetadataElement = bodavm.memory.globalobj['SVGMetadataElement']
-// SVGMatrix = bodavm.memory.globalobj['SVGMatrix']
-// SVGMaskElement = bodavm.memory.globalobj['SVGMaskElement']
-// SVGMarkerElement = bodavm.memory.globalobj['SVGMarkerElement']
-// SVGMPathElement = bodavm.memory.globalobj['SVGMPathElement']
-// SVGLinearGradientElement = bodavm.memory.globalobj['SVGLinearGradientElement']
-// SVGLineElement = bodavm.memory.globalobj['SVGLineElement']
-// SVGLengthList = bodavm.memory.globalobj['SVGLengthList']
-// SVGLength = bodavm.memory.globalobj['SVGLength']
-// SVGImageElement = bodavm.memory.globalobj['SVGImageElement']
-// SVGGraphicsElement = bodavm.memory.globalobj['SVGGraphicsElement']
-// SVGGradientElement = bodavm.memory.globalobj['SVGGradientElement']
-// SVGGeometryElement = bodavm.memory.globalobj['SVGGeometryElement']
-// SVGGElement = bodavm.memory.globalobj['SVGGElement']
-// SVGForeignObjectElement = bodavm.memory.globalobj['SVGForeignObjectElement']
-// SVGFilterElement = bodavm.memory.globalobj['SVGFilterElement']
-// SVGFETurbulenceElement = bodavm.memory.globalobj['SVGFETurbulenceElement']
-// SVGFETileElement = bodavm.memory.globalobj['SVGFETileElement']
-// SVGFESpotLightElement = bodavm.memory.globalobj['SVGFESpotLightElement']
-// SVGFESpecularLightingElement = bodavm.memory.globalobj['SVGFESpecularLightingElement']
-// SVGFEPointLightElement = bodavm.memory.globalobj['SVGFEPointLightElement']
-// SVGFEOffsetElement = bodavm.memory.globalobj['SVGFEOffsetElement']
-// SVGFEMorphologyElement = bodavm.memory.globalobj['SVGFEMorphologyElement']
-// SVGFEMergeNodeElement = bodavm.memory.globalobj['SVGFEMergeNodeElement']
-// SVGFEMergeElement = bodavm.memory.globalobj['SVGFEMergeElement']
-// SVGFEImageElement = bodavm.memory.globalobj['SVGFEImageElement']
-// SVGFEGaussianBlurElement = bodavm.memory.globalobj['SVGFEGaussianBlurElement']
-// SVGFEFuncRElement = bodavm.memory.globalobj['SVGFEFuncRElement']
-// SVGFEFuncGElement = bodavm.memory.globalobj['SVGFEFuncGElement']
-// SVGFEFuncBElement = bodavm.memory.globalobj['SVGFEFuncBElement']
-// SVGFEFuncAElement = bodavm.memory.globalobj['SVGFEFuncAElement']
-// SVGFEFloodElement = bodavm.memory.globalobj['SVGFEFloodElement']
-// SVGFEDropShadowElement = bodavm.memory.globalobj['SVGFEDropShadowElement']
-// SVGFEDistantLightElement = bodavm.memory.globalobj['SVGFEDistantLightElement']
-// SVGFEDisplacementMapElement = bodavm.memory.globalobj['SVGFEDisplacementMapElement']
-// SVGFEDiffuseLightingElement = bodavm.memory.globalobj['SVGFEDiffuseLightingElement']
-// SVGFEConvolveMatrixElement = bodavm.memory.globalobj['SVGFEConvolveMatrixElement']
-// SVGFECompositeElement = bodavm.memory.globalobj['SVGFECompositeElement']
-// SVGFEComponentTransferElement = bodavm.memory.globalobj['SVGFEComponentTransferElement']
-// SVGFEColorMatrixElement = bodavm.memory.globalobj['SVGFEColorMatrixElement']
-// SVGFEBlendElement = bodavm.memory.globalobj['SVGFEBlendElement']
-// SVGEllipseElement = bodavm.memory.globalobj['SVGEllipseElement']
-// SVGElement = bodavm.memory.globalobj['SVGElement']
-// SVGDescElement = bodavm.memory.globalobj['SVGDescElement']
-// SVGDefsElement = bodavm.memory.globalobj['SVGDefsElement']
-// SVGComponentTransferFunctionElement = bodavm.memory.globalobj['SVGComponentTransferFunctionElement']
-// SVGClipPathElement = bodavm.memory.globalobj['SVGClipPathElement']
-// SVGCircleElement = bodavm.memory.globalobj['SVGCircleElement']
-// SVGAnimationElement = bodavm.memory.globalobj['SVGAnimationElement']
-// SVGAnimatedTransformList = bodavm.memory.globalobj['SVGAnimatedTransformList']
-// SVGAnimatedString = bodavm.memory.globalobj['SVGAnimatedString']
-// SVGAnimatedRect = bodavm.memory.globalobj['SVGAnimatedRect']
-// SVGAnimatedPreserveAspectRatio = bodavm.memory.globalobj['SVGAnimatedPreserveAspectRatio']
-// SVGAnimatedNumberList = bodavm.memory.globalobj['SVGAnimatedNumberList']
-// SVGAnimatedNumber = bodavm.memory.globalobj['SVGAnimatedNumber']
-// SVGAnimatedLengthList = bodavm.memory.globalobj['SVGAnimatedLengthList']
-// SVGAnimatedLength = bodavm.memory.globalobj['SVGAnimatedLength']
-// SVGAnimatedInteger = bodavm.memory.globalobj['SVGAnimatedInteger']
-// SVGAnimatedEnumeration = bodavm.memory.globalobj['SVGAnimatedEnumeration']
-// SVGAnimatedBoolean = bodavm.memory.globalobj['SVGAnimatedBoolean']
-// SVGAnimatedAngle = bodavm.memory.globalobj['SVGAnimatedAngle']
-// SVGAnimateTransformElement = bodavm.memory.globalobj['SVGAnimateTransformElement']
-// SVGAnimateMotionElement = bodavm.memory.globalobj['SVGAnimateMotionElement']
-// SVGAnimateElement = bodavm.memory.globalobj['SVGAnimateElement']
-// SVGAngle = bodavm.memory.globalobj['SVGAngle']
-// SVGAElement = bodavm.memory.globalobj['SVGAElement']
-// Response = bodavm.memory.globalobj['Response']
-// ResizeObserverSize = bodavm.memory.globalobj['ResizeObserverSize']
-// ResizeObserverEntry = bodavm.memory.globalobj['ResizeObserverEntry']
-// ResizeObserver = bodavm.memory.globalobj['ResizeObserver']
-// Request = bodavm.memory.globalobj['Request']
-// ReportingObserver = bodavm.memory.globalobj['ReportingObserver']
-// ReadableStreamDefaultReader = bodavm.memory.globalobj['ReadableStreamDefaultReader']
-// ReadableStreamDefaultController = bodavm.memory.globalobj['ReadableStreamDefaultController']
-// ReadableStreamBYOBRequest = bodavm.memory.globalobj['ReadableStreamBYOBRequest']
-// ReadableStreamBYOBReader = bodavm.memory.globalobj['ReadableStreamBYOBReader']
-// ReadableStream = bodavm.memory.globalobj['ReadableStream']
-// ReadableByteStreamController = bodavm.memory.globalobj['ReadableByteStreamController']
-// Range = bodavm.memory.globalobj['Range']
-// RadioNodeList = bodavm.memory.globalobj['RadioNodeList']
-// RTCTrackEvent = bodavm.memory.globalobj['RTCTrackEvent']
-// RTCStatsReport = bodavm.memory.globalobj['RTCStatsReport']
-// RTCSessionDescription = bodavm.memory.globalobj['RTCSessionDescription']
-// RTCSctpTransport = bodavm.memory.globalobj['RTCSctpTransport']
-// RTCRtpTransceiver = bodavm.memory.globalobj['RTCRtpTransceiver']
-// RTCRtpSender = bodavm.memory.globalobj['RTCRtpSender']
-// RTCRtpReceiver = bodavm.memory.globalobj['RTCRtpReceiver']
-// RTCPeerConnectionIceEvent = bodavm.memory.globalobj['RTCPeerConnectionIceEvent']
-// RTCPeerConnectionIceErrorEvent = bodavm.memory.globalobj['RTCPeerConnectionIceErrorEvent']
-// RTCPeerConnection = bodavm.memory.globalobj['RTCPeerConnection']
-// RTCIceCandidate = bodavm.memory.globalobj['RTCIceCandidate']
-// RTCErrorEvent = bodavm.memory.globalobj['RTCErrorEvent']
-// RTCError = bodavm.memory.globalobj['RTCError']
-// RTCEncodedVideoFrame = bodavm.memory.globalobj['RTCEncodedVideoFrame']
-// RTCEncodedAudioFrame = bodavm.memory.globalobj['RTCEncodedAudioFrame']
-// RTCDtlsTransport = bodavm.memory.globalobj['RTCDtlsTransport']
-// RTCDataChannelEvent = bodavm.memory.globalobj['RTCDataChannelEvent']
-// RTCDataChannel = bodavm.memory.globalobj['RTCDataChannel']
-// RTCDTMFToneChangeEvent = bodavm.memory.globalobj['RTCDTMFToneChangeEvent']
-// RTCDTMFSender = bodavm.memory.globalobj['RTCDTMFSender']
-// RTCCertificate = bodavm.memory.globalobj['RTCCertificate']
-// PromiseRejectionEvent = bodavm.memory.globalobj['PromiseRejectionEvent']
-// ProgressEvent = bodavm.memory.globalobj['ProgressEvent']
-// ProcessingInstruction = bodavm.memory.globalobj['ProcessingInstruction']
-// PopStateEvent = bodavm.memory.globalobj['PopStateEvent']
-// PointerEvent = bodavm.memory.globalobj['PointerEvent']
-// PluginArray = bodavm.memory.globalobj['PluginArray']
-// Plugin = bodavm.memory.globalobj['Plugin']
-// PeriodicWave = bodavm.memory.globalobj['PeriodicWave']
-// PerformanceTiming = bodavm.memory.globalobj['PerformanceTiming']
-// PerformanceServerTiming = bodavm.memory.globalobj['PerformanceServerTiming']
-// PerformanceResourceTiming = bodavm.memory.globalobj['PerformanceResourceTiming']
-// PerformancePaintTiming = bodavm.memory.globalobj['PerformancePaintTiming']
-// PerformanceObserverEntryList = bodavm.memory.globalobj['PerformanceObserverEntryList']
-// PerformanceObserver = bodavm.memory.globalobj['PerformanceObserver']
-// PerformanceNavigationTiming = bodavm.memory.globalobj['PerformanceNavigationTiming']
-// PerformanceNavigation = bodavm.memory.globalobj['PerformanceNavigation']
-// PerformanceMeasure = bodavm.memory.globalobj['PerformanceMeasure']
-// PerformanceMark = bodavm.memory.globalobj['PerformanceMark']
-// PerformanceLongTaskTiming = bodavm.memory.globalobj['PerformanceLongTaskTiming']
-// PerformanceEventTiming = bodavm.memory.globalobj['PerformanceEventTiming']
-// PerformanceEntry = bodavm.memory.globalobj['PerformanceEntry']
-// PerformanceElementTiming = bodavm.memory.globalobj['PerformanceElementTiming']
-// Performance = bodavm.memory.globalobj['Performance']
-// Path2D = bodavm.memory.globalobj['Path2D']
-// PannerNode = bodavm.memory.globalobj['PannerNode']
-// PageTransitionEvent = bodavm.memory.globalobj['PageTransitionEvent']
-// OverconstrainedError = bodavm.memory.globalobj['OverconstrainedError']
-// OscillatorNode = bodavm.memory.globalobj['OscillatorNode']
-// OffscreenCanvasRenderingContext2D = bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D']
-// OffscreenCanvas = bodavm.memory.globalobj['OffscreenCanvas']
-// OfflineAudioContext = bodavm.memory.globalobj['OfflineAudioContext']
-// OfflineAudioCompletionEvent = bodavm.memory.globalobj['OfflineAudioCompletionEvent']
-// NodeList = bodavm.memory.globalobj['NodeList']
-// NodeIterator = bodavm.memory.globalobj['NodeIterator']
-// NodeFilter = bodavm.memory.globalobj['NodeFilter']
-// Node = bodavm.memory.globalobj['Node']
-// NetworkInformation = bodavm.memory.globalobj['NetworkInformation']
-// Navigator = bodavm.memory.globalobj['Navigator']
-// NamedNodeMap = bodavm.memory.globalobj['NamedNodeMap']
-// MutationRecord = bodavm.memory.globalobj['MutationRecord']
-// MutationObserver = bodavm.memory.globalobj['MutationObserver']
-// MutationEvent = bodavm.memory.globalobj['MutationEvent']
-// MouseEvent = bodavm.memory.globalobj['MouseEvent']
-// MimeTypeArray = bodavm.memory.globalobj['MimeTypeArray']
-// MimeType = bodavm.memory.globalobj['MimeType']
-// MessagePort = bodavm.memory.globalobj['MessagePort']
-// MessageEvent = bodavm.memory.globalobj['MessageEvent']
-// MessageChannel = bodavm.memory.globalobj['MessageChannel']
-// MediaStreamTrackEvent = bodavm.memory.globalobj['MediaStreamTrackEvent']
-// MediaStreamEvent = bodavm.memory.globalobj['MediaStreamEvent']
-// MediaStreamAudioSourceNode = bodavm.memory.globalobj['MediaStreamAudioSourceNode']
-// MediaStreamAudioDestinationNode = bodavm.memory.globalobj['MediaStreamAudioDestinationNode']
-// MediaStream = bodavm.memory.globalobj['MediaStream']
-// MediaRecorder = bodavm.memory.globalobj['MediaRecorder']
-// MediaQueryListEvent = bodavm.memory.globalobj['MediaQueryListEvent']
-// MediaQueryList = bodavm.memory.globalobj['MediaQueryList']
-// MediaList = bodavm.memory.globalobj['MediaList']
-// MediaError = bodavm.memory.globalobj['MediaError']
-// MediaEncryptedEvent = bodavm.memory.globalobj['MediaEncryptedEvent']
-// MediaElementAudioSourceNode = bodavm.memory.globalobj['MediaElementAudioSourceNode']
-// MediaCapabilities = bodavm.memory.globalobj['MediaCapabilities']
-// Location = bodavm.memory.globalobj['Location']
-// LayoutShiftAttribution = bodavm.memory.globalobj['LayoutShiftAttribution']
-// LayoutShift = bodavm.memory.globalobj['LayoutShift']
-// LargestContentfulPaint = bodavm.memory.globalobj['LargestContentfulPaint']
-// KeyframeEffect = bodavm.memory.globalobj['KeyframeEffect']
-// KeyboardEvent = bodavm.memory.globalobj['KeyboardEvent']
-// IntersectionObserverEntry = bodavm.memory.globalobj['IntersectionObserverEntry']
-// IntersectionObserver = bodavm.memory.globalobj['IntersectionObserver']
-// InputEvent = bodavm.memory.globalobj['InputEvent']
-// InputDeviceInfo = bodavm.memory.globalobj['InputDeviceInfo']
-// InputDeviceCapabilities = bodavm.memory.globalobj['InputDeviceCapabilities']
-// ImageData = bodavm.memory.globalobj['ImageData']
-// ImageCapture = bodavm.memory.globalobj['ImageCapture']
-// ImageBitmapRenderingContext = bodavm.memory.globalobj['ImageBitmapRenderingContext']
-// ImageBitmap = bodavm.memory.globalobj['ImageBitmap']
-// IdleDeadline = bodavm.memory.globalobj['IdleDeadline']
-// IIRFilterNode = bodavm.memory.globalobj['IIRFilterNode']
-// IDBVersionChangeEvent = bodavm.memory.globalobj['IDBVersionChangeEvent']
-// IDBTransaction = bodavm.memory.globalobj['IDBTransaction']
-// IDBRequest = bodavm.memory.globalobj['IDBRequest']
-// IDBOpenDBRequest = bodavm.memory.globalobj['IDBOpenDBRequest']
-// IDBObjectStore = bodavm.memory.globalobj['IDBObjectStore']
-// IDBKeyRange = bodavm.memory.globalobj['IDBKeyRange']
-// IDBIndex = bodavm.memory.globalobj['IDBIndex']
-// IDBFactory = bodavm.memory.globalobj['IDBFactory']
-// IDBDatabase = bodavm.memory.globalobj['IDBDatabase']
-// IDBCursorWithValue = bodavm.memory.globalobj['IDBCursorWithValue']
-// IDBCursor = bodavm.memory.globalobj['IDBCursor']
-// History = bodavm.memory.globalobj['History']
-// Headers = bodavm.memory.globalobj['Headers']
-// HashChangeEvent = bodavm.memory.globalobj['HashChangeEvent']
-// HTMLVideoElement = bodavm.memory.globalobj['HTMLVideoElement']
-// HTMLUnknownElement = bodavm.memory.globalobj['HTMLUnknownElement']
-// HTMLUListElement = bodavm.memory.globalobj['HTMLUListElement']
-// HTMLTrackElement = bodavm.memory.globalobj['HTMLTrackElement']
-// HTMLTitleElement = bodavm.memory.globalobj['HTMLTitleElement']
-// HTMLTimeElement = bodavm.memory.globalobj['HTMLTimeElement']
-// HTMLTextAreaElement = bodavm.memory.globalobj['HTMLTextAreaElement']
-// HTMLTemplateElement = bodavm.memory.globalobj['HTMLTemplateElement']
-// HTMLTableSectionElement = bodavm.memory.globalobj['HTMLTableSectionElement']
-// HTMLTableRowElement = bodavm.memory.globalobj['HTMLTableRowElement']
-// HTMLTableElement = bodavm.memory.globalobj['HTMLTableElement']
-// HTMLTableColElement = bodavm.memory.globalobj['HTMLTableColElement']
-// HTMLTableCellElement = bodavm.memory.globalobj['HTMLTableCellElement']
-// HTMLTableCaptionElement = bodavm.memory.globalobj['HTMLTableCaptionElement']
-// HTMLStyleElement = bodavm.memory.globalobj['HTMLStyleElement']
-// HTMLSpanElement = bodavm.memory.globalobj['HTMLSpanElement']
-// HTMLSourceElement = bodavm.memory.globalobj['HTMLSourceElement']
-// HTMLSlotElement = bodavm.memory.globalobj['HTMLSlotElement']
-// HTMLSelectElement = bodavm.memory.globalobj['HTMLSelectElement']
-// HTMLScriptElement = bodavm.memory.globalobj['HTMLScriptElement']
-// HTMLQuoteElement = bodavm.memory.globalobj['HTMLQuoteElement']
-// HTMLProgressElement = bodavm.memory.globalobj['HTMLProgressElement']
-// HTMLPreElement = bodavm.memory.globalobj['HTMLPreElement']
-// HTMLPictureElement = bodavm.memory.globalobj['HTMLPictureElement']
-// HTMLParamElement = bodavm.memory.globalobj['HTMLParamElement']
-// HTMLParagraphElement = bodavm.memory.globalobj['HTMLParagraphElement']
-// HTMLOutputElement = bodavm.memory.globalobj['HTMLOutputElement']
-// HTMLOptionsCollection = bodavm.memory.globalobj['HTMLOptionsCollection']
-// HTMLOptionElement = bodavm.memory.globalobj['HTMLOptionElement']
-// HTMLOptGroupElement = bodavm.memory.globalobj['HTMLOptGroupElement']
-// HTMLObjectElement = bodavm.memory.globalobj['HTMLObjectElement']
-// HTMLOListElement = bodavm.memory.globalobj['HTMLOListElement']
-// HTMLModElement = bodavm.memory.globalobj['HTMLModElement']
-// HTMLMeterElement = bodavm.memory.globalobj['HTMLMeterElement']
-// HTMLMetaElement = bodavm.memory.globalobj['HTMLMetaElement']
-// HTMLMenuElement = bodavm.memory.globalobj['HTMLMenuElement']
-// HTMLMediaElement = bodavm.memory.globalobj['HTMLMediaElement']
-// HTMLMarqueeElement = bodavm.memory.globalobj['HTMLMarqueeElement']
-// HTMLMapElement = bodavm.memory.globalobj['HTMLMapElement']
-// HTMLLinkElement = bodavm.memory.globalobj['HTMLLinkElement']
-// HTMLLegendElement = bodavm.memory.globalobj['HTMLLegendElement']
-// HTMLLabelElement = bodavm.memory.globalobj['HTMLLabelElement']
-// HTMLLIElement = bodavm.memory.globalobj['HTMLLIElement']
-// HTMLInputElement = bodavm.memory.globalobj['HTMLInputElement']
-// HTMLImageElement = bodavm.memory.globalobj['HTMLImageElement']
-// HTMLIFrameElement = bodavm.memory.globalobj['HTMLIFrameElement']
-// HTMLHtmlElement = bodavm.memory.globalobj['HTMLHtmlElement']
-// HTMLHeadingElement = bodavm.memory.globalobj['HTMLHeadingElement']
-// HTMLHeadElement = bodavm.memory.globalobj['HTMLHeadElement']
-// HTMLHRElement = bodavm.memory.globalobj['HTMLHRElement']
-// HTMLFrameSetElement = bodavm.memory.globalobj['HTMLFrameSetElement']
-// HTMLFrameElement = bodavm.memory.globalobj['HTMLFrameElement']
-// HTMLFormElement = bodavm.memory.globalobj['HTMLFormElement']
-// HTMLFormControlsCollection = bodavm.memory.globalobj['HTMLFormControlsCollection']
-// HTMLFontElement = bodavm.memory.globalobj['HTMLFontElement']
-// HTMLFieldSetElement = bodavm.memory.globalobj['HTMLFieldSetElement']
-// HTMLEmbedElement = bodavm.memory.globalobj['HTMLEmbedElement']
-// HTMLElement = bodavm.memory.globalobj['HTMLElement']
-// HTMLDocument = bodavm.memory.globalobj['HTMLDocument']
-// HTMLDivElement = bodavm.memory.globalobj['HTMLDivElement']
-// HTMLDirectoryElement = bodavm.memory.globalobj['HTMLDirectoryElement']
-// HTMLDialogElement = bodavm.memory.globalobj['HTMLDialogElement']
-// HTMLDetailsElement = bodavm.memory.globalobj['HTMLDetailsElement']
-// HTMLDataListElement = bodavm.memory.globalobj['HTMLDataListElement']
-// HTMLDataElement = bodavm.memory.globalobj['HTMLDataElement']
-// HTMLDListElement = bodavm.memory.globalobj['HTMLDListElement']
-// HTMLCollection = bodavm.memory.globalobj['HTMLCollection']
-// HTMLCanvasElement = bodavm.memory.globalobj['HTMLCanvasElement']
-// HTMLButtonElement = bodavm.memory.globalobj['HTMLButtonElement']
-// HTMLBodyElement = bodavm.memory.globalobj['HTMLBodyElement']
-// HTMLBaseElement = bodavm.memory.globalobj['HTMLBaseElement']
-// HTMLBRElement = bodavm.memory.globalobj['HTMLBRElement']
-// HTMLAudioElement = bodavm.memory.globalobj['HTMLAudioElement']
-// HTMLAreaElement = bodavm.memory.globalobj['HTMLAreaElement']
-// HTMLAnchorElement = bodavm.memory.globalobj['HTMLAnchorElement']
-// HTMLAllCollection = bodavm.memory.globalobj['HTMLAllCollection']
-// GeolocationPositionError = bodavm.memory.globalobj['GeolocationPositionError']
-// GeolocationPosition = bodavm.memory.globalobj['GeolocationPosition']
-// GeolocationCoordinates = bodavm.memory.globalobj['GeolocationCoordinates']
-// Geolocation = bodavm.memory.globalobj['Geolocation']
-// GamepadHapticActuator = bodavm.memory.globalobj['GamepadHapticActuator']
-// GamepadEvent = bodavm.memory.globalobj['GamepadEvent']
-// GamepadButton = bodavm.memory.globalobj['GamepadButton']
-// Gamepad = bodavm.memory.globalobj['Gamepad']
-// GainNode = bodavm.memory.globalobj['GainNode']
-// FormDataEvent = bodavm.memory.globalobj['FormDataEvent']
-// FormData = bodavm.memory.globalobj['FormData']
-// FontFaceSetLoadEvent = bodavm.memory.globalobj['FontFaceSetLoadEvent']
-// FontFace = bodavm.memory.globalobj['FontFace']
-// FocusEvent = bodavm.memory.globalobj['FocusEvent']
-// FileReader = bodavm.memory.globalobj['FileReader']
-// FileList = bodavm.memory.globalobj['FileList']
-// File = bodavm.memory.globalobj['File']
-// FeaturePolicy = bodavm.memory.globalobj['FeaturePolicy']
-// External = bodavm.memory.globalobj['External']
-// EventTarget = bodavm.memory.globalobj['EventTarget']
-// EventSource = bodavm.memory.globalobj['EventSource']
-// EventCounts = bodavm.memory.globalobj['EventCounts']
-// Event = bodavm.memory.globalobj['Event']
-// ErrorEvent = bodavm.memory.globalobj['ErrorEvent']
-// ElementInternals = bodavm.memory.globalobj['ElementInternals']
-// Element = bodavm.memory.globalobj['Element']
-// DynamicsCompressorNode = bodavm.memory.globalobj['DynamicsCompressorNode']
-// DragEvent = bodavm.memory.globalobj['DragEvent']
-// DocumentType = bodavm.memory.globalobj['DocumentType']
-// DocumentFragment = bodavm.memory.globalobj['DocumentFragment']
-// Document = bodavm.memory.globalobj['Document']
-// DelayNode = bodavm.memory.globalobj['DelayNode']
-// DecompressionStream = bodavm.memory.globalobj['DecompressionStream']
-// DataTransferItemList = bodavm.memory.globalobj['DataTransferItemList']
-// DataTransferItem = bodavm.memory.globalobj['DataTransferItem']
-// DataTransfer = bodavm.memory.globalobj['DataTransfer']
-// DOMTokenList = bodavm.memory.globalobj['DOMTokenList']
-// DOMStringMap = bodavm.memory.globalobj['DOMStringMap']
-// DOMStringList = bodavm.memory.globalobj['DOMStringList']
-// DOMRectReadOnly = bodavm.memory.globalobj['DOMRectReadOnly']
-// DOMRectList = bodavm.memory.globalobj['DOMRectList']
-// DOMRect = bodavm.memory.globalobj['DOMRect']
-// DOMQuad = bodavm.memory.globalobj['DOMQuad']
-// DOMPointReadOnly = bodavm.memory.globalobj['DOMPointReadOnly']
-// DOMPoint = bodavm.memory.globalobj['DOMPoint']
-// DOMParser = bodavm.memory.globalobj['DOMParser']
-// DOMMatrixReadOnly = bodavm.memory.globalobj['DOMMatrixReadOnly']
-// DOMMatrix = bodavm.memory.globalobj['DOMMatrix']
-// DOMImplementation = bodavm.memory.globalobj['DOMImplementation']
-// DOMException = bodavm.memory.globalobj['DOMException']
-// DOMError = bodavm.memory.globalobj['DOMError']
-// CustomEvent = bodavm.memory.globalobj['CustomEvent']
-// CustomElementRegistry = bodavm.memory.globalobj['CustomElementRegistry']
-// Crypto = bodavm.memory.globalobj['Crypto']
-// CountQueuingStrategy = bodavm.memory.globalobj['CountQueuingStrategy']
-// ConvolverNode = bodavm.memory.globalobj['ConvolverNode']
-// ConstantSourceNode = bodavm.memory.globalobj['ConstantSourceNode']
-// CompressionStream = bodavm.memory.globalobj['CompressionStream']
-// CompositionEvent = bodavm.memory.globalobj['CompositionEvent']
-// Comment = bodavm.memory.globalobj['Comment']
-// CloseEvent = bodavm.memory.globalobj['CloseEvent']
-// ClipboardEvent = bodavm.memory.globalobj['ClipboardEvent']
-// CharacterData = bodavm.memory.globalobj['CharacterData']
-// ChannelSplitterNode = bodavm.memory.globalobj['ChannelSplitterNode']
-// ChannelMergerNode = bodavm.memory.globalobj['ChannelMergerNode']
-// CanvasRenderingContext2D = bodavm.memory.globalobj['CanvasRenderingContext2D']
-// CanvasPattern = bodavm.memory.globalobj['CanvasPattern']
-// CanvasGradient = bodavm.memory.globalobj['CanvasGradient']
-// CanvasFilter = bodavm.memory.globalobj['CanvasFilter']
-// CanvasCaptureMediaStreamTrack = bodavm.memory.globalobj['CanvasCaptureMediaStreamTrack']
-// CSSVariableReferenceValue = bodavm.memory.globalobj['CSSVariableReferenceValue']
-// CSSUnparsedValue = bodavm.memory.globalobj['CSSUnparsedValue']
-// CSSUnitValue = bodavm.memory.globalobj['CSSUnitValue']
-// CSSTranslate = bodavm.memory.globalobj['CSSTranslate']
-// CSSTransformValue = bodavm.memory.globalobj['CSSTransformValue']
-// CSSTransformComponent = bodavm.memory.globalobj['CSSTransformComponent']
-// CSSSupportsRule = bodavm.memory.globalobj['CSSSupportsRule']
-// CSSStyleValue = bodavm.memory.globalobj['CSSStyleValue']
-// CSSStyleSheet = bodavm.memory.globalobj['CSSStyleSheet']
-// CSSStyleRule = bodavm.memory.globalobj['CSSStyleRule']
-// CSSStyleDeclaration = bodavm.memory.globalobj['CSSStyleDeclaration']
-// CSSSkewY = bodavm.memory.globalobj['CSSSkewY']
-// CSSSkewX = bodavm.memory.globalobj['CSSSkewX']
-// CSSSkew = bodavm.memory.globalobj['CSSSkew']
-// CSSScale = bodavm.memory.globalobj['CSSScale']
-// CSSRuleList = bodavm.memory.globalobj['CSSRuleList']
-// CSSRule = bodavm.memory.globalobj['CSSRule']
-// CSSRotate = bodavm.memory.globalobj['CSSRotate']
-// CSSPropertyRule = bodavm.memory.globalobj['CSSPropertyRule']
-// CSSPositionValue = bodavm.memory.globalobj['CSSPositionValue']
-// CSSPerspective = bodavm.memory.globalobj['CSSPerspective']
-// CSSPageRule = bodavm.memory.globalobj['CSSPageRule']
-// CSSNumericValue = bodavm.memory.globalobj['CSSNumericValue']
-// CSSNumericArray = bodavm.memory.globalobj['CSSNumericArray']
-// CSSNamespaceRule = bodavm.memory.globalobj['CSSNamespaceRule']
-// CSSMediaRule = bodavm.memory.globalobj['CSSMediaRule']
-// CSSMatrixComponent = bodavm.memory.globalobj['CSSMatrixComponent']
-// CSSMathValue = bodavm.memory.globalobj['CSSMathValue']
-// CSSMathSum = bodavm.memory.globalobj['CSSMathSum']
-// CSSMathProduct = bodavm.memory.globalobj['CSSMathProduct']
-// CSSMathNegate = bodavm.memory.globalobj['CSSMathNegate']
-// CSSMathMin = bodavm.memory.globalobj['CSSMathMin']
-// CSSMathMax = bodavm.memory.globalobj['CSSMathMax']
-// CSSMathInvert = bodavm.memory.globalobj['CSSMathInvert']
-// CSSMathClamp = bodavm.memory.globalobj['CSSMathClamp']
-// CSSLayerStatementRule = bodavm.memory.globalobj['CSSLayerStatementRule']
-// CSSLayerBlockRule = bodavm.memory.globalobj['CSSLayerBlockRule']
-// CSSKeywordValue = bodavm.memory.globalobj['CSSKeywordValue']
-// CSSKeyframesRule = bodavm.memory.globalobj['CSSKeyframesRule']
-// CSSKeyframeRule = bodavm.memory.globalobj['CSSKeyframeRule']
-// CSSImportRule = bodavm.memory.globalobj['CSSImportRule']
-// CSSImageValue = bodavm.memory.globalobj['CSSImageValue']
-// CSSGroupingRule = bodavm.memory.globalobj['CSSGroupingRule']
-// CSSFontFaceRule = bodavm.memory.globalobj['CSSFontFaceRule']
-// CSSCounterStyleRule = bodavm.memory.globalobj['CSSCounterStyleRule']
-// CSSConditionRule = bodavm.memory.globalobj['CSSConditionRule']
-// CSS = bodavm.memory.globalobj['CSS']
-// CDATASection = bodavm.memory.globalobj['CDATASection']
-// ByteLengthQueuingStrategy = bodavm.memory.globalobj['ByteLengthQueuingStrategy']
-// BroadcastChannel = bodavm.memory.globalobj['BroadcastChannel']
-// BlobEvent = bodavm.memory.globalobj['BlobEvent']
-// Blob = bodavm.memory.globalobj['Blob']
-// BiquadFilterNode = bodavm.memory.globalobj['BiquadFilterNode']
-// BeforeUnloadEvent = bodavm.memory.globalobj['BeforeUnloadEvent']
-// BeforeInstallPromptEvent = bodavm.memory.globalobj['BeforeInstallPromptEvent']
-// BatteryManager = bodavm.memory.globalobj['BatteryManager']
-// BaseAudioContext = bodavm.memory.globalobj['BaseAudioContext']
-// BarProp = bodavm.memory.globalobj['BarProp']
-// AudioWorkletNode = bodavm.memory.globalobj['AudioWorkletNode']
-// AudioScheduledSourceNode = bodavm.memory.globalobj['AudioScheduledSourceNode']
-// AudioProcessingEvent = bodavm.memory.globalobj['AudioProcessingEvent']
-// AudioParamMap = bodavm.memory.globalobj['AudioParamMap']
-// AudioParam = bodavm.memory.globalobj['AudioParam']
-// AudioNode = bodavm.memory.globalobj['AudioNode']
-// AudioListener = bodavm.memory.globalobj['AudioListener']
-// AudioDestinationNode = bodavm.memory.globalobj['AudioDestinationNode']
-// AudioContext = bodavm.memory.globalobj['AudioContext']
-// AudioBufferSourceNode = bodavm.memory.globalobj['AudioBufferSourceNode']
-// AudioBuffer = bodavm.memory.globalobj['AudioBuffer']
-// Attr = bodavm.memory.globalobj['Attr']
-// AnimationEvent = bodavm.memory.globalobj['AnimationEvent']
-// AnimationEffect = bodavm.memory.globalobj['AnimationEffect']
-// Animation = bodavm.memory.globalobj['Animation']
-// AnalyserNode = bodavm.memory.globalobj['AnalyserNode']
-// AbstractRange = bodavm.memory.globalobj['AbstractRange']
-// AbortSignal = bodavm.memory.globalobj['AbortSignal']
-// AbortController = bodavm.memory.globalobj['AbortController']
-// window = bodavm.memory.globalobj['window']
-// self = bodavm.memory.globalobj['self']
-// document = bodavm.memory.globalobj['document']
-// name = bodavm.memory.globalobj['name']
-// location = bodavm.memory.globalobj['location']
-// customElements = bodavm.memory.globalobj['customElements']
-// history = bodavm.memory.globalobj['history']
-// locationbar = bodavm.memory.globalobj['locationbar']
-// menubar = bodavm.memory.globalobj['menubar']
-// personalbar = bodavm.memory.globalobj['personalbar']
-// scrollbars = bodavm.memory.globalobj['scrollbars']
-// statusbar = bodavm.memory.globalobj['statusbar']
-// toolbar = bodavm.memory.globalobj['toolbar']
-// status = bodavm.memory.globalobj['status']
-// closed = bodavm.memory.globalobj['closed']
-// frames = bodavm.memory.globalobj['frames']
-// length = bodavm.memory.globalobj['length']
-// top = bodavm.memory.globalobj['top']
-// opener = bodavm.memory.globalobj['opener']
-// parent = bodavm.memory.globalobj['parent']
-// frameElement = bodavm.memory.globalobj['frameElement']
-// navigator = bodavm.memory.globalobj['navigator']
-// origin = bodavm.memory.globalobj['origin']
-// external = bodavm.memory.globalobj['external']
-// screen = bodavm.memory.globalobj['screen']
-// innerWidth = bodavm.memory.globalobj['innerWidth']
-// innerHeight = bodavm.memory.globalobj['innerHeight']
-// scrollX = bodavm.memory.globalobj['scrollX']
-// pageXOffset = bodavm.memory.globalobj['pageXOffset']
-// scrollY = bodavm.memory.globalobj['scrollY']
-// pageYOffset = bodavm.memory.globalobj['pageYOffset']
-// visualViewport = bodavm.memory.globalobj['visualViewport']
-// screenX = bodavm.memory.globalobj['screenX']
-// screenY = bodavm.memory.globalobj['screenY']
-// outerWidth = bodavm.memory.globalobj['outerWidth']
-// outerHeight = bodavm.memory.globalobj['outerHeight']
-// devicePixelRatio = bodavm.memory.globalobj['devicePixelRatio']
-// event = bodavm.memory.globalobj['event']
-// clientInformation = bodavm.memory.globalobj['clientInformation']
-// offscreenBuffering = bodavm.memory.globalobj['offscreenBuffering']
-// screenLeft = bodavm.memory.globalobj['screenLeft']
-// screenTop = bodavm.memory.globalobj['screenTop']
-// defaultStatus = bodavm.memory.globalobj['defaultStatus']
-// defaultstatus = bodavm.memory.globalobj['defaultstatus']
-// styleMedia = bodavm.memory.globalobj['styleMedia']
-// onsearch = bodavm.memory.globalobj['onsearch']
-// isSecureContext = bodavm.memory.globalobj['isSecureContext']
-// performance = bodavm.memory.globalobj['performance']
-// onappinstalled = bodavm.memory.globalobj['onappinstalled']
-// onbeforeinstallprompt = bodavm.memory.globalobj['onbeforeinstallprompt']
-// crypto = bodavm.memory.globalobj['crypto']
-// indexedDB = bodavm.memory.globalobj['indexedDB']
-// webkitStorageInfo = bodavm.memory.globalobj['webkitStorageInfo']
-// sessionStorage = bodavm.memory.globalobj['sessionStorage']
-// localStorage = bodavm.memory.globalobj['localStorage']
-// onbeforexrselect = bodavm.memory.globalobj['onbeforexrselect']
-// onabort = bodavm.memory.globalobj['onabort']
-// onblur = bodavm.memory.globalobj['onblur']
-// oncancel = bodavm.memory.globalobj['oncancel']
-// oncanplay = bodavm.memory.globalobj['oncanplay']
-// oncanplaythrough = bodavm.memory.globalobj['oncanplaythrough']
-// onchange = bodavm.memory.globalobj['onchange']
-// onclick = bodavm.memory.globalobj['onclick']
-// onclose = bodavm.memory.globalobj['onclose']
-// oncontextlost = bodavm.memory.globalobj['oncontextlost']
-// oncontextmenu = bodavm.memory.globalobj['oncontextmenu']
-// oncontextrestored = bodavm.memory.globalobj['oncontextrestored']
-// oncuechange = bodavm.memory.globalobj['oncuechange']
-// ondblclick = bodavm.memory.globalobj['ondblclick']
-// ondrag = bodavm.memory.globalobj['ondrag']
-// ondragend = bodavm.memory.globalobj['ondragend']
-// ondragenter = bodavm.memory.globalobj['ondragenter']
-// ondragleave = bodavm.memory.globalobj['ondragleave']
-// ondragover = bodavm.memory.globalobj['ondragover']
-// ondragstart = bodavm.memory.globalobj['ondragstart']
-// ondrop = bodavm.memory.globalobj['ondrop']
-// ondurationchange = bodavm.memory.globalobj['ondurationchange']
-// onemptied = bodavm.memory.globalobj['onemptied']
-// onended = bodavm.memory.globalobj['onended']
-// onerror = bodavm.memory.globalobj['onerror']
-// onfocus = bodavm.memory.globalobj['onfocus']
-// onformdata = bodavm.memory.globalobj['onformdata']
-// oninput = bodavm.memory.globalobj['oninput']
-// oninvalid = bodavm.memory.globalobj['oninvalid']
-// onkeydown = bodavm.memory.globalobj['onkeydown']
-// onkeypress = bodavm.memory.globalobj['onkeypress']
-// onkeyup = bodavm.memory.globalobj['onkeyup']
-// onload = bodavm.memory.globalobj['onload']
-// onloadeddata = bodavm.memory.globalobj['onloadeddata']
-// onloadedmetadata = bodavm.memory.globalobj['onloadedmetadata']
-// onloadstart = bodavm.memory.globalobj['onloadstart']
-// onmousedown = bodavm.memory.globalobj['onmousedown']
-// onmouseenter = bodavm.memory.globalobj['onmouseenter']
-// onmouseleave = bodavm.memory.globalobj['onmouseleave']
-// onmousemove = bodavm.memory.globalobj['onmousemove']
-// onmouseout = bodavm.memory.globalobj['onmouseout']
-// onmouseover = bodavm.memory.globalobj['onmouseover']
-// onmouseup = bodavm.memory.globalobj['onmouseup']
-// onmousewheel = bodavm.memory.globalobj['onmousewheel']
-// onpause = bodavm.memory.globalobj['onpause']
-// onplay = bodavm.memory.globalobj['onplay']
-// onplaying = bodavm.memory.globalobj['onplaying']
-// onprogress = bodavm.memory.globalobj['onprogress']
-// onratechange = bodavm.memory.globalobj['onratechange']
-// onreset = bodavm.memory.globalobj['onreset']
-// onresize = bodavm.memory.globalobj['onresize']
-// onscroll = bodavm.memory.globalobj['onscroll']
-// onsecuritypolicyviolation = bodavm.memory.globalobj['onsecuritypolicyviolation']
-// onseeked = bodavm.memory.globalobj['onseeked']
-// onseeking = bodavm.memory.globalobj['onseeking']
-// onselect = bodavm.memory.globalobj['onselect']
-// onslotchange = bodavm.memory.globalobj['onslotchange']
-// onstalled = bodavm.memory.globalobj['onstalled']
-// onsubmit = bodavm.memory.globalobj['onsubmit']
-// onsuspend = bodavm.memory.globalobj['onsuspend']
-// ontimeupdate = bodavm.memory.globalobj['ontimeupdate']
-// ontoggle = bodavm.memory.globalobj['ontoggle']
-// onvolumechange = bodavm.memory.globalobj['onvolumechange']
-// onwaiting = bodavm.memory.globalobj['onwaiting']
-// onwebkitanimationend = bodavm.memory.globalobj['onwebkitanimationend']
-// onwebkitanimationiteration = bodavm.memory.globalobj['onwebkitanimationiteration']
-// onwebkitanimationstart = bodavm.memory.globalobj['onwebkitanimationstart']
-// onwebkittransitionend = bodavm.memory.globalobj['onwebkittransitionend']
-// onwheel = bodavm.memory.globalobj['onwheel']
-// onauxclick = bodavm.memory.globalobj['onauxclick']
-// ongotpointercapture = bodavm.memory.globalobj['ongotpointercapture']
-// onlostpointercapture = bodavm.memory.globalobj['onlostpointercapture']
-// onpointerdown = bodavm.memory.globalobj['onpointerdown']
-// onpointermove = bodavm.memory.globalobj['onpointermove']
-// onpointerup = bodavm.memory.globalobj['onpointerup']
-// onpointercancel = bodavm.memory.globalobj['onpointercancel']
-// onpointerover = bodavm.memory.globalobj['onpointerover']
-// onpointerout = bodavm.memory.globalobj['onpointerout']
-// onpointerenter = bodavm.memory.globalobj['onpointerenter']
-// onpointerleave = bodavm.memory.globalobj['onpointerleave']
-// onselectstart = bodavm.memory.globalobj['onselectstart']
-// onselectionchange = bodavm.memory.globalobj['onselectionchange']
-// onanimationend = bodavm.memory.globalobj['onanimationend']
-// onanimationiteration = bodavm.memory.globalobj['onanimationiteration']
-// onanimationstart = bodavm.memory.globalobj['onanimationstart']
-// ontransitionrun = bodavm.memory.globalobj['ontransitionrun']
-// ontransitionstart = bodavm.memory.globalobj['ontransitionstart']
-// ontransitionend = bodavm.memory.globalobj['ontransitionend']
-// ontransitioncancel = bodavm.memory.globalobj['ontransitioncancel']
-// onafterprint = bodavm.memory.globalobj['onafterprint']
-// onbeforeprint = bodavm.memory.globalobj['onbeforeprint']
-// onbeforeunload = bodavm.memory.globalobj['onbeforeunload']
-// onhashchange = bodavm.memory.globalobj['onhashchange']
-// onlanguagechange = bodavm.memory.globalobj['onlanguagechange']
-// onmessage = bodavm.memory.globalobj['onmessage']
-// onmessageerror = bodavm.memory.globalobj['onmessageerror']
-// onoffline = bodavm.memory.globalobj['onoffline']
-// ononline = bodavm.memory.globalobj['ononline']
-// onpagehide = bodavm.memory.globalobj['onpagehide']
-// onpageshow = bodavm.memory.globalobj['onpageshow']
-// onpopstate = bodavm.memory.globalobj['onpopstate']
-// onrejectionhandled = bodavm.memory.globalobj['onrejectionhandled']
-// onstorage = bodavm.memory.globalobj['onstorage']
-// onunhandledrejection = bodavm.memory.globalobj['onunhandledrejection']
-// onunload = bodavm.memory.globalobj['onunload']
-// alert = bodavm.memory.globalobj['alert']
-// atob = bodavm.memory.globalobj['atob']
-// blur = bodavm.memory.globalobj['blur']
-// btoa = bodavm.memory.globalobj['btoa']
-// cancelAnimationFrame = bodavm.memory.globalobj['cancelAnimationFrame']
-// cancelIdleCallback = bodavm.memory.globalobj['cancelIdleCallback']
-// captureEvents = bodavm.memory.globalobj['captureEvents']
-// clearInterval = bodavm.memory.globalobj['clearInterval']
-// clearTimeout = bodavm.memory.globalobj['clearTimeout']
-// close = bodavm.memory.globalobj['close']
-// confirm = bodavm.memory.globalobj['confirm']
-// createImageBitmap = bodavm.memory.globalobj['createImageBitmap']
-// fetch = bodavm.memory.globalobj['fetch']
-// find = bodavm.memory.globalobj['find']
-// focus = bodavm.memory.globalobj['focus']
-// getComputedStyle = bodavm.memory.globalobj['getComputedStyle']
-// getSelection = bodavm.memory.globalobj['getSelection']
-// matchMedia = bodavm.memory.globalobj['matchMedia']
-// moveBy = bodavm.memory.globalobj['moveBy']
-// moveTo = bodavm.memory.globalobj['moveTo']
-// open = bodavm.memory.globalobj['open']
-// postMessage = bodavm.memory.globalobj['postMessage']
-// print = bodavm.memory.globalobj['print']
-// prompt = bodavm.memory.globalobj['prompt']
-// queueMicrotask = bodavm.memory.globalobj['queueMicrotask']
-// releaseEvents = bodavm.memory.globalobj['releaseEvents']
-// reportError = bodavm.memory.globalobj['reportError']
-// requestAnimationFrame = bodavm.memory.globalobj['requestAnimationFrame']
-// requestIdleCallback = bodavm.memory.globalobj['requestIdleCallback']
-// resizeBy = bodavm.memory.globalobj['resizeBy']
-// resizeTo = bodavm.memory.globalobj['resizeTo']
-// scroll = bodavm.memory.globalobj['scroll']
-// scrollBy = bodavm.memory.globalobj['scrollBy']
-// scrollTo = bodavm.memory.globalobj['scrollTo']
-// setInterval = bodavm.memory.globalobj['setInterval']
-// setTimeout = bodavm.memory.globalobj['setTimeout']
-// stop = bodavm.memory.globalobj['stop']
-// structuredClone = bodavm.memory.globalobj['structuredClone']
-// webkitCancelAnimationFrame = bodavm.memory.globalobj['webkitCancelAnimationFrame']
-// webkitRequestAnimationFrame = bodavm.memory.globalobj['webkitRequestAnimationFrame']
-// chrome = bodavm.memory.globalobj['chrome']
-// WebAssembly = bodavm.memory.globalobj['WebAssembly']
-// caches = bodavm.memory.globalobj['caches']
-// cookieStore = bodavm.memory.globalobj['cookieStore']
-// ondevicemotion = bodavm.memory.globalobj['ondevicemotion']
-// ondeviceorientation = bodavm.memory.globalobj['ondeviceorientation']
-// ondeviceorientationabsolute = bodavm.memory.globalobj['ondeviceorientationabsolute']
-// onbeforematch = bodavm.memory.globalobj['onbeforematch']
-// AbsoluteOrientationSensor = bodavm.memory.globalobj['AbsoluteOrientationSensor']
-// Accelerometer = bodavm.memory.globalobj['Accelerometer']
-// AudioWorklet = bodavm.memory.globalobj['AudioWorklet']
-// Cache = bodavm.memory.globalobj['Cache']
-// CacheStorage = bodavm.memory.globalobj['CacheStorage']
-// Clipboard = bodavm.memory.globalobj['Clipboard']
-// ClipboardItem = bodavm.memory.globalobj['ClipboardItem']
-// CookieChangeEvent = bodavm.memory.globalobj['CookieChangeEvent']
-// CookieStore = bodavm.memory.globalobj['CookieStore']
-// CookieStoreManager = bodavm.memory.globalobj['CookieStoreManager']
-// Credential = bodavm.memory.globalobj['Credential']
-// CredentialsContainer = bodavm.memory.globalobj['CredentialsContainer']
-// CryptoKey = bodavm.memory.globalobj['CryptoKey']
-// DeviceMotionEvent = bodavm.memory.globalobj['DeviceMotionEvent']
-// DeviceMotionEventAcceleration = bodavm.memory.globalobj['DeviceMotionEventAcceleration']
-// DeviceMotionEventRotationRate = bodavm.memory.globalobj['DeviceMotionEventRotationRate']
-// DeviceOrientationEvent = bodavm.memory.globalobj['DeviceOrientationEvent']
-// FederatedCredential = bodavm.memory.globalobj['FederatedCredential']
-// Gyroscope = bodavm.memory.globalobj['Gyroscope']
-// Keyboard = bodavm.memory.globalobj['Keyboard']
-// KeyboardLayoutMap = bodavm.memory.globalobj['KeyboardLayoutMap']
-// LinearAccelerationSensor = bodavm.memory.globalobj['LinearAccelerationSensor']
-// Lock = bodavm.memory.globalobj['Lock']
-// LockManager = bodavm.memory.globalobj['LockManager']
-// MIDIAccess = bodavm.memory.globalobj['MIDIAccess']
-// MIDIConnectionEvent = bodavm.memory.globalobj['MIDIConnectionEvent']
-// MIDIInput = bodavm.memory.globalobj['MIDIInput']
-// MIDIInputMap = bodavm.memory.globalobj['MIDIInputMap']
-// MIDIMessageEvent = bodavm.memory.globalobj['MIDIMessageEvent']
-// MIDIOutput = bodavm.memory.globalobj['MIDIOutput']
-// MIDIOutputMap = bodavm.memory.globalobj['MIDIOutputMap']
-// MIDIPort = bodavm.memory.globalobj['MIDIPort']
-// MediaDeviceInfo = bodavm.memory.globalobj['MediaDeviceInfo']
-// MediaDevices = bodavm.memory.globalobj['MediaDevices']
-// MediaKeyMessageEvent = bodavm.memory.globalobj['MediaKeyMessageEvent']
-// MediaKeySession = bodavm.memory.globalobj['MediaKeySession']
-// MediaKeyStatusMap = bodavm.memory.globalobj['MediaKeyStatusMap']
-// MediaKeySystemAccess = bodavm.memory.globalobj['MediaKeySystemAccess']
-// MediaKeys = bodavm.memory.globalobj['MediaKeys']
-// NavigationPreloadManager = bodavm.memory.globalobj['NavigationPreloadManager']
-// NavigatorManagedData = bodavm.memory.globalobj['NavigatorManagedData']
-// OrientationSensor = bodavm.memory.globalobj['OrientationSensor']
-// PasswordCredential = bodavm.memory.globalobj['PasswordCredential']
-// RTCIceTransport = bodavm.memory.globalobj['RTCIceTransport']
-// RelativeOrientationSensor = bodavm.memory.globalobj['RelativeOrientationSensor']
-// Sensor = bodavm.memory.globalobj['Sensor']
-// SensorErrorEvent = bodavm.memory.globalobj['SensorErrorEvent']
-// ServiceWorker = bodavm.memory.globalobj['ServiceWorker']
-// ServiceWorkerContainer = bodavm.memory.globalobj['ServiceWorkerContainer']
-// ServiceWorkerRegistration = bodavm.memory.globalobj['ServiceWorkerRegistration']
-// StorageManager = bodavm.memory.globalobj['StorageManager']
-// SubtleCrypto = bodavm.memory.globalobj['SubtleCrypto']
-// Worklet = bodavm.memory.globalobj['Worklet']
-// XRDOMOverlayState = bodavm.memory.globalobj['XRDOMOverlayState']
-// XRLayer = bodavm.memory.globalobj['XRLayer']
-// XRWebGLBinding = bodavm.memory.globalobj['XRWebGLBinding']
-// AudioData = bodavm.memory.globalobj['AudioData']
-// EncodedAudioChunk = bodavm.memory.globalobj['EncodedAudioChunk']
-// EncodedVideoChunk = bodavm.memory.globalobj['EncodedVideoChunk']
-// ImageTrack = bodavm.memory.globalobj['ImageTrack']
-// ImageTrackList = bodavm.memory.globalobj['ImageTrackList']
-// VideoColorSpace = bodavm.memory.globalobj['VideoColorSpace']
-// VideoFrame = bodavm.memory.globalobj['VideoFrame']
-// AudioDecoder = bodavm.memory.globalobj['AudioDecoder']
-// AudioEncoder = bodavm.memory.globalobj['AudioEncoder']
-// ImageDecoder = bodavm.memory.globalobj['ImageDecoder']
-// VideoDecoder = bodavm.memory.globalobj['VideoDecoder']
-// VideoEncoder = bodavm.memory.globalobj['VideoEncoder']
-// AuthenticatorAssertionResponse = bodavm.memory.globalobj['AuthenticatorAssertionResponse']
-// AuthenticatorAttestationResponse = bodavm.memory.globalobj['AuthenticatorAttestationResponse']
-// AuthenticatorResponse = bodavm.memory.globalobj['AuthenticatorResponse']
-// PublicKeyCredential = bodavm.memory.globalobj['PublicKeyCredential']
-// Bluetooth = bodavm.memory.globalobj['Bluetooth']
-// BluetoothCharacteristicProperties = bodavm.memory.globalobj['BluetoothCharacteristicProperties']
-// BluetoothDevice = bodavm.memory.globalobj['BluetoothDevice']
-// BluetoothRemoteGATTCharacteristic = bodavm.memory.globalobj['BluetoothRemoteGATTCharacteristic']
-// BluetoothRemoteGATTDescriptor = bodavm.memory.globalobj['BluetoothRemoteGATTDescriptor']
-// BluetoothRemoteGATTServer = bodavm.memory.globalobj['BluetoothRemoteGATTServer']
-// BluetoothRemoteGATTService = bodavm.memory.globalobj['BluetoothRemoteGATTService']
-// EyeDropper = bodavm.memory.globalobj['EyeDropper']
-// FileSystemDirectoryHandle = bodavm.memory.globalobj['FileSystemDirectoryHandle']
-// FileSystemFileHandle = bodavm.memory.globalobj['FileSystemFileHandle']
-// FileSystemHandle = bodavm.memory.globalobj['FileSystemHandle']
-// FileSystemWritableFileStream = bodavm.memory.globalobj['FileSystemWritableFileStream']
-// FragmentDirective = bodavm.memory.globalobj['FragmentDirective']
-// GravitySensor = bodavm.memory.globalobj['GravitySensor']
-// HID = bodavm.memory.globalobj['HID']
-// HIDConnectionEvent = bodavm.memory.globalobj['HIDConnectionEvent']
-// HIDDevice = bodavm.memory.globalobj['HIDDevice']
-// HIDInputReportEvent = bodavm.memory.globalobj['HIDInputReportEvent']
-// IdleDetector = bodavm.memory.globalobj['IdleDetector']
-// MediaStreamTrackGenerator = bodavm.memory.globalobj['MediaStreamTrackGenerator']
-// MediaStreamTrackProcessor = bodavm.memory.globalobj['MediaStreamTrackProcessor']
-// OTPCredential = bodavm.memory.globalobj['OTPCredential']
-// PaymentAddress = bodavm.memory.globalobj['PaymentAddress']
-// PaymentRequest = bodavm.memory.globalobj['PaymentRequest']
-// PaymentResponse = bodavm.memory.globalobj['PaymentResponse']
-// PaymentMethodChangeEvent = bodavm.memory.globalobj['PaymentMethodChangeEvent']
-// Presentation = bodavm.memory.globalobj['Presentation']
-// PresentationAvailability = bodavm.memory.globalobj['PresentationAvailability']
-// PresentationConnection = bodavm.memory.globalobj['PresentationConnection']
-// PresentationConnectionAvailableEvent = bodavm.memory.globalobj['PresentationConnectionAvailableEvent']
-// PresentationConnectionCloseEvent = bodavm.memory.globalobj['PresentationConnectionCloseEvent']
-// PresentationConnectionList = bodavm.memory.globalobj['PresentationConnectionList']
-// PresentationReceiver = bodavm.memory.globalobj['PresentationReceiver']
-// PresentationRequest = bodavm.memory.globalobj['PresentationRequest']
-// Profiler = bodavm.memory.globalobj['Profiler']
-// Scheduling = bodavm.memory.globalobj['Scheduling']
-// ScreenDetailed = bodavm.memory.globalobj['ScreenDetailed']
-// ScreenDetails = bodavm.memory.globalobj['ScreenDetails']
-// Serial = bodavm.memory.globalobj['Serial']
-// SerialPort = bodavm.memory.globalobj['SerialPort']
-// USB = bodavm.memory.globalobj['USB']
-// USBAlternateInterface = bodavm.memory.globalobj['USBAlternateInterface']
-// USBConfiguration = bodavm.memory.globalobj['USBConfiguration']
-// USBConnectionEvent = bodavm.memory.globalobj['USBConnectionEvent']
-// USBDevice = bodavm.memory.globalobj['USBDevice']
-// USBEndpoint = bodavm.memory.globalobj['USBEndpoint']
-// USBInTransferResult = bodavm.memory.globalobj['USBInTransferResult']
-// USBInterface = bodavm.memory.globalobj['USBInterface']
-// USBIsochronousInTransferPacket = bodavm.memory.globalobj['USBIsochronousInTransferPacket']
-// USBIsochronousInTransferResult = bodavm.memory.globalobj['USBIsochronousInTransferResult']
-// USBIsochronousOutTransferPacket = bodavm.memory.globalobj['USBIsochronousOutTransferPacket']
-// USBIsochronousOutTransferResult = bodavm.memory.globalobj['USBIsochronousOutTransferResult']
-// USBOutTransferResult = bodavm.memory.globalobj['USBOutTransferResult']
-// VirtualKeyboard = bodavm.memory.globalobj['VirtualKeyboard']
-// WakeLock = bodavm.memory.globalobj['WakeLock']
-// WakeLockSentinel = bodavm.memory.globalobj['WakeLockSentinel']
-// WebTransport = bodavm.memory.globalobj['WebTransport']
-// WebTransportBidirectionalStream = bodavm.memory.globalobj['WebTransportBidirectionalStream']
-// WebTransportDatagramDuplexStream = bodavm.memory.globalobj['WebTransportDatagramDuplexStream']
-// WebTransportError = bodavm.memory.globalobj['WebTransportError']
-// XRAnchor = bodavm.memory.globalobj['XRAnchor']
-// XRAnchorSet = bodavm.memory.globalobj['XRAnchorSet']
-// XRBoundedReferenceSpace = bodavm.memory.globalobj['XRBoundedReferenceSpace']
-// XRFrame = bodavm.memory.globalobj['XRFrame']
-// XRInputSource = bodavm.memory.globalobj['XRInputSource']
-// XRInputSourceArray = bodavm.memory.globalobj['XRInputSourceArray']
-// XRInputSourceEvent = bodavm.memory.globalobj['XRInputSourceEvent']
-// XRInputSourcesChangeEvent = bodavm.memory.globalobj['XRInputSourcesChangeEvent']
-// XRPose = bodavm.memory.globalobj['XRPose']
-// XRReferenceSpace = bodavm.memory.globalobj['XRReferenceSpace']
-// XRReferenceSpaceEvent = bodavm.memory.globalobj['XRReferenceSpaceEvent']
-// XRRenderState = bodavm.memory.globalobj['XRRenderState']
-// XRRigidTransform = bodavm.memory.globalobj['XRRigidTransform']
-// XRSession = bodavm.memory.globalobj['XRSession']
-// XRSessionEvent = bodavm.memory.globalobj['XRSessionEvent']
-// XRSpace = bodavm.memory.globalobj['XRSpace']
-// XRSystem = bodavm.memory.globalobj['XRSystem']
-// XRView = bodavm.memory.globalobj['XRView']
-// XRViewerPose = bodavm.memory.globalobj['XRViewerPose']
-// XRViewport = bodavm.memory.globalobj['XRViewport']
-// XRWebGLLayer = bodavm.memory.globalobj['XRWebGLLayer']
-// XRCPUDepthInformation = bodavm.memory.globalobj['XRCPUDepthInformation']
-// XRDepthInformation = bodavm.memory.globalobj['XRDepthInformation']
-// XRWebGLDepthInformation = bodavm.memory.globalobj['XRWebGLDepthInformation']
-// XRHitTestResult = bodavm.memory.globalobj['XRHitTestResult']
-// XRHitTestSource = bodavm.memory.globalobj['XRHitTestSource']
-// XRRay = bodavm.memory.globalobj['XRRay']
-// XRTransientInputHitTestResult = bodavm.memory.globalobj['XRTransientInputHitTestResult']
-// XRTransientInputHitTestSource = bodavm.memory.globalobj['XRTransientInputHitTestSource']
-// XRLightEstimate = bodavm.memory.globalobj['XRLightEstimate']
-// XRLightProbe = bodavm.memory.globalobj['XRLightProbe']
-// getScreenDetails = bodavm.memory.globalobj['getScreenDetails']
-// showDirectoryPicker = bodavm.memory.globalobj['showDirectoryPicker']
-// showOpenFilePicker = bodavm.memory.globalobj['showOpenFilePicker']
-// showSaveFilePicker = bodavm.memory.globalobj['showSaveFilePicker']
-// originAgentCluster = bodavm.memory.globalobj['originAgentCluster']
-// trustedTypes = bodavm.memory.globalobj['trustedTypes']
-// navigation = bodavm.memory.globalobj['navigation']
-// speechSynthesis = bodavm.memory.globalobj['speechSynthesis']
-// onpointerrawupdate = bodavm.memory.globalobj['onpointerrawupdate']
-// crossOriginIsolated = bodavm.memory.globalobj['crossOriginIsolated']
-// scheduler = bodavm.memory.globalobj['scheduler']
-// AnimationPlaybackEvent = bodavm.memory.globalobj['AnimationPlaybackEvent']
-// AnimationTimeline = bodavm.memory.globalobj['AnimationTimeline']
-// CSSAnimation = bodavm.memory.globalobj['CSSAnimation']
-// CSSTransition = bodavm.memory.globalobj['CSSTransition']
-// DocumentTimeline = bodavm.memory.globalobj['DocumentTimeline']
-// BackgroundFetchManager = bodavm.memory.globalobj['BackgroundFetchManager']
-// BackgroundFetchRecord = bodavm.memory.globalobj['BackgroundFetchRecord']
-// BackgroundFetchRegistration = bodavm.memory.globalobj['BackgroundFetchRegistration']
-// BluetoothUUID = bodavm.memory.globalobj['BluetoothUUID']
-// CSSFontPaletteValuesRule = bodavm.memory.globalobj['CSSFontPaletteValuesRule']
-// CaptureHandleChangeEvent = bodavm.memory.globalobj['CaptureHandleChangeEvent']
-// CustomStateSet = bodavm.memory.globalobj['CustomStateSet']
-// DelegatedInkTrailPresenter = bodavm.memory.globalobj['DelegatedInkTrailPresenter']
-// Ink = bodavm.memory.globalobj['Ink']
-// MediaMetadata = bodavm.memory.globalobj['MediaMetadata']
-// MediaSession = bodavm.memory.globalobj['MediaSession']
-// MediaSource = bodavm.memory.globalobj['MediaSource']
-// SourceBuffer = bodavm.memory.globalobj['SourceBuffer']
-// SourceBufferList = bodavm.memory.globalobj['SourceBufferList']
-// MediaStreamTrack = bodavm.memory.globalobj['MediaStreamTrack']
-// NavigateEvent = bodavm.memory.globalobj['NavigateEvent']
-// Navigation = bodavm.memory.globalobj['Navigation']
-// NavigationCurrentEntryChangeEvent = bodavm.memory.globalobj['NavigationCurrentEntryChangeEvent']
-// NavigationDestination = bodavm.memory.globalobj['NavigationDestination']
-// NavigationHistoryEntry = bodavm.memory.globalobj['NavigationHistoryEntry']
-// NavigationTransition = bodavm.memory.globalobj['NavigationTransition']
-// NavigatorUAData = bodavm.memory.globalobj['NavigatorUAData']
-// Notification = bodavm.memory.globalobj['Notification']
-// PaymentInstruments = bodavm.memory.globalobj['PaymentInstruments']
-// PaymentManager = bodavm.memory.globalobj['PaymentManager']
-// PaymentRequestUpdateEvent = bodavm.memory.globalobj['PaymentRequestUpdateEvent']
-// PeriodicSyncManager = bodavm.memory.globalobj['PeriodicSyncManager']
-// PermissionStatus = bodavm.memory.globalobj['PermissionStatus']
-// Permissions = bodavm.memory.globalobj['Permissions']
-// PictureInPictureEvent = bodavm.memory.globalobj['PictureInPictureEvent']
-// PictureInPictureWindow = bodavm.memory.globalobj['PictureInPictureWindow']
-// PushManager = bodavm.memory.globalobj['PushManager']
-// PushSubscription = bodavm.memory.globalobj['PushSubscription']
-// PushSubscriptionOptions = bodavm.memory.globalobj['PushSubscriptionOptions']
-// RemotePlayback = bodavm.memory.globalobj['RemotePlayback']
-// Scheduler = bodavm.memory.globalobj['Scheduler']
-// TaskController = bodavm.memory.globalobj['TaskController']
-// TaskPriorityChangeEvent = bodavm.memory.globalobj['TaskPriorityChangeEvent']
-// TaskSignal = bodavm.memory.globalobj['TaskSignal']
-// SharedWorker = bodavm.memory.globalobj['SharedWorker']
-// SpeechSynthesisErrorEvent = bodavm.memory.globalobj['SpeechSynthesisErrorEvent']
-// SpeechSynthesisEvent = bodavm.memory.globalobj['SpeechSynthesisEvent']
-// SpeechSynthesisUtterance = bodavm.memory.globalobj['SpeechSynthesisUtterance']
-// TrustedHTML = bodavm.memory.globalobj['TrustedHTML']
-// TrustedScript = bodavm.memory.globalobj['TrustedScript']
-// TrustedScriptURL = bodavm.memory.globalobj['TrustedScriptURL']
-// TrustedTypePolicy = bodavm.memory.globalobj['TrustedTypePolicy']
-// TrustedTypePolicyFactory = bodavm.memory.globalobj['TrustedTypePolicyFactory']
-// URLPattern = bodavm.memory.globalobj['URLPattern']
-// VideoPlaybackQuality = bodavm.memory.globalobj['VideoPlaybackQuality']
-// VirtualKeyboardGeometryChangeEvent = bodavm.memory.globalobj['VirtualKeyboardGeometryChangeEvent']
-// XSLTProcessor = bodavm.memory.globalobj['XSLTProcessor']
-// webkitSpeechGrammar = bodavm.memory.globalobj['webkitSpeechGrammar']
-// webkitSpeechGrammarList = bodavm.memory.globalobj['webkitSpeechGrammarList']
-// webkitSpeechRecognition = bodavm.memory.globalobj['webkitSpeechRecognition']
-// webkitSpeechRecognitionError = bodavm.memory.globalobj['webkitSpeechRecognitionError']
-// webkitSpeechRecognitionEvent = bodavm.memory.globalobj['webkitSpeechRecognitionEvent']
-// openDatabase = bodavm.memory.globalobj['openDatabase']
-// webkitRequestFileSystem = bodavm.memory.globalobj['webkitRequestFileSystem']
-// webkitResolveLocalFileSystemURL = bodavm.memory.globalobj['webkitResolveLocalFileSystemURL']
-// vilame_setter = bodavm.memory.globalobj['vilame_setter']
-// getProtoEnvCode = bodavm.memory.globalobj['getProtoEnvCode']
-// getObjEnvCode = bodavm.memory.globalobj['getObjEnvCode']
-// getDescriptor = bodavm.memory.globalobj['getDescriptor']
-// getDescriptor2 = bodavm.memory.globalobj['getDescriptor2']
-// bobocode = bodavm.memory.globalobj['bobocode']
-// code2 = bodavm.memory.globalobj['code2']
-// dir = bodavm.memory.globalobj['dir']
-// dirxml = bodavm.memory.globalobj['dirxml']
-// profile = bodavm.memory.globalobj['profile']
-// profileEnd = bodavm.memory.globalobj['profileEnd']
-// clear = bodavm.memory.globalobj['clear']
-// table = bodavm.memory.globalobj['table']
-// keys = bodavm.memory.globalobj['keys']
-// values = bodavm.memory.globalobj['values']
-// debug = bodavm.memory.globalobj['debug']
-// undebug = bodavm.memory.globalobj['undebug']
-// monitor = bodavm.memory.globalobj['monitor']
-// unmonitor = bodavm.memory.globalobj['unmonitor']
-// inspect = bodavm.memory.globalobj['inspect']
-// copy = bodavm.memory.globalobj['copy']
-// queryObjects = bodavm.memory.globalobj['queryObjects']
-// $_ = bodavm.memory.globalobj['$_']
-// $0 = bodavm.memory.globalobj['$0']
-// $1 = bodavm.memory.globalobj['$1']
-// $2 = bodavm.memory.globalobj['$2']
-// $3 = bodavm.memory.globalobj['$3']
-// $4 = bodavm.memory.globalobj['$4']
-// getEventListeners = bodavm.memory.globalobj['getEventListeners']
-// getAccessibleName = bodavm.memory.globalobj['getAccessibleName']
-// getAccessibleRole = bodavm.memory.globalobj['getAccessibleRole']
-// monitorEvents = bodavm.memory.globalobj['monitorEvents']
-// unmonitorEvents = bodavm.memory.globalobj['unmonitorEvents']
-// $ = bodavm.memory.globalobj['$']
-// $$ = bodavm.memory.globalobj['$$']
-// $x = bodavm.memory.globalobj['$x']
+Object.defineProperty(globalThis, 'window', {
+    get: function window() {
+        // if (bodavm.config.proxy ){
+            // window=bodavm.toolsFunc.proxy(window,'window')
+            // return window
+        // }else{
+            return globalThis
+        // }
+    },
+    // writable: false,
+    configurable: false,
+    enumerable:true
+});
+// debugger
+
+// window.webkitRTCPeerConnection=RTCPeerConnection
+// bodavm.config.isinit=false
+
 
 // 全局变量初始化
 var mytime_stamp = Date.now()
@@ -20727,7 +20176,7 @@ var mytime_stamp = Date.now()
         let arg0 = arguments[0]
         let arg1 = arguments[1]
         let arg2 = arguments[2]
-        if (arg2 = 'bo') {
+        if (arg2 == 'bo') {
             return JSON.stringify_bo.call(this, arg0, arg1)
         }
         // debugger
@@ -20763,7 +20212,7 @@ var mytime_stamp = Date.now()
     JSON.parse = function parse() {
         let arg0 = arguments[0]
         let arg1 = arguments[1]
-        console.log(`JSON.parse `, ` arg0:${arg0.length > 20 ? arg0.substring(0, 20) + '...' : arg0}`, ` arg1:${arg1}`)
+        console.log(`JSON.parse `, ` arg0:${arg0.length > 40 ? arg0.substring(0, 40) + '...' : arg0}`, ` arg1:${arg1}`)
         return JSON.parse_bo.apply(this, arguments)
     }
     bodavm.toolsFunc.safefunction(JSON.parse, 'parse')
@@ -20774,24 +20223,25 @@ var mytime_stamp = Date.now()
     Object.getOwnPropertyDescriptor = function getOwnPropertyDescriptor() {
         let obj = arguments[0]
         let prop = arguments[1]
-        // debugger
         if (prop == 'constructor') {
             // if (obj ==document){debugger}
-            return Object.getOwnPropertyDescriptor_bo.apply(this, arguments)
+            return Object.getOwnPropertyDescriptor_bo.call(this, arguments[0],arguments[1])
         }
-        desc_res = Object.getOwnPropertyDescriptor_bo.apply(this, arguments)
-        console.log(`Object.getOwnPropertyDescriptor==> `, ` obj:${obj}`, `prop:${prop}`, `res ->${desc_res} !!!!检测`);
+        debugger
+
+        desc_res = Object.getOwnPropertyDescriptor_bo.call(this, arguments[0],arguments[1])
+        console.log(`Object.getOwnPropertyDescriptor==> `, ` obj:${obj} ->`, `prop:${prop} ->`, `  res ->${desc_res} !!!!检测`);
         return desc_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptor, 'getOwnPropertyDescriptor')
 
 
     Object.getOwnPropertyDescriptors_bo = Object.getOwnPropertyDescriptors
-    Object.getOwnPropertyDescriptors = function getOwnPropertyDescriptor() {
+    Object.getOwnPropertyDescriptors = function getOwnPropertyDescriptors() {
         let arg0 = arguments[0]
         debugger
         descs_res = Object.getOwnPropertyDescriptors_bo.apply(this, arguments)
-        console.log(`Object.getOwnPropertyDescriptors==> `, `arg0:${arg0}`, `res ->${descs_res} !!!!检测`);
+        console.log(`Object.getOwnPropertyDescriptors==> `, `arg0:${arg0} ->`, `res ->${descs_res} !!!!检测`);
         return descs_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptors, 'getOwnPropertyDescriptors')
@@ -20800,7 +20250,7 @@ var mytime_stamp = Date.now()
     Object.getOwnPropertyNames = function getOwnPropertyDescriptor() {
         let arg0 = arguments[0]
         let name_res = Object.getOwnPropertyNames_bo.apply(this, arguments)
-        console.log(`Object.getOwnPropertyNames==> `, ` arg0:${arg0}`, `name_res->${name_res} !!!检测`);
+        console.log(`Object.getOwnPropertyNames==> `,`this ->${bodavm.toolsFunc.getType(this)}->`, ` arg0:${arg0} ->`, ` name_res->${name_res} !!!检测`);
         return name_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames, 'getOwnPropertyNames')
@@ -20808,7 +20258,7 @@ var mytime_stamp = Date.now()
 
     Object.getPrototypeOf_bo = Object.getPrototypeOf
     Object.getPrototypeOf = function (obj) {
-        console.log(`Object.getPrototypeOf `, `obj:${obj}`, '!!!!检测');
+        console.log(`Object.getPrototypeOf `, `this ->${bodavm.toolsFunc.getType(this)}->`,` obj:${obj} `, '!!!!检测');
         return Object.getPrototypeOf_bo.apply(this, arguments)
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames, 'getOwnPropertyNames')
@@ -20816,7 +20266,7 @@ var mytime_stamp = Date.now()
     Object.getOwnPropertySymbols_bo = Object.getOwnPropertySymbols
     Object.getOwnPropertySymbols = function getOwnPropertySymbols(arg) {
         let symbols_res = Object.getOwnPropertySymbols_bo.apply(this, arguments)
-        console.log('Object.getOwnPropertySymbols ', `arg:${arg}`, `symbols_res ->${symbols_res} !!!!检测`);
+        console.log('Object.getOwnPropertySymbols ',`this ->${bodavm.toolsFunc.getType(this)}->`,` arg:${arg} `, ` symbols_res ->${symbols_res} !!!!检测`);
         return symbols_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertySymbols, 'getOwnPropertySymbols')
@@ -20841,31 +20291,67 @@ var mytime_stamp = Date.now()
     Object.values_bo = Object.values
     Object.values = function values() {
         let res = Object.defineProperty_bo.apply(this, arguments)
-        console.log(`Object.values `, `ress ->${res}   !!!!!!!!!!检测`);
+        console.log(`Object.values `,`this ->${bodavm.toolsFunc.getType(this)}->`, `ress ->${res}   !!!!!!!!!!检测`);
         return res
     }
     bodavm.toolsFunc.safefunction(Object.values, 'values')
 
 
-    // Object.prototype.hasOwnProperty_bo=Object.prototype.hasOwnProperty
-    // Object.prototype.hasOwnProperty=function (){
-    //     debugger
-    //     let arg=arguments[0]
-    //     let res=Object.prototype.hasOwnProperty_bo.call(this,arg)
-    //     console.log(`Object.prototype.hasOwnProperty `,`arg ->${arg}`,`res ->${res}  !!!!!!检测!!!!`)
-    //     return res
-    // }
+    Object.prototype.hasOwnProperty_bo=Object.prototype.hasOwnProperty
+    Object.prototype.hasOwnProperty=function (){
+        
+        let arg=arguments[0]
+        let arg1=arguments[1]
+        if (arg1=='boboflag'){
+            return Object.prototype.hasOwnProperty_bo.call(this,arg)
+        }
+        // debugger
+        obj=''
+        if (arg =='allSettled'){debugger}
+        if (typeof this =='function'){
+            obj=this.name
+        }else{
+            // debugger
+            obj=bodavm.toolsFunc.getType(this)
+        }
+        let res=Object.prototype.hasOwnProperty_bo.call(this,arg)
+        console.log(`Object.prototype.hasOwnProperty `,`this -> ${obj}  ->`,`arg -> ${arg} -> `,` res -> ${res}  !!!!!!检测!!!!`)
+        return res
+    }
 
-    // bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
+    bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
 
     Object.entries_bo = Object.entries
     Object.entries = function () {
         let obj = arguments[0]
         let res = Object.entries_bo.call(this, obj)
-        console.log(`Object.entries `, `obj ->${obj}`, `res ->${res}  !!!!!!检测!!!!`)
+        console.log(`Object.entries `,`this ->${bodavm.toolsFunc.getType(this)}->` `obj ->${obj} ->`, `res ->${res}  !!!!!!检测!!!!`)
         return res
     }
     bodavm.toolsFunc.safefunction(Object.entries, 'entries')
+
+    Object.keys_=Object.keys
+    Object.keys=function (){
+        let obj = arguments[0]
+        if (bodavm.toolsFunc.getType(obj)=='[object Window]'){
+           let iframes= bodaobj.document.getElementsByTagName('iframe')
+           for (let i = 0; i < iframes.length; i++) {
+            if (obj==iframes[i].contentWindow){
+                res_=bodavm.memory.contentWindow_keys
+                console.log(`Object.keys `, `contentWindow下keys !!!!!!检测!!!!`)
+
+                return res_
+            }
+            
+           }
+        }
+        
+        let res = Object.keys_.call(this, obj)
+        debugger
+        console.log(`Object.keys `, `obj ->${obj} ->`, `res ->过长不显示}  !!!!!!检测!!!!`)
+        return res
+    }
+    bodavm.toolsFunc.safefunction(Object.keys,'keys')
 
     // Object.prototype.hasOwnProperty_ = Object.prototype.hasOwnProperty
     // Object.prototype.hasOwnProperty = function(x) {
@@ -20877,6 +20363,21 @@ var mytime_stamp = Date.now()
     // }
     // bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
 
+    // var Object_toString = Object.prototype.toString;
+    // Object.prototype.toString = function () {
+    //     let _temp = Object_toString.call(this, arguments);
+    //     console.log(this);
+    //     console.log("Object.prototype.toString: " + _temp);
+    //     // if(this.constructor.name === 'Document'){
+    //     //     return '[object HTMLDocument]';
+    //     // }else if(this.constructor.name === 'CanvasRenderingContext2D'){
+    //     //     return '[object CanvasRenderingContext2D]'
+    //     // }
+    //     return _temp;
+    // };
+    // bodavm.toolsFunc.safefunction(Object.prototype.toString,'toString')
+
+    
     // String.fromCharCode_=String.fromCharCode
     // String.fromCharCode=function(x){
     // res=String.fromCharCode_.apply(this,arguments)
@@ -20929,7 +20430,6 @@ window=bodavm.toolsFunc.proxy(window,"window")
 
 
 
-
 console.log(`===============================================================================================================`);
 console.log(`===============================================================================================================`);
 console.log(`===============================================================================================================`);
@@ -20939,7 +20439,6 @@ console.log(`===================================================================
 console.log(`===============================================================================================================`);
 console.log(`===============================================================================================================`);
 console.log(`===============================================================================================================`);
-
 ///===================================================
 ///===================================================
 ///扣下的js代码运行
@@ -20953,142 +20452,10 @@ console.log(`===================================================================
 
 
 
-;;;;debugger;;chh = 1;cbbh={};cbbh.cbbNatFun = (a,b,c,d)=>{if (window.chh == 1){console.log(a.toString(),b,c,d);}};
-
-;;!function (n, e, t, r, u, i, f, o, c, d, l, a, p, s, m, g, y, h, b, v, w, k, x, O, _, j, C, I, q, R, z, A, E, F, P, S, $, B, D, M, U, G, H, J, K, L, N, Q, T, V, W, X, Y, Z, nn, en, tn, rn, un, fn, on, cn, dn, ln, an, pn, sn, mn, gn, yn, hn, bn, vn, wn, kn, xn, On, _n, jn, Cn, In, qn, Rn, zn, An, En, Fn, Pn, Sn, $n, Bn, Dn, Mn, Un, Gn, Hn, Jn, Kn, Ln, Nn, Qn, Tn, Vn, Wn, Xn, Yn, Zn, ne, ee, te, re, ue, ie, fe, oe, ce, de, le, ae, pe, se, me, ge, ye, he, be, ve, we, ke, xe, Oe, _e, je, Ce, Ie, qe, Re, ze, Ae, Ee, Fe, Pe, Se) {
-    function $e(n, e, t, r, i, f, d, s, h, v) {
-        return e == oe ? (r ? t[Mn][nn[dn]]() || t[ge][nn[dn]]() : t[Mn][nn[cn]](en) || t[ge][nn[cn]](en)) && undefined : e == ae ? (t = {}) && (t[Mn] = []) && (t[ge] = []) && ((t[Rn] = en) || tn) && t : e == sn ? t ? r[R(r) - tn] : r[R(r) - tn] = i : e == ee ? A(r, Yn) ? E(r, Yn) : A(r, yn) ? E(r, yn) : i ? K(t, r) : E(r, Ln) : e == on ? ((i = {})[nn[Zn]] = t) && i : e == he ? t[nn[Dn]] : e == In ? !(i = b[t[r]]) || r != Yn && r != Ln ? i : t[nn[ae]] ? j[t[nn[ae]]] : ((t[nn[ae]] = t[nn[rn]] + nn[ae] + (t[nn[Pn]] ^ On)) || tn) && ((j[t[nn[ae]]] = F(rn, F(tn, i), t[nn[Pn]] & ze)) || tn) && j[t[nn[ae]]] : e == Un ? (f = P(r ? t[nn[qn]](r) : t)) && [i ? null : t[nn[qn]](r + f[tn], r + f[en] + f[tn]), r + f[en] + f[tn]] : e == zn ? (I += tn) && u : e == Ce ? i && r != nn[Cn] ? q[nn[hn]](t, r) : r in t : e == ne ? ((A(t, Ln) ? Z[en][E(t, Ln)] = Z[fn][r] : A(t, An) ? Z[en][E(E(t[An], Ln), Ln)] = l(Z[fn])[nn[Hn]](Q)[nn[qn]](r) : tn) || tn) && undefined : e == Vn ? Z[fn][t] : e == de ? t == tn ? F(tn, X(un, r))[en] ^ i & ze : t == rn ? F(rn, F(tn, X(un, r)), i & ze) : t == un ? c(r[nn[Xn]](O, nn[Un])) : undefined : e == be ? i == an ? X(tn, t, r) : i == Ln ? X(un, t) : i == dn ? null : i == Yn ? X(un, t) : i == yn ? a(X(rn, t, r)) : i == Dn ? !!p(o(X(tn, t, r))) : i == en ? g(X(rn, t, r)) : i == gn ? ((f = X(rn, t, r)) || tn) && m(f[nn[qn]](en, f[nn[on]](nn[ae])), f[nn[qn]](f[nn[on]](nn[ae]) + tn)) : en : e == _e ? y++ && I++ : e == pe ? (v = [][nn[vn]](t, [Z = [{}, f, i, d, s]])) && (r !== nn[Yn] ? Z[en][r] = h : tn) && Z[tn][nn[Hn]](N) && !(n - y) && K(v, Z[rn], U()) : function w() {
-            return T(t, r, i, f, this, arguments, w)
-        }
-    }
-
-    function Be(n, e, t, r, u, i, f, c, l, a) {
-        for (e == qn ? i = R(t) - tn : e == Pn ? !(f = en) && (i = R(t) - tn) : e == je ? (u = nn[Jn]) || (i = t) : e == hn ? !(r = en) && !(c = en) && (u = t[nn[xn]](x)[en]) && ((i = u[nn[qn]](en, -tn)) || tn) && (f = u[nn[re]](R(u) - tn)) && ((r += w[nn[sn]](f)) || tn) && (l = R(i) - tn) : e == xn ? (i = []) && (f = en) : e == me ? (t = t[nn[xn]](m(x, nn[tn]))) && (r = t[nn[qn]](tn, -tn)) && (u = []) && r[nn[Hn]](function (n) {
-            for (((i = P(n)[en][nn[ln]](bn)) || tn) && !(c = en) && (f = ln - R(i)); c < f; c++) i = nn[ue] + i;
-            u[nn[cn]](i)
-        }) && !(c = en) && (l = P(t[nn[qn]](-tn)[en])[en][nn[ln]](bn)) : e == Nn && (r = S(t, en)) && ((u = r[en]) || tn) && ((i = r[tn]) || tn) && ((u = V(u)) || tn) && (n[nn[pn]] = $e[nn[In]](tn, n, _e)) && (n[nn[ln]] = $e[nn[In]](tn, n, zn)); e == qn || e == Pn ? i >= en : e == je ? i < r : e == hn ? l >= en : e == xn ? f < R(r) : e == me ? c < P(t[nn[qn]](en, tn)[en])[en] - R(r) * ln - R(l) : e == Nn ? R(u) : en; e == qn ? i-- : e == Pn ? f++ && i-- : e == je ? i++ : e == hn ? l-- : e == xn ? f++ : e == me ? c++ : en) if (e == qn ? A(t[i][en], r, tn) && (l = !0) && ((c = t[i][en][r] = u) || tn) && l : e == Pn ? f == en && ((r == nn[Yn] ? (l = !0) && (c = null) : r == nn[yn] ? (l = !0) && (c = G(tn, t)[fn]) : r == nn[Gn] ? (l = !0) && (c = t[en][dn]) : en) || tn) && l || ((i == en && r == nn[mn] ? (l = !0) && (c = t[en][en]) : A(t[i][en], r, tn) ? (l = !0) && (c = t[i][en][r]) : en) || tn) && l || i == en && ((r == nn[wn] ? (l = !0) && (c = u && typeof exports == nn[Vn] ? undefined : exports) : r == nn[gn] ? (l = !0) && (c = u && typeof module == nn[Vn] ? undefined : module) : r == nn[le] ? (l = !0) && (c = u && typeof require == nn[Vn] ? undefined : require) : ((c = t[i][en][r]) || tn) && (c || r in t[i][en]) && (l = !0)) || tn) && l : e == je ? (u += o(i)) && en : e == hn ? ((r += k[nn[sn]](i[nn[re]](l)) * s(R(k), c) * R(w)) || tn) && c++ && en : e == xn ? (i[f] = t == tn ? r[nn[bn]](f) : o(r[f] ^ u)) && en : e == me ? (l = nn[ue] + l) && en : e == Nn ? (l = p(u[nn[qn]](en, tn), bn)) && ((a = p(u[nn[qn]](tn, tn + l), bn)) || tn) && (f = tn + l) && (c = f + a) && h[nn[cn]](u[nn[qn]](f, c)) && (u = u[nn[qn]](c)) && en : en) return c;
-        if (e == Pn && !u) throw d(r + nn[Ln]);
-        return e == qn ? t[en][en][r] = u : e == je ? u : e == hn ? [r, R(u)] : e == xn ? t == tn ? i : i[nn[Nn]](nn[Jn]) : e == me ? u[nn[cn]](l) && u[nn[Nn]](nn[Jn]) : e == Nn ? t[nn[qn]](i) : void 0
-    }
-
-    function K(n, e, t, u, o, c, d, l, a, p, m, g, h, b, v, w, k, x, O, _, j, C, I, q, z, F, P, S, L, N) {
-        return (a = t[l = t[nn[rn]]]) && l == In ? function () {
-            throw K(e, a[en])
-        }() : l == Un ? function () {
-            debugger
-        }() : l == an || l == Yn || l == yn || l == Dn || l == dn || l == en || l == gn ? E(t, l) : l == Kn ? a[nn[Hn]](function (n) {
-            K(e, n)
-        }) : l == Vn ? A(a[en], Jn) ? ((q = K(e, a[tn])) || tn) && a[en][Jn][nn[Hn]](function (n, t) {
-            G(tn, e)[en][E(n, Ln)] = q[t]
-        }) : (I = E(a[en], Ln)) && ((q = K(e, a[tn])) || tn) && (A(a[tn], an) && E(a[tn], an) == Oe ? G(tn, e)[en][I] = G(tn, e)[en][I] : G(tn, e)[en][I] = q) : l == ne ? a[nn[Hn]](function (n) {
-            K(e, n, u)
-        }) : l == un ? u ? G(en, u[Mn], tn) : en : l == on ? u ? G(en, u[ge], tn) : en : l == zn || l == fn ? function (n, t, r, i, f) {
-            for (((r = l == zn ? U() : u) || tn) && !(i = en) && (t = a[nn[Fn]](function (t) {
-                return t[Zn] ? K(e, t) && null : !t[Kn] || t[Kn][nn[Hn]](function (t) {
-                    !(n = E(t[Vn][en], Ln)) && !tn || A(G(tn, e)[en], n) || (G(tn, e)[en][n] = undefined)
-                }) && !0
-            })); i < R(t); i++) {
-                if (G(tn, r[ge])) {
-                    G(en, r[ge], en);
-                    break
-                }
-                if (((f = K(e, t[i], r)) || tn) && G(tn, r[Mn])) break;
-                if (r[Rn]) return f
-            }
-        }() : l == Nn || l == Pn ? function (n, t, r) {
-            function i(n, e, t, r, u) {
-                e[t][nn[Hn]](function (e, f) {
-                    A(e, t) ? i(n, e, t, r[f], u) : A(e, Ln) && (u ? G(tn, n)[en][E(e, Ln)] = r[f] : B(n, E(e, Ln), r[f]))
-                })
-            }
-
-            function f(n, e, t, r, u) {
-                e[t][nn[Hn]](function (e) {
-                    ((u = e[Vn][en]) || tn) && A(u, Ln) ? G(tn, n)[en][E(u, Ln)] = r : A(u, Jn) && i(n, u, Jn, r, tn)
-                })
-            }
-
-            for (t in !D(u) && (n = K(e, a[tn]))) {
-                if (l == Pn && (t = n[t]) && en || A(a[en], Ln) ? B(e, E(a[en], Ln), t) : A(a[en], Jn) ? i(e, a[en], Jn, t) : A(a[en], Kn) && f(e, a[en], Kn, t), ((r = K(e, a[rn], u)) || tn) && G(tn, u[Mn])) break;
-                if (G(tn, u[ge])) G(en, u[ge], en); else if (u[Rn]) return r
-            }
-            D(u, tn)
-        }() : l == Tn ? function () {
-            for (D(u) || K(e, a[en]); K(e, a[tn]) && (!(C = K(e, a[un], u)) && !tn || !G(tn, u[Mn])); K(e, a[rn])) if (G(tn, u[ge])) G(en, u[ge], en); else if (u[Rn]) return C;
-            D(u, tn)
-        }() : l == sn || l == pn ? function (n) {
-            for ((l == pn ? n = !0 : tn) && D(u); (!n || K(e, a[en], u, en, en, tn)) && (!(C = K(e, a[tn], u)) && !tn || !G(tn, u[Mn]));) if ((n = !0) && G(tn, u[ge])) G(en, u[ge], en); else if (u[Rn]) return C;
-            D(u, tn)
-        }() : l == Mn ? function (n, t, r) {
-            try {
-                t = K(e, a[en], u)
-            } catch (i) {
-                t = K(e, a[tn], u, i)
-            } finally {
-                return ((n = u[Rn]) || tn) && !(u[Rn] = en) && ((r = K(e, a[rn], u)) || tn) && u[Rn] ? r : (u[Rn] = n) && t
-            }
-        }() : l == On ? function (n, t, r, i, f, o, c, d) {
-            for ((t = a[nn[qn]](tn)) && !(r = !1) && !(i = !1) && !(f = en) && ((n = K(e, a[en])) || tn) && D(u); f < R(t) && !G(tn, u[ge]); f++) if ((((c = K(e, t[f], n)) || tn) && n === c[en] ? r = !0 : tn) && r) {
-                for (o = en; o < R(c[tn]); o++) {
-                    if (((d = K(e, c[tn][o], u)) || tn) && G(tn, u[Mn])) {
-                        i = !0;
-                        break
-                    }
-                    if (u[Rn]) return d
-                }
-                if (i) break
-            }
-            D(u, tn)
-        }() : l == Qn ? [A(a[en], Ln) && E(a[en], Ln) == nn[Yn] ? u : K(e, a[en]), a[nn[qn]](tn)] : l == Ln ? $(e, E(t, l)) : l == Rn ? (p = {}) && ((p[E(a[en], Ln)] = o) || tn) && e[nn[cn]]([p, null]) && ((C = K(e, a[tn], u)) || tn) && (e[nn[dn]]() || tn) && (u[Rn] ? C : undefined) : l == En ? a[nn[Hn]](function (n) {
-            return K(e, n)[nn[ln]]()
-        })[nn[Nn]](nn[Jn]) : l == qn ? K(e, a[en]) : l == ln ? ((b = E(a[en], an)) || tn) && (g = a[tn]) && (h = function (n, e, t, r, u, i, f, o) {
-            return (((A(t, bn) ? (i = !0) && (o = t[bn]) && (f = K(n, o[en])) && (o = H(n, o[tn], K(n, o[rn]) == xe)) : t = E(t, Ln)) || u) && (r = K(n, r)) || tn) && (e == fe ? i ? f[o] = r : B(n, t, r) : e == Wn ? i ? f[o] += r : B(n, t, $(n, t) + r) : e == en ? i ? f[o] -= r : B(n, t, $(n, t) - r) : e == dn ? i ? f[o] *= r : B(n, t, $(n, t) * r) : e == gn ? i ? f[o] /= r : B(n, t, $(n, t) / r) : e == Dn ? i ? f[o] %= r : B(n, t, $(n, t) % r) : e == ye ? i ? f[o] <<= r : B(n, t, $(n, t) << r) : e == Hn ? i ? f[o] >>= r : B(n, t, $(n, t) >> r) : e == En ? i ? f[o] >>>= r : B(n, t, $(n, t) >>> r) : e == an ? i ? f[o] &= r : B(n, t, $(n, t) & r) : e == Xn ? i ? f[o] |= r : B(n, t, $(n, t) | r) : e == tn ? i ? f[o] ^= r : B(n, t, $(n, t) ^ r) : e == yn ? i ? f[o] = s(f[o], r) : B(n, t, s($(n, t), r)) : undefined)
-        }) && (A(g, Jn) ? (m = K(e, a[rn]))[Jn][nn[Hn]](function (n, t) {
-            return h(e, b, n, m[t])
-        }) : h(e, b, g, a[rn], tn)) : l == jn ? K(e, a[en]) : l == Wn ? function (n, t, r, u, i) {
-            for ((n = []) && !(t = en) && (u = en); t < R(a); t++) if (!A(a[t], tn)) if (A(a[t], jn)) {
-                for (!(r = en) && (i = K(e, a[t])); r < R(i); r++) n[t + u + r] = i[r];
-                u += r - tn
-            } else n[t + u] = K(e, a[t]);
-            return n
-        }() : l == Fn ? ((b = E(a[en], an)) || tn) && ((v = K(e, a[tn])) || tn) && ((O = K(e, a[rn])) || tn) && (b == Ln ? v + O : b == ce ? v - O : b == cn ? v / O : b == ln ? v * O : b == fn ? s(v, O) : b == kn ? v % O : b == bn ? v < O : b == we ? v <= O : b == ie ? v > O : b == Qn ? v >= O : b == _n ? v in O : b == ue ? v & O : b == pn ? v != O : b == On ? v !== O : b == Fn ? v | O : b == vn ? v ^ O : b == Sn ? v == O : b == Jn ? v === O : b == rn ? v << O : b == ke ? v >> O : b == Tn ? v >>> O : b == te ? v instanceof O : undefined) : l == kn ? (u && (u[Rn] = tn), G(tn, a[nn[Hn]](function (n) {
-            return K(e, n)
-        }))) : l == mn ? ((C = {}) && a[nn[Hn]](function (n) {
-            (w = K(e, n)) && ((I = w[en]) || tn) && ((q = w[tn]) || tn) && (w[rn] ? (k = {}) && (k[nn[Wn]] = !0) && (k[nn[Sn]] = !0) && w[rn] == tn ? ((k[nn[Qn]] = q) || tn) && i[nn[En]][nn[Rn]](C, I, k) : w[rn] == rn && ((k[nn[ne]] = q) || tn) && i[nn[En]][nn[Rn]](C, I, k) : C[I] = q)
-        }), C) : l == Bn ? [H(e, a[en], K(e, G(tn, a)) == xe), K(e, a[tn])] : l == Cn ? (((x = K(e, G(tn, a))) == An ? O = tn : x == jn && (O = rn)) || tn) && (a = a[nn[qn]](en, -tn)) && ((_ = K(e, G(tn, a)) == xe) || tn) && (a = a[nn[qn]](en, -tn)) && ((I = H(e, G(tn, a), _)) || tn) && ((q = a[R(a) - rn]) || tn) && ((j = a[nn[qn]](en, R(a) - rn)) || tn) && ((F = J(M(e, I, q, j), I)[nn[Zn]]) || tn) && [I, F, O] : l == cn ? G(tn, a[nn[Hn]](function (n) {
-            return K(e, n)
-        })) : l == Xn ? ((C = K(e, a[en]) ? K(e, a[tn], u) : K(e, a[rn], u)) || tn) && u[Rn] ? C : undefined : l == vn ? function (n, e, t, r, u, i) {
-            return e == le ? A(r, bn) ? ((i = r[bn]) || tn) && ((u = K(n, i[en])) || tn) && ((i = H(n, i[tn], K(n, i[rn]) == xe)) || tn) && (t == xe ? ++u[i] : u[i]++) : ((i = K(n, r)) || tn) && (A(r, Ln) && B(n, E(r, Ln), i + tn) || tn) && (t == xe ? i + tn : i) : e == Zn ? A(r, bn) ? ((i = r[bn]) || tn) && ((u = K(n, i[en])) || tn) && ((i = H(n, i[tn], K(n, i[rn]) == xe)) || tn) && (t == xe ? --u[i] : u[i]--) : ((i = K(n, r)) || tn) && (A(r, Ln) && B(n, E(r, Ln), i - tn) || tn) && (t == xe ? i - tn : i) : void 0
-        }(e, K(e, a[en]), K(e, a[tn]), a[rn]) : l == Zn ? R(a) <= rn && A(a[en], yn) ? G(tn, e)[en][E(G(tn, a), Ln)] = r[K(e, a[en])] : (I = E(G(tn, a), Ln)) && (G(tn, e)[en][I] = J(M(e, I, a[R(a) - rn], a[nn[qn]](en, R(a) - rn)), I)[nn[Zn]]) : l == Sn ? K(e, a[en]) ? K(e, a[tn]) : K(e, a[rn]) : l == wn ? function (n, e, t, r, u, i) {
-            return e == Ln ? +K(n, t) : e == ce ? -K(n, t) : e == Kn ? !K(n, t) : e == mn ? ~K(n, t) : e == Bn ? A(t, Ln) ? typeof $(n, E(t, Ln), tn) : typeof K(n, t) : e != se ? e == ve ? A(t, Ln) ? A(G(tn, n)[en], E(t, Ln)) ? delete G(tn, n)[en][E(t, Ln)] : (i = E(t, Ln)) != nn[gn] && i != nn[wn] && !nn[le] : A(t, bn) ? (u = t[bn], delete K(n, u[en])[u = H(n, u[tn], K(n, u[rn]) == xe)]) : (K(n, t), !0) : void 0 : void K(n, t)
-        }(e, K(e, a[en]), a[tn]) : l == Gn ? function (n, e, t, r) {
-            return e == wn ? t || K(n, r) : e == $n ? t && K(n, r) : void 0
-        }(e, K(e, a[en]), K(e, a[tn]), a[rn]) : l == rn ? R(a) <= rn && A(a[en], yn) ? r[K(e, a[en])] : J(M(e, E(G(tn, a), Ln), a[R(a) - rn], a[nn[qn]](en, R(a) - rn)))[nn[Zn]] : l == Hn ? J(M(e, nn[Yn], G(tn, a), a[nn[qn]](en, R(a) - tn)))[nn[Zn]] : l == xn ? G(tn, e)[un] : l == bn ? ((q = H(e, a[tn], K(e, a[rn]) == xe)) || tn) && ((F = K(e, a[en], typeof u != nn[an] ? tn : u + tn, z = o || [], c)) || tn) && (!u || d ? z[nn[Hn]](function (n) {
-            return F = F[en], n
-        })[nn[Hn]](function (n) {
-            F = F[n]
-        }) && c && c[Gn] ? function () {
-            return f[nn[Tn]][nn[Mn]][nn[hn]](F[q], F, arguments)
-        } : F[q] : z[nn[cn]](q) && [F, F[q]]) : l == _n ? (P = typeof u == nn[te] ? u : {}) && (P[Gn] = tn) && (S = K(e, G(tn, a), en, en, P)) && (N = a[nn[qn]](en, -tn)[nn[Hn]](function (n) {
-            return A(n, jn) ? L = K(e, n) : K(e, n)
-        })) && (N = L ? N[nn[qn]](en, R(N) - tn)[nn[vn]](L) : N) && !(n > y) && f[nn[Tn]][nn[Mn]][nn[hn]](S, undefined, N) : l == $n ? new (f[nn[Tn]][nn[In]][nn[Mn]](K(e, G(tn, a)), [en][nn[vn]](a[nn[qn]](en, R(a) - tn)[nn[Hn]](function (n) {
-            return K(e, n)
-        })))) : void 0
-    }
-
-    (Rn = 27) && (on = 5) && (pn = 10) && (En = 30) && (vn = 17) && (Fn = 31) && (ln = 8) && (bn = 16) && (Dn = 36) && (xn = 20) && (ue = 56) && (Gn = 39) && (an = 9) && (kn = 19) && (Bn = 35) && (Un = 38) && (mn = 12) && (Hn = 40) && (Xn = 49) && (rn = 2) && (le = 62) && (Tn = 46) && (Cn = 24) && (Vn = 47) && (tn = 1) && !(en = 0) && (An = 29) && (zn = 28) && (un = 3) && (qn = 26) && (_n = 22) && (sn = 11) && (In = 25) && ($n = 34) && (Pn = 32) && (yn = 14) && (cn = 6) && (Mn = 37) && (Jn = 41) && (Ln = 43) && (Sn = 33) && (Re = 123) && (re = 55) && (fn = 4) && (ke = 73) && (me = 66) && (ae = 63) && (ne = 52) && (fe = 58) && (On = 21) && (Zn = 51) && (hn = 15) && (dn = 7) && (je = 78) && (be = 70) && (ee = 53) && (ye = 68) && (pe = 64) && (Nn = 44) && (_e = 77) && (he = 69) && (gn = 13) && (de = 61) && (se = 65) && (Yn = 50) && (ze = 127) && (Oe = 76) && (ve = 71) && (wn = 18) && (Ie = 91) && (Qn = 45) && (ge = 67) && (oe = 59) && (Ce = 79) && (te = 54) && (xe = 74) && (jn = 23) && (Kn = 42) && (ie = 57) && (Wn = 48) && (qe = 97) && (we = 72) && (ce = 60) && (nn = "ReferenceError(g(c(call([(lastIndexOf(push(pop(toString(number(valueOf(indexOf(window(module(arguments(cilame_call(charCodeAt(concat(exports(pow(match([0-9a-f]{2}(Date(Math(hasOwnProperty(bind(slice(defineProperty(BigInt(parseFloat(Object(filter(v(configurable(String(keys(length(apply(%$&(vmpzl_arguments(map((]( is not defined(join(get(prototype(undefined(enumerable(replace(null(_(set(decodeURIComponent(object(charAt(0(parseInt(RegExp(Function(fromCharCode(*(require($".split("(")) && (i = typeof global == nn[Vn] ? window : global) && (L = new i[nn[_n]]) && (R = $e[nn[In]](tn, L, he)) && (E = $e[nn[In]](tn, L, In)) && (S = $e[nn[In]](tn, L, Un)) && (A = $e[nn[In]](tn, L, Ce)) && (D = $e[nn[In]](tn, L, oe)) && (M = $e[nn[In]](tn, L, Yn)) && (U = $e[nn[In]](tn, L, ae)) && (G = $e[nn[In]](tn, L, sn)) && (H = $e[nn[In]](tn, L, ee)) && (J = $e[nn[In]](tn, L, on)) && (N = $e[nn[In]](tn, L, ne)) && (Q = $e[nn[In]](tn, L, Vn)) && (T = $e[nn[In]](tn, L, pe)) && (X = $e[nn[In]](tn, L, de)) && (Y = $e[nn[In]](tn, L, be)) && (f = i[nn[oe]]) && (o = i[nn[$n]][nn[ce]]) && (c = i[nn[ee]]) && (d = i[nn[en]]) && (l = i[nn[En]][nn[Bn]]) && (a = i[nn[An]]) && (p = i[nn[ie]]) && (s = i[nn[jn]][nn[kn]]) && (m = i[nn[fe]]) && (f[nn[Tn]][nn[hn]] = f[nn[Tn]][nn[un]]) && (q = i[nn[En]][nn[Tn]][nn[Cn]]) && (y = tn) && (I = tn) && (h = []) && (b = []) && ((g = i[nn[zn]]) || tn) && (z = Be[nn[In]](tn, L, je)) && (F = Be[nn[In]](tn, L, xn)) && (P = Be[nn[In]](tn, L, hn)) && ($ = Be[nn[In]](tn, L, Pn)) && (B = Be[nn[In]](tn, L, qn)) && (V = Be[nn[In]](tn, L, me)) && (W = Be[nn[In]](tn, L, Nn)) && (K = K[nn[In]](tn, L)) && (v = z(Re, ze) + z(Bn, Gn) + z(Hn, Ie) + z(qe, Re)) && (w = z(Hn, Ie)) && (k = z(Re, ze) + z(Bn, Gn) + z(qe, Re)) && (x = nn[fn] + k + nn[Kn] + nn[de] + nn[fn] + w + nn[Kn]) && (O = m(nn[On], nn[tn])) && (_ = [[i, null, null, e, t, en, en, arguments, {}, L]]) && (j = _[en][ln]) && K(_, function De(n, e, t) {
-        return function (n, e, t, r, u, i, f, o, c, d) {
-            if (t == an || t == Ln || t == dn || t == Yn || t == yn || t == Dn || t == en || t == gn) return (r = {}) && ((r[nn[rn]] = t) || tn) && (u = function (n, e, t) {
-                return (t = P(e)) && [Y(h[t[en]], t[en], n), t[en], t[tn]]
-            }(t, e[nn[qn]](y, pn))) && ((r[t] = u[en]) || tn) && [function (n, e, t, r) {
-                return ((r = b[nn[sn]](n[e])) || tn) && ((r == -tn ? b[nn[cn]](n[e]) && (n[e] = R(b) - tn) : n[e] = r) || tn) && ((n[nn[Pn]] = t) || tn) && n
-            }(r, t, u[tn]), u[rn]];
-            for ((f = []) && (r = {}) && (i = S(e, y)[en]); R(i);) (o = v[nn[sn]](i[nn[qn]](en, y))) != an && o != Ln && o != dn && o != Yn && o != yn && o != Dn && o != en && o != gn ? (d = S(i, y, tn)) && f[nn[cn]](De(n, i)) && (i = i[nn[qn]](d[tn])) : (c = De(n, i)) && f[nn[cn]](c[en]) && (i = i[nn[qn]](y + c[tn]));
-            return (r[t] = f) && ((r[nn[rn]] = t) || tn) && r
-        }(n, e, v[nn[sn]](e[nn[qn]](en, y)))
-    }(L, W(u)))
-}("jsvmpzl:ver.1.5.1", this, typeof arguments != "undefined" ? arguments : void 0, [], "~|)~xT#hh|qI#iio}5sh|j|Ss%wp|;#io%$,#hzyuKt%cetOs#}}{)vnzgc4}&xg$+vthwu/gkfvt?awfq|>isdwj4jjj}mR$itim/jkkjhCpwyxa8q#bbwMrl##i*#|%v%Xn||co(qnlg{Pkcdur2#i}%~=d~qqqOnecppW|oria}@xy&zb9|l{ea|6|h$kkpN|d|x#%D|jjjrg5|%k|ee4|ohux|DaokndS#izk%HjchaeLph&lg/jt&dpW%$urb1gc|nh+rqaqo(k{}vc8|}ryz#2ivzzeN|#ad}5|sevqm4af$uj*oqhdw4oqmtbIitljmVjcoug/|sbytO||s}$Ceal$kEizoba;yuikrFed~|&-i}weqAi}qntQjl|hy*#js{|Ynigtk2jl}ixOm&cl%1o&s&sXox%&mHozfjv?#jrz#V#zyh{Poz}paFogabxGuda&lPjjxf)azcbjN&gt#|Y&xcj#)#z$z|/f$ioyPutxfe5a#d#{M|%d%jyTubjvh+|bx|#y.ehuduL|o{pyw,|}gd&wB|byl#hPb&wqm=bo||zVxwytg/uiwmd:qlj$o6qf&#{VjmcaQeuug%.glhg&?a$sfe)sssa<qcnuw-|c#ckuRafoi$K#e}pr-pp}s}L|bvfft<t~whoSby~eYs$coAh~pn#4gde}iTs%okn=d#|r$/#z&w{9a$dcbGyc~wg)er&||Fm}qryU|nrtxo>c$}$t2devwwLdvgg}5&%c%pJderfeNe~%zrJy$xw{:|o{$&dS|joqkw5|jw{&wF|$wipnY&#qoi:|qmiiYaon}~Z|rsehl8|sd%%&AeuewyPbwoj$Na$dvaXy{&|>|%da|y*}i#avI~zjosV${ajp>a#&nl=|m%m0lqy4dxxth=|nie}u)djnn8y{ofe6%g{n~>gcfjoPc~awd=~qdeu:&%kun*~ic~&Y||wyazU}ohoD|n#uqnYm#a{w?|novraBrj}|B&nk{e,&g}kbBdlfzv5|j%wn=bbq#W%gpkzU|nlk|dAh%l|-#y}su9|iwvcD#%e{n6ruex?afofq2h$xoX~%mbE#dmntB&zk|yRcm|}}E$p}}q+aah|lV||uwch7q&xob>##avmN&oaj%*&nv$|Oeukc{O~ypyc@%$mo~Qkr%l|TxykzxNu|&o~0xp#xl.i#rt}D|$mktl.$p$imHftc}p*&ffcd8#&wrlL|rc~ze*xtc~h+a#a#d0xsxf~Murr}yKar$v%J|kw|t?|d${jnQ|sqfb&7v&mjd?nga}n>sxuwh5sp${#TtwxunWuwr&eCqfdjx1wt&%yQvocijSsn|cb3nb$blJ|%vmxz7|d|xe~R|$wnjv<qzbnbTns%$y0udn$m0|ozur&+|gyqso@|sqheu:$jrdc3rwqrsSqqkwi+adrmsU|ordx&B|p{f{}Lz|deuVm%zlu5w#rkmRs%uk~N%iqwt?wlpc&Pfpa&mQn%z&nYbn%t#<%{myyYvwklbTtoolrOq$dqnD|cum$~W|lmh{Lqputx(r#ckiIw$|pr@qpervPafqvw+s&ebxJvnur%2ibx}j?ayqx=lqa##7${xolKsvmvy@bvhlz/$k~l%.%{iii6t~rrl+|h{cz}*|%zb~cE|&$|bw9reoz&.lbl&v,lb|ewSyrvnaC#zoek?z&jvt9ib%syVilmfoKj}olaLjkwrx.icxnvKl&nmdPnirpfBhuikhXlyn}m(a#eet4|sn&csWmzlqi0|}vj$m+||yo|dZjtmstIl{yytTa&lqyPne&bhU|cfuctG|rjmwr6|ctjtmH&hpey=l|e$sMiczyv:oqwqjKadrtuDfjjua*|cumiq7bealaDy|}{p?kkd~a5s$ocuTnjanhFoovuq/hu$eqMb&{io3|khgd}5mq$wu6nqoyq<imjg}Xa$f|sEf&kea=uqb|y;yv{hv)ww&jpTrhba}9vwumt*|{lprV|cv}tvU|uhwm;|gy&t%B%jsl%4ry#rd5ryvcy.ruynk+|p{cxlCjb$rp@|&dc&y.i&k$v(urvkk6|brwe$7|co&o%/ypsn})|nf&xhVatauxK|$ps#rVrfenf<psbifVyb|g#Fib}#f8cvdzq-$px#l+%xj~~Tbfb|~VkfutEqf&hs6|bv%nj+hl}b$,$%x}lReueqrTbvwus-~qvatLaiv#t6mjfm&Iap~j}0c$~}}9beuoh.fu%c~7e~%v$=#gsda(qkhfgN#ipeb,hbvuxGdevsi8bnt$aAa%kf}3nkm%o9|db&tdZ|fr&ze2||ibxc7|fynggPqc|e%Dly$f.yd#myJibjnrDeulcvFanwi&Bfd%apDqm|$l8|caoooM|%$wt|E#iqkg9gdhfl5bnj#hByd#}m;|%y{dr-q{$$v*ecms}Hq#ukp:|c~cba@ax%%|Tb#wjc>ca~}Rb#rzs+q$x#zTy}stt?$yuoqHg|h|%C%gpra3cn{~n2iiw#s,|ga}pa0|bifumK|fshmvMaohgdH}|{vdOao{pqI|rvyr|9yhv%&5t$y&8h|vm$Ag}o#v*ddtabBgd}uwGemxffKgtzqf:&gj~eGk}%R||oluk6|n%xluP#zght4~ht%}N~hdlrWh{ux$*ahtpt2afyt,#|ny|B~$&#.|$p#%c?#hyv#G|yzqeHbmuujIb~b|S$gc&|Ts}}&2}&v{y1admeq@||jw%a,|rgbiuYig%{c2ebkwz1|niw%uYm|%v{+|noe{mW|ikmf+%h{pfE}hs}vV&yiws6pq#haH#z~e$>~i#gbPzr%#Uxy{~dUxlyay3|beq}u9|rm}gf8~i%ksS%$co&Ke~~gq<&$}xzE$oucw<%ocpr>|}frq#Zem|##Z~zgg&B&f&r{KjuopX|fd%wk.|buerr8twxu{Mu~{bk+%xxeoLrdq#O%wvwnS|j~hb1~z#v}<unlbr,|rugdf;n}sbsOuguep?ibjn$Zayido(q~ailY|jpafw;un{jw0#yl~zBeix{x+|rebpj@|jiduy0yqtn$(e&egvF|ne%u#L||satxK&fy$hNdmc}u9#h%b|+#%kqg4a&egj*fnmxB|feozpE|jmnfmB|jhcga2|sm&mt-prb$x=sp&fnDu~}ibNvfr&gP%iucfXth|&i+s%llk,pzqsj($n#sb=vijdyL#z|abHeekub.evbzlMqq%me/%ho|t.gltntVbof#g)x##cx8x#jly?jcoi~.|sqdncO|ssk{g<z|b$|*|~fw}yJmbs|%=xe%|bGx#qhj<q&ursHwwdyvTsxtfe1t%r%fKwt}vs5qqtf|=ufxtgDantfqAr&mrjErhbao5xeua~@qsxy{Zbn$%uC$cqa{:#jz}fHr&f&b9w#g$}0xe$zx0%jhi#3qo%hlQuzqtsTul}w~/|%ps&ySuzqtaHq{|$aQuno&iKwkz{f<fmp$t)|%ztekE|spw}cE|omajr.|bumsfDryynm4nsbjd8x#{wbXimigh/vtu|&<frw%gP|ku}fbI#jmvpZspcqv;txctpH|&#jxfQrdslfFfkm~b=#jfzeSmjwqtFil&u$)mrbsnNyrvs$M|kfuuaA|%w$g}Fewgs$(icqz~Cl{q#&Gm{be~,kc~zoLa$iycVqz#qgK$}tdt1qzckb*mrjqa.aespiJb{arg>|ctyvz3|%hybl5b%e%r.yprm~:|cvhjtM%g#qqA~ys%cO&$tkqY|jmlaiU|jnm%o;|buicn(lb~u}Fri{pxZ%jarq9jt|ljUbcnfdD|p}xv#>|}mkeu(#z$dv@|%khqbG%$zzd)&oibr/qa{gj/acpyu5ivjxj<yynqy1iseck(#{uhp4qyfg{Ni|#gu=yuhxqW|fsj{Vr~ejt7sgmyiZxdmzwGnj%ekJi}xdn4rgfuvC|&~xujUurclg.#jexy;itr{%Dmjes{)f#vs%Cex|~x:bc#xk-|}v{nk@jlynjPrhsqkTnatubQkkpby@oqumcKlk&qsVofy}u;}yveq(auhdVlkam#N}qediQ}&ocfR}i|zxV#gyes-#ibyfY#xstl1}yqyg(}qr|a1$|ddxCtpg$#4v$epg=pwifaE|uipvZqhtwzG$hxv$Sa#mfiKv$jt{Rbxy$&@amjlhCq%ymbHqfr|y@|bym&v)|$xp}zO|}a{dmPqaj%d-q%fns3enkk~9qfr|y@#id$$*m&yua3ic%%qFu%fus8|cwjlo*|bvzeo0xxzrt?|jqs$q+awghnWtxx&vGww&nfG%jlx{Ewnmv}Fugl{sA#ispj*jl#|aYzevzi-|fps|i4|g&{rzY~zzeyIgtl{sOgkqvs@agh}j,aaizk?|o}aiwQkds#/miul$Y#po%w=u~dh#,dvqf|5|iaobYgu&ez5h}d$w3aitibLybmm{K|}%z&~I~xygq*|h|sbnUtt{u8glm{l8dtriaH$i|c~<gdeyn<a$bl#9yc}uwQu$fhd,|%&j%jPmhd{%L|fwlar;|k#ehfLg}fdc7df}g}Eglp%|TfddukV$xixyP$xovp7sh{|$Oemqs~X#im|rX|rjhasO|bppa$Ntvx&kMe}$%xK|rb|lfK|bhbksJtnnlq-|k~ena=|}bmmn<mhum{;#o}lf9|juyxv9|}|%xa<|ov~uh=|&|dtu<r&mzi@ebkc~6xj%cT|fscy$=|r}roY#xof#?|a{xk=mynu}3xx~ie=utymj5bgqwaAbw{}wIdmw~mYa$p{|Jlz}i}UajgkP$wwx|X}{~itU|knnw~(|r&{jj9|nnnrgI|af&#XtnjraFba|laRavida4}jotz3$%tnxHf}mtp-awo$yHnhhix*an#}#8ysxfiIekxy|T|d{{$3||lh%kEesq&v,|%scnqTfvoidAee}dyXc~qklOddkie0%p%sq>~sdgr8|&vg#Y|ojyndCafww3y}stqW|fdp{x?|$ssx#/ibzbyJ}{yf%Cbe}viFc$#e&/%r{v|Aedhya1nj{mr/psuxg)y|okf7|ftunvPyic%fEpwfdj,|rjl&zAdvhgi=&otkv3gkvgoB~&yr$Q}squK}alo&Llz~a|)|%ppva(ls%rb@|gn|}tH|r$w~$*|jmm&o-|%n$x%8cnqvk0gdg}b8$xk{gOfl%lxRbvpbgQh}~im;b&xrl0|rn|rvX|ohw$lQ|o#colE||lyl%Nmm|sa=xlmtlV|cqvp$Uqlidx4|fb#al8|rq&&tYysbq&H|rkh{uQ|fm{u};}}L<aw.J}m>O}m:KXG}m4)|BKX6}m+K|N}}lWK|NK|Z#}lKJ/O-KU)|8Q|(GD)|/?6)}V2.)|EK~QR|Z0/K~QKU)(#9T7(5)*KU0/K~QKU)(K,Q|(GD)|/?6)}V2.)|EK~RR|Z0/K~RKU)(#9T7(5)*KU0/K~RKU)(K,Q|3GO)|/GA)|/2,)JKU?6)}V2.)|EK~SR|Z0/K~SKU)(#9T7(5)*KU0/K~SKU)(K,Q|0GA)|/2,)JKU?6)}@2.)|EK#XR~T#DEB#7T5(3)*KU6-RUK#X;-K~+#(K,K,J~7O~4K~U}~.#~)Q}OKU#}HQ|6?<)}@24)|E0/KUK#Y)(R~T#OEM#B3@0>68B-.BK%:0/KUK#Y)(.4));-K~+#(K,K,Q|4?<)}@24)|E0/KUK#Z)(R~T#MEK#@3>6<0:63.80/KUK#Z)(K%;)(;-K~+#(K,K,K,90B.R%<K$(K,J}8O}5KYG}0)|B0/K%=KY)(6|T}|Q#|LS-#(K}X3|B}|?K$)#|7J0O.K|-)|8T9(7)*00K}XK~-)(K$)T4(2)*K|-B+K}XT8(6)*00K}XK~-)(&,3+K|-K,K,J.O,KR,(J;O9KS(5)*0/KRK}E)(,(Jc)ObYK|+(bS)*0/KSK|+)(6bE}bB#b=3b:,b7C#6KF}#/K~V#~ZJ5O3K|-6.4*K+KYQ@K~V#9T765K~V00K|-K~.)(K,Q}/GU)|B28)J64RN00K|-K~W)(?>)}@004*K+KN)(0/K|-KN)(#|.T|+(|()*0/K|-KN)(}N#JTH6F4*K+K$*0=0600K|-K$+)(KN)(K$,)(K,K,T?(=)*060/K|-KN)(K~-)(K|-T:(8)*00K|-K$+)(4*K+3+K|-K,)(C|2KY}|+#ZJ9O7K~/62004*K+KF)(T@6>K~/K$*060/K~/KN)(K$,)(3+K~/K,)(C2KN},#(K,)(C}DK~.}}<K}4#}4L|4J0O.K~0)|8K}4#XQV65K~000K}4K~W)(#CTA(?)*014*K+K~0))00K}4K~0))K,QV65R|>00K}4K~W)(#CTA(?)*014*K+K|>)(00K}4K|>)(K,K,)(CRK|3}K#G3E6C4*K+0=07004*K+KN)(K~-)(KF)(K,)(K,Jr8Or5K|((r/)*0/KSK|()(6qT,qHC}3KN}},K2K?#|VTE(C)*K2(=)*004*K+K2)(G/)|BK2P(Q|4?0)%>K?K|Z#:T8(6)*004*K+K?)(K?#GTE(C)*004*K+K?)(?5);0/K2K}()(.8K,)(CPK|>}IK$-#B3@6>4*K+08G1)|BK$-K~PK|O)(K,)(C&-K}F}%XKV#%QJ7O5K~X004*K+K2)(J5O3K~Y0.KVK2)(J7O5K}G004*K+K?)(J5O3K~10.KVK?)(T563014*K+K~Z)(Q#L?/)QK}G.8#}UN}RJ.O,K..4?/)KK.K~11.)O)(K.#}6JZOXK$.?S)-?M)/05K~Y?.)/K..G))?:)L.<?4);?.)QK..8.-.6T|2(|/)B0<K~X?5)/?/)@K}GK..G))?H)3K$.?A)L.<?;);?5)Q?/)@K}GK..8.-#|CN|@J/O-K|*.4?0)KK|*K~1(/)4K|*.8#UTS(Q)*0=K~X?6)/?0)@K}GK|*.G))06K~Y?/)/K|*.G))T9(7)4004*K+K?)(K~13,4*K+K,)(C}DK~Z}}<#}7J6O4K2004*K+K2)(J6O4K?004*K+K?)(TW(U)%104K2?.)/K?.G))?B)3.$/?;)L.|Y?4);?.)QK?.8.-TJ(H)*0/K2K}()(6;?/)|4K?.800K|NK$0)(K,)(C|IK|3}|A#|<JDOBK|36=4*K+0700K|+K|3)(K|?)(TJ(H)*0/K|3K2)(6;.407004*K+K2)(K}H)(3+K|3K,)(Cc(K~2}bSK|P#bKJ.O,K2P(J#RO#OK#U}#IK})##AJ0O.K})K})J0O.K}I.%?J0O.K~3.$/3~S}~P#~KTU(S)*K}I?L)-?E)@?7);.%@?0)-K}I.$1?0)#SK}I.CK~3TU(S)*K})?L)-?E)@?7);.%A?0)-K}).$1?0)#SK}).CK~3JDOBK~4?=)-?6)@?/)3K}I.CK})K~3T3(1)%BK~4.#(T2(0)4K~4.$23M?K);K~4AD?:)#R6200K|NK~2)(.$2.B2,)L.BK,K,J8O.K#)D%/O.K~5)|8EF#;T-6+K~UT2(0)*K#)D%0;-K~+#(K,N~5J6O,K..4O.K#*)|8?/)KK.K|P(.)4K..8#}DQ}/2-)JK#)#|VTO(M)*K~56F?A);G:)|BK#*6200K|NK~2)(.#(K#UT;(9)*K#*?2);6+K~5.%CTE6C?8)=?2);6+K~5.#(.40/K2K|M)($*K,K,T8666+K~U0/K2K|M)(38B6K2K|P0/K|(KN)(K,)(0/K|+KF)(J<O:K|G(5)*0/KRK|H)(,(Ja0Oa-K~P(&Z)*00K|GK~P)(,&KC#7K|O}#/KV##(J4O2K20.KVK2)(J4O2K?0.KVK?)(J/O-K~6P(N}UJ.O,K..4?.)KK.K?1.)O)(K.#}:JYOWK}D?R)-?L)/04K2?.)/K..G))?:)L.<?4);?.)QK..8.-.6TH6F6:.C06?/)/K}D.8K|>)(00K~6K|M)(TI6G6;.C07?0)-K}D.%3K|>)(00K~6K|M)(3765R~J00K~6K#+)(K,)(C~6K|,}~.K#,#}YJ7O5K#-00K#,K}()(J.O,K2P(N|WJ.O,K..4?/)KK.K#-(.)4K..G#|;T|8(|5)B05K2?/)/K..|5))?U)36=66K..G00K#,K%D)(.CK%E?:)L.<?4);?.)QK..-.83?B=K2?0)|4K#-.G0/K|(KN)(K,)(J&0O&-K~7(%Z)*00K|GK~7)(,%KC~BK|O}~:KV#~3J4O2K20.KVK2)(J4O2K?0.KVK?)(J/O-K#.P(N}-J.O,K..4?.)KK.K?1.)O)(K.#|EJYOWK}D?R)-?L)/04K2?.)/K..G))?:)L.<?4);?.)QK..8.-.6TC6A65K}D00K%FK%G)(00K#.K|M)(3765R~J00K#.K#+)(K,)(C~+K|,}}VK#/#}NJ7O5K#000K#/K}()(J.O,K2P(N|SJ.O,K..4?/)KK.K#01.)O)(K.#|7T|4(|1)B04K2?.)/K..G))?R)3?:)-64K.00K#/K~8)(.6?:)L.<?4);?.)QK..8.-38B6K2K#00/K|(KN)(K,)(J}GO}DK|7(}>)*00K|GK|7)(,}/C|4K|O}|,KV#YEW#B3@6>6964KV00K~7K|O)(K%HK%I;7K#T#290B.R%JK$(K,K,)(CQK|,}JK$3#C3A6?636.K$3K%KK%L00K~7K|,)(K,)(Jf8Of5K|Q(f/)*0/KSK|Q)(6eT,eHC|0K|I}|(#WTB(@)*014*K+K}5)(B10/K|(KN)(T9(7)*014*K+K$4)(.4K,)(C}-K}J}|XKZ#|QQQ?5)|D2-)|EKZR#1#>T<(:)*KZ64KZ00K|7K|,)(K,T>6<KZ08014*K+K}5)(K}F)(T?(=)4014*K+K$4)(0.KZK?)(K,)(C&8K}6}&0K$5#&(J0O.K#2)|8J7O5KZ014*K+K}5)(J5O3K#30.KZK2)(J5O3K#40.KZK?)(J6O4KM004*K+KM)(J5O3K}K?.);KM.8J8O6K}7?1)|4K#4K}KQ|CK$5#@T>(<)*K}765K}700K|NK$0)(#WTU(S)*K}76L?>)L?/)=K}7.4014*K+K#5)(.400K|NK%M)(J6O4K}L?/);K}7KMJEOCK#66>?/);K}L.8K#400K|NK%N)(Q|ZK}L#|RNWJ.O,K:.4?/)KK:K}L(.)4K:KM#<T:68K#3K:014*K+K$6)(T@(>)*K#267.4K}L00K#3K$7)(T8(6)~K0.KZK?)(K#6K,39B7K#2K#60/K|(KN)(K,)(C|IK|3}|A#|<JDOBK|36=4*K+0700K|+K|3)(K|?)(TJ(H)*00K|3K}5)(6:08014*K+K}5)(K|3)(3+K|3K,)(C/K#5.4)(0/K|+KF)(JaKOaHK$8(aB)*0/KSK$8)(6a4,a(C7K0610/K|+KF)()(C|6KN}|/K0#|(TJ(H)*004*K+K0)(6:K006004*K+K0)(KF)(T563014*K+K|I)(K,)(C|(K|I}T#PT?6=4*K+0700K|QK|I)(K|?)(T563014*K+K#7)(K,)(C|*K%O}VK}M#OT866K}M014*K+K}J)(T563014*K+K}6)(3,4*K+K,)(C|9K}8}|1K}M#|)QAK}M#:T866K}M014*K+K}J)(K,J:O8K#W63014*K+K~9)(3+K#WK,)(C7KM?1)|4.%9.|Y)(C|+K#8}WK|@#P3N}LK|AK0#C3A6?K|A0:B3K00/K|@KN)(K}8)(K,K,)(C|6K%P}|.K|@#Z3X}VK|AK>#M3K6IK|A0DB=K|@K>0600K}9K%Q)(KN)(K}8)(K,K,)(0/K|QKF)(J<O:K}9(5)*0/KRK#9)(,(3*KRK,TpH6pE}pB#p=J.O,KRKXJ5O3KS0/KRK}E)(J6O4K|(0/KSK|()(J6O4K|G0/KRK|H)(JiUOiRK}:(iL)*00K|GK}:)(,i=CcCK|O}c;KV#c4J4O2K20.KVK2)(J4O2K?0.KVK?)(J8O6K}*014*K+K#:)(T3610/KVK~Z)(J/O-K}NP(N&1J.O,K..4?.)KK.K?(/)4K..|5#%HJYOWK$9?R)-?L)/04K2?.)/K..G))?:)L.<?4);?.)QK..8.-.6J|4O|1K$:?|+)-?X)/0:K2?4)/?.)@K..B.G))?@)L.<?:);?4)Q?.)@K..B.8.-.6J|4O|1K$;?|+)-?X)/0:K2?4)/?.)@K..G.G))?@)L.<?:);?4)Q?.)@K..G.8.-.6JJOHK$<?C)=?<)=?/)3K$9.C?/)3K$:.-K$;N}6J/O-K|*.4GJ)|/?/)KK|*.8?<)K?6)@K.?0);K|*.%RK?1/)O)(K|*#|0T|-6|*6Q?E)-?>)/K$<?7);.}W?0)L.|5K|*.%600K}*K#;)(00K}NK|M)(J<O:K};65.}Y00K}*K#;)(QTK};#M*K?6)Q00K}NK}()(.8#9T765K};00K}NK|M)(K,3765R~J00K}NK#+)(K,)(C$EK|,}$=K}+#$5J7O5K}O00K}+K}()(J8O6K}*014*K+K#:)(J8O6K|R014*K+K$=)(Q}/2-)JK|R#|VT@(>)*K|R(7)*014*K+K$=)(P(N|9J/O-K|*.4?7)KK|*00K}*K}()(1/)O)(K|*#GTE(C)*0<K|R65K|*00K}*K~8)())K|*K,J<O:K};65.}Y00K}*K#;)(Q|3K};#|+J<O:K#<65K};00K}+K%S)(QF?4)}VK#<2,)L.B#4T2(0)*K}OK#<K,K,3664K}+K}OK|RK$>K,)(C0K#:R%T)(S$9K}+K}OK|R#$*J.O,K2P(J/O-K|P.4N#7J.O,K..4?/)KK.K}O1.)O)(K.#~NQ~K?.)QK..8#~>JZOXK$??S)30AK|R6:?.)LK..B00K}+K~8)())?4);?.)QK..8.GJ|(OYK$@?T)/0;K|R64K.00K}+K~8)())?;)L.}W?4);?.)QK..8.GT|,(|))B05K2?/)/K|P.G))?I)3?0)=K$?K$@?;)L.<?5);?/)QK|P.8.-T11/)O)(K|PK,3866K2K|P0/K|(KY)(K$>K,T}oRG}oN)|B060/KXK}E)(K},)(6}o7}}o3K|Z#}o*J.O,KRKXJ5O3KS0/KRK}E)(J6O4K|+0/KSK|+)(J6O4K|(0/KSK|()(J6O4K|Q0/KSK|Q)(J6O4K|G0/KRK|H)(J7O5K|700K|GK|7)(J7O5K}:00K|GK}:)(J6O4K}90/KRK#9)(J7O5K~:00K}9K~:)(JeQOeNK},(eH)*0/KSK},)(6e:,e.C7K0610/K|+KF)()(CTK~;}MK>K0#E3C6A014*K+K~<)(K>K0004*K+KY)(K,)(CTK~=}MK>K0#E3C6A014*K+K$A)(K>K0004*K+KY)(K,)(C}/KN}}(K$BK>K0#|OTJ(H)*004*K+K0)(6:K006004*K+K0)(KF)(T:(8)*014*K+K#=)(K$BT9(7)*014*K+K#>)(K>T563014*K+K|I)(K,)(C|(K|I}T#PT?6=4*K+0700K|QK|I)(K|?)(T563014*K+K#7)(K,)(CWK%U}PK}P#IT866K}P014*K+K}J)(3563014*K+K}6)(K,)(C|9K}8}|1K}P#|)QAK}P#:T866K}P014*K+K}J)(K,J:O8K$C63014*K+K~9)(3+K$CK,)(C7KW?1)|4.}B.|Y)(C8K}-?1)|4.}B.|Y)(C/K~<.B)(C/K$A.G)(C~6K#86~.}~+#}YSNK>#GQE?5)|D2-)|EK>R#1#-3+K#?#-3+K}.K#@3}.}}+KE#|W3|T,|QCUK}<}NK|AK>K0#C3A6?KEK|AK>K0046-K>K#@K}<)(K,)(CSK|S}LKDK>K0#B3@6>KEKDK>K0046-K>K#@K|S)(K,)(K,K,)(0/K|QKF)(J|QO|NK$D(|H)*0/KSK$D)(6|:,|.CWK~9}P#LJEOCK}/6>21)J2-)JR#A014*K+K}6)(3+K}/K,)(C.KM.B)(0/K},KF)(J<O:K$E(5)*0/KRK|.)(,(J~=O~:K#B(~4)*0/KSK#B)(6}Y,}MCPK~;}IKEKH#A3?6=KEKH07014*K+K$F)(KY)(K,)(CPK~=}IKEKH#A3?6=KEKH07014*K+K$G)(KY)(K,)(C|)KN}VKEKH#NT9(7)*014*K+K#C)(KET9(7)*014*K+K#D)(KHK,)(0/K|+KF)(JcROcOK|6(cI)*00K$EK|6)(6c:}c7#c2J8O6K|6610/K#BKF)(T~/(~,)*00K|6K$F)(6}P,}DC}AK#E}}9K2K:#}0J7O5KE014*K+K#C)(J4O2KM0.KEKM)(T>6<4*K+K2K:KM00K#FK|?)(T765K2K:0/KEK$H)(TL(J)*014*K+K#G)(6;K:?.)@K:KM0/K2K}H)(K,)(0/K|6KF)(T~9(~6)*00K|6K$G)(6}Z,}NC}KK#E}}CK2K:#}:J7O5KE014*K+K#C)(J4O2KM0.KEKM)(JBO@K$I6;K:?.)@K:KM0/K2K}H)(T765K2K:0/KEK$J)(T>6<4*K+K2K:KM00K#FK|?)(T:(8)*014*K+K#G)(K$IK,)(0/K|6KF)(S~-K2K:KM#}TJ0O.K~>)|8J7O5KH014*K+K#D)(Q|.KH#GT1(/)*K~>KHT:(8)*014*K+K#D)(K|Z#<T:(8)*K~>014*K+K#G)(N|-J.O,K..4?.)KK.KM1.)O)(K.#FTD(B)~L04K2?.)@K:K.))0/K~>K.))K#F3+K|6K,J<O:K$K(5)*0/KRK}C)(,(J%/O%,K}Q($Y)*00K$KK}Q)(,$JC#)K}C}~TKZKM#~KJ5O3K}K?.);KM.8JCOAK|J?<)LK}K?5)Q0.KZK?)(K}KJWOUK$L?P)=?I)=?<)=?/)3K|J.<?/)3K|J.C?/)3K|J.-K|JJ/O-K#HP(NTJ.O,K..4?/)KK.K|J(.)4K..8#9T765K$L00K#HK|M)(J>O<K|967K#HK|J0/K|(KY)(T664K|90/KZK}F)(K,)(C|CK$M}|;KZ#|4JSOQK|J?L)-0F0.KZK2)(?:)/?4)L0.KZK?)(.B.G)).6T8(6)~K0.KZK?)(K|JK,)(JfQOfNK}=(fH)*0/KSK}=)(6f:,f.CSK06M,<C0K|.K|6)(C0K|9K}Q)(050/K},K0)(KF)()(C%WK|I}%O#%JJ0O.K}>)|8T?6=4*K+0700K},K|I)(K|?)(J6O4K0004*K+K0)(J4O2KH0.K0KH)(J6O4K|.0/K0K|.)(Q|M?A)|D014*K+K#=)(014*K+K~<)(#;T9(7)*K}>00K|.K~;)(#NT9(7)*K}>00K|.K~=)(T9(7)*014*K+K#5)(.BQ~4GP)|/014*K+K}?)(?@)|D08014*K+K}?)(K$N)(K}>#PTN6L4*K+G5)|/KH0.KHK2)(07014*K+K}?)(KN)(#|CTY(W)*014*K+K}?)(6HK|.4*K+G5)|/KH0.KHK2)(00K}>K|?)(TA(?)*08014*K+K}?)(K$N)(K}>K,)(CQK$6}JK2K:#BT@6>K2K:08014*K+K}?)(K#E)(K,)(C#)K~9}~T#~OJ0O.K}/)|8J>O<K|907004*K+K0)(K|9)(Q}X?A)|D014*K+K#=)(014*K+K~<)(#|9TI6G014*K+K}5)(004*K+KM)(00K|9K}C)(TG(E)*K}/6>21)J2-)JR#A014*K+K}6)(#ZTG(E)*K}/6>21)J2-)JR#A014*K+K}6)(T765K}/00K|9K$M)(3+K}/K,)(C7KM?1)|4.}B.|Y)(0/K},KF)(J}8O}5K}R(}/)*0/KSK}R)(6|T,|HCGKN}AK}S#:T866K}S014*K+K~.)(K,)(CXK|>}QK~?#J3H6F4*K+0@G9)|BK~?014*K+K~?)(K|O)(K,)(0/K|+KF)(J<O:K$O(5)*0/KRK}0)(,(J&EO&BK$P(&<)*00K$OK$Q)(,&-C}QK|O}}IK}S#}AJ/O-KV)|8J5O3KD0/K}SKD)(J7O5K|)00K}SK|))(Q|8K|)#ZTX(V)*KV6PKD0L6EK|)0@69P..$R.$S0/K|(KY)(K}F)(K}F)(#2T0(.)*KVKD3664K}:0/KVK|>)(K,)(C#1K|,}#)K$T#~TJ0O.K|))|8J;O9KD65K$T00K}:K|,)(J5O3K}T0.KDK2)(Q}5GM)|/?7)|D0/K}T.4)).$R?7)|D0/K}T.B)).$S#|<TJ(H)*K|)6A66.G.800K}TK}H)(0/K|(KY)(T866.4.800K}TK$7)(T7(5)~K0.KDK?)(.CK,3G6E,:C.KDKD)(C0K|)K|))(0/K}RKY)(K,)(JbHObEK}.(b?)*0/KSK}.)(6b1,aXCCK06=,2C0K}0K$P)(0/K|+KF)()(C#CK}<}#;KEK|AK>K0##-TB(@)*K06:K006004*K+K0)(KF)(J<O:K#I65K>K00/KEK~;)(J;O9KD65K|A00K#IK}8)(J6O4K~@0/K#IK0)(3}96}6,}*C.KDKD)(C.K>K>)(C5KH0/K~@KH)()(C/K%VKE)(C7K|.00K~@K|.)()(C7K|900K~@K|9)()(C4KM0.KEKM)()(C6K~?0/K0K}0)()(0/K}RKY)(K,)(C}?K|S}}7KEKDK>K0#}*TB(@)*K06:K006004*K+K0)(KF)(TF(D)*KD6>KD0/K0K}0)(014*K+K#J)(JMOKK~A6F0.KDKD)(0<65K>K00/KEK~=)(K}8)(3+K~AK,)(C|3K#J}|+KDK}0#UQS?5)|D2-)|EKDR#1#<3:68KD4*K+00K}0K|,)(#,3*KDK,)(0/K|+KF)(J<O:K$U(5)*0/KRK~B)(,(J%BO%?K$V(%9)*00K$UK$Q)(,%*C$ZK#K}$RK}1KWK}-K|)K|@#$?QR2-)JK|)#GTE(C)*K|)6<?0)|4.}Y.-00K|(K~2)(K,Q}=2-)JK|@#YJWOUK>6QK}1K|)0I6B,7C5KW?/)@KWK}-)(0/K~:KY)(K$W)(#|3J|0O|-K>6|(K}1K|)0S6L,AC5KW?/)@KWK}-)(C0K|@K|@)(0/K~:KY)(K$W)(JSOQKH6M69KW050.K>K2)(K}H)(?/);K}-.80/K|(KY)(T<(:)*0.K>K?)(?.);KW.83O6M,BC.K>K>)(C.KHKH)(C0K|)K|))(0/K}RKY)(K,)(JbSObPK#?(bJ)*0/KSK#?)(6b<,b0CIK06C,2C0K~BK$V)(050/K}.K0)(KF)()(C#)K}<}~TKEK|AK}1K0#~ETB(@)*K06:K006004*K+K0)(KF)(J|4O|1K}26|+K}10.KEKW)(0/KEK}-)(0/K0K|))(0/K0K|@)(060/K0K~B)(K#K)(T=(;)*0.K0KH)(0/K}2KH)(JSOQKD6M4*K+KEK|A0/K}2K>)(K00700K}.K}<)(K|?)(T664K}20/KDK~.)(3*KDK,)(C#9K|S}#1KEKDK}1K0#~VTB(@)*K06:K006004*K+K0)(KF)(TF(D)*KD6>KD0/K0K}0)(014*K+K#J)(J|4O|1K}26|+K}10.KEKW)(0/KEK}-)(0/KDK|))(0/K0K|@)(060/K0K~B)(K#K)(T=(;)*0.K0KH)(0/K}2KH)(JSOQK~A6L4*K+KEKD0/K}2K>)(K00700K}.K|S)(K|?)(3+K~AK,)(0/K}.KF)(K,T}$,6}$(}}#W#}#QJ.O,KRKXJ5O3KS0/KRK}E)(J6O4K}=0/KSK}=)(J6O4K}90/KRK#9)(J.O,KAP(J/O-K#LP(J/O-K|TP(J/O-K|UP(J/O-K|VP(J/O-K|WP(J/O-K~CP(J/O-K~DP(J/O-K~EP(J/O-K~FP(Ti)6hY}hV#hQJ/O-K|0P(N|VJ.O,K..4?/)KK..~O1.)O)(K.#|:Q|7?/)KK..}B#?T=(;)*0/K|0K.))?.)3K..B#FTD(B)*0/K|0K.))?5)7?.)3K..B.%8J/O-K|1.4J/O-K|F.4Nf5J.O,K..4?/)KK..~O1.)O)(K.#eLJ|4O|1K|2?|+)7?Q)7?C)7?6)7K|F?/)3K|F.B?/)3K|F.G?0)3K|F.|5?/)3K|F.8TL(J)*K|2?C)7?<)7?/)/K|2.-?/)-K|2.6.%7T8(6)*0/KAK|1))K|2T9(7)*00K#LK|2))K|1J7O5K}A00K|0K|1))J7O5K~M00K|0K}A))J7O5K~N00K|0K~M))JKOIK5?E)7?7);00K|0K|2)).#V?0);K|2.$XTJ(H)*00K|TK|1))?:)=?.)3K5.<?.)/K5.-TJ(H)*00K|UK|1))?:)=?.)3K5.C?.)/K5.CTJ(H)*00K|VK|1))?:)=?.)3K5.-?.)/K5.<T8(6)*00K|WK|1))K5J|.O|+K5?Z)7?L)7?>)7?0);K~N.%W?0);K~M.%X?0);K}A.#V?0);K|1.$XTJ(H)*00K~CK|2))?:)=?.)3K5.<?.)/K5.-TJ(H)*00K~DK|2))?:)=?.)3K5.C?.)/K5.CTJ(H)*00K~EK|2))?:)=?.)3K5.-?.)/K5.<T8(6)*00K~FK|2))K5Q}*2-)JK|1#:T8(6)*K|1(/)*K|F.B#|?TU(S)*K|1?L)7K}A0EK|00>K|007K|0?0)7K~NK}A))))))TA(?)~LK|F07K|000K|0K|F))))K,JJOHK$YPC.4.B.G.8.-.C.|Y.}Y.}B.%4.%5J|kCO|k?K}3(|k8)*00K}9K}3)(6|k(,|jNCl/K#7}kZ#kUQ|(GQ)|/014*K+K#M)(?A)}@014*K+K$Z)(014*K+K#>)(#,3*K,K,JFODK>(@)*014*K+K$Z)(014*K+K#>)(J5O3K%(0.K>K2)(J;O9KW?5)|40.K>K?)(.8JEOCK~G(>)*014*K+K#M)(?/)@KW.}WJ<O:K~H?5);?/)@K~G.B.8J=O;KT(7)*014*K+K%))(P(Nb+J.O,KI.4?/)KKIK~H1.)O)(KI#aBQa??.)KKIKW#?T=(;)*0.KTKI))0/K%(KI))#&NJ:O8K504KT?.)LKI.B))Q%H22)J?.)QKIKW#~>TB(@)*K5?:)=?.)3K5.-?.)/K5.<T}-(}*)*K5?|V)=?|C)=?X)=?:)304KA?.)/K5.<)).<?@)30:KA?4)-?.)/K5.C.6)).C?@)30:KA?4)-?.)/K5.-.6)).-04KA?.)-K5.6))TK(I)~LK5?B)30<K$Y?5)=?/)|4KIKW.4)).<Q}SGD)|/?0)#RKW.}W?5)|D?.)QKIKW.8#}0T}-(}*)*K5?|V)=?|C)=?X)=?:)304KA?.)/K5.<)).<?@)30:KA?4)-?.)/K5.C.6)).C?@)30:KA?4)-?.)/K5.-.6)).-04KA?.)-K5.6))K,TH(F)*0.KTKI))?:)704KT?.)LKIKW))K5J>O<K#N(7)*014*K+K%*)(P(N$:J/O-K|X.4?0)KK|XK~H1/)O)(K|X##NJ6O4KI?0)LK~HK|XQW?/)QK|X.8#6J4O2K50.KTKI))#<J:O8K504KT?.)LKI.8))Q~=G=)|B?/)KK|X.8?/)%2KI.8#:T8(6)*00K#NK|X))K5#}BT}?(}<)*00K#NK|X))?}-)7?|F)7?Z)70;K~C04KA?.)/K5.<))))0AK~D0:KA?4)-?.)/K5.C.6))))0AK~E0:KA?4)-?.)/K5.-.6))))0;K~F04KA?.)-K5.6))))K,)(C|1K$H}|)KPK:#TTR6PKPK:014*K+K%))(K|TK|UK|VK|WKA014*K+K#O)(K,)(C#6K$J}#.KPK:#~XJ:O8K504KP?.)@K:.B))TI(G)*04KP?.)@K:.B))05KP?/)@K:.|5))T=(;)*05KP?/)@K:.|5))K5TS6QKPK:014*K+K%*)(K~CK~DK~EK~FK#L014*K+K#O)(J:O8K504KP?.)@K:.B))TI(G)*04KP?.)@K:.B))05KP?/)@K:.|5))T=(;)*05KP?/)@K:.|5))K5K,)(CsFK#O}s>KPK:KTK|TK|UK|VK|WKA#rXJ8O6K~G014*K+K#M)(JAO?K|:?:)70.KPK:))0.KT.4))JGOEK|;?@)704KP?.)@K:.B))0.KT.B))JGOEK|<?@)704KP?.)@K:.G))0.KT.G))JIOGK|=?B)705KP?/)@K:.|5))0/KT.|5))J.O,KI.8NcQJ/O-K#P.B?0)KK#PK~G1/)O)(K#P#c2J}5O}2K}Z?},)7?|L)7?|7)7?P)706K|T?/)/K|:.<))0<K|U?5)-?/)/K|;.C.6))0<K|V?5)-?/)/K|<.-.6))06K|W?/)-K|=.6))04KT1.)O)(KI))J}5O}2K~(?},)7?|L)7?|7)7?P)706K|T?/)/K|;.<))0<K|U?5)-?/)/K|<.C.6))0<K|V?5)-?/)/K|=.-.6))06K|W?/)-K|:.6))04KT1.)O)(KI))J}5O}2K~)?},)7?|L)7?|7)7?P)706K|T?/)/K|<.<))0<K|U?5)-?/)/K|=.C.6))0<K|V?5)-?/)/K|:.-.6))06K|W?/)-K|;.6))04KT1.)O)(KI))J}5O}2K~*?},)7?|L)7?|7)7?P)706K|T?/)/K|=.<))0<K|U?5)-?/)/K|:.C.6))0<K|V?5)-?/)/K|;.-.6))06K|W?/)-K|<.6))04KT1.)O)(KI))T2(0)*K|:K}ZT2(0)*K|;K~(T2(0)*K|<K~)T2(0)*K|=K~*J}CO}@K}Z?}:)7?|Z)=?|F)=?Z)=?;)305KA?/)/K|:.<)).<?A)30;KA?5)-?/)/K|;.C.6)).C?A)30;KA?5)-?/)/K|<.-.6)).-05KA?/)-K|=.6))04KT1.)O)(KI))J}CO}@K~(?}:)7?|Z)=?|F)=?Z)=?;)305KA?/)/K|;.<)).<?A)30;KA?5)-?/)/K|<.C.6)).C?A)30;KA?5)-?/)/K|=.-.6)).-05KA?/)-K|:.6))04KT1.)O)(KI))J}CO}@K~)?}:)7?|Z)=?|F)=?Z)=?;)305KA?/)/K|<.<)).<?A)30;KA?5)-?/)/K|=.C.6)).C?A)30;KA?5)-?/)/K|:.-.6)).-05KA?/)-K|;.6))04KT1.)O)(KI))J}CO}@K~*?}:)7?|Z)=?|F)=?Z)=?;)305KA?/)/K|=.<)).<?A)30;KA?5)-?/)/K|:.C.6)).C?A)30;KA?5)-?/)/K|;.-.6)).-05KA?/)-K|<.6))04KT1.)O)(KI))T7(5)*0.KPK:))K}ZT=(;)*04KP?.)@K:.B))K~(T=(;)*04KP?.)@K:.G))K~)T>(<)*05KP?/)@K:.|5))K~*K,)(C7KW?1)|4.~O.|Y)(0/K}=KF)(TD(B)*0/KRK}3)(65K}300K}=K#8)(K,T#7(#4)*014*K+K%+)(}~WK~I#~NJIOGK~,6BK~I0=060/KXK|H)(K|7)(K|,)(J}MO}JK%,6}DK~,6BR%-0=060/KXK|H)(K|7)(K|,)(,|ECHKH6BR%.0=060/KXK|H)(K|7)(K|,)()(C=K|.060/KXK|.)(K|6)()(C=K|9060/KXK}C)(K}Q)()(060/KXK}3)(K}<)(346200K%,K|>)(K%+T#,(#))*004*K+K9)(}~MK~I#~EJ0O.K~,K~IJ}MO}JK|S6}DK~,6BR%-0=060/KXK|H)(K|7)(K|,)(,|ECHKH6BR%.0=060/KXK|H)(K|7)(K|,)()(C=K|.060/KXK|.)(K|6)()(C=K|9060/KXK}C)(K}Q)()(060/KXK}3)(K|S)(3D6B060/KXK|H)(K|7)(00K|SK|>)(K9Ej8#j,JHOFK16B65R%Y004*K+R9))014*K+K%Z)(Q|L2|.)J?|))|C63R&(0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&)0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&*0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&+0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&,0.K1R9))0J09K163R}U0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&-0.K1R9))0J09K163R#Q0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&.0.K1R9))0J09K163R#Q0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&/0.K1R9))0J09K163R#Q0.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,Q|L2|.)J?|))|C63R&00.K1R9))0J09K163R&10.K1R9))))63R|K0.K1R9))))#?9=B;09K163R|L0.K1R9))))K,TA6?63R&20.K1R9))00K&3K&4)(;-K#T#(K,")
-console.log("通过了");//异步;;;
+;;;;debugger;;navigator.getBattery().then((res)=>{console.log('charging',res.charging)});
+navigator.getBattery().then((res)=>{console.log('chargingTime',res.chargingTime)});
+navigator.getBattery().then((res)=>{console.log('dischargingTime',res.dischargingTime)});
+//异步;;;
 // 宏队列，macrotask,也叫tasks.一些异步任务的回调会依次进入 macro task queue，等待后渎被调用，这些异步任务包括：
 
 // setTimeout
@@ -21106,12 +20473,17 @@ console.log("通过了");//异步;;;
 // MutationObserver
 //先执行微任务,在执行宏任务
 let HTMLElement_promise=bodavm.memory.asyncEvent['HTMLElement']
-for (const key in HTMLElement_promise) {
-    let leng_=HTMLElement_promise[key].length
-    for (let i = 0; i < leng_; i++) {
-        console.log(`HTMLElement_promise异步事件执行`,`type:${HTMLElement_promise[key]}`,`func:${HTMLElement_promise[key][i]}`);
-        HTMLElement_promise[key][i]()
-
+for (let key in HTMLElement_promise) {
+    let html_obj=HTMLElement_promise[key]  //onload
+    if (html_obj.length >0){
+        for (let i = 0; i < html_obj.length; i++) {
+            let element = html_obj[i];
+            console.log(`HTMLElement_promise ->`,`当前html_promise -> ${html_obj}`)
+            if (typeof element =='function'){
+                console.log(`HTMLElement_promise `,`当前html_promise -> ${html_obj}`,`->当前方法 ${html_obj[i]}执行`);
+                html_obj[i]()
+            }
+        }
     }
     
 }
@@ -21129,12 +20501,13 @@ noexecListener={
     'webdriver-evaluate':true,
     'contextmenu':true,
     'selenium-evaluate':true,
-    'error':true
+    'error':true,
+    "mouseEvent":true
 }
 
 // addEventListener  比settimeout先执行
 if (bodavm.memory.asyncEvent.listener) {
-    for (const key in bodavm.memory.asyncEvent.listener) {
+    for (var key in bodavm.memory.asyncEvent.listener) {
         let event = bodavm.memory.asyncEvent.listener[key]
         // debugger
             for (let i = 0; i < event.length; i++) {
@@ -21160,20 +20533,33 @@ if (bodavm.memory.asyncEvent.listener) {
 }
 
 let setTimeEvent = bodavm.memory.asyncEvent.setTimeout
-
+// debugger
 console.log(`当前setTimeEvent有===>${JSON.stringify(setTimeEvent)}`)
-if (setTimeEvent) {
+if (setTimeEvent && bodavm.config.settime_on) {
     setTimeEvent.sort((a, b) => {
-        return a.timeoutID > b.timeoutID ? 1 : -1;
-    })
+        if (a.delay < b.delay) {
+          return -1;
+        } else if (a.delay > b.delay) {
+          return 1;
+        } else {
+          if (a.timeoutID < b.timeoutID) {
+            return -1;
+          } else if (a.timeoutID > b.timeoutID) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      });
+      
 
-    setTimeEvent.sort((a, b) => {
-        return a.delay > b.delay ? 1 : -1;
-    })
+
+
+
     for (let i = 0; i < setTimeEvent.length; i++) {
         let event = setTimeEvent[i]
         if (event == undefined) { continue }
-        console.log(`异步回调执行settime=======================================>${JSON.stringify(event)}   callback:${event.callback+''.length>50?event.callback+''.substring(0,50):event.callback+''}`);
+        console.log(`异步回调执行settime======>${JSON.stringify(event)}   callback:${event.callback+''.length>50?event.callback+''.substring(0,50):event.callback+''}`);
         if (event.type) {
             event.callback()
         } else {
@@ -21181,6 +20567,9 @@ if (setTimeEvent) {
         }
     }
 }
+
+
+
 
 // 鼠标事件最后执行,模仿网站加载完成后再移动鼠标触发事件
 // //鼠标轨迹,获取实际网站的
@@ -21304,34 +20693,34 @@ if (setTimeEvent) {
 
 
 // // debugger
-// if (bodavm.memory.asyncEvent.listener) {
-//     for (let i = 0; i < mouseEvent.length; i++) {
-//         let event = mouseEvent[i];
-//         let type = event.type;
-//         let mouseEventObj = {
-//             "isTrusted": true
-//         };
-//         mouseEventObj = Object.setPrototypeOf(mouseEventObj, MouseEvent.prototype);
-//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientX", event.clientX);
-//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientY", event.clientY);
-//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "timeStamp", event.timeStamp);
-//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "type", event.type);
-//         //bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "pagex", event.type);
-//         let listenerList = bodavm.memory.asyncEvent.listener[type];
-//         //debugger;
-//         console.log(`listenerList====>`, listenerList)
+if (bodavm.memory.asyncEvent.listener) {
+    for (let i = 0; i < mouseEvent.length; i++) {
+        let event = mouseEvent[i];
+        let type = event.type;
+        let mouseEventObj = {
+            "isTrusted": true
+        };
+        mouseEventObj = Object.setPrototypeOf(mouseEventObj, MouseEvent.prototype);
+        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientX", event.clientX);
+        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientY", event.clientY);
+        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "timeStamp", event.timeStamp);
+        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "type", event.type);
+        //bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "pagex", event.type);
+        let listenerList = bodavm.memory.asyncEvent.listener[type];
+        //debugger;
+        console.log(`listenerList====>`, listenerList)
 
-//         if(listenerList ==undefined){debugger;continue}
-//         for (let j = 0; j < listenerList.length; j++) {
-//             let callBack = listenerList[j].listener;
-//             let self = listenerList[j].self;
-//             console.log(`执行异步回调second=======>`, `self:${self}  mouseEventObj:${mouseEventObj}`);
-//             callBack.call(self, mouseEventObj);
+        if(listenerList ==undefined){debugger;continue}
+        for (let j = 0; j < listenerList.length; j++) {
+            let callBack = listenerList[j].listener;
+            let self = listenerList[j].self;
+            console.log(`执行异步回调second=======>`, `self:${self}  mouseEventObj:${mouseEventObj}`);
+            callBack.call(self, mouseEventObj);
 
-//         }
+        }
 
-//     }
-// }
+    }
+}
 
 
 
@@ -21342,20 +20731,21 @@ if (setTimeEvent) {
         // boxhr.open('get' , "searchParamModel=%7B%22ObjectType%22%3A1%2C%22SearchKeyList%22%3A%5B%5D%2C%22SearchExpression%22%3Anull%2C%22BeginYear%22%3Anull%2C%22EndYear%22%3Anull%2C%22UpdateTimeType%22%3Anull%2C%22JournalRange%22%3Anull%2C%22DomainRange%22%3Anull%2C%22ClusterFilter%22%3A%22%22%2C%22ClusterLimit%22%3A0%2C%22ClusterUseType%22%3A%22Article%22%2C%22UrlParam%22%3A%22%22%2C%22Sort%22%3A%220%22%2C%22SortField%22%3Anull%2C%22UserID%22%3A%220%22%2C%22PageNum%22%3A2%2C%22PageSize%22%3A20%2C%22SType%22%3Anull%2C%22StrIds%22%3Anull%2C%22IsRefOrBy%22%3A0%2C%22ShowRules%22%3A%22%22%2C%22IsNoteHistory%22%3A0%2C%22AdvShowTitle%22%3Anull%2C%22ObjectId%22%3Anull%2C%22ObjectSearchType%22%3A0%2C%22ChineseEnglishExtend%22%3A0%2C%22SynonymExtend%22%3A0%2C%22ShowTotalCount%22%3A73734952%2C%22AdvTabGuid%22%3A%22%22%7D" || null)
         // let aaa=boxhr.send(true &&  "searchParamModel=%7B%22ObjectType%22%3A1%2C%22SearchKeyList%22%3A%5B%5D%2C%22SearchExpression%22%3Anull%2C%22BeginYear%22%3Anull%2C%22EndYear%22%3Anull%2C%22UpdateTimeType%22%3Anull%2C%22JournalRange%22%3Anull%2C%22DomainRange%22%3Anull%2C%22ClusterFilter%22%3A%22%22%2C%22ClusterLimit%22%3A0%2C%22ClusterUseType%22%3A%22Article%22%2C%22UrlParam%22%3A%22%22%2C%22Sort%22%3A%220%22%2C%22SortField%22%3Anull%2C%22UserID%22%3A%220%22%2C%22PageNum%22%3A2%2C%22PageSize%22%3A20%2C%22SType%22%3Anull%2C%22StrIds%22%3Anull%2C%22IsRefOrBy%22%3A0%2C%22ShowRules%22%3A%22%22%2C%22IsNoteHistory%22%3A0%2C%22AdvShowTitle%22%3Anull%2C%22ObjectId%22%3Anull%2C%22ObjectSearchType%22%3A0%2C%22ChineseEnglishExtend%22%3A0%2C%22SynonymExtend%22%3A0%2C%22ShowTotalCount%22%3A73734952%2C%22AdvTabGuid%22%3A%22%22%7D")
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'somewhere', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onload = function () {
-            // do something to response
-            console.log(this.responseText);
-        };
-        xhr.send('user=person&pwd=password&organization=place&requiredkey=key');
+        xhr.open('POST', 'http://qikan.cqvip.com/Search/SearchList', true);
+        // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        // xhr.onload = function () {
+        //     // do something to response
+        //     console.log(this.responseText);
+        // };
+        rsurl=xhr.myurl
+        xhr.send(true && "searchParamModel=%7B%22ObjectType%22%3A1%2C%22SearchKeyList%22%3A%5B%5D%2C%22SearchExpression%22%3Anull%2C%22BeginYear%22%3Anull%2C%22EndYear%22%3Anull%2C%22UpdateTimeType%22%3Anull%2C%22JournalRange%22%3Anull%2C%22DomainRange%22%3Anull%2C%22ClusterFilter%22%3A%22%22%2C%22ClusterLimit%22%3A0%2C%22ClusterUseType%22%3A%22Article%22%2C%22UrlParam%22%3A%22%22%2C%22Sort%22%3A%220%22%2C%22SortField%22%3Anull%2C%22UserID%22%3A%220%22%2C%22PageNum%22%3A3%2C%22PageSize%22%3A20%2C%22SType%22%3Anull%2C%22StrIds%22%3Anull%2C%22IsRefOrBy%22%3A0%2C%22ShowRules%22%3A%22%22%2C%22IsNoteHistory%22%3A0%2C%22AdvShowTitle%22%3Anull%2C%22ObjectId%22%3Anull%2C%22ObjectSearchType%22%3A0%2C%22ChineseEnglishExtend%22%3A0%2C%22SynonymExtend%22%3A0%2C%22ShowTotalCount%22%3A74249929%2C%22AdvTabGuid%22%3A%22%22%7D" );
                 
         
         
         let res={
             // b:new XMLHttpRequest().open(''),
             cookie:document.cookie,
-            // result:aaa
+            url:rsurl
         }
         
         return res

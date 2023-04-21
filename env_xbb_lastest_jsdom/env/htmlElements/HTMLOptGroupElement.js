@@ -1,5 +1,5 @@
 // HTMLOptGroupElement对象
-bodavm.memory.globalobj['HTMLOptGroupElement'] = function HTMLOptGroupElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLOptGroupElement'] = function HTMLOptGroupElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLOptGroupElement'], "HTMLOptGroupElement");
 bodavm.memory.globalobj['HTMLOptGroupElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLOptGroupElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

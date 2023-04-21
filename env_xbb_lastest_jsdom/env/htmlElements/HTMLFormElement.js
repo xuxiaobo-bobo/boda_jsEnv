@@ -1,5 +1,5 @@
 // HTMLFormElement对象
-bodavm.memory.globalobj['HTMLFormElement'] = function HTMLFormElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLFormElement'] = function HTMLFormElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLFormElement'], "HTMLFormElement");
 bodavm.memory.globalobj['HTMLFormElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLFormElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

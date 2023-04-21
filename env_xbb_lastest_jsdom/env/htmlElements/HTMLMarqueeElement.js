@@ -1,5 +1,5 @@
 // HTMLMarqueeElement对象
-bodavm.memory.globalobj['HTMLMarqueeElement'] = function HTMLMarqueeElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLMarqueeElement'] = function HTMLMarqueeElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLMarqueeElement'], "HTMLMarqueeElement");
 bodavm.memory.globalobj['HTMLMarqueeElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLMarqueeElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

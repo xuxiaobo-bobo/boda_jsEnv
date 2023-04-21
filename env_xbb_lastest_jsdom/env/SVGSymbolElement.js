@@ -1,5 +1,5 @@
 // SVGSymbolElement对象
-bodavm.memory.globalobj['SVGSymbolElement'] = function SVGSymbolElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGSymbolElement'] = function SVGSymbolElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGSymbolElement'], "SVGSymbolElement");
 bodavm.memory.globalobj['SVGSymbolElement'].prototype.__proto__=bodavm.memory.globalobj['SVGElement'].prototype;
 bodavm.memory.globalobj['SVGSymbolElement'].__proto__=bodavm.memory.globalobj['SVGElement'];

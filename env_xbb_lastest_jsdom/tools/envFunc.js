@@ -1,6 +1,105 @@
 // 浏览器接口具体的实现
 !function () {
+    bodavm.envFunc.Node_contains=function (){
+        debugger
+        let arg=arguments[0]
+        let cont=this._boarg.contains(arg._boarg)
+        console.log(`Node_contains ->`,`res ->${cont}`);
+        return cont
+    }
+    bodavm.envFunc.HTMLIFrameElement_contentDocument_get=function (){
+        let res=bodavm.memory.cache['HTMLIFrameElement_contentDocument_get']
+        // debugger
+        res._boarg=this._boarg.contentDocument
+        res.__proto__=HTMLDocument.prototype
+        res._boisinit=true
+        res._contentiframe=true
+        console.log(`HTMLIFrameElement_contentDocument_get ->`,`res ->${res} 获取iframe下的document !!!!`);
+        return res
+    }
+    bodavm.envFunc.Document_head_get=function (){
+        res=bodavm.memory.cache['Document_head_get']
+        
+        res._boarg=bodaobj.window.document.head
+        res.__proto__=HTMLHeadElement.prototype
+        console.log(`Document_head_get ->`,`res ->${res}`);
+        return res
+    }
 
+    bodavm.envFunc.HTMLAllCollection_item=function (){
+        // debugger
+        let arg=arguments[0]
+        res=this[arg]
+        console.log(`HTMLAllCollection_item ->`,`arg ->${arg} `,`res -> ${res}`);
+        return res
+    }
+    bodavm.envFunc.location_valueOf=function (){
+        // debugger
+        // res=window.location
+        console.log(`location_valueOf `, `res ->`,location);
+        return location
+    }
+
+    bodavm.envFunc.StorageManager_estimate=function (){
+        // debugger
+        
+            let res = {
+                quota:bodavm.memory.estimate['quota'],
+                usage:bodavm.memory.estimate['usage'],
+                usageDetails:{indexedDB:bodavm.memory.estimate['indexedDB']}
+            }
+            let promise = new Promise((resolve, reject) => {
+                resolve(res)
+            })
+            console.log(`StorageManager_estimate `, `res ->${promise}`);
+
+            return promise
+
+    }
+    bodavm.envFunc.HTMLScriptElement_src_set=function (){
+        // debugger
+        this._boarg.src=arguments[0]
+        let res=this._boarg.src
+        console.log(`HTMLScriptElement_src_set ->`,`res->${res}`);
+        return res
+    }
+    bodavm.envFunc.PerformanceEntry_name_get=function (){
+        // debugger
+        let name=this.name
+        console.log(`PerformanceEntry_name_get ->`,`res ->${name}`);
+        return name
+    }
+    bodavm.envFunc.Performance_getEntriesByType=function (){
+        let type=arguments[0]
+        if (type =='resource'){
+            let reslist=bodavm.memory.Performance['getEntriesByType']
+            reslist._boisinit=bodavm.config.isinit
+            for (let i of reslist){
+                i._boisinit=bodavm.config.isinit
+                i.__proto__ =PerformanceResourceTiming.prototype
+            }
+            //  debugger
+            console.log(`Performance_getEntriesByType- >`,`arg->${type}`,`res ->${reslist}`);
+            return reslist
+        }
+
+    }
+    bodavm.envFunc.Document_hasFocus=function (){
+        console.log(`Document_hasFocus ->`,`当前页面有没有获取焦点,默认返回true`)
+        return true
+    }
+    bodavm.envFunc.Performance_timeOrigin_get=function (){
+        let date=bodavm.memory.Performance['timeOrigin']
+        console.log(`Performance_timeOrigin_get-> `,`res ->${date}`);
+        return date
+    }
+
+    bodavm.envFunc.Image_src_set=function (){
+        // debugger
+        console.log(`Image_src_set->`,`res ->${arguments[0]}`);
+        this._boarg.src=arguments[0]
+        return this._boarg.src
+    }
     bodavm.envFunc.Performance_now=function (){
         let now=window.performance._boarg.now()
         console.log(`Performance_now `,`res ->${now}`);
@@ -8,9 +107,10 @@
     }
 
     bodavm.envFunc.window_Image = function window_Image() {
+        // debugger
         let arg=bodavm.memory.globalobj['Image']
         arg._boarg=bodaobj.window.Image
-        console.log(`window_Document `, `res -> ${arg}`);
+        console.log(`window_Image `, `res -> ${arg}`);
 
         return arg
     }
@@ -912,7 +1012,10 @@
     bodavm.envFunc.window_WebKitCSSMatrix = function () { let arg = bodavm.memory.globalobj['WebKitCSSMatrix']; console.log(`window_WebKitCSSMatrix`, `res ->${arg}`); return arg }
     bodavm.envFunc.window_WebKitMutationObserver = function () { let arg = bodavm.memory.globalobj['WebKitMutationObserver']; console.log(`window_WebKitMutationObserver`, `res ->${arg}`); return arg }
     bodavm.envFunc.window_webkitMediaStream = function () { let arg = bodavm.memory.globalobj['webkitMediaStream']; console.log(`window_webkitMediaStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitRTCPeerConnection = function () { let arg = bodavm.memory.globalobj['webkitRTCPeerConnection']; console.log(`window_webkitRTCPeerConnection`, `res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitRTCPeerConnection = function () { 
+        let arg = bodavm.memory.globalobj['webkitRTCPeerConnection']; console.log(`window_webkitRTCPeerConnection`, `res ->${arg}`
+        
+        ); return arg }
     bodavm.envFunc.window_webkitURL = function () { let arg = bodavm.memory.globalobj['webkitURL']; console.log(`window_webkitURL`, `res ->${arg}`); return arg }
     bodavm.envFunc.window_Audio = function () { let arg = bodavm.memory.globalobj['Audio']; console.log(`window_Audio`, `res ->${arg}`); return arg }
     bodavm.envFunc.window_IDBDatabase = function () { let arg = bodavm.memory.globalobj['IDBDatabase']; console.log(`window_IDBDatabase`, `res ->${arg}`); return arg }
@@ -922,55 +1025,58 @@
 
     bodavm.envFunc.window_MutationObserver = function () {
         // debugger
-        let arg = new bodavm.memory.globalobj['MutationObserver'](arguments[0])
-        arg._boarg=new bodaobj.window.MutationObserver(arguments[0])
+        // if (arguments.length<1) {
+            // arguments[0]=function (){}
+        // }
+        let arg =bodavm.memory.globalobj['MutationObserver']
+        // arg._boarg=new bodaobj.window.MutationObserver(arguments[0])
         console.log(`window_MutationObserver `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncanplaythrough_get = function () {
         let arg = bodavm.memory.window['oncanplaythrough']
-        arg._boarg= bodaobj.window['oncanplaythrough']
+        // arg._boarg= bodaobj.window['oncanplaythrough']
 
         console.log(`window_oncanplaythrough_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncanplay_get = function () {
         let arg = bodavm.memory.window['oncanplay']
-        arg._boarg= bodaobj.window['oncanplay']
+        // arg._boarg= bodaobj.window['oncanplay']
 
         console.log(`window_oncanplay_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncancel_get = function () {
         let arg = bodavm.memory.window['oncancel']
-        arg._boarg= bodaobj.window['oncancel']
+        // arg._boarg= bodaobj.window['oncancel']
         console.log(`window_oncancel_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onblur_get = function () {
         let arg = bodavm.memory.window['onblur']
-        arg._boarg= bodaobj.window['onblur']
+        // arg._boarg= bodaobj.window['onblur']
 
         console.log(`window_onblur_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onappinstalled_get = function () {
         let arg = bodavm.memory.window['onappinstalled']
-        arg._boarg= bodaobj.window['onappinstalled']
+        // arg._boarg= bodaobj.window['onappinstalled']
 
         console.log(`window_onappinstalled_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforeinstallprompt_get = function () {
         let arg = bodavm.memory.window['onbeforeinstallprompt']
-        arg._boarg= bodaobj.window['onbeforeinstallprompt']
+        // arg._boarg= bodaobj.window['onbeforeinstallprompt']
 
         console.log(`window_onbeforeinstallprompt_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforexrselect_get = function () {
         let arg = bodavm.memory.window['onbeforexrselect']
-        arg._boarg= bodaobj.window['onbeforexrselect']
+        // arg._boarg= bodaobj.window['onbeforexrselect']
 
         console.log(`window_onbeforexrselect_get `, `res ->${arg}`);
         return arg
@@ -978,7 +1084,7 @@
 
     bodavm.envFunc.window_onabort_get = function () {
         let arg = bodavm.memory.window['onabort']
-        arg._boarg= bodaobj.window['onabort']
+        // arg._boarg= bodaobj.window['onabort']
         console.log(`window_onabort_get `, `res ->${arg}`);
         return arg
     }
@@ -990,9 +1096,9 @@
         return arg
     }
     bodavm.envFunc.window_onsearch_get = function () {
-        let arg = bodavm.memory.globalobj['onsearch'] ? bodavm.memory.globalobj['onsearch'] : null
-        arg._boarg= bodaobj.window['onsearch']
-
+        // let arg = bodavm.memory.globalobj['onsearch'] ? bodavm.memory.globalobj['onsearch'] : null
+        // arg._boarg= bodaobj.window['onsearch']
+        let arg = bodavm.memory.window['onsearch']
         console.log(`window_onsearch_get `, `res ->${arg}`);
         return arg
     }
@@ -1004,16 +1110,18 @@
         return arg
     }
     bodavm.envFunc.window_frameElement_get = function () {
-        let arg = bodavm.memory.globalobj['frameElement'] ? bodavm.memory.globalobj['frameElement'] : null
-        arg._boarg= bodaobj.window['frameElement']
+        let arg = bodavm.memory.window['frameElement'] 
+        // arg._boarg= bodaobj.window['frameElement']
+
+
 
         console.log(`window_frameElement_get `, `res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_opener_get = function () {
-        let arg = bodavm.memory.globalobj['opener'] ? bodavm.memory.globalobj['opener'] : null
-        arg._boarg= bodaobj.window['opener']
-
+        let arg = bodavm.memory.window['opener']
+        // arg._boarg= bodaobj.window['opener']
+        // let arg= bodaobj.window['opener']
         console.log(`window_opener_get `, `res ->${arg}`);
         return arg
     }
@@ -1283,8 +1391,9 @@
     bodavm.envFunc.window_localStorage_get = function window_localStorage_get() {
         let localStorage_ = bodavm.memory.globalobj.localStorage
         console.log(`window_localStorage_get `, `localStorage->`, localStorage_);
-        localStorage_._boarg= bodaobj.window['localStorage']
+        // debugger
 
+        // localStorage_._boarg= bodaobj.window['localStorage']
         return localStorage_
     }
     bodavm.envFunc.window_indexedDB_get = function window_indexedDB_get() {
@@ -1297,7 +1406,7 @@
     bodavm.envFunc.window_sessionStorage_get = function window_sessionStorage_get() {
         let sessionStorage_ = bodavm.memory.globalobj.sessionStorage
         console.log(`window_sessionStorage_get `, `sessionStorage->`, sessionStorage_);
-        sessionStorage_._boarg= bodaobj.window['sessionStorage']
+        // sessionStorage_._boarg= bodaobj.window['sessionStorage']
 
         return sessionStorage_
     }
@@ -1333,6 +1442,7 @@
         return res
     }
     bodavm.envFunc.HTMLAllCollection_length_get = function () {
+        debugger
         let length_ = bodavm.memory.all.length
         console.log(`HTMLAllCollection_length_get `, `length_ ->${length_}`);
         return length_
@@ -1342,23 +1452,34 @@
         let a = boallundefined
         tags = document.getElementsByTagName("*")
         a.__proto__ = bodavm.memory.globalobj['HTMLAllCollection'].prototype
-        if (bodavm.memory.rs6 && bodavm.memory.rs6_body == 0) {
-            let num = 0
-            for (let i = 0; i < tags.length; i++) {
-                if (tags[i] instanceof bodavm.memory.globalobj['HTMLBodyElement']) {
-                } else {
-                    bodavm.memory.all[num] = tags[i]
-                    num++
-                }
-            }
-        } else {
+        // if (bodavm.memory.rs6 && bodavm.memory.rs6_body == 0) {
+        //     let num = 0
+        //     for (let i = 0; i < tags.length; i++) {
+        //         if (tags[i] instanceof bodavm.memory.globalobj['HTMLBodyElement']) {
+
+        //         } else {
+        //             bodavm.memory.all[num] = tags[i]
+        //             num++
+        //         }
+        //     }
+        // } else {
             for (let i2 = 0; i2 < tags.length; i2++) {
-                bodavm.memory.all[i2] = tags[i2];
+                // bodavm.memory.all[i2] = tags[i2];
+                a[i2]=tags[i2]
+                bodavm.memory.all.push(tags[i2])
             }
 
-        }
+        // let arg=arguments[0]
+        // debugger
+        // if (arg){
+        //     res=a[arg]
+        //     console.log(`Document_all_get ->`,`arg :${arg} `,`res -> ${res}`)
+        //     return res
+        // }
 
 
+        // debugger
+        a._boarg=true
         a.__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
         console.log("Document_all_get  ", `all ->${a}`)
         return a
@@ -1419,7 +1540,7 @@
 
     bodavm.envFunc.HTMLFormElement_action_get = function HTMLFormElement_action_get() {
         let action = ''
-        debugger
+        // debugger
         for (let i = 0; i < bodavm.memory.formlist.length; i++) {
             if (bodavm.memory.formlist[i] == this._boarg) {
                 for (let j = 0; j < bodavm.memory.formlist[i]['child'].length; j++) {
@@ -1434,6 +1555,7 @@
 
             }
         }
+        // action=this._boarg.action
         // debugger
 
         console.log(`HTMLFormElement_action_get `, `action ->${action}`, `r6检测点`);
@@ -1462,9 +1584,9 @@
     bodavm.envFunc.Document_createExpression = function Document_createExpression() {
         // debugger
         let res = {}
-
-        res.__proto__ = bodavm.memory.globalobj['XPathExpression'].prototype
         res._boarg = bodaobj.document.createExpression(arguments[0], arguments[1])
+        res.__proto__ = bodavm.memory.globalobj['XPathExpression'].prototype
+        
         console.log(`Document_createExpression `, `res ->${res}`);
         return res
     }
@@ -1472,7 +1594,7 @@
     bodavm.envFunc.BarProp_visible_get = function BarProp_visible_get() {
         // debugger
         let boolres = true
-        console.log(`BarProp_visible_get `, `boolres ->${boolres}`);
+        console.log(`BarProp_visible_get `, `boolres ->${boolres}`,`未完善`);
         return boolres
     }
     bodavm.envFunc.HTMLMediaElement_canPlayType = function HTMLMediaElement_canPlayType() {
@@ -1526,6 +1648,7 @@
         let res = {}
         res._media = arg
         res.__proto__ = bodavm.memory.globalobj['MediaQueryList'].prototype
+        res._boisinit=true
         console.log(`window_matchMedia `, `arg ->${arg}`, `res ->${res}`);
 
         return res
@@ -1536,7 +1659,7 @@
         if (arguments.length > 1) { return bodavm.toolsFunc.throwError('TypeError', 'XMLHttpRequestEventTarget_onabort_set') }
         let arg = arguments[0]
         this._boarg.onabort = arg
-        console.log(`XMLHttpRequestEventTarget_onabort_set`, `arg->${arg}`);
+        console.log(`XMLHttpRequestEventTarget_onabort_set `, `arg->${arg}`);
         return arg
     }
 
@@ -1691,14 +1814,37 @@
 
     }
     bodavm.envFunc.Document_images_get = function () {
-        let imgs = bodaobj.document.images
+        // let imgs = 
         if (bodavm.config.isdebug) { debugger };
+        if (bodavm.memory.collection["IMG"]){
+            res=bodavm.memory.collection["IMG"]
+            console.log(`Document_images_get  bodavm.memory.collection["IMG"]已存在,直接返回`);
+            return res
+        }
 
-        let res = {}
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = imgs
-        console.log(`Document_images_get `, `res -> ${res}`);
-        return res
+        if (!bodavm.memory.collection["IMG"]){
+            bodavm.memory.collection["IMG"]=[]
+        }
+        // else if (bodavm.memory.collection["IMG"]){
+        //     console.log(`Document_images_get `, `已存在bodavm.memory.collection中直接返回 imgs -> ${bodavm.memory.collection["IMG"]}`);
+        //     return bodavm.memory.collection["IMG"]
+        // }
+        // debugger
+        taglist = bodaobj.document.images
+        for (let i = 0; i < taglist.length; i++) {
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection["IMG"].__proto__=Array.prototype
+
+            // if (bodavm.memory.collection["IMG"].indexOf(res)==-1){
+                bodavm.memory.collection["IMG"].push(res)
+            // }
+        }
+        bodavm.memory.collection["IMG"].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection["IMG"]._boarg = taglist
+        bodavm.memory.collection["IMG"].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        console.log(`Document_images_get `, `imgs -> ${bodavm.memory.collection["IMG"]}`);
+        return bodavm.memory.collection["IMG"]
     }
     bodavm.envFunc.Navigator_deviceMemory_get = function Navigator_deviceMemory_get() {
         let deviceMemory = bodavm.memory.navigator['deviceMemory']
@@ -1709,7 +1855,7 @@
     }
 
     bodavm.envFunc.Navigator_credentials_get = function Navigator_credentials_get() {
-        let credentials = {}
+        let credentials = bodavm.memory.cache['Navigator_credentials_get']
         if (bodavm.config.isdebug) { debugger };
 
         credentials.__proto__ = bodavm.memory.globalobj['CredentialsContainer'].prototype
@@ -1717,8 +1863,10 @@
         return credentials
     }
     bodavm.envFunc.Navigator_storage_get = function Navigator_storage_get() {
-        let storage = {}
+        let storage = bodavm.memory.cache['Navigator_storage_get']
+        // debugger
         if (bodavm.config.isdebug) { debugger };
+        storage._boisinit=true
         storage.__proto__ = bodavm.memory.globalobj['StorageManager'].prototype
         console.log(`Navigator_storage_get `, `storage ->${storage}`);
         return storage
@@ -1731,7 +1879,7 @@
         return maxTouchPoints
     }
     bodavm.envFunc.Navigator_bluetooth_get = function Navigator_bluetooth_get() {
-        let bluetooth = {}
+        let bluetooth = bodavm.memory.cache['Navigator_bluetooth_get']
         bluetooth.__proto__ = bodavm.memory.globalobj['Bluetooth'].prototype
         if (bodavm.config.isdebug) { debugger };
 
@@ -1809,8 +1957,9 @@
     }
     bodavm.envFunc.window_frames_get = function window_frames_get() {
         let iframe = bodaobj.window
-        console.log(`window_frames_get `, ` 返回的为jsdom中的window`);
-        iframe = bodavm.toolsFunc.proxy(iframe, 'iframewinodow')
+        console.log(`window_frames_get `, ` 返回的为jsdom中的window`,`需要关注具体方法`);
+        // iframe = bodavm.toolsFunc.proxy(iframe, 'iframewinodow')
+
         return iframe
     }
     bodavm.envFunc.window_closed_get = function window_closed_get() {
@@ -1974,6 +2123,7 @@
         return name
     }
     bodavm.envFunc.window_setTimeout = function window_setTimeout() {
+        // debugger
         let func = arguments[0];
         let delay = arguments[1] || 0;
         let length = arguments.length;
@@ -2087,7 +2237,7 @@
         let index = arguments[0];
         let i = 0;
         console.log(`Storage_key `, `index${index}  `)
-        for (const key in this) {
+        for (var key in this) {
             if (i === index) {
                 return this[key]
             }
@@ -2108,7 +2258,7 @@
         let i = 0;
         if (bodavm.config.isdebug) { debugger }
         debugger
-        for (const key in Object.getOwnPropertyDescriptors(this)) {
+        for (var key in Object.getOwnPropertyDescriptors(this)) {
             i++
         }
         console.log(`Storage_length_get `, `length->${i}   `);
@@ -2132,7 +2282,11 @@
     bodavm.envFunc.Document_webkitFullscreenEnabled_get = function Document_webkitFullscreenEnabled_get() { console.log("Document_webkitFullscreenEnabled_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_webkitFullscreenElement_get = function Document_webkitFullscreenElement_get() { console.log("Document_webkitFullscreenElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_webkitCurrentFullScreenElement_get = function Document_webkitCurrentFullScreenElement_get() { console.log("Document_webkitCurrentFullScreenElement_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Document_wasDiscarded_get = function Document_wasDiscarded_get() { console.log("Document_wasDiscarded_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_wasDiscarded_get = function Document_wasDiscarded_get() { 
+        
+        console.log("Document_wasDiscarded_get  ", false, "!!!!!!!!!未完善!!!!!!!!!!!!")
+        return false
+    }
     bodavm.envFunc.Document_vlinkColor_get = function Document_vlinkColor_get() { console.log("Document_vlinkColor_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_visibilityState_get = function Document_visibilityState_get() {
         console.log("Document_visibilityState_get  ", 'visible',)
@@ -2185,7 +2339,12 @@
     bodavm.envFunc.Document_bgColor_get = function Document_bgColor_get() { console.log("Document_bgColor_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_childElementCount_get = function Document_childElementCount_get() { console.log("Document_childElementCount_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_children_get = function Document_children_get() { console.log("Document_children_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Document_currentScript_get = function Document_currentScript_get() { console.log("Document_currentScript_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_currentScript_get = function Document_currentScript_get() { 
+        // debugger
+        let res=this._boarg.currentScript
+        console.log("Document_currentScript_get  ", `res ->${res}`, "!!!!!!!!!未完善!!!!!!!!!!!!")
+        return res
+    }
     bodavm.envFunc.Document_defaultView_get = function Document_defaultView_get() { console.log("Document_defaultView_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_doctype_get = function Document_doctype_get() { console.log("Document_doctype_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_embeds_get = function Document_embeds_get() { console.log("Document_embeds_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
@@ -2268,7 +2427,13 @@
     bodavm.envFunc.Document_onpointerup_get = function Document_onpointerup_get() { console.log("Document_onpointerup_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_onprogress_get = function Document_onprogress_get() { console.log("Document_onprogress_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Document_onratechange_get = function Document_onratechange_get() { console.log("Document_onratechange_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Document_querySelector = function Document_querySelector() { console.log("Document_querySelector", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Document_querySelector = function Document_querySelector() { 
+        
+        let res=this._boarg.querySelector(arguments[0])
+        console.log("Document_querySelector ->",`res ->${res}`)
+        if (res){debugger}
+        return res
+    }
     bodavm.envFunc.Document_write=function (){
         let html = arguments[0]
         bodaobj.document.write(html)
@@ -2302,12 +2467,31 @@
 
     }
     bodavm.envFunc.Document_scripts_get = function Document_scripts_get() {
-        let res = {}
-        let scripts = bodaobj.document.scripts
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = scripts
-        console.log(`Document_scripts_get `, `res ->${res}`);
-        return res
+        if (bodavm.memory.collection["scripts"]){
+            console.log(`Document_scripts_get 在bodavm.memory.collection[${"scripts"}] 已存在,直接返回`)
+            return bodavm.memory.collection["scripts"]
+        }
+        // let res = {}
+        if (!bodavm.memory.collection["scripts"]){
+            bodavm.memory.collection["scripts"]=[]
+        }
+        taglist = bodaobj.document.scripts
+
+        for (let i = 0; i < taglist.length; i++) {
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection["scripts"].__proto__=Array.prototype
+
+            // if (bodavm.memory.collection["scripts"].indexOf(res)==-1){
+                bodavm.memory.collection["scripts"].push(res)
+            // }
+        }
+        bodavm.memory.collection["scripts"].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection["scripts"]._boarg = taglist
+
+        console.log(`Document_scripts_get `, `res ->${bodavm.memory.collection["scripts"]}`);
+        bodavm.memory.collection["scripts"].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        return bodavm.memory.collection["scripts"]
     }
     bodavm.envFunc.Document_body_set = function Document_body_set() {
 
@@ -2477,8 +2661,9 @@
             console.log(`Document_body_get `, `当前网站为r6使用该功能,否则请关闭`, `body->${null}  `);
             return null
         }
-        let res = bodavm.toolsFunc.setProto('body')
+        let res =bodavm.memory.cache['Document_body_get']
         res._boarg = bodaobj.document.body
+        res.__proto__=HTMLBodyElement.prototype
         console.log(`Document_body_get `, `body->${res}  `);
         return res
 
@@ -2518,36 +2703,52 @@
 
     //'[{"type":"node","tag":"meta",attrs:{"id":id}},{"type":"node","tag":"canvas"},{"type":"node","tag":"a"},{"type":"node","tag":"script"},{"type":"node","tag":"style"}]'
     bodavm.envFunc.Document_getElementsByTagName = function Document_getElementsByTagName() {
-        var tagName = arguments[0].toLowerCase()
-        let res = {}
-        if (bodavm.config.isdebug) { debugger };
-        let taglist = bodaobj.document.getElementsByTagName(tagName)
+        var tagName = arguments[0].toUpperCase()
         // debugger
+
+        if (bodavm.memory.collection[tagName] && bodavm.memory.collection[tagName].length){
+            console.log(`Document_getElementsByTagName 在bodavm.memory.collection[${tagName}] 已存在,直接返回`)
+            return bodavm.memory.collection[tagName]
+        }
+
+        if (!bodavm.memory.collection[tagName]){
+            bodavm.memory.collection[tagName]=[]
+        }
+        
+        let taglist = bodaobj.document.getElementsByTagName(tagName)
         num = 0
         for (let i = 0; i < taglist.length; i++) {
             num++
-            res[i] = bodavm.toolsFunc.setProto(taglist[i].nodeName);
-            res[i]._boarg = taglist[i]
-            if (num == 2 && tagName == 'script' && bodavm.config.isrs) {
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection[tagName].__proto__=Array.prototype
+            bodavm.memory.collection[tagName].push(res)
+            if (num == 2 && tagName == 'SCRIPT' && bodavm.config.isrs) {
                 // debugger
                 break
 
             }
         }
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = taglist
+
+        
+        bodavm.memory.collection[tagName].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection[tagName]._boarg = taglist
         console.log(`Document_getElementsByTagName `, `tagName->${tagName} `, ` taglist->${taglist}`);
-
-
-        return res
+        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        // taglist._boisinit=true
+        return bodavm.memory.collection[tagName]
 
     }
 
     bodavm.envFunc.Document_cookie_get = function Document_cookie_get() {
         // debugger
+        if (this._contentiframe){
+            console.log(`iframe下的document获取cookie,直接返回''`);
+            return ''
+        }
         let jsonCookie = bodavm.memory.globalInit.jsonCookie;
         let tempCookie = "";
-        for (const key in jsonCookie) {
+        for (var  key in jsonCookie) {
             if (key === "") {
                 tempCookie += `${jsonCookie[key]}; `;
             } else {
@@ -2643,9 +2844,15 @@
     bodavm.envFunc.Document_documentElement_get = function Document_documentElement_get() {
         if (bodavm.config.isdebug) { debugger }
         // debugger
+        // let htmlElement={}
+        
         let html = bodaobj.document.documentElement
-        let res = bodavm.toolsFunc.setProto(html.nodeName)
-        res._boarg = html
+        res=bodavm.memory.cache['Document_documentElement_get']
+        res._boarg=html
+        res.__proto__=HTMLHtmlElement.prototype
+        // res._boarg=html
+        res._boisinit=bodavm.config.isinit
+
         console.log(`Document_documentElement_get `, `html->${res}  `);
         return res
 
@@ -2690,14 +2897,13 @@
 
     bodavm.envFunc.Document_scrollingElement_get = function Document_scrollingElement_get() {
         if (bodavm.config.isdebug) { debugger }
-        let res = {}
+        let res = bodavm.memory.cache['Document_scrollingElement_get']
         let html = bodaobj.document.documentElement
-
         res = bodavm.toolsFunc.setProto('html')
-        res._boarg = html
+        res._boarg = html    
         // return onselectionchange
-        console.log(`Document_scrollingElement_get==> `, `html->${res}`);
-        return res
+        console.log(`Document_scrollingElement_get==> `, `html->${html}`);
+        return html
     }
 
 
@@ -2775,26 +2981,36 @@
                     }
                 }
             }
+        }else{
+            content=this._boarg.textContent
         }
-        console.log("Node_textContent_get", `content ->${content}`, `r6检测点`)
+        console.log("Node_textContent_get ", `content ->${content}`, `r6检测点`)
         return content
 
     }
-    bodavm.envFunc.Node_previousSibling_get = function Node_previousSibling_get() { console.log("Node_previousSibling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Node_ownerDocument_get = function Node_ownerDocument_get() { console.log("Node_ownerDocument_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Node_baseURI_get = function Node_baseURI_get() { console.log("Node_baseURI_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Node_childNodes_get = function Node_childNodes_get() { console.log("Nodes_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Node_isConnected_get = function Node_isConnected_get() { console.log("Node_isConnected_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_previousSibling_get = function Node_previousSibling_get() { console.log("Node_previousSibling_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_ownerDocument_get = function Node_ownerDocument_get() { console.log("Node_ownerDocument_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_baseURI_get = function Node_baseURI_get() { console.log("Node_baseURI_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_childNodes_get = function Node_childNodes_get() { 
+        // debugger
+        let Nodelists={}
+        Nodelists._boarg=this._boarg.childNodes
+        Nodelists.__proto__=NodeList.prototype
+        console.log("Node_childNodes_get ->",`res->${Nodelists}`) 
+        return Nodelists
+    }
+    bodavm.envFunc.Node_isConnected_get = function Node_isConnected_get() { console.log("Node_isConnected_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Node_nextSibling_get = function Node_nextSibling_get() {
         // debugger
-        let res = {}
-        _next = this._boarg.nextSibling
+         res = bodavm.memory.cache['Node_nextSibling_get']
+         let _next = this._boarg.nextSibling
         if (_next == null) {
             console.log(`Node_nextSibling_get `, `res -> null`);
             return null
         } else {
             res = bodavm.toolsFunc.setProto(_next.nodeName)
             res._boarg = _next
+            res._boisinit=bodavm.config.isinit
         }
 
         console.log(`Node_nextSibling_get `, `res->${res}`);
@@ -2807,16 +3023,20 @@
         console.log(`Node_nodeType_get `, `nodetype ->${nodetype}`);
         return nodetype
     }
-    bodavm.envFunc.Node_nodeValue_get = function Node_nodeValue_get() { console.log("Node_nodeValue_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Node_nodeValue_get = function Node_nodeValue_get() { console.log("Node_nodeValue_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
     bodavm.envFunc.Node_nodeName_get = function Node_nodeName_get() {
+        // debugger
+        nodeName_=this._boarg.nodeName
         if (bodavm.config.isdebug) { debugger }
-        console.log(`Node_nodeName_get !!!!!!!!!未完善!!!!!!!!!!!!`);
+        console.log(`Node_nodeName_get ->`,` res -> ${ nodeName_}`);
         return nodeName_
     }
     bodavm.envFunc.Node_firstChild_get = function Node_firstChild_get() {
         // debugger
-        let res = {}
+        let res = {
+            _boisinit:bodavm.config.isinit
+        }
         let frist_ = this._boarg.firstChild
         if (frist_) {
             res = bodavm.toolsFunc.setProto(frist_.nodeName)
@@ -2851,27 +3071,62 @@
     bodavm.envFunc.Node_parentNode_get = function Node_parentNode_get() {
         //获取父节点
         // debugger
+        
         if (bodavm.config.isdebug) { debugger }
         let parent = this._boarg.parentNode
-        let res = bodavm.toolsFunc.setProto(parent.nodeName)
-        res._boarg = parent
-        // if (Object.prototype.toString.call(parent) == '[object Object]') {
-        //     console.log(`Node_parentNode_get `, `parent->${null}  `);
-        //     return null
-        // }
-        // parent.__proto__ = bodavm.toolsFunc.setProto(parent._nodeName)
+        if (bodavm.memory.cache['Node_parentNode_get']['parent']==parent){
+            console.log(`Node_parentNode_get parent在bodavm.memory.cache['Node_parentNode_get']['parent']已存在,直接返回`);
+            return bodavm.memory.cache['Node_parentNode_get']['res']
+        }
+        let res=bodavm.memory.cache['Node_parentNode_get']['res']
+        
+        if (parent){
+            // if (!(bodavm.memory.cache['Node_parentNode_get']['parent'])){
+            //     bodavm.memory.cache['Node_parentNode_get']['parent']=parent
+            // }else{
+                // 
+            // }
+           
+            res = bodavm.toolsFunc.setProto(parent.nodeName)
+            res._boarg = parent
+            bodavm.memory.cache['Node_parentNode_get']['parent']=parent
+
+            bodavm.memory.cache['Node_parentNode_get']['res']=res
+            // if (parent.nodeName)
+            // if (Object.prototype.toString.call(parent) == '[object Object]') {
+            //     console.log(`Node_parentNode_get `, `parent->${null}  `);
+            //     return null
+            // }
+            // parent.__proto__ = bodavm.toolsFunc.setProto(parent._nodeName)
+        }else{
+            res=null
+        }
+        
         console.log(`Node_parentNode_get `, `parent->${res}  `);
         return res;
     }
     bodavm.envFunc.Node_removeChild = function Node_removeChild() {
         //删除子节点
-        // debugger
+        debugger
         if (bodavm.config.isdebug) { debugger };;
 
         let child = arguments[0]
         this._boarg.removeChild(child._boarg)
+        let tagname=child._boarg.nodeName
         console.log(`Node_removeChild `, `child->${child}`);
-
+        if (bodavm.memory.collection[tagname]){
+            for (let i = 0; i < bodavm.memory.collection[tagname].length; i++) {
+                if (child ==bodavm.memory.collection[tagname][i]){
+    
+                    console.log(`当前对象 tagname:${tagname},child:${child} 存在bodavm.memory.collection ,重置bodavm.memory.collection[${tagname}]`)
+                    bodavm.memory.collection[tagname].__proto__=Array.prototype
+                    bodavm.memory.collection[tagname].splice(i,1)
+                    bodavm.memory.collection[tagname].__proto__=bodavm.memory.globalobj['HTMLCollection'].prototype
+                }
+                
+            }
+        }
+        
         // debugger
 
         return child
@@ -2884,9 +3139,13 @@
         let parent = {}
         // debugger
         let temp = this._boarg.parentElement
-        parent = bodavm.toolsFunc.setProto(temp.nodeName)
-        parent._boarg = temp
-        console.log(`Node_parentElement_get `, `parent${temp} `);
+        if (temp){
+            parent = bodavm.toolsFunc.setProto(temp.nodeName)
+            parent._boarg = temp
+        }else{
+            parent=null
+        }
+        console.log(`Node_parentElement_get ->`, `parent ->${parent} `);
 
 
         return parent;
@@ -2915,71 +3174,71 @@
     }
 
     //Element
-    bodavm.envFunc.Element_ariaAtomic_get = function Element_ariaAtomic_get() { console.log("Element_ariaAtomic_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaAutoComplete_get = function Element_ariaAutoComplete_get() { console.log("Element_ariaAutoComplete_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaBusy_get = function Element_ariaBusy_get() { console.log("Element_ariaBusy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaChecked_get = function Element_ariaChecked_get() { console.log("Element_ariaChecked_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaColCount_get = function Element_ariaColCount_get() { console.log("Element_ariaColCount_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaDescription_get = function Element_ariaDescription_get() { console.log("Element_ariaDescription_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaCurrent_get = function Element_ariaCurrent_get() { console.log("Element_ariaCurrent_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaColSpan_get = function Element_ariaColSpan_get() { console.log("Element_ariaColSpan_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaColIndex_get = function Element_ariaColIndex_get() { console.log("Element_ariaColIndex_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaDisabled_get = function Element_ariaDisabled_get() { console.log("Element_ariaDisabled_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaExpanded_get = function Element_ariaExpanded_get() { console.log("Element_ariaExpanded_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaHasPopup_get = function Element_ariaHasPopup_get() { console.log("Element_ariaHasPopup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaHidden_get = function Element_ariaHidden_get() { console.log("Element_ariaHidden_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaInvalid_get = function Element_ariaInvalid_get() { console.log("Element_ariaInvalid_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaKeyShortcuts_get = function Element_ariaKeyShortcuts_get() { console.log("Element_ariaKeyShortcuts_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaLevel_get = function Element_ariaLevel_get() { console.log("Element_ariaLevel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaLabel_get = function Element_ariaLabel_get() { console.log("Element_ariaLabel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaLive_get = function Element_ariaLive_get() { console.log("Element_ariaLive_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaModal_get = function Element_ariaModal_get() { console.log("Element_ariaModal_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaMultiLine_get = function Element_ariaMultiLine_get() { console.log("Element_ariaMultiLine_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaMultiSelectable_get = function Element_ariaMultiSelectable_get() { console.log("Element_ariaMultiSelectable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaOrientation_get = function Element_ariaOrientation_get() { console.log("Element_ariaOrientation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaPlaceholder_get = function Element_ariaPlaceholder_get() { console.log("Element_ariaPlaceholder_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaPosInSet_get = function Element_ariaPosInSet_get() { console.log("Element_ariaPosInSet_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaPressed_get = function Element_ariaPressed_get() { console.log("Element_ariaPressed_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaReadOnly_get = function Element_ariaReadOnly_get() { console.log("Element_ariaReadOnly_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRequired_get = function Element_ariaRequired_get() { console.log("Element_ariaRequired_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRelevant_get = function Element_ariaRelevant_get() { console.log("Element_ariaRelevant_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRoleDescription_get = function Element_ariaRoleDescription_get() { console.log("Element_ariaRoleDescription_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRowCount_get = function Element_ariaRowCount_get() { console.log("Element_ariaRowCount_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRowIndex_get = function Element_ariaRowIndex_get() { console.log("Element_ariaRowIndex_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaRowSpan_get = function Element_ariaRowSpan_get() { console.log("Element_ariaRowSpan_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaSelected_get = function Element_ariaSelected_get() { console.log("Element_ariaSelected_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaSort_get = function Element_ariaSort_get() { console.log("Element_ariaSort_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaSetSize_get = function Element_ariaSetSize_get() { console.log("Element_ariaSetSize_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaValueMax_get = function Element_ariaValueMax_get() { console.log("Element_ariaValueMax_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaValueMin_get = function Element_ariaValueMin_get() { console.log("Element_ariaValueMin_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaValueNow_get = function Element_ariaValueNow_get() { console.log("Element_ariaValueNow_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_ariaValueText_get = function Element_ariaValueText_get() { console.log("Element_ariaValueText_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_assignedSlot_get = function Element_assignedSlot_get() { console.log("Element_assignedSlot_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_attributeStyleMap_get = function Element_attributeStyleMap_get() { console.log("Element_attributeStyleMap_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_childElementCount_get = function Element_childElementCount_get() { console.log("ElementCount_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_classList_get = function Element_classList_get() { console.log("Element_classList_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_className_get = function Element_className_get() { console.log("Element_className_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_elementTiming_get = function Element_elementTiming_get() { console.log("Element_elementTiming_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_firstElementChild_get = function Element_firstElementChild_get() { console.log("ElementChild_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_lastElementChild_get = function Element_lastElementChild_get() { console.log("ElementChild_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_localName_get = function Element_localName_get() { console.log("Element_localName_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_namespaceURI_get = function Element_namespaceURI_get() { console.log("Element_namespaceURI_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_nextElementSibling_get = function Element_nextElementSibling_get() { console.log("ElementSibling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onbeforecopy_get = function Element_onbeforecopy_get() { console.log("Element_onbeforecopy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onbeforecut_get = function Element_onbeforecut_get() { console.log("Element_onbeforecut_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onbeforepaste_get = function Element_onbeforepaste_get() { console.log("Element_onbeforepaste_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onfullscreenchange_get = function Element_onfullscreenchange_get() { console.log("Element_onfullscreenchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onfullscreenerror_get = function Element_onfullscreenerror_get() { console.log("Element_onfullscreenerror_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onsearch_get = function Element_onsearch_get() { console.log("Element_onsearch_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onwebkitfullscreenchange_get = function Element_onwebkitfullscreenchange_get() { console.log("Element_onwebkitfullscreenchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_onwebkitfullscreenerror_get = function Element_onwebkitfullscreenerror_get() { console.log("Element_onwebkitfullscreenerror_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_part_get = function Element_part_get() { console.log("Element_part_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_prefix_get = function Element_prefix_get() { console.log("Element_prefix_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_previousElementSibling_get = function Element_previousElementSibling_get() { console.log("ElementSibling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_scrollHeight_get = function Element_scrollHeight_get() { console.log("Element_scrollHeight_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_shadowRoot_get = function Element_shadowRoot_get() { console.log("Element_shadowRoot_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_scrollWidth_get = function Element_scrollWidth_get() { console.log("Element_scrollWidth_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Element_slot_get = function Element_slot_get() { console.log("Element_slot_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaAtomic_get = function Element_ariaAtomic_get() { console.log("Element_ariaAtomic_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaAutoComplete_get = function Element_ariaAutoComplete_get() { console.log("Element_ariaAutoComplete_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaBusy_get = function Element_ariaBusy_get() { console.log("Element_ariaBusy_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaChecked_get = function Element_ariaChecked_get() { console.log("Element_ariaChecked_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaColCount_get = function Element_ariaColCount_get() { console.log("Element_ariaColCount_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaDescription_get = function Element_ariaDescription_get() { console.log("Element_ariaDescription_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaCurrent_get = function Element_ariaCurrent_get() { console.log("Element_ariaCurrent_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaColSpan_get = function Element_ariaColSpan_get() { console.log("Element_ariaColSpan_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaColIndex_get = function Element_ariaColIndex_get() { console.log("Element_ariaColIndex_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaDisabled_get = function Element_ariaDisabled_get() { console.log("Element_ariaDisabled_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaExpanded_get = function Element_ariaExpanded_get() { console.log("Element_ariaExpanded_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaHasPopup_get = function Element_ariaHasPopup_get() { console.log("Element_ariaHasPopup_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaHidden_get = function Element_ariaHidden_get() { console.log("Element_ariaHidden_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaInvalid_get = function Element_ariaInvalid_get() { console.log("Element_ariaInvalid_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaKeyShortcuts_get = function Element_ariaKeyShortcuts_get() { console.log("Element_ariaKeyShortcuts_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaLevel_get = function Element_ariaLevel_get() { console.log("Element_ariaLevel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaLabel_get = function Element_ariaLabel_get() { console.log("Element_ariaLabel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaLive_get = function Element_ariaLive_get() { console.log("Element_ariaLive_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaModal_get = function Element_ariaModal_get() { console.log("Element_ariaModal_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaMultiLine_get = function Element_ariaMultiLine_get() { console.log("Element_ariaMultiLine_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaMultiSelectable_get = function Element_ariaMultiSelectable_get() { console.log("Element_ariaMultiSelectable_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaOrientation_get = function Element_ariaOrientation_get() { console.log("Element_ariaOrientation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaPlaceholder_get = function Element_ariaPlaceholder_get() { console.log("Element_ariaPlaceholder_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaPosInSet_get = function Element_ariaPosInSet_get() { console.log("Element_ariaPosInSet_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaPressed_get = function Element_ariaPressed_get() { console.log("Element_ariaPressed_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaReadOnly_get = function Element_ariaReadOnly_get() { console.log("Element_ariaReadOnly_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRequired_get = function Element_ariaRequired_get() { console.log("Element_ariaRequired_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRelevant_get = function Element_ariaRelevant_get() { console.log("Element_ariaRelevant_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRoleDescription_get = function Element_ariaRoleDescription_get() { console.log("Element_ariaRoleDescription_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRowCount_get = function Element_ariaRowCount_get() { console.log("Element_ariaRowCount_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRowIndex_get = function Element_ariaRowIndex_get() { console.log("Element_ariaRowIndex_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaRowSpan_get = function Element_ariaRowSpan_get() { console.log("Element_ariaRowSpan_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaSelected_get = function Element_ariaSelected_get() { console.log("Element_ariaSelected_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaSort_get = function Element_ariaSort_get() { console.log("Element_ariaSort_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaSetSize_get = function Element_ariaSetSize_get() { console.log("Element_ariaSetSize_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueMax_get = function Element_ariaValueMax_get() { console.log("Element_ariaValueMax_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueMin_get = function Element_ariaValueMin_get() { console.log("Element_ariaValueMin_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueNow_get = function Element_ariaValueNow_get() { console.log("Element_ariaValueNow_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_ariaValueText_get = function Element_ariaValueText_get() { console.log("Element_ariaValueText_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_assignedSlot_get = function Element_assignedSlot_get() { console.log("Element_assignedSlot_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_attributeStyleMap_get = function Element_attributeStyleMap_get() { console.log("Element_attributeStyleMap_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_childElementCount_get = function Element_childElementCount_get() { console.log("ElementCount_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_classList_get = function Element_classList_get() { console.log("Element_classList_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_className_get = function Element_className_get() { console.log("Element_className_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_elementTiming_get = function Element_elementTiming_get() { console.log("Element_elementTiming_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_firstElementChild_get = function Element_firstElementChild_get() { console.log("ElementChild_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_lastElementChild_get = function Element_lastElementChild_get() { console.log("ElementChild_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_localName_get = function Element_localName_get() { console.log("Element_localName_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_namespaceURI_get = function Element_namespaceURI_get() { console.log("Element_namespaceURI_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_nextElementSibling_get = function Element_nextElementSibling_get() { console.log("ElementSibling_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onbeforecopy_get = function Element_onbeforecopy_get() { console.log("Element_onbeforecopy_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onbeforecut_get = function Element_onbeforecut_get() { console.log("Element_onbeforecut_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onbeforepaste_get = function Element_onbeforepaste_get() { console.log("Element_onbeforepaste_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onfullscreenchange_get = function Element_onfullscreenchange_get() { console.log("Element_onfullscreenchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onfullscreenerror_get = function Element_onfullscreenerror_get() { console.log("Element_onfullscreenerror_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onsearch_get = function Element_onsearch_get() { console.log("Element_onsearch_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onwebkitfullscreenchange_get = function Element_onwebkitfullscreenchange_get() { console.log("Element_onwebkitfullscreenchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_onwebkitfullscreenerror_get = function Element_onwebkitfullscreenerror_get() { console.log("Element_onwebkitfullscreenerror_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_part_get = function Element_part_get() { console.log("Element_part_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_prefix_get = function Element_prefix_get() { console.log("Element_prefix_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_previousElementSibling_get = function Element_previousElementSibling_get() { console.log("ElementSibling_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_scrollHeight_get = function Element_scrollHeight_get() { console.log("Element_scrollHeight_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_shadowRoot_get = function Element_shadowRoot_get() { console.log("Element_shadowRoot_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_scrollWidth_get = function Element_scrollWidth_get() { console.log("Element_scrollWidth_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Element_slot_get = function Element_slot_get() { console.log("Element_slot_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Element_tagName_get = function Element_tagName_get() {
         let tagname = this._boarg.tagName
         if (bodavm.memory.isdebug) { debugger }
@@ -2988,7 +3247,7 @@
     }
 
     bodavm.envFunc.Element_getElementsByClassName = function Element_getElementsByClassName() {
-
+        class_list={}
         console.log(`Element_getElementsByClassName `, `!!!!!!!!!未完善!!!!!!!!!!!!  `);
 
         class_list.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
@@ -2998,26 +3257,27 @@
     bodavm.envFunc.Element_append = function Element_append() {
         let child = arguments[0]
         console.log(`Element_append `, `child->${child}`);
-        bobo$(this._boarg).append(child._boarg)
+        this._boarg.append(child._boarg)
         // debugger
 
     }
     bodavm.envFunc.Element_id_get = function () {
         if (bodavm.config.isdebug) { debugger }
-        let content = undefined
+        let id = this._boarg.id
+        // debugger
         if (this instanceof HTMLFormElement) {
             for (let i = 0; i < bodavm.memory.formlist.length; i++) {
                 if (bodavm.memory.formlist[i] == this._boarg) {
                     for (let j = 0; j < bodavm.memory.formlist[i]['child'].length; j++) {
                         if (bodavm.memory.formlist[i]['child'][j]._boarg.name == 'id') {
-                            content = bodavm.memory.formlist[i]['child'][j]
+                            id = bodavm.memory.formlist[i]['child'][j]
                         }
                     }
                 }
             }
         }
-        console.log("Element_id_get", `content ->${content}`, `r6检测点`)
-        return content
+        console.log("Element_id_get ", `id ->${id}`, `r6检测点`)
+        return id
 
     }
     bodavm.envFunc.Element_id_set = function Element_id_set() {
@@ -3134,7 +3394,7 @@
     bodavm.envFunc.Element_outerHTML_get = function Element_outerHTML_get() {
 
         // let outerHtml = this._elements[0].outerHTML
-        let outhtml = bobo$(this._boarg).html()
+        let outhtml = this._boarg.outerHTML
         console.log(`Element_outerHTML_get==> `, `outhtml->${outhtml}`,);
         if (bodavm.config.isdebug) { debugger };;
         //腾讯qq邮箱hk
@@ -3145,17 +3405,32 @@
     bodavm.envFunc.Element_children_get = function Element_children_get() {
         if (bodavm.config.isdebug) { debugger };;
 
-        let res = {}
+        tagName=this._boarg.nodeName
+        if (bodavm.memory.collection[tagName]){
+            console.log(`Element_children_get `, `bodavm.memory.collection[${tagName}]已存在直接返回`);
+            return bodavm.memory.collection[tagName]
+        }
+        if (!bodavm.memory.collection[tagName]){
+            bodavm.memory.collection[tagName]=[]
+        }
+
         if (bodavm.config.isdebug) { debugger };
         let taglist = this._boarg.children
         for (let i = 0; i < taglist.length; i++) {
-            res[i] = bodavm.toolsFunc.setProto(taglist[i].nodeName);
-            res[i]._boarg = taglist[i]
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection[tagName].__proto__=Array.prototype
+            // if (bodavm.memory.collection[tagName].indexOf(res)==-1){
+                bodavm.memory.collection[tagName].push(res)
+            // }
+
         }
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = taglist
+        bodavm.memory.collection[tagName].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection[tagName]._boarg = taglist
         console.log(`Element_children_get `, ` taglist->${taglist}`);
-        return res
+        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
+        return bodavm.memory.collection[tagName]
 
     }
     bodavm.envFunc.Element_getBoundingClientRect = function Element_getBoundingClientRect() {
@@ -3195,60 +3470,71 @@
     bodavm.envFunc.Element_getElementsByTagName = function Element_getElementsByTagName() {
         if (bodavm.config.isdebug) { debugger; }
         // debugger
-        let tagName = arguments[0].toLowerCase();
-
-        let res = {}
+        let tagName = arguments[0].toUpperCase();
+        if (bodavm.memory.collection[tagName]){
+            console.log(`Element_getElementsByTagName`,`bodavm.memory.collection[${tagName}] 已存在直接返回`)
+            return bodavm.memory.collection[tagName]
+        }
+        if (!bodavm.memory.collection[tagName]){
+            bodavm.memory.collection[tagName]=[]
+        }
         if (bodavm.config.isdebug) { debugger };
         let taglist = this._boarg.getElementsByTagName(tagName)
 
         for (let i = 0; i < taglist.length; i++) {
-            res[i] = bodavm.toolsFunc.setProto(taglist[i].nodeName);
-            res[i]._boarg = taglist[i]
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection[tagName].__proto__=Array.prototype
+
+            // if (bodavm.memory.collection[tagName].indexOf(res)==-1){
+                bodavm.memory.collection[tagName].push(res)
+            // }
         }
         // debugger
-        res.__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
-        res._boarg = taglist
+        bodavm.memory.collection[tagName].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
+        bodavm.memory.collection[tagName]._boarg = taglist
         console.log(`Element_getElementsByTagName `, `tagName->${tagName} `, ` taglist->${taglist}`);
+        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
 
 
-        return res
+        return bodavm.memory.collection[tagName]
     }
 
     //Navigator
-    bodavm.envFunc.Navigator_clipboard_get = function Navigator_clipboard_get() { console.log("Navigator_clipboard_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_geolocation_get = function Navigator_geolocation_get() { console.log("Navigator_geolocation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_hid_get = function Navigator_hid_get() { console.log("Navigator_hid_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_ink_get = function Navigator_ink_get() { console.log("Navigator_ink_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_keyboard_get = function Navigator_keyboard_get() { console.log("Navigator_keyboard_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_clipboard_get = function Navigator_clipboard_get() { console.log("Navigator_clipboard_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_geolocation_get = function Navigator_geolocation_get() { console.log("Navigator_geolocation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_hid_get = function Navigator_hid_get() { console.log("Navigator_hid_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_ink_get = function Navigator_ink_get() { console.log("Navigator_ink_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_keyboard_get = function Navigator_keyboard_get() { console.log("Navigator_keyboard_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Navigator_locks_get = function Navigator_locks_get() {
-        let locks = {}
+        let locks = bodavm.memory.cache['Navigator_locks_get']
         locks.__proto__ = bodavm.memory.globalobj['LockManager'].prototype
         console.log("Navigator_locks_get ", `locks ->${locks}`)
         return locks
     }
-    bodavm.envFunc.Navigator_managed_get = function Navigator_managed_get() { console.log("Navigator_managed_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_mediaCapabilities_get = function Navigator_mediaCapabilities_get() { console.log("Navigator_mediaCapabilities_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_mediaDevices_get = function Navigator_mediaDevices_get() { console.log("Navigator_mediaDevices_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_mediaSession_get = function Navigator_mediaSession_get() { console.log("Navigator_mediaSession_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_onLine_get = function Navigator_onLine_get() { console.log("Navigator_onLine_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_pdfViewerEnabled_get = function Navigator_pdfViewerEnabled_get() { console.log("Navigator_pdfViewerEnabled_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_managed_get = function Navigator_managed_get() { console.log("Navigator_managed_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_mediaCapabilities_get = function Navigator_mediaCapabilities_get() { console.log("Navigator_mediaCapabilities_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_mediaDevices_get = function Navigator_mediaDevices_get() { console.log("Navigator_mediaDevices_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_mediaSession_get = function Navigator_mediaSession_get() { console.log("Navigator_mediaSession_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_onLine_get = function Navigator_onLine_get() { console.log("Navigator_onLine_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_pdfViewerEnabled_get = function Navigator_pdfViewerEnabled_get() { console.log("Navigator_pdfViewerEnabled_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
     bodavm.envFunc.Navigator_permissions_get = function Navigator_permissions_get() {
         // debugger
-        let permissions = {}
+        let permissions = bodavm.memory.cache['Navigator_permissions_get']
         permissions.__proto__ = bodavm.memory.globalobj['Permissions'].prototype
 
-        console.log("Navigator_permissions_get", `permissions->${permissions}`)
+        console.log("Navigator_permissions_get ", `permissions->${permissions}`)
         return permissions
     }
-    bodavm.envFunc.Navigator_presentation_get = function Navigator_presentation_get() { console.log("Navigator_presentation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_scheduling_get = function Navigator_scheduling_get() { console.log("Navigator_scheduling_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_serial_get = function Navigator_serial_get() { console.log("Navigator_serial_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_serviceWorker_get = function Navigator_serviceWorker_get() { console.log("Navigator_serviceWorker_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_usb_get = function Navigator_usb_get() { console.log("Navigator_usb_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_userActivation_get = function Navigator_userActivation_get() { console.log("Navigator_userActivation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_virtualKeyboard_get = function Navigator_virtualKeyboard_get() { console.log("Navigator_virtualKeyboard_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_wakeLock_get = function Navigator_wakeLock_get() { console.log("Navigator_wakeLock_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.Navigator_webkitTemporaryStorage_get = function Navigator_webkitTemporaryStorage_get() { console.log("Navigator_webkitTemporaryStorage_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_presentation_get = function Navigator_presentation_get() { console.log("Navigator_presentation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_scheduling_get = function Navigator_scheduling_get() { console.log("Navigator_scheduling_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_serial_get = function Navigator_serial_get() { console.log("Navigator_serial_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_serviceWorker_get = function Navigator_serviceWorker_get() { console.log("Navigator_serviceWorker_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_usb_get = function Navigator_usb_get() { console.log("Navigator_usb_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_userActivation_get = function Navigator_userActivation_get() { console.log("Navigator_userActivation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_virtualKeyboard_get = function Navigator_virtualKeyboard_get() { console.log("Navigator_virtualKeyboard_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_wakeLock_get = function Navigator_wakeLock_get() { console.log("Navigator_wakeLock_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.Navigator_webkitTemporaryStorage_get = function Navigator_webkitTemporaryStorage_get() { console.log("Navigator_webkitTemporaryStorage_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
 
     bodavm.envFunc.Navigator_javaEnabled = function () {
@@ -3324,7 +3610,7 @@
     }
     bodavm.envFunc.Navigator_userAgent_get = function Navigator_userAgent_get() {
         let ua = bodavm.memory.navigator["userAgent"]
-        debugger
+        // debugger
         console.log(`Navigator_userAgent_get `, `${ua}  `)
         // debugger
         return ua
@@ -3340,7 +3626,7 @@
         bodavm.toolsFunc.defineProperty('DeprecatedStorageQuota', "requestQuota", { configurable: true, enumerable: true, get: function DeprecatedStorageQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "requestQuota_get  ", arguments) }, set: function requestQuota() { return bodavm.toolsFunc.dispatch(this, DeprecatedStorageQuota.prototype, "DeprecatedStorageQuota", "requestQuota_set", arguments) } }, 'prototype');
 
         Object.setPrototypeOf(webkitPersistentStorage, bodavm.memory.globalobj['DeprecatedStorageQuota'].prototype)
-        delete DeprecatedStorageQuota
+        delete bodavm.memory.globalobj['DeprecatedStorageQuota'].prototype.constructor;
         console.log(`Navigator_webkitPersistentStorage_get `, `${webkitPersistentStorage}  `)
         if (bodavm.config.isdebug) { debugger };;
 
@@ -3363,7 +3649,8 @@
         return appVersion
     }
     bodavm.envFunc.Navigator_getBattery = function Navigator_getBattery() {
-        let batteryManager = {};
+        let batteryManager = bodavm.memory.cache['Navigator_getBattery'];
+        batteryManager._boisinit=true
         console.log(`Navigator_getBattery  `, 'settimeout 添加异步电池信息');
         batteryManager.__proto__ = bodavm.memory.globalobj['BatteryManager'].prototype
         // debugger
@@ -3376,7 +3663,7 @@
     }
     bodavm.envFunc.Navigator_webdriver_get = function Navigator_webdriver_get() {
         if (bodavm.config.isdebug) { debugger };;
-        console.log(`Navigator_webdriver_get== `, `false  `);
+        console.log(`Navigator_webdriver_get `, `false  `);
         return false
     }
     bodavm.envFunc.Navigator_connection_get = function Navigator_connection_get() {
@@ -3388,7 +3675,7 @@
     }
     bodavm.envFunc.Navigator_cookieEnabled_get = function Navigator_cookieEnabled_get() {
         let cookieEnabled = bodavm.memory.navigator['cookieEnabled']
-        console.log(`Navigator_cookieEnabled_get= `, `${cookieEnabled}  `)
+        console.log(`Navigator_cookieEnabled_get`, `${cookieEnabled}  `)
 
         return cookieEnabled
     }
@@ -3459,121 +3746,121 @@
     }
 
     //HTMLElement
-    bodavm.envFunc.HTMLElement_accessKey_get = function HTMLElement_accessKey_get() { console.log("HTMLElement_accessKey_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_autocapitalize_get = function HTMLElement_autocapitalize_get() { console.log("HTMLElement_autocapitalize_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_autofocus_get = function HTMLElement_autofocus_get() { console.log("HTMLElement_autofocus_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_contentEditable_get = function HTMLElement_contentEditable_get() { console.log("HTMLElement_contentEditable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_dataset_get = function HTMLElement_dataset_get() { console.log("HTMLElement_dataset_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_dir_get = function HTMLElement_dir_get() { console.log("HTMLElement_dir_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_draggable_get = function HTMLElement_draggable_get() { console.log("HTMLElement_draggable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_enterKeyHint_get = function HTMLElement_enterKeyHint_get() { console.log("HTMLElement_enterKeyHint_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_hidden_get = function HTMLElement_hidden_get() { console.log("HTMLElement_hidden_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_inputMode_get = function HTMLElement_inputMode_get() { console.log("HTMLElement_inputMode_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_inert_get = function HTMLElement_inert_get() { console.log("HTMLElement_inert_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_isContentEditable_get = function HTMLElement_isContentEditable_get() { console.log("HTMLElement_isContentEditable_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_lang_get = function HTMLElement_lang_get() { console.log("HTMLElement_lang_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_nonce_get = function HTMLElement_nonce_get() { console.log("HTMLElement_nonce_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_offsetTop_get = function HTMLElement_offsetTop_get() { console.log("HTMLElement_offsetTop_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_offsetParent_get = function HTMLElement_offsetParent_get() { console.log("HTMLElement_offsetParent_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_offsetLeft_get = function HTMLElement_offsetLeft_get() { console.log("HTMLElement_offsetLeft_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onabort_get = function HTMLElement_onabort_get() { console.log("HTMLElement_onabort_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onanimationend_get = function HTMLElement_onanimationend_get() { console.log("HTMLElement_onanimationend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onanimationiteration_get = function HTMLElement_onanimationiteration_get() { console.log("HTMLElement_onanimationiteration_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onanimationstart_get = function HTMLElement_onanimationstart_get() { console.log("HTMLElement_onanimationstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onauxclick_get = function HTMLElement_onauxclick_get() { console.log("HTMLElement_onauxclick_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onbeforematch_get = function HTMLElement_onbeforematch_get() { console.log("HTMLElement_onbeforematch_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onbeforexrselect_get = function HTMLElement_onbeforexrselect_get() { console.log("HTMLElement_onbeforexrselect_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onblur_get = function HTMLElement_onblur_get() { console.log("HTMLElement_onblur_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncancel_get = function HTMLElement_oncancel_get() { console.log("HTMLElement_oncancel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncanplay_get = function HTMLElement_oncanplay_get() { console.log("HTMLElement_oncanplay_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncanplaythrough_get = function HTMLElement_oncanplaythrough_get() { console.log("HTMLElement_oncanplaythrough_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onchange_get = function HTMLElement_onchange_get() { console.log("HTMLElement_onchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onclick_get = function HTMLElement_onclick_get() { console.log("HTMLElement_onclick_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onclose_get = function HTMLElement_onclose_get() { console.log("HTMLElement_onclose_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncontextlost_get = function HTMLElement_oncontextlost_get() { console.log("HTMLElement_oncontextlost_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncontextmenu_get = function HTMLElement_oncontextmenu_get() { console.log("HTMLElement_oncontextmenu_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncontextrestored_get = function HTMLElement_oncontextrestored_get() { console.log("HTMLElement_oncontextrestored_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncopy_get = function HTMLElement_oncopy_get() { console.log("HTMLElement_oncopy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncuechange_get = function HTMLElement_oncuechange_get() { console.log("HTMLElement_oncuechange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondblclick_get = function HTMLElement_ondblclick_get() { console.log("HTMLElement_ondblclick_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oncut_get = function HTMLElement_oncut_get() { console.log("HTMLElement_oncut_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondrag_get = function HTMLElement_ondrag_get() { console.log("HTMLElement_ondrag_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragleave_get = function HTMLElement_ondragleave_get() { console.log("HTMLElement_ondragleave_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragstart_get = function HTMLElement_ondragstart_get() { console.log("HTMLElement_ondragstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragenter_get = function HTMLElement_ondragenter_get() { console.log("HTMLElement_ondragenter_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragend_get = function HTMLElement_ondragend_get() { console.log("HTMLElement_ondragend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondragover_get = function HTMLElement_ondragover_get() { console.log("HTMLElement_ondragover_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondrop_get = function HTMLElement_ondrop_get() { console.log("HTMLElement_ondrop_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ondurationchange_get = function HTMLElement_ondurationchange_get() { console.log("HTMLElement_ondurationchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onemptied_get = function HTMLElement_onemptied_get() { console.log("HTMLElement_onemptied_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onended_get = function HTMLElement_onended_get() { console.log("HTMLElement_onended_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onerror_get = function HTMLElement_onerror_get() { console.log("HTMLElement_onerror_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onfocus_get = function HTMLElement_onfocus_get() { console.log("HTMLElement_onfocus_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onformdata_get = function HTMLElement_onformdata_get() { console.log("HTMLElement_onformdata_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ongotpointercapture_get = function HTMLElement_ongotpointercapture_get() { console.log("HTMLElement_ongotpointercapture_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oninput_get = function HTMLElement_oninput_get() { console.log("HTMLElement_oninput_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onkeydown_get = function HTMLElement_onkeydown_get() { console.log("HTMLElement_onkeydown_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onkeypress_get = function HTMLElement_onkeypress_get() { console.log("HTMLElement_onkeypress_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onkeyup_get = function HTMLElement_onkeyup_get() { console.log("HTMLElement_onkeyup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_oninvalid_get = function HTMLElement_oninvalid_get() { console.log("HTMLElement_oninvalid_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onload_get = function HTMLElement_onload_get() { console.log("HTMLElement_onload_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onloadedmetadata_get = function HTMLElement_onloadedmetadata_get() { console.log("HTMLElement_onloadedmetadata_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onlostpointercapture_get = function HTMLElement_onlostpointercapture_get() { console.log("HTMLElement_onlostpointercapture_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onloadeddata_get = function HTMLElement_onloadeddata_get() { console.log("HTMLElement_onloadeddata_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onloadstart_get = function HTMLElement_onloadstart_get() { console.log("HTMLElement_onloadstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmousedown_get = function HTMLElement_onmousedown_get() { console.log("HTMLElement_onmousedown_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmouseleave_get = function HTMLElement_onmouseleave_get() { console.log("HTMLElement_onmouseleave_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmousemove_get = function HTMLElement_onmousemove_get() { console.log("HTMLElement_onmousemove_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmouseout_get = function HTMLElement_onmouseout_get() { console.log("HTMLElement_onmouseout_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmouseup_get = function HTMLElement_onmouseup_get() { console.log("HTMLElement_onmouseup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmouseover_get = function HTMLElement_onmouseover_get() { console.log("HTMLElement_onmouseover_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onmousewheel_get = function HTMLElement_onmousewheel_get() { console.log("HTMLElement_onmousewheel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpaste_get = function HTMLElement_onpaste_get() { console.log("HTMLElement_onpaste_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpause_get = function HTMLElement_onpause_get() { console.log("HTMLElement_onpause_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onplay_get = function HTMLElement_onplay_get() { console.log("HTMLElement_onplay_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onplaying_get = function HTMLElement_onplaying_get() { console.log("HTMLElement_onplaying_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointercancel_get = function HTMLElement_onpointercancel_get() { console.log("HTMLElement_onpointercancel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerdown_get = function HTMLElement_onpointerdown_get() { console.log("HTMLElement_onpointerdown_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerleave_get = function HTMLElement_onpointerleave_get() { console.log("HTMLElement_onpointerleave_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointermove_get = function HTMLElement_onpointermove_get() { console.log("HTMLElement_onpointermove_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerover_get = function HTMLElement_onpointerover_get() { console.log("HTMLElement_onpointerover_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerout_get = function HTMLElement_onpointerout_get() { console.log("HTMLElement_onpointerout_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerenter_get = function HTMLElement_onpointerenter_get() { console.log("HTMLElement_onpointerenter_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerrawupdate_get = function HTMLElement_onpointerrawupdate_get() { console.log("HTMLElement_onpointerrawupdate_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onpointerup_get = function HTMLElement_onpointerup_get() { console.log("HTMLElement_onpointerup_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onprogress_get = function HTMLElement_onprogress_get() { console.log("HTMLElement_onprogress_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onratechange_get = function HTMLElement_onratechange_get() { console.log("HTMLElement_onratechange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onreset_get = function HTMLElement_onreset_get() { console.log("HTMLElement_onreset_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onscroll_get = function HTMLElement_onscroll_get() { console.log("HTMLElement_onscroll_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onsecuritypolicyviolation_get = function HTMLElement_onsecuritypolicyviolation_get() { console.log("HTMLElement_onsecuritypolicyviolation_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onseeked_get = function HTMLElement_onseeked_get() { console.log("HTMLElement_onseeked_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onseeking_get = function HTMLElement_onseeking_get() { console.log("HTMLElement_onseeking_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onselect_get = function HTMLElement_onselect_get() { console.log("HTMLElement_onselect_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onselectionchange_get = function HTMLElement_onselectionchange_get() { console.log("HTMLElement_onselectionchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onselectstart_get = function HTMLElement_onselectstart_get() { console.log("HTMLElement_onselectstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onslotchange_get = function HTMLElement_onslotchange_get() { console.log("HTMLElement_onslotchange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onstalled_get = function HTMLElement_onstalled_get() { console.log("HTMLElement_onstalled_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onsuspend_get = function HTMLElement_onsuspend_get() { console.log("HTMLElement_onsuspend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontimeupdate_get = function HTMLElement_ontimeupdate_get() { console.log("HTMLElement_ontimeupdate_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onsubmit_get = function HTMLElement_onsubmit_get() { console.log("HTMLElement_onsubmit_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontoggle_get = function HTMLElement_ontoggle_get() { console.log("HTMLElement_ontoggle_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontransitioncancel_get = function HTMLElement_ontransitioncancel_get() { console.log("HTMLElement_ontransitioncancel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontransitionrun_get = function HTMLElement_ontransitionrun_get() { console.log("HTMLElement_ontransitionrun_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontransitionstart_get = function HTMLElement_ontransitionstart_get() { console.log("HTMLElement_ontransitionstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_ontransitionend_get = function HTMLElement_ontransitionend_get() { console.log("HTMLElement_ontransitionend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onvolumechange_get = function HTMLElement_onvolumechange_get() { console.log("HTMLElement_onvolumechange_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwaiting_get = function HTMLElement_onwaiting_get() { console.log("HTMLElement_onwaiting_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwebkitanimationend_get = function HTMLElement_onwebkitanimationend_get() { console.log("HTMLElement_onwebkitanimationend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwebkitanimationiteration_get = function HTMLElement_onwebkitanimationiteration_get() { console.log("HTMLElement_onwebkitanimationiteration_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwebkitanimationstart_get = function HTMLElement_onwebkitanimationstart_get() { console.log("HTMLElement_onwebkitanimationstart_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwebkittransitionend_get = function HTMLElement_onwebkittransitionend_get() { console.log("HTMLElement_onwebkittransitionend_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_onwheel_get = function HTMLElement_onwheel_get() { console.log("HTMLElement_onwheel_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_outerText_get = function HTMLElement_outerText_get() { console.log("HTMLElement_outerText_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_spellcheck_get = function HTMLElement_spellcheck_get() { console.log("HTMLElement_spellcheck_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_tabIndex_get = function HTMLElement_tabIndex_get() { console.log("HTMLElement_tabIndex_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_title_get = function HTMLElement_title_get() { console.log("HTMLElement_title_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_translate_get = function HTMLElement_translate_get() { console.log("HTMLElement_translate_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
-    bodavm.envFunc.HTMLElement_virtualKeyboardPolicy_get = function HTMLElement_virtualKeyboardPolicy_get() { console.log("HTMLElement_virtualKeyboardPolicy_get", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_accessKey_get = function HTMLElement_accessKey_get() { console.log("HTMLElement_accessKey_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_autocapitalize_get = function HTMLElement_autocapitalize_get() { console.log("HTMLElement_autocapitalize_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_autofocus_get = function HTMLElement_autofocus_get() { console.log("HTMLElement_autofocus_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_contentEditable_get = function HTMLElement_contentEditable_get() { console.log("HTMLElement_contentEditable_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_dataset_get = function HTMLElement_dataset_get() { console.log("HTMLElement_dataset_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_dir_get = function HTMLElement_dir_get() { console.log("HTMLElement_dir_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_draggable_get = function HTMLElement_draggable_get() { console.log("HTMLElement_draggable_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_enterKeyHint_get = function HTMLElement_enterKeyHint_get() { console.log("HTMLElement_enterKeyHint_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_hidden_get = function HTMLElement_hidden_get() { console.log("HTMLElement_hidden_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_inputMode_get = function HTMLElement_inputMode_get() { console.log("HTMLElement_inputMode_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_inert_get = function HTMLElement_inert_get() { console.log("HTMLElement_inert_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_isContentEditable_get = function HTMLElement_isContentEditable_get() { console.log("HTMLElement_isContentEditable_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_lang_get = function HTMLElement_lang_get() { console.log("HTMLElement_lang_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_nonce_get = function HTMLElement_nonce_get() { console.log("HTMLElement_nonce_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_offsetTop_get = function HTMLElement_offsetTop_get() { console.log("HTMLElement_offsetTop_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_offsetParent_get = function HTMLElement_offsetParent_get() { console.log("HTMLElement_offsetParent_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_offsetLeft_get = function HTMLElement_offsetLeft_get() { console.log("HTMLElement_offsetLeft_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onabort_get = function HTMLElement_onabort_get() { console.log("HTMLElement_onabort_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onanimationend_get = function HTMLElement_onanimationend_get() { console.log("HTMLElement_onanimationend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onanimationiteration_get = function HTMLElement_onanimationiteration_get() { console.log("HTMLElement_onanimationiteration_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onanimationstart_get = function HTMLElement_onanimationstart_get() { console.log("HTMLElement_onanimationstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onauxclick_get = function HTMLElement_onauxclick_get() { console.log("HTMLElement_onauxclick_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onbeforematch_get = function HTMLElement_onbeforematch_get() { console.log("HTMLElement_onbeforematch_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onbeforexrselect_get = function HTMLElement_onbeforexrselect_get() { console.log("HTMLElement_onbeforexrselect_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onblur_get = function HTMLElement_onblur_get() { console.log("HTMLElement_onblur_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncancel_get = function HTMLElement_oncancel_get() { console.log("HTMLElement_oncancel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncanplay_get = function HTMLElement_oncanplay_get() { console.log("HTMLElement_oncanplay_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncanplaythrough_get = function HTMLElement_oncanplaythrough_get() { console.log("HTMLElement_oncanplaythrough_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onchange_get = function HTMLElement_onchange_get() { console.log("HTMLElement_onchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onclick_get = function HTMLElement_onclick_get() { console.log("HTMLElement_onclick_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onclose_get = function HTMLElement_onclose_get() { console.log("HTMLElement_onclose_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncontextlost_get = function HTMLElement_oncontextlost_get() { console.log("HTMLElement_oncontextlost_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncontextmenu_get = function HTMLElement_oncontextmenu_get() { console.log("HTMLElement_oncontextmenu_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncontextrestored_get = function HTMLElement_oncontextrestored_get() { console.log("HTMLElement_oncontextrestored_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncopy_get = function HTMLElement_oncopy_get() { console.log("HTMLElement_oncopy_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncuechange_get = function HTMLElement_oncuechange_get() { console.log("HTMLElement_oncuechange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondblclick_get = function HTMLElement_ondblclick_get() { console.log("HTMLElement_ondblclick_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oncut_get = function HTMLElement_oncut_get() { console.log("HTMLElement_oncut_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondrag_get = function HTMLElement_ondrag_get() { console.log("HTMLElement_ondrag_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragleave_get = function HTMLElement_ondragleave_get() { console.log("HTMLElement_ondragleave_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragstart_get = function HTMLElement_ondragstart_get() { console.log("HTMLElement_ondragstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragenter_get = function HTMLElement_ondragenter_get() { console.log("HTMLElement_ondragenter_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragend_get = function HTMLElement_ondragend_get() { console.log("HTMLElement_ondragend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondragover_get = function HTMLElement_ondragover_get() { console.log("HTMLElement_ondragover_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondrop_get = function HTMLElement_ondrop_get() { console.log("HTMLElement_ondrop_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ondurationchange_get = function HTMLElement_ondurationchange_get() { console.log("HTMLElement_ondurationchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onemptied_get = function HTMLElement_onemptied_get() { console.log("HTMLElement_onemptied_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onended_get = function HTMLElement_onended_get() { console.log("HTMLElement_onended_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onerror_get = function HTMLElement_onerror_get() { console.log("HTMLElement_onerror_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onfocus_get = function HTMLElement_onfocus_get() { console.log("HTMLElement_onfocus_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onformdata_get = function HTMLElement_onformdata_get() { console.log("HTMLElement_onformdata_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ongotpointercapture_get = function HTMLElement_ongotpointercapture_get() { console.log("HTMLElement_ongotpointercapture_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oninput_get = function HTMLElement_oninput_get() { console.log("HTMLElement_oninput_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onkeydown_get = function HTMLElement_onkeydown_get() { console.log("HTMLElement_onkeydown_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onkeypress_get = function HTMLElement_onkeypress_get() { console.log("HTMLElement_onkeypress_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onkeyup_get = function HTMLElement_onkeyup_get() { console.log("HTMLElement_onkeyup_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_oninvalid_get = function HTMLElement_oninvalid_get() { console.log("HTMLElement_oninvalid_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onload_get = function HTMLElement_onload_get() { console.log("HTMLElement_onload_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onloadedmetadata_get = function HTMLElement_onloadedmetadata_get() { console.log("HTMLElement_onloadedmetadata_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onlostpointercapture_get = function HTMLElement_onlostpointercapture_get() { console.log("HTMLElement_onlostpointercapture_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onloadeddata_get = function HTMLElement_onloadeddata_get() { console.log("HTMLElement_onloadeddata_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onloadstart_get = function HTMLElement_onloadstart_get() { console.log("HTMLElement_onloadstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmousedown_get = function HTMLElement_onmousedown_get() { console.log("HTMLElement_onmousedown_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseleave_get = function HTMLElement_onmouseleave_get() { console.log("HTMLElement_onmouseleave_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmousemove_get = function HTMLElement_onmousemove_get() { console.log("HTMLElement_onmousemove_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseout_get = function HTMLElement_onmouseout_get() { console.log("HTMLElement_onmouseout_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseup_get = function HTMLElement_onmouseup_get() { console.log("HTMLElement_onmouseup_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmouseover_get = function HTMLElement_onmouseover_get() { console.log("HTMLElement_onmouseover_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onmousewheel_get = function HTMLElement_onmousewheel_get() { console.log("HTMLElement_onmousewheel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpaste_get = function HTMLElement_onpaste_get() { console.log("HTMLElement_onpaste_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpause_get = function HTMLElement_onpause_get() { console.log("HTMLElement_onpause_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onplay_get = function HTMLElement_onplay_get() { console.log("HTMLElement_onplay_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onplaying_get = function HTMLElement_onplaying_get() { console.log("HTMLElement_onplaying_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointercancel_get = function HTMLElement_onpointercancel_get() { console.log("HTMLElement_onpointercancel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerdown_get = function HTMLElement_onpointerdown_get() { console.log("HTMLElement_onpointerdown_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerleave_get = function HTMLElement_onpointerleave_get() { console.log("HTMLElement_onpointerleave_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointermove_get = function HTMLElement_onpointermove_get() { console.log("HTMLElement_onpointermove_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerover_get = function HTMLElement_onpointerover_get() { console.log("HTMLElement_onpointerover_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerout_get = function HTMLElement_onpointerout_get() { console.log("HTMLElement_onpointerout_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerenter_get = function HTMLElement_onpointerenter_get() { console.log("HTMLElement_onpointerenter_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerrawupdate_get = function HTMLElement_onpointerrawupdate_get() { console.log("HTMLElement_onpointerrawupdate_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onpointerup_get = function HTMLElement_onpointerup_get() { console.log("HTMLElement_onpointerup_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onprogress_get = function HTMLElement_onprogress_get() { console.log("HTMLElement_onprogress_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onratechange_get = function HTMLElement_onratechange_get() { console.log("HTMLElement_onratechange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onreset_get = function HTMLElement_onreset_get() { console.log("HTMLElement_onreset_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onscroll_get = function HTMLElement_onscroll_get() { console.log("HTMLElement_onscroll_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onsecuritypolicyviolation_get = function HTMLElement_onsecuritypolicyviolation_get() { console.log("HTMLElement_onsecuritypolicyviolation_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onseeked_get = function HTMLElement_onseeked_get() { console.log("HTMLElement_onseeked_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onseeking_get = function HTMLElement_onseeking_get() { console.log("HTMLElement_onseeking_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onselect_get = function HTMLElement_onselect_get() { console.log("HTMLElement_onselect_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onselectionchange_get = function HTMLElement_onselectionchange_get() { console.log("HTMLElement_onselectionchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onselectstart_get = function HTMLElement_onselectstart_get() { console.log("HTMLElement_onselectstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onslotchange_get = function HTMLElement_onslotchange_get() { console.log("HTMLElement_onslotchange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onstalled_get = function HTMLElement_onstalled_get() { console.log("HTMLElement_onstalled_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onsuspend_get = function HTMLElement_onsuspend_get() { console.log("HTMLElement_onsuspend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontimeupdate_get = function HTMLElement_ontimeupdate_get() { console.log("HTMLElement_ontimeupdate_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onsubmit_get = function HTMLElement_onsubmit_get() { console.log("HTMLElement_onsubmit_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontoggle_get = function HTMLElement_ontoggle_get() { console.log("HTMLElement_ontoggle_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitioncancel_get = function HTMLElement_ontransitioncancel_get() { console.log("HTMLElement_ontransitioncancel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitionrun_get = function HTMLElement_ontransitionrun_get() { console.log("HTMLElement_ontransitionrun_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitionstart_get = function HTMLElement_ontransitionstart_get() { console.log("HTMLElement_ontransitionstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_ontransitionend_get = function HTMLElement_ontransitionend_get() { console.log("HTMLElement_ontransitionend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onvolumechange_get = function HTMLElement_onvolumechange_get() { console.log("HTMLElement_onvolumechange_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwaiting_get = function HTMLElement_onwaiting_get() { console.log("HTMLElement_onwaiting_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkitanimationend_get = function HTMLElement_onwebkitanimationend_get() { console.log("HTMLElement_onwebkitanimationend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkitanimationiteration_get = function HTMLElement_onwebkitanimationiteration_get() { console.log("HTMLElement_onwebkitanimationiteration_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkitanimationstart_get = function HTMLElement_onwebkitanimationstart_get() { console.log("HTMLElement_onwebkitanimationstart_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwebkittransitionend_get = function HTMLElement_onwebkittransitionend_get() { console.log("HTMLElement_onwebkittransitionend_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_onwheel_get = function HTMLElement_onwheel_get() { console.log("HTMLElement_onwheel_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_outerText_get = function HTMLElement_outerText_get() { console.log("HTMLElement_outerText_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_spellcheck_get = function HTMLElement_spellcheck_get() { console.log("HTMLElement_spellcheck_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_tabIndex_get = function HTMLElement_tabIndex_get() { console.log("HTMLElement_tabIndex_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_title_get = function HTMLElement_title_get() { console.log("HTMLElement_title_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_translate_get = function HTMLElement_translate_get() { console.log("HTMLElement_translate_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
+    bodavm.envFunc.HTMLElement_virtualKeyboardPolicy_get = function HTMLElement_virtualKeyboardPolicy_get() { console.log("HTMLElement_virtualKeyboardPolicy_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
 
 
     bodavm.envFunc.HTMLElement_innerText_set = function HTMLElement_innerText_set() {
@@ -3652,8 +3939,12 @@
     }
     bodavm.envFunc.HTMLElement_style_get = function HTMLElement_style_get() {
         if (bodavm.config.isdebug) { debugger }
-
-        let style = {}
+        if (!(bodavm.memory.cache['HTMLElement_style_get'][this])){
+            bodavm.memory.cache['HTMLElement_style_get'][this]={}
+        }
+       
+        
+        let style = bodavm.memory.cache['HTMLElement_style_get'][this]
         // debugger
         let oo = this._boarg.style
 
@@ -4282,7 +4573,7 @@
     bodavm.envFunc.HTMLElement_onerror_set = function HTMLElement_onerror_set() {
         if (bodavm.config.isdebug) { debugger }
         console.log(`HTMLElement_onerror_set !!!!!!!!!未完善!!!!!!!!!!!!`,);
-
+        this._onerror=arguments[0]
 
     }
     //HTMLCollection
@@ -4298,6 +4589,7 @@
             console.log(`HTMLCollection_length_get `, `length:${2},  rs检测点`);
             return 2
         }
+        debugger
         let length_ = this._boarg.length
         console.log(`HTMLCollection_length_get `, `length:${length_}`);
         return length_
@@ -4331,8 +4623,8 @@
         let url = arguments[1];
         console.log(`XMLHttpRequest_open `, `[${method}] `, `[${url}]  `)
         if (bodavm.config.isdebug) { debugger }
-        // this.mymethod=method
-        // this.myurl=url
+        this.mymethod=method
+        this.myurl=url
         this._boarg.method = method
         this._boarg.url = url
     }
@@ -4355,7 +4647,8 @@
             "options": options,
             "callback": callback,
             'isTrusted': true,
-            'target': this
+            'target': this,
+            '_boisinit':bodavm.config.isinit
         }
         console.log(`EventTarget_addEventListener `, `type->${type} `, `callback->${callback.toString().length>50?callback.toString().substr(0,50)+'...':callback} `, `options->${options ? options : []}  `)
 
@@ -4408,19 +4701,21 @@
 
     bodavm.envFunc.HTMLCanvasElement_getContext = function HTMLCanvasElement_getContext() {
         let type = arguments[0];
-        let context = {};
+        let context = {_boisinit:bodavm.config.isinit};
         if (bodavm.config.isdebug) { debugger }
         switch (type) {
             case "2d":
                 // context = context.getContext('2d')
                 context._bocanvas = this._bocanvas.getContext('2d')
-                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
                 context.__proto__ = bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype;
+                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
+
                 break
             case "webgl":
                 // context = context.getContext('2d')
-                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
                 context.__proto__ = bodavm.memory.globalobj['WebGLRenderingContext'].prototype;
+                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
+
                 break
             case 'experimental-webgl':
                 console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `context->${context} !!!!!!!!!未完善!!!!!!!!!!!! `)
@@ -4450,15 +4745,17 @@
     bodavm.envFunc.HTMLCanvasElement_toDataURL = function HTMLCanvasElement_toDataURL() {
         if (this._bocanvas) {
             let res = this._bocanvas.toDataURL()
+            res._boisinit=true
             console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
-            // return res
-            return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
+            return res
+            // return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         } else {
             debugger
             res = bodavm.memory.userInit.canvas_webgl
+            res._boisinit=true
             console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
-            // return res
-            return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
+            return res
+            // return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         }
 
     }
@@ -4528,10 +4825,10 @@
     }
 
     bodavm.envFunc.location_toString = function location_toString() {
-        let href = bodaobj.location.toString()
-        console.log(`location_toString `, `${href}   `)
+        let href_ = bodaobj.location.toString()
+        console.log(`location_toString `, `${href_}   `)
         if (bodavm.config.isdebug) { debugger }
-        return href
+        return href_
     }
     bodavm.envFunc.location_href_get = function location_href_get() {
         let href = bodaobj.location.href
@@ -4625,7 +4922,9 @@
         console.log(`--------------------页面跳转停止执行--------------------`,);
         console.log(`--------------------页面跳转停止执行--------------------`,);
         console.log(`--------------------直接执行lastDeal--------------------`,);
+        console.log(document.cookie)
         throw ('End', `--------------------直接执行lastDeal--------------------`)
+
 
     }
     bodavm.envFunc.location_search_set = function location_search_set() {
@@ -4755,7 +5054,9 @@
         let version = arguments[1]
 
         console.log(`IDBFactory_open `, `name->${name} `, `version->${version}  `)
-        let DB = {}
+        let DB = {
+            _boisinit:bodavm.config.isinit
+        }
         DB = Object.setPrototypeOf(DB, bodavm.memory.globalobj['IDBOpenDBRequest'].prototype)
         if (bodavm.config.isdebug) { debugger }
 
@@ -4956,6 +5257,7 @@
         console.log(`WebGLRenderingContext_getShaderPrecisionFormat `, `shaderType:${shaderType} precisionType:${precisionType}  `);
         if (shaderType == 35633 && precisionType == 36338) {
             let shade = {}
+            shade._boisinit=true
             Object.setPrototypeOf(shade, bodavm.memory.globalobj['WebGLShaderPrecisionFormat'].prototype)
             // bodavm.toolsFunc.symbolProperty(shade)
             return shade
@@ -5045,7 +5347,7 @@
     bodavm.envFunc.WebGLRenderingContext_canvas_get = function WebGLRenderingContext_canvas_get() {
         let canvas = {}
         if (bodavm.config.isdebug) { debugger };
-
+        canvas._boisinit=true
         console.log(`WebGLRenderingContext_canvas_get `, `${canvas}  `);
         canvas.__proto__ = bodavm.memory.globalobj['HTMLCanvasElement'].prototype
         // bodavm.toolsFunc.symbolProperty(canvas)
@@ -5091,48 +5393,48 @@
         if (bodavm.config.isdebug) { debugger }
         let getExtension = arguments[0]
         console.log(`WebGLRenderingContext_getExtension `, `${getExtension}  `);
-        let info = {}
+        let info = {_boisinit:bodavm.config.isinit}
         switch (getExtension) {
             case "WEBGL_debug_renderer_info":
 
-                WebGLDebugRendererInfo = function WebGLDebugRendererInfo() { }
+                WebGLDebugRendererInfo = function WebGLDebugRendererInfo() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(WebGLDebugRendererInfo, "WebGLDebugRendererInfo");
                 info = Object.setPrototypeOf(info, WebGLDebugRendererInfo.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDebugRendererInfo.prototype, "UNMASKED_VENDOR_WEBGL", { configurable: false, enumerable: true, writable: false, value: 37445 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLDebugRendererInfo.prototype, "UNMASKED_RENDERER_WEBGL", { configurable: false, enumerable: true, writable: false, value: 37446 });
-                delete WebGLDebugRendererInfo;
+                delete WebGLDebugRendererInfo.prototype.constructor;
                 break;
             case "ANGLE_instanced_arrays":
 
-                ANGLEInstancedArrays = function ANGLEInstancedArrays() { }
+                ANGLEInstancedArrays = function ANGLEInstancedArrays() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(ANGLEInstancedArrays, "ANGLEInstancedArrays");
                 info = Object.setPrototypeOf(info, ANGLEInstancedArrays.prototype)
                 bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE", { configurable: false, enumerable: true, writable: false, value: 35070 });
                 bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "drawArraysInstancedANGLE", { configurable: true, enumerable: true, writable: true, value: function drawArraysInstancedANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "drawArraysInstancedANGLE", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "drawElementsInstancedANGLE", { configurable: true, enumerable: true, writable: true, value: function drawElementsInstancedANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "drawElementsInstancedANGLE", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(ANGLEInstancedArrays.prototype, "vertexAttribDivisorANGLE", { configurable: true, enumerable: true, writable: true, value: function vertexAttribDivisorANGLE() { return bodavm.toolsFunc.dispatch(this, ANGLEInstancedArrays.prototype, "ANGLEInstancedArrays", "vertexAttribDivisorANGLE", arguments) } });
-                delete ANGLEInstancedArrays;
+                delete ANGLEInstancedArrays.prototype.constructor;;
                 break;
             case "EXT_blend_minmax":
-                EXTBlendMinMax = function EXTBlendMinMax() { }
+                EXTBlendMinMax = function EXTBlendMinMax() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTBlendMinMax, "EXTBlendMinMax");
                 info = Object.setPrototypeOf(info, EXTBlendMinMax.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTBlendMinMax.prototype, "MIN_EXT", { configurable: false, enumerable: true, writable: false, value: 32775 });
                 bodavm.toolsFunc.windowdefineProperty(EXTBlendMinMax.prototype, "MAX_EXT", { configurable: false, enumerable: true, writable: false, value: 32776 });
-                delete EXTBlendMinMax
+                delete EXTBlendMinMax.prototype.constructor;
                 break;
             case "EXT_color_buffer_half_float":
-                EXTColorBufferHalfFloat = function EXTColorBufferHalfFloat() { }
+                EXTColorBufferHalfFloat = function EXTColorBufferHalfFloat() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(EXTColorBufferHalfFloat, "EXTColorBufferHalfFloat");
                 info = Object.setPrototypeOf(info, EXTColorBufferHalfFloat.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "RGBA16F_EXT", { configurable: false, enumerable: true, writable: false, value: 34842 });
                 bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "RGB16F_EXT", { configurable: false, enumerable: true, writable: false, value: 34843 });
                 bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT", { configurable: false, enumerable: true, writable: false, value: 33297 });
                 bodavm.toolsFunc.windowdefineProperty(EXTColorBufferHalfFloat.prototype, "UNSIGNED_NORMALIZED_EXT", { configurable: false, enumerable: true, writable: false, value: 35863 });
-                delete EXTColorBufferHalfFloat
+                delete EXTColorBufferHalfFloat.prototype.constructor;
                 break;
             case "EXT_disjoint_timer_query":
-                EXTDisjointTimerQuery = function EXTDisjointTimerQuery() { }
+                EXTDisjointTimerQuery = function EXTDisjointTimerQuery() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(EXTDisjointTimerQuery, "EXTDisjointTimerQuery");
                 info = Object.setPrototypeOf(info, EXTDisjointTimerQuery.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "QUERY_COUNTER_BITS_EXT", { configurable: false, enumerable: true, writable: false, value: 34916 });
@@ -5150,30 +5452,30 @@
                 bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "getQueryObjectEXT", { configurable: true, enumerable: true, writable: true, value: function getQueryObjectEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "getQueryObjectEXT", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "isQueryEXT", { configurable: true, enumerable: true, writable: true, value: function isQueryEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "isQueryEXT", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(EXTDisjointTimerQuery.prototype, "queryCounterEXT", { configurable: true, enumerable: true, writable: true, value: function queryCounterEXT() { return bodavm.toolsFunc.dispatch(this, EXTDisjointTimerQuery.prototype, "EXTDisjointTimerQuery", "queryCounterEXT", arguments) } });
-                delete EXTDisjointTimerQuery
+                delete EXTDisjointTimerQuery.prototype.constructor;
 
                 break;
             case "EXT_float_blend":
-                EXTFloatBlend = function EXTFloatBlend() { }
+                EXTFloatBlend = function EXTFloatBlend() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(EXTFloatBlend, "EXTFloatBlend");
                 info = Object.setPrototypeOf(info, EXTFloatBlend.prototype)
-                delete EXTFloatBlend
+                delete EXTFloatBlend.prototype.constructor;
                 break;
             case "EXT_shader_texture_lod":
-                EXTShaderTextureLOD = function EXTShaderTextureLOD() { }
+                EXTShaderTextureLOD = function EXTShaderTextureLOD() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTShaderTextureLOD, "EXTShaderTextureLOD");
                 info = Object.setPrototypeOf(info, EXTShaderTextureLOD.prototype)
-                delete EXTShaderTextureLOD
+                delete EXTShaderTextureLOD.prototype.constructor;
                 break;
             case "EXT_frag_depth":
-                EXTFragDepth = function EXTFragDepth() { }
+                EXTFragDepth = function EXTFragDepth() { this._boisinit=bodavm.config.isinit}
 
                 bodavm.toolsFunc.safeProto(EXTFragDepth, "EXTFragDepth");
                 info = Object.setPrototypeOf(info, EXTFragDepth.prototype)
-                delete EXTFragDepth
+                delete EXTFragDepth.prototype.constructor;
                 break;
             case "EXT_texture_compression_bptc":
-                EXTTextureCompressionBPTC = function EXTTextureCompressionBPTC() { }
+                EXTTextureCompressionBPTC = function EXTTextureCompressionBPTC() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTTextureCompressionBPTC, "EXTTextureCompressionBPTC");
                 info = Object.setPrototypeOf(info, EXTTextureCompressionBPTC.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGBA_BPTC_UNORM_EXT", { configurable: false, enumerable: true, writable: false, value: 36492 });
@@ -5181,26 +5483,26 @@
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGB_BPTC_SIGNED_FLOAT_EXT", { configurable: false, enumerable: true, writable: false, value: 36494 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionBPTC.prototype, "COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_EXT", { configurable: false, enumerable: true, writable: false, value: 36495 });
 
-                delete EXTTextureCompressionBPTC
+                delete EXTTextureCompressionBPTC.prototype.constructor;
                 break;
             case "EXT_texture_compression_rgtc":
-                EXTTextureCompressionRGTC = function EXTTextureCompressionRGTC() { }
+                EXTTextureCompressionRGTC = function EXTTextureCompressionRGTC() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(EXTTextureCompressionRGTC, "EXTTextureCompressionRGTC");
                 info = Object.setPrototypeOf(info, EXTTextureCompressionRGTC.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_RED_RGTC1_EXT", { configurable: false, enumerable: true, writable: false, value: 36283 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_SIGNED_RED_RGTC1_EXT", { configurable: false, enumerable: true, writable: false, value: 36284 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_RED_GREEN_RGTC2_EXT", { configurable: false, enumerable: true, writable: false, value: 36285 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureCompressionRGTC.prototype, "COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT", { configurable: false, enumerable: true, writable: false, value: 36286 });
-                delete EXTTextureCompressionRGTC;
+                delete EXTTextureCompressionRGTC.prototype.constructor;;
 
                 break;
             case "EXT_texture_filter_anisotropic":
-                EXTTextureFilterAnisotropic = function EXTTextureFilterAnisotropic() { }
+                EXTTextureFilterAnisotropic = function EXTTextureFilterAnisotropic() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTTextureFilterAnisotropic, "EXTTextureFilterAnisotropic");
                 info = Object.setPrototypeOf(info, EXTTextureFilterAnisotropic.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34046 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "MAX_TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34047 });
-                delete EXTTextureFilterAnisotropic;
+                delete EXTTextureFilterAnisotropic.prototype.constructor;;
                 break;
             case "WEBKIT_EXT_texture_filter_anisotropic":
                 EXTTextureFilterAnisotropic = function EXTTextureFilterAnisotropic() { }
@@ -5208,71 +5510,71 @@
                 info = Object.setPrototypeOf(info, EXTTextureFilterAnisotropic.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34046 });
                 bodavm.toolsFunc.windowdefineProperty(EXTTextureFilterAnisotropic.prototype, "MAX_TEXTURE_MAX_ANISOTROPY_EXT", { configurable: false, enumerable: true, writable: false, value: 34047 });
-                delete EXTTextureFilterAnisotropic;
+                delete EXTTextureFilterAnisotropic.prototype.constructor;;
                 break;
             case "EXT_sRGB":
-                EXTsRGB = function EXTsRGB() { }
+                EXTsRGB = function EXTsRGB() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(EXTsRGB, "EXTsRGB");
                 info = Object.setPrototypeOf(info, EXTsRGB.prototype)
                 bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "SRGB_EXT", { configurable: false, enumerable: true, writable: false, value: 35904 });
                 bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "SRGB_ALPHA_EXT", { configurable: false, enumerable: true, writable: false, value: 35906 });
                 bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "SRGB8_ALPHA8_EXT", { configurable: false, enumerable: true, writable: false, value: 35907 });
                 bodavm.toolsFunc.windowdefineProperty(EXTsRGB.prototype, "FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT", { configurable: false, enumerable: true, writable: false, value: 33296 });
-                delete EXTsRGB;
+                delete EXTsRGB.prototype.constructor;;
                 break;
             case "KHR_parallel_shader_compile":
-                KHRParallelShaderCompile = function KHRParallelShaderCompile() { }
+                KHRParallelShaderCompile = function KHRParallelShaderCompile() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(KHRParallelShaderCompile, "KHRParallelShaderCompile");
                 info = Object.setPrototypeOf(info, KHRParallelShaderCompile.prototype)
                 bodavm.toolsFunc.windowdefineProperty(KHRParallelShaderCompile.prototype, "COMPLETION_STATUS_KHR", { configurable: false, enumerable: true, writable: false, value: 37297 });
-                delete KHRParallelShaderCompile;
+                delete KHRParallelShaderCompile.prototype.constructor;;
                 break;
             case "OES_element_index_uint":
-                OESElementIndexUint = function OESElementIndexUint() { }
+                OESElementIndexUint = function OESElementIndexUint() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESElementIndexUint, "OESElementIndexUint");
                 info = Object.setPrototypeOf(info, OESElementIndexUint.prototype)
-                delete OESElementIndexUint;
+                delete OESElementIndexUint.prototype.constructor;;
                 break;
             case "OES_fbo_render_mipmap":
-                OESFboRenderMipmap = function OESFboRenderMipmap() { }
+                OESFboRenderMipmap = function OESFboRenderMipmap() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(OESFboRenderMipmap, "OESFboRenderMipmap");
                 info = Object.setPrototypeOf(info, OESFboRenderMipmap.prototype)
-                delete OESFboRenderMipmap;
+                delete OESFboRenderMipmap.prototype.constructor;;
                 break;
             case "OES_standard_derivatives":
-                OESStandardDerivatives = function OESStandardDerivatives() { }
+                OESStandardDerivatives = function OESStandardDerivatives() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(OESStandardDerivatives, "OESStandardDerivatives");
                 info = Object.setPrototypeOf(info, OESStandardDerivatives.prototype)
                 bodavm.toolsFunc.windowdefineProperty(OESStandardDerivatives.prototype, "FRAGMENT_SHADER_DERIVATIVE_HINT_OES", { configurable: false, enumerable: true, writable: false, value: 35723 });
-                delete OESStandardDerivatives;
+                delete OESStandardDerivatives.prototype.constructor;;
                 break;
             case "OES_texture_float":
-                OESTextureFloat = function OESTextureFloat() { }
+                OESTextureFloat = function OESTextureFloat() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESTextureFloat, "OESTextureFloat");
                 info = Object.setPrototypeOf(info, OESTextureFloat.prototype)
-                delete OESTextureFloat;
+                delete OESTextureFloat.prototype.constructor;;
                 break;
             case "OES_texture_float_linear":
-                OESTextureFloatLinear = function OESTextureFloatLinear() { }
+                OESTextureFloatLinear = function OESTextureFloatLinear() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESTextureFloatLinear, "OESTextureFloatLinear");
                 info = Object.setPrototypeOf(info, OESTextureFloatLinear.prototype)
-                delete OESTextureFloatLinear;
+                delete OESTextureFloatLinear.prototype.constructor;;
                 break;
             case "OES_texture_half_float":
-                OESTextureHalfFloat = function OESTextureHalfFloat() { }
+                OESTextureHalfFloat = function OESTextureHalfFloat() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESTextureHalfFloat, "OESTextureHalfFloat");
                 info = Object.setPrototypeOf(info, OESTextureHalfFloat.prototype)
                 bodavm.toolsFunc.windowdefineProperty(OESTextureHalfFloat.prototype, "HALF_FLOAT_OES", { configurable: false, enumerable: true, writable: false, value: 36193 });
                 delete OESTextureHalfFloat;
                 break;
             case "OES_texture_half_float_linear":
-                OESTextureHalfFloatLinear = function OESTextureHalfFloatLinear() { }
+                OESTextureHalfFloatLinear = function OESTextureHalfFloatLinear() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESTextureHalfFloatLinear, "OESTextureHalfFloatLinear");
                 info = Object.setPrototypeOf(info, OESTextureHalfFloatLinear.prototype)
-                delete OESTextureHalfFloatLinear;
+                delete OESTextureHalfFloatLinear.prototype.constructor;;
                 break;
             case "OES_vertex_array_object":
-                OESVertexArrayObject = function OESVertexArrayObject() { }
+                OESVertexArrayObject = function OESVertexArrayObject() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(OESVertexArrayObject, "OESVertexArrayObject");
                 info = Object.setPrototypeOf(info, OESVertexArrayObject.prototype)
                 bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "VERTEX_ARRAY_BINDING_OES", { configurable: false, enumerable: true, writable: false, value: 34229 });
@@ -5280,70 +5582,70 @@
                 bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "createVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function createVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "createVertexArrayOES", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "deleteVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function deleteVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "deleteVertexArrayOES", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(OESVertexArrayObject.prototype, "isVertexArrayOES", { configurable: true, enumerable: true, writable: true, value: function isVertexArrayOES() { return bodavm.toolsFunc.dispatch(this, OESVertexArrayObject.prototype, "OESVertexArrayObject", "isVertexArrayOES", arguments) } });
-                delete OESVertexArrayObject;
+                delete OESVertexArrayObject.prototype.constructor;;
                 break;
             case "WEBGL_color_buffer_float":
-                WebGLColorBufferFloat = function WebGLColorBufferFloat() { }
+                WebGLColorBufferFloat = function WebGLColorBufferFloat() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(WebGLColorBufferFloat, "WebGLColorBufferFloat");
                 info = Object.setPrototypeOf(info, WebGLColorBufferFloat.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLColorBufferFloat.prototype, "RGBA32F_EXT", { configurable: false, enumerable: true, writable: false, value: 34836 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLColorBufferFloat.prototype, "FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT", { configurable: false, enumerable: true, writable: false, value: 33297 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLColorBufferFloat.prototype, "UNSIGNED_NORMALIZED_EXT", { configurable: false, enumerable: true, writable: false, value: 35863 });
-                delete WebGLColorBufferFloat;
+                delete WebGLColorBufferFloat.prototype.constructor;;
                 break;
             case "WEBGL_compressed_texture_s3tc":
-                WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { }
+                WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLCompressedTextureS3TC, "WebGLCompressedTextureS3TC");
                 info = Object.setPrototypeOf(info, WebGLCompressedTextureS3TC.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33776 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33777 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 33778 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 33779 });
-                delete WebGLCompressedTextureS3TC;
+                delete WebGLCompressedTextureS3TC.prototype.constructor;;
                 break;
             case "WEBKIT_WEBGL_compressed_texture_s3tc":
-                WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { }
+                WebGLCompressedTextureS3TC = function WebGLCompressedTextureS3TC() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLCompressedTextureS3TC, "WebGLCompressedTextureS3TC");
                 info = Object.setPrototypeOf(info, WebGLCompressedTextureS3TC.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33776 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 33777 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 33778 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TC.prototype, "COMPRESSED_RGBA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 33779 });
-                delete WebGLCompressedTextureS3TC;
+                delete WebGLCompressedTextureS3TC.prototype.constructor;;
                 break;
             case "WEBGL_compressed_texture_s3tc_srgb":
-                WebGLCompressedTextureS3TCsRGB = function WebGLCompressedTextureS3TCsRGB() { }
+                WebGLCompressedTextureS3TCsRGB = function WebGLCompressedTextureS3TCsRGB() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLCompressedTextureS3TCsRGB, "WebGLCompressedTextureS3TCsRGB");
                 info = Object.setPrototypeOf(info, WebGLCompressedTextureS3TCsRGB.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 35916 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT", { configurable: false, enumerable: true, writable: false, value: 35917 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT", { configurable: false, enumerable: true, writable: false, value: 35918 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLCompressedTextureS3TCsRGB.prototype, "COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT", { configurable: false, enumerable: true, writable: false, value: 35919 });
-                delete WebGLCompressedTextureS3TCsRGB;
+                delete WebGLCompressedTextureS3TCsRGB.prototype.constructor;;
                 break;
             case "WEBGL_debug_shaders":
-                WebGLDebugShaders = function WebGLDebugShaders() { }
+                WebGLDebugShaders = function WebGLDebugShaders() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(WebGLDebugShaders, "WebGLDebugShaders");
                 info = Object.setPrototypeOf(info, WebGLDebugShaders.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDebugShaders.prototype, "getTranslatedShaderSource", { configurable: true, enumerable: true, writable: true, value: function getTranslatedShaderSource() { return bodavm.toolsFunc.dispatch(this, WebGLDebugShaders.prototype, "WebGLDebugShaders", "getTranslatedShaderSource", arguments) } });
-                delete WebGLDebugShaders;
+                delete WebGLDebugShaders.prototype.constructor;;
                 break;
             case "WEBGL_depth_texture":
-                WebGLDepthTexture = function WebGLDepthTexture() { }
+                WebGLDepthTexture = function WebGLDepthTexture() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLDepthTexture, "WebGLDepthTexture");
                 info = Object.setPrototypeOf(info, WebGLDepthTexture.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDepthTexture.prototype, "UNSIGNED_INT_24_8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34042 });
-                delete WebGLDepthTexture;
+                delete WebGLDepthTexture.prototype.constructor;;
                 break;
             case "WEBKIT_WEBGL_depth_texture":
-                WebGLDepthTexture = function WebGLDepthTexture() { }
+                WebGLDepthTexture = function WebGLDepthTexture() {this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLDepthTexture, "WebGLDepthTexture");
                 info = Object.setPrototypeOf(info, WebGLDepthTexture.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDepthTexture.prototype, "UNSIGNED_INT_24_8_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34042 });
-                delete WebGLDepthTexture;
+                delete WebGLDepthTexture.prototype.constructor;;
                 break;
             case "WEBGL_draw_buffers":
-                WebGLDrawBuffers = function WebGLDrawBuffers() { }
+                WebGLDrawBuffers = function WebGLDrawBuffers() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLDrawBuffers, "WebGLDrawBuffers");
                 info = Object.setPrototypeOf(info, WebGLDrawBuffers.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "COLOR_ATTACHMENT0_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36064 });
@@ -5381,32 +5683,32 @@
                 bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "MAX_COLOR_ATTACHMENTS_WEBGL", { configurable: false, enumerable: true, writable: false, value: 36063 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "MAX_DRAW_BUFFERS_WEBGL", { configurable: false, enumerable: true, writable: false, value: 34852 });
                 bodavm.toolsFunc.windowdefineProperty(WebGLDrawBuffers.prototype, "drawBuffersWEBGL", { configurable: true, enumerable: true, writable: true, value: function drawBuffersWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLDrawBuffers.prototype, "WebGLDrawBuffers", "drawBuffersWEBGL", arguments) } });
-                delete WebGLDrawBuffers;
+                delete WebGLDrawBuffers.prototype.constructor;;
                 break;
             case "WEBGL_lose_context":
-                WebGLLoseContext = function WebGLLoseContext() { }
+                WebGLLoseContext = function WebGLLoseContext() {this._boisinit=bodavm.config.isinit }
                 bodavm.toolsFunc.safeProto(WebGLLoseContext, "WebGLLoseContext");
                 info = Object.setPrototypeOf(info, WebGLLoseContext.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "loseContext", { configurable: true, enumerable: true, writable: true, value: function loseContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "loseContext", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "restoreContext", { configurable: true, enumerable: true, writable: true, value: function restoreContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "restoreContext", arguments) } });
-                delete WebGLLoseContext;
+                delete WebGLLoseContext.prototype.constructor;;
                 break;
             case "WEBKIT_WEBGL_lose_context":
-                WebGLLoseContext = function WebGLLoseContext() { }
+                WebGLLoseContext = function WebGLLoseContext() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLLoseContext, "WebGLLoseContext");
                 info = Object.setPrototypeOf(info, WebGLLoseContext.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "loseContext", { configurable: true, enumerable: true, writable: true, value: function loseContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "loseContext", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLLoseContext.prototype, "restoreContext", { configurable: true, enumerable: true, writable: true, value: function restoreContext() { return bodavm.toolsFunc.dispatch(this, WebGLLoseContext.prototype, "WebGLLoseContext", "restoreContext", arguments) } });
-                delete WebGLLoseContext; break;
+                delete WebGLLoseContext.prototype.constructor;; break;
             case "WEBGL_multi_draw":
-                WebGLMultiDraw = function WebGLMultiDraw() { }
+                WebGLMultiDraw = function WebGLMultiDraw() { this._boisinit=bodavm.config.isinit}
                 bodavm.toolsFunc.safeProto(WebGLMultiDraw, "WebGLMultiDraw");
                 info = Object.setPrototypeOf(info, WebGLMultiDraw.prototype)
                 bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawArraysInstancedWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawArraysInstancedWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawArraysInstancedWEBGL", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawArraysWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawArraysWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawArraysWEBGL", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawElementsInstancedWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawElementsInstancedWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawElementsInstancedWEBGL", arguments) } });
                 bodavm.toolsFunc.windowdefineProperty(WebGLMultiDraw.prototype, "multiDrawElementsWEBGL", { configurable: true, enumerable: true, writable: true, value: function multiDrawElementsWEBGL() { return bodavm.toolsFunc.dispatch(this, WebGLMultiDraw.prototype, "WebGLMultiDraw", "multiDrawElementsWEBGL", arguments) } });
-                delete WebGLMultiDraw;
+                delete WebGLMultiDraw.prototype.constructor;;
                 break;
             default:
                 console.log(`WebGLRenderingContext_getExtension `, `${getExtension}属性未实现  `);
@@ -5495,21 +5797,17 @@
 
     //HTMLIFrameElement
     bodavm.envFunc.HTMLIFrameElement_contentWindow_get = function HTMLIFrameElement_contentWindow_get() {
-        console.log(`HTMLIFrameElement_contentWindow_get `, `这种补法存在问题,待完善`);
         // debugger;
         if (bodavm.config.isdebug) { debugger }
 
-        contentwindow = {
-
+        contentwindow = this._boarg.contentWindow
+        if (contentwindow){
+            contentwindow._contentiframe=true
         }
-        contentwindow.top = contentwindow
-        contentwindow.parent = contentwindow
-        contentwindow.window = contentwindow
-        contentwindow.self = contentwindow
+        console.log(`HTMLIFrameElement_contentWindow_get `, `res ->${contentwindow}`,`获取iframe下的window!!!`);
 
-        contentwindow.__proto__ = bodavm.memory.globalobj['Window'].prototype
+        // contentwindow.__proto__ = bodavm.memory.globalobj['Window'].prototype
         // contentwindow['top']='123'
-        contentwindow = bodavm.toolsFunc.proxy(contentwindow, 'contentwindow')
         //这种补法存在问题,待完善
         return contentwindow
     }
@@ -5595,7 +5893,7 @@
 
 
     bodavm.envFunc.MutationObserver_observe = function () {
-        debugger
+        // debugger
         if (bodavm.config.isdebug) { debugger };
         let target = arguments[0]
         let options = arguments[1]
@@ -5725,13 +6023,13 @@
     //HTMLInputElement
     bodavm.envFunc.HTMLInputElement_type_get = function HTMLInputElement_type_get() {
         // debugger
-        let tpye = this._boarg.attribs['type']
+        let tpye = this._boarg.type
         console.log(`HTMLInputElement_type_get `, `type->${tpye}`);
         return tpye
     }
     bodavm.envFunc.HTMLInputElement_name_get = function HTMLInputElement_name_get() {
         // debugger
-        let name_ = this._boarg.attribs['name']
+        let name_ = this._boarg.name
         if (bodavm.config.isdebug) { debugger };
         console.log(`HTMLInputElement_name_get `, ` name->${name_}`);
         return name_
@@ -5739,7 +6037,7 @@
     bodavm.envFunc.HTMLInputElement_value_get = function HTMLInputElement_value_get() {
         // debugger
 
-        let value_ = this._boarg.attribs['value']
+        let value_ = this._boarg.value
         if (bodavm.config.isdebug) { debugger };
         console.log(`HTMLInputElement_value_get `, ` value_->${value_}`);
         return value_

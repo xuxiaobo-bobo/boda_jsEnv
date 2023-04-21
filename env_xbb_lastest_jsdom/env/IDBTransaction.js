@@ -1,5 +1,5 @@
 // IDBTransaction对象
-bodavm.memory.globalobj['IDBTransaction'] = function IDBTransaction(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBTransaction'] = function IDBTransaction(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBTransaction'], "IDBTransaction");
 bodavm.memory.globalobj['IDBTransaction'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['IDBTransaction'].__proto__=bodavm.memory.globalobj['EventTarget'];

@@ -1,5 +1,5 @@
 // Screen对象
-bodavm.memory.globalobj['Screen'] = function Screen(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Screen'] = function Screen(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Screen'], "Screen");
 bodavm.memory.globalobj['Screen'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Screen'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -15,7 +15,7 @@ bodavm.toolsFunc.defineProperty('Screen', "orientation", {configurable:true, enu
 bodavm.toolsFunc.defineProperty('Screen', "onchange", {configurable:true, enumerable:true, get:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "onchange_get", arguments)}, set:function onchange (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "onchange_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Screen', "isExtended", {configurable:true, enumerable:true, get:function isExtended (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Screen'].prototype, "Screen", "isExtended_get", arguments)}, set:undefined},'prototype');
 
-bodavm.memory.globalobj[ 'screen']  = {}
+bodavm.memory.globalobj[ 'screen']  = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'screen'].__proto__=bodavm.memory.globalobj['Screen'].prototype;
 
 

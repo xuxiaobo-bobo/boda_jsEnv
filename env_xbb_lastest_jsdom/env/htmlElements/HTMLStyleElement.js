@@ -1,5 +1,5 @@
 // HTMLStyleElement对象
-bodavm.memory.globalobj['HTMLStyleElement'] = function HTMLStyleElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLStyleElement'] = function HTMLStyleElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLStyleElement'], "HTMLStyleElement");
 bodavm.memory.globalobj['HTMLStyleElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLStyleElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

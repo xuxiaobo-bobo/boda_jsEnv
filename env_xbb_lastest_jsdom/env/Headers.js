@@ -2,7 +2,7 @@
 bodavm.memory.globalobj['Headers'] = function Headers(){
     if (!(this instanceof Headers)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Headers': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
-    };
+    };this._boisinit=bodavm.config.isinit;
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Headers'], "Headers");
 bodavm.toolsFunc.defineProperty('Headers', "append", {configurable:true, enumerable:true, writable:true, value:function append (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Headers'].prototype, "Headers", "append", arguments)}},'prototype');

@@ -1,5 +1,5 @@
 // MouseEvent对象
-bodavm.memory.globalobj['MouseEvent'] = function MouseEvent() {
+bodavm.memory.globalobj['MouseEvent'] = function MouseEvent() {this._boisinit=bodavm.config.isinit;
     if (!(this instanceof MouseEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MouseEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };

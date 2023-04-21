@@ -3,6 +3,7 @@ bodavm.memory.globalobj['Document'] = function Document(){
     if (!(this instanceof Document)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Document': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
+    this._boisinit=bodavm.config.isinit;
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Document'], "Document");
 bodavm.memory.globalobj['Document'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;

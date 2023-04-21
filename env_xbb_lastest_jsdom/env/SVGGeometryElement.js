@@ -1,5 +1,5 @@
 // SVGGeometryElement对象
-bodavm.memory.globalobj['SVGGeometryElement'] = function SVGGeometryElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['SVGGeometryElement'] = function SVGGeometryElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGGeometryElement'], "SVGGeometryElement");
 bodavm.memory.globalobj['SVGGeometryElement'].prototype.__proto__=bodavm.memory.globalobj['SVGGraphicsElement'].prototype;
 bodavm.memory.globalobj['SVGGeometryElement'].__proto__=bodavm.memory.globalobj['SVGGraphicsElement'];

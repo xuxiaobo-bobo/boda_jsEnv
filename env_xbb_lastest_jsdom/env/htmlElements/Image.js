@@ -1,6 +1,13 @@
 // Image对象
-bodavm.memory.globalobj['Image'] = function Image(){}
+bodavm.memory.globalobj['Image'] = function Image(){
+    if (!(this instanceof Image)) {
+        return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Image': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
+    };
+    this._boisinit=bodavm.config.isinit;
+    this._boarg=new bodaobj.window.Image(arguments[0],arguments[1])
+}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Image'], "Image");
+bodavm.memory.globalobj['Image'].prototype=bodavm.memory.globalobj['HTMLImageElement'].prototype;
 bodavm.memory.globalobj['Image'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.toolsFunc.defineProperty('Image', "alt", {configurable:true, enumerable:true, get:function alt (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "alt_get", arguments)}, set:function alt (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "alt_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('Image', "src", {configurable:true, enumerable:true, get:function src (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "src_get", arguments)}, set:function src (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Image'].prototype, "Image", "src_set", arguments)}},'prototype');

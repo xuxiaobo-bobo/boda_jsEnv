@@ -1,5 +1,5 @@
 // XMLHttpRequestEventTarget对象
-bodavm.memory.globalobj['XMLHttpRequestEventTarget'] = function XMLHttpRequestEventTarget(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['XMLHttpRequestEventTarget'] = function XMLHttpRequestEventTarget(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['XMLHttpRequestEventTarget'], "XMLHttpRequestEventTarget");
 bodavm.memory.globalobj['XMLHttpRequestEventTarget'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['XMLHttpRequestEventTarget'].__proto__=bodavm.memory.globalobj['EventTarget'];

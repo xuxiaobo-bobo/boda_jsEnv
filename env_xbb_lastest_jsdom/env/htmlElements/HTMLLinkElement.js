@@ -1,5 +1,5 @@
 // HTMLLinkElement对象
-bodavm.memory.globalobj['HTMLLinkElement'] = function HTMLLinkElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLLinkElement'] = function HTMLLinkElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLLinkElement'], "HTMLLinkElement");
 bodavm.memory.globalobj['HTMLLinkElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLLinkElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

@@ -1,5 +1,5 @@
 // RTCPeerConnection对象
-bodavm.memory.globalobj['RTCPeerConnection'] = function RTCPeerConnection(){
+bodavm.memory.globalobj['RTCPeerConnection'] = function RTCPeerConnection(){this._boisinit=bodavm.config.isinit;
 
     if (!(this instanceof RTCPeerConnection)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'RTCPeerConnection': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
@@ -54,3 +54,7 @@ bodavm.toolsFunc.defineProperty('RTCPeerConnection', "restartIce", {configurable
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setConfiguration", {configurable:true, enumerable:true, writable:true, value:function setConfiguration (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "setConfiguration", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setLocalDescription", {configurable:true, enumerable:true, writable:true, value:function setLocalDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "setLocalDescription", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setRemoteDescription", {configurable:true, enumerable:true, writable:true, value:function setRemoteDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "setRemoteDescription", arguments)}},'prototype');
+
+
+// bodavm.memory.globalobj['webkitRTCPeerConnection']=bodavm.memory.globalobj['RTCPeerConnection']
+

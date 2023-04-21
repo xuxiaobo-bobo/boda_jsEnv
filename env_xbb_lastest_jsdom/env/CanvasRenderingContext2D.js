@@ -1,5 +1,5 @@
 // CanvasRenderingContext2D对象
-bodavm.memory.globalobj['CanvasRenderingContext2D'] = function CanvasRenderingContext2D(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CanvasRenderingContext2D'] = function CanvasRenderingContext2D(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CanvasRenderingContext2D'], "CanvasRenderingContext2D");
 bodavm.toolsFunc.defineProperty('CanvasRenderingContext2D', "canvas", {configurable:true, enumerable:true, get:function canvas (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype, "CanvasRenderingContext2D", "canvas_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('CanvasRenderingContext2D', "globalAlpha", {configurable:true, enumerable:true, get:function globalAlpha (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype, "CanvasRenderingContext2D", "globalAlpha_get", arguments)}, set:function globalAlpha (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype, "CanvasRenderingContext2D", "globalAlpha_set", arguments)}},'prototype');

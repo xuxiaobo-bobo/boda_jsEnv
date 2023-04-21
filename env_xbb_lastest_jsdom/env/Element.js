@@ -1,5 +1,5 @@
 // Element对象
-bodavm.memory.globalobj['Element'] = function Element(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Element'] = function Element(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Element'], "Element");
 bodavm.memory.globalobj['Element'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['Element'].__proto__=bodavm.memory.globalobj['Node'];

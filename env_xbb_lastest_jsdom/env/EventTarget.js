@@ -4,7 +4,7 @@ bodavm.memory.globalobj['EventTarget'] = function EventTarget(){
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'EventTarget': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };
 
-
+    this._boisinit=bodavm.config.isinit;
 }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['EventTarget'], "EventTarget");
 bodavm.toolsFunc.defineProperty('EventTarget', "addEventListener", {configurable:true, enumerable:true, writable:true, value:function addEventListener (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['EventTarget'].prototype, "EventTarget", "addEventListener", arguments)}},'prototype');

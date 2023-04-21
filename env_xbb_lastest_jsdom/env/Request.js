@@ -1,5 +1,5 @@
 // Request对象
-bodavm.memory.globalobj['Request'] = function Request(){
+bodavm.memory.globalobj['Request'] = function Request(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Request)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Request': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 

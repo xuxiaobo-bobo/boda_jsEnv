@@ -1,5 +1,5 @@
 // HTMLFrameSetElement对象
-bodavm.memory.globalobj['HTMLFrameSetElement'] = function HTMLFrameSetElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLFrameSetElement'] = function HTMLFrameSetElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLFrameSetElement'], "HTMLFrameSetElement");
 bodavm.memory.globalobj['HTMLFrameSetElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLFrameSetElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

@@ -1,5 +1,5 @@
 // Path2D对象
-bodavm.memory.globalobj['Path2D'] = function Path2D(){
+bodavm.memory.globalobj['Path2D'] = function Path2D(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Path2D)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Path2D': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };   

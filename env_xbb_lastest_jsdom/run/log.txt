@@ -26,7 +26,7 @@ window_External res -> function External() { [native code] }
 window_CacheStorage res -> function CacheStorage() { [native code] }
 window_XMLHttpRequestres ->function XMLHttpRequest() { [native code] }
 window_IDBDatabaseres ->function IDBDatabase() { [native code] }
-window_Image  img->[object HTMLImageElement]
+window_Image res -> function Image() { [native code] }
 window_Audiores ->function Audio() { [native code] }
 window_webkitURLres ->undefined
 window_webkitRTCPeerConnectionres ->undefined
@@ -246,7 +246,7 @@ window_Pluginres ->function Plugin() { [native code] }
 window_PeriodicWaveres ->undefined
 window_PerformanceTimingres ->undefined
 window_PerformanceServerTimingres ->undefined
-window_PerformanceResourceTimingres ->undefined
+window_PerformanceResourceTimingres ->function PerformanceResourceTiming() { [native code] }
 window_PerformancePaintTimingres ->function PerformancePaintTiming() { [native code] }
 window_PerformanceObserverEntryListres ->undefined
 window_PerformanceObserverres ->undefined
@@ -274,8 +274,7 @@ window_Noderes ->function Node() { [native code] }
 window_NetworkInformationres ->function NetworkInformation() { [native code] }
 window_NamedNodeMapres ->function NamedNodeMap() { [native code] }
 window_MutationRecordres ->undefined
-'[window_MutationObserver]正在执行,错误信息Failed to construct 'MutationObserver': parameter 1 is not a function'
-'[window_MutationObserver]正在执行,错误信息Failed to construct 'MutationObserver': parameter 1 is not a function'
+window_MutationObserver res ->function MutationObserver() { [native code] }
 window_MutationEventres ->undefined
 window_MouseEventres ->function MouseEvent() { [native code] }
 window_MimeTypeArrayres ->function MimeTypeArray() { [native code] }
@@ -552,7 +551,6 @@ window_findres ->undefined
 window_focusres ->undefined
 window_getComputedStyleres ->undefined
 window_getSelectionres ->undefined
-window_matchMedia arg ->undefinedres ->[object MediaQueryList]
 window_moveByres ->undefined
 window_moveTores ->undefined
 window_openres ->undefined
@@ -621,7 +619,7 @@ window_SensorErrorEventres ->undefined
 window_ServiceWorkerres ->undefined
 window_ServiceWorkerContainerres ->undefined
 window_ServiceWorkerRegistrationres ->undefined
-window_StorageManagerres ->undefined
+window_StorageManagerres ->function StorageManager() { [native code] }
 window_SubtleCryptores ->undefined
 window_Workletres ->undefined
 window_XRDOMOverlayStateres ->undefined
@@ -814,7 +812,6 @@ window_undebugres ->undefined
 window_monitorres ->undefined
 window_unmonitorres ->undefined
 window_inspectres ->undefined
-window_copyres ->undefined
 window_queryObjectsres ->undefined
 window_getEventListenersres ->undefined
 window_getAccessibleNameres ->undefined
@@ -823,377 +820,57 @@ window_monitorEventsres ->undefined
 window_unmonitorEventsres ->undefined
 window_$$res ->undefined
 window_$xres ->undefined
-window_self_get window  
-window_webkitStorageInfo_get webkitStorageInfo->[object DeprecatedStorageInfo]
+window_length_get  length ->0  boss直聘检测
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+======================================调         试        代          码======================================
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+window_navigator_get navigator->[object Navigator]
+Navigator_getBattery  settimeout 添加异步电池信息
+window_setTimeout func->function() {
+        handle(self.value);
+      } delay->0 argList->  
+window_navigator_get navigator->[object Navigator]
+Navigator_getBattery  settimeout 添加异步电池信息
+window_setTimeout func->function() {
+        handle(self.value);
+      } delay->0 argList->  
+window_navigator_get navigator->[object Navigator]
+Navigator_getBattery  settimeout 添加异步电池信息
+window_setTimeout func->function() {
+        handle(self.value);
+      } delay->0 argList->  
+HTMLElement_promise ->当前html_promise -> function(){console.log(1111)}
+HTMLElement_promise 当前html_promise -> function(){console.log(1111)}->当前方法 function(){console.log(1111)}执行
+1111
+HTMLElement_promise ->当前html_promise -> function hasOwnProperty() { [native code] }
+JSON.stringify    arg0:[object Object],[object Object],[object Object]   arg1:undefined
+当前setTimeEvent有===>[{"delay":0,"args":[],"type":1,"timeoutID":1},{"delay":0,"args":[],"type":1,"timeoutID":2},{"delay":0,"args":[],"type":1,"timeoutID":3}]
+JSON.stringify    arg0:[object Object]   arg1:undefined
+异步回调执行settime======>{"delay":0,"args":[],"type":1,"timeoutID":1}   callback:function() {
+        handle(self.value);
+      }
+BatteryManager_chargingTime_get true  
+chargingtrue
+JSON.stringify    arg0:[object Object]   arg1:undefined
+异步回调执行settime======>{"delay":0,"args":[],"type":1,"timeoutID":2}   callback:function() {
+        handle(self.value);
+      }
+BatteryManager_chargingTime_get 0  
+chargingTime0
+JSON.stringify    arg0:[object Object]   arg1:undefined
+异步回调执行settime======>{"delay":0,"args":[],"type":1,"timeoutID":3}   callback:function() {
+        handle(self.value);
+      }
+'[BatteryManager_dischargingTime_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+'[BatteryManager_dischargingTime_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+dischargingTimeundefined
+XMLHttpRequest_open [POST] [http://qikan.cqvip.com/Search/SearchList]  
+XMLHttpRequest_send body->searchParamModel=%7B%22ObjectType%22%3A1%2C%22SearchKeyList%22%3A%5B%5D%2C%22SearchExpression%22%3Anull%2C%22BeginYear%22%3Anull%2C%22EndYear%22%3Anull%2C%22UpdateTimeType%22%3Anull%2C%22JournalRange%22%3Anull%2C%22DomainRange%22%3Anull%2C%22ClusterFilter%22%3A%22%22%2C%22ClusterLimit%22%3A0%2C%22ClusterUseType%22%3A%22Article%22%2C%22UrlParam%22%3A%22%22%2C%22Sort%22%3A%220%22%2C%22SortField%22%3Anull%2C%22UserID%22%3A%220%22%2C%22PageNum%22%3A3%2C%22PageSize%22%3A20%2C%22SType%22%3Anull%2C%22StrIds%22%3Anull%2C%22IsRefOrBy%22%3A0%2C%22ShowRules%22%3A%22%22%2C%22IsNoteHistory%22%3A0%2C%22AdvShowTitle%22%3Anull%2C%22ObjectId%22%3Anull%2C%22ObjectSearchType%22%3A0%2C%22ChineseEnglishExtend%22%3A0%2C%22SynonymExtend%22%3A0%2C%22ShowTotalCount%22%3A74249929%2C%22AdvTabGuid%22%3A%22%22%7D  !!!!!!!!!未完善!!!!!!!!!!!!
 window_document_get document->[object HTMLDocument]
-window_location_get location_->[object Location]
-window_toolbar_get res -> [object BarProp]
-window_menubar_get res -> [object BarProp]
-window_locationbar_get res ->[object BarProp]
-window_customElements_get customElements->[object CustomElementRegistry]
-window_screen_get screen->[object Screen]
-window_navigator_get navigator->[object Navigator]
-window_performance_get performance->[object Performance]
-window_sessionStorage_get sessionStorage->[object Storage]
-window_localStorage_get localStorage->[object Storage]
-window_navigation_get navigation->[object Navigation]
-window_visualViewport_get res -> [object VisualViewport]
-window_history_get history->[object History]
-window_indexedDB_get indexedDB->[object IDBFactory]
-window_trustedTypes_get res -> [object TrustedTypePolicyFactory]
-window_cookieStore_get res -> [object CookieStore]
-window_external_get res -> [object External]
-window_caches_get res -> [object CacheStorage]
-window_webkitStorageInfo_get webkitStorageInfo->[object DeprecatedStorageInfo]
-window_speechSynthesis_get res ->[object SpeechSynthesis]
-window_self_get window  
-window_name_get name ->
-window_personalbar_get res ->[object BarProp]
-window_scrollbars_get res ->[object BarProp]
-window_statusbar_get res ->[object BarProp]
-window_status_get  返回的为jsdom中的window.status->
-window_closed_get  window.closed->false
-window_frames_get  返回的为jsdom中的window
-window_length_get  length ->1  boss直聘检测
-window_top_get window
-'[window_opener_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_opener_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_parent_get window
-'[window_frameElement_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_frameElement_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_origin_get  返回的为jsdom中的window.origin->https://www.douyin.com
-window_innerWidth_get innerWidth ->1024
-window_innerHeight_get innerHeight ->768
-window_scrollX_get scrollX ->0
-window_pageXOffset_get scrollX ->0
-window_scrollY_get scrollY ->0
-window_pageYOffset_get pageYOffset ->0
-window_screenX_get screenX ->0
-window_screenY_get screenY ->0
-window_outerWidth_get outerWidth ->1024
-window_outerHeight_get outerHeight ->768
-window_innerWidth_get devicePixelRatio ->1.5
-window_navigator_get navigator->[object Navigator]
-window_clientInformation_get res- >[object Navigator]
-window_screenLeft_get screenLeft ->0
-window_screenTop_get screenTop ->0
-window_defaultStatus_get defaultStatus ->undefined
-window_defaultstatus_get defaultstatus ->undefined
-window_styleMedia_get res ->[object StyleMedia]
-'[window_onsearch_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onsearch_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_isSecureContext_get res ->true
-'[window_onappinstalled_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onappinstalled_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onbeforeinstallprompt_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onbeforeinstallprompt_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_crypto_get crypto->[object Crypto]
-'[window_onbeforexrselect_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onbeforexrselect_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onabort_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onabort_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onblur_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onblur_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncancel_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncancel_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncanplay_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncanplay_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncanplaythrough_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncanplaythrough_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_onchange_getres ->null
-window_onclick_getres ->null
-window_onclose_getres ->null
-window_oncontextlost_getres ->null
-window_oncontextmenu_getres ->null
-window_oncontextrestored_getres ->null
-window_oncuechange_getres ->null
-window_ondblclick_getres ->null
-window_ondrag_getres ->null
-window_ondragend_getres ->null
-window_ondragenter_getres ->null
-window_ondragleave_getres ->null
-window_ondragover_getres ->null
-window_ondragstart_getres ->null
-window_ondrop_getres ->null
-window_ondurationchange_getres ->null
-window_onemptied_getres ->null
-window_onended_getres ->null
-window_onerror_getres ->null
-window_onfocus_getres ->null
-window_onformdata_getres ->null
-window_oninput_getres ->null
-window_oninvalid_getres ->null
-window_onkeydown_getres ->null
-window_onkeypress_getres ->null
-window_onkeyup_getres ->null
-window_onload_getres ->null
-window_onloadeddata_getres ->null
-window_onloadedmetadata_getres ->null
-window_onloadstart_getres ->null
-window_onmousedown_getres ->null
-window_onmouseenter_getres ->null
-window_onmouseleave_getres ->null
-window_onmousemove_getres ->null
-window_onmouseout_getres ->null
-window_onmouseover_getres ->null
-window_onmouseup_getres ->null
-window_onmousewheel_getres ->null
-window_onpause_getres ->null
-window_onplay_getres ->null
-window_onplaying_getres ->null
-window_onprogress_getres ->null
-window_onratechange_getres ->null
-window_onreset_getres ->null
-window_onresize_getres ->null
-window_onscroll_getres ->null
-window_onsecuritypolicyviolation_getres ->null
-window_onseeked_getres ->null
-window_onseeking_getres ->null
-window_onselect_getres ->null
-window_onslotchange_getres ->null
-window_onstalled_getres ->null
-window_onsubmit_getres ->null
-window_onsuspend_getres ->null
-window_ontimeupdate_getres ->null
-window_ontoggle_getres ->null
-window_onvolumechange_getres ->null
-window_onwaiting_getres ->null
-window_onwebkitanimationend_getres ->null
-window_onwebkitanimationiteration_getres ->null
-window_onwebkitanimationstart_getres ->null
-window_onwebkittransitionend_getres ->null
-window_onwheel_getres ->null
-window_onauxclick_getres ->null
-window_ongotpointercapture_getres ->null
-window_onlostpointercapture_getres ->null
-window_onpointerdown_getres ->null
-window_onpointermove_getres ->null
-window_onpointerup_getres ->null
-window_onpointercancel_getres ->null
-window_onpointerover_getres ->null
-window_onpointerout_getres ->null
-window_onpointerenter_getres ->null
-window_onpointerleave_getres ->null
-window_onselectstart_getres ->null
-window_onselectionchange_getres ->null
-window_onanimationend_getres ->null
-window_onanimationiteration_getres ->null
-window_onanimationstart_getres ->null
-window_ontransitionrun_getres ->null
-window_ontransitionstart_getres ->null
-window_ontransitionend_getres ->null
-window_ontransitioncancel_getres ->null
-window_onafterprint_getres ->null
-window_onbeforeprint_getres ->null
-window_onbeforeunload_get  返回的为jsdom中的window.onbeforeunload ->null
-window_onhashchange_getres ->null
-window_onlanguagechange_getres ->null
-window_onmessage_get  返回的为jsdom中的window.onmessage ->null
-window_onmessageerror_getres ->null
-window_onoffline_getres ->null
-window_ononline_getres ->null
-window_onpagehide_getres ->null
-window_onpageshow_getres ->null
-window_onpopstate_getres ->null
-window_onrejectionhandled_getres ->null
-window_onstorage_getres ->null
-window_onunhandledrejection_getres ->null
-window_onunload_getres ->null
-window_ondevicemotion_getres ->null
-window_ondeviceorientation_getres ->null
-window_ondeviceorientationabsolute_getres ->null
-window_onbeforematch_getres ->null
-window_originAgentCluster_getres ->null
-window_onpointerrawupdate_getres ->null
-window_crossOriginIsolated_getres ->null
-window_scheduler_getres ->[object Scheduler]
-'[window_event_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
-'[window_event_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
-'[window_offscreenBuffering_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
-'[window_offscreenBuffering_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
-window_document_get document->[object HTMLDocument]
-window_location_get location_->[object Location]
-window_toolbar_get res -> [object BarProp]
-window_menubar_get res -> [object BarProp]
-window_locationbar_get res ->[object BarProp]
-window_customElements_get customElements->[object CustomElementRegistry]
-window_screen_get screen->[object Screen]
-window_navigator_get navigator->[object Navigator]
-window_performance_get performance->[object Performance]
-window_sessionStorage_get sessionStorage->[object Storage]
-window_localStorage_get localStorage->[object Storage]
-window_navigation_get navigation->[object Navigation]
-window_visualViewport_get res -> [object VisualViewport]
-window_history_get history->[object History]
-window_indexedDB_get indexedDB->[object IDBFactory]
-window_trustedTypes_get res -> [object TrustedTypePolicyFactory]
-window_cookieStore_get res -> [object CookieStore]
-window_external_get res -> [object External]
-window_caches_get res -> [object CacheStorage]
-window_webkitStorageInfo_get webkitStorageInfo->[object DeprecatedStorageInfo]
-window_speechSynthesis_get res ->[object SpeechSynthesis]
-window_self_get window  
-window_name_get name ->
-window_personalbar_get res ->[object BarProp]
-window_scrollbars_get res ->[object BarProp]
-window_statusbar_get res ->[object BarProp]
-window_status_get  返回的为jsdom中的window.status->
-window_closed_get  window.closed->false
-window_frames_get  返回的为jsdom中的window
-window_length_get  length ->1  boss直聘检测
-window_top_get window
-'[window_opener_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_opener_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_parent_get window
-'[window_frameElement_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_frameElement_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_origin_get  返回的为jsdom中的window.origin->https://www.douyin.com
-window_innerWidth_get innerWidth ->1024
-window_innerHeight_get innerHeight ->768
-window_scrollX_get scrollX ->0
-window_pageXOffset_get scrollX ->0
-window_scrollY_get scrollY ->0
-window_pageYOffset_get pageYOffset ->0
-window_screenX_get screenX ->0
-window_screenY_get screenY ->0
-window_outerWidth_get outerWidth ->1024
-window_outerHeight_get outerHeight ->768
-window_innerWidth_get devicePixelRatio ->1.5
-window_navigator_get navigator->[object Navigator]
-window_clientInformation_get res- >[object Navigator]
-window_screenLeft_get screenLeft ->0
-window_screenTop_get screenTop ->0
-window_defaultStatus_get defaultStatus ->undefined
-window_defaultstatus_get defaultstatus ->undefined
-window_styleMedia_get res ->[object StyleMedia]
-'[window_onsearch_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onsearch_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_isSecureContext_get res ->true
-'[window_onappinstalled_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onappinstalled_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onbeforeinstallprompt_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onbeforeinstallprompt_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_crypto_get crypto->[object Crypto]
-'[window_onbeforexrselect_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onbeforexrselect_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onabort_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onabort_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onblur_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_onblur_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncancel_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncancel_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncanplay_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncanplay_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncanplaythrough_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-'[window_oncanplaythrough_get]正在执行,错误信息Cannot set properties of null (setting '_boarg')'
-window_onchange_getres ->null
-window_onclick_getres ->null
-window_onclose_getres ->null
-window_oncontextlost_getres ->null
-window_oncontextmenu_getres ->null
-window_oncontextrestored_getres ->null
-window_oncuechange_getres ->null
-window_ondblclick_getres ->null
-window_ondrag_getres ->null
-window_ondragend_getres ->null
-window_ondragenter_getres ->null
-window_ondragleave_getres ->null
-window_ondragover_getres ->null
-window_ondragstart_getres ->null
-window_ondrop_getres ->null
-window_ondurationchange_getres ->null
-window_onemptied_getres ->null
-window_onended_getres ->null
-window_onerror_getres ->null
-window_onfocus_getres ->null
-window_onformdata_getres ->null
-window_oninput_getres ->null
-window_oninvalid_getres ->null
-window_onkeydown_getres ->null
-window_onkeypress_getres ->null
-window_onkeyup_getres ->null
-window_onload_getres ->null
-window_onloadeddata_getres ->null
-window_onloadedmetadata_getres ->null
-window_onloadstart_getres ->null
-window_onmousedown_getres ->null
-window_onmouseenter_getres ->null
-window_onmouseleave_getres ->null
-window_onmousemove_getres ->null
-window_onmouseout_getres ->null
-window_onmouseover_getres ->null
-window_onmouseup_getres ->null
-window_onmousewheel_getres ->null
-window_onpause_getres ->null
-window_onplay_getres ->null
-window_onplaying_getres ->null
-window_onprogress_getres ->null
-window_onratechange_getres ->null
-window_onreset_getres ->null
-window_onresize_getres ->null
-window_onscroll_getres ->null
-window_onsecuritypolicyviolation_getres ->null
-window_onseeked_getres ->null
-window_onseeking_getres ->null
-window_onselect_getres ->null
-window_onslotchange_getres ->null
-window_onstalled_getres ->null
-window_onsubmit_getres ->null
-window_onsuspend_getres ->null
-window_ontimeupdate_getres ->null
-window_ontoggle_getres ->null
-window_onvolumechange_getres ->null
-window_onwaiting_getres ->null
-window_onwebkitanimationend_getres ->null
-window_onwebkitanimationiteration_getres ->null
-window_onwebkitanimationstart_getres ->null
-window_onwebkittransitionend_getres ->null
-window_onwheel_getres ->null
-window_onauxclick_getres ->null
-window_ongotpointercapture_getres ->null
-window_onlostpointercapture_getres ->null
-window_onpointerdown_getres ->null
-window_onpointermove_getres ->null
-window_onpointerup_getres ->null
-window_onpointercancel_getres ->null
-window_onpointerover_getres ->null
-window_onpointerout_getres ->null
-window_onpointerenter_getres ->null
-window_onpointerleave_getres ->null
-window_onselectstart_getres ->null
-window_onselectionchange_getres ->null
-window_onanimationend_getres ->null
-window_onanimationiteration_getres ->null
-window_onanimationstart_getres ->null
-window_ontransitionrun_getres ->null
-window_ontransitionstart_getres ->null
-window_ontransitionend_getres ->null
-window_ontransitioncancel_getres ->null
-window_onafterprint_getres ->null
-window_onbeforeprint_getres ->null
-window_onbeforeunload_get  返回的为jsdom中的window.onbeforeunload ->null
-window_onhashchange_getres ->null
-window_onlanguagechange_getres ->null
-window_onmessage_get  返回的为jsdom中的window.onmessage ->null
-window_onmessageerror_getres ->null
-window_onoffline_getres ->null
-window_ononline_getres ->null
-window_onpagehide_getres ->null
-window_onpageshow_getres ->null
-window_onpopstate_getres ->null
-window_onrejectionhandled_getres ->null
-window_onstorage_getres ->null
-window_onunhandledrejection_getres ->null
-window_onunload_getres ->null
-window_ondevicemotion_getres ->null
-window_ondeviceorientation_getres ->null
-window_ondeviceorientationabsolute_getres ->null
-window_onbeforematch_getres ->null
-window_originAgentCluster_getres ->null
-window_onpointerrawupdate_getres ->null
-window_crossOriginIsolated_getres ->null
-window_scheduler_getres ->[object Scheduler]
-'[window_event_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
-'[window_event_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
-'[window_offscreenBuffering_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
-'[window_offscreenBuffering_get]正在执行,错误信息Cannot read properties of undefined (reading 'apply')'
+Document_cookie_get cookie -> hasOwnProperty_bo=function hasOwnProperty() { [native code] }; 

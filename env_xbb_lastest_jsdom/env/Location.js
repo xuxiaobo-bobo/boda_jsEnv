@@ -1,11 +1,11 @@
 // Location对象
-bodavm.memory.globalobj['Location'] = function Location(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Location'] = function Location(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Location'], "Location");
 
 // debugger
 // location对象
 // location对象
-bodavm.memory.globalobj['location'] = {}
+bodavm.memory.globalobj['location'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj['location'].__proto__=bodavm.memory.globalobj['Location'].prototype;
 bodavm.toolsFunc.defineProperty('location', "valueOf", {configurable:false, enumerable:false, writable:false, value:function valueOf (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['location'], "location", "valueOf", arguments)}});
 bodavm.toolsFunc.defineProperty('location', "ancestorOrigins", {configurable:false, enumerable:true, get:function ancestorOrigins (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['location'], "location", "ancestorOrigins_get", arguments)}, set:undefined});

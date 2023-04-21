@@ -1,5 +1,5 @@
 // BatteryManager对象
-bodavm.memory.globalobj['BatteryManager'] = function BatteryManager(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['BatteryManager'] = function BatteryManager(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BatteryManager'], "BatteryManager");
 bodavm.memory.globalobj['BatteryManager'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['BatteryManager'].__proto__=bodavm.memory.globalobj['EventTarget'];

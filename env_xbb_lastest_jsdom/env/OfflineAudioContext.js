@@ -1,6 +1,6 @@
 
 // OfflineAudioContext对象
-bodavm.memory.globalobj['OfflineAudioContext'] = function OfflineAudioContext(){
+bodavm.memory.globalobj['OfflineAudioContext'] = function OfflineAudioContext(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof OfflineAudioContext)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'OfflineAudioContext': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };

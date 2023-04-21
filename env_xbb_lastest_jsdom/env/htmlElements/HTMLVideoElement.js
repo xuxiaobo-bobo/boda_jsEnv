@@ -1,5 +1,5 @@
 // HTMLVideoElement对象
-bodavm.memory.globalobj['HTMLVideoElement'] = function HTMLVideoElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLVideoElement'] = function HTMLVideoElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLVideoElement'], "HTMLVideoElement");
 bodavm.memory.globalobj['HTMLVideoElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLMediaElement'].prototype;
 bodavm.memory.globalobj['HTMLVideoElement'].__proto__=bodavm.memory.globalobj['HTMLMediaElement'];

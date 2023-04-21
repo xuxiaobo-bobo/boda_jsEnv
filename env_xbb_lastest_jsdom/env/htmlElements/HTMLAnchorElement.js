@@ -1,5 +1,6 @@
 // HTMLAnchorElement对象
-bodavm.memory.globalobj['HTMLAnchorElement'] = function HTMLAnchorElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLAnchorElement'] = function HTMLAnchorElement(){    this._boisinit=bodavm.config.isinit;
+    return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLAnchorElement'], "HTMLAnchorElement");
 bodavm.memory.globalobj['HTMLAnchorElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLAnchorElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

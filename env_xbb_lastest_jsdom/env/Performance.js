@@ -1,5 +1,5 @@
 // Performance对象
-bodavm.memory.globalobj['Performance'] = function Performance(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Performance'] = function Performance(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Performance'], "Performance");
 bodavm.memory.globalobj['Performance'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Performance'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -22,6 +22,6 @@ bodavm.toolsFunc.defineProperty('Performance', "memory", {configurable:true, enu
 bodavm.toolsFunc.defineProperty('Performance', "eventCounts", {configurable:true, enumerable:true, get:function eventCounts (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['Performance'].prototype, "Performance", "eventCounts_get", arguments)}, set:undefined},'prototype');
 
 // performance对象
-bodavm.memory.globalobj[ 'performance']  = {}
+bodavm.memory.globalobj[ 'performance']  = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'performance'].__proto__=bodavm.memory.globalobj['Performance'].prototype;
 

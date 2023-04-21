@@ -1,5 +1,5 @@
 // NamedNodeMap对象
-bodavm.memory.globalobj['NamedNodeMap'] = function NamedNodeMap(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['NamedNodeMap'] = function NamedNodeMap(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['NamedNodeMap'], "NamedNodeMap");
 bodavm.toolsFunc.defineProperty('NamedNodeMap', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NamedNodeMap'].prototype, "NamedNodeMap", "length_get", arguments)}, set:undefined},'prototype');
 bodavm.toolsFunc.defineProperty('NamedNodeMap', "getNamedItem", {configurable:true, enumerable:true, writable:true, value:function getNamedItem (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NamedNodeMap'].prototype, "NamedNodeMap", "getNamedItem", arguments)}},'prototype');

@@ -1,5 +1,5 @@
 // DocumentType对象
-bodavm.memory.globalobj['DocumentType'] = function DocumentType(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['DocumentType'] = function DocumentType(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['DocumentType'], "DocumentType");
 bodavm.memory.globalobj['DocumentType'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['DocumentType'].__proto__=bodavm.memory.globalobj['Node'];

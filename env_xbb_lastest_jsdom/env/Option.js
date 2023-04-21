@@ -1,5 +1,5 @@
 // Option对象
-bodavm.memory.globalobj['Option'] = function Option(){
+bodavm.memory.globalobj['Option'] = function Option(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Option)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Option': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };   

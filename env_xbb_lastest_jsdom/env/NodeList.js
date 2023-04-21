@@ -1,5 +1,5 @@
 // NodeList对象
-bodavm.memory.globalobj['NodeList'] = function NodeList(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['NodeList'] = function NodeList(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['NodeList'], "NodeList");
 bodavm.toolsFunc.defineProperty('NodeList', "entries", {configurable:true, enumerable:true, writable:true, value:function entries (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NodeList'].prototype, "NodeList", "entries", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('NodeList', "keys", {configurable:true, enumerable:true, writable:true, value:function keys (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['NodeList'].prototype, "NodeList", "keys", arguments)}},'prototype');

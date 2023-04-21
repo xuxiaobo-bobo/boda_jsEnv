@@ -1,6 +1,6 @@
 // CSS对象
 
-bodavm.memory.globalobj['CSS'] = {}
+bodavm.memory.globalobj['CSS'] = { _boisinit:bodavm.config.isinit}
 bodavm.toolsFunc.defineProperty('CSS' , "Hz", {configurable:true, enumerable:true, writable:true, value:function Hz (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSS'], "CSS", "Hz", arguments)}});
 bodavm.toolsFunc.defineProperty('CSS' , "Q", {configurable:true, enumerable:true, writable:true, value:function Q (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSS'], "CSS", "Q", arguments)}});
 bodavm.toolsFunc.defineProperty('CSS' , "ch", {configurable:true, enumerable:true, writable:true, value:function ch (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSS'], "CSS", "ch", arguments)}});

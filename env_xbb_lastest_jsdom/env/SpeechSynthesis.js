@@ -1,4 +1,4 @@
-bodavm.memory.globalobj['SpeechSynthesis'] = function SpeechSynthesis() { return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor") }
+bodavm.memory.globalobj['SpeechSynthesis'] = function SpeechSynthesis() {this._boisinit=bodavm.config.isinit; return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor") }
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SpeechSynthesis'], "SpeechSynthesis");
 bodavm.toolsFunc.defineProperty('SpeechSynthesis', "cancel", { writable: true, enumerable: true, configurable: true, value: function cancel() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechSynthesis'] .prototype, "SpeechSynthesis", "cancel", arguments) } },'prototype');
 bodavm.toolsFunc.defineProperty('SpeechSynthesis', "getVoices", { writable: true, enumerable: true, configurable: true, value: function getVoices() { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechSynthesis'] .prototype, "SpeechSynthesis", "getVoices", arguments) } },'prototype');
@@ -12,6 +12,6 @@ bodavm.toolsFunc.defineProperty('SpeechSynthesis', "onvoiceschanged", { configur
 
 
 // speechSynthesis对象
-bodavm.memory.globalobj[ 'speechSynthesis'] = {}
+bodavm.memory.globalobj[ 'speechSynthesis'] = { _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'speechSynthesis'].__proto__=bodavm.memory.globalobj['SpeechSynthesis'] .prototype;
 delete SpeechSynthesis

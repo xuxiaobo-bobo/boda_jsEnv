@@ -1,5 +1,5 @@
 // Text对象
-bodavm.memory.globalobj['Text'] = function Text(){
+bodavm.memory.globalobj['Text'] = function Text(){this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Text)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Text': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     }; 

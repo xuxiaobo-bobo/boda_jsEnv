@@ -1,5 +1,5 @@
 // Window对象
-bodavm.memory.globalobj['Window'] = function Window(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Window'] = function Window(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 // debugger
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Window'], "Window");
 bodavm.memory.globalobj['Window'].prototype.__proto__=bodavm.memory.globalobj['WindowProperties'].prototype;

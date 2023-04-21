@@ -1,5 +1,6 @@
 //Event对象
 bodavm.memory.globalobj['Event']=function Event(){
+    this._boisinit=bodavm.config.isinit;
     if (!(this instanceof Event)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Event': Please use the 'new' operator, this DOM object constructor cannot be called as a function")
     };

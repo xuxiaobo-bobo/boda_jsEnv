@@ -16,12 +16,17 @@
 // MutationObserver
 //先执行微任务,在执行宏任务
 let HTMLElement_promise=bodavm.memory.asyncEvent['HTMLElement']
-for (const key in HTMLElement_promise) {
-    let leng_=HTMLElement_promise[key].length
-    for (let i = 0; i < leng_; i++) {
-        console.log(`HTMLElement_promise异步事件执行`,`type:${HTMLElement_promise[key]}`,`func:${HTMLElement_promise[key][i]}`);
-        HTMLElement_promise[key][i]()
-
+for (let key in HTMLElement_promise) {
+    let html_obj=HTMLElement_promise[key]  //onload
+    if (html_obj.length >0){
+        for (let i = 0; i < html_obj.length; i++) {
+            let element = html_obj[i];
+            console.log(`HTMLElement_promise ->`,`当前html_promise -> ${html_obj}`)
+            if (typeof element =='function'){
+                console.log(`HTMLElement_promise `,`当前html_promise -> ${html_obj}`,`->当前方法 ${html_obj[i]}执行`);
+                html_obj[i]()
+            }
+        }
     }
     
 }
@@ -39,12 +44,13 @@ noexecListener={
     'webdriver-evaluate':true,
     'contextmenu':true,
     'selenium-evaluate':true,
-    'error':true
+    'error':true,
+    "mouseEvent":true
 }
 
 // addEventListener  比settimeout先执行
 if (bodavm.memory.asyncEvent.listener) {
-    for (const key in bodavm.memory.asyncEvent.listener) {
+    for (var key in bodavm.memory.asyncEvent.listener) {
         let event = bodavm.memory.asyncEvent.listener[key]
         // debugger
             for (let i = 0; i < event.length; i++) {
@@ -70,20 +76,29 @@ if (bodavm.memory.asyncEvent.listener) {
 }
 
 let setTimeEvent = bodavm.memory.asyncEvent.setTimeout
-
+// debugger
 console.log(`当前setTimeEvent有===>${JSON.stringify(setTimeEvent)}`)
-if (setTimeEvent) {
+if (setTimeEvent && bodavm.config.settime_on) {
     setTimeEvent.sort((a, b) => {
-        return a.timeoutID > b.timeoutID ? 1 : -1;
-    })
-
-    setTimeEvent.sort((a, b) => {
-        return a.delay > b.delay ? 1 : -1;
-    })
+        if (a.delay < b.delay) {
+          return -1;
+        } else if (a.delay > b.delay) {
+          return 1;
+        } else {
+          if (a.timeoutID < b.timeoutID) {
+            return -1;
+          } else if (a.timeoutID > b.timeoutID) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }
+      });
+      
     for (let i = 0; i < setTimeEvent.length; i++) {
         let event = setTimeEvent[i]
         if (event == undefined) { continue }
-        console.log(`异步回调执行settime=======================================>${JSON.stringify(event)}   callback:${event.callback+''.length>50?event.callback+''.substring(0,50):event.callback+''}`);
+        console.log(`异步回调执行settime======>${JSON.stringify(event)}   callback:${event.callback+''.length>50?event.callback+''.substring(0,50):event.callback+''}`);
         if (event.type) {
             event.callback()
         } else {
@@ -91,6 +106,9 @@ if (setTimeEvent) {
         }
     }
 }
+
+
+
 
 // 鼠标事件最后执行,模仿网站加载完成后再移动鼠标触发事件
 // //鼠标轨迹,获取实际网站的
@@ -214,33 +232,33 @@ if (setTimeEvent) {
 
 
 // // debugger
-// if (bodavm.memory.asyncEvent.listener) {
-//     for (let i = 0; i < mouseEvent.length; i++) {
-//         let event = mouseEvent[i];
-//         let type = event.type;
-//         let mouseEventObj = {
-//             "isTrusted": true
-//         };
-//         mouseEventObj = Object.setPrototypeOf(mouseEventObj, MouseEvent.prototype);
-//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientX", event.clientX);
-//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientY", event.clientY);
-//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "timeStamp", event.timeStamp);
-//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "type", event.type);
-//         //bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "pagex", event.type);
-//         let listenerList = bodavm.memory.asyncEvent.listener[type];
-//         //debugger;
-//         console.log(`listenerList====>`, listenerList)
+if (bodavm.memory.asyncEvent.listener) {
+    for (let i = 0; i < mouseEvent.length; i++) {
+        let event = mouseEvent[i];
+        let type = event.type;
+        let mouseEventObj = {
+            "isTrusted": true
+        };
+        mouseEventObj = Object.setPrototypeOf(mouseEventObj, MouseEvent.prototype);
+        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientX", event.clientX);
+        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientY", event.clientY);
+        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "timeStamp", event.timeStamp);
+        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "type", event.type);
+        //bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "pagex", event.type);
+        let listenerList = bodavm.memory.asyncEvent.listener[type];
+        //debugger;
+        console.log(`listenerList====>`, listenerList)
 
-//         if(listenerList ==undefined){debugger;continue}
-//         for (let j = 0; j < listenerList.length; j++) {
-//             let callBack = listenerList[j].listener;
-//             let self = listenerList[j].self;
-//             console.log(`执行异步回调second=======>`, `self:${self}  mouseEventObj:${mouseEventObj}`);
-//             callBack.call(self, mouseEventObj);
+        if(listenerList ==undefined){debugger;continue}
+        for (let j = 0; j < listenerList.length; j++) {
+            let callBack = listenerList[j].listener;
+            let self = listenerList[j].self;
+            console.log(`执行异步回调second=======>`, `self:${self}  mouseEventObj:${mouseEventObj}`);
+            callBack.call(self, mouseEventObj);
 
-//         }
+        }
 
-//     }
-// }
+    }
+}
 
 

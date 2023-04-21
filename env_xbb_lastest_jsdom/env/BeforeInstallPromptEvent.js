@@ -4,7 +4,7 @@ bodavm.memory.globalobj['BeforeInstallPromptEvent'] = function BeforeInstallProm
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BeforeInstallPromptEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function.")}
     if (arguments.length <1){
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BeforeInstallPromptEvent': 1 argument required, but only 0 present.")}
-
+        this._boisinit=bodavm.config.isinit;
     }
 
     

@@ -1,5 +1,5 @@
 // IDBOpenDBRequest对象
-bodavm.memory.globalobj['IDBOpenDBRequest'] = function IDBOpenDBRequest(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBOpenDBRequest'] = function IDBOpenDBRequest(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBOpenDBRequest'], "IDBOpenDBRequest");
 bodavm.memory.globalobj['IDBOpenDBRequest'].prototype.__proto__=bodavm.memory.globalobj['IDBRequest'].prototype;
 bodavm.memory.globalobj['IDBOpenDBRequest'].__proto__=bodavm.memory.globalobj['IDBRequest'];

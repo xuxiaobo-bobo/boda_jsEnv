@@ -1,5 +1,5 @@
 // HTMLBRElement对象
-bodavm.memory.globalobj['HTMLBRElement'] = function HTMLBRElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLBRElement'] = function HTMLBRElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLBRElement'], "HTMLBRElement");
 bodavm.memory.globalobj['HTMLBRElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLBRElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

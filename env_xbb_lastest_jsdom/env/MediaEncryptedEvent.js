@@ -1,5 +1,5 @@
 // MediaEncryptedEvent对象
-bodavm.memory.globalobj['MediaEncryptedEvent'] = function MediaEncryptedEvent(){
+bodavm.memory.globalobj['MediaEncryptedEvent'] = function MediaEncryptedEvent(){this._boisinit=bodavm.config.isinit;
     
     if (!(this instanceof MediaEncryptedEvent)) {
         return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaEncryptedEvent': Please use the 'new' operator, this DOM object constructor cannot be called as a function")

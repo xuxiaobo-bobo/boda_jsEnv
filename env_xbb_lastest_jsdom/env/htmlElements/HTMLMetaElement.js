@@ -1,5 +1,5 @@
 // HTMLMetaElement对象
-bodavm.memory.globalobj['HTMLMetaElement'] = function HTMLMetaElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLMetaElement'] = function HTMLMetaElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLMetaElement'], "HTMLMetaElement");
 bodavm.memory.globalobj['HTMLMetaElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLMetaElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

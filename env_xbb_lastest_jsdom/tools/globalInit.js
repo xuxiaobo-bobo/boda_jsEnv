@@ -52,7 +52,7 @@ var mytime_stamp = Date.now()
         let arg0 = arguments[0]
         let arg1 = arguments[1]
         let arg2 = arguments[2]
-        if (arg2 = 'bo') {
+        if (arg2 == 'bo') {
             return JSON.stringify_bo.call(this, arg0, arg1)
         }
         // debugger
@@ -88,7 +88,7 @@ var mytime_stamp = Date.now()
     JSON.parse = function parse() {
         let arg0 = arguments[0]
         let arg1 = arguments[1]
-        console.log(`JSON.parse `, ` arg0:${arg0.length > 20 ? arg0.substring(0, 20) + '...' : arg0}`, ` arg1:${arg1}`)
+        console.log(`JSON.parse `, ` arg0:${arg0.length > 40 ? arg0.substring(0, 40) + '...' : arg0}`, ` arg1:${arg1}`)
         return JSON.parse_bo.apply(this, arguments)
     }
     bodavm.toolsFunc.safefunction(JSON.parse, 'parse')
@@ -99,24 +99,25 @@ var mytime_stamp = Date.now()
     Object.getOwnPropertyDescriptor = function getOwnPropertyDescriptor() {
         let obj = arguments[0]
         let prop = arguments[1]
-        // debugger
         if (prop == 'constructor') {
             // if (obj ==document){debugger}
-            return Object.getOwnPropertyDescriptor_bo.apply(this, arguments)
+            return Object.getOwnPropertyDescriptor_bo.call(this, arguments[0],arguments[1])
         }
-        desc_res = Object.getOwnPropertyDescriptor_bo.apply(this, arguments)
-        console.log(`Object.getOwnPropertyDescriptor==> `, ` obj:${obj}`, `prop:${prop}`, `res ->${desc_res} !!!!检测`);
+        debugger
+
+        desc_res = Object.getOwnPropertyDescriptor_bo.call(this, arguments[0],arguments[1])
+        console.log(`Object.getOwnPropertyDescriptor==> `, ` obj:${obj} ->`, `prop:${prop} ->`, `  res ->${desc_res} !!!!检测`);
         return desc_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptor, 'getOwnPropertyDescriptor')
 
 
     Object.getOwnPropertyDescriptors_bo = Object.getOwnPropertyDescriptors
-    Object.getOwnPropertyDescriptors = function getOwnPropertyDescriptor() {
+    Object.getOwnPropertyDescriptors = function getOwnPropertyDescriptors() {
         let arg0 = arguments[0]
         debugger
         descs_res = Object.getOwnPropertyDescriptors_bo.apply(this, arguments)
-        console.log(`Object.getOwnPropertyDescriptors==> `, `arg0:${arg0}`, `res ->${descs_res} !!!!检测`);
+        console.log(`Object.getOwnPropertyDescriptors==> `, `arg0:${arg0} ->`, `res ->${descs_res} !!!!检测`);
         return descs_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptors, 'getOwnPropertyDescriptors')
@@ -125,7 +126,7 @@ var mytime_stamp = Date.now()
     Object.getOwnPropertyNames = function getOwnPropertyDescriptor() {
         let arg0 = arguments[0]
         let name_res = Object.getOwnPropertyNames_bo.apply(this, arguments)
-        console.log(`Object.getOwnPropertyNames==> `, ` arg0:${arg0}`, `name_res->${name_res} !!!检测`);
+        console.log(`Object.getOwnPropertyNames==> `,`this ->${bodavm.toolsFunc.getType(this)}->`, ` arg0:${arg0} ->`, ` name_res->${name_res} !!!检测`);
         return name_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames, 'getOwnPropertyNames')
@@ -133,7 +134,7 @@ var mytime_stamp = Date.now()
 
     Object.getPrototypeOf_bo = Object.getPrototypeOf
     Object.getPrototypeOf = function (obj) {
-        console.log(`Object.getPrototypeOf `, `obj:${obj}`, '!!!!检测');
+        console.log(`Object.getPrototypeOf `, `this ->${bodavm.toolsFunc.getType(this)}->`,` obj:${obj} `, '!!!!检测');
         return Object.getPrototypeOf_bo.apply(this, arguments)
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames, 'getOwnPropertyNames')
@@ -141,7 +142,7 @@ var mytime_stamp = Date.now()
     Object.getOwnPropertySymbols_bo = Object.getOwnPropertySymbols
     Object.getOwnPropertySymbols = function getOwnPropertySymbols(arg) {
         let symbols_res = Object.getOwnPropertySymbols_bo.apply(this, arguments)
-        console.log('Object.getOwnPropertySymbols ', `arg:${arg}`, `symbols_res ->${symbols_res} !!!!检测`);
+        console.log('Object.getOwnPropertySymbols ',`this ->${bodavm.toolsFunc.getType(this)}->`,` arg:${arg} `, ` symbols_res ->${symbols_res} !!!!检测`);
         return symbols_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertySymbols, 'getOwnPropertySymbols')
@@ -166,31 +167,67 @@ var mytime_stamp = Date.now()
     Object.values_bo = Object.values
     Object.values = function values() {
         let res = Object.defineProperty_bo.apply(this, arguments)
-        console.log(`Object.values `, `ress ->${res}   !!!!!!!!!!检测`);
+        console.log(`Object.values `,`this ->${bodavm.toolsFunc.getType(this)}->`, `ress ->${res}   !!!!!!!!!!检测`);
         return res
     }
     bodavm.toolsFunc.safefunction(Object.values, 'values')
 
 
-    // Object.prototype.hasOwnProperty_bo=Object.prototype.hasOwnProperty
-    // Object.prototype.hasOwnProperty=function (){
-    //     debugger
-    //     let arg=arguments[0]
-    //     let res=Object.prototype.hasOwnProperty_bo.call(this,arg)
-    //     console.log(`Object.prototype.hasOwnProperty `,`arg ->${arg}`,`res ->${res}  !!!!!!检测!!!!`)
-    //     return res
-    // }
+    Object.prototype.hasOwnProperty_bo=Object.prototype.hasOwnProperty
+    Object.prototype.hasOwnProperty=function (){
+        
+        let arg=arguments[0]
+        let arg1=arguments[1]
+        if (arg1=='boboflag'){
+            return Object.prototype.hasOwnProperty_bo.call(this,arg)
+        }
+        // debugger
+        obj=''
+        if (arg =='allSettled'){debugger}
+        if (typeof this =='function'){
+            obj=this.name
+        }else{
+            // debugger
+            obj=bodavm.toolsFunc.getType(this)
+        }
+        let res=Object.prototype.hasOwnProperty_bo.call(this,arg)
+        console.log(`Object.prototype.hasOwnProperty `,`this -> ${obj}  ->`,`arg -> ${arg} -> `,` res -> ${res}  !!!!!!检测!!!!`)
+        return res
+    }
 
-    // bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
+    bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
 
     Object.entries_bo = Object.entries
     Object.entries = function () {
         let obj = arguments[0]
         let res = Object.entries_bo.call(this, obj)
-        console.log(`Object.entries `, `obj ->${obj}`, `res ->${res}  !!!!!!检测!!!!`)
+        console.log(`Object.entries `,`this ->${bodavm.toolsFunc.getType(this)}->` `obj ->${obj} ->`, `res ->${res}  !!!!!!检测!!!!`)
         return res
     }
     bodavm.toolsFunc.safefunction(Object.entries, 'entries')
+
+    Object.keys_=Object.keys
+    Object.keys=function (){
+        let obj = arguments[0]
+        if (bodavm.toolsFunc.getType(obj)=='[object Window]'){
+           let iframes= bodaobj.document.getElementsByTagName('iframe')
+           for (let i = 0; i < iframes.length; i++) {
+            if (obj==iframes[i].contentWindow){
+                res_=bodavm.memory.contentWindow_keys
+                console.log(`Object.keys `, `contentWindow下keys !!!!!!检测!!!!`)
+
+                return res_
+            }
+            
+           }
+        }
+        
+        let res = Object.keys_.call(this, obj)
+        debugger
+        console.log(`Object.keys `, `obj ->${obj} ->`, `res ->过长不显示}  !!!!!!检测!!!!`)
+        return res
+    }
+    bodavm.toolsFunc.safefunction(Object.keys,'keys')
 
     // Object.prototype.hasOwnProperty_ = Object.prototype.hasOwnProperty
     // Object.prototype.hasOwnProperty = function(x) {
@@ -202,6 +239,21 @@ var mytime_stamp = Date.now()
     // }
     // bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
 
+    // var Object_toString = Object.prototype.toString;
+    // Object.prototype.toString = function () {
+    //     let _temp = Object_toString.call(this, arguments);
+    //     console.log(this);
+    //     console.log("Object.prototype.toString: " + _temp);
+    //     // if(this.constructor.name === 'Document'){
+    //     //     return '[object HTMLDocument]';
+    //     // }else if(this.constructor.name === 'CanvasRenderingContext2D'){
+    //     //     return '[object CanvasRenderingContext2D]'
+    //     // }
+    //     return _temp;
+    // };
+    // bodavm.toolsFunc.safefunction(Object.prototype.toString,'toString')
+
+    
     // String.fromCharCode_=String.fromCharCode
     // String.fromCharCode=function(x){
     // res=String.fromCharCode_.apply(this,arguments)

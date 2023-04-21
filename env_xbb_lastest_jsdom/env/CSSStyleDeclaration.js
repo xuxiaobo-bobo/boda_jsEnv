@@ -1,5 +1,5 @@
 // CSSStyleDeclaration对象
-bodavm.memory.globalobj['CSSStyleDeclaration'] = function CSSStyleDeclaration(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CSSStyleDeclaration'] = function CSSStyleDeclaration(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CSSStyleDeclaration'], "CSSStyleDeclaration");
 bodavm.toolsFunc.defineProperty('CSSStyleDeclaration', "cssText", {configurable:true, enumerable:true, get:function cssText (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "cssText_get", arguments)}, set:function cssText (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "cssText_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('CSSStyleDeclaration', "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "length_get", arguments)}, set:undefined},'prototype');

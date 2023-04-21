@@ -1,5 +1,5 @@
 // CharacterData对象
-bodavm.memory.globalobj['CharacterData'] = function CharacterData(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['CharacterData'] = function CharacterData(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CharacterData'], "CharacterData");
 bodavm.memory.globalobj['CharacterData'].prototype.__proto__=bodavm.memory.globalobj['Node'].prototype;
 bodavm.memory.globalobj['CharacterData'].__proto__=bodavm.memory.globalobj['Node'];

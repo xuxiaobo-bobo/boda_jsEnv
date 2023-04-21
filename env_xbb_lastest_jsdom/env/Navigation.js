@@ -1,5 +1,5 @@
 // Navigation对象
-bodavm.memory.globalobj['Navigation'] = function Navigation(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['Navigation'] = function Navigation(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['Navigation'], "Navigation");
 bodavm.memory.globalobj['Navigation'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['Navigation'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -21,6 +21,6 @@ bodavm.toolsFunc.defineProperty('Navigation', "updateCurrentEntry", {configurabl
 
 
 
-bodavm.memory.globalobj[ 'navigation']  ={}
+bodavm.memory.globalobj[ 'navigation']  ={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'navigation'].__proto__=bodavm.memory.globalobj['Navigation'].prototype
 

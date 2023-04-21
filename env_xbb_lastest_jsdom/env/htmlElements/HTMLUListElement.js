@@ -1,5 +1,5 @@
 // HTMLUListElement对象
-bodavm.memory.globalobj['HTMLUListElement'] = function HTMLUListElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLUListElement'] = function HTMLUListElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLUListElement'], "HTMLUListElement");
 bodavm.memory.globalobj['HTMLUListElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLUListElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

@@ -1,5 +1,5 @@
 // HTMLLIElement对象
-bodavm.memory.globalobj['HTMLLIElement'] = function HTMLLIElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLLIElement'] = function HTMLLIElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLLIElement'], "HTMLLIElement");
 bodavm.memory.globalobj['HTMLLIElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLLIElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

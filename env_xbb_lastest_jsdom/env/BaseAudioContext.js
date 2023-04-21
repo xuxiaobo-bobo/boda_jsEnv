@@ -1,5 +1,5 @@
 // BaseAudioContext对象
-bodavm.memory.globalobj['BaseAudioContext'] = function BaseAudioContext(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['BaseAudioContext'] = function BaseAudioContext(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BaseAudioContext'], "BaseAudioContext");
 bodavm.memory.globalobj['BaseAudioContext'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['BaseAudioContext'].__proto__=bodavm.memory.globalobj['EventTarget'];

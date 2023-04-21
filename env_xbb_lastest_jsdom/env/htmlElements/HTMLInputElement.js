@@ -1,5 +1,5 @@
 // HTMLInputElement对象
-bodavm.memory.globalobj['HTMLInputElement'] = function HTMLInputElement(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['HTMLInputElement'] = function HTMLInputElement(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['HTMLInputElement'], "HTMLInputElement");
 bodavm.memory.globalobj['HTMLInputElement'].prototype.__proto__=bodavm.memory.globalobj['HTMLElement'].prototype;
 bodavm.memory.globalobj['HTMLInputElement'].__proto__=bodavm.memory.globalobj['HTMLElement'];

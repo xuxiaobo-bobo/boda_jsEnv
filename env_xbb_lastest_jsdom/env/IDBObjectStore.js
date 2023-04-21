@@ -1,5 +1,5 @@
 // IDBObjectStore对象
-bodavm.memory.globalobj['IDBObjectStore'] = function IDBObjectStore(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['IDBObjectStore'] = function IDBObjectStore(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['IDBObjectStore'], "IDBObjectStore");
 bodavm.toolsFunc.defineProperty('IDBObjectStore', "name", {configurable:true, enumerable:true, get:function name (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBObjectStore'].prototype, "IDBObjectStore", "name_get", arguments)}, set:function name (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBObjectStore'].prototype, "IDBObjectStore", "name_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('IDBObjectStore', "keyPath", {configurable:true, enumerable:true, get:function keyPath (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['IDBObjectStore'].prototype, "IDBObjectStore", "keyPath_get", arguments)}, set:undefined},'prototype');

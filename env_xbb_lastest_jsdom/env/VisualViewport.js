@@ -1,5 +1,5 @@
 // VisualViewport对象
-bodavm.memory.globalobj['VisualViewport'] = function VisualViewport(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
+bodavm.memory.globalobj['VisualViewport'] = function VisualViewport(){this._boisinit=bodavm.config.isinit;return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['VisualViewport'], "VisualViewport");
 bodavm.memory.globalobj['VisualViewport'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
 bodavm.memory.globalobj['VisualViewport'].__proto__=bodavm.memory.globalobj['EventTarget'];
@@ -13,7 +13,7 @@ bodavm.toolsFunc.defineProperty('VisualViewport', "scale", {configurable:true, e
 bodavm.toolsFunc.defineProperty('VisualViewport', "onresize", {configurable:true, enumerable:true, get:function onresize (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['VisualViewport'].prototype, "VisualViewport", "onresize_get", arguments)}, set:function onresize (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['VisualViewport'].prototype, "VisualViewport", "onresize_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('VisualViewport', "onscroll", {configurable:true, enumerable:true, get:function onscroll (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['VisualViewport'].prototype, "VisualViewport", "onscroll_get", arguments)}, set:function onscroll (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['VisualViewport'].prototype, "VisualViewport", "onscroll_set", arguments)}},'prototype');
 
-bodavm.memory.globalobj[ 'visualViewport']={}
+bodavm.memory.globalobj[ 'visualViewport']={ _boisinit:bodavm.config.isinit}
 bodavm.memory.globalobj[ 'visualViewport'].__proto__ = bodavm.memory.globalobj['VisualViewport'] .prototype
 
 

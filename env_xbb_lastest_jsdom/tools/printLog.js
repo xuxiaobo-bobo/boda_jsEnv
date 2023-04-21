@@ -23,23 +23,25 @@
     console.log_ = console.log;
     console.log = function log(type,...args) {
 
-        let index=args[0]?args[0]:args
-        if (typeof index =='string'&&  index.indexOf('属性:')!=-1){
-        }else{
-        // debugger
-            let arglenth=args.length
-            let obj={'type':'env:'+type}
+        // let index=args[0]?args[0]:args
+        // if (typeof index =='string'&&  index.indexOf('属性:')!=-1){    
+        // }else{
+        // // debugger
+        //     let arglenth=args.length
+        //     let obj={'type':'env:'+type}
 
-            for (let i = 0; i < arglenth; i++) {
+        //     for (let i = 0; i < arglenth; i++) {
                 
-                obj['prop'+i]=args[i]
-                // if (args[i] ==undefined || args[i] ==null){
-                //     myundefinedlist.push(obj)
-                // }
-            }
-            // debugger
-            myloglist.push(obj)
-        }
+        //         obj['prop'+i]=args[i]
+        //         // if (args[i] ==undefined || args[i] ==null){
+        //         //     myundefinedlist.push(obj)
+        //         // }
+        //     }
+        //     // debugger
+        //     myloglist.push(obj)
+        // }
+
+
         // if (bodavm.memory.getundefined){
         //     if (arguments.indexOf(undefined) >0 || arguments.indexOf(null) >0){
         //         myundefinedlist.push(arguments)
