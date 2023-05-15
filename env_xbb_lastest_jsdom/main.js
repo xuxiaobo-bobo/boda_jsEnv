@@ -67,12 +67,12 @@ const app = express()
 //     val =req.query 
     
 // })
-let bohtml_=fs.readFileSync('D:\\My_Dir\\env_xbb_lastest_jsdom\\run\\run.html').toString('utf-8')
+let bohtml_=fs.readFileSync('.\\run\\run.html').toString('utf-8')
 // bohtml_
 const dom = new JSDOM(bohtml_, 
     {
-        url: "http://sthjt.hubei.gov.cn/",
-        referrer: "http://sthjt.hubei.gov.cn/",
+        url: "http://www.fangdi.com.cn/",
+        referrer: "http://www.fangdi.com.cn/",
         contentType: "text/html",
         includeNodeLocations: true,
         pretendToBeVisual: true,

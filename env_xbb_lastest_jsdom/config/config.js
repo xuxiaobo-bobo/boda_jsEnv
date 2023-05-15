@@ -393,30 +393,30 @@ bodavm.memory.estimate={
 }
 
 bodavm.memory.location={
-    origin:"https://www.e-food.gr",
+    origin:"http://www.fangdi.com.cn",
     hash:"",
     pathname:"/",
     search:"",
-    href:"https://www.e-food.gr/",
+    href:"http://www.fangdi.com.cn/",
     port:"",
-    protocol:"https:",
-    host:"www.e-food.gr",
-    ancestorOrigins:{"0":"https://www.e-food.gr"},
-    hostname:"www.e-food.gr"
+    protocol:"http:",
+    host:"www.fangdi.com.cn",
+    ancestorOrigins:'{}',
+    hostname:"www.fangdi.com.cn"
 };
 
 bodavm.memory.document={
-    URL:"https://www.e-food.gr/",
-    referrer:"https://www.e-food.gr/",
-    documentURI:"https://www.e-food.gr/",
-    compatMode:"BackCompat",
+    URL:"http://www.fangdi.com.cn/",
+    referrer:"",
+    documentURI:"http://www.fangdi.com.cn/",
+    compatMode:"CSS1Compat",
     dir:"",
     title:'',
     designMode:"off",
     readyState:"loading",
     contentType:"text/html",
     inputEncoding:"UTF-8",
-    domain:"www.e-food.gr",
+    domain:"www.fangdi.com.cn",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
@@ -438,54 +438,54 @@ bodavm.memory.screen={
     width:1440,
     height:960,
     availWidth:1440,
-    availHeight:920,
+    availHeight:912,
     pixelDepth:24,
     colorDepth:24,
     availLeft:0,
     availTop:0,
-    isExtended:false,
+    isExtended:undefined,
     orientation:{},
-    onchange:null,
+    onchange:undefined,
 };
 
 bodavm.memory.navigator={
     language:"zh-CN",
-    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
-    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
     vendor:"Google Inc.",
     appName:"Netscape",
     appCodeName:"Mozilla",
     cookieEnabled:true,
     languages:["zh-CN","zh"],
     productSub:"20030107",
-    userAgentData:{"brands":[{"brand":"Chromium","version":"112"},{"brand":"Google Chrome","version":"112"},{"brand":"Not:A-Brand","version":"99"}],"mobile":false,"platform":"Windows"},
-    xr:{},
+    userAgentData:undefined,
+    xr:undefined,
     platform:'Win32',
     webkitPersistentStorage:{},
     connection:{},
     javaEnabled:false,
     product:'Gecko',
     vendorSub:"",
-    deviceMemory:8,
+    deviceMemory:undefined,
     maxTouchPoints:0
 };
 bodavm.memory.window={
-    name:"",
+    name:"&$_YWTU=lRzTTHdK5V5grEpcYrNcVfSndG.5OUB8t900nZWO7VA&$_cDro=0&vdFm=",
     innerWidth:1440,
     innerHeight:817,
-    origin:"https://www.e-food.gr",
+    origin:"http://www.fangdi.com.cn",
     outerWidth:1440,
     outerHeight:920,
     defaultStatus:undefined,
     defaultstatus:undefined,
     devicePixelRatio:1.5,
-    isSecureContext:true,
+    isSecureContext:false,
     length:0,
     status:"",
     onmessage:null,
     onbeforeunload:null,
     closed:false,
-    isSecureContext:true,
+    isSecureContext:false,
     onappinstalled:null,
     onbeforeinstallprompt:null,
     onbeforexrselect:null,
@@ -496,7 +496,7 @@ bodavm.memory.window={
     oncanplaythrough:null,
     onsearch:null,
     opener:null,
-    // frameElement:[object HTMLIFrameElement],
+    // frameElement:null,
     
 
 };
@@ -504,7 +504,7 @@ bodavm.memory.localStorage={}
 
 bodavm.memory.Performance={
     'getEntriesByType':[],
-    'timeOrigin':1682672438597.305
+    'timeOrigin':1684137107940.1
 
 
 
