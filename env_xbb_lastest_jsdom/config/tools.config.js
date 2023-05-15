@@ -21,6 +21,7 @@ function getCode(){
     // code+=getFile("toolsParseHtml")
     code+=getFile("envFunc")
     code+=getFile("toolsPlugin")
+    code+=getFile("toolsStyle")
     return code
 }
 module.exports={

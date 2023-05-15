@@ -15,7 +15,7 @@ var mytime_stamp = Date.now()
             //固定时间值
             Date.now_ = Date.now
             Date.now = function () {
-                console.log(`Date.now=>被调用 `, `resulit is mytime_stamp:${mytime_stamp}`)
+                console.log(`Date.now=>被调用 `, `resulit is mytime_stamp:`,mytime_stamp)
                 mytime_stamp++
                 return mytime_stamp
             }
@@ -23,7 +23,7 @@ var mytime_stamp = Date.now()
             //固定时间值
             Date.prototype.valueOf_ = Date.prototype.valueOf
             Date.prototype.valueOf = function valueOf() {
-                console.log(`Date.prototype.valueOf=>被调用 `, `resulit is mytime_stamp:${mytime_stamp}`)
+                console.log(`Date.prototype.valueOf=>被调用 `, `resulit is mytime_stamp:`,mytime_stamp)
                 mytime_stamp++
                 return mytime_stamp
             }
@@ -31,7 +31,7 @@ var mytime_stamp = Date.now()
 
             Date.prototype.getTime_ = Date.prototype.getTime
             Date.prototype.getTime = function () {
-                console.log(`Date.prototype.getTime=>被调用 `, `resulit is mytime_stamp:${mytime_stamp}`)
+                console.log(`Date.prototype.getTime=>被调用 `, `resulit is mytime_stamp`,mytime_stamp)
                 mytime_stamp++
                 return mytime_stamp
             }
@@ -71,10 +71,10 @@ var mytime_stamp = Date.now()
 
         }
         if (typeof arg0 == 'string') {
-            console.log(`JSON.stringify  `, `  arg0:${arg0.length > 20 ? arg0.substring(0, 20) + '...' : arg0}`, ` arg1:${arg1}`)
+            console.log(`JSON.stringify  `, `  arg0:`,arg0.length > 20 ? arg0.substring(0, 20) + '...' : arg0, ` arg1: `,arg1)
 
         } else {
-            console.log(`JSON.stringify  `, `  arg0:${arg0}`, `   arg1:${arg1}`)
+            console.log(`JSON.stringify  `, `  arg0:`,arg0, `   arg1: `,arg1)
 
         }
         return JSON.stringify_bo.call(this, arg0, arg1)
@@ -88,7 +88,7 @@ var mytime_stamp = Date.now()
     JSON.parse = function parse() {
         let arg0 = arguments[0]
         let arg1 = arguments[1]
-        console.log(`JSON.parse `, ` arg0:${arg0.length > 40 ? arg0.substring(0, 40) + '...' : arg0}`, ` arg1:${arg1}`)
+        console.log(`JSON.parse `, ` arg0:`,arg0.length > 40 ? arg0.substring(0, 40) + '...' : arg0, ` arg1:`,arg1)
         return JSON.parse_bo.apply(this, arguments)
     }
     bodavm.toolsFunc.safefunction(JSON.parse, 'parse')
@@ -106,7 +106,13 @@ var mytime_stamp = Date.now()
         debugger
 
         desc_res = Object.getOwnPropertyDescriptor_bo.call(this, arguments[0],arguments[1])
-        console.log(`Object.getOwnPropertyDescriptor==> `, ` obj:${obj} ->`, `prop:${prop} ->`, `  res ->${desc_res} !!!!检测`);
+        if (desc_res && (desc_res['_boarg'] || desc_res['_boisinit'] || desc_res['_contentiframe'] )){
+            delete desc_res['_boarg']
+            delete desc_res['_boisinit']
+            delete desc_res['_contentiframe']
+        }
+        
+        console.log(`Object.getOwnPropertyDescriptor==> `, ` obj:`,obj, `->`, `prop:`,prop,` ->`, `  res ->`,desc_res,` !!!!检测`);
         return desc_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptor, 'getOwnPropertyDescriptor')
@@ -115,9 +121,23 @@ var mytime_stamp = Date.now()
     Object.getOwnPropertyDescriptors_bo = Object.getOwnPropertyDescriptors
     Object.getOwnPropertyDescriptors = function getOwnPropertyDescriptors() {
         let arg0 = arguments[0]
-        debugger
+        debugger 
         descs_res = Object.getOwnPropertyDescriptors_bo.apply(this, arguments)
-        console.log(`Object.getOwnPropertyDescriptors==> `, `arg0:${arg0} ->`, `res ->${descs_res} !!!!检测`);
+        if (descs_res && (descs_res['_boarg'] || descs_res['_boisinit'] || descs_res['_contentiframe'] )){
+            delete descs_res['_boarg']
+            delete descs_res['_boisinit']
+            delete descs_res['_contentiframe']
+        }
+        // ldvm.toolsFunc.deleteProperty(descs_res,'length')
+        // descs_res[0].configurable=true
+        
+        delete descs_res['length']
+        if (arg0.__proto__==HTMLCollection.prototype){
+            for (let i in descs_res){
+                descs_res[i].writable=false
+            }
+        }
+        console.log(`Object.getOwnPropertyDescriptors==> `, `arg0:`,arg0,` ->`, `res ->`,descs_res, `!!!!检测`);
         return descs_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptors, 'getOwnPropertyDescriptors')
@@ -126,7 +146,19 @@ var mytime_stamp = Date.now()
     Object.getOwnPropertyNames = function getOwnPropertyDescriptor() {
         let arg0 = arguments[0]
         let name_res = Object.getOwnPropertyNames_bo.apply(this, arguments)
-        console.log(`Object.getOwnPropertyNames==> `,`this ->${bodavm.toolsFunc.getType(this)}->`, ` arg0:${arg0} ->`, ` name_res->${name_res} !!!检测`);
+        for (let i =0;i <name_res.length;i++){
+            if ((name_res[i] == '_boarg') ||
+                (name_res[i] =='_boisinit') ||
+                (name_res[i] == '_contentiframe') ||
+                (name_res[i] == 'arguments') ||
+                (name_res[i] =='caller') ||
+                (name_res[i] =='prototype'))
+                {
+                name_res.splice(i,1)
+                i--
+            }
+        }
+        console.log(`Object.getOwnPropertyNames==> `,`this ->`,bodavm.toolsFunc.getType(this),`->`, ` arg0:`,arg0,` ->`, ` name_res->`,name_res,` !!!检测`);
         return name_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames, 'getOwnPropertyNames')
@@ -134,7 +166,7 @@ var mytime_stamp = Date.now()
 
     Object.getPrototypeOf_bo = Object.getPrototypeOf
     Object.getPrototypeOf = function (obj) {
-        console.log(`Object.getPrototypeOf `, `this ->${bodavm.toolsFunc.getType(this)}->`,` obj:${obj} `, '!!!!检测');
+        console.log(`Object.getPrototypeOf `, `this ->`,bodavm.toolsFunc.getType(this),`->`,` obj:`,obj,  '!!!!检测');
         return Object.getPrototypeOf_bo.apply(this, arguments)
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames, 'getOwnPropertyNames')
@@ -142,7 +174,7 @@ var mytime_stamp = Date.now()
     Object.getOwnPropertySymbols_bo = Object.getOwnPropertySymbols
     Object.getOwnPropertySymbols = function getOwnPropertySymbols(arg) {
         let symbols_res = Object.getOwnPropertySymbols_bo.apply(this, arguments)
-        console.log('Object.getOwnPropertySymbols ',`this ->${bodavm.toolsFunc.getType(this)}->`,` arg:${arg} `, ` symbols_res ->${symbols_res} !!!!检测`);
+        console.log('Object.getOwnPropertySymbols ',`this ->`,bodavm.toolsFunc.getType(this),`->`,` arg:`,arg, ` symbols_res ->`,symbols_res,` !!!!检测`);
         return symbols_res
     }
     bodavm.toolsFunc.safefunction(Object.getOwnPropertySymbols, 'getOwnPropertySymbols')
@@ -154,20 +186,45 @@ var mytime_stamp = Date.now()
         // debugger
         let target = arguments[0]
         let prop = arguments[1]
+        if(target.__proto__==HTMLCollection.prototype){
+            
+            if (prop !=null && (Number(prop) || Number(prop)==0)){
+                return bodavm.toolsFunc.throwError(`TypeError: `,`Filed to set an indexed property on 'HTMLCollection': Index property setter is not supported.
+                at Function.defineProperty (<anonymous>)`)
+
+            }
+        }
         let obj = arguments[2]
         let myfilter = arguments[3]
         if (myfilter == 'bobo') { return Object.defineProperty_bo.call(this, target, prop, obj) }
         let res = Object.defineProperty_bo.call(this, target, prop, obj)
-        console.log(`Object.defineProperty `, `target ->${(target.toString())}->`, `prop->${(prop.toString())}->`, `obj ->${(obj.toString())}->`, `res ->${res.toString()}`, `!!!!!检测`)
+        console.log(`Object.defineProperty `, `target ->`,(target.toString()),`->`, `prop->`,(prop.toString()),`->`, `obj ->`,(obj.toString()),`->`, `res ->`,res.toString(), `!!!!!检测`)
 
         return res
     }
     bodavm.toolsFunc.safefunction(Object.defineProperty, 'defineProperty')
 
+    Object.defineProperties_bo = Object.defineProperties
+    Object.defineProperties = function defineProperties() {
+        // debugger
+        let target = arguments[0]
+        let prop = arguments[1]
+        let myfilter = arguments[2]
+        if (myfilter == 'bobo') { return Object.defineProperties_bo.call(this, target, prop) }
+        let res = Object.defineProperty_bo.call(this, target, prop)
+        console.log(`Object.defineProperties `, `target ->`,(target.toString()),`->`, `prop->`,(prop.toString()),`->`,`->`, `res ->`,res.toString(), `!!!!!检测`)
+
+        return res
+    }
+    bodavm.toolsFunc.safefunction(Object.defineProperties, 'defineProperties')
+
+
+
+
     Object.values_bo = Object.values
     Object.values = function values() {
-        let res = Object.defineProperty_bo.apply(this, arguments)
-        console.log(`Object.values `,`this ->${bodavm.toolsFunc.getType(this)}->`, `ress ->${res}   !!!!!!!!!!检测`);
+        let res = Object.Object.values_bo.apply(this, arguments)
+        console.log(`Object.values `,`this ->`,bodavm.toolsFunc.getType(this),`->`, `res ->`,res,`   !!!!!!!!!!检测`);
         return res
     }
     bodavm.toolsFunc.safefunction(Object.values, 'values')
@@ -177,13 +234,16 @@ var mytime_stamp = Date.now()
     Object.prototype.hasOwnProperty=function (){
         
         let arg=arguments[0]
+        if ((this == window) && (arg =='hasOwnProperty')){
+            return false
+        } 
         let arg1=arguments[1]
         if (arg1=='boboflag'){
             return Object.prototype.hasOwnProperty_bo.call(this,arg)
         }
         // debugger
-        obj=''
-        if (arg =='allSettled'){debugger}
+        // obj=''
+        // if (arg =='allSettled'){debugger}
         if (typeof this =='function'){
             obj=this.name
         }else{
@@ -191,17 +251,31 @@ var mytime_stamp = Date.now()
             obj=bodavm.toolsFunc.getType(this)
         }
         let res=Object.prototype.hasOwnProperty_bo.call(this,arg)
-        console.log(`Object.prototype.hasOwnProperty `,`this -> ${obj}  ->`,`arg -> ${arg} -> `,` res -> ${res}  !!!!!!检测!!!!`)
+        console.log(`Object.prototype.hasOwnProperty `,`this -> `,obj,` ->`,`arg ->` ,arg,` -> `,` res -> `,res,`  !!!!!!检测!!!!`)
         return res
     }
 
     bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty,'hasOwnProperty')
+    Object.defineProperty(Object.prototype,'hasOwnProperty_bo',{
+        enumerable:false
+    })
 
+
+
+    // delete desc_res['_boarg']
+    // delete desc_res['_boisinit']
+    // delete desc_res['_contentiframe']
     Object.entries_bo = Object.entries
     Object.entries = function () {
         let obj = arguments[0]
         let res = Object.entries_bo.call(this, obj)
-        console.log(`Object.entries `,`this ->${bodavm.toolsFunc.getType(this)}->` `obj ->${obj} ->`, `res ->${res}  !!!!!!检测!!!!`)
+        for (let i =0;i<res.length;i++){
+            if (res[i] && (res[i][0] =='_boarg' || res[0] == '_boisinit' || res[0] == '_contentiframe')){
+                res.splice(i,1)
+                i--
+            }
+        }
+        console.log(`Object.entries `,`this ->`,bodavm.toolsFunc.getType(this),`->obj ->`,obj, `-> res ->`,res,`  !!!!!!检测!!!!`)
         return res
     }
     bodavm.toolsFunc.safefunction(Object.entries, 'entries')

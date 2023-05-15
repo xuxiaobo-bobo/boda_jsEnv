@@ -1,0 +1,5 @@
+// SVGAnimatedBoolean对象
+bodavm.memory.globalobj['SVGAnimatedBoolean'] = function SVGAnimatedBoolean(){if (!(this instanceof SVGAnimatedBoolean)){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")};this._boisinit=bodavm.config.isinit}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SVGAnimatedBoolean'], "SVGAnimatedBoolean");
+bodavm.toolsFunc.defineProperty('SVGAnimatedBoolean', "baseVal", {configurable:true, enumerable:true, get:function baseVal (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SVGAnimatedBoolean'].prototype, "SVGAnimatedBoolean", "baseVal_get", arguments)}, set:function baseVal (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SVGAnimatedBoolean'].prototype, "SVGAnimatedBoolean", "baseVal_set", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('SVGAnimatedBoolean', "animVal", {configurable:true, enumerable:true, get:function animVal (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SVGAnimatedBoolean'].prototype, "SVGAnimatedBoolean", "animVal_get", arguments)}, set:undefined},'prototype');

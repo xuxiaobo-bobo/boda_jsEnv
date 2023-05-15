@@ -1,0 +1,7 @@
+// USBInterface对象
+bodavm.memory.globalobj['USBInterface'] = function USBInterface(){if (!(this instanceof USBInterface)){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'USBInterface': 2 arguments required, but only 0 present.")};this._boisinit=bodavm.config.isinit}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['USBInterface'], "USBInterface");
+bodavm.toolsFunc.defineProperty('USBInterface', "interfaceNumber", {configurable:true, enumerable:true, get:function interfaceNumber (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['USBInterface'].prototype, "USBInterface", "interfaceNumber_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('USBInterface', "alternate", {configurable:true, enumerable:true, get:function alternate (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['USBInterface'].prototype, "USBInterface", "alternate_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('USBInterface', "alternates", {configurable:true, enumerable:true, get:function alternates (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['USBInterface'].prototype, "USBInterface", "alternates_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('USBInterface', "claimed", {configurable:true, enumerable:true, get:function claimed (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['USBInterface'].prototype, "USBInterface", "claimed_get", arguments)}, set:undefined},'prototype');

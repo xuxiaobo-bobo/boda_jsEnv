@@ -1,0 +1,6 @@
+// USBConfiguration对象
+bodavm.memory.globalobj['USBConfiguration'] = function USBConfiguration(){if (!(this instanceof USBConfiguration)){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'USBConfiguration': 2 arguments required, but only 0 present.")};this._boisinit=bodavm.config.isinit}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['USBConfiguration'], "USBConfiguration");
+bodavm.toolsFunc.defineProperty('USBConfiguration', "configurationValue", {configurable:true, enumerable:true, get:function configurationValue (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['USBConfiguration'].prototype, "USBConfiguration", "configurationValue_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('USBConfiguration', "configurationName", {configurable:true, enumerable:true, get:function configurationName (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['USBConfiguration'].prototype, "USBConfiguration", "configurationName_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('USBConfiguration', "interfaces", {configurable:true, enumerable:true, get:function interfaces (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['USBConfiguration'].prototype, "USBConfiguration", "interfaces_get", arguments)}, set:undefined},'prototype');

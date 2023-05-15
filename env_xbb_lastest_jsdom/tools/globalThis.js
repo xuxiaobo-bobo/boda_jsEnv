@@ -1,4 +1,7 @@
 // delete location
+// debugger
+ccc=new Date()-threetime
+debugger
 // 删除浏览器中不存在的对象
 delete global;
 delete GLOBAL;
@@ -10,7 +13,7 @@ delete WindowProperties;
 delete globalThis[Symbol.toStringTag];
 // debugger
 window = globalThis;
-globalThis.__proto__ = bodavm.memory.globalobj['Window'].prototype;
+globalThis.__proto__ =bodavm.memory.globalobj['Window'].prototype
 // document=bodavm.memory.globalobj['document']
 bodavm.memory.globalobj['window'] = window;
 bodavm.toolsFunc.windowdefineProperty(window, "atob", {
@@ -410,7 +413,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitURL", {
   writable: true,
   value: function webkitURL() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitURL", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "webkitRTCPeerConnection", {
   configurable: true,
@@ -418,7 +421,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitRTCPeerConnection", {
   writable: true,
   value: function webkitRTCPeerConnection() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRTCPeerConnection", arguments);
-  }()
+  }
 });
 
 bodavm.toolsFunc.windowdefineProperty(window, "webkitMediaStream", {
@@ -427,7 +430,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitMediaStream", {
   writable: true,
   value: function webkitMediaStream() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitMediaStream", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "WebKitMutationObserver", {
   configurable: true,
@@ -2339,7 +2342,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "NodeFilter", {
   writable: true,
   value: function NodeFilter() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "NodeFilter", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "Node", {
   configurable: true,
@@ -5926,7 +5929,6 @@ bodavm.toolsFunc.windowdefineProperty(window, "onunload", {
     return bodavm.toolsFunc.dispatch(this, window, "window", "onunload_set", arguments);
   }
 });
-// bodavm.toolsFunc.windowdefineProperty(window, "alert", {configurable:true, enumerable:true, writable:true, value:function alert (){return bodavm.toolsFunc.dispatch(this, window, "window", "alert", arguments)}});
 // bodavm.toolsFunc.windowdefineProperty(window, "atob", {configurable:true, enumerable:true, writable:true, value:function atob (){return bodavm.toolsFunc.dispatch(this, window, "window", "atob", arguments)}});
 // bodavm.toolsFunc.windowdefineProperty(window, "blur", {configurable:true, enumerable:true, writable:true, value:function blur (){return bodavm.toolsFunc.dispatch(this, window, "window", "blur", arguments)}});
 // bodavm.toolsFunc.windowdefineProperty(window, "btoa", {configurable:true, enumerable:true, writable:true, value:function btoa (){return bodavm.toolsFunc.dispatch(this, window, "window", "btoa", arguments)}});
@@ -5936,7 +5938,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "cancelAnimationFrame", {
   writable: true,
   value: function cancelAnimationFrame() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "cancelAnimationFrame", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "cancelIdleCallback", {
   configurable: true,
@@ -5944,7 +5946,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "cancelIdleCallback", {
   writable: true,
   value: function cancelIdleCallback() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "cancelIdleCallback", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "captureEvents", {
   configurable: true,
@@ -5952,7 +5954,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "captureEvents", {
   writable: true,
   value: function captureEvents() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "captureEvents", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "clearInterval", {
   configurable: true,
@@ -5976,7 +5978,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "close", {
   writable: true,
   value: function close() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "close", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "confirm", {
   configurable: true,
@@ -5984,7 +5986,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "confirm", {
   writable: true,
   value: function confirm() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "confirm", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "createImageBitmap", {
   configurable: true,
@@ -5992,7 +5994,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "createImageBitmap", {
   writable: true,
   value: function createImageBitmap() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "createImageBitmap", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "fetch", {
   configurable: true,
@@ -6000,7 +6002,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "fetch", {
   writable: true,
   value: function fetch() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "fetch", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "find", {
   configurable: true,
@@ -6008,7 +6010,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "find", {
   writable: true,
   value: function find() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "find", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "focus", {
   configurable: true,
@@ -6016,7 +6018,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "focus", {
   writable: true,
   value: function focus() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "focus", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "getComputedStyle", {
   configurable: true,
@@ -6024,7 +6026,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "getComputedStyle", {
   writable: true,
   value: function getComputedStyle() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "getComputedStyle", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "getSelection", {
   configurable: true,
@@ -6032,7 +6034,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "getSelection", {
   writable: true,
   value: function getSelection() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "getSelection", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "matchMedia", {
   configurable: true,
@@ -6048,7 +6050,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "moveBy", {
   writable: true,
   value: function moveBy() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "moveBy", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "moveTo", {
   configurable: true,
@@ -6056,7 +6058,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "moveTo", {
   writable: true,
   value: function moveTo() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "moveTo", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "open", {
   configurable: true,
@@ -6064,7 +6066,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "open", {
   writable: true,
   value: function open() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "open", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "postMessage", {
   configurable: true,
@@ -6072,7 +6074,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "postMessage", {
   writable: true,
   value: function postMessage() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "postMessage", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "print", {
   configurable: true,
@@ -6080,7 +6082,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "print", {
   writable: true,
   value: function print() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "print", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "prompt", {
   configurable: true,
@@ -6088,7 +6090,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "prompt", {
   writable: true,
   value: function prompt() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "prompt", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "queueMicrotask", {
   configurable: true,
@@ -6096,7 +6098,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "queueMicrotask", {
   writable: true,
   value: function queueMicrotask() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "queueMicrotask", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "releaseEvents", {
   configurable: true,
@@ -6104,7 +6106,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "releaseEvents", {
   writable: true,
   value: function releaseEvents() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "releaseEvents", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "reportError", {
   configurable: true,
@@ -6112,7 +6114,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "reportError", {
   writable: true,
   value: function reportError() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "reportError", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "requestAnimationFrame", {
   configurable: true,
@@ -6120,7 +6122,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "requestAnimationFrame", {
   writable: true,
   value: function requestAnimationFrame() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "requestAnimationFrame", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "requestIdleCallback", {
   configurable: true,
@@ -6128,7 +6130,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "requestIdleCallback", {
   writable: true,
   value: function requestIdleCallback() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "requestIdleCallback", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "resizeBy", {
   configurable: true,
@@ -6136,7 +6138,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "resizeBy", {
   writable: true,
   value: function resizeBy() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "resizeBy", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "resizeTo", {
   configurable: true,
@@ -6144,7 +6146,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "resizeTo", {
   writable: true,
   value: function resizeTo() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "resizeTo", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "scroll", {
   configurable: true,
@@ -6152,7 +6154,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "scroll", {
   writable: true,
   value: function scroll() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "scroll", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "scrollBy", {
   configurable: true,
@@ -6160,7 +6162,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "scrollBy", {
   writable: true,
   value: function scrollBy() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "scrollBy", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "scrollTo", {
   configurable: true,
@@ -6168,7 +6170,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "scrollTo", {
   writable: true,
   value: function scrollTo() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "scrollTo", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "setInterval", {
   configurable: true,
@@ -6192,7 +6194,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "stop", {
   writable: true,
   value: function stop() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "stop", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "structuredClone", {
   configurable: true,
@@ -6200,7 +6202,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "structuredClone", {
   writable: true,
   value: function structuredClone() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "structuredClone", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "webkitCancelAnimationFrame", {
   configurable: true,
@@ -6208,7 +6210,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitCancelAnimationFrame", {
   writable: true,
   value: function webkitCancelAnimationFrame() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitCancelAnimationFrame", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "webkitRequestAnimationFrame", {
   configurable: true,
@@ -6216,7 +6218,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitRequestAnimationFrame", {
   writable: true,
   value: function webkitRequestAnimationFrame() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestAnimationFrame", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "ondevicemotion", {
   configurable: true,
@@ -7552,7 +7554,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "getScreenDetails", {
   writable: true,
   value: function getScreenDetails() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "getScreenDetails", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "showDirectoryPicker", {
   configurable: true,
@@ -7560,7 +7562,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "showDirectoryPicker", {
   writable: true,
   value: function showDirectoryPicker() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "showDirectoryPicker", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "showOpenFilePicker", {
   configurable: true,
@@ -7568,7 +7570,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "showOpenFilePicker", {
   writable: true,
   value: function showOpenFilePicker() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "showOpenFilePicker", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "showSaveFilePicker", {
   configurable: true,
@@ -7576,7 +7578,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "showSaveFilePicker", {
   writable: true,
   value: function showSaveFilePicker() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "showSaveFilePicker", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "originAgentCluster", {
   configurable: true,
@@ -7700,7 +7702,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "CaptureHandleChangeEvent", {
   writable: true,
   value: function CaptureHandleChangeEvent() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "CaptureHandleChangeEvent", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "CustomStateSet", {
   configurable: true,
@@ -7836,7 +7838,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "PaymentInstruments", {
   writable: true,
   value: function PaymentInstruments() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "PaymentInstruments", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "PaymentManager", {
   configurable: true,
@@ -8060,7 +8062,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechGrammar", {
   writable: true,
   value: function webkitSpeechGrammar() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechGrammar", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechGrammarList", {
   configurable: true,
@@ -8068,7 +8070,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechGrammarList", {
   writable: true,
   value: function webkitSpeechGrammarList() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechGrammarList", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognition", {
   configurable: true,
@@ -8076,7 +8078,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognition", {
   writable: true,
   value: function webkitSpeechRecognition() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechRecognition", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognitionError", {
   configurable: true,
@@ -8084,7 +8086,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognitionError", {
   writable: true,
   value: function webkitSpeechRecognitionError() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechRecognitionError", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognitionEvent", {
   configurable: true,
@@ -8092,7 +8094,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitSpeechRecognitionEvent", {
   writable: true,
   value: function webkitSpeechRecognitionEvent() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitSpeechRecognitionEvent", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "openDatabase", {
   configurable: true,
@@ -8100,7 +8102,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "openDatabase", {
   writable: true,
   value: function openDatabase() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "openDatabase", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "webkitRequestFileSystem", {
   configurable: true,
@@ -8108,7 +8110,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitRequestFileSystem", {
   writable: true,
   value: function webkitRequestFileSystem() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestFileSystem", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "webkitResolveLocalFileSystemURL", {
   configurable: true,
@@ -8116,33 +8118,24 @@ bodavm.toolsFunc.windowdefineProperty(window, "webkitResolveLocalFileSystemURL",
   writable: true,
   value: function webkitResolveLocalFileSystemURL() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "webkitResolveLocalFileSystemURL", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "vilame_setter", {
   configurable: true,
   enumerable: true,
   writable: true,
-  value: {}
+  value:  function dir() {
+    return bodavm.toolsFunc.dispatch(this, window, "window", "vilame_setter", arguments);
+  }
 });
-bodavm.toolsFunc.windowdefineProperty(window, "code2", {
-  configurable: true,
-  enumerable: true,
-  writable: true,
-  value: undefined
-});
-bodavm.toolsFunc.windowdefineProperty(window, "code1", {
-  configurable: true,
-  enumerable: true,
-  writable: true,
-  value: undefined
-});
+
 bodavm.toolsFunc.windowdefineProperty(window, "dir", {
   configurable: true,
   enumerable: false,
   writable: true,
   value: function dir() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "dir", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "dirxml", {
   configurable: true,
@@ -8150,7 +8143,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "dirxml", {
   writable: true,
   value: function dirxml() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "dirxml", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "profile", {
   configurable: true,
@@ -8158,7 +8151,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "profile", {
   writable: true,
   value: function profile() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "profile", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "profileEnd", {
   configurable: true,
@@ -8166,7 +8159,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "profileEnd", {
   writable: true,
   value: function profileEnd() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "profileEnd", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "clear", {
   configurable: true,
@@ -8174,7 +8167,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "clear", {
   writable: true,
   value: function clear() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "clear", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "table", {
   configurable: true,
@@ -8182,7 +8175,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "table", {
   writable: true,
   value: function table() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "table", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "keys", {
   configurable: true,
@@ -8190,7 +8183,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "keys", {
   writable: true,
   value: function keys() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "keys", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "values", {
   configurable: true,
@@ -8198,7 +8191,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "values", {
   writable: true,
   value: function values() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "values", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "debug", {
   configurable: true,
@@ -8206,7 +8199,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "debug", {
   writable: true,
   value: function debug() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "debug", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "undebug", {
   configurable: true,
@@ -8214,7 +8207,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "undebug", {
   writable: true,
   value: function undebug() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "undebug", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "monitor", {
   configurable: true,
@@ -8222,7 +8215,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "monitor", {
   writable: true,
   value: function monitor() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "monitor", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "unmonitor", {
   configurable: true,
@@ -8230,7 +8223,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "unmonitor", {
   writable: true,
   value: function unmonitor() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "unmonitor", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "inspect", {
   configurable: true,
@@ -8238,7 +8231,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "inspect", {
   writable: true,
   value: function inspect() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "inspect", arguments);
-  }()
+  }
 });
 // bodavm.toolsFunc.windowdefineProperty(window, "copy", {
 //   configurable: true,
@@ -8254,7 +8247,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "queryObjects", {
   writable: true,
   value: function queryObjects() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "queryObjects", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "$_", {
   configurable: true,
@@ -8298,7 +8291,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "getEventListeners", {
   writable: true,
   value: function getEventListeners() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "getEventListeners", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "getAccessibleName", {
   configurable: true,
@@ -8306,7 +8299,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "getAccessibleName", {
   writable: true,
   value: function getAccessibleName() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "getAccessibleName", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "getAccessibleRole", {
   configurable: true,
@@ -8314,7 +8307,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "getAccessibleRole", {
   writable: true,
   value: function getAccessibleRole() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "getAccessibleRole", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "monitorEvents", {
   configurable: true,
@@ -8322,7 +8315,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "monitorEvents", {
   writable: true,
   value: function monitorEvents() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "monitorEvents", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "unmonitorEvents", {
   configurable: true,
@@ -8330,7 +8323,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "unmonitorEvents", {
   writable: true,
   value: function unmonitorEvents() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "unmonitorEvents", arguments);
-  }()
+  }
 });
 // bodavm.toolsFunc.windowdefineProperty(window, "$", {configurable:true, enumerable:false, writable:true, value:function $ (){return bodavm.toolsFunc.dispatch(this, window, "window", "$", arguments)}});
 bodavm.toolsFunc.windowdefineProperty(window, "$$", {
@@ -8339,7 +8332,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "$$", {
   writable: true,
   value: function $$() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "$$", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "$x", {
   configurable: true,
@@ -8347,7 +8340,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "$x", {
   writable: true,
   value: function $x() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "$x", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "chrome", {
   writable: true,
@@ -8388,9 +8381,17 @@ bodavm.toolsFunc.windowdefineProperty(window, "chrome", {
   }
 });
 debugger;
+
 if (window.length > 0) {
-  window[0] = bodaobj.window;
+  window_collect=bodaobj.document.getElementsByTagName('iframe');
+  for (let i = 0; i < window_collect.length; i++) {
+    window[i]=window_collect[i].contentWindow
+    
+  }
 }
+
+
+
 var boeval = eval;
 eval = function (x) {
   if (x=='debugger'){return {}}
@@ -8411,6 +8412,8 @@ window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables] = {
 };
 window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables].__proto__ = null;
 // debugger
+
+
 Object.defineProperty(globalThis, 'window', {
     get: function window() {
         // if (bodavm.config.proxy ){
@@ -8421,12 +8424,60 @@ Object.defineProperty(globalThis, 'window', {
         // }
     },
     // writable: false,
+    // set:function window(){
+    //   debugger
+    // },
     configurable: false,
     enumerable:true
 });
-// debugger
+
+//新增出问题就 注释掉
+Object.defineProperty(window, '__proto__', {
+  get: function window() {
+        // console.log('get  window, __proto__',`!!!!检测!!!!!!`)
+          return Window.prototype
+  },
+  set:function window(){
+      console.log('set  window, __proto__',`!!!!检测!!!!!!`)
+      if (globalThis.__proto__ === arguments[0]){
+        return globalThis.__proto__
+      }else{
+        bodavm.toolsFunc.throwError(`TypeError: `,`mutable prototype object '#<Window>' cannot have their prototype set
+        at set __proto__ (<anonymous>)`)
+      }
+  },
+  configurable: false,
+  enumerable:true
+});
+//新增出问题就 注释掉
+
+Object.defineProperty(globalThis.location,'__proto__',{
+  get: function window() {
+    // console.log('get  globalThis.location,__proto__',`!!!!检测!!!!!!`)
+
+   return Location.prototype
+  },
+  set:function window(){
+    console.log('set  globalThis.location,__proto__',`!!!!检测!!!!!!`)
+    if (globalThis.location.__proto__ === arguments[0]){
+      return globalThis.location.__proto__
+    }else{
+      bodavm.toolsFunc.throwError(`TypeError: `,`mutable prototype object '[object Location]' cannot have their prototype set
+        at set __proto__ (<anonymous>)`)
+    }
+  },
+configurable: false,
+enumerable:true
+})
+
+Object.defineProperty(window,'require',{
+  value:undefined
+})
+
 
 // window.webkitRTCPeerConnection=RTCPeerConnection
 // bodavm.config.isinit=false
 
+
+bodavm.toolsFunc.windowdefineProperty(window, "alert", {configurable:true, enumerable:true, writable:true, value:function alert (){return bodavm.toolsFunc.dispatch(this, window, "window", "alert", arguments)}});
 

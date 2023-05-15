@@ -1,0 +1,6 @@
+// SpeechSynthesisErrorEvent对象
+bodavm.memory.globalobj['SpeechSynthesisErrorEvent'] = function SpeechSynthesisErrorEvent(){if (!(this instanceof SpeechSynthesisErrorEvent)){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'SpeechSynthesisErrorEvent': 2 arguments required, but only 0 present.")};this._boisinit=bodavm.config.isinit}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SpeechSynthesisErrorEvent'], "SpeechSynthesisErrorEvent");
+bodavm.memory.globalobj['SpeechSynthesisErrorEvent'].prototype.__proto__=bodavm.memory.globalobj['SpeechSynthesisEvent'].prototype;
+bodavm.memory.globalobj['SpeechSynthesisErrorEvent'].__proto__=bodavm.memory.globalobj['SpeechSynthesisEvent'];
+bodavm.toolsFunc.defineProperty('SpeechSynthesisErrorEvent', "error", {configurable:true, enumerable:true, get:function error (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechSynthesisErrorEvent'].prototype, "SpeechSynthesisErrorEvent", "error_get", arguments)}, set:undefined},'prototype');

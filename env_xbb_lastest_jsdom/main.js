@@ -1,4 +1,4 @@
-// debugger
+
 let firsttime=+new Date()
 const { VM, VMScript } = require("vm2")
 const fs = require("fs");
@@ -18,20 +18,13 @@ const env=require(`${config_path}/env.config`)
 
 fs.writeFileSync(`${run_path}/log.txt`,"")
 
-let bohtml_=fs.readFileSync('D:\\My_Dir\\env_xbb_lastest_jsdom\\run\\run.html').toString('utf-8')
-const dom = new JSDOM(bohtml_, 
-    {
-        url: "https://sthjt.hubei.gov.cn/fbjd/zc/zcwj/sthjt/ehs/202302/t20230216_4550698.shtml",
-        referrer: "https://sthjt.hubei.gov.cn/",
-        contentType: "text/html",
-        includeNodeLocations: true,
-        pretendToBeVisual: true,
-
-    });
+//当前电脑是不是windows系统
+isWindowSystem=true
+console.log(`当前系统为win`,isWindowSystem)
 
 //创建沙盒实例
 const vm = new VM(
-);
+    );
 
 const configCode=fs.readFileSync(`${config_path}/config.js`)
 //导入功能插件相关函数
@@ -48,8 +41,6 @@ const proxyObj =  tools.getFile("proxyObj");
 const jscode = fs.readFileSync(`${run_path}/run.js`)
 //导入异步执行的代码
 const asyncCode = tools.getFile("async");
-
-const globalobjInit=tools.getFile("globalobjInit");
 // bodavm.memory.tag[0].__proto__=HTMLDocument.prototype
 //整合代码
 //导入日志代码
@@ -58,8 +49,37 @@ const log_code=fs.readFileSync(`${tools_path}/printLog.js`)
 const globadlThis=fs.readFileSync(`${tools_path}/globalThis.js`)
 // const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globalInit}${userInit}${changeDom}${proxyObj}${jscode}${asyncCode}`+"\r\n"+"debugger";
 const last_deal=fs.readFileSync(`${run_path}/lastDeal.js`)
+
+var window_config_code=''
+//该目录下的代码只能在windows下运行
+if (isWindowSystem){
+    window_config_code=fs.readFileSync(`${tools_path}/winSystemFunc.js`)
+    var boallundefined=  new xtd;
+    // debugger
+    vm.setGlobal('boallundefined',boallundefined)
+}
+// debugger
 // const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${globalInit}${proxyObj};;;;debugger;try{;${jscode}${asyncCode}}catch(e){console.log(e.message,e.stack);}finally{;${last_deal}};get_cookie`;
-const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};${globalobjInit};${globadlThis}${globalInit}${proxyObj};;;;debugger;;${jscode}${asyncCode};${last_deal};get_cookie`;
+const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${window_config_code}${globalInit}${proxyObj};;;;debugger;;${jscode}${asyncCode};${last_deal};get_cookie`;
+
+const app = express()
+// app.get('./gethtml', async function (req, res) {
+//     val =req.query 
+    
+// })
+let bohtml_=fs.readFileSync('D:\\My_Dir\\env_xbb_lastest_jsdom\\run\\run.html').toString('utf-8')
+// bohtml_
+const dom = new JSDOM(bohtml_, 
+    {
+        url: "http://sthjt.hubei.gov.cn/",
+        referrer: "http://sthjt.hubei.gov.cn/",
+        contentType: "text/html",
+        includeNodeLocations: true,
+        pretendToBeVisual: true,
+
+    });
+
+console.log('jsdom 导入完成',+new Date()-firsttime)
 
 
 bodaobj={
@@ -69,16 +89,20 @@ bodaobj={
     navigator:dom.window.navigator,
     navigation:dom.window.navigation
 }
-var boallundefined=  new xtd;
+
+// debugger
+// iframe
 
 
+    
 //沙盒创建全局
 vm.setGlobal('bofs', fs)
-// vm.setGlobal('bobo$',bobo$)
-// debugger
+vm.setGlobal('isWindowSystem',isWindowSystem)
+// // vm.setGlobal('bobo$',bobo$)
+// // debugger
 vm.setGlobal('bodaobj',bodaobj)
 vm.setGlobal('bocreateCanvas',createCanvas)
-vm.setGlobal('boallundefined',boallundefined)
+
 // let iframes=bobo$('iframe')
 // console.log('iframes的个数---->',iframes.length)
 // if (iframes.length>0){
@@ -101,24 +125,23 @@ vm.setGlobal('boallundefined',boallundefined)
 
 
 
-
 const script = new VMScript(codeTest, "./debugJS.js")
 
 // const result = vm.run(script);
 var getcookieapi=vm.run(script)
 
-// const app = express()
-// app.get('./ip', async function (req, res) {
-//     val = getcookieapi()
-//     res.send(val)
-// })
 
+//
+app.get('./ip', async function (req, res) {
+    val = getcookieapi()
+    res.send(val)
+})
+let lastime=+new Date()
+console.log('花费时间:',lastime-firsttime)
 // app.listen(3000)
 //输出结果
 // debugger
 console.log(getcookieapi())
-let lastime=+new Date()
-console.log('花费时间:',lastime-firsttime)
-//
+
 fs.writeFileSync(`${run_path}/output.js`,codeTest)
 

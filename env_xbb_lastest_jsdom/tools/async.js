@@ -55,6 +55,9 @@ if (bodavm.memory.asyncEvent.listener) {
         // debugger
             for (let i = 0; i < event.length; i++) {
                 // debugger
+                if (!event[i]){
+                    continue
+                }
                 if (noexecListener[event[i].type]){
                     console.log(`开始执行浏览器事件==========`,`当前为事件类型为==>: ${event[i].type}  无需执行`);
                     continue
@@ -231,34 +234,34 @@ if (setTimeEvent && bodavm.config.settime_on) {
 // ];
 
 
-// // debugger
-if (bodavm.memory.asyncEvent.listener) {
-    for (let i = 0; i < mouseEvent.length; i++) {
-        let event = mouseEvent[i];
-        let type = event.type;
-        let mouseEventObj = {
-            "isTrusted": true
-        };
-        mouseEventObj = Object.setPrototypeOf(mouseEventObj, MouseEvent.prototype);
-        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientX", event.clientX);
-        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientY", event.clientY);
-        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "timeStamp", event.timeStamp);
-        bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "type", event.type);
-        //bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "pagex", event.type);
-        let listenerList = bodavm.memory.asyncEvent.listener[type];
-        //debugger;
-        console.log(`listenerList====>`, listenerList)
+debugger
+// if (bodavm.memory.asyncEvent.listener) {
+//     for (let i = 0; i < mouseEvent.length; i++) {
+//         let event = mouseEvent[i];
+//         let type = event.type;
+//         let mouseEventObj = {
+//             "isTrusted": true
+//         };
+//         mouseEventObj = Object.setPrototypeOf(mouseEventObj, MouseEvent.prototype);
+//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientX", event.clientX);
+//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "clientY", event.clientY);
+//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "timeStamp", event.timeStamp);
+//         bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "type", event.type);
+//         //bodavm.toolsFunc.setProtoAttr.call(mouseEventObj, "pagex", event.type);
+//         let listenerList = bodavm.memory.asyncEvent.listener[type];
+//         //debugger;
+//         console.log(`listenerList====>`, listenerList)
 
-        if(listenerList ==undefined){debugger;continue}
-        for (let j = 0; j < listenerList.length; j++) {
-            let callBack = listenerList[j].listener;
-            let self = listenerList[j].self;
-            console.log(`执行异步回调second=======>`, `self:${self}  mouseEventObj:${mouseEventObj}`);
-            callBack.call(self, mouseEventObj);
+//         if(listenerList ==undefined){debugger;continue}
+//         for (let j = 0; j < listenerList.length; j++) {
+//             let callBack = listenerList[j].listener;
+//             let self = listenerList[j].self;
+//             console.log(`执行异步回调second=======>`, `self:${self}  mouseEventObj:${mouseEventObj}`);
+//             callBack.call(self, mouseEventObj);
 
-        }
+//         }
 
-    }
-}
+//     }
+// }
 
 

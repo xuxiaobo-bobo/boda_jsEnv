@@ -1,4 +1,4 @@
-window=bodavm.toolsFunc.proxy(window,"window")
+// window=bodavm.toolsFunc.proxy(window,"window")
 
 // CSS=bodavm.toolsFunc.proxy(CSS,"CSS");
 // performance=bodavm.toolsFunc.proxy(performance,'performance')

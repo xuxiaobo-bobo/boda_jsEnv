@@ -1,0 +1,5 @@
+// BackgroundFetchRecord对象
+bodavm.memory.globalobj['BackgroundFetchRecord'] = function BackgroundFetchRecord(){if (!(this instanceof BackgroundFetchRecord)){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")};this._boisinit=bodavm.config.isinit}
+bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['BackgroundFetchRecord'], "BackgroundFetchRecord");
+bodavm.toolsFunc.defineProperty('BackgroundFetchRecord', "request", {configurable:true, enumerable:true, get:function request (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BackgroundFetchRecord'].prototype, "BackgroundFetchRecord", "request_get", arguments)}, set:undefined},'prototype');
+bodavm.toolsFunc.defineProperty('BackgroundFetchRecord', "responseReady", {configurable:true, enumerable:true, get:function responseReady (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['BackgroundFetchRecord'].prototype, "BackgroundFetchRecord", "responseReady_get", arguments)}, set:undefined},'prototype');

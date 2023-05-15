@@ -4,7 +4,7 @@
         debugger
         let arg=arguments[0]
         let cont=this._boarg.contains(arg._boarg)
-        console.log(`Node_contains ->`,`res ->${cont}`);
+        console.log(`Node_contains ->`,`-> res ->${cont}`);
         return cont
     }
     bodavm.envFunc.HTMLIFrameElement_contentDocument_get=function (){
@@ -14,7 +14,7 @@
         res.__proto__=HTMLDocument.prototype
         res._boisinit=true
         res._contentiframe=true
-        console.log(`HTMLIFrameElement_contentDocument_get ->`,`res ->${res} 获取iframe下的document !!!!`);
+        console.log(`HTMLIFrameElement_contentDocument_get ->`,`-> res ->${res} 获取iframe下的document !!!!`);
         return res
     }
     bodavm.envFunc.Document_head_get=function (){
@@ -22,7 +22,7 @@
         
         res._boarg=bodaobj.window.document.head
         res.__proto__=HTMLHeadElement.prototype
-        console.log(`Document_head_get ->`,`res ->${res}`);
+        console.log(`Document_head_get ->`,`-> res ->${res}`);
         return res
     }
 
@@ -30,13 +30,13 @@
         // debugger
         let arg=arguments[0]
         res=this[arg]
-        console.log(`HTMLAllCollection_item ->`,`arg ->${arg} `,`res -> ${res}`);
+        console.log(`HTMLAllCollection_item ->`,`arg ->${arg} `,`-> res -> ${res}`);
         return res
     }
     bodavm.envFunc.location_valueOf=function (){
         // debugger
         // res=window.location
-        console.log(`location_valueOf `, `res ->`,location);
+        console.log(`location_valueOf `, `-> res ->`,location);
         return location
     }
 
@@ -51,7 +51,7 @@
             let promise = new Promise((resolve, reject) => {
                 resolve(res)
             })
-            console.log(`StorageManager_estimate `, `res ->${promise}`);
+            console.log(`StorageManager_estimate `, `-> res ->${promise}`);
 
             return promise
 
@@ -60,13 +60,13 @@
         // debugger
         this._boarg.src=arguments[0]
         let res=this._boarg.src
-        console.log(`HTMLScriptElement_src_set ->`,`res->${res}`);
+        console.log(`HTMLScriptElement_src_set ->`,`-> res->${res}`);
         return res
     }
     bodavm.envFunc.PerformanceEntry_name_get=function (){
         // debugger
         let name=this.name
-        console.log(`PerformanceEntry_name_get ->`,`res ->${name}`);
+        console.log(`PerformanceEntry_name_get ->`,`-> res ->${name}`);
         return name
     }
     bodavm.envFunc.Performance_getEntriesByType=function (){
@@ -79,7 +79,7 @@
                 i.__proto__ =PerformanceResourceTiming.prototype
             }
             //  debugger
-            console.log(`Performance_getEntriesByType- >`,`arg->${type}`,`res ->${reslist}`);
+            console.log(`Performance_getEntriesByType- >`,`arg->${type}`,`-> res ->${reslist}`);
             return reslist
         }
 
@@ -90,19 +90,19 @@
     }
     bodavm.envFunc.Performance_timeOrigin_get=function (){
         let date=bodavm.memory.Performance['timeOrigin']
-        console.log(`Performance_timeOrigin_get-> `,`res ->${date}`);
+        console.log(`Performance_timeOrigin_get-> `,`-> res ->${date}`);
         return date
     }
 
     bodavm.envFunc.Image_src_set=function (){
         // debugger
-        console.log(`Image_src_set->`,`res ->${arguments[0]}`);
+        console.log(`Image_src_set->`,`-> res ->${arguments[0]}`);
         this._boarg.src=arguments[0]
         return this._boarg.src
     }
     bodavm.envFunc.Performance_now=function (){
         let now=window.performance._boarg.now()
-        console.log(`Performance_now `,`res ->${now}`);
+        console.log(`Performance_now `,`-> res ->${now}`);
         return now
     }
 
@@ -110,915 +110,915 @@
         // debugger
         let arg=bodavm.memory.globalobj['Image']
         arg._boarg=bodaobj.window.Image
-        console.log(`window_Image `, `res -> ${arg}`);
+        console.log(`window_Image `, `-> res -> ${arg}`);
 
         return arg
     }
-    bodavm.envFunc.window_scheduler_get=function (){let arg=bodavm.memory.globalobj['scheduler']?bodavm.memory.globalobj['scheduler']:null;console.log(`window_scheduler_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_crossOriginIsolated_get=function (){let arg=bodavm.memory.globalobj['crossOriginIsolated']?bodavm.memory.globalobj['crossOriginIsolated']:null;console.log(`window_crossOriginIsolated_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpointerrawupdate_get=function (){let arg=bodavm.memory.globalobj['onpointerrawupdate']?bodavm.memory.globalobj['onpointerrawupdate']:null;console.log(`window_onpointerrawupdate_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_originAgentCluster_get=function (){let arg=bodavm.memory.globalobj['originAgentCluster']?bodavm.memory.globalobj['originAgentCluster']:null;console.log(`window_originAgentCluster_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onbeforematch_get=function (){let arg=bodavm.memory.globalobj['onbeforematch']?bodavm.memory.globalobj['onbeforematch']:null;console.log(`window_onbeforematch_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondeviceorientationabsolute_get=function (){let arg=bodavm.memory.globalobj['ondeviceorientationabsolute']?bodavm.memory.globalobj['ondeviceorientationabsolute']:null;console.log(`window_ondeviceorientationabsolute_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondeviceorientation_get=function (){let arg=bodavm.memory.globalobj['ondeviceorientation']?bodavm.memory.globalobj['ondeviceorientation']:null;console.log(`window_ondeviceorientation_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondevicemotion_get=function (){let arg=bodavm.memory.globalobj['ondevicemotion']?bodavm.memory.globalobj['ondevicemotion']:null;console.log(`window_ondevicemotion_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onunload_get=function (){let arg=bodavm.memory.globalobj['onunload']?bodavm.memory.globalobj['onunload']:null;console.log(`window_onunload_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onunhandledrejection_get=function (){let arg=bodavm.memory.globalobj['onunhandledrejection']?bodavm.memory.globalobj['onunhandledrejection']:null;console.log(`window_onunhandledrejection_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onstorage_get=function (){let arg=bodavm.memory.globalobj['onstorage']?bodavm.memory.globalobj['onstorage']:null;console.log(`window_onstorage_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onrejectionhandled_get=function (){let arg=bodavm.memory.globalobj['onrejectionhandled']?bodavm.memory.globalobj['onrejectionhandled']:null;console.log(`window_onrejectionhandled_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpopstate_get=function (){let arg=bodavm.memory.globalobj['onpopstate']?bodavm.memory.globalobj['onpopstate']:null;console.log(`window_onpopstate_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpageshow_get=function (){let arg=bodavm.memory.globalobj['onpageshow']?bodavm.memory.globalobj['onpageshow']:null;console.log(`window_onpageshow_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpagehide_get=function (){let arg=bodavm.memory.globalobj['onpagehide']?bodavm.memory.globalobj['onpagehide']:null;console.log(`window_onpagehide_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ononline_get=function (){let arg=bodavm.memory.globalobj['ononline']?bodavm.memory.globalobj['ononline']:null;console.log(`window_ononline_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onoffline_get=function (){let arg=bodavm.memory.globalobj['onoffline']?bodavm.memory.globalobj['onoffline']:null;console.log(`window_onoffline_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onmessageerror_get=function (){let arg=bodavm.memory.globalobj['onmessageerror']?bodavm.memory.globalobj['onmessageerror']:null;console.log(`window_onmessageerror_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onlanguagechange_get=function (){let arg=bodavm.memory.globalobj['onlanguagechange']?bodavm.memory.globalobj['onlanguagechange']:null;console.log(`window_onlanguagechange_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onhashchange_get=function (){let arg=bodavm.memory.globalobj['onhashchange']?bodavm.memory.globalobj['onhashchange']:null;console.log(`window_onhashchange_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onbeforeprint_get=function (){let arg=bodavm.memory.globalobj['onbeforeprint']?bodavm.memory.globalobj['onbeforeprint']:null;console.log(`window_onbeforeprint_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onafterprint_get=function (){let arg=bodavm.memory.globalobj['onafterprint']?bodavm.memory.globalobj['onafterprint']:null;console.log(`window_onafterprint_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ontransitioncancel_get=function (){let arg=bodavm.memory.globalobj['ontransitioncancel']?bodavm.memory.globalobj['ontransitioncancel']:null;console.log(`window_ontransitioncancel_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ontransitionend_get=function (){let arg=bodavm.memory.globalobj['ontransitionend']?bodavm.memory.globalobj['ontransitionend']:null;console.log(`window_ontransitionend_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ontransitionstart_get=function (){let arg=bodavm.memory.globalobj['ontransitionstart']?bodavm.memory.globalobj['ontransitionstart']:null;console.log(`window_ontransitionstart_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ontransitionrun_get=function (){let arg=bodavm.memory.globalobj['ontransitionrun']?bodavm.memory.globalobj['ontransitionrun']:null;console.log(`window_ontransitionrun_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onanimationstart_get=function (){let arg=bodavm.memory.globalobj['onanimationstart']?bodavm.memory.globalobj['onanimationstart']:null;console.log(`window_onanimationstart_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onanimationiteration_get=function (){let arg=bodavm.memory.globalobj['onanimationiteration']?bodavm.memory.globalobj['onanimationiteration']:null;console.log(`window_onanimationiteration_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onanimationend_get=function (){let arg=bodavm.memory.globalobj['onanimationend']?bodavm.memory.globalobj['onanimationend']:null;console.log(`window_onanimationend_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onselectionchange_get=function (){let arg=bodavm.memory.globalobj['onselectionchange']?bodavm.memory.globalobj['onselectionchange']:null;console.log(`window_onselectionchange_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onselectstart_get=function (){let arg=bodavm.memory.globalobj['onselectstart']?bodavm.memory.globalobj['onselectstart']:null;console.log(`window_onselectstart_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpointerleave_get=function (){let arg=bodavm.memory.globalobj['onpointerleave']?bodavm.memory.globalobj['onpointerleave']:null;console.log(`window_onpointerleave_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpointerenter_get=function (){let arg=bodavm.memory.globalobj['onpointerenter']?bodavm.memory.globalobj['onpointerenter']:null;console.log(`window_onpointerenter_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpointerout_get=function (){let arg=bodavm.memory.globalobj['onpointerout']?bodavm.memory.globalobj['onpointerout']:null;console.log(`window_onpointerout_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpointerover_get=function (){let arg=bodavm.memory.globalobj['onpointerover']?bodavm.memory.globalobj['onpointerover']:null;console.log(`window_onpointerover_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpointercancel_get=function (){let arg=bodavm.memory.globalobj['onpointercancel']?bodavm.memory.globalobj['onpointercancel']:null;console.log(`window_onpointercancel_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpointerup_get=function (){let arg=bodavm.memory.globalobj['onpointerup']?bodavm.memory.globalobj['onpointerup']:null;console.log(`window_onpointerup_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpointermove_get=function (){let arg=bodavm.memory.globalobj['onpointermove']?bodavm.memory.globalobj['onpointermove']:null;console.log(`window_onpointermove_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpointerdown_get=function (){let arg=bodavm.memory.globalobj['onpointerdown']?bodavm.memory.globalobj['onpointerdown']:null;console.log(`window_onpointerdown_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onlostpointercapture_get=function (){let arg=bodavm.memory.globalobj['onlostpointercapture']?bodavm.memory.globalobj['onlostpointercapture']:null;console.log(`window_onlostpointercapture_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ongotpointercapture_get=function (){let arg=bodavm.memory.globalobj['ongotpointercapture']?bodavm.memory.globalobj['ongotpointercapture']:null;console.log(`window_ongotpointercapture_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onauxclick_get=function (){let arg=bodavm.memory.globalobj['onauxclick']?bodavm.memory.globalobj['onauxclick']:null;console.log(`window_onauxclick_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onwheel_get=function (){let arg=bodavm.memory.globalobj['onwheel']?bodavm.memory.globalobj['onwheel']:null;console.log(`window_onwheel_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onwebkittransitionend_get=function (){let arg=bodavm.memory.globalobj['onwebkittransitionend']?bodavm.memory.globalobj['onwebkittransitionend']:null;console.log(`window_onwebkittransitionend_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onwebkitanimationstart_get=function (){let arg=bodavm.memory.globalobj['onwebkitanimationstart']?bodavm.memory.globalobj['onwebkitanimationstart']:null;console.log(`window_onwebkitanimationstart_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onwebkitanimationiteration_get=function (){let arg=bodavm.memory.globalobj['onwebkitanimationiteration']?bodavm.memory.globalobj['onwebkitanimationiteration']:null;console.log(`window_onwebkitanimationiteration_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onwebkitanimationend_get=function (){let arg=bodavm.memory.globalobj['onwebkitanimationend']?bodavm.memory.globalobj['onwebkitanimationend']:null;console.log(`window_onwebkitanimationend_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onwaiting_get=function (){let arg=bodavm.memory.globalobj['onwaiting']?bodavm.memory.globalobj['onwaiting']:null;console.log(`window_onwaiting_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onvolumechange_get=function (){let arg=bodavm.memory.globalobj['onvolumechange']?bodavm.memory.globalobj['onvolumechange']:null;console.log(`window_onvolumechange_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ontoggle_get=function (){let arg=bodavm.memory.globalobj['ontoggle']?bodavm.memory.globalobj['ontoggle']:null;console.log(`window_ontoggle_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ontimeupdate_get=function (){let arg=bodavm.memory.globalobj['ontimeupdate']?bodavm.memory.globalobj['ontimeupdate']:null;console.log(`window_ontimeupdate_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onsuspend_get=function (){let arg=bodavm.memory.globalobj['onsuspend']?bodavm.memory.globalobj['onsuspend']:null;console.log(`window_onsuspend_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onsubmit_get=function (){let arg=bodavm.memory.globalobj['onsubmit']?bodavm.memory.globalobj['onsubmit']:null;console.log(`window_onsubmit_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onstalled_get=function (){let arg=bodavm.memory.globalobj['onstalled']?bodavm.memory.globalobj['onstalled']:null;console.log(`window_onstalled_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onslotchange_get=function (){let arg=bodavm.memory.globalobj['onslotchange']?bodavm.memory.globalobj['onslotchange']:null;console.log(`window_onslotchange_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onselect_get=function (){let arg=bodavm.memory.globalobj['onselect']?bodavm.memory.globalobj['onselect']:null;console.log(`window_onselect_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onseeking_get=function (){let arg=bodavm.memory.globalobj['onseeking']?bodavm.memory.globalobj['onseeking']:null;console.log(`window_onseeking_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onseeked_get=function (){let arg=bodavm.memory.globalobj['onseeked']?bodavm.memory.globalobj['onseeked']:null;console.log(`window_onseeked_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onsecuritypolicyviolation_get=function (){let arg=bodavm.memory.globalobj['onsecuritypolicyviolation']?bodavm.memory.globalobj['onsecuritypolicyviolation']:null;console.log(`window_onsecuritypolicyviolation_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onscroll_get=function (){let arg=bodavm.memory.globalobj['onscroll']?bodavm.memory.globalobj['onscroll']:null;console.log(`window_onscroll_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onresize_get=function (){let arg=bodavm.memory.globalobj['onresize']?bodavm.memory.globalobj['onresize']:null;console.log(`window_onresize_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onreset_get=function (){let arg=bodavm.memory.globalobj['onreset']?bodavm.memory.globalobj['onreset']:null;console.log(`window_onreset_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onratechange_get=function (){let arg=bodavm.memory.globalobj['onratechange']?bodavm.memory.globalobj['onratechange']:null;console.log(`window_onratechange_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onprogress_get=function (){let arg=bodavm.memory.globalobj['onprogress']?bodavm.memory.globalobj['onprogress']:null;console.log(`window_onprogress_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onplaying_get=function (){let arg=bodavm.memory.globalobj['onplaying']?bodavm.memory.globalobj['onplaying']:null;console.log(`window_onplaying_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onplay_get=function (){let arg=bodavm.memory.globalobj['onplay']?bodavm.memory.globalobj['onplay']:null;console.log(`window_onplay_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onpause_get=function (){let arg=bodavm.memory.globalobj['onpause']?bodavm.memory.globalobj['onpause']:null;console.log(`window_onpause_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onmousewheel_get=function (){let arg=bodavm.memory.globalobj['onmousewheel']?bodavm.memory.globalobj['onmousewheel']:null;console.log(`window_onmousewheel_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onmouseup_get=function (){let arg=bodavm.memory.globalobj['onmouseup']?bodavm.memory.globalobj['onmouseup']:null;console.log(`window_onmouseup_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onmouseover_get=function (){let arg=bodavm.memory.globalobj['onmouseover']?bodavm.memory.globalobj['onmouseover']:null;console.log(`window_onmouseover_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onmouseout_get=function (){let arg=bodavm.memory.globalobj['onmouseout']?bodavm.memory.globalobj['onmouseout']:null;console.log(`window_onmouseout_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onmousemove_get=function (){let arg=bodavm.memory.globalobj['onmousemove']?bodavm.memory.globalobj['onmousemove']:null;console.log(`window_onmousemove_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onmouseleave_get=function (){let arg=bodavm.memory.globalobj['onmouseleave']?bodavm.memory.globalobj['onmouseleave']:null;console.log(`window_onmouseleave_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onmouseenter_get=function (){let arg=bodavm.memory.globalobj['onmouseenter']?bodavm.memory.globalobj['onmouseenter']:null;console.log(`window_onmouseenter_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onmousedown_get=function (){let arg=bodavm.memory.globalobj['onmousedown']?bodavm.memory.globalobj['onmousedown']:null;console.log(`window_onmousedown_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onloadstart_get=function (){let arg=bodavm.memory.globalobj['onloadstart']?bodavm.memory.globalobj['onloadstart']:null;console.log(`window_onloadstart_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onloadedmetadata_get=function (){let arg=bodavm.memory.globalobj['onloadedmetadata']?bodavm.memory.globalobj['onloadedmetadata']:null;console.log(`window_onloadedmetadata_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onloadeddata_get=function (){let arg=bodavm.memory.globalobj['onloadeddata']?bodavm.memory.globalobj['onloadeddata']:null;console.log(`window_onloadeddata_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onload_get=function (){let arg=bodavm.memory.globalobj['onload']?bodavm.memory.globalobj['onload']:null;console.log(`window_onload_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onkeyup_get=function (){let arg=bodavm.memory.globalobj['onkeyup']?bodavm.memory.globalobj['onkeyup']:null;console.log(`window_onkeyup_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onkeypress_get=function (){let arg=bodavm.memory.globalobj['onkeypress']?bodavm.memory.globalobj['onkeypress']:null;console.log(`window_onkeypress_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onkeydown_get=function (){let arg=bodavm.memory.globalobj['onkeydown']?bodavm.memory.globalobj['onkeydown']:null;console.log(`window_onkeydown_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_oninvalid_get=function (){let arg=bodavm.memory.globalobj['oninvalid']?bodavm.memory.globalobj['oninvalid']:null;console.log(`window_oninvalid_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_oninput_get=function (){let arg=bodavm.memory.globalobj['oninput']?bodavm.memory.globalobj['oninput']:null;console.log(`window_oninput_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onformdata_get=function (){let arg=bodavm.memory.globalobj['onformdata']?bodavm.memory.globalobj['onformdata']:null;console.log(`window_onformdata_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onfocus_get=function (){let arg=bodavm.memory.globalobj['onfocus']?bodavm.memory.globalobj['onfocus']:null;console.log(`window_onfocus_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onerror_get=function (){let arg=bodavm.memory.globalobj['onerror']?bodavm.memory.globalobj['onerror']:null;console.log(`window_onerror_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onended_get=function (){let arg=bodavm.memory.globalobj['onended']?bodavm.memory.globalobj['onended']:null;console.log(`window_onended_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onemptied_get=function (){let arg=bodavm.memory.globalobj['onemptied']?bodavm.memory.globalobj['onemptied']:null;console.log(`window_onemptied_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondurationchange_get=function (){let arg=bodavm.memory.globalobj['ondurationchange']?bodavm.memory.globalobj['ondurationchange']:null;console.log(`window_ondurationchange_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondrop_get=function (){let arg=bodavm.memory.globalobj['ondrop']?bodavm.memory.globalobj['ondrop']:null;console.log(`window_ondrop_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondragstart_get=function (){let arg=bodavm.memory.globalobj['ondragstart']?bodavm.memory.globalobj['ondragstart']:null;console.log(`window_ondragstart_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondragover_get=function (){let arg=bodavm.memory.globalobj['ondragover']?bodavm.memory.globalobj['ondragover']:null;console.log(`window_ondragover_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondragleave_get=function (){let arg=bodavm.memory.globalobj['ondragleave']?bodavm.memory.globalobj['ondragleave']:null;console.log(`window_ondragleave_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondragenter_get=function (){let arg=bodavm.memory.globalobj['ondragenter']?bodavm.memory.globalobj['ondragenter']:null;console.log(`window_ondragenter_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondragend_get=function (){let arg=bodavm.memory.globalobj['ondragend']?bodavm.memory.globalobj['ondragend']:null;console.log(`window_ondragend_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondrag_get=function (){let arg=bodavm.memory.globalobj['ondrag']?bodavm.memory.globalobj['ondrag']:null;console.log(`window_ondrag_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_ondblclick_get=function (){let arg=bodavm.memory.globalobj['ondblclick']?bodavm.memory.globalobj['ondblclick']:null;console.log(`window_ondblclick_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_oncuechange_get=function (){let arg=bodavm.memory.globalobj['oncuechange']?bodavm.memory.globalobj['oncuechange']:null;console.log(`window_oncuechange_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_oncontextrestored_get=function (){let arg=bodavm.memory.globalobj['oncontextrestored']?bodavm.memory.globalobj['oncontextrestored']:null;console.log(`window_oncontextrestored_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_oncontextmenu_get=function (){let arg=bodavm.memory.globalobj['oncontextmenu']?bodavm.memory.globalobj['oncontextmenu']:null;console.log(`window_oncontextmenu_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_oncontextlost_get=function (){let arg=bodavm.memory.globalobj['oncontextlost']?bodavm.memory.globalobj['oncontextlost']:null;console.log(`window_oncontextlost_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onclose_get=function (){let arg=bodavm.memory.globalobj['onclose']?bodavm.memory.globalobj['onclose']:null;console.log(`window_onclose_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onclick_get=function (){let arg=bodavm.memory.globalobj['onclick']?bodavm.memory.globalobj['onclick']:null;console.log(`window_onclick_get`,`res ->${arg}`);return arg}
-    bodavm.envFunc.window_onchange_get=function (){let arg=bodavm.memory.globalobj['onchange']?bodavm.memory.globalobj['onchange']:null;console.log(`window_onchange_get`,`res ->${arg}`);return arg}
+    bodavm.envFunc.window_scheduler_get=function (){let arg=bodavm.memory.globalobj['scheduler']?bodavm.memory.globalobj['scheduler']:null;console.log(`window_scheduler_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_crossOriginIsolated_get=function (){let arg=bodavm.memory.globalobj['crossOriginIsolated']?bodavm.memory.globalobj['crossOriginIsolated']:null;console.log(`window_crossOriginIsolated_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpointerrawupdate_get=function (){let arg=bodavm.memory.globalobj['onpointerrawupdate']?bodavm.memory.globalobj['onpointerrawupdate']:null;console.log(`window_onpointerrawupdate_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_originAgentCluster_get=function (){let arg=bodavm.memory.globalobj['originAgentCluster']?bodavm.memory.globalobj['originAgentCluster']:null;console.log(`window_originAgentCluster_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onbeforematch_get=function (){let arg=bodavm.memory.globalobj['onbeforematch']?bodavm.memory.globalobj['onbeforematch']:null;console.log(`window_onbeforematch_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondeviceorientationabsolute_get=function (){let arg=bodavm.memory.globalobj['ondeviceorientationabsolute']?bodavm.memory.globalobj['ondeviceorientationabsolute']:null;console.log(`window_ondeviceorientationabsolute_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondeviceorientation_get=function (){let arg=bodavm.memory.globalobj['ondeviceorientation']?bodavm.memory.globalobj['ondeviceorientation']:null;console.log(`window_ondeviceorientation_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondevicemotion_get=function (){let arg=bodavm.memory.globalobj['ondevicemotion']?bodavm.memory.globalobj['ondevicemotion']:null;console.log(`window_ondevicemotion_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onunload_get=function (){let arg=bodavm.memory.globalobj['onunload']?bodavm.memory.globalobj['onunload']:null;console.log(`window_onunload_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onunhandledrejection_get=function (){let arg=bodavm.memory.globalobj['onunhandledrejection']?bodavm.memory.globalobj['onunhandledrejection']:null;console.log(`window_onunhandledrejection_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onstorage_get=function (){let arg=bodavm.memory.globalobj['onstorage']?bodavm.memory.globalobj['onstorage']:null;console.log(`window_onstorage_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onrejectionhandled_get=function (){let arg=bodavm.memory.globalobj['onrejectionhandled']?bodavm.memory.globalobj['onrejectionhandled']:null;console.log(`window_onrejectionhandled_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpopstate_get=function (){let arg=bodavm.memory.globalobj['onpopstate']?bodavm.memory.globalobj['onpopstate']:null;console.log(`window_onpopstate_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpageshow_get=function (){let arg=bodavm.memory.globalobj['onpageshow']?bodavm.memory.globalobj['onpageshow']:null;console.log(`window_onpageshow_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpagehide_get=function (){let arg=bodavm.memory.globalobj['onpagehide']?bodavm.memory.globalobj['onpagehide']:null;console.log(`window_onpagehide_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ononline_get=function (){let arg=bodavm.memory.globalobj['ononline']?bodavm.memory.globalobj['ononline']:null;console.log(`window_ononline_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onoffline_get=function (){let arg=bodavm.memory.globalobj['onoffline']?bodavm.memory.globalobj['onoffline']:null;console.log(`window_onoffline_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onmessageerror_get=function (){let arg=bodavm.memory.globalobj['onmessageerror']?bodavm.memory.globalobj['onmessageerror']:null;console.log(`window_onmessageerror_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onlanguagechange_get=function (){let arg=bodavm.memory.globalobj['onlanguagechange']?bodavm.memory.globalobj['onlanguagechange']:null;console.log(`window_onlanguagechange_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onhashchange_get=function (){let arg=bodavm.memory.globalobj['onhashchange']?bodavm.memory.globalobj['onhashchange']:null;console.log(`window_onhashchange_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onbeforeprint_get=function (){let arg=bodavm.memory.globalobj['onbeforeprint']?bodavm.memory.globalobj['onbeforeprint']:null;console.log(`window_onbeforeprint_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onafterprint_get=function (){let arg=bodavm.memory.globalobj['onafterprint']?bodavm.memory.globalobj['onafterprint']:null;console.log(`window_onafterprint_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ontransitioncancel_get=function (){let arg=bodavm.memory.globalobj['ontransitioncancel']?bodavm.memory.globalobj['ontransitioncancel']:null;console.log(`window_ontransitioncancel_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ontransitionend_get=function (){let arg=bodavm.memory.globalobj['ontransitionend']?bodavm.memory.globalobj['ontransitionend']:null;console.log(`window_ontransitionend_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ontransitionstart_get=function (){let arg=bodavm.memory.globalobj['ontransitionstart']?bodavm.memory.globalobj['ontransitionstart']:null;console.log(`window_ontransitionstart_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ontransitionrun_get=function (){let arg=bodavm.memory.globalobj['ontransitionrun']?bodavm.memory.globalobj['ontransitionrun']:null;console.log(`window_ontransitionrun_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onanimationstart_get=function (){let arg=bodavm.memory.globalobj['onanimationstart']?bodavm.memory.globalobj['onanimationstart']:null;console.log(`window_onanimationstart_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onanimationiteration_get=function (){let arg=bodavm.memory.globalobj['onanimationiteration']?bodavm.memory.globalobj['onanimationiteration']:null;console.log(`window_onanimationiteration_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onanimationend_get=function (){let arg=bodavm.memory.globalobj['onanimationend']?bodavm.memory.globalobj['onanimationend']:null;console.log(`window_onanimationend_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onselectionchange_get=function (){let arg=bodavm.memory.globalobj['onselectionchange']?bodavm.memory.globalobj['onselectionchange']:null;console.log(`window_onselectionchange_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onselectstart_get=function (){let arg=bodavm.memory.globalobj['onselectstart']?bodavm.memory.globalobj['onselectstart']:null;console.log(`window_onselectstart_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpointerleave_get=function (){let arg=bodavm.memory.globalobj['onpointerleave']?bodavm.memory.globalobj['onpointerleave']:null;console.log(`window_onpointerleave_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpointerenter_get=function (){let arg=bodavm.memory.globalobj['onpointerenter']?bodavm.memory.globalobj['onpointerenter']:null;console.log(`window_onpointerenter_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpointerout_get=function (){let arg=bodavm.memory.globalobj['onpointerout']?bodavm.memory.globalobj['onpointerout']:null;console.log(`window_onpointerout_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpointerover_get=function (){let arg=bodavm.memory.globalobj['onpointerover']?bodavm.memory.globalobj['onpointerover']:null;console.log(`window_onpointerover_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpointercancel_get=function (){let arg=bodavm.memory.globalobj['onpointercancel']?bodavm.memory.globalobj['onpointercancel']:null;console.log(`window_onpointercancel_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpointerup_get=function (){let arg=bodavm.memory.globalobj['onpointerup']?bodavm.memory.globalobj['onpointerup']:null;console.log(`window_onpointerup_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpointermove_get=function (){let arg=bodavm.memory.globalobj['onpointermove']?bodavm.memory.globalobj['onpointermove']:null;console.log(`window_onpointermove_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpointerdown_get=function (){let arg=bodavm.memory.globalobj['onpointerdown']?bodavm.memory.globalobj['onpointerdown']:null;console.log(`window_onpointerdown_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onlostpointercapture_get=function (){let arg=bodavm.memory.globalobj['onlostpointercapture']?bodavm.memory.globalobj['onlostpointercapture']:null;console.log(`window_onlostpointercapture_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ongotpointercapture_get=function (){let arg=bodavm.memory.globalobj['ongotpointercapture']?bodavm.memory.globalobj['ongotpointercapture']:null;console.log(`window_ongotpointercapture_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onauxclick_get=function (){let arg=bodavm.memory.globalobj['onauxclick']?bodavm.memory.globalobj['onauxclick']:null;console.log(`window_onauxclick_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onwheel_get=function (){let arg=bodavm.memory.globalobj['onwheel']?bodavm.memory.globalobj['onwheel']:null;console.log(`window_onwheel_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onwebkittransitionend_get=function (){let arg=bodavm.memory.globalobj['onwebkittransitionend']?bodavm.memory.globalobj['onwebkittransitionend']:null;console.log(`window_onwebkittransitionend_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onwebkitanimationstart_get=function (){let arg=bodavm.memory.globalobj['onwebkitanimationstart']?bodavm.memory.globalobj['onwebkitanimationstart']:null;console.log(`window_onwebkitanimationstart_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onwebkitanimationiteration_get=function (){let arg=bodavm.memory.globalobj['onwebkitanimationiteration']?bodavm.memory.globalobj['onwebkitanimationiteration']:null;console.log(`window_onwebkitanimationiteration_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onwebkitanimationend_get=function (){let arg=bodavm.memory.globalobj['onwebkitanimationend']?bodavm.memory.globalobj['onwebkitanimationend']:null;console.log(`window_onwebkitanimationend_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onwaiting_get=function (){let arg=bodavm.memory.globalobj['onwaiting']?bodavm.memory.globalobj['onwaiting']:null;console.log(`window_onwaiting_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onvolumechange_get=function (){let arg=bodavm.memory.globalobj['onvolumechange']?bodavm.memory.globalobj['onvolumechange']:null;console.log(`window_onvolumechange_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ontoggle_get=function (){let arg=bodavm.memory.globalobj['ontoggle']?bodavm.memory.globalobj['ontoggle']:null;console.log(`window_ontoggle_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ontimeupdate_get=function (){let arg=bodavm.memory.globalobj['ontimeupdate']?bodavm.memory.globalobj['ontimeupdate']:null;console.log(`window_ontimeupdate_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onsuspend_get=function (){let arg=bodavm.memory.globalobj['onsuspend']?bodavm.memory.globalobj['onsuspend']:null;console.log(`window_onsuspend_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onsubmit_get=function (){let arg=bodavm.memory.globalobj['onsubmit']?bodavm.memory.globalobj['onsubmit']:null;console.log(`window_onsubmit_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onstalled_get=function (){let arg=bodavm.memory.globalobj['onstalled']?bodavm.memory.globalobj['onstalled']:null;console.log(`window_onstalled_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onslotchange_get=function (){let arg=bodavm.memory.globalobj['onslotchange']?bodavm.memory.globalobj['onslotchange']:null;console.log(`window_onslotchange_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onselect_get=function (){let arg=bodavm.memory.globalobj['onselect']?bodavm.memory.globalobj['onselect']:null;console.log(`window_onselect_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onseeking_get=function (){let arg=bodavm.memory.globalobj['onseeking']?bodavm.memory.globalobj['onseeking']:null;console.log(`window_onseeking_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onseeked_get=function (){let arg=bodavm.memory.globalobj['onseeked']?bodavm.memory.globalobj['onseeked']:null;console.log(`window_onseeked_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onsecuritypolicyviolation_get=function (){let arg=bodavm.memory.globalobj['onsecuritypolicyviolation']?bodavm.memory.globalobj['onsecuritypolicyviolation']:null;console.log(`window_onsecuritypolicyviolation_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onscroll_get=function (){let arg=bodavm.memory.globalobj['onscroll']?bodavm.memory.globalobj['onscroll']:null;console.log(`window_onscroll_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onresize_get=function (){let arg=bodavm.memory.globalobj['onresize']?bodavm.memory.globalobj['onresize']:null;console.log(`window_onresize_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onreset_get=function (){let arg=bodavm.memory.globalobj['onreset']?bodavm.memory.globalobj['onreset']:null;console.log(`window_onreset_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onratechange_get=function (){let arg=bodavm.memory.globalobj['onratechange']?bodavm.memory.globalobj['onratechange']:null;console.log(`window_onratechange_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onprogress_get=function (){let arg=bodavm.memory.globalobj['onprogress']?bodavm.memory.globalobj['onprogress']:null;console.log(`window_onprogress_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onplaying_get=function (){let arg=bodavm.memory.globalobj['onplaying']?bodavm.memory.globalobj['onplaying']:null;console.log(`window_onplaying_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onplay_get=function (){let arg=bodavm.memory.globalobj['onplay']?bodavm.memory.globalobj['onplay']:null;console.log(`window_onplay_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onpause_get=function (){let arg=bodavm.memory.globalobj['onpause']?bodavm.memory.globalobj['onpause']:null;console.log(`window_onpause_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onmousewheel_get=function (){let arg=bodavm.memory.globalobj['onmousewheel']?bodavm.memory.globalobj['onmousewheel']:null;console.log(`window_onmousewheel_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onmouseup_get=function (){let arg=bodavm.memory.globalobj['onmouseup']?bodavm.memory.globalobj['onmouseup']:null;console.log(`window_onmouseup_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onmouseover_get=function (){let arg=bodavm.memory.globalobj['onmouseover']?bodavm.memory.globalobj['onmouseover']:null;console.log(`window_onmouseover_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onmouseout_get=function (){let arg=bodavm.memory.globalobj['onmouseout']?bodavm.memory.globalobj['onmouseout']:null;console.log(`window_onmouseout_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onmousemove_get=function (){let arg=bodavm.memory.globalobj['onmousemove']?bodavm.memory.globalobj['onmousemove']:null;console.log(`window_onmousemove_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onmouseleave_get=function (){let arg=bodavm.memory.globalobj['onmouseleave']?bodavm.memory.globalobj['onmouseleave']:null;console.log(`window_onmouseleave_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onmouseenter_get=function (){let arg=bodavm.memory.globalobj['onmouseenter']?bodavm.memory.globalobj['onmouseenter']:null;console.log(`window_onmouseenter_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onmousedown_get=function (){let arg=bodavm.memory.globalobj['onmousedown']?bodavm.memory.globalobj['onmousedown']:null;console.log(`window_onmousedown_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onloadstart_get=function (){let arg=bodavm.memory.globalobj['onloadstart']?bodavm.memory.globalobj['onloadstart']:null;console.log(`window_onloadstart_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onloadedmetadata_get=function (){let arg=bodavm.memory.globalobj['onloadedmetadata']?bodavm.memory.globalobj['onloadedmetadata']:null;console.log(`window_onloadedmetadata_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onloadeddata_get=function (){let arg=bodavm.memory.globalobj['onloadeddata']?bodavm.memory.globalobj['onloadeddata']:null;console.log(`window_onloadeddata_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onload_get=function (){let arg=bodavm.memory.globalobj['onload']?bodavm.memory.globalobj['onload']:null;console.log(`window_onload_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onkeyup_get=function (){let arg=bodavm.memory.globalobj['onkeyup']?bodavm.memory.globalobj['onkeyup']:null;console.log(`window_onkeyup_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onkeypress_get=function (){let arg=bodavm.memory.globalobj['onkeypress']?bodavm.memory.globalobj['onkeypress']:null;console.log(`window_onkeypress_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onkeydown_get=function (){let arg=bodavm.memory.globalobj['onkeydown']?bodavm.memory.globalobj['onkeydown']:null;console.log(`window_onkeydown_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_oninvalid_get=function (){let arg=bodavm.memory.globalobj['oninvalid']?bodavm.memory.globalobj['oninvalid']:null;console.log(`window_oninvalid_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_oninput_get=function (){let arg=bodavm.memory.globalobj['oninput']?bodavm.memory.globalobj['oninput']:null;console.log(`window_oninput_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onformdata_get=function (){let arg=bodavm.memory.globalobj['onformdata']?bodavm.memory.globalobj['onformdata']:null;console.log(`window_onformdata_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onfocus_get=function (){let arg=bodavm.memory.globalobj['onfocus']?bodavm.memory.globalobj['onfocus']:null;console.log(`window_onfocus_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onerror_get=function (){let arg=bodavm.memory.globalobj['onerror']?bodavm.memory.globalobj['onerror']:null;console.log(`window_onerror_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onended_get=function (){let arg=bodavm.memory.globalobj['onended']?bodavm.memory.globalobj['onended']:null;console.log(`window_onended_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onemptied_get=function (){let arg=bodavm.memory.globalobj['onemptied']?bodavm.memory.globalobj['onemptied']:null;console.log(`window_onemptied_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondurationchange_get=function (){let arg=bodavm.memory.globalobj['ondurationchange']?bodavm.memory.globalobj['ondurationchange']:null;console.log(`window_ondurationchange_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondrop_get=function (){let arg=bodavm.memory.globalobj['ondrop']?bodavm.memory.globalobj['ondrop']:null;console.log(`window_ondrop_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondragstart_get=function (){let arg=bodavm.memory.globalobj['ondragstart']?bodavm.memory.globalobj['ondragstart']:null;console.log(`window_ondragstart_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondragover_get=function (){let arg=bodavm.memory.globalobj['ondragover']?bodavm.memory.globalobj['ondragover']:null;console.log(`window_ondragover_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondragleave_get=function (){let arg=bodavm.memory.globalobj['ondragleave']?bodavm.memory.globalobj['ondragleave']:null;console.log(`window_ondragleave_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondragenter_get=function (){let arg=bodavm.memory.globalobj['ondragenter']?bodavm.memory.globalobj['ondragenter']:null;console.log(`window_ondragenter_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondragend_get=function (){let arg=bodavm.memory.globalobj['ondragend']?bodavm.memory.globalobj['ondragend']:null;console.log(`window_ondragend_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondrag_get=function (){let arg=bodavm.memory.globalobj['ondrag']?bodavm.memory.globalobj['ondrag']:null;console.log(`window_ondrag_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_ondblclick_get=function (){let arg=bodavm.memory.globalobj['ondblclick']?bodavm.memory.globalobj['ondblclick']:null;console.log(`window_ondblclick_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_oncuechange_get=function (){let arg=bodavm.memory.globalobj['oncuechange']?bodavm.memory.globalobj['oncuechange']:null;console.log(`window_oncuechange_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_oncontextrestored_get=function (){let arg=bodavm.memory.globalobj['oncontextrestored']?bodavm.memory.globalobj['oncontextrestored']:null;console.log(`window_oncontextrestored_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_oncontextmenu_get=function (){let arg=bodavm.memory.globalobj['oncontextmenu']?bodavm.memory.globalobj['oncontextmenu']:null;console.log(`window_oncontextmenu_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_oncontextlost_get=function (){let arg=bodavm.memory.globalobj['oncontextlost']?bodavm.memory.globalobj['oncontextlost']:null;console.log(`window_oncontextlost_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onclose_get=function (){let arg=bodavm.memory.globalobj['onclose']?bodavm.memory.globalobj['onclose']:null;console.log(`window_onclose_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onclick_get=function (){let arg=bodavm.memory.globalobj['onclick']?bodavm.memory.globalobj['onclick']:null;console.log(`window_onclick_get`,`-> res ->${arg}`);return arg}
+    bodavm.envFunc.window_onchange_get=function (){let arg=bodavm.memory.globalobj['onchange']?bodavm.memory.globalobj['onchange']:null;console.log(`window_onchange_get`,`-> res ->${arg}`);return arg}
 
-    bodavm.envFunc.window_$x = function () { let arg = bodavm.memory.globalobj['$x']; console.log(`window_$x`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_$$ = function () { let arg = bodavm.memory.globalobj['$$']; console.log(`window_$$`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_$ = function () { let arg = bodavm.memory.globalobj['$']; console.log(`window_$`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_unmonitorEvents = function () { let arg = bodavm.memory.globalobj['unmonitorEvents']; console.log(`window_unmonitorEvents`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_monitorEvents = function () { let arg = bodavm.memory.globalobj['monitorEvents']; console.log(`window_monitorEvents`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_getAccessibleRole = function () { let arg = bodavm.memory.globalobj['getAccessibleRole']; console.log(`window_getAccessibleRole`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_getAccessibleName = function () { let arg = bodavm.memory.globalobj['getAccessibleName']; console.log(`window_getAccessibleName`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_getEventListeners = function () { let arg = bodavm.memory.globalobj['getEventListeners']; console.log(`window_getEventListeners`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_queryObjects = function () { let arg = bodavm.memory.globalobj['queryObjects']; console.log(`window_queryObjects`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_copy = function () { let arg = bodavm.memory.globalobj['copy']; console.log(`window_copy`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_inspect = function () { let arg = bodavm.memory.globalobj['inspect']; console.log(`window_inspect`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_unmonitor = function () { let arg = bodavm.memory.globalobj['unmonitor']; console.log(`window_unmonitor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_monitor = function () { let arg = bodavm.memory.globalobj['monitor']; console.log(`window_monitor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_undebug = function () { let arg = bodavm.memory.globalobj['undebug']; console.log(`window_undebug`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_debug = function () { let arg = bodavm.memory.globalobj['debug']; console.log(`window_debug`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_values = function () { let arg = bodavm.memory.globalobj['values']; console.log(`window_values`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_keys = function () { let arg = bodavm.memory.globalobj['keys']; console.log(`window_keys`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_table = function () { let arg = bodavm.memory.globalobj['table']; console.log(`window_table`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_clear = function () { let arg = bodavm.memory.globalobj['clear']; console.log(`window_clear`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_profileEnd = function () { let arg = bodavm.memory.globalobj['profileEnd']; console.log(`window_profileEnd`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_profile = function () { let arg = bodavm.memory.globalobj['profile']; console.log(`window_profile`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_dirxml = function () { let arg = bodavm.memory.globalobj['dirxml']; console.log(`window_dirxml`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_dir = function () { let arg = bodavm.memory.globalobj['dir']; console.log(`window_dir`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitResolveLocalFileSystemURL = function () { let arg = bodavm.memory.globalobj['webkitResolveLocalFileSystemURL']; console.log(`window_webkitResolveLocalFileSystemURL`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitSpeechRecognitionEvent = function () { let arg = bodavm.memory.globalobj['webkitSpeechRecognitionEvent']; console.log(`window_webkitSpeechRecognitionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitSpeechRecognitionError = function () { let arg = bodavm.memory.globalobj['webkitSpeechRecognitionError']; console.log(`window_webkitSpeechRecognitionError`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitSpeechRecognition = function () { let arg = bodavm.memory.globalobj['webkitSpeechRecognition']; console.log(`window_webkitSpeechRecognition`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitSpeechGrammarList = function () { let arg = bodavm.memory.globalobj['webkitSpeechGrammarList']; console.log(`window_webkitSpeechGrammarList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitSpeechGrammar = function () { let arg = bodavm.memory.globalobj['webkitSpeechGrammar']; console.log(`window_webkitSpeechGrammar`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XSLTProcessor = function () { let arg = bodavm.memory.globalobj['XSLTProcessor']; console.log(`window_XSLTProcessor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_VirtualKeyboardGeometryChangeEvent = function () { let arg = bodavm.memory.globalobj['VirtualKeyboardGeometryChangeEvent']; console.log(`window_VirtualKeyboardGeometryChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_VideoPlaybackQuality = function () { let arg = bodavm.memory.globalobj['VideoPlaybackQuality']; console.log(`window_VideoPlaybackQuality`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_URLPattern = function () { let arg = bodavm.memory.globalobj['URLPattern']; console.log(`window_URLPattern`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TrustedTypePolicy = function () { let arg = bodavm.memory.globalobj['TrustedTypePolicy']; console.log(`window_TrustedTypePolicy`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TrustedScriptURL = function () { let arg = bodavm.memory.globalobj['TrustedScriptURL']; console.log(`window_TrustedScriptURL`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TrustedScript = function () { let arg = bodavm.memory.globalobj['TrustedScript']; console.log(`window_TrustedScript`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TrustedHTML = function () { let arg = bodavm.memory.globalobj['TrustedHTML']; console.log(`window_TrustedHTML`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SpeechSynthesisUtterance = function () { let arg = bodavm.memory.globalobj['SpeechSynthesisUtterance']; console.log(`window_SpeechSynthesisUtterance`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SpeechSynthesisEvent = function () { let arg = bodavm.memory.globalobj['SpeechSynthesisEvent']; console.log(`window_SpeechSynthesisEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SpeechSynthesisErrorEvent = function () { let arg = bodavm.memory.globalobj['SpeechSynthesisErrorEvent']; console.log(`window_SpeechSynthesisErrorEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SharedWorker = function () { let arg = bodavm.memory.globalobj['SharedWorker']; console.log(`window_SharedWorker`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TaskSignal = function () { let arg = bodavm.memory.globalobj['TaskSignal']; console.log(`window_TaskSignal`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TaskPriorityChangeEvent = function () { let arg = bodavm.memory.globalobj['TaskPriorityChangeEvent']; console.log(`window_TaskPriorityChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TaskController = function () { let arg = bodavm.memory.globalobj['TaskController']; console.log(`window_TaskController`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Scheduler = function () { let arg = bodavm.memory.globalobj['Scheduler']; console.log(`window_Scheduler`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RemotePlayback = function () { let arg = bodavm.memory.globalobj['RemotePlayback']; console.log(`window_RemotePlayback`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PushSubscriptionOptions = function () { let arg = bodavm.memory.globalobj['PushSubscriptionOptions']; console.log(`window_PushSubscriptionOptions`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PushSubscription = function () { let arg = bodavm.memory.globalobj['PushSubscription']; console.log(`window_PushSubscription`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PushManager = function () { let arg = bodavm.memory.globalobj['PushManager']; console.log(`window_PushManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PictureInPictureWindow = function () { let arg = bodavm.memory.globalobj['PictureInPictureWindow']; console.log(`window_PictureInPictureWindow`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PictureInPictureEvent = function () { let arg = bodavm.memory.globalobj['PictureInPictureEvent']; console.log(`window_PictureInPictureEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Permissions = function () { let arg = bodavm.memory.globalobj['Permissions']; console.log(`window_Permissions`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PermissionStatus = function () { let arg = bodavm.memory.globalobj['PermissionStatus']; console.log(`window_PermissionStatus`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PeriodicSyncManager = function () { let arg = bodavm.memory.globalobj['PeriodicSyncManager']; console.log(`window_PeriodicSyncManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PaymentRequestUpdateEvent = function () { let arg = bodavm.memory.globalobj['PaymentRequestUpdateEvent']; console.log(`window_PaymentRequestUpdateEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PaymentManager = function () { let arg = bodavm.memory.globalobj['PaymentManager']; console.log(`window_PaymentManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PaymentInstruments = function () { let arg = bodavm.memory.globalobj['PaymentInstruments']; console.log(`window_PaymentInstruments`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Notification = function () { let arg = bodavm.memory.globalobj['Notification']; console.log(`window_Notification`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NavigatorUAData = function () { let arg = bodavm.memory.globalobj['NavigatorUAData']; console.log(`window_NavigatorUAData`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NavigationTransition = function () { let arg = bodavm.memory.globalobj['NavigationTransition']; console.log(`window_NavigationTransition`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NavigationHistoryEntry = function () { let arg = bodavm.memory.globalobj['NavigationHistoryEntry']; console.log(`window_NavigationHistoryEntry`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NavigationDestination = function () { let arg = bodavm.memory.globalobj['NavigationDestination']; console.log(`window_NavigationDestination`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NavigationCurrentEntryChangeEvent = function () { let arg = bodavm.memory.globalobj['NavigationCurrentEntryChangeEvent']; console.log(`window_NavigationCurrentEntryChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NavigateEvent = function () { let arg = bodavm.memory.globalobj['NavigateEvent']; console.log(`window_NavigateEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaStreamTrack = function () { let arg = bodavm.memory.globalobj['MediaStreamTrack']; console.log(`window_MediaStreamTrack`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SourceBufferList = function () { let arg = bodavm.memory.globalobj['SourceBufferList']; console.log(`window_SourceBufferList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SourceBuffer = function () { let arg = bodavm.memory.globalobj['SourceBuffer']; console.log(`window_SourceBuffer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaSource = function () { let arg = bodavm.memory.globalobj['MediaSource']; console.log(`window_MediaSource`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaSession = function () { let arg = bodavm.memory.globalobj['MediaSession']; console.log(`window_MediaSession`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaMetadata = function () { let arg = bodavm.memory.globalobj['MediaMetadata']; console.log(`window_MediaMetadata`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Ink = function () { let arg = bodavm.memory.globalobj['Ink']; console.log(`window_Ink`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DelegatedInkTrailPresenter = function () { let arg = bodavm.memory.globalobj['DelegatedInkTrailPresenter']; console.log(`window_DelegatedInkTrailPresenter`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CustomStateSet = function () { let arg = bodavm.memory.globalobj['CustomStateSet']; console.log(`window_CustomStateSet`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CaptureHandleChangeEvent = function () { let arg = bodavm.memory.globalobj['CaptureHandleChangeEvent']; console.log(`window_CaptureHandleChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSFontPaletteValuesRule = function () { let arg = bodavm.memory.globalobj['CSSFontPaletteValuesRule']; console.log(`window_CSSFontPaletteValuesRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BluetoothUUID = function () { let arg = bodavm.memory.globalobj['BluetoothUUID']; console.log(`window_BluetoothUUID`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BackgroundFetchRegistration = function () { let arg = bodavm.memory.globalobj['BackgroundFetchRegistration']; console.log(`window_BackgroundFetchRegistration`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BackgroundFetchRecord = function () { let arg = bodavm.memory.globalobj['BackgroundFetchRecord']; console.log(`window_BackgroundFetchRecord`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BackgroundFetchManager = function () { let arg = bodavm.memory.globalobj['BackgroundFetchManager']; console.log(`window_BackgroundFetchManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DocumentTimeline = function () { let arg = bodavm.memory.globalobj['DocumentTimeline']; console.log(`window_DocumentTimeline`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSTransition = function () { let arg = bodavm.memory.globalobj['CSSTransition']; console.log(`window_CSSTransition`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSAnimation = function () { let arg = bodavm.memory.globalobj['CSSAnimation']; console.log(`window_CSSAnimation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AnimationTimeline = function () { let arg = bodavm.memory.globalobj['AnimationTimeline']; console.log(`window_AnimationTimeline`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AnimationPlaybackEvent = function () { let arg = bodavm.memory.globalobj['AnimationPlaybackEvent']; console.log(`window_AnimationPlaybackEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_showSaveFilePicker = function () { let arg = bodavm.memory.globalobj['showSaveFilePicker']; console.log(`window_showSaveFilePicker`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_showOpenFilePicker = function () { let arg = bodavm.memory.globalobj['showOpenFilePicker']; console.log(`window_showOpenFilePicker`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_showDirectoryPicker = function () { let arg = bodavm.memory.globalobj['showDirectoryPicker']; console.log(`window_showDirectoryPicker`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_getScreenDetails = function () { let arg = bodavm.memory.globalobj['getScreenDetails']; console.log(`window_getScreenDetails`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRLightProbe = function () { let arg = bodavm.memory.globalobj['XRLightProbe']; console.log(`window_XRLightProbe`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRLightEstimate = function () { let arg = bodavm.memory.globalobj['XRLightEstimate']; console.log(`window_XRLightEstimate`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRTransientInputHitTestSource = function () { let arg = bodavm.memory.globalobj['XRTransientInputHitTestSource']; console.log(`window_XRTransientInputHitTestSource`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRTransientInputHitTestResult = function () { let arg = bodavm.memory.globalobj['XRTransientInputHitTestResult']; console.log(`window_XRTransientInputHitTestResult`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRRay = function () { let arg = bodavm.memory.globalobj['XRRay']; console.log(`window_XRRay`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRHitTestSource = function () { let arg = bodavm.memory.globalobj['XRHitTestSource']; console.log(`window_XRHitTestSource`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRHitTestResult = function () { let arg = bodavm.memory.globalobj['XRHitTestResult']; console.log(`window_XRHitTestResult`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRWebGLDepthInformation = function () { let arg = bodavm.memory.globalobj['XRWebGLDepthInformation']; console.log(`window_XRWebGLDepthInformation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRDepthInformation = function () { let arg = bodavm.memory.globalobj['XRDepthInformation']; console.log(`window_XRDepthInformation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRCPUDepthInformation = function () { let arg = bodavm.memory.globalobj['XRCPUDepthInformation']; console.log(`window_XRCPUDepthInformation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRWebGLLayer = function () { let arg = bodavm.memory.globalobj['XRWebGLLayer']; console.log(`window_XRWebGLLayer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRViewport = function () { let arg = bodavm.memory.globalobj['XRViewport']; console.log(`window_XRViewport`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRViewerPose = function () { let arg = bodavm.memory.globalobj['XRViewerPose']; console.log(`window_XRViewerPose`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRView = function () { let arg = bodavm.memory.globalobj['XRView']; console.log(`window_XRView`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRSystem = function () { let arg = bodavm.memory.globalobj['XRSystem']; console.log(`window_XRSystem`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRSpace = function () { let arg = bodavm.memory.globalobj['XRSpace']; console.log(`window_XRSpace`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRSessionEvent = function () { let arg = bodavm.memory.globalobj['XRSessionEvent']; console.log(`window_XRSessionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRSession = function () { let arg = bodavm.memory.globalobj['XRSession']; console.log(`window_XRSession`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRRigidTransform = function () { let arg = bodavm.memory.globalobj['XRRigidTransform']; console.log(`window_XRRigidTransform`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRRenderState = function () { let arg = bodavm.memory.globalobj['XRRenderState']; console.log(`window_XRRenderState`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRReferenceSpaceEvent = function () { let arg = bodavm.memory.globalobj['XRReferenceSpaceEvent']; console.log(`window_XRReferenceSpaceEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRReferenceSpace = function () { let arg = bodavm.memory.globalobj['XRReferenceSpace']; console.log(`window_XRReferenceSpace`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRPose = function () { let arg = bodavm.memory.globalobj['XRPose']; console.log(`window_XRPose`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRInputSourcesChangeEvent = function () { let arg = bodavm.memory.globalobj['XRInputSourcesChangeEvent']; console.log(`window_XRInputSourcesChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRInputSourceEvent = function () { let arg = bodavm.memory.globalobj['XRInputSourceEvent']; console.log(`window_XRInputSourceEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRInputSourceArray = function () { let arg = bodavm.memory.globalobj['XRInputSourceArray']; console.log(`window_XRInputSourceArray`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRInputSource = function () { let arg = bodavm.memory.globalobj['XRInputSource']; console.log(`window_XRInputSource`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRFrame = function () { let arg = bodavm.memory.globalobj['XRFrame']; console.log(`window_XRFrame`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRBoundedReferenceSpace = function () { let arg = bodavm.memory.globalobj['XRBoundedReferenceSpace']; console.log(`window_XRBoundedReferenceSpace`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRAnchorSet = function () { let arg = bodavm.memory.globalobj['XRAnchorSet']; console.log(`window_XRAnchorSet`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRAnchor = function () { let arg = bodavm.memory.globalobj['XRAnchor']; console.log(`window_XRAnchor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebTransportError = function () { let arg = bodavm.memory.globalobj['WebTransportError']; console.log(`window_WebTransportError`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebTransportDatagramDuplexStream = function () { let arg = bodavm.memory.globalobj['WebTransportDatagramDuplexStream']; console.log(`window_WebTransportDatagramDuplexStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebTransportBidirectionalStream = function () { let arg = bodavm.memory.globalobj['WebTransportBidirectionalStream']; console.log(`window_WebTransportBidirectionalStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebTransport = function () { let arg = bodavm.memory.globalobj['WebTransport']; console.log(`window_WebTransport`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WakeLockSentinel = function () { let arg = bodavm.memory.globalobj['WakeLockSentinel']; console.log(`window_WakeLockSentinel`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WakeLock = function () { let arg = bodavm.memory.globalobj['WakeLock']; console.log(`window_WakeLock`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_VirtualKeyboard = function () { let arg = bodavm.memory.globalobj['VirtualKeyboard']; console.log(`window_VirtualKeyboard`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBOutTransferResult = function () { let arg = bodavm.memory.globalobj['USBOutTransferResult']; console.log(`window_USBOutTransferResult`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBIsochronousOutTransferResult = function () { let arg = bodavm.memory.globalobj['USBIsochronousOutTransferResult']; console.log(`window_USBIsochronousOutTransferResult`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBIsochronousOutTransferPacket = function () { let arg = bodavm.memory.globalobj['USBIsochronousOutTransferPacket']; console.log(`window_USBIsochronousOutTransferPacket`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBIsochronousInTransferResult = function () { let arg = bodavm.memory.globalobj['USBIsochronousInTransferResult']; console.log(`window_USBIsochronousInTransferResult`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBIsochronousInTransferPacket = function () { let arg = bodavm.memory.globalobj['USBIsochronousInTransferPacket']; console.log(`window_USBIsochronousInTransferPacket`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBInterface = function () { let arg = bodavm.memory.globalobj['USBInterface']; console.log(`window_USBInterface`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBInTransferResult = function () { let arg = bodavm.memory.globalobj['USBInTransferResult']; console.log(`window_USBInTransferResult`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBEndpoint = function () { let arg = bodavm.memory.globalobj['USBEndpoint']; console.log(`window_USBEndpoint`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBDevice = function () { let arg = bodavm.memory.globalobj['USBDevice']; console.log(`window_USBDevice`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBConnectionEvent = function () { let arg = bodavm.memory.globalobj['USBConnectionEvent']; console.log(`window_USBConnectionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBConfiguration = function () { let arg = bodavm.memory.globalobj['USBConfiguration']; console.log(`window_USBConfiguration`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USBAlternateInterface = function () { let arg = bodavm.memory.globalobj['USBAlternateInterface']; console.log(`window_USBAlternateInterface`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_USB = function () { let arg = bodavm.memory.globalobj['USB']; console.log(`window_USB`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SerialPort = function () { let arg = bodavm.memory.globalobj['SerialPort']; console.log(`window_SerialPort`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Serial = function () { let arg = bodavm.memory.globalobj['Serial']; console.log(`window_Serial`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ScreenDetails = function () { let arg = bodavm.memory.globalobj['ScreenDetails']; console.log(`window_ScreenDetails`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ScreenDetailed = function () { let arg = bodavm.memory.globalobj['ScreenDetailed']; console.log(`window_ScreenDetailed`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Scheduling = function () { let arg = bodavm.memory.globalobj['Scheduling']; console.log(`window_Scheduling`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Profiler = function () { let arg = bodavm.memory.globalobj['Profiler']; console.log(`window_Profiler`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PresentationRequest = function () { let arg = bodavm.memory.globalobj['PresentationRequest']; console.log(`window_PresentationRequest`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PresentationReceiver = function () { let arg = bodavm.memory.globalobj['PresentationReceiver']; console.log(`window_PresentationReceiver`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PresentationConnectionList = function () { let arg = bodavm.memory.globalobj['PresentationConnectionList']; console.log(`window_PresentationConnectionList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PresentationConnectionCloseEvent = function () { let arg = bodavm.memory.globalobj['PresentationConnectionCloseEvent']; console.log(`window_PresentationConnectionCloseEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PresentationConnectionAvailableEvent = function () { let arg = bodavm.memory.globalobj['PresentationConnectionAvailableEvent']; console.log(`window_PresentationConnectionAvailableEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PresentationConnection = function () { let arg = bodavm.memory.globalobj['PresentationConnection']; console.log(`window_PresentationConnection`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PresentationAvailability = function () { let arg = bodavm.memory.globalobj['PresentationAvailability']; console.log(`window_PresentationAvailability`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Presentation = function () { let arg = bodavm.memory.globalobj['Presentation']; console.log(`window_Presentation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PaymentMethodChangeEvent = function () { let arg = bodavm.memory.globalobj['PaymentMethodChangeEvent']; console.log(`window_PaymentMethodChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PaymentResponse = function () { let arg = bodavm.memory.globalobj['PaymentResponse']; console.log(`window_PaymentResponse`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PaymentRequest = function () { let arg = bodavm.memory.globalobj['PaymentRequest']; console.log(`window_PaymentRequest`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PaymentAddress = function () { let arg = bodavm.memory.globalobj['PaymentAddress']; console.log(`window_PaymentAddress`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_OTPCredential = function () { let arg = bodavm.memory.globalobj['OTPCredential']; console.log(`window_OTPCredential`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaStreamTrackProcessor = function () { let arg = bodavm.memory.globalobj['MediaStreamTrackProcessor']; console.log(`window_MediaStreamTrackProcessor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaStreamTrackGenerator = function () { let arg = bodavm.memory.globalobj['MediaStreamTrackGenerator']; console.log(`window_MediaStreamTrackGenerator`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IdleDetector = function () { let arg = bodavm.memory.globalobj['IdleDetector']; console.log(`window_IdleDetector`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HIDInputReportEvent = function () { let arg = bodavm.memory.globalobj['HIDInputReportEvent']; console.log(`window_HIDInputReportEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HIDDevice = function () { let arg = bodavm.memory.globalobj['HIDDevice']; console.log(`window_HIDDevice`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HIDConnectionEvent = function () { let arg = bodavm.memory.globalobj['HIDConnectionEvent']; console.log(`window_HIDConnectionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HID = function () { let arg = bodavm.memory.globalobj['HID']; console.log(`window_HID`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_GravitySensor = function () { let arg = bodavm.memory.globalobj['GravitySensor']; console.log(`window_GravitySensor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FragmentDirective = function () { let arg = bodavm.memory.globalobj['FragmentDirective']; console.log(`window_FragmentDirective`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FileSystemWritableFileStream = function () { let arg = bodavm.memory.globalobj['FileSystemWritableFileStream']; console.log(`window_FileSystemWritableFileStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FileSystemHandle = function () { let arg = bodavm.memory.globalobj['FileSystemHandle']; console.log(`window_FileSystemHandle`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FileSystemFileHandle = function () { let arg = bodavm.memory.globalobj['FileSystemFileHandle']; console.log(`window_FileSystemFileHandle`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FileSystemDirectoryHandle = function () { let arg = bodavm.memory.globalobj['FileSystemDirectoryHandle']; console.log(`window_FileSystemDirectoryHandle`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_EyeDropper = function () { let arg = bodavm.memory.globalobj['EyeDropper']; console.log(`window_EyeDropper`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BluetoothRemoteGATTService = function () { let arg = bodavm.memory.globalobj['BluetoothRemoteGATTService']; console.log(`window_BluetoothRemoteGATTService`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BluetoothRemoteGATTServer = function () { let arg = bodavm.memory.globalobj['BluetoothRemoteGATTServer']; console.log(`window_BluetoothRemoteGATTServer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BluetoothRemoteGATTDescriptor = function () { let arg = bodavm.memory.globalobj['BluetoothRemoteGATTDescriptor']; console.log(`window_BluetoothRemoteGATTDescriptor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BluetoothRemoteGATTCharacteristic = function () { let arg = bodavm.memory.globalobj['BluetoothRemoteGATTCharacteristic']; console.log(`window_BluetoothRemoteGATTCharacteristic`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BluetoothDevice = function () { let arg = bodavm.memory.globalobj['BluetoothDevice']; console.log(`window_BluetoothDevice`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BluetoothCharacteristicProperties = function () { let arg = bodavm.memory.globalobj['BluetoothCharacteristicProperties']; console.log(`window_BluetoothCharacteristicProperties`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Bluetooth = function () { let arg = bodavm.memory.globalobj['Bluetooth']; console.log(`window_Bluetooth`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PublicKeyCredential = function () { let arg = bodavm.memory.globalobj['PublicKeyCredential']; console.log(`window_PublicKeyCredential`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AuthenticatorResponse = function () { let arg = bodavm.memory.globalobj['AuthenticatorResponse']; console.log(`window_AuthenticatorResponse`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AuthenticatorAttestationResponse = function () { let arg = bodavm.memory.globalobj['AuthenticatorAttestationResponse']; console.log(`window_AuthenticatorAttestationResponse`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AuthenticatorAssertionResponse = function () { let arg = bodavm.memory.globalobj['AuthenticatorAssertionResponse']; console.log(`window_AuthenticatorAssertionResponse`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_VideoEncoder = function () { let arg = bodavm.memory.globalobj['VideoEncoder']; console.log(`window_VideoEncoder`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_VideoDecoder = function () { let arg = bodavm.memory.globalobj['VideoDecoder']; console.log(`window_VideoDecoder`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ImageDecoder = function () { let arg = bodavm.memory.globalobj['ImageDecoder']; console.log(`window_ImageDecoder`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioEncoder = function () { let arg = bodavm.memory.globalobj['AudioEncoder']; console.log(`window_AudioEncoder`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioDecoder = function () { let arg = bodavm.memory.globalobj['AudioDecoder']; console.log(`window_AudioDecoder`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_VideoFrame = function () { let arg = bodavm.memory.globalobj['VideoFrame']; console.log(`window_VideoFrame`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_VideoColorSpace = function () { let arg = bodavm.memory.globalobj['VideoColorSpace']; console.log(`window_VideoColorSpace`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ImageTrackList = function () { let arg = bodavm.memory.globalobj['ImageTrackList']; console.log(`window_ImageTrackList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ImageTrack = function () { let arg = bodavm.memory.globalobj['ImageTrack']; console.log(`window_ImageTrack`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_EncodedVideoChunk = function () { let arg = bodavm.memory.globalobj['EncodedVideoChunk']; console.log(`window_EncodedVideoChunk`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_EncodedAudioChunk = function () { let arg = bodavm.memory.globalobj['EncodedAudioChunk']; console.log(`window_EncodedAudioChunk`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioData = function () { let arg = bodavm.memory.globalobj['AudioData']; console.log(`window_AudioData`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRWebGLBinding = function () { let arg = bodavm.memory.globalobj['XRWebGLBinding']; console.log(`window_XRWebGLBinding`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRLayer = function () { let arg = bodavm.memory.globalobj['XRLayer']; console.log(`window_XRLayer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XRDOMOverlayState = function () { let arg = bodavm.memory.globalobj['XRDOMOverlayState']; console.log(`window_XRDOMOverlayState`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Worklet = function () { let arg = bodavm.memory.globalobj['Worklet']; console.log(`window_Worklet`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SubtleCrypto = function () { let arg = bodavm.memory.globalobj['SubtleCrypto']; console.log(`window_SubtleCrypto`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_StorageManager = function () { let arg = bodavm.memory.globalobj['StorageManager']; console.log(`window_StorageManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ServiceWorkerRegistration = function () { let arg = bodavm.memory.globalobj['ServiceWorkerRegistration']; console.log(`window_ServiceWorkerRegistration`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ServiceWorkerContainer = function () { let arg = bodavm.memory.globalobj['ServiceWorkerContainer']; console.log(`window_ServiceWorkerContainer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ServiceWorker = function () { let arg = bodavm.memory.globalobj['ServiceWorker']; console.log(`window_ServiceWorker`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SensorErrorEvent = function () { let arg = bodavm.memory.globalobj['SensorErrorEvent']; console.log(`window_SensorErrorEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Sensor = function () { let arg = bodavm.memory.globalobj['Sensor']; console.log(`window_Sensor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RelativeOrientationSensor = function () { let arg = bodavm.memory.globalobj['RelativeOrientationSensor']; console.log(`window_RelativeOrientationSensor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCIceTransport = function () { let arg = bodavm.memory.globalobj['RTCIceTransport']; console.log(`window_RTCIceTransport`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PasswordCredential = function () { let arg = bodavm.memory.globalobj['PasswordCredential']; console.log(`window_PasswordCredential`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_OrientationSensor = function () { let arg = bodavm.memory.globalobj['OrientationSensor']; console.log(`window_OrientationSensor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NavigatorManagedData = function () { let arg = bodavm.memory.globalobj['NavigatorManagedData']; console.log(`window_NavigatorManagedData`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NavigationPreloadManager = function () { let arg = bodavm.memory.globalobj['NavigationPreloadManager']; console.log(`window_NavigationPreloadManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaKeys = function () { let arg = bodavm.memory.globalobj['MediaKeys']; console.log(`window_MediaKeys`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaKeySystemAccess = function () { let arg = bodavm.memory.globalobj['MediaKeySystemAccess']; console.log(`window_MediaKeySystemAccess`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaKeyStatusMap = function () { let arg = bodavm.memory.globalobj['MediaKeyStatusMap']; console.log(`window_MediaKeyStatusMap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaKeySession = function () { let arg = bodavm.memory.globalobj['MediaKeySession']; console.log(`window_MediaKeySession`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaKeyMessageEvent = function () { let arg = bodavm.memory.globalobj['MediaKeyMessageEvent']; console.log(`window_MediaKeyMessageEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaDevices = function () { let arg = bodavm.memory.globalobj['MediaDevices']; console.log(`window_MediaDevices`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaDeviceInfo = function () { let arg = bodavm.memory.globalobj['MediaDeviceInfo']; console.log(`window_MediaDeviceInfo`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MIDIPort = function () { let arg = bodavm.memory.globalobj['MIDIPort']; console.log(`window_MIDIPort`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MIDIOutputMap = function () { let arg = bodavm.memory.globalobj['MIDIOutputMap']; console.log(`window_MIDIOutputMap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MIDIOutput = function () { let arg = bodavm.memory.globalobj['MIDIOutput']; console.log(`window_MIDIOutput`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MIDIMessageEvent = function () { let arg = bodavm.memory.globalobj['MIDIMessageEvent']; console.log(`window_MIDIMessageEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MIDIInputMap = function () { let arg = bodavm.memory.globalobj['MIDIInputMap']; console.log(`window_MIDIInputMap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MIDIInput = function () { let arg = bodavm.memory.globalobj['MIDIInput']; console.log(`window_MIDIInput`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MIDIConnectionEvent = function () { let arg = bodavm.memory.globalobj['MIDIConnectionEvent']; console.log(`window_MIDIConnectionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MIDIAccess = function () { let arg = bodavm.memory.globalobj['MIDIAccess']; console.log(`window_MIDIAccess`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_LockManager = function () { let arg = bodavm.memory.globalobj['LockManager']; console.log(`window_LockManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Lock = function () { let arg = bodavm.memory.globalobj['Lock']; console.log(`window_Lock`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_LinearAccelerationSensor = function () { let arg = bodavm.memory.globalobj['LinearAccelerationSensor']; console.log(`window_LinearAccelerationSensor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_KeyboardLayoutMap = function () { let arg = bodavm.memory.globalobj['KeyboardLayoutMap']; console.log(`window_KeyboardLayoutMap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Keyboard = function () { let arg = bodavm.memory.globalobj['Keyboard']; console.log(`window_Keyboard`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Gyroscope = function () { let arg = bodavm.memory.globalobj['Gyroscope']; console.log(`window_Gyroscope`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FederatedCredential = function () { let arg = bodavm.memory.globalobj['FederatedCredential']; console.log(`window_FederatedCredential`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DeviceOrientationEvent = function () { let arg = bodavm.memory.globalobj['DeviceOrientationEvent']; console.log(`window_DeviceOrientationEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DeviceMotionEventRotationRate = function () { let arg = bodavm.memory.globalobj['DeviceMotionEventRotationRate']; console.log(`window_DeviceMotionEventRotationRate`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DeviceMotionEventAcceleration = function () { let arg = bodavm.memory.globalobj['DeviceMotionEventAcceleration']; console.log(`window_DeviceMotionEventAcceleration`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DeviceMotionEvent = function () { let arg = bodavm.memory.globalobj['DeviceMotionEvent']; console.log(`window_DeviceMotionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CryptoKey = function () { let arg = bodavm.memory.globalobj['CryptoKey']; console.log(`window_CryptoKey`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CredentialsContainer = function () { let arg = bodavm.memory.globalobj['CredentialsContainer']; console.log(`window_CredentialsContainer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Credential = function () { let arg = bodavm.memory.globalobj['Credential']; console.log(`window_Credential`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CookieStoreManager = function () { let arg = bodavm.memory.globalobj['CookieStoreManager']; console.log(`window_CookieStoreManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CookieChangeEvent = function () { let arg = bodavm.memory.globalobj['CookieChangeEvent']; console.log(`window_CookieChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ClipboardItem = function () { let arg = bodavm.memory.globalobj['ClipboardItem']; console.log(`window_ClipboardItem`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Clipboard = function () { let arg = bodavm.memory.globalobj['Clipboard']; console.log(`window_Clipboard`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Cache = function () { let arg = bodavm.memory.globalobj['Cache']; console.log(`window_Cache`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioWorklet = function () { let arg = bodavm.memory.globalobj['AudioWorklet']; console.log(`window_AudioWorklet`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Accelerometer = function () { let arg = bodavm.memory.globalobj['Accelerometer']; console.log(`window_Accelerometer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AbsoluteOrientationSensor = function () { let arg = bodavm.memory.globalobj['AbsoluteOrientationSensor']; console.log(`window_AbsoluteOrientationSensor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitRequestAnimationFrame = function () { let arg = bodavm.memory.globalobj['webkitRequestAnimationFrame']; console.log(`window_webkitRequestAnimationFrame`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitCancelAnimationFrame = function () { let arg = bodavm.memory.globalobj['webkitCancelAnimationFrame']; console.log(`window_webkitCancelAnimationFrame`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_structuredClone = function () { let arg = bodavm.memory.globalobj['structuredClone']; console.log(`window_structuredClone`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_stop = function () { let arg = bodavm.memory.globalobj['stop']; console.log(`window_stop`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_scrollTo = function () { let arg = bodavm.memory.globalobj['scrollTo']; console.log(`window_scrollTo`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_scrollBy = function () { let arg = bodavm.memory.globalobj['scrollBy']; console.log(`window_scrollBy`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_scroll = function () { let arg = bodavm.memory.globalobj['scroll']; console.log(`window_scroll`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_resizeTo = function () { let arg = bodavm.memory.globalobj['resizeTo']; console.log(`window_resizeTo`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_resizeBy = function () { let arg = bodavm.memory.globalobj['resizeBy']; console.log(`window_resizeBy`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_requestIdleCallback = function () { let arg = bodavm.memory.globalobj['requestIdleCallback']; console.log(`window_requestIdleCallback`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_requestAnimationFrame = function () { let arg = bodavm.memory.globalobj['requestAnimationFrame']; console.log(`window_requestAnimationFrame`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_reportError = function () { let arg = bodavm.memory.globalobj['reportError']; console.log(`window_reportError`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_releaseEvents = function () { let arg = bodavm.memory.globalobj['releaseEvents']; console.log(`window_releaseEvents`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_queueMicrotask = function () { let arg = bodavm.memory.globalobj['queueMicrotask']; console.log(`window_queueMicrotask`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_prompt = function () { let arg = bodavm.memory.globalobj['prompt']; console.log(`window_prompt`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_print = function () { let arg = bodavm.memory.globalobj['print']; console.log(`window_print`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_postMessage = function () { let arg = bodavm.memory.globalobj['postMessage']; console.log(`window_postMessage`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_open = function () { let arg = bodavm.memory.globalobj['open']; console.log(`window_open`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_moveTo = function () { let arg = bodavm.memory.globalobj['moveTo']; console.log(`window_moveTo`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_moveBy = function () { let arg = bodavm.memory.globalobj['moveBy']; console.log(`window_moveBy`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_getSelection = function () { let arg = bodavm.memory.globalobj['getSelection']; console.log(`window_getSelection`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_getComputedStyle = function () { let arg = bodavm.memory.globalobj['getComputedStyle']; console.log(`window_getComputedStyle`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_focus = function () { let arg = bodavm.memory.globalobj['focus']; console.log(`window_focus`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_find = function () { let arg = bodavm.memory.globalobj['find']; console.log(`window_find`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_fetch = function () { let arg = bodavm.memory.globalobj['fetch']; console.log(`window_fetch`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_createImageBitmap = function () { let arg = bodavm.memory.globalobj['createImageBitmap']; console.log(`window_createImageBitmap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_confirm = function () { let arg = bodavm.memory.globalobj['confirm']; console.log(`window_confirm`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_close = function () { let arg = bodavm.memory.globalobj['close']; console.log(`window_close`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_clearTimeout = function () { let arg = bodavm.memory.globalobj['clearTimeout']; console.log(`window_clearTimeout`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_clearInterval = function () { let arg = bodavm.memory.globalobj['clearInterval']; console.log(`window_clearInterval`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_captureEvents = function () { let arg = bodavm.memory.globalobj['captureEvents']; console.log(`window_captureEvents`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_cancelIdleCallback = function () { let arg = bodavm.memory.globalobj['cancelIdleCallback']; console.log(`window_cancelIdleCallback`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_cancelAnimationFrame = function () { let arg = bodavm.memory.globalobj['cancelAnimationFrame']; console.log(`window_cancelAnimationFrame`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AbortController = function () { let arg = bodavm.memory.globalobj['AbortController']; console.log(`window_AbortController`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AbortSignal = function () { let arg = bodavm.memory.globalobj['AbortSignal']; console.log(`window_AbortSignal`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AbstractRange = function () { let arg = bodavm.memory.globalobj['AbstractRange']; console.log(`window_AbstractRange`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AnalyserNode = function () { let arg = bodavm.memory.globalobj['AnalyserNode']; console.log(`window_AnalyserNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Animation = function () { let arg = bodavm.memory.globalobj['Animation']; console.log(`window_Animation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AnimationEffect = function () { let arg = bodavm.memory.globalobj['AnimationEffect']; console.log(`window_AnimationEffect`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AnimationEvent = function () { let arg = bodavm.memory.globalobj['AnimationEvent']; console.log(`window_AnimationEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Attr = function () { let arg = bodavm.memory.globalobj['Attr']; console.log(`window_Attr`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioBuffer = function () { let arg = bodavm.memory.globalobj['AudioBuffer']; console.log(`window_AudioBuffer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioBufferSourceNode = function () { let arg = bodavm.memory.globalobj['AudioBufferSourceNode']; console.log(`window_AudioBufferSourceNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioContext = function () { let arg = bodavm.memory.globalobj['AudioContext']; console.log(`window_AudioContext`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioDestinationNode = function () { let arg = bodavm.memory.globalobj['AudioDestinationNode']; console.log(`window_AudioDestinationNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioListener = function () { let arg = bodavm.memory.globalobj['AudioListener']; console.log(`window_AudioListener`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioNode = function () { let arg = bodavm.memory.globalobj['AudioNode']; console.log(`window_AudioNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioParam = function () { let arg = bodavm.memory.globalobj['AudioParam']; console.log(`window_AudioParam`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioParamMap = function () { let arg = bodavm.memory.globalobj['AudioParamMap']; console.log(`window_AudioParamMap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioProcessingEvent = function () { let arg = bodavm.memory.globalobj['AudioProcessingEvent']; console.log(`window_AudioProcessingEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioScheduledSourceNode = function () { let arg = bodavm.memory.globalobj['AudioScheduledSourceNode']; console.log(`window_AudioScheduledSourceNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_AudioWorkletNode = function () { let arg = bodavm.memory.globalobj['AudioWorkletNode']; console.log(`window_AudioWorkletNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BaseAudioContext = function () { let arg = bodavm.memory.globalobj['BaseAudioContext']; console.log(`window_BaseAudioContext`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BatteryManager = function () { let arg = bodavm.memory.globalobj['BatteryManager']; console.log(`window_BatteryManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BeforeInstallPromptEvent = function () { let arg = bodavm.memory.globalobj['BeforeInstallPromptEvent']; console.log(`window_BeforeInstallPromptEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BeforeUnloadEvent = function () { let arg = bodavm.memory.globalobj['BeforeUnloadEvent']; console.log(`window_BeforeUnloadEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BiquadFilterNode = function () { let arg = bodavm.memory.globalobj['BiquadFilterNode']; console.log(`window_BiquadFilterNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Blob = function () { let arg = bodavm.memory.globalobj['Blob']; console.log(`window_Blob`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BlobEvent = function () { let arg = bodavm.memory.globalobj['BlobEvent']; console.log(`window_BlobEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_BroadcastChannel = function () { let arg = bodavm.memory.globalobj['BroadcastChannel']; console.log(`window_BroadcastChannel`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ByteLengthQueuingStrategy = function () { let arg = bodavm.memory.globalobj['ByteLengthQueuingStrategy']; console.log(`window_ByteLengthQueuingStrategy`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CDATASection = function () { let arg = bodavm.memory.globalobj['CDATASection']; console.log(`window_CDATASection`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSConditionRule = function () { let arg = bodavm.memory.globalobj['CSSConditionRule']; console.log(`window_CSSConditionRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSCounterStyleRule = function () { let arg = bodavm.memory.globalobj['CSSCounterStyleRule']; console.log(`window_CSSCounterStyleRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSFontFaceRule = function () { let arg = bodavm.memory.globalobj['CSSFontFaceRule']; console.log(`window_CSSFontFaceRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSGroupingRule = function () { let arg = bodavm.memory.globalobj['CSSGroupingRule']; console.log(`window_CSSGroupingRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSImageValue = function () { let arg = bodavm.memory.globalobj['CSSImageValue']; console.log(`window_CSSImageValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSImportRule = function () { let arg = bodavm.memory.globalobj['CSSImportRule']; console.log(`window_CSSImportRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSKeyframeRule = function () { let arg = bodavm.memory.globalobj['CSSKeyframeRule']; console.log(`window_CSSKeyframeRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSKeyframesRule = function () { let arg = bodavm.memory.globalobj['CSSKeyframesRule']; console.log(`window_CSSKeyframesRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSKeywordValue = function () { let arg = bodavm.memory.globalobj['CSSKeywordValue']; console.log(`window_CSSKeywordValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSLayerBlockRule = function () { let arg = bodavm.memory.globalobj['CSSLayerBlockRule']; console.log(`window_CSSLayerBlockRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSLayerStatementRule = function () { let arg = bodavm.memory.globalobj['CSSLayerStatementRule']; console.log(`window_CSSLayerStatementRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMathClamp = function () { let arg = bodavm.memory.globalobj['CSSMathClamp']; console.log(`window_CSSMathClamp`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMathInvert = function () { let arg = bodavm.memory.globalobj['CSSMathInvert']; console.log(`window_CSSMathInvert`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMathMax = function () { let arg = bodavm.memory.globalobj['CSSMathMax']; console.log(`window_CSSMathMax`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMathMin = function () { let arg = bodavm.memory.globalobj['CSSMathMin']; console.log(`window_CSSMathMin`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMathNegate = function () { let arg = bodavm.memory.globalobj['CSSMathNegate']; console.log(`window_CSSMathNegate`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMathProduct = function () { let arg = bodavm.memory.globalobj['CSSMathProduct']; console.log(`window_CSSMathProduct`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMathSum = function () { let arg = bodavm.memory.globalobj['CSSMathSum']; console.log(`window_CSSMathSum`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMathValue = function () { let arg = bodavm.memory.globalobj['CSSMathValue']; console.log(`window_CSSMathValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMatrixComponent = function () { let arg = bodavm.memory.globalobj['CSSMatrixComponent']; console.log(`window_CSSMatrixComponent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSMediaRule = function () { let arg = bodavm.memory.globalobj['CSSMediaRule']; console.log(`window_CSSMediaRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSNamespaceRule = function () { let arg = bodavm.memory.globalobj['CSSNamespaceRule']; console.log(`window_CSSNamespaceRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSNumericArray = function () { let arg = bodavm.memory.globalobj['CSSNumericArray']; console.log(`window_CSSNumericArray`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSNumericValue = function () { let arg = bodavm.memory.globalobj['CSSNumericValue']; console.log(`window_CSSNumericValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSPageRule = function () { let arg = bodavm.memory.globalobj['CSSPageRule']; console.log(`window_CSSPageRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSPerspective = function () { let arg = bodavm.memory.globalobj['CSSPerspective']; console.log(`window_CSSPerspective`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSPositionValue = function () { let arg = bodavm.memory.globalobj['CSSPositionValue']; console.log(`window_CSSPositionValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSPropertyRule = function () { let arg = bodavm.memory.globalobj['CSSPropertyRule']; console.log(`window_CSSPropertyRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSRotate = function () { let arg = bodavm.memory.globalobj['CSSRotate']; console.log(`window_CSSRotate`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSRule = function () { let arg = bodavm.memory.globalobj['CSSRule']; console.log(`window_CSSRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSRuleList = function () { let arg = bodavm.memory.globalobj['CSSRuleList']; console.log(`window_CSSRuleList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSScale = function () { let arg = bodavm.memory.globalobj['CSSScale']; console.log(`window_CSSScale`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSSkew = function () { let arg = bodavm.memory.globalobj['CSSSkew']; console.log(`window_CSSSkew`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSSkewX = function () { let arg = bodavm.memory.globalobj['CSSSkewX']; console.log(`window_CSSSkewX`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSSkewY = function () { let arg = bodavm.memory.globalobj['CSSSkewY']; console.log(`window_CSSSkewY`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSStyleDeclaration = function () { let arg = bodavm.memory.globalobj['CSSStyleDeclaration']; console.log(`window_CSSStyleDeclaration`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSStyleRule = function () { let arg = bodavm.memory.globalobj['CSSStyleRule']; console.log(`window_CSSStyleRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSStyleSheet = function () { let arg = bodavm.memory.globalobj['CSSStyleSheet']; console.log(`window_CSSStyleSheet`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSStyleValue = function () { let arg = bodavm.memory.globalobj['CSSStyleValue']; console.log(`window_CSSStyleValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSSupportsRule = function () { let arg = bodavm.memory.globalobj['CSSSupportsRule']; console.log(`window_CSSSupportsRule`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSTransformComponent = function () { let arg = bodavm.memory.globalobj['CSSTransformComponent']; console.log(`window_CSSTransformComponent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSTransformValue = function () { let arg = bodavm.memory.globalobj['CSSTransformValue']; console.log(`window_CSSTransformValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSTranslate = function () { let arg = bodavm.memory.globalobj['CSSTranslate']; console.log(`window_CSSTranslate`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSUnitValue = function () { let arg = bodavm.memory.globalobj['CSSUnitValue']; console.log(`window_CSSUnitValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSUnparsedValue = function () { let arg = bodavm.memory.globalobj['CSSUnparsedValue']; console.log(`window_CSSUnparsedValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CSSVariableReferenceValue = function () { let arg = bodavm.memory.globalobj['CSSVariableReferenceValue']; console.log(`window_CSSVariableReferenceValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CanvasCaptureMediaStreamTrack = function () { let arg = bodavm.memory.globalobj['CanvasCaptureMediaStreamTrack']; console.log(`window_CanvasCaptureMediaStreamTrack`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CanvasFilter = function () { let arg = bodavm.memory.globalobj['CanvasFilter']; console.log(`window_CanvasFilter`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CanvasGradient = function () { let arg = bodavm.memory.globalobj['CanvasGradient']; console.log(`window_CanvasGradient`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CanvasPattern = function () { let arg = bodavm.memory.globalobj['CanvasPattern']; console.log(`window_CanvasPattern`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CanvasRenderingContext2D = function () { let arg = bodavm.memory.globalobj['CanvasRenderingContext2D']; console.log(`window_CanvasRenderingContext2D`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ChannelMergerNode = function () { let arg = bodavm.memory.globalobj['ChannelMergerNode']; console.log(`window_ChannelMergerNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ChannelSplitterNode = function () { let arg = bodavm.memory.globalobj['ChannelSplitterNode']; console.log(`window_ChannelSplitterNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CharacterData = function () { let arg = bodavm.memory.globalobj['CharacterData']; console.log(`window_CharacterData`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ClipboardEvent = function () { let arg = bodavm.memory.globalobj['ClipboardEvent']; console.log(`window_ClipboardEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CloseEvent = function () { let arg = bodavm.memory.globalobj['CloseEvent']; console.log(`window_CloseEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Comment = function () { let arg = bodavm.memory.globalobj['Comment']; console.log(`window_Comment`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CompositionEvent = function () { let arg = bodavm.memory.globalobj['CompositionEvent']; console.log(`window_CompositionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CompressionStream = function () { let arg = bodavm.memory.globalobj['CompressionStream']; console.log(`window_CompressionStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ConstantSourceNode = function () { let arg = bodavm.memory.globalobj['ConstantSourceNode']; console.log(`window_ConstantSourceNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ConvolverNode = function () { let arg = bodavm.memory.globalobj['ConvolverNode']; console.log(`window_ConvolverNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CountQueuingStrategy = function () { let arg = bodavm.memory.globalobj['CountQueuingStrategy']; console.log(`window_CountQueuingStrategy`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Crypto = function () { let arg = bodavm.memory.globalobj['Crypto']; console.log(`window_Crypto`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_CustomEvent = function () { let arg = bodavm.memory.globalobj['CustomEvent']; console.log(`window_CustomEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMError = function () { let arg = bodavm.memory.globalobj['DOMError']; console.log(`window_DOMError`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMException = function () { let arg = bodavm.memory.globalobj['DOMException']; console.log(`window_DOMException`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMImplementation = function () { let arg = bodavm.memory.globalobj['DOMImplementation']; console.log(`window_DOMImplementation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMMatrix = function () { let arg = bodavm.memory.globalobj['DOMMatrix']; console.log(`window_DOMMatrix`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMMatrixReadOnly = function () { let arg = bodavm.memory.globalobj['DOMMatrixReadOnly']; console.log(`window_DOMMatrixReadOnly`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMParser = function () { let arg = bodavm.memory.globalobj['DOMParser']; console.log(`window_DOMParser`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMPoint = function () { let arg = bodavm.memory.globalobj['DOMPoint']; console.log(`window_DOMPoint`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMPointReadOnly = function () { let arg = bodavm.memory.globalobj['DOMPointReadOnly']; console.log(`window_DOMPointReadOnly`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMQuad = function () { let arg = bodavm.memory.globalobj['DOMQuad']; console.log(`window_DOMQuad`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMRect = function () { let arg = bodavm.memory.globalobj['DOMRect']; console.log(`window_DOMRect`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMRectList = function () { let arg = bodavm.memory.globalobj['DOMRectList']; console.log(`window_DOMRectList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMRectReadOnly = function () { let arg = bodavm.memory.globalobj['DOMRectReadOnly']; console.log(`window_DOMRectReadOnly`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMStringList = function () { let arg = bodavm.memory.globalobj['DOMStringList']; console.log(`window_DOMStringList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMStringMap = function () { let arg = bodavm.memory.globalobj['DOMStringMap']; console.log(`window_DOMStringMap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DOMTokenList = function () { let arg = bodavm.memory.globalobj['DOMTokenList']; console.log(`window_DOMTokenList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DataTransfer = function () { let arg = bodavm.memory.globalobj['DataTransfer']; console.log(`window_DataTransfer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DataTransferItem = function () { let arg = bodavm.memory.globalobj['DataTransferItem']; console.log(`window_DataTransferItem`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DataTransferItemList = function () { let arg = bodavm.memory.globalobj['DataTransferItemList']; console.log(`window_DataTransferItemList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DecompressionStream = function () { let arg = bodavm.memory.globalobj['DecompressionStream']; console.log(`window_DecompressionStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DelayNode = function () { let arg = bodavm.memory.globalobj['DelayNode']; console.log(`window_DelayNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DocumentFragment = function () { let arg = bodavm.memory.globalobj['DocumentFragment']; console.log(`window_DocumentFragment`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DocumentType = function () { let arg = bodavm.memory.globalobj['DocumentType']; console.log(`window_DocumentType`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DragEvent = function () { let arg = bodavm.memory.globalobj['DragEvent']; console.log(`window_DragEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_DynamicsCompressorNode = function () { let arg = bodavm.memory.globalobj['DynamicsCompressorNode']; console.log(`window_DynamicsCompressorNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Element = function () { let arg = bodavm.memory.globalobj['Element']; console.log(`window_Element`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ElementInternals = function () { let arg = bodavm.memory.globalobj['ElementInternals']; console.log(`window_ElementInternals`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ErrorEvent = function () { let arg = bodavm.memory.globalobj['ErrorEvent']; console.log(`window_ErrorEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Event = function () { let arg = bodavm.memory.globalobj['Event']; console.log(`window_Event`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_EventCounts = function () { let arg = bodavm.memory.globalobj['EventCounts']; console.log(`window_EventCounts`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_EventSource = function () { let arg = bodavm.memory.globalobj['EventSource']; console.log(`window_EventSource`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_EventTarget = function () { let arg = bodavm.memory.globalobj['EventTarget']; console.log(`window_EventTarget`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FeaturePolicy = function () { let arg = bodavm.memory.globalobj['FeaturePolicy']; console.log(`window_FeaturePolicy`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_File = function () { let arg = bodavm.memory.globalobj['File']; console.log(`window_File`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FileList = function () { let arg = bodavm.memory.globalobj['FileList']; console.log(`window_FileList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FileReader = function () { let arg = bodavm.memory.globalobj['FileReader']; console.log(`window_FileReader`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FocusEvent = function () { let arg = bodavm.memory.globalobj['FocusEvent']; console.log(`window_FocusEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FontFace = function () { let arg = bodavm.memory.globalobj['FontFace']; console.log(`window_FontFace`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FontFaceSetLoadEvent = function () { let arg = bodavm.memory.globalobj['FontFaceSetLoadEvent']; console.log(`window_FontFaceSetLoadEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FormData = function () { let arg = bodavm.memory.globalobj['FormData']; console.log(`window_FormData`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_FormDataEvent = function () { let arg = bodavm.memory.globalobj['FormDataEvent']; console.log(`window_FormDataEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_GainNode = function () { let arg = bodavm.memory.globalobj['GainNode']; console.log(`window_GainNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Gamepad = function () { let arg = bodavm.memory.globalobj['Gamepad']; console.log(`window_Gamepad`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_GamepadButton = function () { let arg = bodavm.memory.globalobj['GamepadButton']; console.log(`window_GamepadButton`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_GamepadEvent = function () { let arg = bodavm.memory.globalobj['GamepadEvent']; console.log(`window_GamepadEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_GamepadHapticActuator = function () { let arg = bodavm.memory.globalobj['GamepadHapticActuator']; console.log(`window_GamepadHapticActuator`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Geolocation = function () { let arg = bodavm.memory.globalobj['Geolocation']; console.log(`window_Geolocation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_GeolocationCoordinates = function () { let arg = bodavm.memory.globalobj['GeolocationCoordinates']; console.log(`window_GeolocationCoordinates`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_GeolocationPosition = function () { let arg = bodavm.memory.globalobj['GeolocationPosition']; console.log(`window_GeolocationPosition`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_GeolocationPositionError = function () { let arg = bodavm.memory.globalobj['GeolocationPositionError']; console.log(`window_GeolocationPositionError`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLAllCollection = function () { let arg = bodavm.memory.globalobj['HTMLAllCollection']; console.log(`window_HTMLAllCollection`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLAnchorElement = function () { let arg = bodavm.memory.globalobj['HTMLAnchorElement']; console.log(`window_HTMLAnchorElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLAreaElement = function () { let arg = bodavm.memory.globalobj['HTMLAreaElement']; console.log(`window_HTMLAreaElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLAudioElement = function () { let arg = bodavm.memory.globalobj['HTMLAudioElement']; console.log(`window_HTMLAudioElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLBRElement = function () { let arg = bodavm.memory.globalobj['HTMLBRElement']; console.log(`window_HTMLBRElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLBaseElement = function () { let arg = bodavm.memory.globalobj['HTMLBaseElement']; console.log(`window_HTMLBaseElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLBodyElement = function () { let arg = bodavm.memory.globalobj['HTMLBodyElement']; console.log(`window_HTMLBodyElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLButtonElement = function () { let arg = bodavm.memory.globalobj['HTMLButtonElement']; console.log(`window_HTMLButtonElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLCanvasElement = function () { let arg = bodavm.memory.globalobj['HTMLCanvasElement']; console.log(`window_HTMLCanvasElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLCollection = function () { let arg = bodavm.memory.globalobj['HTMLCollection']; console.log(`window_HTMLCollection`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLDListElement = function () { let arg = bodavm.memory.globalobj['HTMLDListElement']; console.log(`window_HTMLDListElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLDataElement = function () { let arg = bodavm.memory.globalobj['HTMLDataElement']; console.log(`window_HTMLDataElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLDataListElement = function () { let arg = bodavm.memory.globalobj['HTMLDataListElement']; console.log(`window_HTMLDataListElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLDetailsElement = function () { let arg = bodavm.memory.globalobj['HTMLDetailsElement']; console.log(`window_HTMLDetailsElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLDialogElement = function () { let arg = bodavm.memory.globalobj['HTMLDialogElement']; console.log(`window_HTMLDialogElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLDirectoryElement = function () { let arg = bodavm.memory.globalobj['HTMLDirectoryElement']; console.log(`window_HTMLDirectoryElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLDivElement = function () { let arg = bodavm.memory.globalobj['HTMLDivElement']; console.log(`window_HTMLDivElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLDocument = function () { let arg = bodavm.memory.globalobj['HTMLDocument']; console.log(`window_HTMLDocument`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLElement = function () { let arg = bodavm.memory.globalobj['HTMLElement']; console.log(`window_HTMLElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLEmbedElement = function () { let arg = bodavm.memory.globalobj['HTMLEmbedElement']; console.log(`window_HTMLEmbedElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLFieldSetElement = function () { let arg = bodavm.memory.globalobj['HTMLFieldSetElement']; console.log(`window_HTMLFieldSetElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLFontElement = function () { let arg = bodavm.memory.globalobj['HTMLFontElement']; console.log(`window_HTMLFontElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLFormControlsCollection = function () { let arg = bodavm.memory.globalobj['HTMLFormControlsCollection']; console.log(`window_HTMLFormControlsCollection`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLFormElement = function () { let arg = bodavm.memory.globalobj['HTMLFormElement']; console.log(`window_HTMLFormElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLFrameElement = function () { let arg = bodavm.memory.globalobj['HTMLFrameElement']; console.log(`window_HTMLFrameElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLFrameSetElement = function () { let arg = bodavm.memory.globalobj['HTMLFrameSetElement']; console.log(`window_HTMLFrameSetElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLHRElement = function () { let arg = bodavm.memory.globalobj['HTMLHRElement']; console.log(`window_HTMLHRElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLHeadElement = function () { let arg = bodavm.memory.globalobj['HTMLHeadElement']; console.log(`window_HTMLHeadElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLHeadingElement = function () { let arg = bodavm.memory.globalobj['HTMLHeadingElement']; console.log(`window_HTMLHeadingElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLHtmlElement = function () { let arg = bodavm.memory.globalobj['HTMLHtmlElement']; console.log(`window_HTMLHtmlElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLIFrameElement = function () { let arg = bodavm.memory.globalobj['HTMLIFrameElement']; console.log(`window_HTMLIFrameElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLImageElement = function () { let arg = bodavm.memory.globalobj['HTMLImageElement']; console.log(`window_HTMLImageElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLInputElement = function () { let arg = bodavm.memory.globalobj['HTMLInputElement']; console.log(`window_HTMLInputElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLLIElement = function () { let arg = bodavm.memory.globalobj['HTMLLIElement']; console.log(`window_HTMLLIElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLLabelElement = function () { let arg = bodavm.memory.globalobj['HTMLLabelElement']; console.log(`window_HTMLLabelElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLLegendElement = function () { let arg = bodavm.memory.globalobj['HTMLLegendElement']; console.log(`window_HTMLLegendElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLLinkElement = function () { let arg = bodavm.memory.globalobj['HTMLLinkElement']; console.log(`window_HTMLLinkElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLMapElement = function () { let arg = bodavm.memory.globalobj['HTMLMapElement']; console.log(`window_HTMLMapElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLMarqueeElement = function () { let arg = bodavm.memory.globalobj['HTMLMarqueeElement']; console.log(`window_HTMLMarqueeElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLMediaElement = function () { let arg = bodavm.memory.globalobj['HTMLMediaElement']; console.log(`window_HTMLMediaElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLMenuElement = function () { let arg = bodavm.memory.globalobj['HTMLMenuElement']; console.log(`window_HTMLMenuElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLMetaElement = function () { let arg = bodavm.memory.globalobj['HTMLMetaElement']; console.log(`window_HTMLMetaElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLMeterElement = function () { let arg = bodavm.memory.globalobj['HTMLMeterElement']; console.log(`window_HTMLMeterElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLModElement = function () { let arg = bodavm.memory.globalobj['HTMLModElement']; console.log(`window_HTMLModElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLOListElement = function () { let arg = bodavm.memory.globalobj['HTMLOListElement']; console.log(`window_HTMLOListElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLObjectElement = function () { let arg = bodavm.memory.globalobj['HTMLObjectElement']; console.log(`window_HTMLObjectElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLOptGroupElement = function () { let arg = bodavm.memory.globalobj['HTMLOptGroupElement']; console.log(`window_HTMLOptGroupElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLOptionElement = function () { let arg = bodavm.memory.globalobj['HTMLOptionElement']; console.log(`window_HTMLOptionElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLOptionsCollection = function () { let arg = bodavm.memory.globalobj['HTMLOptionsCollection']; console.log(`window_HTMLOptionsCollection`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLOutputElement = function () { let arg = bodavm.memory.globalobj['HTMLOutputElement']; console.log(`window_HTMLOutputElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLParagraphElement = function () { let arg = bodavm.memory.globalobj['HTMLParagraphElement']; console.log(`window_HTMLParagraphElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLParamElement = function () { let arg = bodavm.memory.globalobj['HTMLParamElement']; console.log(`window_HTMLParamElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLPictureElement = function () { let arg = bodavm.memory.globalobj['HTMLPictureElement']; console.log(`window_HTMLPictureElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLPreElement = function () { let arg = bodavm.memory.globalobj['HTMLPreElement']; console.log(`window_HTMLPreElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLProgressElement = function () { let arg = bodavm.memory.globalobj['HTMLProgressElement']; console.log(`window_HTMLProgressElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLQuoteElement = function () { let arg = bodavm.memory.globalobj['HTMLQuoteElement']; console.log(`window_HTMLQuoteElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLScriptElement = function () { let arg = bodavm.memory.globalobj['HTMLScriptElement']; console.log(`window_HTMLScriptElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLSelectElement = function () { let arg = bodavm.memory.globalobj['HTMLSelectElement']; console.log(`window_HTMLSelectElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLSlotElement = function () { let arg = bodavm.memory.globalobj['HTMLSlotElement']; console.log(`window_HTMLSlotElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLSourceElement = function () { let arg = bodavm.memory.globalobj['HTMLSourceElement']; console.log(`window_HTMLSourceElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLSpanElement = function () { let arg = bodavm.memory.globalobj['HTMLSpanElement']; console.log(`window_HTMLSpanElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLStyleElement = function () { let arg = bodavm.memory.globalobj['HTMLStyleElement']; console.log(`window_HTMLStyleElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTableCaptionElement = function () { let arg = bodavm.memory.globalobj['HTMLTableCaptionElement']; console.log(`window_HTMLTableCaptionElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTableCellElement = function () { let arg = bodavm.memory.globalobj['HTMLTableCellElement']; console.log(`window_HTMLTableCellElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTableColElement = function () { let arg = bodavm.memory.globalobj['HTMLTableColElement']; console.log(`window_HTMLTableColElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTableElement = function () { let arg = bodavm.memory.globalobj['HTMLTableElement']; console.log(`window_HTMLTableElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTableRowElement = function () { let arg = bodavm.memory.globalobj['HTMLTableRowElement']; console.log(`window_HTMLTableRowElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTableSectionElement = function () { let arg = bodavm.memory.globalobj['HTMLTableSectionElement']; console.log(`window_HTMLTableSectionElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTemplateElement = function () { let arg = bodavm.memory.globalobj['HTMLTemplateElement']; console.log(`window_HTMLTemplateElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTextAreaElement = function () { let arg = bodavm.memory.globalobj['HTMLTextAreaElement']; console.log(`window_HTMLTextAreaElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTimeElement = function () { let arg = bodavm.memory.globalobj['HTMLTimeElement']; console.log(`window_HTMLTimeElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTitleElement = function () { let arg = bodavm.memory.globalobj['HTMLTitleElement']; console.log(`window_HTMLTitleElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLTrackElement = function () { let arg = bodavm.memory.globalobj['HTMLTrackElement']; console.log(`window_HTMLTrackElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLUListElement = function () { let arg = bodavm.memory.globalobj['HTMLUListElement']; console.log(`window_HTMLUListElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLUnknownElement = function () { let arg = bodavm.memory.globalobj['HTMLUnknownElement']; console.log(`window_HTMLUnknownElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HTMLVideoElement = function () { let arg = bodavm.memory.globalobj['HTMLVideoElement']; console.log(`window_HTMLVideoElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_HashChangeEvent = function () { let arg = bodavm.memory.globalobj['HashChangeEvent']; console.log(`window_HashChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Headers = function () { let arg = bodavm.memory.globalobj['Headers']; console.log(`window_Headers`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBCursor = function () { let arg = bodavm.memory.globalobj['IDBCursor']; console.log(`window_IDBCursor`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBCursorWithValue = function () { let arg = bodavm.memory.globalobj['IDBCursorWithValue']; console.log(`window_IDBCursorWithValue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBIndex = function () { let arg = bodavm.memory.globalobj['IDBIndex']; console.log(`window_IDBIndex`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBKeyRange = function () { let arg = bodavm.memory.globalobj['IDBKeyRange']; console.log(`window_IDBKeyRange`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBObjectStore = function () { let arg = bodavm.memory.globalobj['IDBObjectStore']; console.log(`window_IDBObjectStore`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBOpenDBRequest = function () { let arg = bodavm.memory.globalobj['IDBOpenDBRequest']; console.log(`window_IDBOpenDBRequest`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBRequest = function () { let arg = bodavm.memory.globalobj['IDBRequest']; console.log(`window_IDBRequest`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBTransaction = function () { let arg = bodavm.memory.globalobj['IDBTransaction']; console.log(`window_IDBTransaction`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBVersionChangeEvent = function () { let arg = bodavm.memory.globalobj['IDBVersionChangeEvent']; console.log(`window_IDBVersionChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IIRFilterNode = function () { let arg = bodavm.memory.globalobj['IIRFilterNode']; console.log(`window_IIRFilterNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IdleDeadline = function () { let arg = bodavm.memory.globalobj['IdleDeadline']; console.log(`window_IdleDeadline`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ImageBitmap = function () { let arg = bodavm.memory.globalobj['ImageBitmap']; console.log(`window_ImageBitmap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ImageBitmapRenderingContext = function () { let arg = bodavm.memory.globalobj['ImageBitmapRenderingContext']; console.log(`window_ImageBitmapRenderingContext`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ImageCapture = function () { let arg = bodavm.memory.globalobj['ImageCapture']; console.log(`window_ImageCapture`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ImageData = function () { let arg = bodavm.memory.globalobj['ImageData']; console.log(`window_ImageData`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_InputDeviceCapabilities = function () { let arg = bodavm.memory.globalobj['InputDeviceCapabilities']; console.log(`window_InputDeviceCapabilities`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_InputDeviceInfo = function () { let arg = bodavm.memory.globalobj['InputDeviceInfo']; console.log(`window_InputDeviceInfo`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_InputEvent = function () { let arg = bodavm.memory.globalobj['InputEvent']; console.log(`window_InputEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IntersectionObserver = function () { let arg = bodavm.memory.globalobj['IntersectionObserver']; console.log(`window_IntersectionObserver`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IntersectionObserverEntry = function () { let arg = bodavm.memory.globalobj['IntersectionObserverEntry']; console.log(`window_IntersectionObserverEntry`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_KeyboardEvent = function () { let arg = bodavm.memory.globalobj['KeyboardEvent']; console.log(`window_KeyboardEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_KeyframeEffect = function () { let arg = bodavm.memory.globalobj['KeyframeEffect']; console.log(`window_KeyframeEffect`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_LargestContentfulPaint = function () { let arg = bodavm.memory.globalobj['LargestContentfulPaint']; console.log(`window_LargestContentfulPaint`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_LayoutShift = function () { let arg = bodavm.memory.globalobj['LayoutShift']; console.log(`window_LayoutShift`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_LayoutShiftAttribution = function () { let arg = bodavm.memory.globalobj['LayoutShiftAttribution']; console.log(`window_LayoutShiftAttribution`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaCapabilities = function () { let arg = bodavm.memory.globalobj['MediaCapabilities']; console.log(`window_MediaCapabilities`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaElementAudioSourceNode = function () { let arg = bodavm.memory.globalobj['MediaElementAudioSourceNode']; console.log(`window_MediaElementAudioSourceNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaEncryptedEvent = function () { let arg = bodavm.memory.globalobj['MediaEncryptedEvent']; console.log(`window_MediaEncryptedEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaError = function () { let arg = bodavm.memory.globalobj['MediaError']; console.log(`window_MediaError`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaList = function () { let arg = bodavm.memory.globalobj['MediaList']; console.log(`window_MediaList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaQueryList = function () { let arg = bodavm.memory.globalobj['MediaQueryList']; console.log(`window_MediaQueryList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaQueryListEvent = function () { let arg = bodavm.memory.globalobj['MediaQueryListEvent']; console.log(`window_MediaQueryListEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaRecorder = function () { let arg = bodavm.memory.globalobj['MediaRecorder']; console.log(`window_MediaRecorder`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaStream = function () { let arg = bodavm.memory.globalobj['MediaStream']; console.log(`window_MediaStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaStreamAudioDestinationNode = function () { let arg = bodavm.memory.globalobj['MediaStreamAudioDestinationNode']; console.log(`window_MediaStreamAudioDestinationNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaStreamAudioSourceNode = function () { let arg = bodavm.memory.globalobj['MediaStreamAudioSourceNode']; console.log(`window_MediaStreamAudioSourceNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaStreamEvent = function () { let arg = bodavm.memory.globalobj['MediaStreamEvent']; console.log(`window_MediaStreamEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MediaStreamTrackEvent = function () { let arg = bodavm.memory.globalobj['MediaStreamTrackEvent']; console.log(`window_MediaStreamTrackEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MessageChannel = function () { let arg = bodavm.memory.globalobj['MessageChannel']; console.log(`window_MessageChannel`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MessageEvent = function () { let arg = bodavm.memory.globalobj['MessageEvent']; console.log(`window_MessageEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MessagePort = function () { let arg = bodavm.memory.globalobj['MessagePort']; console.log(`window_MessagePort`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MimeType = function () { let arg = bodavm.memory.globalobj['MimeType']; console.log(`window_MimeType`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MimeTypeArray = function () { let arg = bodavm.memory.globalobj['MimeTypeArray']; console.log(`window_MimeTypeArray`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MouseEvent = function () { let arg = bodavm.memory.globalobj['MouseEvent']; console.log(`window_MouseEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MutationEvent = function () { let arg = bodavm.memory.globalobj['MutationEvent']; console.log(`window_MutationEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_MutationRecord = function () { let arg = bodavm.memory.globalobj['MutationRecord']; console.log(`window_MutationRecord`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NamedNodeMap = function () { let arg = bodavm.memory.globalobj['NamedNodeMap']; console.log(`window_NamedNodeMap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NetworkInformation = function () { let arg = bodavm.memory.globalobj['NetworkInformation']; console.log(`window_NetworkInformation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Node = function () { let arg = bodavm.memory.globalobj['Node']; console.log(`window_Node`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NodeFilter = function () { let arg = bodavm.memory.globalobj['NodeFilter']; console.log(`window_NodeFilter`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NodeIterator = function () { let arg = bodavm.memory.globalobj['NodeIterator']; console.log(`window_NodeIterator`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_NodeList = function () { let arg = bodavm.memory.globalobj['NodeList']; console.log(`window_NodeList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_OfflineAudioCompletionEvent = function () { let arg = bodavm.memory.globalobj['OfflineAudioCompletionEvent']; console.log(`window_OfflineAudioCompletionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_OfflineAudioContext = function () { let arg = bodavm.memory.globalobj['OfflineAudioContext']; console.log(`window_OfflineAudioContext`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_OffscreenCanvas = function () { let arg = bodavm.memory.globalobj['OffscreenCanvas']; console.log(`window_OffscreenCanvas`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_OffscreenCanvasRenderingContext2D = function () { let arg = bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D']; console.log(`window_OffscreenCanvasRenderingContext2D`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_OscillatorNode = function () { let arg = bodavm.memory.globalobj['OscillatorNode']; console.log(`window_OscillatorNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_OverconstrainedError = function () { let arg = bodavm.memory.globalobj['OverconstrainedError']; console.log(`window_OverconstrainedError`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PageTransitionEvent = function () { let arg = bodavm.memory.globalobj['PageTransitionEvent']; console.log(`window_PageTransitionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PannerNode = function () { let arg = bodavm.memory.globalobj['PannerNode']; console.log(`window_PannerNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Path2D = function () { let arg = bodavm.memory.globalobj['Path2D']; console.log(`window_Path2D`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceElementTiming = function () { let arg = bodavm.memory.globalobj['PerformanceElementTiming']; console.log(`window_PerformanceElementTiming`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceEntry = function () { let arg = bodavm.memory.globalobj['PerformanceEntry']; console.log(`window_PerformanceEntry`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceEventTiming = function () { let arg = bodavm.memory.globalobj['PerformanceEventTiming']; console.log(`window_PerformanceEventTiming`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceLongTaskTiming = function () { let arg = bodavm.memory.globalobj['PerformanceLongTaskTiming']; console.log(`window_PerformanceLongTaskTiming`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceMark = function () { let arg = bodavm.memory.globalobj['PerformanceMark']; console.log(`window_PerformanceMark`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceMeasure = function () { let arg = bodavm.memory.globalobj['PerformanceMeasure']; console.log(`window_PerformanceMeasure`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceNavigation = function () { let arg = bodavm.memory.globalobj['PerformanceNavigation']; console.log(`window_PerformanceNavigation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceNavigationTiming = function () { let arg = bodavm.memory.globalobj['PerformanceNavigationTiming']; console.log(`window_PerformanceNavigationTiming`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceObserver = function () { let arg = bodavm.memory.globalobj['PerformanceObserver']; console.log(`window_PerformanceObserver`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceObserverEntryList = function () { let arg = bodavm.memory.globalobj['PerformanceObserverEntryList']; console.log(`window_PerformanceObserverEntryList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformancePaintTiming = function () { let arg = bodavm.memory.globalobj['PerformancePaintTiming']; console.log(`window_PerformancePaintTiming`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceResourceTiming = function () { let arg = bodavm.memory.globalobj['PerformanceResourceTiming']; console.log(`window_PerformanceResourceTiming`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceServerTiming = function () { let arg = bodavm.memory.globalobj['PerformanceServerTiming']; console.log(`window_PerformanceServerTiming`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PerformanceTiming = function () { let arg = bodavm.memory.globalobj['PerformanceTiming']; console.log(`window_PerformanceTiming`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PeriodicWave = function () { let arg = bodavm.memory.globalobj['PeriodicWave']; console.log(`window_PeriodicWave`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Plugin = function () { let arg = bodavm.memory.globalobj['Plugin']; console.log(`window_Plugin`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PluginArray = function () { let arg = bodavm.memory.globalobj['PluginArray']; console.log(`window_PluginArray`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PointerEvent = function () { let arg = bodavm.memory.globalobj['PointerEvent']; console.log(`window_PointerEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PopStateEvent = function () { let arg = bodavm.memory.globalobj['PopStateEvent']; console.log(`window_PopStateEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ProcessingInstruction = function () { let arg = bodavm.memory.globalobj['ProcessingInstruction']; console.log(`window_ProcessingInstruction`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ProgressEvent = function () { let arg = bodavm.memory.globalobj['ProgressEvent']; console.log(`window_ProgressEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_PromiseRejectionEvent = function () { let arg = bodavm.memory.globalobj['PromiseRejectionEvent']; console.log(`window_PromiseRejectionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCCertificate = function () { let arg = bodavm.memory.globalobj['RTCCertificate']; console.log(`window_RTCCertificate`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCDTMFSender = function () { let arg = bodavm.memory.globalobj['RTCDTMFSender']; console.log(`window_RTCDTMFSender`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCDTMFToneChangeEvent = function () { let arg = bodavm.memory.globalobj['RTCDTMFToneChangeEvent']; console.log(`window_RTCDTMFToneChangeEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCDataChannel = function () { let arg = bodavm.memory.globalobj['RTCDataChannel']; console.log(`window_RTCDataChannel`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCDataChannelEvent = function () { let arg = bodavm.memory.globalobj['RTCDataChannelEvent']; console.log(`window_RTCDataChannelEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCDtlsTransport = function () { let arg = bodavm.memory.globalobj['RTCDtlsTransport']; console.log(`window_RTCDtlsTransport`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCEncodedAudioFrame = function () { let arg = bodavm.memory.globalobj['RTCEncodedAudioFrame']; console.log(`window_RTCEncodedAudioFrame`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCEncodedVideoFrame = function () { let arg = bodavm.memory.globalobj['RTCEncodedVideoFrame']; console.log(`window_RTCEncodedVideoFrame`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCError = function () { let arg = bodavm.memory.globalobj['RTCError']; console.log(`window_RTCError`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCErrorEvent = function () { let arg = bodavm.memory.globalobj['RTCErrorEvent']; console.log(`window_RTCErrorEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCIceCandidate = function () { let arg = bodavm.memory.globalobj['RTCIceCandidate']; console.log(`window_RTCIceCandidate`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCPeerConnection = function () { let arg = bodavm.memory.globalobj['RTCPeerConnection']; console.log(`window_RTCPeerConnection`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCPeerConnectionIceErrorEvent = function () { let arg = bodavm.memory.globalobj['RTCPeerConnectionIceErrorEvent']; console.log(`window_RTCPeerConnectionIceErrorEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCPeerConnectionIceEvent = function () { let arg = bodavm.memory.globalobj['RTCPeerConnectionIceEvent']; console.log(`window_RTCPeerConnectionIceEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCRtpReceiver = function () { let arg = bodavm.memory.globalobj['RTCRtpReceiver']; console.log(`window_RTCRtpReceiver`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCRtpSender = function () { let arg = bodavm.memory.globalobj['RTCRtpSender']; console.log(`window_RTCRtpSender`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCRtpTransceiver = function () { let arg = bodavm.memory.globalobj['RTCRtpTransceiver']; console.log(`window_RTCRtpTransceiver`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCSctpTransport = function () { let arg = bodavm.memory.globalobj['RTCSctpTransport']; console.log(`window_RTCSctpTransport`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCSessionDescription = function () { let arg = bodavm.memory.globalobj['RTCSessionDescription']; console.log(`window_RTCSessionDescription`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCStatsReport = function () { let arg = bodavm.memory.globalobj['RTCStatsReport']; console.log(`window_RTCStatsReport`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RTCTrackEvent = function () { let arg = bodavm.memory.globalobj['RTCTrackEvent']; console.log(`window_RTCTrackEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_RadioNodeList = function () { let arg = bodavm.memory.globalobj['RadioNodeList']; console.log(`window_RadioNodeList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Range = function () { let arg = bodavm.memory.globalobj['Range']; console.log(`window_Range`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ReadableByteStreamController = function () { let arg = bodavm.memory.globalobj['ReadableByteStreamController']; console.log(`window_ReadableByteStreamController`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ReadableStream = function () { let arg = bodavm.memory.globalobj['ReadableStream']; console.log(`window_ReadableStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ReadableStreamBYOBReader = function () { let arg = bodavm.memory.globalobj['ReadableStreamBYOBReader']; console.log(`window_ReadableStreamBYOBReader`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ReadableStreamBYOBRequest = function () { let arg = bodavm.memory.globalobj['ReadableStreamBYOBRequest']; console.log(`window_ReadableStreamBYOBRequest`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ReadableStreamDefaultController = function () { let arg = bodavm.memory.globalobj['ReadableStreamDefaultController']; console.log(`window_ReadableStreamDefaultController`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ReadableStreamDefaultReader = function () { let arg = bodavm.memory.globalobj['ReadableStreamDefaultReader']; console.log(`window_ReadableStreamDefaultReader`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ReportingObserver = function () { let arg = bodavm.memory.globalobj['ReportingObserver']; console.log(`window_ReportingObserver`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Request = function () { let arg = bodavm.memory.globalobj['Request']; console.log(`window_Request`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ResizeObserver = function () { let arg = bodavm.memory.globalobj['ResizeObserver']; console.log(`window_ResizeObserver`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ResizeObserverEntry = function () { let arg = bodavm.memory.globalobj['ResizeObserverEntry']; console.log(`window_ResizeObserverEntry`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ResizeObserverSize = function () { let arg = bodavm.memory.globalobj['ResizeObserverSize']; console.log(`window_ResizeObserverSize`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Response = function () { let arg = bodavm.memory.globalobj['Response']; console.log(`window_Response`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAElement = function () { let arg = bodavm.memory.globalobj['SVGAElement']; console.log(`window_SVGAElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAngle = function () { let arg = bodavm.memory.globalobj['SVGAngle']; console.log(`window_SVGAngle`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimateElement = function () { let arg = bodavm.memory.globalobj['SVGAnimateElement']; console.log(`window_SVGAnimateElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimateMotionElement = function () { let arg = bodavm.memory.globalobj['SVGAnimateMotionElement']; console.log(`window_SVGAnimateMotionElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimateTransformElement = function () { let arg = bodavm.memory.globalobj['SVGAnimateTransformElement']; console.log(`window_SVGAnimateTransformElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedAngle = function () { let arg = bodavm.memory.globalobj['SVGAnimatedAngle']; console.log(`window_SVGAnimatedAngle`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedBoolean = function () { let arg = bodavm.memory.globalobj['SVGAnimatedBoolean']; console.log(`window_SVGAnimatedBoolean`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedEnumeration = function () { let arg = bodavm.memory.globalobj['SVGAnimatedEnumeration']; console.log(`window_SVGAnimatedEnumeration`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedInteger = function () { let arg = bodavm.memory.globalobj['SVGAnimatedInteger']; console.log(`window_SVGAnimatedInteger`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedLength = function () { let arg = bodavm.memory.globalobj['SVGAnimatedLength']; console.log(`window_SVGAnimatedLength`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedLengthList = function () { let arg = bodavm.memory.globalobj['SVGAnimatedLengthList']; console.log(`window_SVGAnimatedLengthList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedNumber = function () { let arg = bodavm.memory.globalobj['SVGAnimatedNumber']; console.log(`window_SVGAnimatedNumber`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedNumberList = function () { let arg = bodavm.memory.globalobj['SVGAnimatedNumberList']; console.log(`window_SVGAnimatedNumberList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedPreserveAspectRatio = function () { let arg = bodavm.memory.globalobj['SVGAnimatedPreserveAspectRatio']; console.log(`window_SVGAnimatedPreserveAspectRatio`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedRect = function () { let arg = bodavm.memory.globalobj['SVGAnimatedRect']; console.log(`window_SVGAnimatedRect`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedString = function () { let arg = bodavm.memory.globalobj['SVGAnimatedString']; console.log(`window_SVGAnimatedString`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimatedTransformList = function () { let arg = bodavm.memory.globalobj['SVGAnimatedTransformList']; console.log(`window_SVGAnimatedTransformList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGAnimationElement = function () { let arg = bodavm.memory.globalobj['SVGAnimationElement']; console.log(`window_SVGAnimationElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGCircleElement = function () { let arg = bodavm.memory.globalobj['SVGCircleElement']; console.log(`window_SVGCircleElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGClipPathElement = function () { let arg = bodavm.memory.globalobj['SVGClipPathElement']; console.log(`window_SVGClipPathElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGComponentTransferFunctionElement = function () { let arg = bodavm.memory.globalobj['SVGComponentTransferFunctionElement']; console.log(`window_SVGComponentTransferFunctionElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGDefsElement = function () { let arg = bodavm.memory.globalobj['SVGDefsElement']; console.log(`window_SVGDefsElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGDescElement = function () { let arg = bodavm.memory.globalobj['SVGDescElement']; console.log(`window_SVGDescElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGElement = function () { let arg = bodavm.memory.globalobj['SVGElement']; console.log(`window_SVGElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGEllipseElement = function () { let arg = bodavm.memory.globalobj['SVGEllipseElement']; console.log(`window_SVGEllipseElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEBlendElement = function () { let arg = bodavm.memory.globalobj['SVGFEBlendElement']; console.log(`window_SVGFEBlendElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEColorMatrixElement = function () { let arg = bodavm.memory.globalobj['SVGFEColorMatrixElement']; console.log(`window_SVGFEColorMatrixElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEComponentTransferElement = function () { let arg = bodavm.memory.globalobj['SVGFEComponentTransferElement']; console.log(`window_SVGFEComponentTransferElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFECompositeElement = function () { let arg = bodavm.memory.globalobj['SVGFECompositeElement']; console.log(`window_SVGFECompositeElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEConvolveMatrixElement = function () { let arg = bodavm.memory.globalobj['SVGFEConvolveMatrixElement']; console.log(`window_SVGFEConvolveMatrixElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEDiffuseLightingElement = function () { let arg = bodavm.memory.globalobj['SVGFEDiffuseLightingElement']; console.log(`window_SVGFEDiffuseLightingElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEDisplacementMapElement = function () { let arg = bodavm.memory.globalobj['SVGFEDisplacementMapElement']; console.log(`window_SVGFEDisplacementMapElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEDistantLightElement = function () { let arg = bodavm.memory.globalobj['SVGFEDistantLightElement']; console.log(`window_SVGFEDistantLightElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEDropShadowElement = function () { let arg = bodavm.memory.globalobj['SVGFEDropShadowElement']; console.log(`window_SVGFEDropShadowElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEFloodElement = function () { let arg = bodavm.memory.globalobj['SVGFEFloodElement']; console.log(`window_SVGFEFloodElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEFuncAElement = function () { let arg = bodavm.memory.globalobj['SVGFEFuncAElement']; console.log(`window_SVGFEFuncAElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEFuncBElement = function () { let arg = bodavm.memory.globalobj['SVGFEFuncBElement']; console.log(`window_SVGFEFuncBElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEFuncGElement = function () { let arg = bodavm.memory.globalobj['SVGFEFuncGElement']; console.log(`window_SVGFEFuncGElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEFuncRElement = function () { let arg = bodavm.memory.globalobj['SVGFEFuncRElement']; console.log(`window_SVGFEFuncRElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEGaussianBlurElement = function () { let arg = bodavm.memory.globalobj['SVGFEGaussianBlurElement']; console.log(`window_SVGFEGaussianBlurElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEImageElement = function () { let arg = bodavm.memory.globalobj['SVGFEImageElement']; console.log(`window_SVGFEImageElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEMergeElement = function () { let arg = bodavm.memory.globalobj['SVGFEMergeElement']; console.log(`window_SVGFEMergeElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEMergeNodeElement = function () { let arg = bodavm.memory.globalobj['SVGFEMergeNodeElement']; console.log(`window_SVGFEMergeNodeElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEMorphologyElement = function () { let arg = bodavm.memory.globalobj['SVGFEMorphologyElement']; console.log(`window_SVGFEMorphologyElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEOffsetElement = function () { let arg = bodavm.memory.globalobj['SVGFEOffsetElement']; console.log(`window_SVGFEOffsetElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFEPointLightElement = function () { let arg = bodavm.memory.globalobj['SVGFEPointLightElement']; console.log(`window_SVGFEPointLightElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFESpecularLightingElement = function () { let arg = bodavm.memory.globalobj['SVGFESpecularLightingElement']; console.log(`window_SVGFESpecularLightingElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFESpotLightElement = function () { let arg = bodavm.memory.globalobj['SVGFESpotLightElement']; console.log(`window_SVGFESpotLightElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFETileElement = function () { let arg = bodavm.memory.globalobj['SVGFETileElement']; console.log(`window_SVGFETileElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFETurbulenceElement = function () { let arg = bodavm.memory.globalobj['SVGFETurbulenceElement']; console.log(`window_SVGFETurbulenceElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGFilterElement = function () { let arg = bodavm.memory.globalobj['SVGFilterElement']; console.log(`window_SVGFilterElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGForeignObjectElement = function () { let arg = bodavm.memory.globalobj['SVGForeignObjectElement']; console.log(`window_SVGForeignObjectElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGGElement = function () { let arg = bodavm.memory.globalobj['SVGGElement']; console.log(`window_SVGGElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGGeometryElement = function () { let arg = bodavm.memory.globalobj['SVGGeometryElement']; console.log(`window_SVGGeometryElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGGradientElement = function () { let arg = bodavm.memory.globalobj['SVGGradientElement']; console.log(`window_SVGGradientElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGGraphicsElement = function () { let arg = bodavm.memory.globalobj['SVGGraphicsElement']; console.log(`window_SVGGraphicsElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGImageElement = function () { let arg = bodavm.memory.globalobj['SVGImageElement']; console.log(`window_SVGImageElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGLength = function () { let arg = bodavm.memory.globalobj['SVGLength']; console.log(`window_SVGLength`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGLengthList = function () { let arg = bodavm.memory.globalobj['SVGLengthList']; console.log(`window_SVGLengthList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGLineElement = function () { let arg = bodavm.memory.globalobj['SVGLineElement']; console.log(`window_SVGLineElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGLinearGradientElement = function () { let arg = bodavm.memory.globalobj['SVGLinearGradientElement']; console.log(`window_SVGLinearGradientElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGMPathElement = function () { let arg = bodavm.memory.globalobj['SVGMPathElement']; console.log(`window_SVGMPathElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGMarkerElement = function () { let arg = bodavm.memory.globalobj['SVGMarkerElement']; console.log(`window_SVGMarkerElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGMaskElement = function () { let arg = bodavm.memory.globalobj['SVGMaskElement']; console.log(`window_SVGMaskElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGMatrix = function () { let arg = bodavm.memory.globalobj['SVGMatrix']; console.log(`window_SVGMatrix`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGMetadataElement = function () { let arg = bodavm.memory.globalobj['SVGMetadataElement']; console.log(`window_SVGMetadataElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGNumber = function () { let arg = bodavm.memory.globalobj['SVGNumber']; console.log(`window_SVGNumber`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGNumberList = function () { let arg = bodavm.memory.globalobj['SVGNumberList']; console.log(`window_SVGNumberList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGPathElement = function () { let arg = bodavm.memory.globalobj['SVGPathElement']; console.log(`window_SVGPathElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGPatternElement = function () { let arg = bodavm.memory.globalobj['SVGPatternElement']; console.log(`window_SVGPatternElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGPoint = function () { let arg = bodavm.memory.globalobj['SVGPoint']; console.log(`window_SVGPoint`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGPointList = function () { let arg = bodavm.memory.globalobj['SVGPointList']; console.log(`window_SVGPointList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGPolygonElement = function () { let arg = bodavm.memory.globalobj['SVGPolygonElement']; console.log(`window_SVGPolygonElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGPolylineElement = function () { let arg = bodavm.memory.globalobj['SVGPolylineElement']; console.log(`window_SVGPolylineElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGPreserveAspectRatio = function () { let arg = bodavm.memory.globalobj['SVGPreserveAspectRatio']; console.log(`window_SVGPreserveAspectRatio`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGRadialGradientElement = function () { let arg = bodavm.memory.globalobj['SVGRadialGradientElement']; console.log(`window_SVGRadialGradientElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGRect = function () { let arg = bodavm.memory.globalobj['SVGRect']; console.log(`window_SVGRect`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGRectElement = function () { let arg = bodavm.memory.globalobj['SVGRectElement']; console.log(`window_SVGRectElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGSVGElement = function () { let arg = bodavm.memory.globalobj['SVGSVGElement']; console.log(`window_SVGSVGElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGScriptElement = function () { let arg = bodavm.memory.globalobj['SVGScriptElement']; console.log(`window_SVGScriptElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGSetElement = function () { let arg = bodavm.memory.globalobj['SVGSetElement']; console.log(`window_SVGSetElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGStopElement = function () { let arg = bodavm.memory.globalobj['SVGStopElement']; console.log(`window_SVGStopElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGStringList = function () { let arg = bodavm.memory.globalobj['SVGStringList']; console.log(`window_SVGStringList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGStyleElement = function () { let arg = bodavm.memory.globalobj['SVGStyleElement']; console.log(`window_SVGStyleElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGSwitchElement = function () { let arg = bodavm.memory.globalobj['SVGSwitchElement']; console.log(`window_SVGSwitchElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGSymbolElement = function () { let arg = bodavm.memory.globalobj['SVGSymbolElement']; console.log(`window_SVGSymbolElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGTSpanElement = function () { let arg = bodavm.memory.globalobj['SVGTSpanElement']; console.log(`window_SVGTSpanElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGTextContentElement = function () { let arg = bodavm.memory.globalobj['SVGTextContentElement']; console.log(`window_SVGTextContentElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGTextElement = function () { let arg = bodavm.memory.globalobj['SVGTextElement']; console.log(`window_SVGTextElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGTextPathElement = function () { let arg = bodavm.memory.globalobj['SVGTextPathElement']; console.log(`window_SVGTextPathElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGTextPositioningElement = function () { let arg = bodavm.memory.globalobj['SVGTextPositioningElement']; console.log(`window_SVGTextPositioningElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGTitleElement = function () { let arg = bodavm.memory.globalobj['SVGTitleElement']; console.log(`window_SVGTitleElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGTransform = function () { let arg = bodavm.memory.globalobj['SVGTransform']; console.log(`window_SVGTransform`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGTransformList = function () { let arg = bodavm.memory.globalobj['SVGTransformList']; console.log(`window_SVGTransformList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGUnitTypes = function () { let arg = bodavm.memory.globalobj['SVGUnitTypes']; console.log(`window_SVGUnitTypes`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGUseElement = function () { let arg = bodavm.memory.globalobj['SVGUseElement']; console.log(`window_SVGUseElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SVGViewElement = function () { let arg = bodavm.memory.globalobj['SVGViewElement']; console.log(`window_SVGViewElement`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ScreenOrientation = function () { let arg = bodavm.memory.globalobj['ScreenOrientation']; console.log(`window_ScreenOrientation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ScriptProcessorNode = function () { let arg = bodavm.memory.globalobj['ScriptProcessorNode']; console.log(`window_ScriptProcessorNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SecurityPolicyViolationEvent = function () { let arg = bodavm.memory.globalobj['SecurityPolicyViolationEvent']; console.log(`window_SecurityPolicyViolationEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Selection = function () { let arg = bodavm.memory.globalobj['Selection']; console.log(`window_Selection`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ShadowRoot = function () { let arg = bodavm.memory.globalobj['ShadowRoot']; console.log(`window_ShadowRoot`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_StaticRange = function () { let arg = bodavm.memory.globalobj['StaticRange']; console.log(`window_StaticRange`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_StereoPannerNode = function () { let arg = bodavm.memory.globalobj['StereoPannerNode']; console.log(`window_StereoPannerNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_StorageEvent = function () { let arg = bodavm.memory.globalobj['StorageEvent']; console.log(`window_StorageEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_StylePropertyMap = function () { let arg = bodavm.memory.globalobj['StylePropertyMap']; console.log(`window_StylePropertyMap`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_StylePropertyMapReadOnly = function () { let arg = bodavm.memory.globalobj['StylePropertyMapReadOnly']; console.log(`window_StylePropertyMapReadOnly`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_StyleSheet = function () { let arg = bodavm.memory.globalobj['StyleSheet']; console.log(`window_StyleSheet`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_StyleSheetList = function () { let arg = bodavm.memory.globalobj['StyleSheetList']; console.log(`window_StyleSheetList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SubmitEvent = function () { let arg = bodavm.memory.globalobj['SubmitEvent']; console.log(`window_SubmitEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_SyncManager = function () { let arg = bodavm.memory.globalobj['SyncManager']; console.log(`window_SyncManager`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TaskAttributionTiming = function () { let arg = bodavm.memory.globalobj['TaskAttributionTiming']; console.log(`window_TaskAttributionTiming`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Text = function () { let arg = bodavm.memory.globalobj['Text']; console.log(`window_Text`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextDecoder = function () { let arg = bodavm.memory.globalobj['TextDecoder']; console.log(`window_TextDecoder`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextDecoderStream = function () { let arg = bodavm.memory.globalobj['TextDecoderStream']; console.log(`window_TextDecoderStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextEncoder = function () { let arg = bodavm.memory.globalobj['TextEncoder']; console.log(`window_TextEncoder`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextEncoderStream = function () { let arg = bodavm.memory.globalobj['TextEncoderStream']; console.log(`window_TextEncoderStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextEvent = function () { let arg = bodavm.memory.globalobj['TextEvent']; console.log(`window_TextEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextMetrics = function () { let arg = bodavm.memory.globalobj['TextMetrics']; console.log(`window_TextMetrics`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextTrack = function () { let arg = bodavm.memory.globalobj['TextTrack']; console.log(`window_TextTrack`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextTrackCue = function () { let arg = bodavm.memory.globalobj['TextTrackCue']; console.log(`window_TextTrackCue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextTrackCueList = function () { let arg = bodavm.memory.globalobj['TextTrackCueList']; console.log(`window_TextTrackCueList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TextTrackList = function () { let arg = bodavm.memory.globalobj['TextTrackList']; console.log(`window_TextTrackList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TimeRanges = function () { let arg = bodavm.memory.globalobj['TimeRanges']; console.log(`window_TimeRanges`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Touch = function () { let arg = bodavm.memory.globalobj['Touch']; console.log(`window_Touch`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TouchEvent = function () { let arg = bodavm.memory.globalobj['TouchEvent']; console.log(`window_TouchEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TouchList = function () { let arg = bodavm.memory.globalobj['TouchList']; console.log(`window_TouchList`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TrackEvent = function () { let arg = bodavm.memory.globalobj['TrackEvent']; console.log(`window_TrackEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TransformStream = function () { let arg = bodavm.memory.globalobj['TransformStream']; console.log(`window_TransformStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TransitionEvent = function () { let arg = bodavm.memory.globalobj['TransitionEvent']; console.log(`window_TransitionEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_TreeWalker = function () { let arg = bodavm.memory.globalobj['TreeWalker']; console.log(`window_TreeWalker`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_UIEvent = function () { let arg = bodavm.memory.globalobj['UIEvent']; console.log(`window_UIEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_URL = function () { let arg = bodavm.memory.globalobj['URL']; console.log(`window_URL`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_URLSearchParams = function () { let arg = bodavm.memory.globalobj['URLSearchParams']; console.log(`window_URLSearchParams`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_UserActivation = function () { let arg = bodavm.memory.globalobj['UserActivation']; console.log(`window_UserActivation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_VTTCue = function () { let arg = bodavm.memory.globalobj['VTTCue']; console.log(`window_VTTCue`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_ValidityState = function () { let arg = bodavm.memory.globalobj['ValidityState']; console.log(`window_ValidityState`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WaveShaperNode = function () { let arg = bodavm.memory.globalobj['WaveShaperNode']; console.log(`window_WaveShaperNode`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGL2RenderingContext = function () { let arg = bodavm.memory.globalobj['WebGL2RenderingContext']; console.log(`window_WebGL2RenderingContext`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLActiveInfo = function () { let arg = bodavm.memory.globalobj['WebGLActiveInfo']; console.log(`window_WebGLActiveInfo`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLBuffer = function () { let arg = bodavm.memory.globalobj['WebGLBuffer']; console.log(`window_WebGLBuffer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLContextEvent = function () { let arg = bodavm.memory.globalobj['WebGLContextEvent']; console.log(`window_WebGLContextEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLFramebuffer = function () { let arg = bodavm.memory.globalobj['WebGLFramebuffer']; console.log(`window_WebGLFramebuffer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLProgram = function () { let arg = bodavm.memory.globalobj['WebGLProgram']; console.log(`window_WebGLProgram`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLQuery = function () { let arg = bodavm.memory.globalobj['WebGLQuery']; console.log(`window_WebGLQuery`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLRenderbuffer = function () { let arg = bodavm.memory.globalobj['WebGLRenderbuffer']; console.log(`window_WebGLRenderbuffer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLRenderingContext = function () { let arg = bodavm.memory.globalobj['WebGLRenderingContext']; console.log(`window_WebGLRenderingContext`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLSampler = function () { let arg = bodavm.memory.globalobj['WebGLSampler']; console.log(`window_WebGLSampler`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLShader = function () { let arg = bodavm.memory.globalobj['WebGLShader']; console.log(`window_WebGLShader`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLShaderPrecisionFormat = function () { let arg = bodavm.memory.globalobj['WebGLShaderPrecisionFormat']; console.log(`window_WebGLShaderPrecisionFormat`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLSync = function () { let arg = bodavm.memory.globalobj['WebGLSync']; console.log(`window_WebGLSync`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLTexture = function () { let arg = bodavm.memory.globalobj['WebGLTexture']; console.log(`window_WebGLTexture`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLTransformFeedback = function () { let arg = bodavm.memory.globalobj['WebGLTransformFeedback']; console.log(`window_WebGLTransformFeedback`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLUniformLocation = function () { let arg = bodavm.memory.globalobj['WebGLUniformLocation']; console.log(`window_WebGLUniformLocation`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebGLVertexArrayObject = function () { let arg = bodavm.memory.globalobj['WebGLVertexArrayObject']; console.log(`window_WebGLVertexArrayObject`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebSocket = function () { let arg = bodavm.memory.globalobj['WebSocket']; console.log(`window_WebSocket`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WheelEvent = function () { let arg = bodavm.memory.globalobj['WheelEvent']; console.log(`window_WheelEvent`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Worker = function () { let arg = bodavm.memory.globalobj['Worker']; console.log(`window_Worker`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WritableStream = function () { let arg = bodavm.memory.globalobj['WritableStream']; console.log(`window_WritableStream`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WritableStreamDefaultController = function () { let arg = bodavm.memory.globalobj['WritableStreamDefaultController']; console.log(`window_WritableStreamDefaultController`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WritableStreamDefaultWriter = function () { let arg = bodavm.memory.globalobj['WritableStreamDefaultWriter']; console.log(`window_WritableStreamDefaultWriter`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XMLDocument = function () { let arg = bodavm.memory.globalobj['XMLDocument']; console.log(`window_XMLDocument`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XMLHttpRequest = function () { let arg = bodavm.memory.globalobj['XMLHttpRequest']; console.log(`window_XMLHttpRequest`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XMLHttpRequestEventTarget = function () { let arg = bodavm.memory.globalobj['XMLHttpRequestEventTarget']; console.log(`window_XMLHttpRequestEventTarget`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XMLHttpRequestUpload = function () { let arg = bodavm.memory.globalobj['XMLHttpRequestUpload']; console.log(`window_XMLHttpRequestUpload`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XMLSerializer = function () { let arg = bodavm.memory.globalobj['XMLSerializer']; console.log(`window_XMLSerializer`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XPathEvaluator = function () { let arg = bodavm.memory.globalobj['XPathEvaluator']; console.log(`window_XPathEvaluator`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XPathExpression = function () { let arg = bodavm.memory.globalobj['XPathExpression']; console.log(`window_XPathExpression`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_XPathResult = function () { let arg = bodavm.memory.globalobj['XPathResult']; console.log(`window_XPathResult`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebKitCSSMatrix = function () { let arg = bodavm.memory.globalobj['WebKitCSSMatrix']; console.log(`window_WebKitCSSMatrix`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_WebKitMutationObserver = function () { let arg = bodavm.memory.globalobj['WebKitMutationObserver']; console.log(`window_WebKitMutationObserver`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_webkitMediaStream = function () { let arg = bodavm.memory.globalobj['webkitMediaStream']; console.log(`window_webkitMediaStream`, `res ->${arg}`); return arg }
+    bodavm.envFunc.window_$x = function () { let arg = bodavm.memory.globalobj['$x']; console.log(`window_$x`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_$$ = function () { let arg = bodavm.memory.globalobj['$$']; console.log(`window_$$`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_$ = function () { let arg = bodavm.memory.globalobj['$']; console.log(`window_$`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_unmonitorEvents = function () { let arg = bodavm.memory.globalobj['unmonitorEvents']; console.log(`window_unmonitorEvents`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_monitorEvents = function () { let arg = bodavm.memory.globalobj['monitorEvents']; console.log(`window_monitorEvents`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_getAccessibleRole = function () { let arg = bodavm.memory.globalobj['getAccessibleRole']; console.log(`window_getAccessibleRole`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_getAccessibleName = function () { let arg = bodavm.memory.globalobj['getAccessibleName']; console.log(`window_getAccessibleName`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_getEventListeners = function () { let arg = bodavm.memory.globalobj['getEventListeners']; console.log(`window_getEventListeners`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_queryObjects = function () { let arg = bodavm.memory.globalobj['queryObjects']; console.log(`window_queryObjects`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_copy = function () { let arg = bodavm.memory.globalobj['copy']; console.log(`window_copy`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_inspect = function () { let arg = bodavm.memory.globalobj['inspect']; console.log(`window_inspect`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_unmonitor = function () { let arg = bodavm.memory.globalobj['unmonitor']; console.log(`window_unmonitor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_monitor = function () { let arg = bodavm.memory.globalobj['monitor']; console.log(`window_monitor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_undebug = function () { let arg = bodavm.memory.globalobj['undebug']; console.log(`window_undebug`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_debug = function () { let arg = bodavm.memory.globalobj['debug']; console.log(`window_debug`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_values = function () { let arg = bodavm.memory.globalobj['values']; console.log(`window_values`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_keys = function () { let arg = bodavm.memory.globalobj['keys']; console.log(`window_keys`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_table = function () { let arg = bodavm.memory.globalobj['table']; console.log(`window_table`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_clear = function () { let arg = bodavm.memory.globalobj['clear']; console.log(`window_clear`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_profileEnd = function () { let arg = bodavm.memory.globalobj['profileEnd']; console.log(`window_profileEnd`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_profile = function () { let arg = bodavm.memory.globalobj['profile']; console.log(`window_profile`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_dirxml = function () { let arg = bodavm.memory.globalobj['dirxml']; console.log(`window_dirxml`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_dir = function () { let arg = bodavm.memory.globalobj['dir']; console.log(`window_dir`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitResolveLocalFileSystemURL = function () { let arg = bodavm.memory.globalobj['webkitResolveLocalFileSystemURL']; console.log(`window_webkitResolveLocalFileSystemURL`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitSpeechRecognitionEvent = function () { let arg = bodavm.memory.globalobj['webkitSpeechRecognitionEvent']; console.log(`window_webkitSpeechRecognitionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitSpeechRecognitionError = function () { let arg = bodavm.memory.globalobj['webkitSpeechRecognitionError']; console.log(`window_webkitSpeechRecognitionError`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitSpeechRecognition = function () { let arg = bodavm.memory.globalobj['webkitSpeechRecognition']; console.log(`window_webkitSpeechRecognition`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitSpeechGrammarList = function () { let arg = bodavm.memory.globalobj['webkitSpeechGrammarList']; console.log(`window_webkitSpeechGrammarList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitSpeechGrammar = function () { let arg = bodavm.memory.globalobj['webkitSpeechGrammar']; console.log(`window_webkitSpeechGrammar`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XSLTProcessor = function () { let arg = bodavm.memory.globalobj['XSLTProcessor']; console.log(`window_XSLTProcessor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_VirtualKeyboardGeometryChangeEvent = function () { let arg = bodavm.memory.globalobj['VirtualKeyboardGeometryChangeEvent']; console.log(`window_VirtualKeyboardGeometryChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_VideoPlaybackQuality = function () { let arg = bodavm.memory.globalobj['VideoPlaybackQuality']; console.log(`window_VideoPlaybackQuality`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_URLPattern = function () { let arg = bodavm.memory.globalobj['URLPattern']; console.log(`window_URLPattern`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TrustedTypePolicy = function () { let arg = bodavm.memory.globalobj['TrustedTypePolicy']; console.log(`window_TrustedTypePolicy`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TrustedScriptURL = function () { let arg = bodavm.memory.globalobj['TrustedScriptURL']; console.log(`window_TrustedScriptURL`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TrustedScript = function () { let arg = bodavm.memory.globalobj['TrustedScript']; console.log(`window_TrustedScript`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TrustedHTML = function () { let arg = bodavm.memory.globalobj['TrustedHTML']; console.log(`window_TrustedHTML`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SpeechSynthesisUtterance = function () { let arg = bodavm.memory.globalobj['SpeechSynthesisUtterance']; console.log(`window_SpeechSynthesisUtterance`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SpeechSynthesisEvent = function () { let arg = bodavm.memory.globalobj['SpeechSynthesisEvent']; console.log(`window_SpeechSynthesisEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SpeechSynthesisErrorEvent = function () { let arg = bodavm.memory.globalobj['SpeechSynthesisErrorEvent']; console.log(`window_SpeechSynthesisErrorEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SharedWorker = function () { let arg = bodavm.memory.globalobj['SharedWorker']; console.log(`window_SharedWorker`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TaskSignal = function () { let arg = bodavm.memory.globalobj['TaskSignal']; console.log(`window_TaskSignal`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TaskPriorityChangeEvent = function () { let arg = bodavm.memory.globalobj['TaskPriorityChangeEvent']; console.log(`window_TaskPriorityChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TaskController = function () { let arg = bodavm.memory.globalobj['TaskController']; console.log(`window_TaskController`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Scheduler = function () { let arg = bodavm.memory.globalobj['Scheduler']; console.log(`window_Scheduler`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RemotePlayback = function () { let arg = bodavm.memory.globalobj['RemotePlayback']; console.log(`window_RemotePlayback`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PushSubscriptionOptions = function () { let arg = bodavm.memory.globalobj['PushSubscriptionOptions']; console.log(`window_PushSubscriptionOptions`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PushSubscription = function () { let arg = bodavm.memory.globalobj['PushSubscription']; console.log(`window_PushSubscription`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PushManager = function () { let arg = bodavm.memory.globalobj['PushManager']; console.log(`window_PushManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PictureInPictureWindow = function () { let arg = bodavm.memory.globalobj['PictureInPictureWindow']; console.log(`window_PictureInPictureWindow`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PictureInPictureEvent = function () { let arg = bodavm.memory.globalobj['PictureInPictureEvent']; console.log(`window_PictureInPictureEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Permissions = function () { let arg = bodavm.memory.globalobj['Permissions']; console.log(`window_Permissions`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PermissionStatus = function () { let arg = bodavm.memory.globalobj['PermissionStatus']; console.log(`window_PermissionStatus`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PeriodicSyncManager = function () { let arg = bodavm.memory.globalobj['PeriodicSyncManager']; console.log(`window_PeriodicSyncManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PaymentRequestUpdateEvent = function () { let arg = bodavm.memory.globalobj['PaymentRequestUpdateEvent']; console.log(`window_PaymentRequestUpdateEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PaymentManager = function () { let arg = bodavm.memory.globalobj['PaymentManager']; console.log(`window_PaymentManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PaymentInstruments = function () { let arg = bodavm.memory.globalobj['PaymentInstruments']; console.log(`window_PaymentInstruments`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Notification = function () { let arg = bodavm.memory.globalobj['Notification']; console.log(`window_Notification`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NavigatorUAData = function () { let arg = bodavm.memory.globalobj['NavigatorUAData']; console.log(`window_NavigatorUAData`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NavigationTransition = function () { let arg = bodavm.memory.globalobj['NavigationTransition']; console.log(`window_NavigationTransition`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NavigationHistoryEntry = function () { let arg = bodavm.memory.globalobj['NavigationHistoryEntry']; console.log(`window_NavigationHistoryEntry`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NavigationDestination = function () { let arg = bodavm.memory.globalobj['NavigationDestination']; console.log(`window_NavigationDestination`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NavigationCurrentEntryChangeEvent = function () { let arg = bodavm.memory.globalobj['NavigationCurrentEntryChangeEvent']; console.log(`window_NavigationCurrentEntryChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NavigateEvent = function () { let arg = bodavm.memory.globalobj['NavigateEvent']; console.log(`window_NavigateEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaStreamTrack = function () { let arg = bodavm.memory.globalobj['MediaStreamTrack']; console.log(`window_MediaStreamTrack`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SourceBufferList = function () { let arg = bodavm.memory.globalobj['SourceBufferList']; console.log(`window_SourceBufferList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SourceBuffer = function () { let arg = bodavm.memory.globalobj['SourceBuffer']; console.log(`window_SourceBuffer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaSource = function () { let arg = bodavm.memory.globalobj['MediaSource']; console.log(`window_MediaSource`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaSession = function () { let arg = bodavm.memory.globalobj['MediaSession']; console.log(`window_MediaSession`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaMetadata = function () { let arg = bodavm.memory.globalobj['MediaMetadata']; console.log(`window_MediaMetadata`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Ink = function () { let arg = bodavm.memory.globalobj['Ink']; console.log(`window_Ink`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DelegatedInkTrailPresenter = function () { let arg = bodavm.memory.globalobj['DelegatedInkTrailPresenter']; console.log(`window_DelegatedInkTrailPresenter`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CustomStateSet = function () { let arg = bodavm.memory.globalobj['CustomStateSet']; console.log(`window_CustomStateSet`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CaptureHandleChangeEvent = function () { let arg = bodavm.memory.globalobj['CaptureHandleChangeEvent']; console.log(`window_CaptureHandleChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSFontPaletteValuesRule = function () { let arg = bodavm.memory.globalobj['CSSFontPaletteValuesRule']; console.log(`window_CSSFontPaletteValuesRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BluetoothUUID = function () { let arg = bodavm.memory.globalobj['BluetoothUUID']; console.log(`window_BluetoothUUID`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BackgroundFetchRegistration = function () { let arg = bodavm.memory.globalobj['BackgroundFetchRegistration']; console.log(`window_BackgroundFetchRegistration`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BackgroundFetchRecord = function () { let arg = bodavm.memory.globalobj['BackgroundFetchRecord']; console.log(`window_BackgroundFetchRecord`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BackgroundFetchManager = function () { let arg = bodavm.memory.globalobj['BackgroundFetchManager']; console.log(`window_BackgroundFetchManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DocumentTimeline = function () { let arg = bodavm.memory.globalobj['DocumentTimeline']; console.log(`window_DocumentTimeline`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSTransition = function () { let arg = bodavm.memory.globalobj['CSSTransition']; console.log(`window_CSSTransition`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSAnimation = function () { let arg = bodavm.memory.globalobj['CSSAnimation']; console.log(`window_CSSAnimation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AnimationTimeline = function () { let arg = bodavm.memory.globalobj['AnimationTimeline']; console.log(`window_AnimationTimeline`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AnimationPlaybackEvent = function () { let arg = bodavm.memory.globalobj['AnimationPlaybackEvent']; console.log(`window_AnimationPlaybackEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_showSaveFilePicker = function () { let arg = bodavm.memory.globalobj['showSaveFilePicker']; console.log(`window_showSaveFilePicker`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_showOpenFilePicker = function () { let arg = bodavm.memory.globalobj['showOpenFilePicker']; console.log(`window_showOpenFilePicker`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_showDirectoryPicker = function () { let arg = bodavm.memory.globalobj['showDirectoryPicker']; console.log(`window_showDirectoryPicker`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_getScreenDetails = function () { let arg = bodavm.memory.globalobj['getScreenDetails']; console.log(`window_getScreenDetails`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRLightProbe = function () { let arg = bodavm.memory.globalobj['XRLightProbe']; console.log(`window_XRLightProbe`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRLightEstimate = function () { let arg = bodavm.memory.globalobj['XRLightEstimate']; console.log(`window_XRLightEstimate`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRTransientInputHitTestSource = function () { let arg = bodavm.memory.globalobj['XRTransientInputHitTestSource']; console.log(`window_XRTransientInputHitTestSource`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRTransientInputHitTestResult = function () { let arg = bodavm.memory.globalobj['XRTransientInputHitTestResult']; console.log(`window_XRTransientInputHitTestResult`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRRay = function () { let arg = bodavm.memory.globalobj['XRRay']; console.log(`window_XRRay`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRHitTestSource = function () { let arg = bodavm.memory.globalobj['XRHitTestSource']; console.log(`window_XRHitTestSource`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRHitTestResult = function () { let arg = bodavm.memory.globalobj['XRHitTestResult']; console.log(`window_XRHitTestResult`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRWebGLDepthInformation = function () { let arg = bodavm.memory.globalobj['XRWebGLDepthInformation']; console.log(`window_XRWebGLDepthInformation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRDepthInformation = function () { let arg = bodavm.memory.globalobj['XRDepthInformation']; console.log(`window_XRDepthInformation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRCPUDepthInformation = function () { let arg = bodavm.memory.globalobj['XRCPUDepthInformation']; console.log(`window_XRCPUDepthInformation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRWebGLLayer = function () { let arg = bodavm.memory.globalobj['XRWebGLLayer']; console.log(`window_XRWebGLLayer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRViewport = function () { let arg = bodavm.memory.globalobj['XRViewport']; console.log(`window_XRViewport`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRViewerPose = function () { let arg = bodavm.memory.globalobj['XRViewerPose']; console.log(`window_XRViewerPose`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRView = function () { let arg = bodavm.memory.globalobj['XRView']; console.log(`window_XRView`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRSystem = function () { let arg = bodavm.memory.globalobj['XRSystem']; console.log(`window_XRSystem`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRSpace = function () { let arg = bodavm.memory.globalobj['XRSpace']; console.log(`window_XRSpace`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRSessionEvent = function () { let arg = bodavm.memory.globalobj['XRSessionEvent']; console.log(`window_XRSessionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRSession = function () { let arg = bodavm.memory.globalobj['XRSession']; console.log(`window_XRSession`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRRigidTransform = function () { let arg = bodavm.memory.globalobj['XRRigidTransform']; console.log(`window_XRRigidTransform`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRRenderState = function () { let arg = bodavm.memory.globalobj['XRRenderState']; console.log(`window_XRRenderState`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRReferenceSpaceEvent = function () { let arg = bodavm.memory.globalobj['XRReferenceSpaceEvent']; console.log(`window_XRReferenceSpaceEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRReferenceSpace = function () { let arg = bodavm.memory.globalobj['XRReferenceSpace']; console.log(`window_XRReferenceSpace`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRPose = function () { let arg = bodavm.memory.globalobj['XRPose']; console.log(`window_XRPose`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRInputSourcesChangeEvent = function () { let arg = bodavm.memory.globalobj['XRInputSourcesChangeEvent']; console.log(`window_XRInputSourcesChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRInputSourceEvent = function () { let arg = bodavm.memory.globalobj['XRInputSourceEvent']; console.log(`window_XRInputSourceEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRInputSourceArray = function () { let arg = bodavm.memory.globalobj['XRInputSourceArray']; console.log(`window_XRInputSourceArray`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRInputSource = function () { let arg = bodavm.memory.globalobj['XRInputSource']; console.log(`window_XRInputSource`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRFrame = function () { let arg = bodavm.memory.globalobj['XRFrame']; console.log(`window_XRFrame`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRBoundedReferenceSpace = function () { let arg = bodavm.memory.globalobj['XRBoundedReferenceSpace']; console.log(`window_XRBoundedReferenceSpace`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRAnchorSet = function () { let arg = bodavm.memory.globalobj['XRAnchorSet']; console.log(`window_XRAnchorSet`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRAnchor = function () { let arg = bodavm.memory.globalobj['XRAnchor']; console.log(`window_XRAnchor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebTransportError = function () { let arg = bodavm.memory.globalobj['WebTransportError']; console.log(`window_WebTransportError`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebTransportDatagramDuplexStream = function () { let arg = bodavm.memory.globalobj['WebTransportDatagramDuplexStream']; console.log(`window_WebTransportDatagramDuplexStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebTransportBidirectionalStream = function () { let arg = bodavm.memory.globalobj['WebTransportBidirectionalStream']; console.log(`window_WebTransportBidirectionalStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebTransport = function () { let arg = bodavm.memory.globalobj['WebTransport']; console.log(`window_WebTransport`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WakeLockSentinel = function () { let arg = bodavm.memory.globalobj['WakeLockSentinel']; console.log(`window_WakeLockSentinel`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WakeLock = function () { let arg = bodavm.memory.globalobj['WakeLock']; console.log(`window_WakeLock`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_VirtualKeyboard = function () { let arg = bodavm.memory.globalobj['VirtualKeyboard']; console.log(`window_VirtualKeyboard`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBOutTransferResult = function () { let arg = bodavm.memory.globalobj['USBOutTransferResult']; console.log(`window_USBOutTransferResult`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBIsochronousOutTransferResult = function () { let arg = bodavm.memory.globalobj['USBIsochronousOutTransferResult']; console.log(`window_USBIsochronousOutTransferResult`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBIsochronousOutTransferPacket = function () { let arg = bodavm.memory.globalobj['USBIsochronousOutTransferPacket']; console.log(`window_USBIsochronousOutTransferPacket`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBIsochronousInTransferResult = function () { let arg = bodavm.memory.globalobj['USBIsochronousInTransferResult']; console.log(`window_USBIsochronousInTransferResult`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBIsochronousInTransferPacket = function () { let arg = bodavm.memory.globalobj['USBIsochronousInTransferPacket']; console.log(`window_USBIsochronousInTransferPacket`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBInterface = function () { let arg = bodavm.memory.globalobj['USBInterface']; console.log(`window_USBInterface`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBInTransferResult = function () { let arg = bodavm.memory.globalobj['USBInTransferResult']; console.log(`window_USBInTransferResult`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBEndpoint = function () { let arg = bodavm.memory.globalobj['USBEndpoint']; console.log(`window_USBEndpoint`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBDevice = function () { let arg = bodavm.memory.globalobj['USBDevice']; console.log(`window_USBDevice`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBConnectionEvent = function () { let arg = bodavm.memory.globalobj['USBConnectionEvent']; console.log(`window_USBConnectionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBConfiguration = function () { let arg = bodavm.memory.globalobj['USBConfiguration']; console.log(`window_USBConfiguration`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USBAlternateInterface = function () { let arg = bodavm.memory.globalobj['USBAlternateInterface']; console.log(`window_USBAlternateInterface`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_USB = function () { let arg = bodavm.memory.globalobj['USB']; console.log(`window_USB`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SerialPort = function () { let arg = bodavm.memory.globalobj['SerialPort']; console.log(`window_SerialPort`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Serial = function () { let arg = bodavm.memory.globalobj['Serial']; console.log(`window_Serial`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ScreenDetails = function () { let arg = bodavm.memory.globalobj['ScreenDetails']; console.log(`window_ScreenDetails`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ScreenDetailed = function () { let arg = bodavm.memory.globalobj['ScreenDetailed']; console.log(`window_ScreenDetailed`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Scheduling = function () { let arg = bodavm.memory.globalobj['Scheduling']; console.log(`window_Scheduling`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Profiler = function () { let arg = bodavm.memory.globalobj['Profiler']; console.log(`window_Profiler`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PresentationRequest = function () { let arg = bodavm.memory.globalobj['PresentationRequest']; console.log(`window_PresentationRequest`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PresentationReceiver = function () { let arg = bodavm.memory.globalobj['PresentationReceiver']; console.log(`window_PresentationReceiver`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PresentationConnectionList = function () { let arg = bodavm.memory.globalobj['PresentationConnectionList']; console.log(`window_PresentationConnectionList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PresentationConnectionCloseEvent = function () { let arg = bodavm.memory.globalobj['PresentationConnectionCloseEvent']; console.log(`window_PresentationConnectionCloseEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PresentationConnectionAvailableEvent = function () { let arg = bodavm.memory.globalobj['PresentationConnectionAvailableEvent']; console.log(`window_PresentationConnectionAvailableEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PresentationConnection = function () { let arg = bodavm.memory.globalobj['PresentationConnection']; console.log(`window_PresentationConnection`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PresentationAvailability = function () { let arg = bodavm.memory.globalobj['PresentationAvailability']; console.log(`window_PresentationAvailability`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Presentation = function () { let arg = bodavm.memory.globalobj['Presentation']; console.log(`window_Presentation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PaymentMethodChangeEvent = function () { let arg = bodavm.memory.globalobj['PaymentMethodChangeEvent']; console.log(`window_PaymentMethodChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PaymentResponse = function () { let arg = bodavm.memory.globalobj['PaymentResponse']; console.log(`window_PaymentResponse`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PaymentRequest = function () { let arg = bodavm.memory.globalobj['PaymentRequest']; console.log(`window_PaymentRequest`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PaymentAddress = function () { let arg = bodavm.memory.globalobj['PaymentAddress']; console.log(`window_PaymentAddress`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_OTPCredential = function () { let arg = bodavm.memory.globalobj['OTPCredential']; console.log(`window_OTPCredential`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaStreamTrackProcessor = function () { let arg = bodavm.memory.globalobj['MediaStreamTrackProcessor']; console.log(`window_MediaStreamTrackProcessor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaStreamTrackGenerator = function () { let arg = bodavm.memory.globalobj['MediaStreamTrackGenerator']; console.log(`window_MediaStreamTrackGenerator`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IdleDetector = function () { let arg = bodavm.memory.globalobj['IdleDetector']; console.log(`window_IdleDetector`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HIDInputReportEvent = function () { let arg = bodavm.memory.globalobj['HIDInputReportEvent']; console.log(`window_HIDInputReportEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HIDDevice = function () { let arg = bodavm.memory.globalobj['HIDDevice']; console.log(`window_HIDDevice`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HIDConnectionEvent = function () { let arg = bodavm.memory.globalobj['HIDConnectionEvent']; console.log(`window_HIDConnectionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HID = function () { let arg = bodavm.memory.globalobj['HID']; console.log(`window_HID`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_GravitySensor = function () { let arg = bodavm.memory.globalobj['GravitySensor']; console.log(`window_GravitySensor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FragmentDirective = function () { let arg = bodavm.memory.globalobj['FragmentDirective']; console.log(`window_FragmentDirective`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FileSystemWritableFileStream = function () { let arg = bodavm.memory.globalobj['FileSystemWritableFileStream']; console.log(`window_FileSystemWritableFileStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FileSystemHandle = function () { let arg = bodavm.memory.globalobj['FileSystemHandle']; console.log(`window_FileSystemHandle`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FileSystemFileHandle = function () { let arg = bodavm.memory.globalobj['FileSystemFileHandle']; console.log(`window_FileSystemFileHandle`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FileSystemDirectoryHandle = function () { let arg = bodavm.memory.globalobj['FileSystemDirectoryHandle']; console.log(`window_FileSystemDirectoryHandle`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_EyeDropper = function () { let arg = bodavm.memory.globalobj['EyeDropper']; console.log(`window_EyeDropper`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BluetoothRemoteGATTService = function () { let arg = bodavm.memory.globalobj['BluetoothRemoteGATTService']; console.log(`window_BluetoothRemoteGATTService`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BluetoothRemoteGATTServer = function () { let arg = bodavm.memory.globalobj['BluetoothRemoteGATTServer']; console.log(`window_BluetoothRemoteGATTServer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BluetoothRemoteGATTDescriptor = function () { let arg = bodavm.memory.globalobj['BluetoothRemoteGATTDescriptor']; console.log(`window_BluetoothRemoteGATTDescriptor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BluetoothRemoteGATTCharacteristic = function () { let arg = bodavm.memory.globalobj['BluetoothRemoteGATTCharacteristic']; console.log(`window_BluetoothRemoteGATTCharacteristic`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BluetoothDevice = function () { let arg = bodavm.memory.globalobj['BluetoothDevice']; console.log(`window_BluetoothDevice`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BluetoothCharacteristicProperties = function () { let arg = bodavm.memory.globalobj['BluetoothCharacteristicProperties']; console.log(`window_BluetoothCharacteristicProperties`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Bluetooth = function () { let arg = bodavm.memory.globalobj['Bluetooth']; console.log(`window_Bluetooth`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PublicKeyCredential = function () { let arg = bodavm.memory.globalobj['PublicKeyCredential']; console.log(`window_PublicKeyCredential`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AuthenticatorResponse = function () { let arg = bodavm.memory.globalobj['AuthenticatorResponse']; console.log(`window_AuthenticatorResponse`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AuthenticatorAttestationResponse = function () { let arg = bodavm.memory.globalobj['AuthenticatorAttestationResponse']; console.log(`window_AuthenticatorAttestationResponse`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AuthenticatorAssertionResponse = function () { let arg = bodavm.memory.globalobj['AuthenticatorAssertionResponse']; console.log(`window_AuthenticatorAssertionResponse`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_VideoEncoder = function () { let arg = bodavm.memory.globalobj['VideoEncoder']; console.log(`window_VideoEncoder`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_VideoDecoder = function () { let arg = bodavm.memory.globalobj['VideoDecoder']; console.log(`window_VideoDecoder`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ImageDecoder = function () { let arg = bodavm.memory.globalobj['ImageDecoder']; console.log(`window_ImageDecoder`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioEncoder = function () { let arg = bodavm.memory.globalobj['AudioEncoder']; console.log(`window_AudioEncoder`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioDecoder = function () { let arg = bodavm.memory.globalobj['AudioDecoder']; console.log(`window_AudioDecoder`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_VideoFrame = function () { let arg = bodavm.memory.globalobj['VideoFrame']; console.log(`window_VideoFrame`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_VideoColorSpace = function () { let arg = bodavm.memory.globalobj['VideoColorSpace']; console.log(`window_VideoColorSpace`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ImageTrackList = function () { let arg = bodavm.memory.globalobj['ImageTrackList']; console.log(`window_ImageTrackList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ImageTrack = function () { let arg = bodavm.memory.globalobj['ImageTrack']; console.log(`window_ImageTrack`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_EncodedVideoChunk = function () { let arg = bodavm.memory.globalobj['EncodedVideoChunk']; console.log(`window_EncodedVideoChunk`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_EncodedAudioChunk = function () { let arg = bodavm.memory.globalobj['EncodedAudioChunk']; console.log(`window_EncodedAudioChunk`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioData = function () { let arg = bodavm.memory.globalobj['AudioData']; console.log(`window_AudioData`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRWebGLBinding = function () { let arg = bodavm.memory.globalobj['XRWebGLBinding']; console.log(`window_XRWebGLBinding`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRLayer = function () { let arg = bodavm.memory.globalobj['XRLayer']; console.log(`window_XRLayer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XRDOMOverlayState = function () { let arg = bodavm.memory.globalobj['XRDOMOverlayState']; console.log(`window_XRDOMOverlayState`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Worklet = function () { let arg = bodavm.memory.globalobj['Worklet']; console.log(`window_Worklet`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SubtleCrypto = function () { let arg = bodavm.memory.globalobj['SubtleCrypto']; console.log(`window_SubtleCrypto`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_StorageManager = function () { let arg = bodavm.memory.globalobj['StorageManager']; console.log(`window_StorageManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ServiceWorkerRegistration = function () { let arg = bodavm.memory.globalobj['ServiceWorkerRegistration']; console.log(`window_ServiceWorkerRegistration`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ServiceWorkerContainer = function () { let arg = bodavm.memory.globalobj['ServiceWorkerContainer']; console.log(`window_ServiceWorkerContainer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ServiceWorker = function () { let arg = bodavm.memory.globalobj['ServiceWorker']; console.log(`window_ServiceWorker`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SensorErrorEvent = function () { let arg = bodavm.memory.globalobj['SensorErrorEvent']; console.log(`window_SensorErrorEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Sensor = function () { let arg = bodavm.memory.globalobj['Sensor']; console.log(`window_Sensor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RelativeOrientationSensor = function () { let arg = bodavm.memory.globalobj['RelativeOrientationSensor']; console.log(`window_RelativeOrientationSensor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCIceTransport = function () { let arg = bodavm.memory.globalobj['RTCIceTransport']; console.log(`window_RTCIceTransport`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PasswordCredential = function () { let arg = bodavm.memory.globalobj['PasswordCredential']; console.log(`window_PasswordCredential`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_OrientationSensor = function () { let arg = bodavm.memory.globalobj['OrientationSensor']; console.log(`window_OrientationSensor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NavigatorManagedData = function () { let arg = bodavm.memory.globalobj['NavigatorManagedData']; console.log(`window_NavigatorManagedData`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NavigationPreloadManager = function () { let arg = bodavm.memory.globalobj['NavigationPreloadManager']; console.log(`window_NavigationPreloadManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaKeys = function () { let arg = bodavm.memory.globalobj['MediaKeys']; console.log(`window_MediaKeys`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaKeySystemAccess = function () { let arg = bodavm.memory.globalobj['MediaKeySystemAccess']; console.log(`window_MediaKeySystemAccess`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaKeyStatusMap = function () { let arg = bodavm.memory.globalobj['MediaKeyStatusMap']; console.log(`window_MediaKeyStatusMap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaKeySession = function () { let arg = bodavm.memory.globalobj['MediaKeySession']; console.log(`window_MediaKeySession`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaKeyMessageEvent = function () { let arg = bodavm.memory.globalobj['MediaKeyMessageEvent']; console.log(`window_MediaKeyMessageEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaDevices = function () { let arg = bodavm.memory.globalobj['MediaDevices']; console.log(`window_MediaDevices`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaDeviceInfo = function () { let arg = bodavm.memory.globalobj['MediaDeviceInfo']; console.log(`window_MediaDeviceInfo`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MIDIPort = function () { let arg = bodavm.memory.globalobj['MIDIPort']; console.log(`window_MIDIPort`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MIDIOutputMap = function () { let arg = bodavm.memory.globalobj['MIDIOutputMap']; console.log(`window_MIDIOutputMap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MIDIOutput = function () { let arg = bodavm.memory.globalobj['MIDIOutput']; console.log(`window_MIDIOutput`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MIDIMessageEvent = function () { let arg = bodavm.memory.globalobj['MIDIMessageEvent']; console.log(`window_MIDIMessageEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MIDIInputMap = function () { let arg = bodavm.memory.globalobj['MIDIInputMap']; console.log(`window_MIDIInputMap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MIDIInput = function () { let arg = bodavm.memory.globalobj['MIDIInput']; console.log(`window_MIDIInput`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MIDIConnectionEvent = function () { let arg = bodavm.memory.globalobj['MIDIConnectionEvent']; console.log(`window_MIDIConnectionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MIDIAccess = function () { let arg = bodavm.memory.globalobj['MIDIAccess']; console.log(`window_MIDIAccess`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_LockManager = function () { let arg = bodavm.memory.globalobj['LockManager']; console.log(`window_LockManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Lock = function () { let arg = bodavm.memory.globalobj['Lock']; console.log(`window_Lock`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_LinearAccelerationSensor = function () { let arg = bodavm.memory.globalobj['LinearAccelerationSensor']; console.log(`window_LinearAccelerationSensor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_KeyboardLayoutMap = function () { let arg = bodavm.memory.globalobj['KeyboardLayoutMap']; console.log(`window_KeyboardLayoutMap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Keyboard = function () { let arg = bodavm.memory.globalobj['Keyboard']; console.log(`window_Keyboard`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Gyroscope = function () { let arg = bodavm.memory.globalobj['Gyroscope']; console.log(`window_Gyroscope`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FederatedCredential = function () { let arg = bodavm.memory.globalobj['FederatedCredential']; console.log(`window_FederatedCredential`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DeviceOrientationEvent = function () { let arg = bodavm.memory.globalobj['DeviceOrientationEvent']; console.log(`window_DeviceOrientationEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DeviceMotionEventRotationRate = function () { let arg = bodavm.memory.globalobj['DeviceMotionEventRotationRate']; console.log(`window_DeviceMotionEventRotationRate`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DeviceMotionEventAcceleration = function () { let arg = bodavm.memory.globalobj['DeviceMotionEventAcceleration']; console.log(`window_DeviceMotionEventAcceleration`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DeviceMotionEvent = function () { let arg = bodavm.memory.globalobj['DeviceMotionEvent']; console.log(`window_DeviceMotionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CryptoKey = function () { let arg = bodavm.memory.globalobj['CryptoKey']; console.log(`window_CryptoKey`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CredentialsContainer = function () { let arg = bodavm.memory.globalobj['CredentialsContainer']; console.log(`window_CredentialsContainer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Credential = function () { let arg = bodavm.memory.globalobj['Credential']; console.log(`window_Credential`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CookieStoreManager = function () { let arg = bodavm.memory.globalobj['CookieStoreManager']; console.log(`window_CookieStoreManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CookieChangeEvent = function () { let arg = bodavm.memory.globalobj['CookieChangeEvent']; console.log(`window_CookieChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ClipboardItem = function () { let arg = bodavm.memory.globalobj['ClipboardItem']; console.log(`window_ClipboardItem`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Clipboard = function () { let arg = bodavm.memory.globalobj['Clipboard']; console.log(`window_Clipboard`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Cache = function () { let arg = bodavm.memory.globalobj['Cache']; console.log(`window_Cache`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioWorklet = function () { let arg = bodavm.memory.globalobj['AudioWorklet']; console.log(`window_AudioWorklet`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Accelerometer = function () { let arg = bodavm.memory.globalobj['Accelerometer']; console.log(`window_Accelerometer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AbsoluteOrientationSensor = function () { let arg = bodavm.memory.globalobj['AbsoluteOrientationSensor']; console.log(`window_AbsoluteOrientationSensor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitRequestAnimationFrame = function () { let arg = bodavm.memory.globalobj['webkitRequestAnimationFrame']; console.log(`window_webkitRequestAnimationFrame`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitCancelAnimationFrame = function () { let arg = bodavm.memory.globalobj['webkitCancelAnimationFrame']; console.log(`window_webkitCancelAnimationFrame`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_structuredClone = function () { let arg = bodavm.memory.globalobj['structuredClone']; console.log(`window_structuredClone`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_stop = function () { let arg = bodavm.memory.globalobj['stop']; console.log(`window_stop`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_scrollTo = function () { let arg = bodavm.memory.globalobj['scrollTo']; console.log(`window_scrollTo`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_scrollBy = function () { let arg = bodavm.memory.globalobj['scrollBy']; console.log(`window_scrollBy`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_scroll = function () { let arg = bodavm.memory.globalobj['scroll']; console.log(`window_scroll`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_resizeTo = function () { let arg = bodavm.memory.globalobj['resizeTo']; console.log(`window_resizeTo`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_resizeBy = function () { let arg = bodavm.memory.globalobj['resizeBy']; console.log(`window_resizeBy`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_requestIdleCallback = function () { let arg = bodavm.memory.globalobj['requestIdleCallback']; console.log(`window_requestIdleCallback`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_requestAnimationFrame = function () { let arg = bodavm.memory.globalobj['requestAnimationFrame']; console.log(`window_requestAnimationFrame`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_reportError = function () { let arg = bodavm.memory.globalobj['reportError']; console.log(`window_reportError`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_releaseEvents = function () { let arg = bodavm.memory.globalobj['releaseEvents']; console.log(`window_releaseEvents`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_queueMicrotask = function () { let arg = bodavm.memory.globalobj['queueMicrotask']; console.log(`window_queueMicrotask`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_prompt = function () { let arg = bodavm.memory.globalobj['prompt']; console.log(`window_prompt`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_print = function () { let arg = bodavm.memory.globalobj['print']; console.log(`window_print`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_postMessage = function () { let arg = bodavm.memory.globalobj['postMessage']; console.log(`window_postMessage`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_open = function () { let arg = bodavm.memory.globalobj['open']; console.log(`window_open`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_moveTo = function () { let arg = bodavm.memory.globalobj['moveTo']; console.log(`window_moveTo`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_moveBy = function () { let arg = bodavm.memory.globalobj['moveBy']; console.log(`window_moveBy`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_getSelection = function () { let arg = bodavm.memory.globalobj['getSelection']; console.log(`window_getSelection`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_getComputedStyle = function () { let arg = bodavm.memory.globalobj['getComputedStyle']; console.log(`window_getComputedStyle`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_focus = function () { let arg = bodavm.memory.globalobj['focus']; console.log(`window_focus`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_find = function () { let arg = bodavm.memory.globalobj['find']; console.log(`window_find`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_fetch = function () { let arg = bodavm.memory.globalobj['fetch']; console.log(`window_fetch`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_createImageBitmap = function () { let arg = bodavm.memory.globalobj['createImageBitmap']; console.log(`window_createImageBitmap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_confirm = function () { let arg = bodavm.memory.globalobj['confirm']; console.log(`window_confirm`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_close = function () { let arg = bodavm.memory.globalobj['close']; console.log(`window_close`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_clearTimeout = function () { let arg = bodavm.memory.globalobj['clearTimeout']; console.log(`window_clearTimeout`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_clearInterval = function () { let arg = bodavm.memory.globalobj['clearInterval']; console.log(`window_clearInterval`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_captureEvents = function () { let arg = bodavm.memory.globalobj['captureEvents']; console.log(`window_captureEvents`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_cancelIdleCallback = function () { let arg = bodavm.memory.globalobj['cancelIdleCallback']; console.log(`window_cancelIdleCallback`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_cancelAnimationFrame = function () { let arg = bodavm.memory.globalobj['cancelAnimationFrame']; console.log(`window_cancelAnimationFrame`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AbortController = function () { let arg = bodavm.memory.globalobj['AbortController']; console.log(`window_AbortController`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AbortSignal = function () { let arg = bodavm.memory.globalobj['AbortSignal']; console.log(`window_AbortSignal`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AbstractRange = function () { let arg = bodavm.memory.globalobj['AbstractRange']; console.log(`window_AbstractRange`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AnalyserNode = function () { let arg = bodavm.memory.globalobj['AnalyserNode']; console.log(`window_AnalyserNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Animation = function () { let arg = bodavm.memory.globalobj['Animation']; console.log(`window_Animation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AnimationEffect = function () { let arg = bodavm.memory.globalobj['AnimationEffect']; console.log(`window_AnimationEffect`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AnimationEvent = function () { let arg = bodavm.memory.globalobj['AnimationEvent']; console.log(`window_AnimationEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Attr = function () { let arg = bodavm.memory.globalobj['Attr']; console.log(`window_Attr`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioBuffer = function () { let arg = bodavm.memory.globalobj['AudioBuffer']; console.log(`window_AudioBuffer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioBufferSourceNode = function () { let arg = bodavm.memory.globalobj['AudioBufferSourceNode']; console.log(`window_AudioBufferSourceNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioContext = function () { let arg = bodavm.memory.globalobj['AudioContext']; console.log(`window_AudioContext`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioDestinationNode = function () { let arg = bodavm.memory.globalobj['AudioDestinationNode']; console.log(`window_AudioDestinationNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioListener = function () { let arg = bodavm.memory.globalobj['AudioListener']; console.log(`window_AudioListener`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioNode = function () { let arg = bodavm.memory.globalobj['AudioNode']; console.log(`window_AudioNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioParam = function () { let arg = bodavm.memory.globalobj['AudioParam']; console.log(`window_AudioParam`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioParamMap = function () { let arg = bodavm.memory.globalobj['AudioParamMap']; console.log(`window_AudioParamMap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioProcessingEvent = function () { let arg = bodavm.memory.globalobj['AudioProcessingEvent']; console.log(`window_AudioProcessingEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioScheduledSourceNode = function () { let arg = bodavm.memory.globalobj['AudioScheduledSourceNode']; console.log(`window_AudioScheduledSourceNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_AudioWorkletNode = function () { let arg = bodavm.memory.globalobj['AudioWorkletNode']; console.log(`window_AudioWorkletNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BaseAudioContext = function () { let arg = bodavm.memory.globalobj['BaseAudioContext']; console.log(`window_BaseAudioContext`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BatteryManager = function () { let arg = bodavm.memory.globalobj['BatteryManager']; console.log(`window_BatteryManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BeforeInstallPromptEvent = function () { let arg = bodavm.memory.globalobj['BeforeInstallPromptEvent']; console.log(`window_BeforeInstallPromptEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BeforeUnloadEvent = function () { let arg = bodavm.memory.globalobj['BeforeUnloadEvent']; console.log(`window_BeforeUnloadEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BiquadFilterNode = function () { let arg = bodavm.memory.globalobj['BiquadFilterNode']; console.log(`window_BiquadFilterNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Blob = function () { let arg = bodavm.memory.globalobj['Blob']; console.log(`window_Blob`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BlobEvent = function () { let arg = bodavm.memory.globalobj['BlobEvent']; console.log(`window_BlobEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_BroadcastChannel = function () { let arg = bodavm.memory.globalobj['BroadcastChannel']; console.log(`window_BroadcastChannel`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ByteLengthQueuingStrategy = function () { let arg = bodavm.memory.globalobj['ByteLengthQueuingStrategy']; console.log(`window_ByteLengthQueuingStrategy`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CDATASection = function () { let arg = bodavm.memory.globalobj['CDATASection']; console.log(`window_CDATASection`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSConditionRule = function () { let arg = bodavm.memory.globalobj['CSSConditionRule']; console.log(`window_CSSConditionRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSCounterStyleRule = function () { let arg = bodavm.memory.globalobj['CSSCounterStyleRule']; console.log(`window_CSSCounterStyleRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSFontFaceRule = function () { let arg = bodavm.memory.globalobj['CSSFontFaceRule']; console.log(`window_CSSFontFaceRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSGroupingRule = function () { let arg = bodavm.memory.globalobj['CSSGroupingRule']; console.log(`window_CSSGroupingRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSImageValue = function () { let arg = bodavm.memory.globalobj['CSSImageValue']; console.log(`window_CSSImageValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSImportRule = function () { let arg = bodavm.memory.globalobj['CSSImportRule']; console.log(`window_CSSImportRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSKeyframeRule = function () { let arg = bodavm.memory.globalobj['CSSKeyframeRule']; console.log(`window_CSSKeyframeRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSKeyframesRule = function () { let arg = bodavm.memory.globalobj['CSSKeyframesRule']; console.log(`window_CSSKeyframesRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSKeywordValue = function () { let arg = bodavm.memory.globalobj['CSSKeywordValue']; console.log(`window_CSSKeywordValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSLayerBlockRule = function () { let arg = bodavm.memory.globalobj['CSSLayerBlockRule']; console.log(`window_CSSLayerBlockRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSLayerStatementRule = function () { let arg = bodavm.memory.globalobj['CSSLayerStatementRule']; console.log(`window_CSSLayerStatementRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMathClamp = function () { let arg = bodavm.memory.globalobj['CSSMathClamp']; console.log(`window_CSSMathClamp`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMathInvert = function () { let arg = bodavm.memory.globalobj['CSSMathInvert']; console.log(`window_CSSMathInvert`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMathMax = function () { let arg = bodavm.memory.globalobj['CSSMathMax']; console.log(`window_CSSMathMax`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMathMin = function () { let arg = bodavm.memory.globalobj['CSSMathMin']; console.log(`window_CSSMathMin`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMathNegate = function () { let arg = bodavm.memory.globalobj['CSSMathNegate']; console.log(`window_CSSMathNegate`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMathProduct = function () { let arg = bodavm.memory.globalobj['CSSMathProduct']; console.log(`window_CSSMathProduct`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMathSum = function () { let arg = bodavm.memory.globalobj['CSSMathSum']; console.log(`window_CSSMathSum`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMathValue = function () { let arg = bodavm.memory.globalobj['CSSMathValue']; console.log(`window_CSSMathValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMatrixComponent = function () { let arg = bodavm.memory.globalobj['CSSMatrixComponent']; console.log(`window_CSSMatrixComponent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSMediaRule = function () { let arg = bodavm.memory.globalobj['CSSMediaRule']; console.log(`window_CSSMediaRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSNamespaceRule = function () { let arg = bodavm.memory.globalobj['CSSNamespaceRule']; console.log(`window_CSSNamespaceRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSNumericArray = function () { let arg = bodavm.memory.globalobj['CSSNumericArray']; console.log(`window_CSSNumericArray`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSNumericValue = function () { let arg = bodavm.memory.globalobj['CSSNumericValue']; console.log(`window_CSSNumericValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSPageRule = function () { let arg = bodavm.memory.globalobj['CSSPageRule']; console.log(`window_CSSPageRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSPerspective = function () { let arg = bodavm.memory.globalobj['CSSPerspective']; console.log(`window_CSSPerspective`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSPositionValue = function () { let arg = bodavm.memory.globalobj['CSSPositionValue']; console.log(`window_CSSPositionValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSPropertyRule = function () { let arg = bodavm.memory.globalobj['CSSPropertyRule']; console.log(`window_CSSPropertyRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSRotate = function () { let arg = bodavm.memory.globalobj['CSSRotate']; console.log(`window_CSSRotate`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSRule = function () { let arg = bodavm.memory.globalobj['CSSRule']; console.log(`window_CSSRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSRuleList = function () { let arg = bodavm.memory.globalobj['CSSRuleList']; console.log(`window_CSSRuleList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSScale = function () { let arg = bodavm.memory.globalobj['CSSScale']; console.log(`window_CSSScale`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSSkew = function () { let arg = bodavm.memory.globalobj['CSSSkew']; console.log(`window_CSSSkew`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSSkewX = function () { let arg = bodavm.memory.globalobj['CSSSkewX']; console.log(`window_CSSSkewX`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSSkewY = function () { let arg = bodavm.memory.globalobj['CSSSkewY']; console.log(`window_CSSSkewY`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSStyleDeclaration = function () { let arg = bodavm.memory.globalobj['CSSStyleDeclaration']; console.log(`window_CSSStyleDeclaration`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSStyleRule = function () { let arg = bodavm.memory.globalobj['CSSStyleRule']; console.log(`window_CSSStyleRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSStyleSheet = function () { let arg = bodavm.memory.globalobj['CSSStyleSheet']; console.log(`window_CSSStyleSheet`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSStyleValue = function () { let arg = bodavm.memory.globalobj['CSSStyleValue']; console.log(`window_CSSStyleValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSSupportsRule = function () { let arg = bodavm.memory.globalobj['CSSSupportsRule']; console.log(`window_CSSSupportsRule`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSTransformComponent = function () { let arg = bodavm.memory.globalobj['CSSTransformComponent']; console.log(`window_CSSTransformComponent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSTransformValue = function () { let arg = bodavm.memory.globalobj['CSSTransformValue']; console.log(`window_CSSTransformValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSTranslate = function () { let arg = bodavm.memory.globalobj['CSSTranslate']; console.log(`window_CSSTranslate`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSUnitValue = function () { let arg = bodavm.memory.globalobj['CSSUnitValue']; console.log(`window_CSSUnitValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSUnparsedValue = function () { let arg = bodavm.memory.globalobj['CSSUnparsedValue']; console.log(`window_CSSUnparsedValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CSSVariableReferenceValue = function () { let arg = bodavm.memory.globalobj['CSSVariableReferenceValue']; console.log(`window_CSSVariableReferenceValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CanvasCaptureMediaStreamTrack = function () { let arg = bodavm.memory.globalobj['CanvasCaptureMediaStreamTrack']; console.log(`window_CanvasCaptureMediaStreamTrack`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CanvasFilter = function () { let arg = bodavm.memory.globalobj['CanvasFilter']; console.log(`window_CanvasFilter`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CanvasGradient = function () { let arg = bodavm.memory.globalobj['CanvasGradient']; console.log(`window_CanvasGradient`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CanvasPattern = function () { let arg = bodavm.memory.globalobj['CanvasPattern']; console.log(`window_CanvasPattern`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CanvasRenderingContext2D = function () { let arg = bodavm.memory.globalobj['CanvasRenderingContext2D']; console.log(`window_CanvasRenderingContext2D`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ChannelMergerNode = function () { let arg = bodavm.memory.globalobj['ChannelMergerNode']; console.log(`window_ChannelMergerNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ChannelSplitterNode = function () { let arg = bodavm.memory.globalobj['ChannelSplitterNode']; console.log(`window_ChannelSplitterNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CharacterData = function () { let arg = bodavm.memory.globalobj['CharacterData']; console.log(`window_CharacterData`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ClipboardEvent = function () { let arg = bodavm.memory.globalobj['ClipboardEvent']; console.log(`window_ClipboardEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CloseEvent = function () { let arg = bodavm.memory.globalobj['CloseEvent']; console.log(`window_CloseEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Comment = function () { let arg = bodavm.memory.globalobj['Comment']; console.log(`window_Comment`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CompositionEvent = function () { let arg = bodavm.memory.globalobj['CompositionEvent']; console.log(`window_CompositionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CompressionStream = function () { let arg = bodavm.memory.globalobj['CompressionStream']; console.log(`window_CompressionStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ConstantSourceNode = function () { let arg = bodavm.memory.globalobj['ConstantSourceNode']; console.log(`window_ConstantSourceNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ConvolverNode = function () { let arg = bodavm.memory.globalobj['ConvolverNode']; console.log(`window_ConvolverNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CountQueuingStrategy = function () { let arg = bodavm.memory.globalobj['CountQueuingStrategy']; console.log(`window_CountQueuingStrategy`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Crypto = function () { let arg = bodavm.memory.globalobj['Crypto']; console.log(`window_Crypto`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_CustomEvent = function () { let arg = bodavm.memory.globalobj['CustomEvent']; console.log(`window_CustomEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMError = function () { let arg = bodavm.memory.globalobj['DOMError']; console.log(`window_DOMError`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMException = function () { let arg = bodavm.memory.globalobj['DOMException']; console.log(`window_DOMException`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMImplementation = function () { let arg = bodavm.memory.globalobj['DOMImplementation']; console.log(`window_DOMImplementation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMMatrix = function () { let arg = bodavm.memory.globalobj['DOMMatrix']; console.log(`window_DOMMatrix`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMMatrixReadOnly = function () { let arg = bodavm.memory.globalobj['DOMMatrixReadOnly']; console.log(`window_DOMMatrixReadOnly`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMParser = function () { let arg = bodavm.memory.globalobj['DOMParser']; console.log(`window_DOMParser`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMPoint = function () { let arg = bodavm.memory.globalobj['DOMPoint']; console.log(`window_DOMPoint`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMPointReadOnly = function () { let arg = bodavm.memory.globalobj['DOMPointReadOnly']; console.log(`window_DOMPointReadOnly`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMQuad = function () { let arg = bodavm.memory.globalobj['DOMQuad']; console.log(`window_DOMQuad`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMRect = function () { let arg = bodavm.memory.globalobj['DOMRect']; console.log(`window_DOMRect`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMRectList = function () { let arg = bodavm.memory.globalobj['DOMRectList']; console.log(`window_DOMRectList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMRectReadOnly = function () { let arg = bodavm.memory.globalobj['DOMRectReadOnly']; console.log(`window_DOMRectReadOnly`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMStringList = function () { let arg = bodavm.memory.globalobj['DOMStringList']; console.log(`window_DOMStringList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMStringMap = function () { let arg = bodavm.memory.globalobj['DOMStringMap']; console.log(`window_DOMStringMap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DOMTokenList = function () { let arg = bodavm.memory.globalobj['DOMTokenList']; console.log(`window_DOMTokenList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DataTransfer = function () { let arg = bodavm.memory.globalobj['DataTransfer']; console.log(`window_DataTransfer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DataTransferItem = function () { let arg = bodavm.memory.globalobj['DataTransferItem']; console.log(`window_DataTransferItem`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DataTransferItemList = function () { let arg = bodavm.memory.globalobj['DataTransferItemList']; console.log(`window_DataTransferItemList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DecompressionStream = function () { let arg = bodavm.memory.globalobj['DecompressionStream']; console.log(`window_DecompressionStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DelayNode = function () { let arg = bodavm.memory.globalobj['DelayNode']; console.log(`window_DelayNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DocumentFragment = function () { let arg = bodavm.memory.globalobj['DocumentFragment']; console.log(`window_DocumentFragment`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DocumentType = function () { let arg = bodavm.memory.globalobj['DocumentType']; console.log(`window_DocumentType`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DragEvent = function () { let arg = bodavm.memory.globalobj['DragEvent']; console.log(`window_DragEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_DynamicsCompressorNode = function () { let arg = bodavm.memory.globalobj['DynamicsCompressorNode']; console.log(`window_DynamicsCompressorNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Element = function () { let arg = bodavm.memory.globalobj['Element']; console.log(`window_Element`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ElementInternals = function () { let arg = bodavm.memory.globalobj['ElementInternals']; console.log(`window_ElementInternals`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ErrorEvent = function () { let arg = bodavm.memory.globalobj['ErrorEvent']; console.log(`window_ErrorEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Event = function () { let arg = bodavm.memory.globalobj['Event']; console.log(`window_Event`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_EventCounts = function () { let arg = bodavm.memory.globalobj['EventCounts']; console.log(`window_EventCounts`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_EventSource = function () { let arg = bodavm.memory.globalobj['EventSource']; console.log(`window_EventSource`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_EventTarget = function () { let arg = bodavm.memory.globalobj['EventTarget']; console.log(`window_EventTarget`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FeaturePolicy = function () { let arg = bodavm.memory.globalobj['FeaturePolicy']; console.log(`window_FeaturePolicy`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_File = function () { let arg = bodavm.memory.globalobj['File']; console.log(`window_File`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FileList = function () { let arg = bodavm.memory.globalobj['FileList']; console.log(`window_FileList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FileReader = function () { let arg = bodavm.memory.globalobj['FileReader']; console.log(`window_FileReader`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FocusEvent = function () { let arg = bodavm.memory.globalobj['FocusEvent']; console.log(`window_FocusEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FontFace = function () { let arg = bodavm.memory.globalobj['FontFace']; console.log(`window_FontFace`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FontFaceSetLoadEvent = function () { let arg = bodavm.memory.globalobj['FontFaceSetLoadEvent']; console.log(`window_FontFaceSetLoadEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FormData = function () { let arg = bodavm.memory.globalobj['FormData']; console.log(`window_FormData`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_FormDataEvent = function () { let arg = bodavm.memory.globalobj['FormDataEvent']; console.log(`window_FormDataEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_GainNode = function () { let arg = bodavm.memory.globalobj['GainNode']; console.log(`window_GainNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Gamepad = function () { let arg = bodavm.memory.globalobj['Gamepad']; console.log(`window_Gamepad`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_GamepadButton = function () { let arg = bodavm.memory.globalobj['GamepadButton']; console.log(`window_GamepadButton`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_GamepadEvent = function () { let arg = bodavm.memory.globalobj['GamepadEvent']; console.log(`window_GamepadEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_GamepadHapticActuator = function () { let arg = bodavm.memory.globalobj['GamepadHapticActuator']; console.log(`window_GamepadHapticActuator`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Geolocation = function () { let arg = bodavm.memory.globalobj['Geolocation']; console.log(`window_Geolocation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_GeolocationCoordinates = function () { let arg = bodavm.memory.globalobj['GeolocationCoordinates']; console.log(`window_GeolocationCoordinates`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_GeolocationPosition = function () { let arg = bodavm.memory.globalobj['GeolocationPosition']; console.log(`window_GeolocationPosition`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_GeolocationPositionError = function () { let arg = bodavm.memory.globalobj['GeolocationPositionError']; console.log(`window_GeolocationPositionError`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLAllCollection = function () { let arg = bodavm.memory.globalobj['HTMLAllCollection']; console.log(`window_HTMLAllCollection`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLAnchorElement = function () { let arg = bodavm.memory.globalobj['HTMLAnchorElement']; console.log(`window_HTMLAnchorElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLAreaElement = function () { let arg = bodavm.memory.globalobj['HTMLAreaElement']; console.log(`window_HTMLAreaElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLAudioElement = function () { let arg = bodavm.memory.globalobj['HTMLAudioElement']; console.log(`window_HTMLAudioElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLBRElement = function () { let arg = bodavm.memory.globalobj['HTMLBRElement']; console.log(`window_HTMLBRElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLBaseElement = function () { let arg = bodavm.memory.globalobj['HTMLBaseElement']; console.log(`window_HTMLBaseElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLBodyElement = function () { let arg = bodavm.memory.globalobj['HTMLBodyElement']; console.log(`window_HTMLBodyElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLButtonElement = function () { let arg = bodavm.memory.globalobj['HTMLButtonElement']; console.log(`window_HTMLButtonElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLCanvasElement = function () { let arg = bodavm.memory.globalobj['HTMLCanvasElement']; console.log(`window_HTMLCanvasElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLCollection = function () { let arg = bodavm.memory.globalobj['HTMLCollection']; console.log(`window_HTMLCollection`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLDListElement = function () { let arg = bodavm.memory.globalobj['HTMLDListElement']; console.log(`window_HTMLDListElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLDataElement = function () { let arg = bodavm.memory.globalobj['HTMLDataElement']; console.log(`window_HTMLDataElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLDataListElement = function () { let arg = bodavm.memory.globalobj['HTMLDataListElement']; console.log(`window_HTMLDataListElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLDetailsElement = function () { let arg = bodavm.memory.globalobj['HTMLDetailsElement']; console.log(`window_HTMLDetailsElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLDialogElement = function () { let arg = bodavm.memory.globalobj['HTMLDialogElement']; console.log(`window_HTMLDialogElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLDirectoryElement = function () { let arg = bodavm.memory.globalobj['HTMLDirectoryElement']; console.log(`window_HTMLDirectoryElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLDivElement = function () { let arg = bodavm.memory.globalobj['HTMLDivElement']; console.log(`window_HTMLDivElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLDocument = function () { let arg = bodavm.memory.globalobj['HTMLDocument']; console.log(`window_HTMLDocument`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLElement = function () { let arg = bodavm.memory.globalobj['HTMLElement']; console.log(`window_HTMLElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLEmbedElement = function () { let arg = bodavm.memory.globalobj['HTMLEmbedElement']; console.log(`window_HTMLEmbedElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLFieldSetElement = function () { let arg = bodavm.memory.globalobj['HTMLFieldSetElement']; console.log(`window_HTMLFieldSetElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLFontElement = function () { let arg = bodavm.memory.globalobj['HTMLFontElement']; console.log(`window_HTMLFontElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLFormControlsCollection = function () { let arg = bodavm.memory.globalobj['HTMLFormControlsCollection']; console.log(`window_HTMLFormControlsCollection`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLFormElement = function () { let arg = bodavm.memory.globalobj['HTMLFormElement']; console.log(`window_HTMLFormElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLFrameElement = function () { let arg = bodavm.memory.globalobj['HTMLFrameElement']; console.log(`window_HTMLFrameElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLFrameSetElement = function () { let arg = bodavm.memory.globalobj['HTMLFrameSetElement']; console.log(`window_HTMLFrameSetElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLHRElement = function () { let arg = bodavm.memory.globalobj['HTMLHRElement']; console.log(`window_HTMLHRElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLHeadElement = function () { let arg = bodavm.memory.globalobj['HTMLHeadElement']; console.log(`window_HTMLHeadElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLHeadingElement = function () { let arg = bodavm.memory.globalobj['HTMLHeadingElement']; console.log(`window_HTMLHeadingElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLHtmlElement = function () { let arg = bodavm.memory.globalobj['HTMLHtmlElement']; console.log(`window_HTMLHtmlElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLIFrameElement = function () { let arg = bodavm.memory.globalobj['HTMLIFrameElement']; console.log(`window_HTMLIFrameElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLImageElement = function () { let arg = bodavm.memory.globalobj['HTMLImageElement']; console.log(`window_HTMLImageElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLInputElement = function () { let arg = bodavm.memory.globalobj['HTMLInputElement']; console.log(`window_HTMLInputElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLLIElement = function () { let arg = bodavm.memory.globalobj['HTMLLIElement']; console.log(`window_HTMLLIElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLLabelElement = function () { let arg = bodavm.memory.globalobj['HTMLLabelElement']; console.log(`window_HTMLLabelElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLLegendElement = function () { let arg = bodavm.memory.globalobj['HTMLLegendElement']; console.log(`window_HTMLLegendElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLLinkElement = function () { let arg = bodavm.memory.globalobj['HTMLLinkElement']; console.log(`window_HTMLLinkElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLMapElement = function () { let arg = bodavm.memory.globalobj['HTMLMapElement']; console.log(`window_HTMLMapElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLMarqueeElement = function () { let arg = bodavm.memory.globalobj['HTMLMarqueeElement']; console.log(`window_HTMLMarqueeElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLMediaElement = function () { let arg = bodavm.memory.globalobj['HTMLMediaElement']; console.log(`window_HTMLMediaElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLMenuElement = function () { let arg = bodavm.memory.globalobj['HTMLMenuElement']; console.log(`window_HTMLMenuElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLMetaElement = function () { let arg = bodavm.memory.globalobj['HTMLMetaElement']; console.log(`window_HTMLMetaElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLMeterElement = function () { let arg = bodavm.memory.globalobj['HTMLMeterElement']; console.log(`window_HTMLMeterElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLModElement = function () { let arg = bodavm.memory.globalobj['HTMLModElement']; console.log(`window_HTMLModElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLOListElement = function () { let arg = bodavm.memory.globalobj['HTMLOListElement']; console.log(`window_HTMLOListElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLObjectElement = function () { let arg = bodavm.memory.globalobj['HTMLObjectElement']; console.log(`window_HTMLObjectElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLOptGroupElement = function () { let arg = bodavm.memory.globalobj['HTMLOptGroupElement']; console.log(`window_HTMLOptGroupElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLOptionElement = function () { let arg = bodavm.memory.globalobj['HTMLOptionElement']; console.log(`window_HTMLOptionElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLOptionsCollection = function () { let arg = bodavm.memory.globalobj['HTMLOptionsCollection']; console.log(`window_HTMLOptionsCollection`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLOutputElement = function () { let arg = bodavm.memory.globalobj['HTMLOutputElement']; console.log(`window_HTMLOutputElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLParagraphElement = function () { let arg = bodavm.memory.globalobj['HTMLParagraphElement']; console.log(`window_HTMLParagraphElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLParamElement = function () { let arg = bodavm.memory.globalobj['HTMLParamElement']; console.log(`window_HTMLParamElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLPictureElement = function () { let arg = bodavm.memory.globalobj['HTMLPictureElement']; console.log(`window_HTMLPictureElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLPreElement = function () { let arg = bodavm.memory.globalobj['HTMLPreElement']; console.log(`window_HTMLPreElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLProgressElement = function () { let arg = bodavm.memory.globalobj['HTMLProgressElement']; console.log(`window_HTMLProgressElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLQuoteElement = function () { let arg = bodavm.memory.globalobj['HTMLQuoteElement']; console.log(`window_HTMLQuoteElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLScriptElement = function () { let arg = bodavm.memory.globalobj['HTMLScriptElement']; console.log(`window_HTMLScriptElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLSelectElement = function () { let arg = bodavm.memory.globalobj['HTMLSelectElement']; console.log(`window_HTMLSelectElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLSlotElement = function () { let arg = bodavm.memory.globalobj['HTMLSlotElement']; console.log(`window_HTMLSlotElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLSourceElement = function () { let arg = bodavm.memory.globalobj['HTMLSourceElement']; console.log(`window_HTMLSourceElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLSpanElement = function () { let arg = bodavm.memory.globalobj['HTMLSpanElement']; console.log(`window_HTMLSpanElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLStyleElement = function () { let arg = bodavm.memory.globalobj['HTMLStyleElement']; console.log(`window_HTMLStyleElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTableCaptionElement = function () { let arg = bodavm.memory.globalobj['HTMLTableCaptionElement']; console.log(`window_HTMLTableCaptionElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTableCellElement = function () { let arg = bodavm.memory.globalobj['HTMLTableCellElement']; console.log(`window_HTMLTableCellElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTableColElement = function () { let arg = bodavm.memory.globalobj['HTMLTableColElement']; console.log(`window_HTMLTableColElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTableElement = function () { let arg = bodavm.memory.globalobj['HTMLTableElement']; console.log(`window_HTMLTableElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTableRowElement = function () { let arg = bodavm.memory.globalobj['HTMLTableRowElement']; console.log(`window_HTMLTableRowElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTableSectionElement = function () { let arg = bodavm.memory.globalobj['HTMLTableSectionElement']; console.log(`window_HTMLTableSectionElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTemplateElement = function () { let arg = bodavm.memory.globalobj['HTMLTemplateElement']; console.log(`window_HTMLTemplateElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTextAreaElement = function () { let arg = bodavm.memory.globalobj['HTMLTextAreaElement']; console.log(`window_HTMLTextAreaElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTimeElement = function () { let arg = bodavm.memory.globalobj['HTMLTimeElement']; console.log(`window_HTMLTimeElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTitleElement = function () { let arg = bodavm.memory.globalobj['HTMLTitleElement']; console.log(`window_HTMLTitleElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLTrackElement = function () { let arg = bodavm.memory.globalobj['HTMLTrackElement']; console.log(`window_HTMLTrackElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLUListElement = function () { let arg = bodavm.memory.globalobj['HTMLUListElement']; console.log(`window_HTMLUListElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLUnknownElement = function () { let arg = bodavm.memory.globalobj['HTMLUnknownElement']; console.log(`window_HTMLUnknownElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HTMLVideoElement = function () { let arg = bodavm.memory.globalobj['HTMLVideoElement']; console.log(`window_HTMLVideoElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_HashChangeEvent = function () { let arg = bodavm.memory.globalobj['HashChangeEvent']; console.log(`window_HashChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Headers = function () { let arg = bodavm.memory.globalobj['Headers']; console.log(`window_Headers`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBCursor = function () { let arg = bodavm.memory.globalobj['IDBCursor']; console.log(`window_IDBCursor`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBCursorWithValue = function () { let arg = bodavm.memory.globalobj['IDBCursorWithValue']; console.log(`window_IDBCursorWithValue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBIndex = function () { let arg = bodavm.memory.globalobj['IDBIndex']; console.log(`window_IDBIndex`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBKeyRange = function () { let arg = bodavm.memory.globalobj['IDBKeyRange']; console.log(`window_IDBKeyRange`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBObjectStore = function () { let arg = bodavm.memory.globalobj['IDBObjectStore']; console.log(`window_IDBObjectStore`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBOpenDBRequest = function () { let arg = bodavm.memory.globalobj['IDBOpenDBRequest']; console.log(`window_IDBOpenDBRequest`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBRequest = function () { let arg = bodavm.memory.globalobj['IDBRequest']; console.log(`window_IDBRequest`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBTransaction = function () { let arg = bodavm.memory.globalobj['IDBTransaction']; console.log(`window_IDBTransaction`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBVersionChangeEvent = function () { let arg = bodavm.memory.globalobj['IDBVersionChangeEvent']; console.log(`window_IDBVersionChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IIRFilterNode = function () { let arg = bodavm.memory.globalobj['IIRFilterNode']; console.log(`window_IIRFilterNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IdleDeadline = function () { let arg = bodavm.memory.globalobj['IdleDeadline']; console.log(`window_IdleDeadline`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ImageBitmap = function () { let arg = bodavm.memory.globalobj['ImageBitmap']; console.log(`window_ImageBitmap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ImageBitmapRenderingContext = function () { let arg = bodavm.memory.globalobj['ImageBitmapRenderingContext']; console.log(`window_ImageBitmapRenderingContext`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ImageCapture = function () { let arg = bodavm.memory.globalobj['ImageCapture']; console.log(`window_ImageCapture`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ImageData = function () { let arg = bodavm.memory.globalobj['ImageData']; console.log(`window_ImageData`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_InputDeviceCapabilities = function () { let arg = bodavm.memory.globalobj['InputDeviceCapabilities']; console.log(`window_InputDeviceCapabilities`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_InputDeviceInfo = function () { let arg = bodavm.memory.globalobj['InputDeviceInfo']; console.log(`window_InputDeviceInfo`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_InputEvent = function () { let arg = bodavm.memory.globalobj['InputEvent']; console.log(`window_InputEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IntersectionObserver = function () { let arg = bodavm.memory.globalobj['IntersectionObserver']; console.log(`window_IntersectionObserver`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IntersectionObserverEntry = function () { let arg = bodavm.memory.globalobj['IntersectionObserverEntry']; console.log(`window_IntersectionObserverEntry`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_KeyboardEvent = function () { let arg = bodavm.memory.globalobj['KeyboardEvent']; console.log(`window_KeyboardEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_KeyframeEffect = function () { let arg = bodavm.memory.globalobj['KeyframeEffect']; console.log(`window_KeyframeEffect`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_LargestContentfulPaint = function () { let arg = bodavm.memory.globalobj['LargestContentfulPaint']; console.log(`window_LargestContentfulPaint`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_LayoutShift = function () { let arg = bodavm.memory.globalobj['LayoutShift']; console.log(`window_LayoutShift`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_LayoutShiftAttribution = function () { let arg = bodavm.memory.globalobj['LayoutShiftAttribution']; console.log(`window_LayoutShiftAttribution`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaCapabilities = function () { let arg = bodavm.memory.globalobj['MediaCapabilities']; console.log(`window_MediaCapabilities`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaElementAudioSourceNode = function () { let arg = bodavm.memory.globalobj['MediaElementAudioSourceNode']; console.log(`window_MediaElementAudioSourceNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaEncryptedEvent = function () { let arg = bodavm.memory.globalobj['MediaEncryptedEvent']; console.log(`window_MediaEncryptedEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaError = function () { let arg = bodavm.memory.globalobj['MediaError']; console.log(`window_MediaError`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaList = function () { let arg = bodavm.memory.globalobj['MediaList']; console.log(`window_MediaList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaQueryList = function () { let arg = bodavm.memory.globalobj['MediaQueryList']; console.log(`window_MediaQueryList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaQueryListEvent = function () { let arg = bodavm.memory.globalobj['MediaQueryListEvent']; console.log(`window_MediaQueryListEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaRecorder = function () { let arg = bodavm.memory.globalobj['MediaRecorder']; console.log(`window_MediaRecorder`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaStream = function () { let arg = bodavm.memory.globalobj['MediaStream']; console.log(`window_MediaStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaStreamAudioDestinationNode = function () { let arg = bodavm.memory.globalobj['MediaStreamAudioDestinationNode']; console.log(`window_MediaStreamAudioDestinationNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaStreamAudioSourceNode = function () { let arg = bodavm.memory.globalobj['MediaStreamAudioSourceNode']; console.log(`window_MediaStreamAudioSourceNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaStreamEvent = function () { let arg = bodavm.memory.globalobj['MediaStreamEvent']; console.log(`window_MediaStreamEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MediaStreamTrackEvent = function () { let arg = bodavm.memory.globalobj['MediaStreamTrackEvent']; console.log(`window_MediaStreamTrackEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MessageChannel = function () { let arg = bodavm.memory.globalobj['MessageChannel']; console.log(`window_MessageChannel`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MessageEvent = function () { let arg = bodavm.memory.globalobj['MessageEvent']; console.log(`window_MessageEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MessagePort = function () { let arg = bodavm.memory.globalobj['MessagePort']; console.log(`window_MessagePort`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MimeType = function () { let arg = bodavm.memory.globalobj['MimeType']; console.log(`window_MimeType`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MimeTypeArray = function () { let arg = bodavm.memory.globalobj['MimeTypeArray']; console.log(`window_MimeTypeArray`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MouseEvent = function () { let arg = bodavm.memory.globalobj['MouseEvent']; console.log(`window_MouseEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MutationEvent = function () { let arg = bodavm.memory.globalobj['MutationEvent']; console.log(`window_MutationEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_MutationRecord = function () { let arg = bodavm.memory.globalobj['MutationRecord']; console.log(`window_MutationRecord`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NamedNodeMap = function () { let arg = bodavm.memory.globalobj['NamedNodeMap']; console.log(`window_NamedNodeMap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NetworkInformation = function () { let arg = bodavm.memory.globalobj['NetworkInformation']; console.log(`window_NetworkInformation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Node = function () { let arg = bodavm.memory.globalobj['Node']; console.log(`window_Node`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NodeFilter = function () { let arg = bodavm.memory.globalobj['NodeFilter']; console.log(`window_NodeFilter`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NodeIterator = function () { let arg = bodavm.memory.globalobj['NodeIterator']; console.log(`window_NodeIterator`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_NodeList = function () { let arg = bodavm.memory.globalobj['NodeList']; console.log(`window_NodeList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_OfflineAudioCompletionEvent = function () { let arg = bodavm.memory.globalobj['OfflineAudioCompletionEvent']; console.log(`window_OfflineAudioCompletionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_OfflineAudioContext = function () { let arg = bodavm.memory.globalobj['OfflineAudioContext']; console.log(`window_OfflineAudioContext`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_OffscreenCanvas = function () { let arg = bodavm.memory.globalobj['OffscreenCanvas']; console.log(`window_OffscreenCanvas`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_OffscreenCanvasRenderingContext2D = function () { let arg = bodavm.memory.globalobj['OffscreenCanvasRenderingContext2D']; console.log(`window_OffscreenCanvasRenderingContext2D`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_OscillatorNode = function () { let arg = bodavm.memory.globalobj['OscillatorNode']; console.log(`window_OscillatorNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_OverconstrainedError = function () { let arg = bodavm.memory.globalobj['OverconstrainedError']; console.log(`window_OverconstrainedError`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PageTransitionEvent = function () { let arg = bodavm.memory.globalobj['PageTransitionEvent']; console.log(`window_PageTransitionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PannerNode = function () { let arg = bodavm.memory.globalobj['PannerNode']; console.log(`window_PannerNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Path2D = function () { let arg = bodavm.memory.globalobj['Path2D']; console.log(`window_Path2D`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceElementTiming = function () { let arg = bodavm.memory.globalobj['PerformanceElementTiming']; console.log(`window_PerformanceElementTiming`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceEntry = function () { let arg = bodavm.memory.globalobj['PerformanceEntry']; console.log(`window_PerformanceEntry`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceEventTiming = function () { let arg = bodavm.memory.globalobj['PerformanceEventTiming']; console.log(`window_PerformanceEventTiming`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceLongTaskTiming = function () { let arg = bodavm.memory.globalobj['PerformanceLongTaskTiming']; console.log(`window_PerformanceLongTaskTiming`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceMark = function () { let arg = bodavm.memory.globalobj['PerformanceMark']; console.log(`window_PerformanceMark`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceMeasure = function () { let arg = bodavm.memory.globalobj['PerformanceMeasure']; console.log(`window_PerformanceMeasure`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceNavigation = function () { let arg = bodavm.memory.globalobj['PerformanceNavigation']; console.log(`window_PerformanceNavigation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceNavigationTiming = function () { let arg = bodavm.memory.globalobj['PerformanceNavigationTiming']; console.log(`window_PerformanceNavigationTiming`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceObserver = function () { let arg = bodavm.memory.globalobj['PerformanceObserver']; console.log(`window_PerformanceObserver`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceObserverEntryList = function () { let arg = bodavm.memory.globalobj['PerformanceObserverEntryList']; console.log(`window_PerformanceObserverEntryList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformancePaintTiming = function () { let arg = bodavm.memory.globalobj['PerformancePaintTiming']; console.log(`window_PerformancePaintTiming`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceResourceTiming = function () { let arg = bodavm.memory.globalobj['PerformanceResourceTiming']; console.log(`window_PerformanceResourceTiming`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceServerTiming = function () { let arg = bodavm.memory.globalobj['PerformanceServerTiming']; console.log(`window_PerformanceServerTiming`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PerformanceTiming = function () { let arg = bodavm.memory.globalobj['PerformanceTiming']; console.log(`window_PerformanceTiming`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PeriodicWave = function () { let arg = bodavm.memory.globalobj['PeriodicWave']; console.log(`window_PeriodicWave`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Plugin = function () { let arg = bodavm.memory.globalobj['Plugin']; console.log(`window_Plugin`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PluginArray = function () { let arg = bodavm.memory.globalobj['PluginArray']; console.log(`window_PluginArray`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PointerEvent = function () { let arg = bodavm.memory.globalobj['PointerEvent']; console.log(`window_PointerEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PopStateEvent = function () { let arg = bodavm.memory.globalobj['PopStateEvent']; console.log(`window_PopStateEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ProcessingInstruction = function () { let arg = bodavm.memory.globalobj['ProcessingInstruction']; console.log(`window_ProcessingInstruction`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ProgressEvent = function () { let arg = bodavm.memory.globalobj['ProgressEvent']; console.log(`window_ProgressEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_PromiseRejectionEvent = function () { let arg = bodavm.memory.globalobj['PromiseRejectionEvent']; console.log(`window_PromiseRejectionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCCertificate = function () { let arg = bodavm.memory.globalobj['RTCCertificate']; console.log(`window_RTCCertificate`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCDTMFSender = function () { let arg = bodavm.memory.globalobj['RTCDTMFSender']; console.log(`window_RTCDTMFSender`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCDTMFToneChangeEvent = function () { let arg = bodavm.memory.globalobj['RTCDTMFToneChangeEvent']; console.log(`window_RTCDTMFToneChangeEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCDataChannel = function () { let arg = bodavm.memory.globalobj['RTCDataChannel']; console.log(`window_RTCDataChannel`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCDataChannelEvent = function () { let arg = bodavm.memory.globalobj['RTCDataChannelEvent']; console.log(`window_RTCDataChannelEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCDtlsTransport = function () { let arg = bodavm.memory.globalobj['RTCDtlsTransport']; console.log(`window_RTCDtlsTransport`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCEncodedAudioFrame = function () { let arg = bodavm.memory.globalobj['RTCEncodedAudioFrame']; console.log(`window_RTCEncodedAudioFrame`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCEncodedVideoFrame = function () { let arg = bodavm.memory.globalobj['RTCEncodedVideoFrame']; console.log(`window_RTCEncodedVideoFrame`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCError = function () { let arg = bodavm.memory.globalobj['RTCError']; console.log(`window_RTCError`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCErrorEvent = function () { let arg = bodavm.memory.globalobj['RTCErrorEvent']; console.log(`window_RTCErrorEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCIceCandidate = function () { let arg = bodavm.memory.globalobj['RTCIceCandidate']; console.log(`window_RTCIceCandidate`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCPeerConnection = function () { let arg = bodavm.memory.globalobj['RTCPeerConnection']; console.log(`window_RTCPeerConnection`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCPeerConnectionIceErrorEvent = function () { let arg = bodavm.memory.globalobj['RTCPeerConnectionIceErrorEvent']; console.log(`window_RTCPeerConnectionIceErrorEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCPeerConnectionIceEvent = function () { let arg = bodavm.memory.globalobj['RTCPeerConnectionIceEvent']; console.log(`window_RTCPeerConnectionIceEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCRtpReceiver = function () { let arg = bodavm.memory.globalobj['RTCRtpReceiver']; console.log(`window_RTCRtpReceiver`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCRtpSender = function () { let arg = bodavm.memory.globalobj['RTCRtpSender']; console.log(`window_RTCRtpSender`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCRtpTransceiver = function () { let arg = bodavm.memory.globalobj['RTCRtpTransceiver']; console.log(`window_RTCRtpTransceiver`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCSctpTransport = function () { let arg = bodavm.memory.globalobj['RTCSctpTransport']; console.log(`window_RTCSctpTransport`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCSessionDescription = function () { let arg = bodavm.memory.globalobj['RTCSessionDescription']; console.log(`window_RTCSessionDescription`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCStatsReport = function () { let arg = bodavm.memory.globalobj['RTCStatsReport']; console.log(`window_RTCStatsReport`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RTCTrackEvent = function () { let arg = bodavm.memory.globalobj['RTCTrackEvent']; console.log(`window_RTCTrackEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_RadioNodeList = function () { let arg = bodavm.memory.globalobj['RadioNodeList']; console.log(`window_RadioNodeList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Range = function () { let arg = bodavm.memory.globalobj['Range']; console.log(`window_Range`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ReadableByteStreamController = function () { let arg = bodavm.memory.globalobj['ReadableByteStreamController']; console.log(`window_ReadableByteStreamController`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ReadableStream = function () { let arg = bodavm.memory.globalobj['ReadableStream']; console.log(`window_ReadableStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ReadableStreamBYOBReader = function () { let arg = bodavm.memory.globalobj['ReadableStreamBYOBReader']; console.log(`window_ReadableStreamBYOBReader`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ReadableStreamBYOBRequest = function () { let arg = bodavm.memory.globalobj['ReadableStreamBYOBRequest']; console.log(`window_ReadableStreamBYOBRequest`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ReadableStreamDefaultController = function () { let arg = bodavm.memory.globalobj['ReadableStreamDefaultController']; console.log(`window_ReadableStreamDefaultController`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ReadableStreamDefaultReader = function () { let arg = bodavm.memory.globalobj['ReadableStreamDefaultReader']; console.log(`window_ReadableStreamDefaultReader`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ReportingObserver = function () { let arg = bodavm.memory.globalobj['ReportingObserver']; console.log(`window_ReportingObserver`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Request = function () { let arg = bodavm.memory.globalobj['Request']; console.log(`window_Request`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ResizeObserver = function () { let arg = bodavm.memory.globalobj['ResizeObserver']; console.log(`window_ResizeObserver`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ResizeObserverEntry = function () { let arg = bodavm.memory.globalobj['ResizeObserverEntry']; console.log(`window_ResizeObserverEntry`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ResizeObserverSize = function () { let arg = bodavm.memory.globalobj['ResizeObserverSize']; console.log(`window_ResizeObserverSize`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Response = function () { let arg = bodavm.memory.globalobj['Response']; console.log(`window_Response`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAElement = function () { let arg = bodavm.memory.globalobj['SVGAElement']; console.log(`window_SVGAElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAngle = function () { let arg = bodavm.memory.globalobj['SVGAngle']; console.log(`window_SVGAngle`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimateElement = function () { let arg = bodavm.memory.globalobj['SVGAnimateElement']; console.log(`window_SVGAnimateElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimateMotionElement = function () { let arg = bodavm.memory.globalobj['SVGAnimateMotionElement']; console.log(`window_SVGAnimateMotionElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimateTransformElement = function () { let arg = bodavm.memory.globalobj['SVGAnimateTransformElement']; console.log(`window_SVGAnimateTransformElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedAngle = function () { let arg = bodavm.memory.globalobj['SVGAnimatedAngle']; console.log(`window_SVGAnimatedAngle`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedBoolean = function () { let arg = bodavm.memory.globalobj['SVGAnimatedBoolean']; console.log(`window_SVGAnimatedBoolean`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedEnumeration = function () { let arg = bodavm.memory.globalobj['SVGAnimatedEnumeration']; console.log(`window_SVGAnimatedEnumeration`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedInteger = function () { let arg = bodavm.memory.globalobj['SVGAnimatedInteger']; console.log(`window_SVGAnimatedInteger`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedLength = function () { let arg = bodavm.memory.globalobj['SVGAnimatedLength']; console.log(`window_SVGAnimatedLength`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedLengthList = function () { let arg = bodavm.memory.globalobj['SVGAnimatedLengthList']; console.log(`window_SVGAnimatedLengthList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedNumber = function () { let arg = bodavm.memory.globalobj['SVGAnimatedNumber']; console.log(`window_SVGAnimatedNumber`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedNumberList = function () { let arg = bodavm.memory.globalobj['SVGAnimatedNumberList']; console.log(`window_SVGAnimatedNumberList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedPreserveAspectRatio = function () { let arg = bodavm.memory.globalobj['SVGAnimatedPreserveAspectRatio']; console.log(`window_SVGAnimatedPreserveAspectRatio`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedRect = function () { let arg = bodavm.memory.globalobj['SVGAnimatedRect']; console.log(`window_SVGAnimatedRect`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedString = function () { let arg = bodavm.memory.globalobj['SVGAnimatedString']; console.log(`window_SVGAnimatedString`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimatedTransformList = function () { let arg = bodavm.memory.globalobj['SVGAnimatedTransformList']; console.log(`window_SVGAnimatedTransformList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGAnimationElement = function () { let arg = bodavm.memory.globalobj['SVGAnimationElement']; console.log(`window_SVGAnimationElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGCircleElement = function () { let arg = bodavm.memory.globalobj['SVGCircleElement']; console.log(`window_SVGCircleElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGClipPathElement = function () { let arg = bodavm.memory.globalobj['SVGClipPathElement']; console.log(`window_SVGClipPathElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGComponentTransferFunctionElement = function () { let arg = bodavm.memory.globalobj['SVGComponentTransferFunctionElement']; console.log(`window_SVGComponentTransferFunctionElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGDefsElement = function () { let arg = bodavm.memory.globalobj['SVGDefsElement']; console.log(`window_SVGDefsElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGDescElement = function () { let arg = bodavm.memory.globalobj['SVGDescElement']; console.log(`window_SVGDescElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGElement = function () { let arg = bodavm.memory.globalobj['SVGElement']; console.log(`window_SVGElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGEllipseElement = function () { let arg = bodavm.memory.globalobj['SVGEllipseElement']; console.log(`window_SVGEllipseElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEBlendElement = function () { let arg = bodavm.memory.globalobj['SVGFEBlendElement']; console.log(`window_SVGFEBlendElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEColorMatrixElement = function () { let arg = bodavm.memory.globalobj['SVGFEColorMatrixElement']; console.log(`window_SVGFEColorMatrixElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEComponentTransferElement = function () { let arg = bodavm.memory.globalobj['SVGFEComponentTransferElement']; console.log(`window_SVGFEComponentTransferElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFECompositeElement = function () { let arg = bodavm.memory.globalobj['SVGFECompositeElement']; console.log(`window_SVGFECompositeElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEConvolveMatrixElement = function () { let arg = bodavm.memory.globalobj['SVGFEConvolveMatrixElement']; console.log(`window_SVGFEConvolveMatrixElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEDiffuseLightingElement = function () { let arg = bodavm.memory.globalobj['SVGFEDiffuseLightingElement']; console.log(`window_SVGFEDiffuseLightingElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEDisplacementMapElement = function () { let arg = bodavm.memory.globalobj['SVGFEDisplacementMapElement']; console.log(`window_SVGFEDisplacementMapElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEDistantLightElement = function () { let arg = bodavm.memory.globalobj['SVGFEDistantLightElement']; console.log(`window_SVGFEDistantLightElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEDropShadowElement = function () { let arg = bodavm.memory.globalobj['SVGFEDropShadowElement']; console.log(`window_SVGFEDropShadowElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEFloodElement = function () { let arg = bodavm.memory.globalobj['SVGFEFloodElement']; console.log(`window_SVGFEFloodElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEFuncAElement = function () { let arg = bodavm.memory.globalobj['SVGFEFuncAElement']; console.log(`window_SVGFEFuncAElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEFuncBElement = function () { let arg = bodavm.memory.globalobj['SVGFEFuncBElement']; console.log(`window_SVGFEFuncBElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEFuncGElement = function () { let arg = bodavm.memory.globalobj['SVGFEFuncGElement']; console.log(`window_SVGFEFuncGElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEFuncRElement = function () { let arg = bodavm.memory.globalobj['SVGFEFuncRElement']; console.log(`window_SVGFEFuncRElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEGaussianBlurElement = function () { let arg = bodavm.memory.globalobj['SVGFEGaussianBlurElement']; console.log(`window_SVGFEGaussianBlurElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEImageElement = function () { let arg = bodavm.memory.globalobj['SVGFEImageElement']; console.log(`window_SVGFEImageElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEMergeElement = function () { let arg = bodavm.memory.globalobj['SVGFEMergeElement']; console.log(`window_SVGFEMergeElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEMergeNodeElement = function () { let arg = bodavm.memory.globalobj['SVGFEMergeNodeElement']; console.log(`window_SVGFEMergeNodeElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEMorphologyElement = function () { let arg = bodavm.memory.globalobj['SVGFEMorphologyElement']; console.log(`window_SVGFEMorphologyElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEOffsetElement = function () { let arg = bodavm.memory.globalobj['SVGFEOffsetElement']; console.log(`window_SVGFEOffsetElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFEPointLightElement = function () { let arg = bodavm.memory.globalobj['SVGFEPointLightElement']; console.log(`window_SVGFEPointLightElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFESpecularLightingElement = function () { let arg = bodavm.memory.globalobj['SVGFESpecularLightingElement']; console.log(`window_SVGFESpecularLightingElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFESpotLightElement = function () { let arg = bodavm.memory.globalobj['SVGFESpotLightElement']; console.log(`window_SVGFESpotLightElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFETileElement = function () { let arg = bodavm.memory.globalobj['SVGFETileElement']; console.log(`window_SVGFETileElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFETurbulenceElement = function () { let arg = bodavm.memory.globalobj['SVGFETurbulenceElement']; console.log(`window_SVGFETurbulenceElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGFilterElement = function () { let arg = bodavm.memory.globalobj['SVGFilterElement']; console.log(`window_SVGFilterElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGForeignObjectElement = function () { let arg = bodavm.memory.globalobj['SVGForeignObjectElement']; console.log(`window_SVGForeignObjectElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGGElement = function () { let arg = bodavm.memory.globalobj['SVGGElement']; console.log(`window_SVGGElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGGeometryElement = function () { let arg = bodavm.memory.globalobj['SVGGeometryElement']; console.log(`window_SVGGeometryElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGGradientElement = function () { let arg = bodavm.memory.globalobj['SVGGradientElement']; console.log(`window_SVGGradientElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGGraphicsElement = function () { let arg = bodavm.memory.globalobj['SVGGraphicsElement']; console.log(`window_SVGGraphicsElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGImageElement = function () { let arg = bodavm.memory.globalobj['SVGImageElement']; console.log(`window_SVGImageElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGLength = function () { let arg = bodavm.memory.globalobj['SVGLength']; console.log(`window_SVGLength`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGLengthList = function () { let arg = bodavm.memory.globalobj['SVGLengthList']; console.log(`window_SVGLengthList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGLineElement = function () { let arg = bodavm.memory.globalobj['SVGLineElement']; console.log(`window_SVGLineElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGLinearGradientElement = function () { let arg = bodavm.memory.globalobj['SVGLinearGradientElement']; console.log(`window_SVGLinearGradientElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGMPathElement = function () { let arg = bodavm.memory.globalobj['SVGMPathElement']; console.log(`window_SVGMPathElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGMarkerElement = function () { let arg = bodavm.memory.globalobj['SVGMarkerElement']; console.log(`window_SVGMarkerElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGMaskElement = function () { let arg = bodavm.memory.globalobj['SVGMaskElement']; console.log(`window_SVGMaskElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGMatrix = function () { let arg = bodavm.memory.globalobj['SVGMatrix']; console.log(`window_SVGMatrix`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGMetadataElement = function () { let arg = bodavm.memory.globalobj['SVGMetadataElement']; console.log(`window_SVGMetadataElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGNumber = function () { let arg = bodavm.memory.globalobj['SVGNumber']; console.log(`window_SVGNumber`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGNumberList = function () { let arg = bodavm.memory.globalobj['SVGNumberList']; console.log(`window_SVGNumberList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGPathElement = function () { let arg = bodavm.memory.globalobj['SVGPathElement']; console.log(`window_SVGPathElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGPatternElement = function () { let arg = bodavm.memory.globalobj['SVGPatternElement']; console.log(`window_SVGPatternElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGPoint = function () { let arg = bodavm.memory.globalobj['SVGPoint']; console.log(`window_SVGPoint`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGPointList = function () { let arg = bodavm.memory.globalobj['SVGPointList']; console.log(`window_SVGPointList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGPolygonElement = function () { let arg = bodavm.memory.globalobj['SVGPolygonElement']; console.log(`window_SVGPolygonElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGPolylineElement = function () { let arg = bodavm.memory.globalobj['SVGPolylineElement']; console.log(`window_SVGPolylineElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGPreserveAspectRatio = function () { let arg = bodavm.memory.globalobj['SVGPreserveAspectRatio']; console.log(`window_SVGPreserveAspectRatio`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGRadialGradientElement = function () { let arg = bodavm.memory.globalobj['SVGRadialGradientElement']; console.log(`window_SVGRadialGradientElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGRect = function () { let arg = bodavm.memory.globalobj['SVGRect']; console.log(`window_SVGRect`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGRectElement = function () { let arg = bodavm.memory.globalobj['SVGRectElement']; console.log(`window_SVGRectElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGSVGElement = function () { let arg = bodavm.memory.globalobj['SVGSVGElement']; console.log(`window_SVGSVGElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGScriptElement = function () { let arg = bodavm.memory.globalobj['SVGScriptElement']; console.log(`window_SVGScriptElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGSetElement = function () { let arg = bodavm.memory.globalobj['SVGSetElement']; console.log(`window_SVGSetElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGStopElement = function () { let arg = bodavm.memory.globalobj['SVGStopElement']; console.log(`window_SVGStopElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGStringList = function () { let arg = bodavm.memory.globalobj['SVGStringList']; console.log(`window_SVGStringList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGStyleElement = function () { let arg = bodavm.memory.globalobj['SVGStyleElement']; console.log(`window_SVGStyleElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGSwitchElement = function () { let arg = bodavm.memory.globalobj['SVGSwitchElement']; console.log(`window_SVGSwitchElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGSymbolElement = function () { let arg = bodavm.memory.globalobj['SVGSymbolElement']; console.log(`window_SVGSymbolElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGTSpanElement = function () { let arg = bodavm.memory.globalobj['SVGTSpanElement']; console.log(`window_SVGTSpanElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGTextContentElement = function () { let arg = bodavm.memory.globalobj['SVGTextContentElement']; console.log(`window_SVGTextContentElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGTextElement = function () { let arg = bodavm.memory.globalobj['SVGTextElement']; console.log(`window_SVGTextElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGTextPathElement = function () { let arg = bodavm.memory.globalobj['SVGTextPathElement']; console.log(`window_SVGTextPathElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGTextPositioningElement = function () { let arg = bodavm.memory.globalobj['SVGTextPositioningElement']; console.log(`window_SVGTextPositioningElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGTitleElement = function () { let arg = bodavm.memory.globalobj['SVGTitleElement']; console.log(`window_SVGTitleElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGTransform = function () { let arg = bodavm.memory.globalobj['SVGTransform']; console.log(`window_SVGTransform`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGTransformList = function () { let arg = bodavm.memory.globalobj['SVGTransformList']; console.log(`window_SVGTransformList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGUnitTypes = function () { let arg = bodavm.memory.globalobj['SVGUnitTypes']; console.log(`window_SVGUnitTypes`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGUseElement = function () { let arg = bodavm.memory.globalobj['SVGUseElement']; console.log(`window_SVGUseElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SVGViewElement = function () { let arg = bodavm.memory.globalobj['SVGViewElement']; console.log(`window_SVGViewElement`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ScreenOrientation = function () { let arg = bodavm.memory.globalobj['ScreenOrientation']; console.log(`window_ScreenOrientation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ScriptProcessorNode = function () { let arg = bodavm.memory.globalobj['ScriptProcessorNode']; console.log(`window_ScriptProcessorNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SecurityPolicyViolationEvent = function () { let arg = bodavm.memory.globalobj['SecurityPolicyViolationEvent']; console.log(`window_SecurityPolicyViolationEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Selection = function () { let arg = bodavm.memory.globalobj['Selection']; console.log(`window_Selection`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ShadowRoot = function () { let arg = bodavm.memory.globalobj['ShadowRoot']; console.log(`window_ShadowRoot`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_StaticRange = function () { let arg = bodavm.memory.globalobj['StaticRange']; console.log(`window_StaticRange`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_StereoPannerNode = function () { let arg = bodavm.memory.globalobj['StereoPannerNode']; console.log(`window_StereoPannerNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_StorageEvent = function () { let arg = bodavm.memory.globalobj['StorageEvent']; console.log(`window_StorageEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_StylePropertyMap = function () { let arg = bodavm.memory.globalobj['StylePropertyMap']; console.log(`window_StylePropertyMap`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_StylePropertyMapReadOnly = function () { let arg = bodavm.memory.globalobj['StylePropertyMapReadOnly']; console.log(`window_StylePropertyMapReadOnly`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_StyleSheet = function () { let arg = bodavm.memory.globalobj['StyleSheet']; console.log(`window_StyleSheet`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_StyleSheetList = function () { let arg = bodavm.memory.globalobj['StyleSheetList']; console.log(`window_StyleSheetList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SubmitEvent = function () { let arg = bodavm.memory.globalobj['SubmitEvent']; console.log(`window_SubmitEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_SyncManager = function () { let arg = bodavm.memory.globalobj['SyncManager']; console.log(`window_SyncManager`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TaskAttributionTiming = function () { let arg = bodavm.memory.globalobj['TaskAttributionTiming']; console.log(`window_TaskAttributionTiming`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Text = function () { let arg = bodavm.memory.globalobj['Text']; console.log(`window_Text`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextDecoder = function () { let arg = bodavm.memory.globalobj['TextDecoder']; console.log(`window_TextDecoder`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextDecoderStream = function () { let arg = bodavm.memory.globalobj['TextDecoderStream']; console.log(`window_TextDecoderStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextEncoder = function () { let arg = bodavm.memory.globalobj['TextEncoder']; console.log(`window_TextEncoder`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextEncoderStream = function () { let arg = bodavm.memory.globalobj['TextEncoderStream']; console.log(`window_TextEncoderStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextEvent = function () { let arg = bodavm.memory.globalobj['TextEvent']; console.log(`window_TextEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextMetrics = function () { let arg = bodavm.memory.globalobj['TextMetrics']; console.log(`window_TextMetrics`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextTrack = function () { let arg = bodavm.memory.globalobj['TextTrack']; console.log(`window_TextTrack`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextTrackCue = function () { let arg = bodavm.memory.globalobj['TextTrackCue']; console.log(`window_TextTrackCue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextTrackCueList = function () { let arg = bodavm.memory.globalobj['TextTrackCueList']; console.log(`window_TextTrackCueList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TextTrackList = function () { let arg = bodavm.memory.globalobj['TextTrackList']; console.log(`window_TextTrackList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TimeRanges = function () { let arg = bodavm.memory.globalobj['TimeRanges']; console.log(`window_TimeRanges`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Touch = function () { let arg = bodavm.memory.globalobj['Touch']; console.log(`window_Touch`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TouchEvent = function () { let arg = bodavm.memory.globalobj['TouchEvent']; console.log(`window_TouchEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TouchList = function () { let arg = bodavm.memory.globalobj['TouchList']; console.log(`window_TouchList`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TrackEvent = function () { let arg = bodavm.memory.globalobj['TrackEvent']; console.log(`window_TrackEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TransformStream = function () { let arg = bodavm.memory.globalobj['TransformStream']; console.log(`window_TransformStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TransitionEvent = function () { let arg = bodavm.memory.globalobj['TransitionEvent']; console.log(`window_TransitionEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_TreeWalker = function () { let arg = bodavm.memory.globalobj['TreeWalker']; console.log(`window_TreeWalker`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_UIEvent = function () { let arg = bodavm.memory.globalobj['UIEvent']; console.log(`window_UIEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_URL = function () { let arg = bodavm.memory.globalobj['URL']; console.log(`window_URL`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_URLSearchParams = function () { let arg = bodavm.memory.globalobj['URLSearchParams']; console.log(`window_URLSearchParams`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_UserActivation = function () { let arg = bodavm.memory.globalobj['UserActivation']; console.log(`window_UserActivation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_VTTCue = function () { let arg = bodavm.memory.globalobj['VTTCue']; console.log(`window_VTTCue`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_ValidityState = function () { let arg = bodavm.memory.globalobj['ValidityState']; console.log(`window_ValidityState`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WaveShaperNode = function () { let arg = bodavm.memory.globalobj['WaveShaperNode']; console.log(`window_WaveShaperNode`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGL2RenderingContext = function () { let arg = bodavm.memory.globalobj['WebGL2RenderingContext']; console.log(`window_WebGL2RenderingContext`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLActiveInfo = function () { let arg = bodavm.memory.globalobj['WebGLActiveInfo']; console.log(`window_WebGLActiveInfo`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLBuffer = function () { let arg = bodavm.memory.globalobj['WebGLBuffer']; console.log(`window_WebGLBuffer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLContextEvent = function () { let arg = bodavm.memory.globalobj['WebGLContextEvent']; console.log(`window_WebGLContextEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLFramebuffer = function () { let arg = bodavm.memory.globalobj['WebGLFramebuffer']; console.log(`window_WebGLFramebuffer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLProgram = function () { let arg = bodavm.memory.globalobj['WebGLProgram']; console.log(`window_WebGLProgram`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLQuery = function () { let arg = bodavm.memory.globalobj['WebGLQuery']; console.log(`window_WebGLQuery`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLRenderbuffer = function () { let arg = bodavm.memory.globalobj['WebGLRenderbuffer']; console.log(`window_WebGLRenderbuffer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLRenderingContext = function () { let arg = bodavm.memory.globalobj['WebGLRenderingContext']; console.log(`window_WebGLRenderingContext`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLSampler = function () { let arg = bodavm.memory.globalobj['WebGLSampler']; console.log(`window_WebGLSampler`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLShader = function () { let arg = bodavm.memory.globalobj['WebGLShader']; console.log(`window_WebGLShader`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLShaderPrecisionFormat = function () { let arg = bodavm.memory.globalobj['WebGLShaderPrecisionFormat']; console.log(`window_WebGLShaderPrecisionFormat`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLSync = function () { let arg = bodavm.memory.globalobj['WebGLSync']; console.log(`window_WebGLSync`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLTexture = function () { let arg = bodavm.memory.globalobj['WebGLTexture']; console.log(`window_WebGLTexture`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLTransformFeedback = function () { let arg = bodavm.memory.globalobj['WebGLTransformFeedback']; console.log(`window_WebGLTransformFeedback`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLUniformLocation = function () { let arg = bodavm.memory.globalobj['WebGLUniformLocation']; console.log(`window_WebGLUniformLocation`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebGLVertexArrayObject = function () { let arg = bodavm.memory.globalobj['WebGLVertexArrayObject']; console.log(`window_WebGLVertexArrayObject`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebSocket = function () { let arg = bodavm.memory.globalobj['WebSocket']; console.log(`window_WebSocket`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WheelEvent = function () { let arg = bodavm.memory.globalobj['WheelEvent']; console.log(`window_WheelEvent`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Worker = function () { let arg = bodavm.memory.globalobj['Worker']; console.log(`window_Worker`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WritableStream = function () { let arg = bodavm.memory.globalobj['WritableStream']; console.log(`window_WritableStream`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WritableStreamDefaultController = function () { let arg = bodavm.memory.globalobj['WritableStreamDefaultController']; console.log(`window_WritableStreamDefaultController`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WritableStreamDefaultWriter = function () { let arg = bodavm.memory.globalobj['WritableStreamDefaultWriter']; console.log(`window_WritableStreamDefaultWriter`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XMLDocument = function () { let arg = bodavm.memory.globalobj['XMLDocument']; console.log(`window_XMLDocument`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XMLHttpRequest = function () { let arg = bodavm.memory.globalobj['XMLHttpRequest']; console.log(`window_XMLHttpRequest`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XMLHttpRequestEventTarget = function () { let arg = bodavm.memory.globalobj['XMLHttpRequestEventTarget']; console.log(`window_XMLHttpRequestEventTarget`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XMLHttpRequestUpload = function () { let arg = bodavm.memory.globalobj['XMLHttpRequestUpload']; console.log(`window_XMLHttpRequestUpload`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XMLSerializer = function () { let arg = bodavm.memory.globalobj['XMLSerializer']; console.log(`window_XMLSerializer`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XPathEvaluator = function () { let arg = bodavm.memory.globalobj['XPathEvaluator']; console.log(`window_XPathEvaluator`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XPathExpression = function () { let arg = bodavm.memory.globalobj['XPathExpression']; console.log(`window_XPathExpression`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_XPathResult = function () { let arg = bodavm.memory.globalobj['XPathResult']; console.log(`window_XPathResult`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebKitCSSMatrix = function () { let arg = bodavm.memory.globalobj['DOMMatrix']; console.log(`window_WebKitCSSMatrix`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_WebKitMutationObserver = function () { let arg = bodavm.memory.globalobj['MutationObserver']; console.log(`window_WebKitMutationObserver`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitMediaStream = function () { let arg = bodavm.memory.globalobj['webkitMediaStream']; console.log(`window_webkitMediaStream`, `-> res ->${arg}`); return arg }
     bodavm.envFunc.window_webkitRTCPeerConnection = function () { 
-        let arg = bodavm.memory.globalobj['webkitRTCPeerConnection']; console.log(`window_webkitRTCPeerConnection`, `res ->${arg}`
+        let arg = bodavm.memory.globalobj['webkitRTCPeerConnection']; console.log(`window_webkitRTCPeerConnection`, `-> res ->${arg}`
         
         ); return arg }
-    bodavm.envFunc.window_webkitURL = function () { let arg = bodavm.memory.globalobj['webkitURL']; console.log(`window_webkitURL`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_Audio = function () { let arg = bodavm.memory.globalobj['Audio']; console.log(`window_Audio`, `res ->${arg}`); return arg }
-    bodavm.envFunc.window_IDBDatabase = function () { let arg = bodavm.memory.globalobj['IDBDatabase']; console.log(`window_IDBDatabase`, `res ->${arg}`); return arg }
+    bodavm.envFunc.window_webkitURL = function () { let arg = bodavm.memory.globalobj['webkitURL']; console.log(`window_webkitURL`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_Audio = function () { let arg = bodavm.memory.globalobj['Audio']; console.log(`window_Audio`, `-> res ->${arg}`); return arg }
+    bodavm.envFunc.window_IDBDatabase = function () { let arg = bodavm.memory.globalobj['IDBDatabase']; console.log(`window_IDBDatabase`, `-> res ->${arg}`); return arg }
 
 
 
@@ -1030,134 +1030,134 @@
         // }
         let arg =bodavm.memory.globalobj['MutationObserver']
         // arg._boarg=new bodaobj.window.MutationObserver(arguments[0])
-        console.log(`window_MutationObserver `, `res ->${arg}`);
+        console.log(`window_MutationObserver `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncanplaythrough_get = function () {
         let arg = bodavm.memory.window['oncanplaythrough']
         // arg._boarg= bodaobj.window['oncanplaythrough']
 
-        console.log(`window_oncanplaythrough_get `, `res ->${arg}`);
+        console.log(`window_oncanplaythrough_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncanplay_get = function () {
         let arg = bodavm.memory.window['oncanplay']
         // arg._boarg= bodaobj.window['oncanplay']
 
-        console.log(`window_oncanplay_get `, `res ->${arg}`);
+        console.log(`window_oncanplay_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_oncancel_get = function () {
         let arg = bodavm.memory.window['oncancel']
         // arg._boarg= bodaobj.window['oncancel']
-        console.log(`window_oncancel_get `, `res ->${arg}`);
+        console.log(`window_oncancel_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onblur_get = function () {
         let arg = bodavm.memory.window['onblur']
         // arg._boarg= bodaobj.window['onblur']
 
-        console.log(`window_onblur_get `, `res ->${arg}`);
+        console.log(`window_onblur_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onappinstalled_get = function () {
         let arg = bodavm.memory.window['onappinstalled']
         // arg._boarg= bodaobj.window['onappinstalled']
 
-        console.log(`window_onappinstalled_get `, `res ->${arg}`);
+        console.log(`window_onappinstalled_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforeinstallprompt_get = function () {
         let arg = bodavm.memory.window['onbeforeinstallprompt']
         // arg._boarg= bodaobj.window['onbeforeinstallprompt']
 
-        console.log(`window_onbeforeinstallprompt_get `, `res ->${arg}`);
+        console.log(`window_onbeforeinstallprompt_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onbeforexrselect_get = function () {
         let arg = bodavm.memory.window['onbeforexrselect']
         // arg._boarg= bodaobj.window['onbeforexrselect']
 
-        console.log(`window_onbeforexrselect_get `, `res ->${arg}`);
+        console.log(`window_onbeforexrselect_get `, `-> res ->${arg}`);
         return arg
     }
 
     bodavm.envFunc.window_onabort_get = function () {
         let arg = bodavm.memory.window['onabort']
         // arg._boarg= bodaobj.window['onabort']
-        console.log(`window_onabort_get `, `res ->${arg}`);
+        console.log(`window_onabort_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_isSecureContext_get = function () {
         let arg = bodavm.memory.window['isSecureContext']
         arg._boarg= bodaobj.window['isSecureContext']
 
-        console.log(`window_isSecureContext_get `, `res ->${arg}`);
+        console.log(`window_isSecureContext_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_onsearch_get = function () {
         // let arg = bodavm.memory.globalobj['onsearch'] ? bodavm.memory.globalobj['onsearch'] : null
         // arg._boarg= bodaobj.window['onsearch']
         let arg = bodavm.memory.window['onsearch']
-        console.log(`window_onsearch_get `, `res ->${arg}`);
+        console.log(`window_onsearch_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_styleMedia_get = function () {
         let arg = bodavm.memory.globalobj['styleMedia'] ? bodavm.memory.globalobj['styleMedia'] : null
         arg._boarg= bodaobj.window['styleMedia']
 
-        console.log(`window_styleMedia_get `, `res ->${arg}`);
+        console.log(`window_styleMedia_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_frameElement_get = function () {
-        let arg = bodavm.memory.window['frameElement'] 
-        // arg._boarg= bodaobj.window['frameElement']
+        let arg = {}
+        arg._boarg= bodaobj.window['frameElement']
 
-
-
-        console.log(`window_frameElement_get `, `res ->${arg}`);
+        // arg.
+        arg.__proto__=HTMLIFrameElement.prototype
+        console.log(`window_frameElement_get `, `-> res ->${arg} `);
         return arg
     }
     bodavm.envFunc.window_opener_get = function () {
         let arg = bodavm.memory.window['opener']
         // arg._boarg= bodaobj.window['opener']
         // let arg= bodaobj.window['opener']
-        console.log(`window_opener_get `, `res ->${arg}`);
+        console.log(`window_opener_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_statusbar_get = function () {
         let arg = bodavm.memory.globalobj['statusbar']
         arg._boarg= bodaobj.window['statusbar']
 
-        console.log(`window_statusbar_get `, `res ->${arg}`);
+        console.log(`window_statusbar_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_scrollbars_get = function () {
         let arg = bodavm.memory.globalobj['scrollbars']
         arg._boarg= bodaobj.window['scrollbars']
 
-        console.log(`window_scrollbars_get `, `res ->${arg}`);
+        console.log(`window_scrollbars_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_locationbar_get = function () {
         let arg = bodavm.memory.globalobj['locationbar']
         arg._boarg= bodaobj.window['locationbar']
 
-        console.log(`window_locationbar_get `, `res ->${arg}`);
+        console.log(`window_locationbar_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_personalbar_get = function () {
         let arg = bodavm.memory.globalobj['personalbar']
         arg._boarg= bodaobj.window['personalbar']
 
-        console.log(`window_personalbar_get `, `res ->${arg}`);
+        console.log(`window_personalbar_get `, `-> res ->${arg}`);
         return arg
     }
     bodavm.envFunc.window_speechSynthesis_get = function () {
         let arg = bodavm.memory.globalobj['speechSynthesis']
         arg._boarg= bodaobj.window['speechSynthesis']
 
-        console.log(`window_speechSynthesis_get `, `res ->${arg}`);
+        console.log(`window_speechSynthesis_get `, `-> res ->${arg}`);
         return arg
     }
 
@@ -1166,28 +1166,28 @@
         let arg = bodavm.memory.globalobj['trustedTypes']
         arg._boarg= bodaobj.window['trustedTypes']
 
-        console.log(`window_trustedTypes_get `, `res -> ${arg}`);
+        console.log(`window_trustedTypes_get `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_cookieStore_get = function () {
         let arg = bodavm.memory.globalobj['cookieStore']
         arg._boarg= bodaobj.window['cookieStore']
 
-        console.log(`window_cookieStore_get `, `res -> ${arg}`);
+        console.log(`window_cookieStore_get `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_external_get = function () {
         let arg = bodavm.memory.globalobj['external']
         arg._boarg= bodaobj.window['external']
 
-        console.log(`window_external_get `, `res -> ${arg}`);
+        console.log(`window_external_get `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_caches_get = function () {
         let arg = bodavm.memory.globalobj['caches']
         arg._boarg= bodaobj.window['caches']
 
-        console.log(`window_caches_get `, `res -> ${arg}`);
+        console.log(`window_caches_get `, `-> res -> ${arg}`);
         return arg
     }
 
@@ -1195,49 +1195,49 @@
         let arg = bodavm.memory.globalobj['visualViewport']
         arg._boarg= bodaobj.window['visualViewport']
 
-        console.log(`window_visualViewport_get `, `res -> ${arg}`);
+        console.log(`window_visualViewport_get `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_menubar_get = function () {
         let arg = bodavm.memory.globalobj['menubar']
         arg._boarg= bodaobj.window['menubar']
 
-        console.log(`window_menubar_get `, `res -> ${arg}`);
+        console.log(`window_menubar_get `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_toolbar_get = function () {
         let arg = bodavm.memory.globalobj['toolbar']
         arg._boarg= bodaobj.window['toolbar']
 
-        console.log(`window_toolbar_get `, `res -> ${arg}`);
+        console.log(`window_toolbar_get `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_CookieStore = function () {
         let arg = bodavm.memory.globalobj['CookieStore']
         arg._boarg= bodaobj.window['CookieStore']
 
-        console.log(`window_CookieStore `, `res -> ${arg}`);
+        console.log(`window_CookieStore `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Storage = function () {
         let arg = bodavm.memory.globalobj['Storage']
         arg._boarg= bodaobj.window['Storage']
 
-        console.log(`window_Storage `, `res -> ${arg}`);
+        console.log(`window_Storage `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Navigation = function () {
         let arg = bodavm.memory.globalobj['Navigation']
         arg._boarg= bodaobj.window['Navigation']
 
-        console.log(`window_Navigation `, `res -> ${arg}`);
+        console.log(`window_Navigation `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_VisualViewport = function () {
         let arg = bodavm.memory.globalobj['VisualViewport']
         arg._boarg= bodaobj.window['VisualViewport']
 
-        console.log(`window_VisualViewport `, `res -> ${arg}`);
+        console.log(`window_VisualViewport `, `-> res -> ${arg}`);
         return arg
     }
 
@@ -1245,35 +1245,35 @@
         let arg = bodavm.memory.globalobj['History']
         arg._boarg= bodaobj.window['History']
 
-        console.log(`window_History `, `res -> ${arg}`);
+        console.log(`window_History `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_IDBFactory = function () {
         let arg = bodavm.memory.globalobj['IDBFactory']
         arg._boarg= bodaobj.window['IDBFactory']
 
-        console.log(`window_IDBFactory `, `res -> ${arg}`);
+        console.log(`window_IDBFactory `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_TrustedTypePolicyFactory = function () {
         let arg = bodavm.memory.globalobj['TrustedTypePolicyFactory']
         arg._boarg= bodaobj.window['TrustedTypePolicyFactory']
 
-        console.log(`window_TrustedTypePolicyFactory `, `res -> ${arg}`);
+        console.log(`window_TrustedTypePolicyFactory `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_External = function () {
         let arg = bodavm.memory.globalobj['External']
         arg._boarg= bodaobj.window['External']
 
-        console.log(`window_External `, `res -> ${arg}`);
+        console.log(`window_External `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_CacheStorage = function () {
         let arg = bodavm.memory.globalobj['CacheStorage']
         arg._boarg= bodaobj.window['CacheStorage']
 
-        console.log(`window_CacheStorage `, `res -> ${arg}`);
+        console.log(`window_CacheStorage `, `-> res -> ${arg}`);
         return arg
     }
 
@@ -1282,35 +1282,35 @@
         let arg = bodavm.memory.globalobj['CustomElementRegistry']
         arg._boarg= bodaobj.window['CustomElementRegistry']
 
-        console.log(`window_CustomElementRegistry `, `res -> ${arg}`);
+        console.log(`window_CustomElementRegistry `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Window = function () {
         let arg = bodavm.memory.globalobj['Window']
         arg._boarg= bodaobj.window['Window']
 
-        console.log(`window_Window `, `res -> ${arg}`);
+        console.log(`window_Window `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Screen = function () {
         let arg = bodavm.memory.globalobj['Screen']
         arg._boarg= bodaobj.window['Screen']
 
-        console.log(`window_Screen `, `res -> ${arg}`);
+        console.log(`window_Screen `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Navigator = function () {
         let arg = bodavm.memory.globalobj['Navigator']
         arg._boarg= bodaobj.window['Navigator']
 
-        console.log(`window_Navigator `, `res -> ${arg}`);
+        console.log(`window_Navigator `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Performance = function () {
         let arg = bodavm.memory.globalobj['Performance']
         arg._boarg= bodaobj.window['Performance']
 
-        console.log(`window_Performance `, `res -> ${arg}`);
+        console.log(`window_Performance `, `-> res -> ${arg}`);
         return arg
     }
 
@@ -1318,21 +1318,21 @@
         let arg = bodavm.memory.globalobj['BarProp']
         arg._boarg= bodaobj.window['BarProp']
 
-        console.log(`window_BarProp `, `res -> ${arg}`);
+        console.log(`window_BarProp `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Location = function () {
         let arg = bodavm.memory.globalobj['Location']
         arg._boarg= bodaobj.window['Location']
 
-        console.log(`window_Location `, `res -> ${arg}`);
+        console.log(`window_Location `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_Document = function () {
         let arg = bodavm.memory.globalobj['Document']
         arg._boarg= bodaobj.window['Document']
 
-        console.log(`window_Document `, `res -> ${arg}`);
+        console.log(`window_Document `, `-> res -> ${arg}`);
         return arg
     }
     bodavm.envFunc.window_webkitStorageInfo_get = function () {
@@ -1426,7 +1426,7 @@
         return document_
     }
     bodavm.envFunc.window_location_get = function window_location_get() {
-        // debugger
+        debugger
         let location_ = bodavm.memory.globalobj.location
         location_._boarg= bodaobj.window['location']
 
@@ -1438,52 +1438,21 @@
         let res = navigator
         res._boarg= bodaobj.window['navigator']
 
-        console.log(`window_clientInformation_get `, `res- >${res}`);
+        console.log(`window_clientInformation_get `, `-> res- >${res}`);
         return res
     }
     bodavm.envFunc.HTMLAllCollection_length_get = function () {
         debugger
         let length_ = bodavm.memory.all.length
+        if (bodavm.memory.rs6  && bodavm.memory.rs6_body==0){
+            console.log(`HTMLAllCollection_length_get `, `length_ ->${3}`);
+
+            return 3
+        }
         console.log(`HTMLAllCollection_length_get `, `length_ ->${length_}`);
         return length_
     }
-    bodavm.envFunc.Document_all_get = function Document_all_get() {
-        bodavm.memory.all = []
-        let a = boallundefined
-        tags = document.getElementsByTagName("*")
-        a.__proto__ = bodavm.memory.globalobj['HTMLAllCollection'].prototype
-        // if (bodavm.memory.rs6 && bodavm.memory.rs6_body == 0) {
-        //     let num = 0
-        //     for (let i = 0; i < tags.length; i++) {
-        //         if (tags[i] instanceof bodavm.memory.globalobj['HTMLBodyElement']) {
-
-        //         } else {
-        //             bodavm.memory.all[num] = tags[i]
-        //             num++
-        //         }
-        //     }
-        // } else {
-            for (let i2 = 0; i2 < tags.length; i2++) {
-                // bodavm.memory.all[i2] = tags[i2];
-                a[i2]=tags[i2]
-                bodavm.memory.all.push(tags[i2])
-            }
-
-        // let arg=arguments[0]
-        // debugger
-        // if (arg){
-        //     res=a[arg]
-        //     console.log(`Document_all_get ->`,`arg :${arg} `,`res -> ${res}`)
-        //     return res
-        // }
-
-
-        // debugger
-        a._boarg=true
-        a.__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
-        console.log("Document_all_get  ", `all ->${a}`)
-        return a
-    }
+   
 
     bodavm.envFunc.HTMLAnchorElement_hash_get = function HTMLAnchorElement_hash_get() {
         let hash = this._boarg.hash
@@ -1587,7 +1556,7 @@
         res._boarg = bodaobj.document.createExpression(arguments[0], arguments[1])
         res.__proto__ = bodavm.memory.globalobj['XPathExpression'].prototype
         
-        console.log(`Document_createExpression `, `res ->${res}`);
+        console.log(`Document_createExpression `, `-> res ->${res}`);
         return res
     }
 
@@ -1636,7 +1605,7 @@
                 console.log(`HTMLMediaElement_canPlayType `, `canplaytype->${canplaytype}未实现 `);
         }
 
-        console.log(`HTMLMediaElement_canPlayType `, `canplaytype ->${canplaytype}`, `res ->${res}`);
+        console.log(`HTMLMediaElement_canPlayType `, `canplaytype ->${canplaytype}`, `-> res ->${res}`);
         return res
 
     }
@@ -1649,7 +1618,7 @@
         res._media = arg
         res.__proto__ = bodavm.memory.globalobj['MediaQueryList'].prototype
         res._boisinit=true
-        console.log(`window_matchMedia `, `arg ->${arg}`, `res ->${res}`);
+        console.log(`window_matchMedia `, `arg ->${arg}`, `-> res ->${res}`);
 
         return res
     }
@@ -1804,7 +1773,7 @@
             let promise = new Promise((resolve, reject) => {
                 resolve(res)
             })
-            console.log(`Permissions_query `, `res ->${promise}`);
+            console.log(`Permissions_query `, `-> res ->${promise}`);
 
             return promise
         } else {
@@ -1832,6 +1801,7 @@
         // debugger
         taglist = bodaobj.document.images
         for (let i = 0; i < taglist.length; i++) {
+            // res={}
             res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
             res._boarg = taglist[i]
             bodavm.memory.collection["IMG"].__proto__=Array.prototype
@@ -1840,6 +1810,28 @@
                 bodavm.memory.collection["IMG"].push(res)
             // }
         }
+        let tags=bodavm.memory.collection['IMG']
+        //修改属性描述符writable为false
+        for (let ind = 0; ind < tags.length; ind++) {
+            Object.defineProperty(tags,ind+'',{
+                value:tags[ind],
+                writable: false, 
+                enumerable: true, 
+                configurable:true
+
+            })            
+        }
+        //防止属性被删除  过检测
+        bodavm.memory.collection['IMG']=new Proxy( bodavm.memory.collection['IMG'] ,{
+            deleteProperty(target,propkey){
+                if (target.__proto__ ==Array.prototype){
+                    return true
+                }
+                console.log(target,`正在删除属性`,propkey,`默认返回false`);
+                return false
+            }
+        })
+
         bodavm.memory.collection["IMG"].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         bodavm.memory.collection["IMG"]._boarg = taglist
         bodavm.memory.collection["IMG"].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
@@ -1986,9 +1978,10 @@
 
 
     bodavm.envFunc.window_webkitRequestFileSystem = function window_webkitRequestFileSystem() {
+        debugger
         let webkitRequestFileSystem = bodavm.memory.globalobj['webkitRequestFileSystem'];
-        console.log(`window.webkitRequestFileSystem `, ` window.webkitRequestFileSystem ->${webkitRequestFileSystem}`);
-        return webkitRequestFileSystem
+        console.log(`window.webkitRequestFileSystem `, ` window.webkitRequestFileSystem 无返回值->${webkitRequestFileSystem}`);
+        // return webkitRequestFileSystem
     }
     bodavm.envFunc.window_onbeforeunload_get = function window_onbeforeunload_get() {
         let onbeforeunload = bodaobj.window.onbeforeunload;
@@ -2123,7 +2116,7 @@
         return name
     }
     bodavm.envFunc.window_setTimeout = function window_setTimeout() {
-        // debugger
+        debugger
         let func = arguments[0];
         let delay = arguments[1] || 0;
         let length = arguments.length;
@@ -2138,7 +2131,8 @@
             "delay": delay,
             "args": argList,
             "type": typeof func == 'function' ? 1 : 0,  //1代表函数,0代表code
-            "timeoutID": bodavm.memory.globalInit.timeoutID
+            "timeoutID": bodavm.memory.globalInit.timeoutID,
+            'settime_name':'setTimeout'
         }
         if (bodavm.memory.asyncEvent.setTimeout === undefined) {
             bodavm.memory.asyncEvent.setTimeout = [];
@@ -2191,7 +2185,9 @@
             "delay": delay,
             "args": argList,
             "type": typeof func == 'function' ? 1 : 0,  //1代表函数,0代表code
-            "timeoutID": bodavm.memory.globalInit.timeoutID
+            "timeoutID": bodavm.memory.globalInit.timeoutID,
+            'settime_name':'setInterval'
+
         }
         if (bodavm.memory.asyncEvent.setTimeout === undefined) {
             bodavm.memory.asyncEvent.setTimeout = [];
@@ -2238,6 +2234,9 @@
         let i = 0;
         console.log(`Storage_key `, `index${index}  `)
         for (var key in this) {
+            if (key =='hasOwnProperty_bo'){continue}
+
+
             if (i === index) {
                 return this[key]
             }
@@ -2259,6 +2258,8 @@
         if (bodavm.config.isdebug) { debugger }
         debugger
         for (var key in Object.getOwnPropertyDescriptors(this)) {
+            if (key =='hasOwnProperty_bo'){continue}
+
             i++
         }
         console.log(`Storage_length_get `, `length->${i}   `);
@@ -2342,7 +2343,7 @@
     bodavm.envFunc.Document_currentScript_get = function Document_currentScript_get() { 
         // debugger
         let res=this._boarg.currentScript
-        console.log("Document_currentScript_get  ", `res ->${res}`, "!!!!!!!!!未完善!!!!!!!!!!!!")
+        console.log("Document_currentScript_get  ", `-> res ->${res}`, "!!!!!!!!!未完善!!!!!!!!!!!!")
         return res
     }
     bodavm.envFunc.Document_defaultView_get = function Document_defaultView_get() { console.log("Document_defaultView_get  ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
@@ -2430,7 +2431,7 @@
     bodavm.envFunc.Document_querySelector = function Document_querySelector() { 
         
         let res=this._boarg.querySelector(arguments[0])
-        console.log("Document_querySelector ->",`res ->${res}`)
+        console.log("Document_querySelector ->",`-> res ->${res}`)
         if (res){debugger}
         return res
     }
@@ -2478,6 +2479,7 @@
         taglist = bodaobj.document.scripts
 
         for (let i = 0; i < taglist.length; i++) {
+            // res={}
             res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
             res._boarg = taglist[i]
             bodavm.memory.collection["scripts"].__proto__=Array.prototype
@@ -2486,10 +2488,35 @@
                 bodavm.memory.collection["scripts"].push(res)
             // }
         }
+        
+        let tags=bodavm.memory.collection['scripts']
+        //修改属性描述符writable为false
+        for (let ind = 0; ind < tags.length; ind++) {
+            Object.defineProperty(tags,ind+'',{
+                value:tags[ind],
+                writable: false, 
+                enumerable: true, 
+                configurable:true
+
+            },'bobo')            
+        }
+        //防止属性被删除  过检测
+        bodavm.memory.collection['scripts']=new Proxy( bodavm.memory.collection['scripts'] ,{
+            deleteProperty(target,propkey){
+                if (target.__proto__ ==Array.prototype){
+                    return true
+                }
+                console.log(target,`正在删除属性`,propkey,`默认返回false`);
+                return false
+            }
+        })
+
+
+
         bodavm.memory.collection["scripts"].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         bodavm.memory.collection["scripts"]._boarg = taglist
 
-        console.log(`Document_scripts_get `, `res ->${bodavm.memory.collection["scripts"]}`);
+        console.log(`Document_scripts_get `, `-> res ->${bodavm.memory.collection["scripts"]}`);
         bodavm.memory.collection["scripts"].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
         return bodavm.memory.collection["scripts"]
     }
@@ -2689,7 +2716,8 @@
         let id = arguments[0]
         let res = bodaobj.document.getElementById(id)
         if (res) {
-            let value = bodavm.toolsFunc.setProto(res.nodeName)
+            // let value={}
+            value = bodavm.toolsFunc.setProto(res.nodeName)
             value._boarg = res  //防止this丢失
             console.log(`Document_getElementById `, `id->${id}`, ` res->${value}`);
             return value
@@ -2719,17 +2747,40 @@
         num = 0
         for (let i = 0; i < taglist.length; i++) {
             num++
-            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
-            res._boarg = taglist[i]
-            bodavm.memory.collection[tagName].__proto__=Array.prototype
-            bodavm.memory.collection[tagName].push(res)
             if (num == 2 && tagName == 'SCRIPT' && bodavm.config.isrs) {
                 // debugger
                 break
 
             }
+            // res={}
+            res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
+            res._boarg = taglist[i]
+            bodavm.memory.collection[tagName].__proto__=Array.prototype
+            bodavm.memory.collection[tagName].push(res)
+            
         }
+        //过检测 
+        let tags=bodavm.memory.collection[tagName]
+        //修改属性描述符writable为false
+        // for (let ind = 0; ind < tags.length; ind++) {
+        //     Object.defineProperty(tags,ind+'',{
+        //         value:tags[ind],
+        //         writable: false, 
+        //         enumerable: true, 
+        //         configurable:true
 
+        //     })            
+        // }
+        //防止属性被删除  过检测
+        bodavm.memory.collection[tagName]=new Proxy( bodavm.memory.collection[tagName] ,{
+            deleteProperty(target,propkey){
+                if (target.__proto__ ==Array.prototype){
+                    return true
+                }
+                console.log(target,`正在删除属性`,propkey,`默认返回false`);
+                return false
+            }
+        })
         
         bodavm.memory.collection[tagName].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         bodavm.memory.collection[tagName]._boarg = taglist
@@ -2748,7 +2799,9 @@
         }
         let jsonCookie = bodavm.memory.globalInit.jsonCookie;
         let tempCookie = "";
+        // debugger
         for (var  key in jsonCookie) {
+            if (key =='hasOwnProperty_bo'){continue}
             if (key === "") {
                 tempCookie += `${jsonCookie[key]}; `;
             } else {
@@ -2996,7 +3049,7 @@
         let Nodelists={}
         Nodelists._boarg=this._boarg.childNodes
         Nodelists.__proto__=NodeList.prototype
-        console.log("Node_childNodes_get ->",`res->${Nodelists}`) 
+        console.log("Node_childNodes_get ->",`-> res->${Nodelists}`) 
         return Nodelists
     }
     bodavm.envFunc.Node_isConnected_get = function Node_isConnected_get() { console.log("Node_isConnected_get ", undefined, "!!!!!!!!!未完善!!!!!!!!!!!!") }
@@ -3005,7 +3058,7 @@
          res = bodavm.memory.cache['Node_nextSibling_get']
          let _next = this._boarg.nextSibling
         if (_next == null) {
-            console.log(`Node_nextSibling_get `, `res -> null`);
+            console.log(`Node_nextSibling_get `, `-> res -> null`);
             return null
         } else {
             res = bodavm.toolsFunc.setProto(_next.nodeName)
@@ -3013,7 +3066,7 @@
             res._boisinit=bodavm.config.isinit
         }
 
-        console.log(`Node_nextSibling_get `, `res->${res}`);
+        console.log(`Node_nextSibling_get `, `-> res->${res}`);
         return res
     }
     bodavm.envFunc.Node_nodeType_get = function Node_nodeType_get() {
@@ -3044,7 +3097,7 @@
         } else {
             res = null
         }
-        console.log(`Node_firstChild_get `, `res->${res}`);
+        console.log(`Node_firstChild_get `, `-> res->${res}`);
 
         return res
 
@@ -3086,18 +3139,12 @@
             // }else{
                 // 
             // }
-           
+        //    debugger
             res = bodavm.toolsFunc.setProto(parent.nodeName)
             res._boarg = parent
             bodavm.memory.cache['Node_parentNode_get']['parent']=parent
 
             bodavm.memory.cache['Node_parentNode_get']['res']=res
-            // if (parent.nodeName)
-            // if (Object.prototype.toString.call(parent) == '[object Object]') {
-            //     console.log(`Node_parentNode_get `, `parent->${null}  `);
-            //     return null
-            // }
-            // parent.__proto__ = bodavm.toolsFunc.setProto(parent._nodeName)
         }else{
             res=null
         }
@@ -3107,9 +3154,8 @@
     }
     bodavm.envFunc.Node_removeChild = function Node_removeChild() {
         //删除子节点
-        debugger
+        
         if (bodavm.config.isdebug) { debugger };;
-
         let child = arguments[0]
         this._boarg.removeChild(child._boarg)
         let tagname=child._boarg.nodeName
@@ -3117,7 +3163,7 @@
         if (bodavm.memory.collection[tagname]){
             for (let i = 0; i < bodavm.memory.collection[tagname].length; i++) {
                 if (child ==bodavm.memory.collection[tagname][i]){
-    
+                    debugger
                     console.log(`当前对象 tagname:${tagname},child:${child} 存在bodavm.memory.collection ,重置bodavm.memory.collection[${tagname}]`)
                     bodavm.memory.collection[tagname].__proto__=Array.prototype
                     bodavm.memory.collection[tagname].splice(i,1)
@@ -3126,7 +3172,6 @@
                 
             }
         }
-        
         // debugger
 
         return child
@@ -3153,7 +3198,7 @@
     bodavm.envFunc.Node_appendChild = function Node_appendChild() {
         // ;debugger
         if (bodavm.config.isdebug) { debugger };;
-        debugger
+        // debugger
         let child = arguments[0]
         if (this instanceof  HTMLFormElement) {
             for (let i = 0; i < bodavm.memory.formlist.length; i++) {
@@ -3417,6 +3462,7 @@
         if (bodavm.config.isdebug) { debugger };
         let taglist = this._boarg.children
         for (let i = 0; i < taglist.length; i++) {
+            // res={}
             res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
             res._boarg = taglist[i]
             bodavm.memory.collection[tagName].__proto__=Array.prototype
@@ -3425,6 +3471,29 @@
             // }
 
         }
+
+        let tags=bodavm.memory.collection[tagName]
+        //修改属性描述符writable为false
+        for (let ind = 0; ind < tags.length; ind++) {
+            Object.defineProperty(tags,ind+'',{
+                value:tags[ind],
+                writable: false, 
+                enumerable: true, 
+                configurable:true
+
+            })            
+        }
+        //防止属性被删除  过检测
+        bodavm.memory.collection[tagName]=new Proxy( bodavm.memory.collection[tagName] ,{
+            deleteProperty(target,propkey){
+                if (target.__proto__ ==Array.prototype){
+                    return true
+                }
+                console.log(target,`正在删除属性`,propkey,`默认返回false`);
+                return false
+            }
+        })
+
         bodavm.memory.collection[tagName].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         bodavm.memory.collection[tagName]._boarg = taglist
         console.log(`Element_children_get `, ` taglist->${taglist}`);
@@ -3443,7 +3512,7 @@
         let res = this._boarg.innerHTML
         if (bodavm.config.isdebug) { debugger };;
 
-        console.log(`Element_innerHTML_get `, `res->${res}`);
+        console.log(`Element_innerHTML_get `, `-> res->${res}`);
         return res
 
     }
@@ -3482,21 +3551,38 @@
         let taglist = this._boarg.getElementsByTagName(tagName)
 
         for (let i = 0; i < taglist.length; i++) {
+            // res={}
             res = bodavm.toolsFunc.setProto(taglist[i].nodeName);
             res._boarg = taglist[i]
             bodavm.memory.collection[tagName].__proto__=Array.prototype
-
-            // if (bodavm.memory.collection[tagName].indexOf(res)==-1){
-                bodavm.memory.collection[tagName].push(res)
-            // }
+            bodavm.memory.collection[tagName].push(res)
         }
-        // debugger
+        let tags=bodavm.memory.collection[tagName]
+        //修改属性描述符writable为false
+        for (let ind = 0; ind < tags.length; ind++) {
+            Object.defineProperty(tags,ind+'',{
+                value:tags[ind],
+                writable: false, 
+                enumerable: true, 
+                configurable:true
+
+            })            
+        }
+        //防止属性被删除
+        bodavm.memory.collection[tagName]=new Proxy( bodavm.memory.collection[tagName] ,{
+            deleteProperty(target,propkey){
+                if (target.__proto__ ==Array.prototype){
+                    return true
+                }
+                console.log(target,`正在删除属性`,propkey,`默认返回false`);
+                return false
+            }
+        })
+
         bodavm.memory.collection[tagName].__proto__ = bodavm.memory.globalobj['HTMLCollection'].prototype
         bodavm.memory.collection[tagName]._boarg = taglist
         console.log(`Element_getElementsByTagName `, `tagName->${tagName} `, ` taglist->${taglist}`);
         bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
-
-
         return bodavm.memory.collection[tagName]
     }
 
@@ -3649,6 +3735,7 @@
         return appVersion
     }
     bodavm.envFunc.Navigator_getBattery = function Navigator_getBattery() {
+        debugger
         let batteryManager = bodavm.memory.cache['Navigator_getBattery'];
         batteryManager._boisinit=true
         console.log(`Navigator_getBattery  `, 'settimeout 添加异步电池信息');
@@ -3939,11 +4026,13 @@
     }
     bodavm.envFunc.HTMLElement_style_get = function HTMLElement_style_get() {
         if (bodavm.config.isdebug) { debugger }
-        if (!(bodavm.memory.cache['HTMLElement_style_get'][this])){
+        debugger
+        if ((!bodavm.memory.cache['HTMLElement_style_get'][this])){
             bodavm.memory.cache['HTMLElement_style_get'][this]={}
+        }else{
+            console.log(`HTMLElement_style_get ->`,`this->`,this,'已存在直接返回')
+            return bodavm.memory.cache['HTMLElement_style_get'][this]
         }
-       
-        
         let style = bodavm.memory.cache['HTMLElement_style_get'][this]
         // debugger
         let oo = this._boarg.style
@@ -3952,592 +4041,9 @@
         // bodavm.toolsFunc.symbolProperty(style)
         style.__proto__ = bodavm.memory.globalobj['CSSStyleDeclaration'].prototype
         console.log(`HTMLElement_style_get `, `style->${style}`);
-
-        bodavm.toolsFunc.windowdefineProperty(style, "0", { configurable: true, enumerable: true, writable: false, value: "font-family" });
-        bodavm.toolsFunc.windowdefineProperty(style, "1", { configurable: true, enumerable: true, writable: false, value: "font-size" });
-        bodavm.toolsFunc.windowdefineProperty(style, "accentColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "additiveSymbols", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "alignContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "alignItems", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "alignSelf", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "alignmentBaseline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "all", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "animation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "animationDelay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "animationDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "animationDuration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "animationFillMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "animationIterationCount", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "animationName", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "animationPlayState", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "animationTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "appRegion", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "appearance", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "ascentOverride", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "aspectRatio", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backdropFilter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backfaceVisibility", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "background", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundAttachment", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundBlendMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundClip", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundPositionX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundPositionY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundRepeatX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundRepeatY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "backgroundSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "basePalette", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "baselineShift", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "blockSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "border", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockEndColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockEndStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockEndWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStartColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStartStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStartWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBlockWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderBottomWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderCollapse", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderEndEndRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderEndStartRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderImageOutset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderImageRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderImageSlice", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderImageSource", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderImageWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineEndColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineEndStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineEndWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStartColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStartStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStartWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderInlineWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderLeftColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderLeftStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderLeftWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderRightColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderRightStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderRightWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderStartEndRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderStartStartRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderTopColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderTopLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderTopRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderTopStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderTopWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "borderWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "bottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "boxShadow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "boxSizing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "breakAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "breakBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "breakInside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "bufferedRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "captionSide", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "caretColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "clear", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "clip", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "clipPath", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "clipRule", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "color", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "colorInterpolation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "colorInterpolationFilters", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "colorRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "colorScheme", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columnCount", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columnFill", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columnGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columnRule", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columnRuleColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columnRuleStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columnRuleWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columnSpan", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columnWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "columns", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "contain", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicBlockSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicInlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "containIntrinsicWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "content", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "contentVisibility", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "counterIncrement", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "counterReset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "counterSet", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "cursor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "cx", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "cy", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "d", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "descentOverride", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "direction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "display", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "dominantBaseline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "emptyCells", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fallback", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fill", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fillOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fillRule", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "filter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "flex", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "flexBasis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "flexDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "flexFlow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "flexGrow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "flexShrink", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "flexWrap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "float", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "floodColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "floodOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "font", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontDisplay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontFamily", { configurable: true, enumerable: true, get: function () { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "fontFamily_get  ", arguments) }, set: function () { return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CSSStyleDeclaration'].prototype, "CSSStyleDeclaration", "fontFamily_set", arguments) } });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontFeatureSettings", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontKerning", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontOpticalSizing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontPalette", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontSize", { configurable: true, enumerable: true, writable: true, value: "160px" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontStretch", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontSynthesis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontSynthesisSmallCaps", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontSynthesisStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontSynthesisWeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontVariant", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontVariantCaps", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontVariantEastAsian", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontVariantLigatures", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontVariantNumeric", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontVariationSettings", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "fontWeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "forcedColorAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "grid", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridArea", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridAutoColumns", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridAutoFlow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridAutoRows", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridColumn", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridColumnEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridColumnGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridColumnStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridRow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridRowEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridRowGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridRowStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridTemplate", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridTemplateAreas", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridTemplateColumns", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "gridTemplateRows", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "height", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "hyphens", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "imageOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "imageRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "inherits", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "initialValue", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "inlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "inset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "insetBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "insetBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "insetBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "insetInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "insetInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "insetInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "isolation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "justifyContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "justifyItems", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "justifySelf", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "left", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "letterSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "lightingColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "lineBreak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "lineGapOverride", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "lineHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "listStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "listStyleImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "listStylePosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "listStyleType", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "margin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marginTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "marker", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "markerEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "markerMid", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "markerStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "mask", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "maskType", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "maxBlockSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "maxHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "maxInlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "maxWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "maxZoom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "minBlockSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "minHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "minInlineSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "minWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "minZoom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "mixBlendMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "negative", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "objectFit", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "objectPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "offset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "offsetDistance", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "offsetPath", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "offsetRotate", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "opacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "order", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "orientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "orphans", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "outline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "outlineColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "outlineOffset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "outlineStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "outlineWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overflow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overflowAnchor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overflowClipMargin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overflowWrap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overflowX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overflowY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overrideColors", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehavior", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehaviorBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehaviorInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehaviorX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "overscrollBehaviorY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "pad", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "padding", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paddingTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "page", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "pageBreakAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "pageBreakBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "pageBreakInside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "pageOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "paintOrder", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "perspective", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "perspectiveOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "placeContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "placeItems", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "placeSelf", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "pointerEvents", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "position", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "prefix", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "quotes", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "r", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "range", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "resize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "right", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "rowGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "rubyPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "rx", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "ry", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollBehavior", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMargin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollMarginTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPadding", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingBlock", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingBlockEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingBlockStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingBottom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingInline", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingInlineEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingInlineStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingLeft", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingRight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollPaddingTop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollSnapAlign", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollSnapStop", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollSnapType", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "scrollbarGutter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "shapeImageThreshold", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "shapeMargin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "shapeOutside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "shapeRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "size", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "sizeAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "speak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "speakAs", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "src", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "stopColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "stopOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "stroke", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "strokeDasharray", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "strokeDashoffset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "strokeLinecap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "strokeLinejoin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "strokeMiterlimit", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "strokeOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "strokeWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "suffix", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "symbols", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "syntax", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "system", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "tabSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "tableLayout", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textAlign", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textAlignLast", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textAnchor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textCombineUpright", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textDecoration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationLine", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationSkipInk", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textDecorationThickness", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textEmphasis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textEmphasisColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textEmphasisPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textEmphasisStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textIndent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textOverflow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textRendering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textShadow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textSizeAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textTransform", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textUnderlineOffset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "textUnderlinePosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "top", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "touchAction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "transform", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "transformBox", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "transformOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "transformStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "transition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "transitionDelay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "transitionDuration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "transitionProperty", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "transitionTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "unicodeBidi", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "unicodeRange", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "userSelect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "userZoom", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "vectorEffect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "verticalAlign", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "visibility", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAlignContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAlignItems", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAlignSelf", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationDelay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationDuration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationFillMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationIterationCount", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationName", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationPlayState", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAnimationTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAppRegion", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitAppearance", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBackfaceVisibility", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBackgroundClip", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBackgroundOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBackgroundSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderAfterColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderAfterStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderAfterWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBeforeColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBeforeStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBeforeWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBottomLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderBottomRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderEndColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderEndStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderEndWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderHorizontalSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderStartColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderStartStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderStartWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderTopLeftRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderTopRightRadius", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBorderVerticalSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxAlign", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxDecorationBreak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxFlex", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxOrdinalGroup", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxOrient", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxPack", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxReflect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxShadow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitBoxSizing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitClipPath", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnBreakAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnBreakBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnBreakInside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnCount", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnGap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnRule", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnRuleColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnRuleStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnRuleWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnSpan", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumnWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitColumns", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFilter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlex", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexBasis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexDirection", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexFlow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexGrow", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexShrink", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFlexWrap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFontFeatureSettings", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitFontSmoothing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitHighlight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitHyphenateCharacter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitJustifyContent", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitLineBreak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitLineClamp", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitLocale", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitLogicalHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitLogicalWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMarginAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMarginBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMarginEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMarginStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMask", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageOutset", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageSlice", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageSource", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskBoxImageWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskClip", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskComposite", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskImage", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskPositionX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskPositionY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskRepeat", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskRepeatX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskRepeatY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaskSize", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaxLogicalHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMaxLogicalWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMinLogicalHeight", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitMinLogicalWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitOpacity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitOrder", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitPaddingAfter", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitPaddingBefore", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitPaddingEnd", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitPaddingStart", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitPerspective", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitPerspectiveOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitPerspectiveOriginX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitPerspectiveOriginY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitPrintColorAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitRtlOrdering", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitRubyPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitShapeImageThreshold", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitShapeMargin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitShapeOutside", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTapHighlightColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextCombine", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextDecorationsInEffect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextEmphasis", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextEmphasisColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextEmphasisPosition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextEmphasisStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextFillColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextOrientation", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextSecurity", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextSizeAdjust", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextStroke", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextStrokeColor", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTextStrokeWidth", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransform", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformOrigin", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformOriginX", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformOriginY", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformOriginZ", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransformStyle", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransition", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransitionDelay", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransitionDuration", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransitionProperty", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitTransitionTimingFunction", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitUserDrag", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitUserModify", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitUserSelect", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "webkitWritingMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "whiteSpace", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "widows", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "width", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "willChange", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "wordBreak", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "wordSpacing", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "wordWrap", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "writingMode", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "x", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "y", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "zIndex", { configurable: true, enumerable: true, writable: true, value: "" });
-        bodavm.toolsFunc.windowdefineProperty(style, "zoom", { configurable: true, enumerable: true, writable: true, value: "" });
-        return style
+        res=bodavm.toolsFunc.style_(style)
+        style=null
+        return res
     }
 
     bodavm.envFunc.HTMLElement_style_set = function HTMLElement_style_set() {
@@ -4708,13 +4214,13 @@
                 // context = context.getContext('2d')
                 context._bocanvas = this._bocanvas.getContext('2d')
                 context.__proto__ = bodavm.memory.globalobj['CanvasRenderingContext2D'].prototype;
-                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
+                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `-> res -> ${context}`)
 
                 break
             case "webgl":
                 // context = context.getContext('2d')
                 context.__proto__ = bodavm.memory.globalobj['WebGLRenderingContext'].prototype;
-                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `res -> ${context}`)
+                console.log(`HTMLCanvasElement_getContext `, `type->${type} `, `-> res -> ${context}`)
 
                 break
             case 'experimental-webgl':
@@ -4746,14 +4252,14 @@
         if (this._bocanvas) {
             let res = this._bocanvas.toDataURL()
             res._boisinit=true
-            console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
+            console.log(`HTMLCanvasElement_toDataURL `, `-> res->${res}`);
             return res
             // return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         } else {
             debugger
             res = bodavm.memory.userInit.canvas_webgl
             res._boisinit=true
-            console.log(`HTMLCanvasElement_toDataURL `, `res->${res}`);
+            console.log(`HTMLCanvasElement_toDataURL `, `-> res->${res}`);
             return res
             // return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O/7Dr52l+/7vfd7zz3Pc57n3HeI0+NvetfrkM1pzX8Xn1341CTwsErIE80JZ3CDBDMKfAAmEi3bwH3gF3AGQMW+78/J/o9q3AFuAg8sqbICFetRQpGQQVYg6/EKsA5sAgJy2z7YrpjNm1seiGAXgVngKbAMLACfAc0/A9YCc4ov9jaAq55IkEZlJsUZK2Kc8UBXBRS48oEYkV41pNF9YBx4DdyzRJ8EUK5vgRWjzu4n4HmRvZKfMoCXkzfKCvTDeGZf7OzY4dLpMPAH2AJ+AKsBQATslYlJyqAaDvRLYt4xdppYIJzt+Nvbalzzg7QmViWZl8C0JT2SALiEIqgMQNW7DtwFvjUadAnAk41Pl0619tiC+1PsPgLeAdeMOR0Uk9UW/84TrCoQmY5+8fklSS6auNVGcwUiIe+BXeCtTXpi30370ngE8NW6ibrIXmC4BSAD9bPdN0e9WmFXv9faETBjxnVmZeiYXASgb8S6DKtK9aqApCRviYg8FHelVYF+PaDg0roPN2hsm60KnEjANnZVQJ5SN1Nb7qxA/gsR2a/WxP488LFhsvOazneGx1X1NnMFslFj1/E19eLfFqWXBM8LRDNOlcAl4LixYw54AbwBvPMMPMmuAyoAt+zW+wkc2n2gK/8GcAC8ugDZ9E3KP5vHqyrasecsAAAAAElFTkSuQmCC'
         }
@@ -4817,7 +4323,8 @@
     }
 
     bodavm.envFunc.location_ancestorOrigins_get = function location_ancestorOrigins_get() {
-        let ancestorOrigins = {}
+        let ancestorOrigins = bodavm.memory.cache['location_ancestorOrigins_get']
+        ancestorOrigins['0']=bodavm.memory.location.ancestorOrigins['0']
         ancestorOrigins.__proto__ = bodavm.memory.globalobj['DOMStringList'].prototype
         console.log(`location_ancestorOrigins_get `, `${ancestorOrigins}  `)
         if (bodavm.config.isdebug) { debugger }
@@ -5785,7 +5292,7 @@
         }
         res = resDict[pname]
         if (res === undefined) return console.log(`WebGLRenderingContext_getParameter `, `${pname} 未实现`);
-        console.log(`WebGLRenderingContext_getParameter `, `${pname}  `, `res ->${res}`)
+        console.log(`WebGLRenderingContext_getParameter `, `${pname}  `, `-> res ->${res}`)
         return res
     }
     //HTMLStyleElement
@@ -5804,7 +5311,7 @@
         if (contentwindow){
             contentwindow._contentiframe=true
         }
-        console.log(`HTMLIFrameElement_contentWindow_get `, `res ->${contentwindow}`,`获取iframe下的window!!!`);
+        console.log(`HTMLIFrameElement_contentWindow_get `, `-> res ->${contentwindow}`,`获取iframe下的window!!!`);
 
         // contentwindow.__proto__ = bodavm.memory.globalobj['Window'].prototype
         // contentwindow['top']='123'
@@ -5936,52 +5443,52 @@
         switch (media_) {
             case "(any-pointer: fine )":
                 resbool = true
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(any-pointer: coarse )":
                 resbool = false
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(any-pointer: none )":
                 resbool = false
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(any-pointer )":
                 resbool = true
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(any-hover: hover )":
                 resbool = true
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(any-hover: on-demand )":
                 resbool = false
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
 
             case "(any-hover: none )":
                 resbool = false
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(any-hover )":
                 resbool = true
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(color-gamut: srgb )":
                 resbool = true
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(color-gamut: p3 )":
                 resbool = false
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(color-gamut: rec2020 )":
                 resbool = false
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
             case "(color-gamut )":
                 resbool = true
-                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `resbool->${resbool}`);
+                console.log(`MediaQueryList_matches_get `, `media_ ->${media_}`, `-> resbool->${resbool}`);
                 break
 
             default:

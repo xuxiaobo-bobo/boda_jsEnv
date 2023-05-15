@@ -12,6 +12,11 @@ bodavm.toolsFunc.defineProperty('SpeechSynthesis', "onvoiceschanged", { configur
 
 
 // speechSynthesis对象
-bodavm.memory.globalobj[ 'speechSynthesis'] = { _boisinit:bodavm.config.isinit}
+bodavm.memory.globalobj[ 'speechSynthesis'] = {
+    _boisinit:bodavm.config.isinit
+
+}
 bodavm.memory.globalobj[ 'speechSynthesis'].__proto__=bodavm.memory.globalobj['SpeechSynthesis'] .prototype;
 delete SpeechSynthesis
+
+

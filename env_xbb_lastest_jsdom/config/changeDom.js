@@ -11,7 +11,7 @@ bodavm.memory.location={
     port:"${location.port}",
     protocol:"${location.protocol}",
     host:"${location.host}",
-    ancestorOrigins:"${JSON.stringify(location.ancestorOrigins)}",
+    ancestorOrigins:'${JSON.stringify(location.ancestorOrigins)}',
     hostname:"${location.hostname}"
 };
 
@@ -106,7 +106,7 @@ bodavm.memory.window={
     oncanplaythrough:${oncanplaythrough},
     onsearch:${onsearch},
     opener:${opener},
-    frameElement:${frameElement},
+    // frameElement:${frameElement},
     
 
 };
