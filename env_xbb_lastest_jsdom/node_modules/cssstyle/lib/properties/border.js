@@ -13,7 +13,7 @@ var myShorthandSetter = shorthandSetter('border', shorthand_for);
 var myShorthandGetter = shorthandGetter('border', shorthand_for);
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     if (v.toString().toLowerCase() === 'none') {
       v = '';
     }

@@ -2,10 +2,10 @@
 
 module.exports = function getBasicPropertyDescriptor(name) {
   return {
-    set: function(v) {
+    set: function (v) {
       this._setProperty(name, v);
     },
-    get: function() {
+    get: function () {
       return this.getPropertyValue(name);
     },
     enumerable: true,

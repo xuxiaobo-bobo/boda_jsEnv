@@ -1,4 +1,5 @@
-// URL对象
+// URL对象
+/*
 bodavm.memory.globalobj['URL'] = function URL(){if (!(this instanceof URL)){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'URL': 1 argument required, but only 0 present.")};this._boisinit=bodavm.config.isinit}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['URL'], "URL");
 bodavm.toolsFunc.defineProperty('URL', "createObjectURL", {configurable:true, enumerable:true, writable:true, value:function createObjectURL (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['URL'].undefined, "URL", "createObjectURL", arguments)}});
@@ -17,3 +18,6 @@ bodavm.toolsFunc.defineProperty('URL', "hash", {configurable:true, enumerable:tr
 bodavm.toolsFunc.defineProperty('URL', "href", {configurable:true, enumerable:true, get:function href (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['URL'].prototype, "URL", "href_get", arguments)}, set:function href (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['URL'].prototype, "URL", "href_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('URL', "toJSON", {configurable:true, enumerable:true, writable:true, value:function toJSON (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['URL'].prototype, "URL", "toJSON", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('URL', "toString", {configurable:true, enumerable:true, writable:true, value:function toString (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['URL'].prototype, "URL", "toString", arguments)}},'prototype');
+*/
+
+webkitURL = bodavm.memory.globalobj['URL'];

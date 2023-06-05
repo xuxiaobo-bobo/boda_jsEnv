@@ -1,4 +1,5 @@
-// innerWidth对象
+// innerWidth对象
+
 bodavm.memory.globalobj['innerWidth'] = {
-    _boisinit:bodavm.config.isinit
-    }
+  _boisinit: bodavm.config.isinit
+};

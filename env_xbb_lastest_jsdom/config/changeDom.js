@@ -1,6 +1,12 @@
-var canvassss=document.createElement("canvas")
-var cccc=canvassss.getContext("2d")
-var aaaaaa=
+let canvassss=document.createElement("canvas")
+let cccc=canvassss.getContext("2d")
+let localstorage__={
+
+}
+for(let i in localStorage){
+    localstorage__[i]=localStorage[i]
+}
+let aaaaaa=
 `
 bodavm.memory.location={
     origin:"${location.origin}",
@@ -32,8 +38,19 @@ bodavm.memory.document={
     hidden:"${document.hidden}",
     onmousemove:${document.onmousemove},
     onselectionchange:${document.onselectionchange},
+    cookie:'${document.cookie}'
     
 };
+
+bodavm.memory.cookies_=bodavm.memory.document['cookie'].split(';')
+if (bodavm.memory.cookies_[0]){
+    for (var i = 0; i < bodavm.memory.cookies_.length; i++) {
+        var cookie = bodavm.memory.cookies_[i].split("=");
+        bodavm.memory.globalInit.jsonCookie[cookie[0]] = cookie[1];
+      }
+}
+
+
 
 bodavm.memory.htmldivelement={
     align:"${HTMLDivElement.align}",
@@ -80,7 +97,7 @@ bodavm.memory.navigator={
     maxTouchPoints:${navigator.maxTouchPoints}
 };
 bodavm.memory.window={
-    name:${JSON.stringify(window.name)},
+    // name:${JSON.stringify(window.name)},
     innerWidth:1440,
     innerHeight:817,
     origin:${JSON.stringify(window.origin)},
@@ -110,7 +127,10 @@ bodavm.memory.window={
     
 
 };
-bodavm.memory.localStorage={}
+
+
+bodavm.memory.localStorage=${JSON.stringify(localstorage__)}
+
 
 bodavm.memory.Performance={
     'getEntriesByType':${JSON.stringify(performance.getEntriesByType('resource'))},

@@ -1,43 +1,37 @@
 const PENDING = 'pending';
 const FULFILLED = 'fulfilled';
 const REJECTED = 'rejected';
-
 function Promise(executor) {
   this.state = PENDING;
   this.value = null;
   this.reason = null;
   this.onFulfilledCallbacks = [];
   this.onRejectedCallbacks = [];
-
-  const resolve = (value) => {
+  const resolve = value => {
     if (this.state === PENDING) {
       this.state = FULFILLED;
       this.value = value;
-      this.onFulfilledCallbacks.forEach((fun) => {
+      this.onFulfilledCallbacks.forEach(fun => {
         fun();
       });
     }
   };
-
-  const reject = (reason) => {
+  const reject = reason => {
     if (this.state === PENDING) {
       this.state = REJECTED;
       this.reason = reason;
-      this.onRejectedCallbacks.forEach((fun) => {
+      this.onRejectedCallbacks.forEach(fun => {
         fun();
       });
     }
   };
-
   try {
     executor(resolve, reject);
   } catch (reason) {
     reject(reason);
   }
 }
-bodavm.toolsFunc.safeProto(Promise,"Promise");
-
-
+bodavm.toolsFunc.safeProto(Promise, "Promise");
 
 //原型上面的方法
 //用settimeout来模拟异步调用,保证链式调用，即then方法中要返回一个新的promise，并将then方法的返回值进行resolve
@@ -100,28 +94,21 @@ Promise.prototype.then = function (onFulfilled, onRejected) {
   });
   return promise2;
 };
-bodavm.toolsFunc.safeFunc(Promise.prototype.then,'then')
-
+bodavm.toolsFunc.safeFunc(Promise.prototype.then, 'then');
 Promise.prototype.catch = function (onRejected) {
   return this.then(null, onRejected);
 };
-bodavm.toolsFunc.safeFunc(Promise.prototype.catch,'catch')
-
-
+bodavm.toolsFunc.safeFunc(Promise.prototype.catch, 'catch');
 Promise.prototype.finally = function (fn) {
-  return this.then(
-    (value) => {
-      fn();
-      return value;
-    },
-    (reason) => {
-      fn();
-      throw reason;
-    }
-  );
+  return this.then(value => {
+    fn();
+    return value;
+  }, reason => {
+    fn();
+    throw reason;
+  });
 };
-bodavm.toolsFunc.safeFunc(Promise.prototype.finally,'finally')
-
+bodavm.toolsFunc.safeFunc(Promise.prototype.finally, 'finally');
 
 //静态方法
 Promise.resolve = function (value) {
@@ -129,14 +116,13 @@ Promise.resolve = function (value) {
     resolve(value);
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.resolve,'resolve')
-
+bodavm.toolsFunc.safeFunc(Promise.resolve, 'resolve');
 Promise.reject = function (reason) {
   return new Promise((resolve, reject) => {
     reject(reason);
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.reject,'reject')
+bodavm.toolsFunc.safeFunc(Promise.reject, 'reject');
 
 //接受一个promise数组，当所有promise状态resolve后，执行resolve
 Promise.all = function (promises) {
@@ -147,23 +133,20 @@ Promise.all = function (promises) {
       let result = [];
       let index = 0;
       for (let i = 0; i < promises.length; i++) {
-        promises[i].then(
-          (data) => {
-            result[i] = data;
-            if (++index === promises.length) {
-              resolve(result);
-            }
-          },
-          (err) => {
-            reject(err);
-            return;
+        promises[i].then(data => {
+          result[i] = data;
+          if (++index === promises.length) {
+            resolve(result);
           }
-        );
+        }, err => {
+          reject(err);
+          return;
+        });
       }
     }
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.all,'all')
+bodavm.toolsFunc.safeFunc(Promise.all, 'all');
 
 //接受一个promise数组，当有一个promise状态resolve后，执行resolve
 Promise.race = function (promises) {
@@ -173,21 +156,16 @@ Promise.race = function (promises) {
     } else {
       let index = 0;
       for (let i = 0; i < promises.length; i++) {
-        promises[i].then(
-          (data) => {
-            resolve(data);
-          },
-          (err) => {
-            reject(err);
-            return;
-          }
-        );
+        promises[i].then(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+          return;
+        });
       }
     }
   });
 };
-bodavm.toolsFunc.safeFunc(Promise.race,'race')
-
-bodavm.toolsFunc.safeFunc(Promise)
+bodavm.toolsFunc.safeFunc(Promise.race, 'race');
+bodavm.toolsFunc.safeFunc(Promise);
 // globalMy.rename(Promise.prototype,"Promise")
-

@@ -21,14 +21,14 @@ module.exports.isValid = function isValid(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     var parsed = parse(v);
     if (parsed === undefined) {
       return;
     }
     this._setProperty('background-color', parsed);
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('background-color');
   },
   enumerable: true,

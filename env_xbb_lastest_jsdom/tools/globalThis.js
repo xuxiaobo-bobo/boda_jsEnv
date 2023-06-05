@@ -1,7 +1,7 @@
 // delete location
 // debugger
 ccc=new Date()-threetime
-debugger
+// debugger
 // 删除浏览器中不存在的对象
 delete global;
 delete GLOBAL;
@@ -9,8 +9,12 @@ delete VMError;
 delete Buffer;
 delete process;
 delete root;
+// delete Error;
 delete WindowProperties;
+
 delete globalThis[Symbol.toStringTag];
+delete SharedArrayBuffer;
+// delete require
 // debugger
 window = globalThis;
 globalThis.__proto__ =bodavm.memory.globalobj['Window'].prototype
@@ -438,7 +442,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "WebKitMutationObserver", {
   writable: true,
   value: function WebKitMutationObserver() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "WebKitMutationObserver", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "WebKitCSSMatrix", {
   configurable: true,
@@ -446,7 +450,7 @@ bodavm.toolsFunc.windowdefineProperty(window, "WebKitCSSMatrix", {
   writable: true,
   value: function WebKitCSSMatrix() {
     return bodavm.toolsFunc.dispatch(this, window, "window", "WebKitCSSMatrix", arguments);
-  }()
+  }
 });
 bodavm.toolsFunc.windowdefineProperty(window, "XPathResult", {
   configurable: true,
@@ -8380,8 +8384,36 @@ bodavm.toolsFunc.windowdefineProperty(window, "chrome", {
     }
   }
 });
-debugger;
+// debugger;
+//230531新增
+// bodavm.toolsFunc.windowdefineProperty(window, "Error", {
+//   configurable: true,
+//   enumerable: false,
+//   writable: true,
+//   value: function Error() {
+//     return bodavm.toolsFunc.dispatch(this, window, "window", "Error", arguments);
+//   }()
+// });
+// const bodadom = new bodaobj['JSDOM'](bodaobj['bohtml_'], 
+//     {
+//         url: "https://match2023.yuanrenxue.cn/topic/3",
+//         referrer: "https://match2023.yuanrenxue.cn/topic/3",
+//         contentType: "text/html",
+//         includeNodeLocations: true,
+//         pretendToBeVisual: true,
+//         runScripts: "dangerously",
 
+//     });
+// bodaobj.document=bodadom.document
+// bodaobj.window=bodadom.window
+// bodaobj.navigator=bodadom.window.navigator
+// bodaobj.navigation=bodadom.window.navigation
+// window:dom.window,
+    // document:dom.window.document,
+    // location:dom.window.location,
+    // navigator:dom.window.navigator,
+    // navigation:dom.window.navigation
+    debugger
 if (window.length > 0) {
   window_collect=bodaobj.document.getElementsByTagName('iframe');
   for (let i = 0; i < window_collect.length; i++) {
@@ -8391,14 +8423,25 @@ if (window.length > 0) {
 }
 
 
+if (!bodavm.config.rs6){
+  var boeval = eval;
+  eval = function (x) {
+    if (x=='debugger'){return function (){}}
+    // if (x=="this.a=1"){
+    //   // window.a=1
+    //   x="{a:1}"
+    //   res=x
+    //   console.log_copy(`执行eval,参数为${x.length > 30 ? x.substr(0, 50) : x} `,'res -> true'  ,'rs6检测');
+    //   return res
+    //   }
+    debugger;
+    console.log_copy(`执行eval,参数为${x.length > 30 ? x.substr(0, 50) : x}`);
+    res=boeval(x);
+    console.log_copy(`eval执行结果为 -->`,res)
+    return res
+  };
+}
 
-var boeval = eval;
-eval = function (x) {
-  if (x=='debugger'){return {}}
-  debugger;
-  console.log(`执行eval,参数为${x.length > 30 ? x.substr(0, 50) : x}`);
-  return boeval.call(this, x);
-};
 bodavm.toolsFunc.safefunction(eval);
 window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables] = {
   after: true,
@@ -8417,8 +8460,8 @@ window.bodavm.memory.globalobj['Element'].prototype[Symbol.unscopables].__proto_
 Object.defineProperty(globalThis, 'window', {
     get: function window() {
         // if (bodavm.config.proxy ){
-            // window=bodavm.toolsFunc.proxy(window,'window')
-            // return window
+        //     window=bodavm.toolsFunc.proxy(window,'window')
+        //     return window
         // }else{
             return globalThis
         // }
@@ -8427,37 +8470,103 @@ Object.defineProperty(globalThis, 'window', {
     // set:function window(){
     //   debugger
     // },
-    configurable: false,
+    configurable: bodavm.config.proxy,
     enumerable:true
 });
-
+// debugger
 //新增出问题就 注释掉
+// window.__proto__.__proto__.__proto__.__proto__未实现 需要修改__proto__=xx.prototype 为Object.setprototypeof()方法
+// Object.defineProperty(EventTarget.prototype, '__proto__', {
+//   get: function window() {
+//     // debugger
+//         // console.log('get  window, __proto__',`!!!!检测!!!!!!`)
+//           return Object.prototype
+//         },
+//   set:function window(){
+//     // debugger
+//       console.log('set  EventTarget.prototype.__proto__',`!!!!检测!!!!!!`)
+//       if ((typeof arguments[0] !=="object") || arguments[0] ==Object.prototype){
+//         return arguments[0]
+//       }else{
+//         bodavm.toolsFunc.throwError(`TypeError: `,`Immutable prototype object '#<EventTarget>' cannot have their prototype set
+//         at set __proto__ [as __proto__] (<anonymous>)
+//         at <anonymous>:1:37`)
+//       }
+//   },
+//   configurable: false,
+//   enumerable:true
+// });
+
+Object.defineProperty(bodavm.memory.globalobj['WindowProperties'].prototype, '__proto__', {
+  get: function window() {
+    // debugger
+    console.log(`get bodavm.memory.globalobj['WindowProperties'].prototype`,`!!!!检测!!!!!!`)
+          return EventTarget.prototype
+        },
+  set:function window(){
+    // debugger
+      console.log('set  window.WindowProperties.prototype',`!!!!检测!!!!!!`)
+      if ((typeof arguments[0] !=="object") || arguments[0] ==bodavm.memory.globalobj['EventTarget'].prototype){
+        return arguments[0]
+      }else{
+        bodavm.toolsFunc.throwError(`TypeError: `,`Immutable prototype object '#<EventTarget>' cannot have their prototype set
+        at set __proto__ [as __proto__] (<anonymous>)
+        at <anonymous>:1:37`)
+      }
+  },
+  configurable: false,
+  enumerable:true
+});
+
+Object.defineProperty(Window.prototype, '__proto__', {
+  get: function window() {
+    console.log(`get  Window.prototype, '__proto__'`,`!!!!检测!!!!!!`)
+
+          return bodavm.memory.globalobj['WindowProperties'].prototype
+        },
+  set:function window(){
+    debugger
+      console.log('set  window.__proto____proto__',`!!!!检测!!!!!!`)
+      if ((typeof arguments[0] !=="object") || arguments[0] ==bodavm.memory.globalobj['WindowProperties'].prototype){
+        return arguments[0]
+      }else{
+        bodavm.toolsFunc.throwError(`TypeError: `,`Immutable prototype object '#<Window>' cannot have their prototype set
+        at set __proto__ [as __proto__] (<anonymous>)
+        at <anonymous>:1:27`)
+      }
+  },
+  configurable: false,
+  enumerable:true
+});
+
 Object.defineProperty(window, '__proto__', {
   get: function window() {
-        // console.log('get  window, __proto__',`!!!!检测!!!!!!`)
           return Window.prototype
   },
   set:function window(){
+    debugger
       console.log('set  window, __proto__',`!!!!检测!!!!!!`)
-      if (globalThis.__proto__ === arguments[0]){
-        return globalThis.__proto__
+      if ((arguments.length && typeof arguments[0] !=="object") || arguments[0] ==Window.prototype){
+        return arguments[0]
       }else{
-        bodavm.toolsFunc.throwError(`TypeError: `,`mutable prototype object '#<Window>' cannot have their prototype set
+        bodavm.toolsFunc.throwError(`TypeError: `,`Imutable prototype object '#<Window>' cannot have their prototype set
         at set __proto__ (<anonymous>)`)
       }
   },
   configurable: false,
   enumerable:true
 });
+
+
 //新增出问题就 注释掉
 
 Object.defineProperty(globalThis.location,'__proto__',{
-  get: function window() {
+  get: function () {
     // console.log('get  globalThis.location,__proto__',`!!!!检测!!!!!!`)
 
    return Location.prototype
   },
-  set:function window(){
+  set:function (){
     console.log('set  globalThis.location,__proto__',`!!!!检测!!!!!!`)
     if (globalThis.location.__proto__ === arguments[0]){
       return globalThis.location.__proto__
@@ -8480,4 +8589,52 @@ Object.defineProperty(window,'require',{
 
 
 bodavm.toolsFunc.windowdefineProperty(window, "alert", {configurable:true, enumerable:true, writable:true, value:function alert (){return bodavm.toolsFunc.dispatch(this, window, "window", "alert", arguments)}});
+debugger
+delete window.__proto__.__proto__.constructor
+
+//获取所有dom节点中带有id的并且赋值给window
+
+boidlist=bodaobj.document.querySelectorAll("[id]")
+for (let i = 0; i < boidlist.length; i++) {
+
+  window[boidlist[i].id]=bodavm.toolsFunc.setProto(boidlist[i].nodeName)
+  window[boidlist[i].id]._boarg=boidlist[i]
+  // debugger
+
+}
+// scriptsss=document.scripts
+// for (let i = 0; i < scriptsss.length; i++) {
+//   const element = scriptsss[i];
+//   if (element.src){
+
+//   }else{
+//     debugger
+//     code=element.innerHTML
+//     eval(code)
+//   }
+  
+// }
+//230531新增
+// debugger
+// new Proxy(navigator.plugins[0],{
+//   get:function(){
+//     debugger
+//   }
+// })
+//过console检测
+// Object.defineProperty(console,Symbol.toStringTag,{
+//   value: 'console',
+//   configurable: true,
+//   writable: false,
+//   enumerable: false
+// })
+// console.memory=
+// console.toString=function (){
+//   return '[object console]'
+// }
+// $=function(){}
+// $.ajax:function(){
+//       debugger
+//       console.log_copy('ajax------',JSON.stringify(arguments))
+//   }
 

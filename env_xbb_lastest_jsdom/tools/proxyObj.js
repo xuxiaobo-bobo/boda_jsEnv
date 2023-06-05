@@ -1,3 +1,4 @@
+// debugger
 // window=bodavm.toolsFunc.proxy(window,"window")
 
 // CSS=bodavm.toolsFunc.proxy(CSS,"CSS");

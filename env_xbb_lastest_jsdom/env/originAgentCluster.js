@@ -1,4 +1,5 @@
-// originAgentCluster对象
+// originAgentCluster对象
+
 bodavm.memory.globalobj['originAgentCluster'] = {
-    _boisinit:bodavm.config.isinit
-    }
+  _boisinit: bodavm.config.isinit
+};

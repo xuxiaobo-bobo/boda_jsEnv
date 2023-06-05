@@ -549,3 +549,4 @@ boboi={
 }
 // res=window._webmsxyw(bobou,boboi)   
 console.log('sssssssssssssss   ',JSON.stringify(window._webmsxyw(bobou,boboi)))
+//正确628位

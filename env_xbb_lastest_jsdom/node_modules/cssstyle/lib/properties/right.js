@@ -3,10 +3,10 @@
 var parseMeasurement = require('../parsers').parseMeasurement;
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('right', parseMeasurement(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('right');
   },
   enumerable: true,

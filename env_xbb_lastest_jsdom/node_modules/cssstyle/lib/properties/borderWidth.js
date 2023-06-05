@@ -25,7 +25,7 @@ module.exports.isValid = function parse(v) {
 };
 var isValid = module.exports.isValid;
 
-var parser = function(v) {
+var parser = function (v) {
   var length = parsers.parseLength(v);
   if (length !== undefined) {
     return length;
@@ -38,7 +38,7 @@ var parser = function(v) {
 
 module.exports.definition = {
   set: implicitSetter('border', 'width', isValid, parser),
-  get: function() {
+  get: function () {
     return this.getPropertyValue('border-width');
   },
   enumerable: true,

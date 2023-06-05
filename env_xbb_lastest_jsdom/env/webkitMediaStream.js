@@ -1,4 +1,5 @@
-// MediaStream对象
+// MediaStream对象
+/*
 bodavm.memory.globalobj['MediaStream'] = function MediaStream(){this._boarg= new bodaobj.window.MediaStream();this._boisinit=bodavm.config.isinit}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['MediaStream'], "MediaStream");
 bodavm.memory.globalobj['MediaStream'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
@@ -15,4 +16,5 @@ bodavm.toolsFunc.defineProperty('MediaStream', "getAudioTracks", {configurable:t
 bodavm.toolsFunc.defineProperty('MediaStream', "getTrackById", {configurable:true, enumerable:true, writable:true, value:function getTrackById (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaStream'].prototype, "MediaStream", "getTrackById", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('MediaStream', "getTracks", {configurable:true, enumerable:true, writable:true, value:function getTracks (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaStream'].prototype, "MediaStream", "getTracks", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('MediaStream', "getVideoTracks", {configurable:true, enumerable:true, writable:true, value:function getVideoTracks (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaStream'].prototype, "MediaStream", "getVideoTracks", arguments)}},'prototype');
-bodavm.toolsFunc.defineProperty('MediaStream', "removeTrack", {configurable:true, enumerable:true, writable:true, value:function removeTrack (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaStream'].prototype, "MediaStream", "removeTrack", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('MediaStream', "removeTrack", {configurable:true, enumerable:true, writable:true, value:function removeTrack (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['MediaStream'].prototype, "MediaStream", "removeTrack", arguments)}},'prototype');*/
+webkitMediaStream = bodavm.memory.globalobj['MediaStream'];

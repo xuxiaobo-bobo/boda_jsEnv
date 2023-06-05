@@ -20,7 +20,7 @@ var parse = function parse(v) {
   if (parts.length !== 1 && parts.length !== 2) {
     return undefined;
   }
-  parts.forEach(function(part) {
+  parts.forEach(function (part) {
     if (parsers.valueType(part) !== parsers.TYPES.LENGTH) {
       return undefined;
     }
@@ -30,10 +30,10 @@ var parse = function parse(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('border-spacing', parse(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('border-spacing');
   },
   enumerable: true,

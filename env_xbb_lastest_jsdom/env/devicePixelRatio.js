@@ -1,4 +1,5 @@
-// devicePixelRatio对象
+// devicePixelRatio对象
+
 bodavm.memory.globalobj['devicePixelRatio'] = {
-    _boisinit:bodavm.config.isinit
-    }
+  _boisinit: bodavm.config.isinit
+};

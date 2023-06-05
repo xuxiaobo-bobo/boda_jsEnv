@@ -3,7 +3,7 @@
 var parsers = require('../parsers.js');
 var TYPES = parsers.TYPES;
 
-var isValid = function(v) {
+var isValid = function (v) {
   var type = parsers.valueType(v);
   return (
     type === TYPES.LENGTH ||
@@ -12,7 +12,7 @@ var isValid = function(v) {
   );
 };
 
-var parser = function(v) {
+var parser = function (v) {
   return parsers.parseMeasurement(v);
 };
 
@@ -20,16 +20,16 @@ var mySetter = parsers.implicitSetter('padding', '', isValid, parser);
 var myGlobal = parsers.implicitSetter(
   'padding',
   '',
-  function() {
+  function () {
     return true;
   },
-  function(v) {
+  function (v) {
     return v;
   }
 );
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     if (typeof v === 'number') {
       v = String(v);
     }
@@ -50,7 +50,7 @@ module.exports.definition = {
         break;
     }
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('padding');
   },
   enumerable: true,

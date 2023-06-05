@@ -1,4 +1,5 @@
-// credentialless对象
+// credentialless对象
+
 bodavm.memory.globalobj['credentialless'] = {
-    _boisinit:bodavm.config.isinit
-    }
+  _boisinit: bodavm.config.isinit
+};

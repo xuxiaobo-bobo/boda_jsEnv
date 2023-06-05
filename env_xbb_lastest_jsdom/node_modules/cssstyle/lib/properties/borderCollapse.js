@@ -15,10 +15,10 @@ var parse = function parse(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('border-collapse', parse(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('border-collapse');
   },
   enumerable: true,

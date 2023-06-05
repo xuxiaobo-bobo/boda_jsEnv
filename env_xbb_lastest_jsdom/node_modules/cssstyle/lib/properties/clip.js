@@ -4,7 +4,7 @@ var parseMeasurement = require('../parsers').parseMeasurement;
 
 var shape_regex = /^rect\((.*)\)$/i;
 
-var parse = function(val) {
+var parse = function (val) {
   if (val === '' || val === null) {
     return val;
   }
@@ -23,7 +23,7 @@ var parse = function(val) {
   if (parts.length !== 4) {
     return undefined;
   }
-  var valid = parts.every(function(part, index) {
+  var valid = parts.every(function (part, index) {
     var measurement = parseMeasurement(part);
     parts[index] = measurement;
     return measurement !== undefined;
@@ -36,10 +36,10 @@ var parse = function(val) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('clip', parse(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('clip');
   },
   enumerable: true,

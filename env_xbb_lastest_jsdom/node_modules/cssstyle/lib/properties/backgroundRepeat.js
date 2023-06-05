@@ -21,10 +21,10 @@ module.exports.isValid = function isValid(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('background-repeat', parse(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('background-repeat');
   },
   enumerable: true,

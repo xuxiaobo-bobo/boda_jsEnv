@@ -22,10 +22,10 @@ module.exports.isValid = function isValid(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('font-family', v);
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('font-family');
   },
   enumerable: true,

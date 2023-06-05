@@ -4,7 +4,7 @@ var isValid = require('./borderStyle').isValid;
 module.exports.isValid = isValid;
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     if (isValid(v)) {
       if (v.toLowerCase() === 'none') {
         v = '';
@@ -13,7 +13,7 @@ module.exports.definition = {
       this._setProperty('border-top-style', v);
     }
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('border-top-style');
   },
   enumerable: true,

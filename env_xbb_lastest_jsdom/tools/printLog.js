@@ -51,11 +51,19 @@
             bodavm.toolsFunc.printLog(arguments)
 
         }
-        
+
         //自动生成hook代码
         return console.log_.apply(this, arguments)
     };
-   
+    console.log_copy=console.log
     bodavm.toolsFunc.safefunction(console.log,'log')
+    // Object.defineProperty(console,'log',{
+    //     get:function (){
+    //         return console.log
+    //     },
+    //     // set:function (){
+    //     //     return console.log
+    //     // }
+    // })
 }();
 

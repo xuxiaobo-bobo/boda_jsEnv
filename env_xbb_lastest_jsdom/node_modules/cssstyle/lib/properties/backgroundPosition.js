@@ -13,7 +13,7 @@ var parse = function parse(v) {
     return undefined;
   }
   var types = [];
-  parts.forEach(function(part, index) {
+  parts.forEach(function (part, index) {
     types[index] = parsers.valueType(part);
   });
   if (parts.length === 1) {
@@ -47,10 +47,10 @@ module.exports.isValid = function isValid(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('background-position', parse(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('background-position');
   },
   enumerable: true,

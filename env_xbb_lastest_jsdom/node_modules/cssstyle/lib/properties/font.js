@@ -28,7 +28,7 @@ var static_fonts = [
 var setter = shorthandSetter('font', shorthand_for);
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     var short = shorthandParser(v, shorthand_for);
     if (short !== undefined) {
       return setter.call(this, v);

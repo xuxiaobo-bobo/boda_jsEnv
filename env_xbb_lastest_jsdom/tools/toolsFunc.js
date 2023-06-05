@@ -6,7 +6,28 @@
 */
 ;;
 !function () {
-
+    bodavm.toolsFunc.deepCloneWithRefs=function deepCloneWithRefs(obj, map = new Map()) {
+        if (obj === null || typeof obj !== 'object') {
+          return obj;
+        }
+        if (map.has(obj)) {
+          return map.get(obj);
+        }
+        let copy = Array.isArray(obj) ? [] : {};
+        map.set(obj, copy);
+        for (let key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            copy[key] = deepCloneWithRefs(obj[key], map);
+          }
+        }
+        Object.getOwnPropertySymbols(obj).forEach(sym => {
+          copy[sym] = deepCloneWithRefs(obj[sym], map);
+        });
+        Object.setPrototypeOf(copy, Object.getPrototypeOf(obj));
+        return copy;
+      }
+      
+      
     bodavm.toolsFunc.setProto = function setpro(dom,ele) {
         //设置原型链
         if (!ele){
@@ -14,7 +35,21 @@
         }
         // let ele = {}
         let tagpro = dom.toUpperCase()
+        // debugger
+
         switch (tagpro) {
+            case "TABLE":
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLTableElement'].prototype)
+                return ele
+            case "HEADER":
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
+                return ele
+            case "B":
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLElement'].prototype)
+                return ele
+            case "H4":
+                Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLHeadingElement'].prototype)
+                return ele
             case "DIV":
                 Object.setPrototypeOf(ele, bodavm.memory.globalobj['HTMLDivElement'].prototype)
                 return ele
@@ -303,7 +338,7 @@
         }
 
         // 实现r={} ;r.__proto__=document ,r.location 报错
-        if (self.__proto__.constructor == self.__proto__.__proto__.constructor) {
+        if (!(self._boisinit) && self.__proto__.constructor == self.__proto__.__proto__.constructor) {
             debugger
             console.log(self, `  bodavm.toolsFunc.dispatch 执行出错`, funcName);
             return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")

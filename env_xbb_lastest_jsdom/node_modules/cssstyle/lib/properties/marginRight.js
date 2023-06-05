@@ -5,7 +5,7 @@ var parsers = require('../parsers.js');
 
 module.exports.definition = {
   set: parsers.subImplicitSetter('margin', 'right', margin.isValid, margin.parser),
-  get: function() {
+  get: function () {
     return this.getPropertyValue('margin-right');
   },
   enumerable: true,

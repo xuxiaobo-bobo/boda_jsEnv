@@ -10,7 +10,7 @@ var parsers = require('./parsers');
 var dashedProperties = [...allProperties, ...allExtraProperties];
 var allowedProperties = dashedProperties.map(parsers.dashedToCamelCase);
 implementedProperties = Array.from(implementedProperties).map(parsers.dashedToCamelCase);
-var invalidProperties = implementedProperties.filter(prop => !allowedProperties.includes(prop));
+var invalidProperties = implementedProperties.filter((prop) => !allowedProperties.includes(prop));
 
 describe('CSSStyleDeclaration', () => {
   test('has only valid properties implemented', () => {
@@ -19,7 +19,7 @@ describe('CSSStyleDeclaration', () => {
 
   test('has all properties', () => {
     var style = new CSSStyleDeclaration();
-    allProperties.forEach(property => {
+    allProperties.forEach((property) => {
       expect(style.__lookupGetter__(property)).toBeTruthy();
       expect(style.__lookupSetter__(property)).toBeTruthy();
     });
@@ -27,7 +27,7 @@ describe('CSSStyleDeclaration', () => {
 
   test('has dashed properties', () => {
     var style = new CSSStyleDeclaration();
-    dashedProperties.forEach(property => {
+    dashedProperties.forEach((property) => {
       expect(style.__lookupGetter__(property)).toBeTruthy();
       expect(style.__lookupSetter__(property)).toBeTruthy();
     });
@@ -302,7 +302,7 @@ describe('CSSStyleDeclaration', () => {
   test('padding and margin should set/clear shorthand properties', () => {
     var style = new CSSStyleDeclaration();
     var parts = ['Top', 'Right', 'Bottom', 'Left'];
-    var testParts = function(name, v, V) {
+    var testParts = function (name, v, V) {
       style[name] = v;
       for (var i = 0; i < 4; i++) {
         var part = name + parts[i];
@@ -329,7 +329,7 @@ describe('CSSStyleDeclaration', () => {
   test('padding and margin shorthands should set main properties', () => {
     var style = new CSSStyleDeclaration();
     var parts = ['Top', 'Right', 'Bottom', 'Left'];
-    var testParts = function(name, v, V) {
+    var testParts = function (name, v, V) {
       var expected;
       for (var i = 0; i < 4; i++) {
         style[name] = v;
@@ -353,7 +353,7 @@ describe('CSSStyleDeclaration', () => {
   });
 
   test('onchange callback should be called when the csstext changes', () => {
-    var style = new CSSStyleDeclaration(function(cssText) {
+    var style = new CSSStyleDeclaration(function (cssText) {
       expect(cssText).toEqual('opacity: 0;');
     });
     style.setProperty('opacity', 0);

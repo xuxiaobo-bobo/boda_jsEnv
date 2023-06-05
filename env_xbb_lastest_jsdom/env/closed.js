@@ -1,4 +1,5 @@
-// closed对象
+// closed对象
+
 bodavm.memory.globalobj['closed'] = {
-    _boisinit:bodavm.config.isinit
-    }
+  _boisinit: bodavm.config.isinit
+};

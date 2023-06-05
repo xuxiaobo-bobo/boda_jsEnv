@@ -876,6 +876,9 @@ filelist=[
     "XRWebGLDepthInformation",
     "XRWebGLLayer",
     "XSLTProcessor",
+    //0531新增
+    "Error",
+    "MemoryInfo",
   ]
 
 

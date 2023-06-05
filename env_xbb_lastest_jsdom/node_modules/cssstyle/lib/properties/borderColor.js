@@ -13,7 +13,7 @@ module.exports.isValid = function parse(v) {
 };
 var isValid = module.exports.isValid;
 
-var parser = function(v) {
+var parser = function (v) {
   if (isValid(v)) {
     return v.toLowerCase();
   }
@@ -22,7 +22,7 @@ var parser = function(v) {
 
 module.exports.definition = {
   set: implicitSetter('border', 'color', isValid, parser),
-  get: function() {
+  get: function () {
     return this.getPropertyValue('border-color');
   },
   enumerable: true,

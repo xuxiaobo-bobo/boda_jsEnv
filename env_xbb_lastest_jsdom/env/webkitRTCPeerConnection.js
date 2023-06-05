@@ -1,4 +1,5 @@
-// RTCPeerConnection对象
+// RTCPeerConnection对象
+/*
 bodavm.memory.globalobj['RTCPeerConnection'] = function RTCPeerConnection(){this._boarg= new bodaobj.window.RTCPeerConnection();this._boisinit=bodavm.config.isinit}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['RTCPeerConnection'], "RTCPeerConnection");
 bodavm.memory.globalobj['RTCPeerConnection'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
@@ -48,4 +49,6 @@ bodavm.toolsFunc.defineProperty('RTCPeerConnection', "removeTrack", {configurabl
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "restartIce", {configurable:true, enumerable:true, writable:true, value:function restartIce (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "restartIce", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setConfiguration", {configurable:true, enumerable:true, writable:true, value:function setConfiguration (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "setConfiguration", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setLocalDescription", {configurable:true, enumerable:true, writable:true, value:function setLocalDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "setLocalDescription", arguments)}},'prototype');
-bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setRemoteDescription", {configurable:true, enumerable:true, writable:true, value:function setRemoteDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "setRemoteDescription", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('RTCPeerConnection', "setRemoteDescription", {configurable:true, enumerable:true, writable:true, value:function setRemoteDescription (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['RTCPeerConnection'].prototype, "RTCPeerConnection", "setRemoteDescription", arguments)}},'prototype');*/
+
+webkitRTCPeerConnection = bodavm.memory.globalobj['RTCPeerConnection'];

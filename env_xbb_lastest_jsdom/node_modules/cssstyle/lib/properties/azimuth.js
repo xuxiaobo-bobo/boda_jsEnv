@@ -3,16 +3,13 @@
 var parsers = require('../parsers');
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     var valueType = parsers.valueType(v);
     if (valueType === parsers.TYPES.ANGLE) {
       return this._setProperty('azimuth', parsers.parseAngle(v));
     }
     if (valueType === parsers.TYPES.KEYWORD) {
-      var keywords = v
-        .toLowerCase()
-        .trim()
-        .split(/\s+/);
+      var keywords = v.toLowerCase().trim().split(/\s+/);
       var hasBehind = false;
       if (keywords.length > 2) {
         return;
@@ -59,7 +56,7 @@ module.exports.definition = {
       }
     }
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('azimuth');
   },
   enumerable: true,

@@ -13,10 +13,10 @@ function parse(v) {
 }
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('height', parse(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('height');
   },
   enumerable: true,

@@ -21,10 +21,10 @@ module.exports.isValid = function isValid(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('background-image', parse(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('background-image');
   },
   enumerable: true,

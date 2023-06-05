@@ -17,10 +17,10 @@ module.exports.isValid = function isValid(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('flex-basis', parse(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('flex-basis');
   },
   enumerable: true,

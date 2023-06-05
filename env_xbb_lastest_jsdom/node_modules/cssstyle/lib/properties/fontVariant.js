@@ -7,10 +7,10 @@ module.exports.isValid = function isValid(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('font-variant', v);
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('font-variant');
   },
   enumerable: true,

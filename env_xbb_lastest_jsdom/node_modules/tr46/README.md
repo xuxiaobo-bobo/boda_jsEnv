@@ -2,16 +2,6 @@
 
 An JavaScript implementation of [Unicode Technical Standard #46: Unicode IDNA Compatibility Processing](https://unicode.org/reports/tr46/).
 
-## Installation
-
-[Node.js](http://nodejs.org) ≥ 12 is required. To install, type this at the command line:
-
-```shell
-npm install tr46
-# or
-yarn add tr46
-```
-
 ## API
 
 ### `toASCII(domainName[, options])`

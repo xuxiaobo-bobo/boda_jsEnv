@@ -8,10 +8,10 @@ module.exports.isValid = function isValid(v, positionAtFlexShorthand) {
 };
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('flex-shrink', parseNumber(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('flex-shrink');
   },
   enumerable: true,

@@ -1,4 +1,5 @@
-// SpeechRecognition对象
+// SpeechRecognition对象
+/*
 bodavm.memory.globalobj['SpeechRecognition'] = function SpeechRecognition(){this._boarg= new bodaobj.window.SpeechRecognition();this._boisinit=bodavm.config.isinit}
 bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['SpeechRecognition'], "SpeechRecognition");
 bodavm.memory.globalobj['SpeechRecognition'].prototype.__proto__=bodavm.memory.globalobj['EventTarget'].prototype;
@@ -21,4 +22,5 @@ bodavm.toolsFunc.defineProperty('SpeechRecognition', "onstart", {configurable:tr
 bodavm.toolsFunc.defineProperty('SpeechRecognition', "onend", {configurable:true, enumerable:true, get:function onend (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechRecognition'].prototype, "SpeechRecognition", "onend_get", arguments)}, set:function onend (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechRecognition'].prototype, "SpeechRecognition", "onend_set", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('SpeechRecognition', "abort", {configurable:true, enumerable:true, writable:true, value:function abort (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechRecognition'].prototype, "SpeechRecognition", "abort", arguments)}},'prototype');
 bodavm.toolsFunc.defineProperty('SpeechRecognition', "start", {configurable:true, enumerable:true, writable:true, value:function start (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechRecognition'].prototype, "SpeechRecognition", "start", arguments)}},'prototype');
-bodavm.toolsFunc.defineProperty('SpeechRecognition', "stop", {configurable:true, enumerable:true, writable:true, value:function stop (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechRecognition'].prototype, "SpeechRecognition", "stop", arguments)}},'prototype');
+bodavm.toolsFunc.defineProperty('SpeechRecognition', "stop", {configurable:true, enumerable:true, writable:true, value:function stop (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['SpeechRecognition'].prototype, "SpeechRecognition", "stop", arguments)}},'prototype');*/
+webkitSpeechRecognition = bodavm.memory.globalobj['SpeechRecognition'];

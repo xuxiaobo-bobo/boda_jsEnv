@@ -1,4 +1,5 @@
-// scrollY对象
+// scrollY对象
+
 bodavm.memory.globalobj['scrollY'] = {
-    _boisinit:bodavm.config.isinit
-    }
+  _boisinit: bodavm.config.isinit
+};

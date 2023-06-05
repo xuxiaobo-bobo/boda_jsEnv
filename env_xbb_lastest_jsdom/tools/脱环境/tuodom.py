@@ -131,8 +131,9 @@ async def recv_msg(websocket):
         recv_text = await websocket.recv()
         print('res',recv_text)
         filename=recv_text.split('___')[0]
+        print('filename_____',filename)
         content=recv_text.split('___')[1]
-        file='./env/'+filename
+        file=r'D:\My_Dir\env_xbb_lastest_jsdom\env\\'+filename   #修改需要导出的路径
         mode='w'
         if os.path.exists(file):
             mode='a+'

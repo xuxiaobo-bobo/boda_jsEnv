@@ -1,4 +1,5 @@
-// screenY对象
+// screenY对象
+
 bodavm.memory.globalobj['screenY'] = {
-    _boisinit:bodavm.config.isinit
-    }
+  _boisinit: bodavm.config.isinit
+};

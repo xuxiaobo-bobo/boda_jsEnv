@@ -55,8 +55,12 @@ bodavm.memory.cache={
     HTMLIFrameElement_contentDocument_get:{},
     HTMLElement_style_get:{},
     location_ancestorOrigins_get:{
-    
-    }
+    },
+    Document_getElementsByName:{},
+    Element_querySelectorAll:{
+    },
+    Document_querySelector:{},
+    plugin:{}
 
 }
 bodavm.memory.collection={
@@ -71,15 +75,15 @@ bodavm.memory.collection={
 // debugger
 bodavm.config.isdebug = false;  //是否开启debugger
 bodavm.config.proxy = false; //是否代理
-bodavm.config.settime_on=true   //是否开启settime
+bodavm.config.settime_on=true   //是否开启settime定时器执行
 bodavm.config.isinit=true   //实现 var bobo__2 = {};bobo__2.__proto__ = Document.prototype;bobo__2.activeElement
 // bodavm.config.getundefined=true  //暂未实现   
-
+bodavm.memory.all = []
 
 //网站为r4或者r5 设置为true 否则请关闭
-bodavm.config.isrs = true  //判断当前网站是不是瑞数
+bodavm.config.isrs = false  //判断当前网站是不是瑞数
 //网站为r6 设置为true body设置为0 否则请把true改为false
-bodavm.memory.rs6=false
+bodavm.memory.rs6=true
 bodavm.memory.rs6_body=0
 bodavm.memory.contentWindow_keys=    [
     "window",
@@ -393,22 +397,22 @@ bodavm.memory.estimate={
 }
 
 bodavm.memory.location={
-    origin:"http://www.fangdi.com.cn",
+    origin:"https://qikan.cqvip.com",
     hash:"",
-    pathname:"/",
+    pathname:"/Qikan/Search",
     search:"",
-    href:"http://www.fangdi.com.cn/",
+    href:"https://qikan.cqvip.com/Qikan/Search",
     port:"",
-    protocol:"http:",
-    host:"www.fangdi.com.cn",
+    protocol:"https:",
+    host:"qikan.cqvip.com",
     ancestorOrigins:'{}',
-    hostname:"www.fangdi.com.cn"
+    hostname:"qikan.cqvip.com"
 };
 
 bodavm.memory.document={
-    URL:"http://www.fangdi.com.cn/",
-    referrer:"",
-    documentURI:"http://www.fangdi.com.cn/",
+    URL:"https://qikan.cqvip.com/Qikan/Search",
+    referrer:"https://qikan.cqvip.com/Qikan/Search",
+    documentURI:"https://qikan.cqvip.com/Qikan/Search",
     compatMode:"CSS1Compat",
     dir:"",
     title:'',
@@ -416,14 +420,25 @@ bodavm.memory.document={
     readyState:"loading",
     contentType:"text/html",
     inputEncoding:"UTF-8",
-    domain:"www.fangdi.com.cn",
+    domain:"qikan.cqvip.com",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
     onmousemove:null,
     onselectionchange:null,
+    cookie:''
     
 };
+
+bodavm.memory.cookies_=bodavm.memory.document['cookie'].split(';')
+if (bodavm.memory.cookies_[0]){
+    for (var i = 0; i < bodavm.memory.cookies_.length; i++) {
+        var cookie = bodavm.memory.cookies_[i].split("=");
+        bodavm.memory.globalInit.jsonCookie[cookie[0]] = cookie[1];
+      }
+}
+
+
 
 bodavm.memory.htmldivelement={
     align:"undefined",
@@ -443,49 +458,49 @@ bodavm.memory.screen={
     colorDepth:24,
     availLeft:0,
     availTop:0,
-    isExtended:undefined,
+    isExtended:false,
     orientation:{},
-    onchange:undefined,
+    onchange:null,
 };
 
 bodavm.memory.navigator={
     language:"zh-CN",
-    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
-    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
     vendor:"Google Inc.",
     appName:"Netscape",
     appCodeName:"Mozilla",
     cookieEnabled:true,
     languages:["zh-CN","zh"],
     productSub:"20030107",
-    userAgentData:undefined,
-    xr:undefined,
+    userAgentData:{"brands":[{"brand":"Not.A/Brand","version":"8"},{"brand":"Chromium","version":"114"},{"brand":"Google Chrome","version":"114"}],"mobile":false,"platform":"Windows"},
+    xr:{},
     platform:'Win32',
     webkitPersistentStorage:{},
     connection:{},
     javaEnabled:false,
     product:'Gecko',
     vendorSub:"",
-    deviceMemory:undefined,
+    deviceMemory:8,
     maxTouchPoints:0
 };
 bodavm.memory.window={
-    name:"&$_YWTU=lRzTTHdK5V5grEpcYrNcVfSndG.5OUB8t900nZWO7VA&$_cDro=0&vdFm=",
+    name:"$_YWTU=slV7JU4yFXZHGjxr0vT00ktBZ7LF3cvbYHH_at.kEHG&$_YVTX=Wq&vdFm=__bid_n%3D18886761d16873664bbaa2",
     innerWidth:1440,
     innerHeight:817,
-    origin:"http://www.fangdi.com.cn",
+    origin:"https://qikan.cqvip.com",
     outerWidth:1440,
     outerHeight:920,
     defaultStatus:undefined,
     defaultstatus:undefined,
     devicePixelRatio:1.5,
-    isSecureContext:false,
+    isSecureContext:true,
     length:0,
     status:"",
     onmessage:null,
     onbeforeunload:null,
     closed:false,
-    isSecureContext:false,
+    isSecureContext:true,
     onappinstalled:null,
     onbeforeinstallprompt:null,
     onbeforexrselect:null,
@@ -500,11 +515,14 @@ bodavm.memory.window={
     
 
 };
-bodavm.memory.localStorage={}
+
+
+bodavm.memory.localStorage={"length":0}
+
 
 bodavm.memory.Performance={
     'getEntriesByType':[],
-    'timeOrigin':1684137107940.1
+    'timeOrigin':1685883191464.9
 
 
 

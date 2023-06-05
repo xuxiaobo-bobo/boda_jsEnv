@@ -7,7 +7,7 @@ var parseMeasurement = require('../parsers').parseMeasurement;
 var absoluteSizes = ['xx-small', 'x-small', 'small', 'medium', 'large', 'x-large', 'xx-large'];
 var relativeSizes = ['larger', 'smaller'];
 
-module.exports.isValid = function(v) {
+module.exports.isValid = function (v) {
   var type = valueType(v.toLowerCase());
   return (
     type === TYPES.LENGTH ||
@@ -21,16 +21,16 @@ function parse(v) {
   const valueAsString = String(v).toLowerCase();
   const optionalArguments = absoluteSizes.concat(relativeSizes);
   const isOptionalArgument = optionalArguments.some(
-    stringValue => stringValue.toLowerCase() === valueAsString
+    (stringValue) => stringValue.toLowerCase() === valueAsString
   );
   return isOptionalArgument ? valueAsString : parseMeasurement(v);
 }
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     this._setProperty('font-size', parse(v));
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('font-size');
   },
   enumerable: true,

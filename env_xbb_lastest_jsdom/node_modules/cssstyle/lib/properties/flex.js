@@ -17,10 +17,8 @@ module.exports.isValid = function isValid(v) {
 };
 
 module.exports.definition = {
-  set: function(v) {
-    var normalizedValue = String(v)
-      .trim()
-      .toLowerCase();
+  set: function (v) {
+    var normalizedValue = String(v).trim().toLowerCase();
 
     if (normalizedValue === 'none') {
       myShorthandSetter.call(this, '0 0 auto');

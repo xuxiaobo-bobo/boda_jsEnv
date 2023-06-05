@@ -10,13 +10,13 @@ var isValid = (module.exports.isValid = function isValid(v) {
 });
 
 module.exports.definition = {
-  set: function(v) {
+  set: function (v) {
     if (!isValid(v)) {
       return;
     }
     this._setProperty('background-attachment', v);
   },
-  get: function() {
+  get: function () {
     return this.getPropertyValue('background-attachment');
   },
   enumerable: true,

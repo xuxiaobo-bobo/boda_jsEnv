@@ -23,8 +23,7 @@ isWindowSystem=true
 console.log(`当前系统为win`,isWindowSystem)
 
 //创建沙盒实例
-const vm = new VM(
-    );
+const vm = new VM();
 
 const configCode=fs.readFileSync(`${config_path}/config.js`)
 //导入功能插件相关函数
@@ -41,6 +40,9 @@ const proxyObj =  tools.getFile("proxyObj");
 const jscode = fs.readFileSync(`${run_path}/run.js`)
 //导入异步执行的代码
 const asyncCode = tools.getFile("async");
+//导入jquery的代码
+const myReqCode=tools.getFile('myReqHelper')
+
 // bodavm.memory.tag[0].__proto__=HTMLDocument.prototype
 //整合代码
 //导入日志代码
@@ -60,26 +62,35 @@ if (isWindowSystem){
 }
 // debugger
 // const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${globalInit}${proxyObj};;;;debugger;try{;${jscode}${asyncCode}}catch(e){console.log(e.message,e.stack);}finally{;${last_deal}};get_cookie`;
-const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${window_config_code}${globalInit}${proxyObj};;;;debugger;;${jscode}${asyncCode};${last_deal};get_cookie`;
+const codeTest=`${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${myReqCode}${window_config_code}${globalInit}${proxyObj};;;;debugger;;${jscode}${asyncCode};${last_deal};get_cookie`;
 
 const app = express()
 // app.get('./gethtml', async function (req, res) {
 //     val =req.query 
     
 // })
-let bohtml_=fs.readFileSync('.\\run\\run.html').toString('utf-8')
+let bohtml_=fs.readFileSync(`${run_path}\\run.html`).toString('utf-8')
+url='https://qikan.cqvip.com/Qikan/Search'
+
+
 // bohtml_
 const dom = new JSDOM(bohtml_, 
     {
-        url: "http://www.fangdi.com.cn/",
-        referrer: "http://www.fangdi.com.cn/",
+        url: url,
+        referrer: url,
         contentType: "text/html",
         includeNodeLocations: true,
         pretendToBeVisual: true,
-
+        // runScripts: "dangerously",
     });
 
+
+// debugger
 console.log('jsdom 导入完成',+new Date()-firsttime)
+// dom.window.onload = () => {
+//     debugger
+//     console.log("DOM loaded!");
+//   };
 
 
 bodaobj={
@@ -88,18 +99,21 @@ bodaobj={
     location:dom.window.location,
     navigator:dom.window.navigator,
     navigation:dom.window.navigation
+    // "bohtml_":bohtml_,
+    // "JSDOM":JSDOM,
+    // "url":url
 }
 
 // debugger
 // iframe
 
 
-    
 //沙盒创建全局
 vm.setGlobal('bofs', fs)
 vm.setGlobal('isWindowSystem',isWindowSystem)
 // // vm.setGlobal('bobo$',bobo$)
 // // debugger
+// vm.setGlobal('HookedFunction',HookedFunction)
 vm.setGlobal('bodaobj',bodaobj)
 vm.setGlobal('bocreateCanvas',createCanvas)
 
@@ -123,7 +137,7 @@ vm.setGlobal('bocreateCanvas',createCanvas)
 
 
 
-
+// vm.run('debugger;!new function(){eval("this.a=1")}().a')
 
 const script = new VMScript(codeTest, "./debugJS.js")
 
@@ -140,8 +154,8 @@ let lastime=+new Date()
 console.log('花费时间:',lastime-firsttime)
 // app.listen(3000)
 //输出结果
-// debugger
-console.log(getcookieapi())
+debugger
+console.log('结果:',getcookieapi())
 
 fs.writeFileSync(`${run_path}/output.js`,codeTest)
 

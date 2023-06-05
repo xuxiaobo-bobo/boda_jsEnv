@@ -573,7 +573,7 @@ class HTMLInputElementImpl extends HTMLElementImpl {
 
   get files() {
     if (this.type === "file") {
-      this[filesSymbol] = this[filesSymbol] || FileList.createImpl(this._globalObject);
+      this[filesSymbol] ||= FileList.createImpl(this._globalObject);
     } else {
       this[filesSymbol] = null;
     }
@@ -596,7 +596,7 @@ class HTMLInputElementImpl extends HTMLElementImpl {
   }
 
   _dispatchSelectEvent() {
-    fireAnEvent("select", this, undefined, { bubbles: true, cancelable: true });
+    setTimeout(() => fireAnEvent("select", this, undefined, { bubbles: true, cancelable: false }), 0);
   }
 
   _getValueLength() {
@@ -694,7 +694,7 @@ class HTMLInputElementImpl extends HTMLElementImpl {
 
     this.value = val.slice(0, start) + repl + val.slice(end);
 
-    const newEnd = start + this.value.length;
+    const newEnd = start + repl.length;
 
     if (selectionMode === "select") {
       this.setSelectionRange(start, newEnd);

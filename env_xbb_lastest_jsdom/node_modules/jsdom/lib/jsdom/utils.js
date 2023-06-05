@@ -2,7 +2,6 @@
 const path = require("path");
 const whatwgURL = require("whatwg-url");
 const { domSymbolTree } = require("./living/helpers/internal-constants");
-const perfHooks = require("perf_hooks");
 const SYMBOL_TREE_POSITION = require("symbol-tree").TreePosition;
 
 exports.toFileUrl = function (fileName) {
@@ -145,23 +144,9 @@ exports.treeOrderSorter = function (a, b) {
   return 0;
 };
 
-// TODO: remove once Node v16 is the minimum version.
-exports.performance = globalThis.performance || perfHooks.performance;
-
 /* eslint-disable global-require */
-
-exports.Canvas = null;
-let canvasInstalled = false;
 try {
-  require.resolve("canvas");
-  canvasInstalled = true;
-} catch (e) {
-  // canvas is not installed
-}
-if (canvasInstalled) {
-  const Canvas = require("canvas");
-  if (typeof Canvas.createCanvas === "function") {
-    // In browserify, the require will succeed but return an empty object
-    exports.Canvas = Canvas;
-  }
+  exports.Canvas = require("canvas");
+} catch {
+  exports.Canvas = null;
 }

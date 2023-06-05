@@ -1,4 +1,5 @@
-// pageXOffset对象
+// pageXOffset对象
+
 bodavm.memory.globalobj['pageXOffset'] = {
-    _boisinit:bodavm.config.isinit
-    }
+  _boisinit: bodavm.config.isinit
+};
