@@ -1,0 +1,14 @@
+// Option对象
+Option = function Option(){bodavm.toolsFunc.symbolProperty(this);
+if (arg =='bobo'){console.log_copy('Option 实例化对象 --->',JSON.stringify_bo(arguments,function(k,v){if (v==window){return 'window'}else{return v}}))};}
+
+bodavm.toolsFunc.safeProto(Option, "Option");
+Option.prototype.__proto__=HTMLElement.prototype;
+bodavm.toolsFunc.defineProperty(Option.prototype, "disabled", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(Option.prototype, "form", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_get", arguments)}, set:undefined},);
+bodavm.toolsFunc.defineProperty(Option.prototype, "label", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(Option.prototype, "defaultSelected", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(Option.prototype, "selected", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(Option.prototype, "value", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(Option.prototype, "text", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(Option.prototype, "index", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, Option.prototype, "Option", "bodefault_get", arguments)}, set:undefined},);

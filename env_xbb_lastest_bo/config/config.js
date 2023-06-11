@@ -13,9 +13,31 @@ var bodavm = {
 
 bodavm.memory.tag=[]          //存放标签
 bodavm.memory.globalobj={}    //全局对象
+bodavm.memory.domParser=''    //存在parse5解析的dom
+bodavm.memory.domParserScriptFlag=true  //判断当前是否处于domParserScriptFlag  script标签执行
+bodavm.memory.notDefined={}  //存在浏览器中不存在dom  如Database等
+bodavm.memory.cache={
+    "Document_body_get":{
+        'this':'',
+        "res":'',
+        'domParserbody':''
+    },
+    "Document_scripts_get":{
+        'this':'',
+        "res":[],
+        'domParser':''
+        
+    },
+    "Document_getElementById":{
+        "id":{},
+    },
+    "Document_getElementsByName":{
+        "eleName":{},
+    }
+} //缓存
 bodavm.config.isdebug=false ;  //是否开启debugger
 // bodavm.config.getundefined=true  //暂未实现   
-bodavm.config.isrs=true  //判断当前网站是不是瑞数
+bodavm.config.isrs=false  //判断当前网站是不是瑞数
 bodavm.config.proxy = false; //是否代理
 bodavm.config.issymbolProperty=false // 实现了一半,暂时不推荐使用 //是否开启 过检测 r={};r.__proto__=document;r.location
 
@@ -67,7 +89,6 @@ bodavm.memory.IDBOpenDBRequest={
 
 }
 
-
 bodavm.memory.location={
     origin:"http://www.fangdi.com.cn",
     hash:"",
@@ -87,9 +108,9 @@ bodavm.memory.document={
     documentURI:"http://www.fangdi.com.cn/",
     compatMode:"CSS1Compat",
     dir:"",
-    title:"网上房地产",
+    title:'',
     designMode:"off",
-    readyState:"interactive",
+    readyState:"loading",
     contentType:"text/html",
     inputEncoding:"UTF-8",
     domain:"www.fangdi.com.cn",
@@ -126,8 +147,8 @@ bodavm.memory.screen={
 
 bodavm.memory.navigator={
     language:"zh-CN",
-    userAgent:"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
-    appVersion:"5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
     vendor:"Google Inc.",
     appName:"Netscape",
     appCodeName:"Mozilla",
@@ -139,55 +160,50 @@ bodavm.memory.navigator={
     platform:'Win32',
     webkitPersistentStorage:{},
     connection:{},
-    javaEnabled:false
+    javaEnabled:false,
+    product:'Gecko',
+    vendorSub:"",
+    deviceMemory:undefined,
+    maxTouchPoints:0
 };
 bodavm.memory.window={
-    name:"",
+    name:"__bid_n=1851f71836a8ec02594207&$_YWTU=s.LG3L_743YOFKIPDJpIAHDVhzcP8iw0fsEKz_fqc39&$_cDro=0&vdFm=__bid_n%3D1851f71836a8ec02594207",
     innerWidth:1440,
     innerHeight:817,
     origin:"http://www.fangdi.com.cn",
     outerWidth:1440,
     outerHeight:920,
-    defaultStatus:"",
-    defaultstatus:"",
+    defaultStatus:undefined,
+    defaultstatus:undefined,
     devicePixelRatio:1.5,
     isSecureContext:false,
     length:0,
     status:"",
     onmessage:null,
-    onbeforeunload:'',
-    // clientInformation:""
+    onbeforeunload:null,
+    closed:false,
+    isSecureContext:false,
+    onappinstalled:null,
+    onbeforeinstallprompt:null,
+    onbeforexrselect:null,
+    onabort:null,
+    onblur:null,
+    oncancel:null,
+    oncanplay:null,
+    oncanplaythrough:null,
+    onsearch:null,
+    opener:null,
+    frameElement:null,
+    
 
 };
+bodavm.memory.localStorage={}
 
-bodavm.memory.canvas={};
-bodavm.memory.canvas2D={
-    direction: "ltr",
-    fillStyle: "#000000",
-    filter: "none",
-    font: "10px sans-serif",
-    fontKerning: "auto",
-    fontStretch: "normal",
-    fontVariantCaps: "normal",
-    globalAlpha: 1,
-    globalCompositeOperation: "source-over",
-    imageSmoothingEnabled: true,
-    imageSmoothingQuality: "low",
-    letterSpacing: "0px",
-    lineCap: "butt",
-    lineDashOffset: 0,
-    lineJoin: "miter",
-    lineWidth: 1,
-    miterLimit: 10,
-    shadowBlur: 0,
-    shadowColor: "rgba(0, 0, 0, 0)",
-    shadowOffsetX: 0,
-    shadowOffsetY: 0,
-    strokeStyle: "#000000",
-    textAlign: "start",
-    textBaseline: "alphabetic",
-    textRendering: "auto",
-    wordSpacing: "0px",
-}
-// bodavm.memory.localStorage={}
+bodavm.memory.Performance={
+    'getEntriesByType':[],
+    'timeOrigin':1682492723085.3
+
+
+
+};
 

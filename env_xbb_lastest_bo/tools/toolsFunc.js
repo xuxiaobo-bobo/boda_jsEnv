@@ -6,16 +6,51 @@
 */
 ;;
 !function () {
-    bodavm.toolsFunc.symbolProperty=function (obj){
+    bodavm.toolsFunc.traverseGetParent=function (node){
+        if (node.parentNode){
+            return bodavm.toolsFunc.traverseGetParent(node.parentNode)
+        }else{
+            return node
+        }
+    }
+    bodavm.toolsFunc.traverse2=function(node, callback) {
+        if (!node.childNodes) {
+            return;
+        }
+        if (node.nodeName=='script'){
+                callback(node.parentNode);
+
+        }else{
+            callback(node)
+        }
+        // debugger
+        for (let i = 0; i < node.childNodes.length; i++) {
+            bodavm.toolsFunc.traverse2(node.childNodes[i], callback);
+        }
+    }
+    bodavm.toolsFunc.traverse=function(node, callback) {
+        if (!node.childNodes) {
+            return;
+        }
+    
+        callback(node)
+        
+        // debugger
+        for (let i = 0; i < node.childNodes.length; i++) {
+            bodavm.toolsFunc.traverse(node.childNodes[i], callback);
+        }
+    }
+
+    bodavm.toolsFunc.symbolProperty=function (obj,value){
         if (bodavm.config.issymbolProperty ==false){
             return obj
         };
         Object.defineProperty(obj,bodavm.memory.symbolProperty,{
             configurable:false,
             enumerable:false,
-            value:1,
+            value:value?value:1,
             writable:false
-        })
+        },'bobo')
         
     }
     bodavm.toolsFunc.setProto=function setpro(dom){
@@ -23,87 +58,87 @@
         let tagpro=dom.toUpperCase()
         switch (tagpro) {
             case "DIV":
-                return HTMLDivElement.prototype
+                return new HTMLDivElement('bobo')
             case "SCRIPT":
-                return  HTMLScriptElement.prototype
+                return  new HTMLScriptElement('bobo')
             case "TITLE":
-                return  HTMLTitleElement.prototype
+                return  new HTMLTitleElement('bobo')
             case "HEAD":
-                return  HTMLHeadElement.prototype
+                return new HTMLHeadElement('bobo')
             case 'META':
-                return  HTMLMetaElement.prototype
+                return new HTMLMetaElement('bobo')
             case 'LINK':
-                return  HTMLLinkElement.prototype
+                return new HTMLLinkElement('bobo')
             case "A":
-                return  HTMLAnchorElement.prototype
+                return  new HTMLAnchorElement('bobo')
             case "SPAN":
-                return  HTMLSpanElement.prototype
+                return new HTMLSpanElement('bobo')
             case "P":
-                return  HTMLParagraphElement.prototype
+                return new HTMLParagraphElement('bobo')
             case "LI":
-                return  HTMLLIElement.prototype
+                return new HTMLLIElement('bobo')
             case "UL":
-                return  HTMLUListElement.prototype
+                return new HTMLUListElement('bobo')
             case 'IFRAME':
-                return  HTMLIFrameElement.prototype
+                return new HTMLIFrameElement('bobo')
             case 'IMG':
-                return  HTMLImageElement.prototype
+                return new HTMLImageElement('bobo')
             case "H1":
-                return  HTMLHeadingElement.prototype
+                return new HTMLHeadingElement('bobo')
             case "H2":
-                return  HTMLHeadingElement.prototype
+                return new HTMLHeadingElement('bobo')
             case "NOSCRIPT":
-                return  HTMLElement.prototype
+                return  new HTMLElement('bobo')
             case 'INPUT':
-                return  HTMLInputElement.prototype
+                return new HTMLInputElement('bobo')
             case 'FORM':
-                return  HTMLFormElement.prototype
+                return new HTMLFormElement('bobo')
             case 'STYLE':
-                return  HTMLStyleElement.prototype
+                return new HTMLStyleElement('bobo')
             case 'VIDEO':
-                return  HTMLVideoElement.prototype
+                return new HTMLVideoElement('bobo')
             case 'BODY':
-                return  HTMLBodyElement.prototype
+                return new HTMLBodyElement('bobo')
             case 'HTML':
-                return  HTMLHtmlElement.prototype
+                return new HTMLHtmlElement('bobo')
             case "CANVAS":
-                return  HTMLCanvasElement.prototype
+                return  new HTMLCanvasElement('bobo')
             case "SECTION":
-                return  HTMLElement.prototype
+                return new HTMLElement('bobo')
             case "I":
-                return  HTMLElement.prototype
+                return new HTMLElement('bobo')
             case "FONT":
-                return  HTMLFontElement.prototype
+                return new HTMLFontElement('bobo')
             case "EM":
-                return  HTMLElement.prototype
+                return new HTMLElement('bobo')
             case "H6":
-                return  HTMLHeadingElement.prototype
+                return new HTMLHeadingElement('bobo')
             case "OPTION":
-                return  HTMLOptionElement.prototype
+                return new HTMLOptionElement('bobo')
             case "SELECT":
-                return  HTMLSelectElement.prototype
+                return new HTMLSelectElement('bobo')
             case "BR":
-                return  HTMLBRElement.prototype
+                return new HTMLBRElement('bobo')
             case "CLOB":
-                return  HTMLUnknownElement.prototype
+                return new HTMLUnknownElement('bobo')
             case "MARQUEE":
-                return  HTMLMarqueeElement.prototype
+                return new HTMLMarqueeElement('bobo')
             case "STRONG":
-                return  HTMLElement.prototype
+                return new HTMLElement('bobo')
             case "BUTTON":
-                return  HTMLButtonElement.prototype
+                return   new HTMLButtonElement('bobo')
             case 'LEGEND':
-                return  HTMLLegendElement.prototype
+                return new HTMLLegendElement('bobo')
             case 'OPTGROUP':
-                return  HTMLOptGroupElement.prototype
+                return new HTMLOptGroupElement('bobo')
             case "FIELDSET":
-                return  HTMLFieldSetElement.prototype
+                return  new HTMLFieldSetElement('bobo')
             case 'SUP':
-                return  HTMLElement.prototype
+                return new HTMLElement('bobo')
             case "H3":
-                return  HTMLHeadingElement.prototype
+                return  new HTMLHeadingElement('bobo')
             case "ADDRESS":
-                return  HTMLElement.prototype
+                return new HTMLElement('bobo')
 
             default:
                 console.log(`setProto属性${tagpro}未实现`)
@@ -167,13 +202,13 @@
                 configurable: false,
                 writable: true,
                 value: {},
-            }),
+            },'bobo'),
             Object.defineProperty(this,bodavm.memory.symbolProperty,{
                 value:1,
                 enumerable:false,
                 writable:false,
                 configurable:false
-            })
+            },'bobo')
 
         }
         this[bodavm.memory.symbolData][key] = value;
@@ -197,7 +232,7 @@
     // //proxy代理
     bodavm.toolsFunc.proxy = function (obj, objName) {
         // bodavm.toolsFunc.symbolProperty(obj)
-        bodavm.memory.globalobj[objName]=obj
+        // bodavm.memory.globalobj[objName]=obj
         if (bodavm.config.proxy == false) { return obj };
         if(bodavm.memory.symbolProxy in obj){// 判断对象obj是否是已代理的对象
             return obj[bodavm.memory.symbolProxy];
@@ -268,7 +303,7 @@
             enumerable:false,
             writable:false,
             value:proxyObj
-        });
+        },'bobo');
         return proxyObj;
     }
 
@@ -290,21 +325,21 @@
         }
         try {
 
-            if (bodavm.config.issymbolProperty){
-                if(self[bodavm.memory.symbolProperty] ==undefined){
-                    debugger
-                    console.log(self,`  bodavm.toolsFunc.dispatch1 执行出错`,funcName);
-                    return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+            // if (bodavm.config.issymbolProperty){
+            //     if(self[bodavm.memory.symbolProperty] ==undefined){
+            //         debugger
+            //         console.log(self,`  bodavm.toolsFunc.dispatch1 执行出错`,funcName);
+            //         return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
         
-                }
-                //实现r={} ;r.__proto__=document ,r.location 报错
-                if (self.__proto__.constructor == self.__proto__.__proto__.constructor){
-                    debugger
-                    console.log(self,`  bodavm.toolsFunc.dispatch2  执行出错`,funcName);
-                    return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
-                }
+            //     }
+            //     //实现r={} ;r.__proto__=document ,r.location 报错
+            //     if (self.__proto__.constructor == self.__proto__.__proto__.constructor){
+            //         debugger
+            //         console.log(self,`  bodavm.toolsFunc.dispatch2  执行出错`,funcName);
+            //         return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
+            //     }
     
-            }
+            // }
      
             return bodavm.envFunc[name].apply(self, argList)
 
@@ -349,7 +384,7 @@
             }
             newDescriptior.set = set;
         }
-            Object.defineProperty(obj, prop, newDescriptior)
+            Object.defineProperty(obj, prop, newDescriptior,'bobo')
 
     };
     ;;
@@ -386,7 +421,7 @@
                 "configurable": true,
                 "writable": true,
                 "value": value
-            })
+            },'bobo')
         };
         delete Function.prototype['toString']; //删除原型链上的toString
         set_native(Function.prototype, "toString", myToString); //自己定义个getter方法
@@ -410,7 +445,7 @@
             configurable: true,
             writable: false,
             enumerable: false
-        })
+        },'bobo')
     };
     //函数重命名 
     bodavm.toolsFunc.reNameFunc = function reNameFunc(func, name) {
@@ -419,7 +454,7 @@
             configurable: true,
             writable: false,
             enumerable: false
-        })
+        },'bobo')
     }
     //合并 保护方法
     bodavm.toolsFunc.safeFunc = function safeFunc(func, name) {
@@ -428,7 +463,7 @@
     }
     //合并 保护原型
     bodavm.toolsFunc.safeProto = function safeProto(obj, name) {
-        bodavm.memory.globalobj[name]=obj
+        // bodavm.memory.globalobj[name]=obj
         // bodavm.toolsFunc.symbolProperty(obj)
         bodavm.toolsFunc.safefunction(obj, name)
         bodavm.toolsFunc.reNameObj(obj, name)

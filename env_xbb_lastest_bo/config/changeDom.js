@@ -21,7 +21,7 @@ bodavm.memory.document={
     documentURI:"${document.documentURI}",
     compatMode:"${document.compatMode}",
     dir:"${document.dir}",
-    title:"${document.title}",
+    title:'${document.title}',
     designMode:"${document.designMode}",
     readyState:"${document.readyState}",
     contentType:"${document.contentType}",
@@ -73,7 +73,11 @@ bodavm.memory.navigator={
     platform:'${navigator.platform}',
     webkitPersistentStorage:${JSON.stringify(navigator.webkitPersistentStorage)},
     connection:${JSON.stringify(navigator.connection)},
-    javaEnabled:${navigator.javaEnabled()}
+    javaEnabled:${navigator.javaEnabled()},
+    product:'${navigator.product}',
+    vendorSub:${JSON.stringify(navigator.vendorSub)},
+    deviceMemory:${navigator.deviceMemory},
+    maxTouchPoints:${navigator.maxTouchPoints}
 };
 bodavm.memory.window={
     name:${JSON.stringify(window.name)},
@@ -90,39 +94,21 @@ bodavm.memory.window={
     status:${JSON.stringify(window.status)},
     onmessage:${window.onmessage},
     onbeforeunload:${window.onbeforeunload},
+    closed:${window.closed},
+    isSecureContext:${window.isSecureContext},
+    onappinstalled:${window.onappinstalled},
+    onbeforeinstallprompt:${window.onbeforeinstallprompt},
+    onbeforexrselect:${onbeforexrselect},
+    onabort:${onabort},
+    onblur:${onblur},
+    oncancel:${oncancel},
+    oncanplay:${oncanplay},
+    oncanplaythrough:${oncanplaythrough}
 
 };
+bodavm.memory.localStorage={}
 
-bodavm.memory.canvas={};
-bodavm.memory.canvas2D={
-    direction: "${cccc.direction}",
-    fillStyle: "${cccc.fillStyle}",
-    filter: "${cccc.filter}",
-    font: "${cccc.font}",
-    fontKerning: "${cccc.fontKerning}",
-    fontStretch: "${cccc.fontStretch}",
-    fontVariantCaps: "${cccc.fontVariantCaps}",
-    globalAlpha: ${cccc.globalAlpha},
-    globalCompositeOperation: "${cccc.globalCompositeOperation}",
-    imageSmoothingEnabled: ${cccc.imageSmoothingEnabled},
-    imageSmoothingQuality: "${cccc.imageSmoothingQuality}",
-    letterSpacing: "${cccc.letterSpacing}",
-    lineCap: "${cccc.lineCap}",
-    lineDashOffset: ${cccc.lineDashOffset},
-    lineJoin: "${cccc.lineJoin}",
-    lineWidth: ${cccc.lineWidth},
-    miterLimit: ${cccc.miterLimit},
-    shadowBlur: ${cccc.shadowBlur},
-    shadowColor: "${cccc.shadowColor}",
-    shadowOffsetX: ${cccc.shadowOffsetX},
-    shadowOffsetY: ${cccc.shadowOffsetY},
-    strokeStyle: "${cccc.strokeStyle}",
-    textAlign: "${cccc.textAlign}",
-    textBaseline: "${cccc.textBaseline}",
-    textRendering: "${cccc.textRendering}",
-    wordSpacing: "${cccc.wordSpacing}",
-}
-// bodavm.memory.localStorage={}
+bodavm.memory.Performance=${JSON.stringify(performance.getEntriesByType('resource'))};
 
 `
 

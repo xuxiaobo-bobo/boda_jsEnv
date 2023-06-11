@@ -1,0 +1,14 @@
+// IntersectionObserverEntry对象
+IntersectionObserverEntry = function IntersectionObserverEntry(){let arg=arguments[0];
+if (arg!='bobo' && !(this instanceof IntersectionObserverEntry) ){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")};bodavm.toolsFunc.symbolProperty(this);
+if (arg =='bobo'){console.log_copy('IntersectionObserverEntry 实例化对象 --->',JSON.stringify_bo(arguments,function(k,v){if (v==window){return 'window'}else{return v}}))};}
+
+bodavm.toolsFunc.safeProto(IntersectionObserverEntry, "IntersectionObserverEntry");
+bodavm.toolsFunc.defineProperty(IntersectionObserverEntry.prototype, "time", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, IntersectionObserverEntry.prototype, "IntersectionObserverEntry", "bodefault_get", arguments)}, set:undefined},);
+bodavm.toolsFunc.defineProperty(IntersectionObserverEntry.prototype, "rootBounds", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, IntersectionObserverEntry.prototype, "IntersectionObserverEntry", "bodefault_get", arguments)}, set:undefined},);
+bodavm.toolsFunc.defineProperty(IntersectionObserverEntry.prototype, "boundingClientRect", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, IntersectionObserverEntry.prototype, "IntersectionObserverEntry", "bodefault_get", arguments)}, set:undefined},);
+bodavm.toolsFunc.defineProperty(IntersectionObserverEntry.prototype, "intersectionRect", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, IntersectionObserverEntry.prototype, "IntersectionObserverEntry", "bodefault_get", arguments)}, set:undefined},);
+bodavm.toolsFunc.defineProperty(IntersectionObserverEntry.prototype, "isIntersecting", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, IntersectionObserverEntry.prototype, "IntersectionObserverEntry", "bodefault_get", arguments)}, set:undefined},);
+bodavm.toolsFunc.defineProperty(IntersectionObserverEntry.prototype, "isVisible", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, IntersectionObserverEntry.prototype, "IntersectionObserverEntry", "bodefault_get", arguments)}, set:undefined},);
+bodavm.toolsFunc.defineProperty(IntersectionObserverEntry.prototype, "intersectionRatio", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, IntersectionObserverEntry.prototype, "IntersectionObserverEntry", "bodefault_get", arguments)}, set:undefined},);
+bodavm.toolsFunc.defineProperty(IntersectionObserverEntry.prototype, "target", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, IntersectionObserverEntry.prototype, "IntersectionObserverEntry", "bodefault_get", arguments)}, set:undefined},);

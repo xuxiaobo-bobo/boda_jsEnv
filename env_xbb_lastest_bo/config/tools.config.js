@@ -18,7 +18,7 @@ function getCode(){
     let code=""
     code+=getFile("toolsFunc")
     // code+=getFile("toolsJsSoup")
-    code+=getFile("toolsParseHtml")
+    // code+=getFile("toolsParseHtml")
     code+=getFile("envFunc")
     code+=getFile("toolsPlugin")
     return code

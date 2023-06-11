@@ -1,0 +1,15 @@
+// TextTrackCue对象
+TextTrackCue = function TextTrackCue(){let arg=arguments[0];
+if (arg!='bobo' && !(this instanceof TextTrackCue) ){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")};bodavm.toolsFunc.symbolProperty(this);
+if (arg =='bobo'){console.log_copy('TextTrackCue 实例化对象 --->',JSON.stringify_bo(arguments,function(k,v){if (v==window){return 'window'}else{return v}}))};}
+
+bodavm.toolsFunc.safeProto(TextTrackCue, "TextTrackCue");
+TextTrackCue.prototype.__proto__=EventTarget.prototype;
+TextTrackCue.__proto__=EventTarget;
+bodavm.toolsFunc.defineProperty(TextTrackCue.prototype, "track", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_get", arguments)}, set:undefined},);
+bodavm.toolsFunc.defineProperty(TextTrackCue.prototype, "id", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(TextTrackCue.prototype, "startTime", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(TextTrackCue.prototype, "endTime", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(TextTrackCue.prototype, "pauseOnExit", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(TextTrackCue.prototype, "onenter", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(TextTrackCue.prototype, "onexit", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, TextTrackCue.prototype, "TextTrackCue", "bodefault_set", arguments)}},);

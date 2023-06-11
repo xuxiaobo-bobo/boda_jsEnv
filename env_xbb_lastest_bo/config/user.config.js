@@ -1,15 +1,15 @@
 const fs=require("fs");
 
 const path = require("path");
-let user_path = path.resolve(__dirname, `../user/`);
+let user_path = path.resolve(__dirname, `../run/`);
 
 
-function getCode(name, type) {
+function getCode(type) {
     try {
-        return fs.readFileSync(`${user_path}/${name}/${type}.js`) + "\r\n";
+        return fs.readFileSync(`${user_path}/${type}.js`) + "\r\n";
 
     } catch (e) {
-        console.log(`${user_path}/${name}/${type}.js不存在`)
+        console.log(`${user_path}/${type}.js不存在`)
         return "";
     }
 }

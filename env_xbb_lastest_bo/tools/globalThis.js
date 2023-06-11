@@ -9,12 +9,13 @@ delete process;
 delete root;
 delete WindowProperties;
 delete globalThis[Symbol.toStringTag];
-window = globalThis;
+window= globalThis;
 globalThis.__proto__=Window.prototype
 
 
 
-
+// document=new HTMLDocument('bobo')
+// debugger
 bodavm.toolsFunc.defineProperty(window, "atob", {
     configurable: true, enumerable: true, writable: true,
     value: function atob(str) {
@@ -76,12 +77,12 @@ bodavm.toolsFunc.defineProperty(window, "chrome", {
     }
 
 });
-bodavm.toolsFunc.defineProperty(window, "webkitRequestFileSystem", { writable: true, enumerable: true, configurable: true, value: function webkitRequestFileSystem() { return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestFileSystem", arguments) } });
+//bodavm.toolsFunc.defineProperty(window, "webkitRequestFileSystem", { writable: true, enumerable: true, configurable: true, value: function webkitRequestFileSystem() { return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestFileSystem", arguments) } });
 bodavm.toolsFunc.defineProperty(window, "fetch", { writable: true, enumerable: true, configurable: true, value: function fetch() { return bodavm.toolsFunc.dispatch(this, window, "window", "fetch", arguments) } });
 bodavm.toolsFunc.defineProperty(window, "devicePixelRatio", { configurable: true, enumerable: true, get: function devicePixelRatio() { return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_get", arguments) }, set: function devicePixelRatio() { return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_set", arguments) } });
-bodavm.toolsFunc.defineProperty(window, "getComputedStyle", { configurable: true, enumerable: true, writable: true, value: function getComputedStyle() { return bodavm.toolsFunc.dispatch(this, window, "window", "getComputedStyle", arguments) } });
+//bodavm.toolsFunc.defineProperty(window, "getComputedStyle", { configurable: true, enumerable: true, writable: true, value: function getComputedStyle() { return bodavm.toolsFunc.dispatch(this, window, "window", "getComputedStyle", arguments) } });
 bodavm.toolsFunc.defineProperty(window, "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, window, "window", "length_get", arguments)}, set:function length (){return bodavm.toolsFunc.dispatch(this, window, "window", "length_set", arguments)}});
-bodavm.toolsFunc.defineProperty(window, "openDatabase", {configurable:true, enumerable:true, writable:true, value:function openDatabase (){return bodavm.toolsFunc.dispatch(this, window, "window", "openDatabase", arguments)}});
+//bodavm.toolsFunc.defineProperty(window, "openDatabase", {configurable:true, enumerable:true, writable:true, value:function openDatabase (){return bodavm.toolsFunc.dispatch(this, window, "window", "openDatabase", arguments)}});
 
 bodavm.toolsFunc.defineProperty(window, "onmessage", {configurable:true, enumerable:true, get:function onmessage (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmessage_get", arguments)}, set:function onmessage (){return bodavm.toolsFunc.dispatch(this, window, "window", "onmessage_set", arguments)}});
 bodavm.toolsFunc.defineProperty(window, "onbeforeunload", {configurable:true, enumerable:true, get:function onbeforeunload (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeunload_get", arguments, null)}, set:function onbeforeunload (){return bodavm.toolsFunc.dispatch(this, window, "window", "onbeforeunload_set", arguments)}});
@@ -108,28 +109,28 @@ bodavm.toolsFunc.defineProperty(window, "$4", {configurable:true, enumerable:fal
 
 
 
-var boeval = eval
-eval = function (x) {
-    console.log(`执行eval,参数为${x}`)
-    return boeval.call(this, x)
-}
-eval.toString = function () { return 'function eval() { [native code] }' }
+// var boeval = eval
+// eval = function (x) {
+//     console.log(`执行eval,参数为${x}`)
+//     return boeval.call(this, x)
+// }
+// eval.toString = function () { return 'function eval() { [native code] }' }
 
 
 
 
 
-// Object.defineProperty(this, 'window', {
-//     get: function window() {
-//         // if (bodavm.config.proxy ){
-//             // window=bodavm.toolsFunc.proxy(window,'window')
-//             // return window
-//         // }else{
-//             return this
-//         // }
-//     },
-//     // writable: false,
-//     configurable: false,
-//     enumerable:true
-// });
-// debugger
+Object.defineProperty(this, 'window', {
+    get: function window() {
+        // if (bodavm.config.proxy ){
+            // window=bodavm.toolsFunc.proxy(window,'window')
+            // return window
+        // }else{
+            return this
+        // }
+    },
+    // writable: false,
+    configurable: false,
+    enumerable:true
+});
+bodavm.toolsFunc.safeFunc(Object.getOwnPropertyDescriptor(this,'window').get,'get window')

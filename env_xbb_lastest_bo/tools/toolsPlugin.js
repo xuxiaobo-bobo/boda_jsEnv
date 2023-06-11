@@ -17,7 +17,7 @@ bodavm.toolsFunc.addPlugin = function addPlugin(plugin){
     }
     let index = pluginArray.length;
     pluginArray[index] = plugin;
-    Object.defineProperty(pluginArray, plugin.name, {value: plugin, writable: false, enumerable: false, configurable: true});
+    Object.defineProperty(pluginArray, plugin.name, {value: plugin, writable: false, enumerable: false, configurable: true},'bobo');
 
     bodavm.toolsFunc.setProtoAttr.call(pluginArray, "length", index+1);
     bodavm.memory.globalInit.pluginArray = pluginArray;
@@ -42,7 +42,7 @@ bodavm.toolsFunc.addMimeType = function addMimeType(mimeType){
         enumerable:false,
         writable:false,
         configurable:false
-    })
+    },'bobo')
     let index = mimeTypeArray.length;
     let flag = true;
     for(let i=0;i<index;i++){
@@ -53,7 +53,7 @@ bodavm.toolsFunc.addMimeType = function addMimeType(mimeType){
     if(flag){
         mimeTypeArray[index] = mimeType;
 
-        Object.defineProperty(mimeTypeArray, mimeType.type, {value: mimeType, writable: false, enumerable: false, configurable: true});
+        Object.defineProperty(mimeTypeArray, mimeType.type, {value: mimeType, writable: false, enumerable: false, configurable: true},'bobo');
      
         bodavm.toolsFunc.setProtoAttr.call(mimeTypeArray, "length", index+1);
     }
@@ -87,7 +87,7 @@ bodavm.toolsPlugin.createPlugin = function createPlugin(data){
     for(let i=0; i<mimeTypes.length; i++){
         let mimeType = bodavm.toolsFunc.createMimeType(mimeTypes[i], plugin);
         plugin[i] = mimeType;
-        Object.defineProperty(plugin, mimeTypes[i].type, {value: mimeType, writable: false, enumerable: false, configurable: true});
+        Object.defineProperty(plugin, mimeTypes[i].type, {value: mimeType, writable: false, enumerable: false, configurable: true},'bobo');
        
     }
     bodavm.toolsFunc.addPlugin(plugin);

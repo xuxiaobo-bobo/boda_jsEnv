@@ -1,0 +1,16 @@
+// VTTCue对象
+VTTCue = function VTTCue(){let arg=arguments[0];
+if (arg!='bobo' && !(this instanceof VTTCue) ){return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'VTTCue': 3 arguments required, but only 0 present.")};bodavm.toolsFunc.symbolProperty(this);
+if (arg =='bobo'){console.log_copy('VTTCue 实例化对象 --->',JSON.stringify_bo(arguments,function(k,v){if (v==window){return 'window'}else{return v}}))};}
+
+bodavm.toolsFunc.safeProto(VTTCue, "VTTCue");
+VTTCue.prototype.__proto__=TextTrackCue.prototype;
+VTTCue.__proto__=TextTrackCue;
+bodavm.toolsFunc.defineProperty(VTTCue.prototype, "vertical", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(VTTCue.prototype, "snapToLines", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(VTTCue.prototype, "line", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(VTTCue.prototype, "position", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(VTTCue.prototype, "size", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(VTTCue.prototype, "align", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(VTTCue.prototype, "text", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "bodefault_set", arguments)}},);
+bodavm.toolsFunc.defineProperty(VTTCue.prototype, "getCueAsHTML", {configurable:true, enumerable:true, writable:true, value:function getCueAsHTML (){return bodavm.toolsFunc.dispatch(this, VTTCue.prototype, "VTTCue", "getCueAsHTML", arguments)}},);

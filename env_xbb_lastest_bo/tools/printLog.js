@@ -17,29 +17,31 @@
             }
         }
         log += "\r\n"
-        fs.appendFileSync(`D:/My_Dir/env_xbb_lastest_bo/user/${_name_}/log.txt`, log)
+        bofs.appendFileSync(`D:/My_Dir/env_xbb_lastest_bo/run/log.txt`, log)
     }
     //hook console,让他自动调用printlog
     console.log_ = console.log;
     console.log = function log(type,...args) {
 
-        let index=args[0]?args[0]:args
-        if (typeof index =='string'&&  index.indexOf('属性:')!=-1){
-        }else{
-        // debugger
-            let arglenth=args.length
-            let obj={'type':'env:'+type}
+        // let index=args[0]?args[0]:args
+        // if (typeof index =='string'&&  index.indexOf('属性:')!=-1){    
+        // }else{
+        // // debugger
+        //     let arglenth=args.length
+        //     let obj={'type':'env:'+type}
 
-            for (let i = 0; i < arglenth; i++) {
+        //     for (let i = 0; i < arglenth; i++) {
                 
-                obj['prop'+i]=args[i]
-                // if (args[i] ==undefined || args[i] ==null){
-                //     myundefinedlist.push(obj)
-                // }
-            }
-            // debugger
-            myloglist.push(obj)
-        }
+        //         obj['prop'+i]=args[i]
+        //         // if (args[i] ==undefined || args[i] ==null){
+        //         //     myundefinedlist.push(obj)
+        //         // }
+        //     }
+        //     // debugger
+        //     myloglist.push(obj)
+        // }
+
+
         // if (bodavm.memory.getundefined){
         //     if (arguments.indexOf(undefined) >0 || arguments.indexOf(null) >0){
         //         myundefinedlist.push(arguments)
@@ -49,13 +51,19 @@
             bodavm.toolsFunc.printLog(arguments)
 
         }
-        
+
         //自动生成hook代码
         return console.log_.apply(this, arguments)
     };
-   
-    console.log.toString = function log(){
-        return 'function log() { [native code] }';
-    }
+    console.log_copy=console.log
+    bodavm.toolsFunc.safeFunc(console.log,'log')
+    // Object.defineProperty(console,'log',{
+    //     get:function (){
+    //         return console.log
+    //     },
+    //     // set:function (){
+    //     //     return console.log
+    //     // }
+    // })
 }();
 
