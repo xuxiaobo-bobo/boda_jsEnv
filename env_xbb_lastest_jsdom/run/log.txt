@@ -804,3 +804,20 @@ window_URLPattern-> res ->function URLPattern() { [native code] }
 window_VideoPlaybackQuality-> res ->function VideoPlaybackQuality() { [native code] }
 window_VirtualKeyboardGeometryChangeEvent-> res ->function VirtualKeyboardGeometryChangeEvent() { [native code] }
 window_XSLTProcessor-> res ->function XSLTProcessor() { [native code] }
+window_length_get  length ->0  boss直聘检测
+window_location_get location_->[object Location]
+get  Window.prototype, '__proto__'!!!!检测!!!!!!
+Object.defineProperty target ->[object Object]->prop->"hasOwnProperty_bo"->obj ->{"enumerable":false}->res ->{}!!!!!检测
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+======================================调         试        代          码======================================
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+===============================================================================================================
+window_document_get document->[object HTMLDocument]
+Document_all_get  all ->[object HTMLAllCollection]
+window_document_get document->[object HTMLDocument]
+Document_all_get  all ->[object HTMLAllCollection]

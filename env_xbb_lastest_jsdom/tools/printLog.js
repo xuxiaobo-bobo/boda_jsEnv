@@ -17,7 +17,7 @@
             }
         }
         log += "\r\n"
-        bofs.appendFileSync(`D:/My_Dir/env_xbb_lastest_jsdom/run/log.txt`, log)
+        bofs.appendFileSync(`D:\\spider\\boda_jsEnv\\env_xbb_lastest_jsdom\\run\\log.txt`, log)
     }
     //hook console,让他自动调用printlog
     console.log_ = console.log;

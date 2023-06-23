@@ -5,8 +5,9 @@ getProtoEnvCode = function getProtoEnvCode(proto, instanceObj) {
     let protoName = proto.name;
     // 添加注释
     code += `// ${protoName}对象\r\n`;
-    new_name = instanceObj.toLowerCase()
-    if (new_name.startsWith('webkit')) {
+    // 定义原型
+    new_name=instanceObj.toLowerCase()
+    if (new_name.startsWith('webkit')){
         code += `${instanceObj} =${protoName}`
         return code
     }
