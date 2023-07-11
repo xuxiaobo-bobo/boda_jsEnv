@@ -1,9 +1,0 @@
-// MediaMetadata对象
-MediaMetadata = function MediaMetadata(){bodavm.toolsFunc.symbolProperty(this);
-if (arg =='bobo'){console.log_copy('MediaMetadata 实例化对象 --->',JSON.stringify_bo(arguments,function(k,v){if (v==window){return 'window'}else{return v}}))};}
-
-bodavm.toolsFunc.safeProto(MediaMetadata, "MediaMetadata");
-bodavm.toolsFunc.defineProperty(MediaMetadata.prototype, "title", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, MediaMetadata.prototype, "MediaMetadata", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, MediaMetadata.prototype, "MediaMetadata", "bodefault_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(MediaMetadata.prototype, "artist", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, MediaMetadata.prototype, "MediaMetadata", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, MediaMetadata.prototype, "MediaMetadata", "bodefault_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(MediaMetadata.prototype, "album", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, MediaMetadata.prototype, "MediaMetadata", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, MediaMetadata.prototype, "MediaMetadata", "bodefault_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(MediaMetadata.prototype, "artwork", {configurable:true, enumerable:true, get:function bodefault (){return bodavm.toolsFunc.dispatch(this, MediaMetadata.prototype, "MediaMetadata", "bodefault_get", arguments)}, set:function bodefault (){return bodavm.toolsFunc.dispatch(this, MediaMetadata.prototype, "MediaMetadata", "bodefault_set", arguments)}},);

@@ -2,12 +2,12 @@
 
 GPUSupportedFeatures = function GPUSupportedFeatures() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof GPUSupportedFeatures)) {
+  if (arg != 'bobo' && (this instanceof GPUSupportedFeatures)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('GPUSupportedFeatures 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

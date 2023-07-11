@@ -2,12 +2,15 @@
 
 Event = function Event() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof Event)) {
-    return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Event': 1 argument required, but only 0 present.");
-  }
+  let arg2=arguments[1]
+  if (bodavm.memory.listenerProxy[arg]['res']){
+		  return bodavm.memory.listenerProxy[arg]['res']
+	  }
+  this.isTrusted=false
+  bodavm.toolsFunc.setProtoAttr.call(this,this,arg)
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg2 != 'bobo') {
     console.log_copy('Event 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

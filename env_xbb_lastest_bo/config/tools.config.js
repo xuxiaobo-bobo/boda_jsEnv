@@ -19,7 +19,11 @@ function getCode(){
     code+=getFile("toolsFunc")
     // code+=getFile("toolsJsSoup")
     // code+=getFile("toolsParseHtml")
-    code+=getFile("envFunc")
+    code+=getFile("envFuncBom")
+    code+=getFile("envFuncDom")
+    code+=getFile("envFuncJSApi")
+    // code+=getFile("envFuncOther")
+
     code+=getFile("toolsPlugin")
     return code
 }

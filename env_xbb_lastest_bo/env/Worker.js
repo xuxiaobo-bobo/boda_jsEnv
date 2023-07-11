@@ -2,12 +2,12 @@
 
 Worker = function Worker() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof Worker)) {
+  if (arg != 'bobo' && (this instanceof Worker)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Worker': 1 argument required, but only 0 present.");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('Worker 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

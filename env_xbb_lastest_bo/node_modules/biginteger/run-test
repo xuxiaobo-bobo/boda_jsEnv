@@ -1,0 +1,6 @@
+#!/bin/bash
+
+shell=${1:-rhino}
+verbosity=${2:-1}
+
+cd test && $shell test-biginteger.js $verbosity

@@ -2,7 +2,8 @@
 
 AudioContext = function AudioContext() {
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  arg = arguments[0];
+  if (arg != 'bobo') {
     console.log_copy('AudioContext 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

@@ -2,12 +2,12 @@
 
 RTCIceCandidate = function RTCIceCandidate() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof RTCIceCandidate)) {
+  if (arg != 'bobo' && (this instanceof RTCIceCandidate)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'RTCIceCandidate': sdpMid and sdpMLineIndex are both null.");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('RTCIceCandidate 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

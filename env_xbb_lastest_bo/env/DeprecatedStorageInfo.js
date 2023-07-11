@@ -48,5 +48,6 @@ bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['DeprecatedStorageInfo'
     return bodavm.toolsFunc.dispatch(this, bodavm.memory.notDefined['DeprecatedStorageInfo'].prototype, "DeprecatedStorageInfo", "requestQuota", arguments);
   }
 });
+delete bodavm.memory.notDefined['DeprecatedStorageInfo'].prototype.constructor;
 bodavm.memory.notDefined['webkitStorageInfo'] = {};
 bodavm.memory.notDefined['webkitStorageInfo'].__proto__ = bodavm.memory.notDefined['DeprecatedStorageInfo'].prototype;

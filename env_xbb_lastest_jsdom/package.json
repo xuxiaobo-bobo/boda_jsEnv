@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "jsdom": "^22.0.0",
-    "node-addon-api": "^6.1.0"
-  }
-}

@@ -1,8 +1,65 @@
 // window=bodavm.toolsFunc.proxy(window,"window")
 
 // CSS=bodavm.toolsFunc.proxy(CSS,"CSS");
+// let newThi = {};
+// var proxy=function (o){
+//     return new Proxy(o,{
+//         set(target,prop,value){
+//             console.log('set',target,prop);
+//             if (target.toString() == "[object Window]"){
+//                 newThi[prop] = value
+//                 return value;
+//             }
+//             return Reflect.set(...arguments)
+//         },
+//         get(target,prop,value){
+//             // console.log('get',target,prop)
+//             if (target.toString() == "[object Window]"){
+//                 if (prop == "self"){
+//                     return window;
+//                 } // 是window都往下写
+//                 return newThi[prop]
+//             }
+//             return Reflect.get(...arguments)
+//         },
+//         deleteProperty(target){
+//             console.log('delete',target)
+//             return false
+//         }
+//     })
+// }
+// let xtd;
+// let xtd_isProxy = 1;
+// Object.defineProperty(this,"window",{
+//     "get":function window(){
+//         if (xtd_isProxy){
+//             xtd ? 1 : xtd = proxy(this); // 防止重复代理
+//             return xtd;
+//         }else{
+//             return this;
+//         }
+//     },
+//     configurable:false,
+//     enumerable:true
+// })
+
+// debugger
+
+// Object.getOwnPropertyDescriptor_ =Object.getOwnPropertyDescriptor;
+// Object.getOwnPropertyDescriptor = function (a,b){  // 记得保护函数
+//     if (a == window){
+//         return {
+//             'configurable': false,
+//             'enumerable':false,
+//             'value':undefined,
+//             'writable':false
+//         }
+//     }else{
+//         return Object.getOwnPropertyDescriptor_.apply(this,arguments);
+//     }
+// }
 // performance=bodavm.toolsFunc.proxy(performance,'performance')
-// // Storage=bodavm.toolsFunc.proxy(Storage,Storage)
+// Storage=bodavm.toolsFunc.proxy(Storage,Storage)
 // database=bodavm.toolsFunc.proxy(database,'database')
 // navigation=bodavm.toolsFunc.proxy(navigation,'navigation')
 // webkitStorageInfo=bodavm.toolsFunc.proxy(webkitStorageInfo,'webkitStorageInfo')

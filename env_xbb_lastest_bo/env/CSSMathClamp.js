@@ -2,12 +2,12 @@
 
 CSSMathClamp = function CSSMathClamp() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof CSSMathClamp)) {
+  if (arg != 'bobo' && (this instanceof CSSMathClamp)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSMathClamp': 3 arguments required, but only 0 present.");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('CSSMathClamp 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

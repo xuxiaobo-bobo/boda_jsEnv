@@ -1,14 +1,19 @@
 bodavm.memory.notDefined['SpeechSynthesis'] = function SpeechSynthesis() {
-  console.log_copy('SpeechSynthesis 实例化对象参数为 ->', JSON.stringify_bo(arguments, function (k, v) {
-    if (v == window) {
-      return 'window';
-    } else {
-      return v;
-    }
-  }));
-  this._boisinit = bodavm.config.isinit;
-  return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
+  let arg = arguments[0];
+  if (arg != 'bobo') {
+    console.log_copy('SpeechSynthesis 实例化对象参数为 ->', JSON.stringify_bo(arguments, function (k, v) {
+      if (v == window) {
+        return 'window';
+      } else {
+        return v;
+      }
+    }));
+    this._boisinit = bodavm.config.isinit;
+  }
+
+  //return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
 };
+
 bodavm.toolsFunc.safeProto(bodavm.memory.notDefined['SpeechSynthesis'], "SpeechSynthesis");
 bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['SpeechSynthesis'].prototype, "cancel", {
   writable: true,
@@ -84,10 +89,5 @@ bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['SpeechSynthesis'].prot
     return bodavm.toolsFunc.dispatch(this, bodavm.memory.notDefined['SpeechSynthesis'].prototype, "SpeechSynthesis", "onvoiceschanged_set", arguments);
   }
 });
-
+delete bodavm.memory.notDefined['SpeechSynthesis'].prototype.constructor;
 // speechSynthesis对象
-bodavm.memory.notDefined['speechSynthesis'] = {
-  _boisinit: bodavm.config.isinit
-};
-bodavm.memory.notDefined['speechSynthesis'].__proto__ = bodavm.memory.notDefined['SpeechSynthesis'].prototype;
-delete SpeechSynthesis;

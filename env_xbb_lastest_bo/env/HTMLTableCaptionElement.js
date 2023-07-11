@@ -2,12 +2,12 @@
 
 HTMLTableCaptionElement = function HTMLTableCaptionElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof HTMLTableCaptionElement)) {
+  if (arg != 'bobo' && (this instanceof HTMLTableCaptionElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('HTMLTableCaptionElement 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

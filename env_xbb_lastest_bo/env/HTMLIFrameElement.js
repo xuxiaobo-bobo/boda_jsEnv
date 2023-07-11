@@ -2,12 +2,12 @@
 
 HTMLIFrameElement = function HTMLIFrameElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof HTMLIFrameElement)) {
+  if (arg != 'bobo' && (this instanceof HTMLIFrameElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('HTMLIFrameElement 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

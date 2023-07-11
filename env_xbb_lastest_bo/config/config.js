@@ -1,111 +1,523 @@
 //全局对象配置
-debugger
-var myloglist=[]
-var myloglistindex=0
-var myundefinedlist=[]
+// debugger
+var myloglist = []
+var myloglistindex = 0
+var myundefinedlist = []
 var bodavm = {
     "toolsFunc": {}, //功能函数相关,插件
     "envFunc": {},//环境相关
     "config": {},   //配置相关
-    "memory":{},
+    "memory": {},
     "toolsPlugin": {} //Plugin相关
 }
 
-bodavm.memory.tag=[]          //存放标签
-bodavm.memory.globalobj={}    //全局对象
-bodavm.memory.domParser=''    //存在parse5解析的dom
-bodavm.memory.domParserScriptFlag=true  //判断当前是否处于domParserScriptFlag  script标签执行
-bodavm.memory.notDefined={}  //存在浏览器中不存在dom  如Database等
-bodavm.memory.cache={
-    "Document_body_get":{
+bodavm.memory.tag = []          //存放标签
+bodavm.memory.globalobj = {}    //全局对象
+bodavm.memory.domParser = ''    //存在parse5解析的dom
+bodavm.memory.domParserScriptFlag = true  //判断当前是否处于domParserScriptFlag  script标签执行
+bodavm.memory.notDefined = {}  //存在浏览器中不存在dom  如Database等
+bodavm.memory.cache = {
+    "window_customElements_get": '',
+    "Document_body_get": {
+        'this': '',
+        "res": '',
+        'domParserbody': ''
+    },
+    "Document_scripts_get": {
+        'this': '',
+        "res": [],
+        'domParser': ''
+
+    },
+    "Document_getElementById": {
+        "id": {},
+    },
+    "Document_getElementsByName": {
+        "eleName": {},
+    },
+    "Element_children_get":{},
+    "Document_head_get": {
+        'res': ''
+    },
+    'location': null,
+    "Document_getElementsByName": "",
+    "MessageChannel_port2_get": {
+        'this': '',
+        "res": ''
+    },
+    "MessageChannel_port1_get": {
+        'this': '',
+        "res": ''
+    },
+    "Element_getElementsByTagName": {
+        'this': '',
+        'res': [],
+        "ele": ''
+    },
+    "Node_firstChild_get": {
+        "this": '',
+        "res": ''
+    },
+    "Node_nextSibling_get":{
         'this':'',
-        "res":'',
-        'domParserbody':''
+        'res':''
     },
-    "Document_scripts_get":{
+    "Document_getElementsByTagName": {
+    },
+    "Node_parentNode_get": {
+        'this': '',
+        "res": ''
+    },
+    "Navigator_webkitPersistentStorage_get": {
+        'this': '',
+        "res": ''
+    },
+    "HTMLElement_style_get": {
+        "this": '',
+        "res": ''
+    },
+    "Navigator_getBattery": {
+    },
+    "Node_parentElement_get": {
+        "this": '',
+        "res": ''
+    },
+    "Navigator_connection_get": '',
+    "window_document_get": '',
+    "window_localStorage_get": '',
+    "Navigator_plugins_get": '',
+    "Navigator_locks_get": '',
+    "Node_childNodes_get":{
         'this':'',
-        "res":[],
-        'domParser':''
-        
-    },
-    "Document_getElementById":{
-        "id":{},
-    },
-    "Document_getElementsByName":{
-        "eleName":{},
+        'res':''
     }
-} //缓存
-bodavm.config.isdebug=false ;  //是否开启debugger
+} //变量缓存
+bodavm.config.isdebug = false;  //是否开启debugger
 // bodavm.config.getundefined=true  //暂未实现   
-bodavm.config.isrs=false  //判断当前网站是不是瑞数
 bodavm.config.proxy = false; //是否代理
-bodavm.config.issymbolProperty=false // 实现了一半,暂时不推荐使用 //是否开启 过检测 r={};r.__proto__=document;r.location
+bodavm.memory.proxyCache = {
 
-bodavm.config.randomhook=false //hook随机值和时间
-bodavm.config.printLog=true; //是否打开日志
+}//代理set属性的缓存
+bodavm.memory.listenerProxy = {
+    'mousemove': {
+        'res': ''
+    },
+    'mouseup': {
+        'res': ''
+    },
+    "click": {
+        'res': ''
+    },
+    "load": {
+        'res': ''
+    },
+}//键盘事件等代理 这个代理默认开启 暂时只实现了click 和mousemove 以及
+
+bodavm.memory.asyncEvent = {
+    HTMLElement: { onload: [],onkeydown:[],onchange:[],onclick:[],onerror:[] }  //html元素事件 暂时只执行onload 其他的存放
+}; //异步事件存储  包含load等等
+
+bodavm.config.issymbolProperty = false // 实现了一半,暂时不推荐使用 //是否开启 过检测 r={};r.__proto__=document;r.location
+bodavm.memory.contentWindow_keys = [
+    "window",
+    "self",
+    "document",
+    "name",
+    "location",
+    "customElements",
+    "history",
+    "navigation",
+    "locationbar",
+    "menubar",
+    "personalbar",
+    "scrollbars",
+    "statusbar",
+    "toolbar",
+    "status",
+    "closed",
+    "frames",
+    "length",
+    "top",
+    "opener",
+    "parent",
+    "frameElement",
+    "navigator",
+    "origin",
+    "external",
+    "screen",
+    "innerWidth",
+    "innerHeight",
+    "scrollX",
+    "pageXOffset",
+    "scrollY",
+    "pageYOffset",
+    "visualViewport",
+    "screenX",
+    "screenY",
+    "outerWidth",
+    "outerHeight",
+    "devicePixelRatio",
+    "clientInformation",
+    "screenLeft",
+    "screenTop",
+    "styleMedia",
+    "onsearch",
+    "isSecureContext",
+    "trustedTypes",
+    "performance",
+    "onappinstalled",
+    "onbeforeinstallprompt",
+    "crypto",
+    "indexedDB",
+    "sessionStorage",
+    "localStorage",
+    "onbeforexrselect",
+    "onabort",
+    "onbeforeinput",
+    "onblur",
+    "oncancel",
+    "oncanplay",
+    "oncanplaythrough",
+    "onchange",
+    "onclick",
+    "onclose",
+    "oncontextlost",
+    "oncontextmenu",
+    "oncontextrestored",
+    "oncuechange",
+    "ondblclick",
+    "ondrag",
+    "ondragend",
+    "ondragenter",
+    "ondragleave",
+    "ondragover",
+    "ondragstart",
+    "ondrop",
+    "ondurationchange",
+    "onemptied",
+    "onended",
+    "onerror",
+    "onfocus",
+    "onformdata",
+    "oninput",
+    "oninvalid",
+    "onkeydown",
+    "onkeypress",
+    "onkeyup",
+    "onload",
+    "onloadeddata",
+    "onloadedmetadata",
+    "onloadstart",
+    "onmousedown",
+    "onmouseenter",
+    "onmouseleave",
+    "onmousemove",
+    "onmouseout",
+    "onmouseover",
+    "onmouseup",
+    "onmousewheel",
+    "onpause",
+    "onplay",
+    "onplaying",
+    "onprogress",
+    "onratechange",
+    "onreset",
+    "onresize",
+    "onscroll",
+    "onsecuritypolicyviolation",
+    "onseeked",
+    "onseeking",
+    "onselect",
+    "onslotchange",
+    "onstalled",
+    "onsubmit",
+    "onsuspend",
+    "ontimeupdate",
+    "ontoggle",
+    "onvolumechange",
+    "onwaiting",
+    "onwebkitanimationend",
+    "onwebkitanimationiteration",
+    "onwebkitanimationstart",
+    "onwebkittransitionend",
+    "onwheel",
+    "onauxclick",
+    "ongotpointercapture",
+    "onlostpointercapture",
+    "onpointerdown",
+    "onpointermove",
+    "onpointerrawupdate",
+    "onpointerup",
+    "onpointercancel",
+    "onpointerover",
+    "onpointerout",
+    "onpointerenter",
+    "onpointerleave",
+    "onselectstart",
+    "onselectionchange",
+    "onanimationend",
+    "onanimationiteration",
+    "onanimationstart",
+    "ontransitionrun",
+    "ontransitionstart",
+    "ontransitionend",
+    "ontransitioncancel",
+    "onafterprint",
+    "onbeforeprint",
+    "onbeforeunload",
+    "onhashchange",
+    "onlanguagechange",
+    "onmessage",
+    "onmessageerror",
+    "onoffline",
+    "ononline",
+    "onpagehide",
+    "onpageshow",
+    "onpopstate",
+    "onrejectionhandled",
+    "onstorage",
+    "onunhandledrejection",
+    "onunload",
+    "crossOriginIsolated",
+    "scheduler",
+    "alert",
+    "atob",
+    "blur",
+    "btoa",
+    "cancelAnimationFrame",
+    "cancelIdleCallback",
+    "captureEvents",
+    "clearInterval",
+    "clearTimeout",
+    "close",
+    "confirm",
+    "createImageBitmap",
+    "fetch",
+    "find",
+    "focus",
+    "getComputedStyle",
+    "getSelection",
+    "matchMedia",
+    "moveBy",
+    "moveTo",
+    "open",
+    "postMessage",
+    "print",
+    "prompt",
+    "queueMicrotask",
+    "releaseEvents",
+    "reportError",
+    "requestAnimationFrame",
+    "requestIdleCallback",
+    "resizeBy",
+    "resizeTo",
+    "scroll",
+    "scrollBy",
+    "scrollTo",
+    "setInterval",
+    "setTimeout",
+    "stop",
+    "structuredClone",
+    "webkitCancelAnimationFrame",
+    "webkitRequestAnimationFrame",
+    "chrome",
+    "credentialless",
+    "caches",
+    "cookieStore",
+    "ondevicemotion",
+    "ondeviceorientation",
+    "ondeviceorientationabsolute",
+    "launchQueue",
+    "onbeforematch",
+    "getScreenDetails",
+    "queryLocalFonts",
+    "showDirectoryPicker",
+    "showOpenFilePicker",
+    "showSaveFilePicker",
+    "originAgentCluster",
+    "speechSynthesis",
+    "oncontentvisibilityautostatechange",
+    "openDatabase",
+    "webkitRequestFileSystem",
+    "webkitResolveLocalFileSystemURL"
+]  //过检测 Object.keys(iframe.contentWindow).length
+
+bodavm.config.randomhook = false //hook随机值和时间
+bodavm.config.printLog = true; //是否打开日志
 // bodavm.memory.isproxy= {}
-bodavm.memory.symbolProxy=Symbol("proxy")
+bodavm.memory.symbolProxy = Symbol("proxy")
+bodavm.memory.symbolProperty = Symbol('Property')
 
-bodavm.memory.symbolProperty=Symbol('Property')
+bodavm.memory.symbolData = Symbol("data")
 
-bodavm.memory.symbolData=Symbol("data") 
+bodavm.memory.filterProxyProp = ['__proto__', 'constructor', 'valueOf', bodavm.memory.symbolProperty, bodavm.memory.symbolProxy, bodavm.memory.symbolData, Symbol.toPrimitive, Symbol.toStringTag, "eval", 'toString', 'prototype'];
 
-// if (bodavm.config.issymbolProperty && bodavm.config.proxy ){
-bodavm.memory.filterProxyProp =['hasOwnProperty','__proto__','constructor','valueOf',bodavm.memory.symbolProperty,bodavm.memory.symbolProxy,bodavm.memory.symbolData,Symbol.toPrimitive,Symbol.toStringTag, "eval",'toString','prototype'];
-// }else{
-    // bodavm.memory.filterProxyProp =['prototype','hasOwnProperty',bodavm.memory.symbolProperty,bodavm.memory.symbolProxy,bodavm.memory.symbolData,Symbol.toPrimitive,Symbol.toStringTag, "eval"];// 需要过滤的属性
-// }
 
 //用来保存当前对象上的原型属性
-bodavm.memory.globalInit={}
+bodavm.memory.globalInit = {}
 bodavm.memory.globalInit.jsonCookie = {};// json格式的cookie
+bodavm.config.settime_on = true  //执行定时器
+bodavm.memory.userInit = {}
 
-bodavm.memory.userInit={}
+bodavm.memory.listenerDone = 0 //异步事件标签
+
 //存储tag标签
-bodavm.memory.all=[]
-
-bodavm.memory.collection={}
+bodavm.memory.all = []
+bodavm.memory.collection = {}
 // bodavm.memory.localStorage={};
 
-bodavm.memory.asyncEvent={
-    HTMLElement:{onload:[]}
+//存储input标签 过form检测
+bodavm.memory.form = []
 
-};
-bodavm.memory.globalInit.timeoutID=0;
+
+bodavm.memory.iframe = {
+    "contentWindow": {
+        'this': '',
+        'res': ''
+    },
+    "contentDocument": {
+        'this': '',
+        'res': ''
+    },
+    "thisWindow": {
+        "this": [],
+        // "res":''
+    }
+}  //存放iframe相关
+
+
+bodavm.memory.htmlElement = {
+    "onresize": null
+}
+bodavm.memory.globalInit.timeoutID = 0;
 // "Verdana;Helvetica Neue LT Pro 35 Thin;tahoma;verdana;times new roman;Courier New;Microsoft Himalaya;helvetica;LG-FZKaTong-M19-V2.2;Georgia;georgia;courier new;Arial;arial;cursive;times;fantasy;courier;serif;monospace;Times New Roman"
-bodavm.memory.globalInit.fontList = ["SimHei", "SimSun", "NSimSun", "FangSong", "KaiTi",'Verdana', 'Helvetica Neue LT Pro 35 Thin', 'tahoma', 'verdana', 'times new roman', 'Courier New', 'Microsoft Himalaya', 'helvetica', 'LG-FZKaTong-M19-V2.2', 'Georgia', 'georgia', 'courier new', 'Arial', 'arial', 'cursive', 'times', 'fantasy', 'courier', 'serif', 'monospace', 'Times New Roman']
+bodavm.memory.globalInit.fontList = ["SimHei", "SimSun", "NSimSun", "FangSong", "KaiTi", 'Verdana', 'Helvetica Neue LT Pro 35 Thin', 'tahoma', 'verdana', 'times new roman', 'Courier New', 'Microsoft Himalaya', 'helvetica', 'LG-FZKaTong-M19-V2.2', 'Georgia', 'georgia', 'courier new', 'Arial', 'arial', 'cursive', 'times', 'fantasy', 'courier', 'serif', 'monospace', 'Times New Roman', '"MT Extra", monospace', '"MT Extra", sans-serif', '"MT Extra", serif', 'Sylfaen, monospace', 'Sylfaen, sans-serif', 'Sylfaen, serif', '"Cambria Math", monospace', '"Cambria Math", sans-serif', '"Cambria Math", serif', 'SimSun-ExtB, sans-serif', 'PMingLiU-ExtB, monospace', 'PMingLiU-ExtB, sans-serif', 'PMingLiU-ExtB, serif', 'Marlett, monospace', 'Marlett, sans-serif', 'Marlett, serif', 'SimHei, sans-serif', '"Arial Narrow", monospace', '"Arial Narrow", sans-serif', '"Arial Narrow", serif', '"Microsoft JhengHei", monospace', '"Microsoft JhengHei", sans-serif', '"Microsoft JhengHei", serif', 'MingLiU-ExtB, sans-serif', 'MingLiU_HKSCS-ExtB, sans-serif', 'Calibri, monospace', 'Calibri, sans-serif', 'Calibri, serif', '"Segoe UI Symbol", monospace', '"Segoe UI Symbol", sans-serif', '"Segoe UI Symbol", serif', '"Arial Black", monospace', '"Arial Black", sans-serif', '"Arial Black", serif', 'Consolas, monospace', 'Consolas, sans-serif', 'Consolas, serif', 'Gabriola, monospace', 'Gabriola, sans-serif', 'Gabriola, serif', 'FangSong, sans-serif', 'KaiTi, sans-serif', 'NSimSun, sans-serif', '"Malgun Gothic", monospace', '"Malgun Gothic", sans-serif', '"Malgun Gothic", serif', '"MS UI Gothic", monospace', '"MS UI Gothic", sans-serif', '"MS UI Gothic", serif', '"Lucida Sans Unicode", monospace', '"Lucida Sans Unicode", sans-serif', '"Lucida Sans Unicode", serif']
+bodavm.memory.fontsize = {
+    'SimHei': [640, 160],
+    'SimSun': [640, 160],
+    'NSimSun': [640, 160],
+    'FangSong': [640, 160],
+    'KaiTi': [640, 160],
+    'Verdana': [641, 194],
+    'Helvetica Neue LT Pro 35 Thin': [641, 194],
+    'tahoma': [565, 193],
+    'verdana': [641, 194],
+    'times new roman': [522, 177],
+    'Courier New': [768, 181],
+    'Microsoft Himalaya': [350, 160],
+    'helvetica': [560, 179],
+    'LG-FZKaTong-M19-V2.2': [560, 179],
+    'Georgia': [589, 182],
+    'georgia': [589, 182],
+    'courier new': [768, 181],
+    'Arial': [560, 179],
+    'arial': [560, 179],
+    'cursive': [640, 160],
+    'times': [522, 177],
+    'fantasy': [533, 195],
+    'courier': [768, 181],
+    'serif': [640, 160],
+    'monospace': [640, 160],
+    'Times New Roman': [522, 177],
+    "\"MT Extra\", monospace": [681,276],
+    "\"MT Extra\", sans-serif": [692,276],
+    "\"MT Extra\", serif": [681,276],
+    "Sylfaen, monospace": [556,211],
+    "Sylfaen, sans-serif": [556,211],
+    "Sylfaen, serif": [556,211],
+    "\"Cambria Math\", monospace": [558,160],
+    "\"Cambria Math\", sans-serif": [558,160],
+    "\"Cambria Math\", serif": [558, 160],
+    "SimSun-ExtB, sans-serif": [640, 160],
+    "PMingLiU-ExtB, monospace": [501, 160],
+    "PMingLiU-ExtB, sans-serif": [501, 160],
+    "PMingLiU-ExtB, serif": [501, 160],
+    "Marlett, monospace": [1200, 160],
+    "Marlett, sans-serif": [1212, 160],
+    "Marlett, serif": [1200, 160],
+    "SimHei, sans-serif": [640, 160],
+    "\"Arial Narrow\", monospace": [560, 179],
+    "\"Arial Narrow\", sans-serif": [560, 179],
+    "\"Arial Narrow\", serif": [560, 179],
+    "\"Microsoft JhengHei\", monospace": [603, 213],
+    "\"Microsoft JhengHei\", sans-serif": [603, 213],
+    "\"Microsoft JhengHei\", serif": [603, 213],
+    "MingLiU-ExtB, sans-serif": [640, 160],
+    "MingLiU_HKSCS-ExtB, sans-serif": [640, 160],
+    "Calibri, monospace": [524, 195],
+    "Calibri, sans-serif": [524, 195],
+    "Calibri, serif": [524, 195],
+    "\"Segoe UI Symbol\", monospace": [562, 213],
+    "\"Segoe UI Symbol\", sans-serif": [562, 213],
+    "\"Segoe UI Symbol\", serif": [562, 213],
+    "\"Arial Black\", monospace": [725, 225],
+    "\"Arial Black\", sans-serif": [725, 225],
+    "\"Arial Black\", serif": [725, 225],
+    "Consolas, monospace": [704, 187],
+    "Consolas, sans-serif": [704, 187],
+    "Consolas, serif": [704, 187],
+    "Gabriola, monospace": [387, 160],
+    "Gabriola, sans-serif": [387, 160],
+    "Gabriola, serif": [387, 160],
+    "FangSong, sans-serif": [640, 160],
+    "KaiTi, sans-serif": [640, 160],
+    "NSimSun, sans-serif": [640, 160],
+    "\"Malgun Gothic\", monospace": [572, 213],
+    "\"Malgun Gothic\", sans-serif": [572, 213],
+    "\"Malgun Gothic\", serif": [572, 213],
+    "\"MS UI Gothic\", monospace": [571, 160],
+    "\"MS UI Gothic\", sans-serif": [571, 160],
+    "\"MS UI Gothic\", serif": [571, 160],
+    "\"Lucida Sans Unicode\", monospace": [648, 246],
+    "\"Lucida Sans Unicode\", sans-serif": [648, 246],
+    "\"Lucida Sans Unicode\", serif": [648, 246]
 
-bodavm.memory.font={
-    "font-family":'',
-    "fontFamily":''
+
 }
-bodavm.memory.IDBRequest={
-    onerror:"",
-    onupgradeneeded:'',
-    onsuccess:'',
+bodavm.memory.scroll = [0, 50]   //模仿浏览器滚动 ,默认为0,50
+bodavm.memory.HTMLAnchorElement = {
+    "hash": '',
+    "host": '',
+    "hostname": '',
+    "href": '',
+    "origin": '',
+    'pathname': '',
+    'port': '',
+    'protocol': '',
+    'search': ''
+
 }
-bodavm.memory.IDBOpenDBRequest={
-    onupgradeneeded:'',
+bodavm.memory.font = {
+    "font-family": '',
+    "fontFamily": ''
+}
+bodavm.memory.IDBRequest = {
+    onerror: "",
+    onupgradeneeded: '',
+    onsuccess: '',
+}
+bodavm.memory.IDBOpenDBRequest = {
+    onupgradeneeded: '',
 
 }
 
 bodavm.memory.location={
-    origin:"http://www.fangdi.com.cn",
+    origin:"http://qikan.cqvip.com",
     hash:"",
-    pathname:"/",
-    search:"",
-    href:"http://www.fangdi.com.cn/",
+    pathname:"/Qikan/Search/Advance",
+    search:"?from=index",
+    href:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
     port:"",
     protocol:"http:",
-    host:"www.fangdi.com.cn",
-    ancestorOrigins:"{}",
-    hostname:"www.fangdi.com.cn"
+    host:"qikan.cqvip.com",
+    ancestorOrigins:'{}',
+    hostname:"qikan.cqvip.com"
 };
 
 bodavm.memory.document={
-    URL:"http://www.fangdi.com.cn/",
-    referrer:"",
-    documentURI:"http://www.fangdi.com.cn/",
+    URL:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
+    referrer:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
+    documentURI:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
     compatMode:"CSS1Compat",
     dir:"",
     title:'',
@@ -113,17 +525,28 @@ bodavm.memory.document={
     readyState:"loading",
     contentType:"text/html",
     inputEncoding:"UTF-8",
-    domain:"www.fangdi.com.cn",
+    domain:"qikan.cqvip.com",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
     onmousemove:null,
     onselectionchange:null,
+    cookie:''
     
 };
 
+bodavm.memory.cookies_=bodavm.memory.document['cookie'].split(';')
+if (bodavm.memory.cookies_[0]){
+    for (var i = 0; i < bodavm.memory.cookies_.length; i++) {
+        var cookie = bodavm.memory.cookies_[i].split("=");
+        bodavm.memory.globalInit.jsonCookie[cookie[0]] = cookie[1];
+      }
+}
+
+
+
 bodavm.memory.htmldivelement={
-    align:"undefined",
+     align:"undefined",
 
 };
 
@@ -135,7 +558,7 @@ bodavm.memory.screen={
     width:1440,
     height:960,
     availWidth:1440,
-    availHeight:920,
+    availHeight:912,
     pixelDepth:24,
     colorDepth:24,
     availLeft:0,
@@ -147,8 +570,8 @@ bodavm.memory.screen={
 
 bodavm.memory.navigator={
     language:"zh-CN",
-    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
-    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
     vendor:"Google Inc.",
     appName:"Netscape",
     appCodeName:"Mozilla",
@@ -167,10 +590,10 @@ bodavm.memory.navigator={
     maxTouchPoints:0
 };
 bodavm.memory.window={
-    name:"__bid_n=1851f71836a8ec02594207&$_YWTU=s.LG3L_743YOFKIPDJpIAHDVhzcP8iw0fsEKz_fqc39&$_cDro=0&vdFm=__bid_n%3D1851f71836a8ec02594207",
+    name:"$_YWTU=L62jtgBzKXWXtxCNO2N8fU5oxt5qosuXIA9yiyr4ZVa&$_YVTX=Wq&vdFm=__bid_n%3D1893f5ac5e98736eb09285",
     innerWidth:1440,
     innerHeight:817,
-    origin:"http://www.fangdi.com.cn",
+    origin:"http://qikan.cqvip.com",
     outerWidth:1440,
     outerHeight:920,
     defaultStatus:undefined,
@@ -193,15 +616,20 @@ bodavm.memory.window={
     oncanplaythrough:null,
     onsearch:null,
     opener:null,
-    frameElement:null,
+    // frameElement:null,
+    isSecureContext:false,
+    // customElements:null
     
 
 };
-bodavm.memory.localStorage={}
+
+
+bodavm.memory.localStorage={"length":0}
+
 
 bodavm.memory.Performance={
     'getEntriesByType':[],
-    'timeOrigin':1682492723085.3
+    'timeOrigin':1688985072292.5
 
 
 

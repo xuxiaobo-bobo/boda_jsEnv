@@ -1,7 +1,0 @@
-// CredentialsContainer对象
-bodavm.memory.globalobj['CredentialsContainer'] = function CredentialsContainer(){return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor")}
-bodavm.toolsFunc.safeProto(bodavm.memory.globalobj['CredentialsContainer'], "CredentialsContainer");
-bodavm.toolsFunc.defineProperty('CredentialsContainer', "create", {configurable:true, enumerable:true, writable:true, value:function create (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CredentialsContainer'].prototype, "CredentialsContainer", "create", arguments)}},'prototype');
-bodavm.toolsFunc.defineProperty('CredentialsContainer', "get", {configurable:true, enumerable:true, writable:true, value:function get (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CredentialsContainer'].prototype, "CredentialsContainer", "get", arguments)}},'prototype');
-bodavm.toolsFunc.defineProperty('CredentialsContainer', "preventSilentAccess", {configurable:true, enumerable:true, writable:true, value:function preventSilentAccess (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CredentialsContainer'].prototype, "CredentialsContainer", "preventSilentAccess", arguments)}},'prototype');
-bodavm.toolsFunc.defineProperty('CredentialsContainer', "store", {configurable:true, enumerable:true, writable:true, value:function store (){return bodavm.toolsFunc.dispatch(this, bodavm.memory.globalobj['CredentialsContainer'].prototype, "CredentialsContainer", "store", arguments)}},'prototype');

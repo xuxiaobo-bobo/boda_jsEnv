@@ -2,12 +2,12 @@
 
 NavigateEvent = function NavigateEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof NavigateEvent)) {
+  if (arg != 'bobo' && (this instanceof NavigateEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'NavigateEvent': 2 arguments required, but only 0 present.");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('NavigateEvent 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

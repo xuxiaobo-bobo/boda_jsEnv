@@ -2,12 +2,12 @@
 
 USBConfiguration = function USBConfiguration() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof USBConfiguration)) {
+  if (arg != 'bobo' && (this instanceof USBConfiguration)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'USBConfiguration': 2 arguments required, but only 0 present.");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('USBConfiguration 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

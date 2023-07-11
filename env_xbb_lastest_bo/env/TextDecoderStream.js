@@ -1,8 +1,9 @@
 // TextDecoderStream对象
 
 TextDecoderStream = function TextDecoderStream() {
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('TextDecoderStream 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

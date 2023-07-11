@@ -1,0 +1,1 @@
+先运行 changeDom.js 去对应网站获取location等相关信息,复制后,粘贴到config.js下 (bodavm.memory.location以下代码替换)

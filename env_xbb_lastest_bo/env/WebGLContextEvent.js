@@ -2,12 +2,12 @@
 
 WebGLContextEvent = function WebGLContextEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof WebGLContextEvent)) {
+  if (arg != 'bobo' && (this instanceof WebGLContextEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WebGLContextEvent': 1 argument required, but only 0 present.");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('WebGLContextEvent 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

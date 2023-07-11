@@ -2,12 +2,12 @@
 
 CSSMathProduct = function CSSMathProduct() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof CSSMathProduct)) {
+  if (arg != 'bobo' && (this instanceof CSSMathProduct)) {
     return bodavm.toolsFunc.throwError("SyntaxError", "Failed to construct 'CSSMathProduct': Arguments can't be empty");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('CSSMathProduct 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

@@ -8,10 +8,11 @@ bodavm.memory.notDefined['CanvasFilter'] = function CanvasFilter() {
       return v;
     }
   }));
-  if (!(this instanceof CanvasFilter)) {
+  if (!(this instanceof bodavm.memory.notDefined['CanvasFilter'])) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CanvasFilter': 1 argument required, but only 0 present.");
   }
   ;
   this._boisinit = bodavm.config.isinit;
 };
 bodavm.toolsFunc.safeProto(bodavm.memory.notDefined['CanvasFilter'], "CanvasFilter");
+delete bodavm.memory.notDefined['CanvasFilter'].prototype.constructor;

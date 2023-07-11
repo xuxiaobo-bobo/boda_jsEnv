@@ -2,12 +2,12 @@
 
 DeviceOrientationEvent = function DeviceOrientationEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof DeviceOrientationEvent)) {
+  if (arg != 'bobo' && (this instanceof DeviceOrientationEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DeviceOrientationEvent': 1 argument required, but only 0 present.");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('DeviceOrientationEvent 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

@@ -2,12 +2,12 @@
 
 HTMLQuoteElement = function HTMLQuoteElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof HTMLQuoteElement)) {
+  if (arg != 'bobo' && (this instanceof HTMLQuoteElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('HTMLQuoteElement 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

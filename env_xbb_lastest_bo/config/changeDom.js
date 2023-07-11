@@ -1,6 +1,12 @@
-var canvassss=document.createElement("canvas")
-var cccc=canvassss.getContext("2d")
-var aaaaaa=
+let canvassss=document.createElement("canvas")
+let cccc=canvassss.getContext("2d")
+let localstorage__={
+
+}
+for(let i in localStorage){
+    localstorage__[i]=localStorage[i]
+}
+let aaaaaa=
 `
 bodavm.memory.location={
     origin:"${location.origin}",
@@ -11,7 +17,7 @@ bodavm.memory.location={
     port:"${location.port}",
     protocol:"${location.protocol}",
     host:"${location.host}",
-    ancestorOrigins:"${JSON.stringify(location.ancestorOrigins)}",
+    ancestorOrigins:'${JSON.stringify(location.ancestorOrigins)}',
     hostname:"${location.hostname}"
 };
 
@@ -32,11 +38,22 @@ bodavm.memory.document={
     hidden:"${document.hidden}",
     onmousemove:${document.onmousemove},
     onselectionchange:${document.onselectionchange},
+    cookie:'${document.cookie}'
     
 };
 
+bodavm.memory.cookies_=bodavm.memory.document['cookie'].split(';')
+if (bodavm.memory.cookies_[0]){
+    for (var i = 0; i < bodavm.memory.cookies_.length; i++) {
+        var cookie = bodavm.memory.cookies_[i].split("=");
+        bodavm.memory.globalInit.jsonCookie[cookie[0]] = cookie[1];
+      }
+}
+
+
+
 bodavm.memory.htmldivelement={
-    align:"${HTMLDivElement.align}",
+     align:"${HTMLDivElement.align}",
 
 };
 
@@ -103,12 +120,27 @@ bodavm.memory.window={
     onblur:${onblur},
     oncancel:${oncancel},
     oncanplay:${oncanplay},
-    oncanplaythrough:${oncanplaythrough}
+    oncanplaythrough:${oncanplaythrough},
+    onsearch:${onsearch},
+    opener:${opener},
+    // frameElement:${frameElement},
+    isSecureContext:${window.isSecureContext},
+    // customElements:${window.customElements}
+    
 
 };
-bodavm.memory.localStorage={}
 
-bodavm.memory.Performance=${JSON.stringify(performance.getEntriesByType('resource'))};
+
+bodavm.memory.localStorage=${JSON.stringify(localstorage__)}
+
+
+bodavm.memory.Performance={
+    'getEntriesByType':${JSON.stringify(performance.getEntriesByType('resource'))},
+    'timeOrigin':${performance.timeOrigin}
+
+
+
+};
 
 `
 

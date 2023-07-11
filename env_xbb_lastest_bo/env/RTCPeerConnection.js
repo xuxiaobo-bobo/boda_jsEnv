@@ -2,7 +2,7 @@
 
 RTCPeerConnection = function RTCPeerConnection() {
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('RTCPeerConnection 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

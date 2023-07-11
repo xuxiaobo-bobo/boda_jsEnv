@@ -6,6 +6,44 @@
 */
 ;;
 !function () {
+    bodavm.toolsFunc.getNodeType=function (node){
+        switch (node.nodeName) {
+            case '#document':
+              return 9; // Document Node
+            case '#text':
+              return 3; // Text Node
+            case '#comment':
+              return 8; // Comment Node
+            case '#documentType':
+              return 10; // DocumentType Node
+            case '#documentFragment':
+              return 11; // DocumentFragment Node
+            case '#cdata-section':
+              return 4; // CDATA Section Node
+            case '#entity':
+              return 6; // Entity Node
+            case '#entityReference':
+              return 5; // EntityReference Node
+            case '#processingInstruction':
+              return 7; // ProcessingInstruction Node
+            default:
+              return 1; // Element Node
+          }
+    }
+    bodavm.toolsFunc.getParentElement=function (node){
+        const parentNode = node.parentNode;
+      
+        if (parentNode && parentNode.nodeName !== '#document') {
+          if (parentNode.nodeName === '#document-fragment') {
+            return bodavm.toolsFunc.getParentElement(parentNode);
+          } else {
+            return parentNode;
+          }
+        }
+      
+        return null;
+      }
+      
     bodavm.toolsFunc.traverseGetParent=function (node){
         if (node.parentNode){
             return bodavm.toolsFunc.traverseGetParent(node.parentNode)
@@ -13,17 +51,24 @@
             return node
         }
     }
+
     bodavm.toolsFunc.traverse2=function(node, callback) {
         if (!node.childNodes) {
             return;
         }
-        if (node.nodeName=='script'){
+        if (node.nodeName=='script' &&bodavm.memory.domParserScriptFlag){
+            // if (node.parentNode){
                 callback(node.parentNode);
+            // }
 
         }else{
             callback(node)
         }
         // debugger
+        if (!node.childNodes){
+            debugger
+        }
+
         for (let i = 0; i < node.childNodes.length; i++) {
             bodavm.toolsFunc.traverse2(node.childNodes[i], callback);
         }
@@ -32,7 +77,7 @@
         if (!node.childNodes) {
             return;
         }
-    
+
         callback(node)
         
         // debugger
@@ -57,6 +102,16 @@
         //设置原型链
         let tagpro=dom.toUpperCase()
         switch (tagpro) {
+            case 'TEXT':
+                return new Text('bobo')
+            case "B":
+                return new HTMLElement('bobo')
+            case "AUDIO":
+                return new HTMLAudioElement('bobo')
+            case "#COMMENT":
+                return new Comment("bobo")
+            case "#TEXT":
+                return new Text("bobo")
             case "DIV":
                 return new HTMLDivElement('bobo')
             case "SCRIPT":
@@ -84,6 +139,8 @@
             case 'IMG':
                 return new HTMLImageElement('bobo')
             case "H1":
+                return new HTMLHeadingElement('bobo')
+            case "H4":
                 return new HTMLHeadingElement('bobo')
             case "H2":
                 return new HTMLHeadingElement('bobo')
@@ -228,28 +285,116 @@
         return false
     }
 
+    bodavm.toolsFunc.proxy2 = function (obj, objName) {
+        let handler = {
+            get(target, prop, receiver) {
+                // let 
+                
+                let result = Reflect.get(target, prop, receiver)
+                if (bodavm.toolsFunc.filterProxyProp(prop)) {
+                    return result;
+                }
+                console.log_copy('['+objName+']', '   获取属性:   ', prop, '   value:   ', result,);
+                
+                return result;
+            },
+            set(target, propKey, value, receiver) {
+                if (propKey=='isTrusted'){
+                    console.log('['+objName+']', "   设置属性:   ", propKey, "   value:   ", false);
 
+                    return false
+                }
+                console.log('['+objName+']', "   设置属性:   ", propKey, "   value:   ", value);
+
+                let res=Reflect.set(target, propKey, value, receiver);
+                return res
+            },
+            // has(target, prop) {
+            //     console.log('['+objName+']',`->  has -> 正在判断对象是否具有属性${prop}`);
+            //     return Reflect.has(target, prop);
+            //   },
+              deleteProperty(target, prop) {
+                console.log('['+objName+']',`-> deleteProperty -> 正在删除属性${prop}`);
+                return Reflect.deleteProperty(target, prop);
+              },
+              ownKeys(target) {
+                // if (target._boContentWindow){
+                //     let resKeys=Reflect.ownKeys(target)
+                //     // debugger    
+                //     console.log('['+objName+']',' ->ownKeys -> contentWindow_keys 正在获取对象的所有属性 ->',target,`-> res ->`,resKeys );
+                //     return resKeys
+                // }
+                console.log('['+objName+']',' ->ownKeys -> 正在获取对象的所有属性 ->',target );
+                return Reflect.ownKeys(target);
+              },
+            //   getOwnPropertyDescriptor(target, prop) {
+            //     console.log('['+objName+']',`正在获取属性${prop}的描述符`);
+            //     return Reflect.getOwnPropertyDescriptor(target, prop);
+            //   },
+            //   defineProperty(target, prop, descriptor) {
+            //     console.log('['+objName+']',`-> defineProperty -> 正在定义属性${prop}`);
+            //     return Reflect.defineProperty(target, prop, descriptor);
+            //   },
+              preventExtensions(target) {
+                console.log('['+objName+']','-> preventExtensions -> 正在禁止对象扩展');
+                return Reflect.preventExtensions(target);
+              },
+            //   getPrototypeOf(target) {
+            //     debugger
+            //     console.log('['+objName+']','正在获取对象的原型');
+            //     return Reflect.getPrototypeOf(target);
+            //   },
+              setPrototypeOf(target, proto) {
+                console.log('['+objName+']','正在设置对象的原型');
+                return Reflect.setPrototypeOf(target, proto);
+              },
+              apply(target, thisArg, argArray) {
+                console.log('['+objName+']','正在调用函数');
+                return Reflect.apply(target, thisArg, argArray);
+              },
+              construct(target, argArray, newTarget) {
+                console.log('['+objName+']','正在创建对象实例');
+                return Reflect.construct(target, argArray, newTarget);
+              }
+        };
+        // debugger
+        let proxyObj = new Proxy(obj, handler);
+        // Object.defineProperty(obj, bodavm.memory.symbolProxy, {
+        //     configurable:false,
+        //     enumerable:false,
+        //     writable:false,
+        //     value:proxyObj
+        // },'bobo');
+        return proxyObj;
+    }
     // //proxy代理
     bodavm.toolsFunc.proxy = function (obj, objName) {
         // bodavm.toolsFunc.symbolProperty(obj)
         // bodavm.memory.globalobj[objName]=obj
-        if (bodavm.config.proxy == false) { return obj };
-        if(bodavm.memory.symbolProxy in obj){// 判断对象obj是否是已代理的对象
-            return obj[bodavm.memory.symbolProxy];
-        }
+        // if (bodavm.config.proxy == false) { return obj };
+        // if(bodavm.memory.symbolProxy in obj){// 判断对象obj是否是已代理的对象
+        //     return obj[bodavm.memory.symbolProxy];
+        // }
         let handler = {
             get(target, prop, receiver) {
-                if(prop =='_createHelper'){debugger}
-                if (prop == 'onmessage'){debugger}
+                // debugger
+                // if(prop =='_createHelper'){debugger}
+                // if (prop == 'onmessage'){debugger}
                 let result = Reflect.get(target, prop, receiver)
-                
+                let cacheVal=bodavm.memory.proxyCache[prop]
                 // if (target ==window.$_ts._$Aw){return result }
-                if (bodavm.toolsFunc.filterProxyProp(prop)) {
-                    return result;
-                }
-                if (prop ==hasOwnProperty){debugger}
+                // if (bodavm.toolsFunc.filterProxyProp(prop)) {
+                //     return result;
+                // }
+                // if (prop ==hasOwnProperty){debugger}
                 // let mylog=
-                console.log('['+objName+']', '   获取属性:   ', prop, '   value:   ', result);
+                if (cacheVal){
+                    console.log_copy('['+objName+']', '   获取属性:   ', prop, '   value:   ', cacheVal,);
+
+                }else{
+                    console.log_copy('['+objName+']', '   获取属性:   ', prop, '   value:   ', result,);
+
+                }
 
                     if (typeof result =='function' ){
                         myloglist.push({ 'type': 'get:'+objName , 'prop0': prop, 'prop1': result.toString() })
@@ -275,9 +420,10 @@
             },
             set(target, propKey, value, receiver) {
                 // debugger
-                if (objName=='window' && propKey){
-                    bodavm.memory.window[propKey]=value
-                }
+                // if (objName=='window' && propKey){
+                //     bodavm.memory.window[propKey]=value
+                bodavm.memory.proxyCache[propKey]=value
+                // }
                 console.log('['+objName+']', "   设置属性:   ", propKey, "   value:   ", value);
                     if (typeof value =='function' ){
                         myloglist.push({ 'type': 'set:'+ objName, 'prop0': propKey, 'prop1': value.toString() })
@@ -298,12 +444,12 @@
         };
         // debugger
         let proxyObj = new Proxy(obj, handler);
-        Object.defineProperty(obj, bodavm.memory.symbolProxy, {
-            configurable:false,
-            enumerable:false,
-            writable:false,
-            value:proxyObj
-        },'bobo');
+        // Object.defineProperty(obj, bodavm.memory.symbolProxy, {
+        //     configurable:false,
+        //     enumerable:false,
+        //     writable:false,
+        //     value:proxyObj
+        // },'bobo');
         return proxyObj;
     }
 
@@ -360,24 +506,24 @@
         let newDescriptior = {};
         newDescriptior.configurable = bodavm.config.proxy || OldDescriptior.configurable;//如果开启代理必须是true
         newDescriptior.enumerable = OldDescriptior.enumerable;
-        if (OldDescriptior.hasOwnProperty("writable")) {
+        if (OldDescriptior.hasOwnProperty("writable","boboflag")) {
             newDescriptior.writable = bodavm.config.proxy || OldDescriptior.writable;//如果开启代理必须是true
         }
-        if (OldDescriptior.hasOwnProperty("value")) {
+        if (OldDescriptior.hasOwnProperty("value","boboflag")) {
             let value = OldDescriptior.value;
             if (typeof value == "function") {
                     bodavm.toolsFunc.safeFunc(value, prop)
             }
             newDescriptior.value = value;
         }
-        if (OldDescriptior.hasOwnProperty("get")) {
+        if (OldDescriptior.hasOwnProperty("get","boboflag")) {
             let get = OldDescriptior.get;
             if (typeof get == "function") {
                 bodavm.toolsFunc.safeFunc(get, `get ${prop}`)
             }
             newDescriptior.get = get;
         }
-        if (OldDescriptior.hasOwnProperty("set")) {
+        if (OldDescriptior.hasOwnProperty("set","boboflag")) {
             let set = OldDescriptior.set;
             if (typeof set == "function") {
                 bodavm.toolsFunc.safeFunc(set, `set ${prop}`)
@@ -467,6 +613,20 @@
         // bodavm.toolsFunc.symbolProperty(obj)
         bodavm.toolsFunc.safefunction(obj, name)
         bodavm.toolsFunc.reNameObj(obj, name)
+        // debugger
+        // Object.defineProperty(globalThis,name,{
+        //     enumerable: false
+        // })
+        // debugger
+        // try{
+        //     Object.defineProperty(globalThis,name,{
+        //                 enumerable: false
+        //             },'bobo')
+        // }catch (e){
+        //     e.message
+        //     e.stac
+        //     debugger
+        // }
     }
 
 

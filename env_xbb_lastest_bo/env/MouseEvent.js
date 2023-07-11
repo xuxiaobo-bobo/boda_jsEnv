@@ -2,12 +2,15 @@
 
 MouseEvent = function MouseEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof MouseEvent)) {
-    return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MouseEvent': 1 argument required, but only 0 present.");
-  }
   ;
+  
+  if (bodavm.memory.listenerProxy[arg]['res']){
+	  return bodavm.memory.listenerProxy[arg]['res']
+  }
+  this.isTrusted=false
+  bodavm.toolsFunc.setProtoAttr.call(this,this,arg)
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('MouseEvent 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

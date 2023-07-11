@@ -2,12 +2,12 @@
 
 XRLightProbe = function XRLightProbe() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof XRLightProbe)) {
+  if (arg != 'bobo' && (this instanceof XRLightProbe)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('XRLightProbe 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

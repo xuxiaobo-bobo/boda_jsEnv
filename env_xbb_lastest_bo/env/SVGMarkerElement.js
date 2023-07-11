@@ -2,12 +2,12 @@
 
 SVGMarkerElement = function SVGMarkerElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof SVGMarkerElement)) {
+  if (arg != 'bobo' && (this instanceof SVGMarkerElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('SVGMarkerElement 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

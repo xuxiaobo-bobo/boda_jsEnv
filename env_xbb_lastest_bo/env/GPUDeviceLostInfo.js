@@ -2,12 +2,12 @@
 
 GPUDeviceLostInfo = function GPUDeviceLostInfo() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof GPUDeviceLostInfo)) {
+  if (arg != 'bobo' && (this instanceof GPUDeviceLostInfo)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('GPUDeviceLostInfo 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

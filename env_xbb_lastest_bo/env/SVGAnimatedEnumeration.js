@@ -2,12 +2,12 @@
 
 SVGAnimatedEnumeration = function SVGAnimatedEnumeration() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof SVGAnimatedEnumeration)) {
+  if (arg != 'bobo' && (this instanceof SVGAnimatedEnumeration)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('SVGAnimatedEnumeration 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

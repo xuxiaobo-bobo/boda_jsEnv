@@ -2,12 +2,12 @@
 
 DataTransferItem = function DataTransferItem() {
   let arg = arguments[0];
-  if (arg != 'bobo' && !(this instanceof DataTransferItem)) {
+  if (arg != 'bobo' && (this instanceof DataTransferItem)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
-  if (arg == 'bobo') {
+  if (arg != 'bobo') {
     console.log_copy('DataTransferItem 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';

@@ -42,5 +42,6 @@ bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['Database'].prototype, 
     return bodavm.toolsFunc.dispatch(this, bodavm.memory.notDefined['Database'].prototype, "Database", "changeVersion", arguments);
   }
 });
+delete bodavm.memory.notDefined['Database'].prototype.constructor;
 bodavm.memory.notDefined['database'] = {};
 bodavm.memory.notDefined['database'].__proto__ = bodavm.memory.notDefined['Database'].prototype;
