@@ -854,13 +854,7 @@
 
     bodavm.envFunc.Navigator_plugins_get = function () {
         // debugger
-        if (bodavm.memory.cache['Navigator_plugins_get']) {
-            console.log_copy(`Navigator_plugins_get cache已存在直接返回 ->`)
-
-            return bodavm.memory.cache['Navigator_plugins_get']
-        }
-        let pluginArray_ = new PluginArray('bobo')
-        bodavm.memory.cache['Navigator_plugins_get'] = pluginArray_
+        let pluginArray_ = bodavm.memory.globalInit.pluginArray
         console.log_copy(`Navigator_plugins_get res ->`, pluginArray_)
         return pluginArray_
 
@@ -1507,10 +1501,10 @@
         //     debugger;
         //   }
         ;
-        let index = arguments[0];
-        console.log_copy(`PluginArray_item - >arg ->`, index)
-
-        return this[index];
+         let index = arguments[0];
+        itemindex=index % 42949672960
+        console.log_copy(`PluginArray_item -> `,`arg -> `,index);
+        return this[itemindex];
     };
 
     bodavm.envFunc.MimeType_suffixes_get = function MimeType_suffixes_get() {
