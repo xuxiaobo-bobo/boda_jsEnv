@@ -1172,19 +1172,13 @@
             "timeoutID": bodavm.memory.globalInit.timeoutID,
             'settime_name': 'setTimeout'
         };
-        if (delay == 0) {
-            // debugger
-            console.log_copy(`window_setTimeout `, `delay->为0 立马开始执行`);
 
-            func.call(this, argList)
-        }
-        else {
             if (bodavm.memory.asyncEvent.setTimeout === undefined) {
                 bodavm.memory.asyncEvent.setTimeout = [];
             }
             // bodavm.toolsFunc.symbolProperty(event)
             bodavm.memory.asyncEvent.setTimeout.push(event);
-        }
+        
 
         return bodavm.memory.globalInit.timeoutID;
     };
@@ -1246,16 +1240,11 @@
             "timeoutID": bodavm.memory.globalInit.timeoutID,
             'settime_name': 'setInterval'
         };
-        //if (delay == 0) {
-            // debugger
-         //   console.log_copy(`window_setInterval `, `delay->为0 立马开始执行`);
 
-         //   func.call(this, argList)
-       // } else {
             if (bodavm.memory.asyncEvent.setTimeout === undefined) {
                 bodavm.memory.asyncEvent.setTimeout = [];
             }
-        //}
+
 
         // bodavm.toolsFunc.symbolProperty(event)
         bodavm.memory.asyncEvent.setTimeout.push(event);
