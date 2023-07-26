@@ -9,185 +9,299 @@
 // innerHTML：获取或设置元素的HTML内容。
 ;;
 (function () {
+    bodavm.envFunc.HTMLScriptElement_async_set = function () {
+        let async = arguments[0]
+        bodavm.toolsFunc.setProtoAttr.call(this, 'async', async)
+        console.log_copy(this, `-> HTMLScriptElement_async_set arg->`, async)
+
+        return async
+    }
+    bodavm.envFunc.Document_querySelectorAll = function () {
+        let arg = arguments[0]
+        // boda$(thisNode)
+        // let resNodeList=boda$('html').find(arg).splice(0,1)
+        let resNodeList = boda$('html').find(arg)
+
+        // debugger
+        let nodeList = []
+        if (resNodeList) {
+            for (const resNode of resNodeList) {
+                let newNode = bodavm.toolsFunc.setProto(resNode.name)
+                bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, resNode)
+                nodeList.push(newNode)
+            }
+
+
+        }
+        nodeList.__proto__ = NodeList.prototype
+        console.log_copy(this, `-> Element_querySelector res->`, nodeList)
+        return nodeList
+    }
+    bodavm.envFunc.Element_innerHTML_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        // debugger
+        let html = boda$(thisNode).html()
+        console.log_copy(this, ` -> Element_innerHTML_get -> res ->`, html)
+
+        return html
+    }
+    bodavm.envFunc.Element_firstElementChild_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        // debugger
+        let target = boda$(thisNode).children().first()[0]
+        let newNode = bodavm.toolsFunc.setProto(target.name)
+        bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, target)
+        console.log_copy(this, ` -> Element_firstElementChild_get -> res ->`, newNode)
+
+        return newNode
+    }
+    bodavm.envFunc.Document_createTextNode = function () {
+        // debugger
+        let arg = arguments[0]
+        let newNode = bodavm.toolsFunc.setProto('TEXT')
+        bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, arg)
+        console.log_copy(this, ` -> Document_createTextNode -> res ->`, newNode)
+
+        return newNode
+    }
+
+    bodavm.envFunc.Document_getElementsByClassName = function () {
+        let tagName = arguments[0]
+        let classList = boda$(`.${tagName}`)
+        if (!bodavm.memory.cache['Document_getElementsByClassName'][tagName]) {
+            bodavm.memory.cache['Document_getElementsByClassName'][tagName] = {}
+        }
+        if (bodavm.memory.collection[tagName] && bodavm.memory.cache['Document_getElementsByClassName'][tagName]['this'] == this) {
+            let cacheValue = bodavm.memory.cache['Document_getElementsByClassName'][tagName]["res"]
+            console.log_copy(`Document_getElementsByClassName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
+            return cacheValue
+        }
+        // debugger
+        bodavm.memory.collection[tagName] = []
+        if (classList) {
+            for (let ind = 0; ind < classList.length; ind++) {
+                let newNode = bodavm.toolsFunc.setProto(classList[ind].name)
+                let currNode = classList[ind]
+                bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, currNode)
+                bodavm.memory.collection[tagName].push(newNode)
+            }
+        }
+        // debugger
+        bodavm.memory.collection[tagName].__proto__ = HTMLCollection.prototype
+        bodavm.memory.cache['Document_getElementsByClassName'][tagName]['res'] = bodavm.memory.collection[tagName]
+        bodavm.memory.cache['Document_getElementsByClassName'][tagName]['this'] = this
+
+        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        console.log_copy(`Document_getElementsByClassName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.collection[tagName])
+        // debugger
+
+        return bodavm.memory.collection[tagName];
+
+    }
+    bodavm.envFunc.Document_dir_set = function () {
+        let arg = arguments[0]
+        bodavm.memory.document['dir'] = arg
+        console.log_copy(`Document_dir_set -> arg`, arg)
+        return arg
+    }
+    bodavm.envFunc.Document_title_set = function () {
+        let arg = arguments[0]
+        if (arg == "ltr" || arg == 'rtl') {
+            bodavm.memory.document['title'] = arg
+        }
+        console.log_copy(`Document_title_set -> arg`, arg)
+        return arg
+    }
+
+
     bodavm.envFunc.Element_clientHeight_get = function () {
         let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this)
-        if (thisNode.nodeName == 'html' || thisNode.nodeName == 'body') {
-            console.log_copy(`Element_clientHeight_get -> 当前node为 nodeName`,thisNode.nodeName, ` 返回809`)
+        if (thisNode.name == 'html' || thisNode.name == 'body') {
+            console.log_copy(`Element_clientHeight_get -> 当前node为 nodeName`, thisNode.name, ` 返回809`)
             return 809
         }
         else {
-            console.log_copy(`Element_clientWidth_get 正在执行错误`, thisNode.nodeName, '未实现')
+            console.log_copy(`Element_clientWidth_get 正在执行错误`, thisNode.name, '未实现')
 
         }
     }
     bodavm.envFunc.Element_clientWidth_get = function () {
         let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this)
         if (thisNode.name == 'html' || thisNode.name == 'body') {
-            console.log_copy(`Element_clientWidth_get ->当前node为 nodeName`,thisNode.name,` 返回1440`)
+            console.log_copy(`Element_clientWidth_get ->当前node为 nodeName`, thisNode.name, ` 返回1440`)
             return 1440
         } else {
-            console.log_copy(`Element_clientWidth_get 正在执行错误`, thisNode.nodeName, '未实现')
+            console.log_copy(`Element_clientWidth_get 正在执行错误`, thisNode.name, '未实现')
 
         }
     }
-    bodavm.envFunc.Document_currentScript_get=function (){
-        let currentNode=bodaCurrentElement  
-        if (currentNode.name=='script'){
-            let newNode=bodavm.toolsFunc.setProto(currentNode.name)
-            bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,currentNode)
-            console.log_copy(this ,`-> Document_currentScript_get -> res ->`,newNode)
+    bodavm.envFunc.Document_currentScript_get = function () {
+        let currentNode = bodaCurrentElement
+        if (currentNode.name == 'script') {
+            let newNode = bodavm.toolsFunc.setProto(currentNode.name)
+            bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, currentNode)
+            console.log_copy(this, `-> Document_currentScript_get -> res ->`, newNode)
             return newNode
-        }else{
-            console.log_copy(this ,`-> Document_currentScript_get ->,当前不处于script标签内,直接返回null`)
+        } else {
+            console.log_copy(this, `-> Document_currentScript_get ->,当前不处于script标签内,直接返回null`)
             return null
         }
     }
-    bodavm.envFunc.Node_nextSibling_get=function (){
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+    bodavm.envFunc.Node_nextSibling_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         // debugger
-        let nextNode=thisNode.nextSibling
-        if (bodavm.memory.cache["Node_nextSibling_get"]['this']&& bodavm.memory.cache["Node_nextSibling_get"]['this'] == this) {
+        let nextNode = thisNode.nextSibling
+        if (bodavm.memory.cache["Node_nextSibling_get"]['this'] && bodavm.memory.cache["Node_nextSibling_get"]['this'] == this) {
             let cacheValue = bodavm.memory.cache["Node_nextSibling_get"]['res'];
             console.log_copy(`Node_nextSibling_get 已存在,直接从cache中取值`, 'res- >', cacheValue);
             return cacheValue;
         }
         // debugger
-        if (!nextNode){
-            console.log_copy(this,`-> Node_nextSibling_get res- >`, null);
+        if (!nextNode) {
+            console.log_copy(this, `-> Node_nextSibling_get res- >`, null);
 
             return null
         }
-        let name=nextNode.name?nextNode.name:nextNode.type
-        let newNode=bodavm.toolsFunc.setProto(name)
-        bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,nextNode)
-        bodavm.memory.cache["Node_nextSibling_get"]['this'] =this
-        bodavm.memory.cache["Node_nextSibling_get"]['res']=newNode 
-        console.log_copy(this,`-> Node_nextSibling_get res- >`, newNode);
+        let name = nextNode.name ? nextNode.name : nextNode.type
+        let newNode = bodavm.toolsFunc.setProto(name)
+        bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, nextNode)
+        bodavm.memory.cache["Node_nextSibling_get"]['this'] = this
+        bodavm.memory.cache["Node_nextSibling_get"]['res'] = newNode
+        console.log_copy(this, `-> Node_nextSibling_get res- >`, newNode);
         return newNode
-    }   
-    bodavm.envFunc.Node_nodeType_get=function (){
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+    }
+    bodavm.envFunc.Node_nodeType_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         // debugger
-        let nodetype=boda$(thisNode)[0].nodeType
-        console.log_copy(this,`-> Node_nodeType_get nodetype- >`, nodetype);
+        let nodetype = boda$(thisNode)[0].nodeType
+        console.log_copy(this, `-> Node_nodeType_get nodetype- >`, nodetype);
 
         return nodetype
     }
 
-    bodavm.envFunc.Node_firstChild_get=function (){
+    bodavm.envFunc.Node_firstChild_get = function () {
         if (bodavm.memory.cache["Node_firstChild_get"]['this'] == this) {
             let cacheValue = bodavm.memory.cache["Node_firstChild_get"]['res'];
             console.log_copy(`Node_firstChild_get 已存在,直接从cache中取值`, 'res- >', cacheValue);
             return cacheValue;
         }
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        let node_=boda$(thisNode).children()[0]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        let node_ = boda$(thisNode).children()[0]
         // debugger
-        if(!node_){
-            console.log_copy(this,`-> Node_firstChild_get res->`,null)
+        if (!node_) {
+            console.log_copy(this, `-> Node_firstChild_get res->`, null)
 
             return null
         }
-        let newNode=bodavm.toolsFunc.setProto(node_.name)
-        bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,node_)
-        console.log_copy(this,`-> Node_firstChild_get res->`,newNode)
-        bodavm.memory.cache["Node_firstChild_get"]['this'] =this
-        bodavm.memory.cache["Node_firstChild_get"]['res']=newNode 
+        let newNode = bodavm.toolsFunc.setProto(node_.name)
+        bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, node_)
+        console.log_copy(this, `-> Node_firstChild_get res->`, newNode)
+        bodavm.memory.cache["Node_firstChild_get"]['this'] = this
+        bodavm.memory.cache["Node_firstChild_get"]['res'] = newNode
         return newNode
     }
-    bodavm.envFunc.Element_tagName_get=function (){
+    bodavm.envFunc.Element_tagName_get = function () {
         // debugger
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        let tagName_=boda$(thisNode).prop('tagName')
-        console.log_copy(this,`-> Element_tagName_get tagName_->`,tagName_)
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        let tagName_ = boda$(thisNode).prop('tagName')
+        console.log_copy(this, `-> Element_tagName_get tagName_->`, tagName_)
 
         return tagName_
     }
-    bodavm.envFunc.HTMLMetaElement_content_get=function (){
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        let cont_=boda$(thisNode).attr('content')
-        console.log_copy(this,`-> HTMLMetaElement_content_get res->`,cont_)
+    bodavm.envFunc.HTMLMetaElement_content_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        let cont_ = boda$(thisNode).attr('content')
+        console.log_copy(this, `-> HTMLMetaElement_content_get res->`, cont_)
 
         return cont_
     }
-    bodavm.envFunc.Node_parentElement_get=function (){
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+    bodavm.envFunc.Node_parentElement_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         // debugger
         if (bodavm.memory.cache["Node_parentElement_get"]['this'] == this) {
             let cacheValue = bodavm.memory.cache["Node_parentElement_get"]['res'];
             console.log_copy(`Node_parentElement_get 已存在,直接从cache中取值`, 'res- >', cacheValue);
             return cacheValue;
         }
-        let parentEle=boda$(thisNode).parent()[0]
-        if (thisNode.name=='html'){
-            console.log_copy(this,`-> Node_parentElement_get res->`,null)
+        let parentEle = boda$(thisNode).parent()[0]
+        if (thisNode.name == 'html') {
+            console.log_copy(this, `-> Node_parentElement_get res->`, null)
             return null
         }
         // debugger
-        let newNode=bodavm.toolsFunc.setProto(parentEle.name)
-        bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,parentEle)
-        console.log_copy(this,`-> Node_parentElement_get res->`,newNode)
-        bodavm.memory.cache['Node_parentElement_get']['res']=newNode
-        bodavm.memory.cache['Node_parentElement_get']['this']=this
+        let newNode = bodavm.toolsFunc.setProto(parentEle.name)
+        bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, parentEle)
+        console.log_copy(this, `-> Node_parentElement_get res->`, newNode)
+        bodavm.memory.cache['Node_parentElement_get']['res'] = newNode
+        bodavm.memory.cache['Node_parentElement_get']['this'] = this
 
         return newNode
     }
-    bodavm.envFunc.Element_getAttribute=function (){
-        let arg=arguments[0]
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        let res=boda$(thisNode).attr(arg)
-        console.log_copy(this,`-> Element_getAttribute res-> `,res)
+    bodavm.envFunc.Element_setAttribute = function () {
+        let name = arguments[0]
+        let value = arguments[1]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        let res = boda$(thisNode).attr(name, value)
+        console.log_copy(this, `-> Element_getAttribute name-> `, name, `-> value ->`, value)
+        // return res
+
+    }
+    bodavm.envFunc.Element_getAttribute = function () {
+        let arg = arguments[0]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        let res = boda$(thisNode).attr(arg)
+        console.log_copy(this, `-> Element_getAttribute res-> `, res)
         return res
     }
-    bodavm.envFunc.Node_childNodes_get=function (){
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+    bodavm.envFunc.Node_childNodes_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         // debugger
-        let childs=thisNode.children
-        let childNodes=[]
-        if (bodavm.memory.cache['Node_childNodes_get']['this']==this){
-            let cacheValue=bodavm.memory.cache['Node_childNodes_get']['res']
-            console.log_copy(this,`-> Node_childNodes_get 已存在,直接从cache中取值`,' -> res- >', cacheValue)
+        let childs = thisNode.children
+        let childNodes = []
+        if (bodavm.memory.cache['Node_childNodes_get']['this'] == this) {
+            let cacheValue = bodavm.memory.cache['Node_childNodes_get']['res']
+            console.log_copy(this, `-> Node_childNodes_get 已存在,直接从cache中取值`, ' -> res- >', cacheValue)
             return cacheValue
-        
+
 
         }
         if (childs) {
             for (let child of childs) {
                 if (child.type === 'tag' || child.type === 'text') {
                     // debugger
-                    let name=child.name?child.name:child.type
-                    let newNode=bodavm.toolsFunc.setProto(name)
-                    bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,child)
+                    let name = child.name ? child.name : child.type
+                    let newNode = bodavm.toolsFunc.setProto(name)
+                    bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, child)
                     childNodes.push(newNode);
-                  }
+                }
             }
-          }
-          childNodes.__proto__=NodeList.prototype
-          bodavm.memory.cache['Node_childNodes_get']['this']=this
-          bodavm.memory.cache['Node_childNodes_get']['res']=childNodes
-          console.log_copy(this,`-> Node_childNodes_get `, 'res- >', childNodes)
-          return childNodes
+        }
+        childNodes.__proto__ = NodeList.prototype
+        bodavm.memory.cache['Node_childNodes_get']['this'] = this
+        bodavm.memory.cache['Node_childNodes_get']['res'] = childNodes
+        console.log_copy(this, `-> Node_childNodes_get `, 'res- >', childNodes)
+        return childNodes
 
 
     }
-    bodavm.envFunc.Element_children_get=function (){
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+    bodavm.envFunc.Element_children_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         // debugger
-        let tagName=thisNode.name
+        let tagName = thisNode.name
         // debugger
         if (!bodavm.memory.cache['Element_children_get'][tagName]) {
             bodavm.memory.cache['Element_children_get'][tagName] = {}
         }
         if (bodavm.memory.collection[tagName] && bodavm.memory.cache['Element_children_get'][tagName]['this'] == this) {
             let cacheValue = bodavm.memory.cache['Element_children_get'][tagName]["res"]
-            console.log_copy(this,`-> Element_children_get 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
+            console.log_copy(this, `-> Element_children_get 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
             return cacheValue
         }
         bodavm.memory.collection[tagName] = []
-        let childs=boda$(thisNode).children()
+        let childs = boda$(thisNode).children()
         for (const child of childs) {
-            let newNode=bodavm.toolsFunc.setProto(child.name)
-            bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,child)
+            let newNode = bodavm.toolsFunc.setProto(child.name)
+            bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, child)
             bodavm.memory.collection[tagName].push(newNode)
         }
         // debugger
@@ -196,121 +310,142 @@
         bodavm.memory.cache['Element_children_get'][tagName]['this'] = this
 
         bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
-        console.log_copy(this,`-> Element_children_get `, ' -> res- >', bodavm.memory.collection[tagName])
+        console.log_copy(this, `-> Element_children_get `, ' -> res- >', bodavm.memory.collection[tagName])
         return bodavm.memory.collection[tagName]
     }
 
-    bodavm.envFunc.Element_className_set=function (){
+    bodavm.envFunc.Element_className_set = function () {
         // debugger
-        let arg=arguments[0]
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        boda$(thisNode).attr('class',arg)
-        console.log_copy(this,`-> Element_className_set ->`,arg)
+        let arg = arguments[0]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        boda$(thisNode).attr('class', arg)
+        console.log_copy(this, `-> Element_className_set ->`, arg)
         return arg
     }
-    bodavm.envFunc.Element_querySelector=function (){
+    bodavm.envFunc.Element_querySelector = function () {
         // debugger
-        let arg=arguments[0]
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        let arg = arguments[0]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         boda$(thisNode)
-        let resNode=boda$(thisNode).find(arg)
-        let newNode=null
-        if (resNode){
-            newNode=bodavm.toolsFunc.setProto(resNode[0].name)
-            bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,resNode[0])
+        let resNode = boda$(thisNode).find(arg)
+        let newNode = null
+        if (resNode) {
+            newNode = bodavm.toolsFunc.setProto(resNode[0].name)
+            bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, resNode[0])
 
         }
-      
-        console.log_copy(this,`-> Element_querySelector res->`,newNode)
+
+        console.log_copy(this, `-> Element_querySelector res->`, newNode)
         return newNode
 
     }
-    bodavm.envFunc.DOMTokenList_add=function (){
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        this.__proto__=Array.prototype
+
+
+    bodavm.envFunc.DOMTokenList_add = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        this.__proto__ = Array.prototype
         this.push(arguments[0])
-        boda$(thisNode).attr('class',arguments[0])
-        this.__proto__=DOMTokenList.prototype
-        console.log_copy(this,`-> DOMTokenList_add arg->`,arguments[0])
+        boda$(thisNode).attr('class', arguments[0])
+        this.__proto__ = DOMTokenList.prototype
+        console.log_copy(this, `-> DOMTokenList_add arg->`, arguments[0])
 
         return arguments[0]
     }
-    bodavm.envFunc.Node_insertBefore=function (){
-            let target=arguments[0]
-            let target2=arguments[1]
-            let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-            let targetNode=bodavm.toolsFunc.getProtoAttr.call(target,target)
-            let target2sNode=bodavm.toolsFunc.getProtoAttr.call(target2,target2)
-            // debugger
-            boda$(target2sNode).before(targetNode)
-            console.log_copy(this,`-> Node_insertBefore newNode->`,target,`-> referenceNode ->`,target2)
-            return target
+    bodavm.envFunc.Node_insertBefore = function () {
+        let target = arguments[0]
+        let target2 = arguments[1]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        let targetNode = bodavm.toolsFunc.getProtoAttr.call(target, target)
+        let target2sNode = bodavm.toolsFunc.getProtoAttr.call(target2, target2)
+        // debugger
+        if (targetNode.name == 'script' && target2sNode.name == 'script') {
+            debugger
+            bodavm.memory.waitExec.push(targetNode)
+
+        }
+        boda$(target2sNode).before(targetNode)
+        console.log_copy(this, `-> Node_insertBefore newNode->`, target, `-> referenceNode ->`, target2)
+        return target
 
     }
-    bodavm.envFunc.Document_querySelector=function (){
+    bodavm.envFunc.Document_querySelector = function () {
         // debugger
-        let arg=arguments[0]
-        let res=boda$(arg).get()[0]
-        let newNode=null
-        if (res){
-            newNode =bodavm.toolsFunc.setProto(res.name)
-            bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,res)
+        let arg = arguments[0]
+        let res = boda$(arg).get()[0]
+        let newNode = null
+        if (res) {
+            newNode = bodavm.toolsFunc.setProto(res.name)
+            bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, res)
         }
-       
-        console.log_copy(this,`-> Document_querySelector res->`,newNode)
+
+        console.log_copy(this, `-> Document_querySelector arg-> `, arg, ` -> res->`, newNode)
         return newNode
     }
-    bodavm.envFunc.Element_classList_get=function (){
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+    // bodavm.envFunc.DOMTokenList_toString=function (){
+    //     debugger
+    // }
+    bodavm.envFunc.Element_classList_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         let classNames = boda$(thisNode).attr('class');
-        let clsList=[]
+        let clsList = []
         // debugger
         if (classNames) {
-            clsList= classNames.trim().split(/\s+/);
-          }
-        
-        clsList.__proto__=DOMTokenList.prototype
+            clsList = classNames.trim().split(/\s+/);
+        }
+
+        clsList.__proto__ = DOMTokenList.prototype
         // return [];
         // debugger
-        console.log_copy(this,`-> Element_classList_get res->`,clsList)
-        bodavm.toolsFunc.setProtoAttr.call(clsList,clsList,thisNode)
+        console.log_copy(this, `-> Element_classList_get res->`, clsList)
+        // bodavm.toolsFunc.setProtoAttr.call(clsList,clsList,thisNode)
         return clsList
-        
-    }
-    bodavm.envFunc.HTMLScriptElement_src_set=function (){
-        let arg=arguments[0]
-        // debugger
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        boda$(thisNode).attr('src',arg)
-        // debugger
-        console.log_copy(this,`-> HTMLScriptElement_src_set arg->`,arg)
-        return arg
-    }
-    bodavm.envFunc.Image_src_set=function (){
-        let arg=arguments[0]
-        // debugger
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        boda$(thisNode).attr('src',arg)
-        // debugger
-        console.log_copy(this,`-> Image_src_set arg->`,arg)
-        return arg
-    }
 
-    bodavm.envFunc.Document_getElementById=function (){
-        let element = boda$(`#${arguments[0]}`)
-        let res=null
+    }
+    bodavm.envFunc.HTMLScriptElement_src_set = function () {
+        let arg = arguments[0]
+        // debugger
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        boda$(thisNode).attr('src', arg)
+        // debugger
+        console.log_copy(this, `-> HTMLScriptElement_src_set arg->`, arg)
+        return arg
+    }
+    bodavm.envFunc.Image_src_set = function () {
+        let arg = arguments[0]
+        // debugger
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        boda$(thisNode).attr('src', arg)
+        // debugger
+        console.log_copy(this, `-> Image_src_set arg->`, arg)
+        return arg
+    }
+    bodavm.envFunc.Image_alt_set = function () {
+        let arg = arguments[0]
+        // debugger
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        boda$(thisNode).attr('alt', arg)
+        // debugger
+        console.log_copy(this, `-> Image_alt_set arg->`, arg)
+        return arg
+    }
+    bodavm.envFunc.Document_getElementById = function () {
+        let arg = arguments[0]
+        let element = boda$(`#${arg}`)
+        let res = null
         if (element.length > 0) {
-            res=element[0]
-            
-            let newNode=bodavm.toolsFunc.setProto(res.name)
-            bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,res)
-            console.log_copy(`Document_getElementById res->`,newNode)
+            res = element[0]
+
+            let newNode = bodavm.toolsFunc.setProto(res.name)
+            bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, res)
+            console.log_copy(`Document_getElementById arg->`, arg, ` -> res->`, newNode)
 
             return newNode;
         }
-        console.log_copy(`Document_getElementById res->`,res)
+        console.log_copy(`Document_getElementById arg->`, arg, ` -> res->`, res)
+        // debugger
+
         return res;
-      
+
     }
 
     bodavm.envFunc.Image_width_get = function () {
@@ -568,7 +703,7 @@
         ;
         let targetNode = bodavm.toolsFunc.getProtoAttr(arguments[0]) ? bodavm.toolsFunc.getProtoAttr(arguments[0]) : bodavm.toolsFunc.getProtoAttr.call(arguments[0], arguments[0]); //目标node
         // debugger
-        if(bodavm.memory.collection[targetNode.name]){
+        if (bodavm.memory.collection[targetNode.name]) {
             bodavm.memory.collection[targetNode.name].__proto__ = Array.prototype
             let index_ = bodavm.memory.collection[targetNode.name].indexOf(arguments[0])
             if (index_ != -1) {
@@ -576,7 +711,7 @@
             }
             bodavm.memory.collection[targetNode.name].__proto__ = HTMLCollection.prototype
         }
-        
+
         let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this);
         console.log_copy(`Node_removeChild `, `child->${arguments[0]}`);
         // debugger
@@ -1133,8 +1268,8 @@
         }
         let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this);
         // debugger
-        if (thisNode.name =='html'){
-            console.log_copy(this,`-> Node_parentNode_get `, 'res- > document');
+        if (thisNode.name == 'html') {
+            console.log_copy(this, `-> Node_parentNode_get `, 'res- > document');
 
             return document
         }
@@ -1213,8 +1348,14 @@
         let res = bodavm.toolsFunc.setProto(arg);
         let ele = ''
         switch (arg.toLowerCase()) {
+            case "iframe":
+                ele = boda$('<iframe></iframe>')
+                break
+            case "fake":
+                ele = boda$('<fake></fake>')
+                break
             case "canvas":
-                ele=boda$('<canvas>')
+                ele = boda$('<canvas>')
                 break
             case "b":
                 ele = boda$('<b></b>')
@@ -1309,6 +1450,7 @@
             default:
                 console.log('Document_createElement 错误!!!标签未实现-->', arg);
         }
+        // debugger
         res = bodavm.toolsFunc.proxy2(res, arg)
         bodavm.toolsFunc.setProtoAttr.call(res, res, ele[0]);
         console.log_copy(`Document_createElement arg->`, arg, ' -> res->', res);
@@ -1349,6 +1491,15 @@
                 break
             case "webgl":
                 // context = context.getContext('2d')
+                context = new WebGL2RenderingContext('bobo')
+                bodavm.toolsFunc.setProtoAttr.call(this, 'getContext', type)
+                bodavm.toolsFunc.setProtoAttr.call(this, 'context', context)
+                bodavm.toolsFunc.setProtoAttr.call(context, 'canvas', this)
+
+                console.log_copy(`HTMLCanvasElement_getContext `, `type->${type} `, `-> res -> ${context}`)
+                break
+            case "webgl2":
+                // context = context.getContext('2d')
                 context = new WebGLRenderingContext('bobo')
                 bodavm.toolsFunc.setProtoAttr.call(this, 'getContext', type)
                 bodavm.toolsFunc.setProtoAttr.call(this, 'context', context)
@@ -1366,7 +1517,7 @@
                 // bodavm.toolsFunc.setProtoAttr.call(this, "type", type);
                 break
             default:
-                console.log_copy(`HTMLCanvasElement_getContext `, `${type}属性未实现  `)
+                console.log_copy(`HTMLCanvasElement_getContext ->`, `错误${type}属性未实现  `)
                 break
         }
         return context
@@ -1488,7 +1639,57 @@
         console.log_copy(`Document_documentElement_get -> `, ` -> res ->`, newNode);
         return newNode;
     };
+    bodavm.envFunc.Node_contains=function (){
+        let arg=arguments[0]
+        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        let targetNode=bodavm.toolsFunc.getProtoAttr.call(arg,arg)
+        let current = targetNode;
+        // debugger
+        while (current) {
+          if (current === thisNode) {
+            console.log_copy(thisNode, ` -> Node_contains -> arg ->`, arg ,`-> res -> true`);
 
+                return true;
+          }
+          current = current.parent;
+        }
+        console.log_copy(thisNode, ` -> Node_contains -> arg ->`, arg, `-> res -> false`);
+
+        return false;
+    }
+
+    bodavm.envFunc.Element_outerHTML_get=function (){
+        // debugger
+        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        const innerHTML = boda$(thisNode).html(); 
+        let outerHTML = `<${thisNode.name}`;
+        Object.entries_bo(thisNode.attribs).forEach(([key, value]) => {
+          outerHTML += ` ${key}="${value}"`; 
+        });
+        outerHTML += '>';
+        outerHTML += innerHTML;
+        outerHTML += `</${thisNode.name}>`;
+        console.log_copy(thisNode, ` -> Element_outerHTML_get -> outHtml ->`, outerHTML);
+        return outerHTML
+    }
+    bodavm.envFunc.Element_append=function (){
+        let arg=arguments[0]
+        // debugger
+        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        let targetNode=bodavm.toolsFunc.getProtoAttr.call(arg,arg)?bodavm.toolsFunc.getProtoAttr.call(arg,arg):arg
+        thisNode.children.push(targetNode)
+        console.log_copy(this, ` -> Element_append -> arg ->`, arg);
+        if (targetNode.name=='iframe'){
+            debugger
+            console.log_copy(`Node_appendChild -> arg ->`, arguments[0],`正在往${this}中添加iframe标签`);
+            window[window.length-1]=arg.contentWindow
+            return 
+        }
+        if (bodavm.memory.domDocument['body'] && thisNode.name == 'head') {
+            bodavm.memory.waitExec.push(targetNode)
+        }
+
+    }
     bodavm.envFunc.Node_appendChild = function () {
         if (bodavm.config.isdebug) {
             debugger;
@@ -1501,17 +1702,28 @@
         let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this);
         // let targetDom=bodavm.toolsFunc.setProto(arguments[0].nodeName)
         // bodavm.toolsFunc.setProtoAttr(targetDom,arguments[0])
-        let target = bodavm.toolsFunc.getProtoAttr.call(arg, arg)
+        let targetNode = bodavm.toolsFunc.getProtoAttr.call(arg, arg)
         // debugger
-        let attr = boda$(target).attr()
-        if (attr['id']) {
+        let attr = boda$(targetNode).attr()
+        if (attr && attr['id']) {
             window.__proto__.__proto__[attr['id']] = arg
         }
         // debugger    
+        
+        boda$(thisNode).append(targetNode)
+        // debugger
+        if (targetNode.name=='iframe'){
+            console.log_copy(`Node_appendChild -> arg ->`, arguments[0],`正在往${this}中添加iframe标签`);
+            window[window.length-1]=arg.contentWindow
+            return 
+        }
+        if (bodavm.memory.domDocument['body'] && thisNode.name == 'head') {
+            bodavm.memory.waitExec.push(targetNode)
+        }
 
-        boda$(thisNode).append(target)
         // debugger
         console.log_copy(this, ` -> Node_appendChild -> arg ->`, arguments[0]);
+        // debugger
     };
 
 
@@ -1563,7 +1775,7 @@
             'target': this,
             '_boisinit': bodavm.config.isinit
         };
-        console.log_copy(`EventTarget_addEventListener `, `type->${type} `, `callback->${callback.toString().length > 50 ? callback.toString().substr(0, 50) + '...' : callback} `, `options->${options ? options : []}  `);
+        console.log_copy(`注册事件-->`, `EventTarget_addEventListener `, `type->${type} `, `callback->${callback.toString().length > 50 ? callback.toString().substr(0, 50) + '...' : callback} `, `options->${options ? options : []}  `);
 
         if (bodavm.memory.listenerDone == 1) {
             if (bodavm.memory.asyncEvent.listener2 === undefined) {
@@ -1816,12 +2028,17 @@
         }
         // debugger
         ;
+        if (this._boContentWindow) {
+            console.log_copy(`iframe下的document设置cookie,直接返回''`);
+            return '';
+        }
         let cookieValue = arguments[0];
         // debugger
         let cookieSplit = cookieValue.split(';')
         let expiresTime = null
         for (let co = 0; co < cookieSplit.length; co++) {
             let expiresIndex = cookieSplit[co].indexOf('expires')
+            // debugger.;
             if (expiresIndex != -1) {
                 expiresTime = cookieSplit[co].split('=')[1]
             }
@@ -1831,7 +2048,10 @@
             cookieValue = cookieValue.substring(0, index);
         }
         if (expiresTime) {
-            if (new Date(expiresTime) < new Date()) {
+            // debugger
+            let ex1Time = new Date(expiresTime).getTime()
+            let curTime = new Date().getTime()
+            if (ex1Time < curTime) {
                 let item = cookieValue.split("=");
                 let k = item[0].trim();
                 // let v = item[1].trim();
@@ -1910,10 +2130,10 @@
     bodavm.envFunc.HTMLElement_offsetHeight_get = function () {
         let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this) ? bodavm.toolsFunc.getProtoAttr.call(this, this) : bodavm.toolsFunc.getProtoAttr(this)
         let thisNodeStyle = ''
-        
+
         thisNodeStyle = boda$(thisNode).attr('style')
         // debugger
-       
+
         // debugger
         let fontFamily = ''
         if (this.style.fontFamily) {
@@ -1964,48 +2184,78 @@
     }
 
     bodavm.envFunc.HTMLIFrameElement_contentWindow_get = function () {
+        // debugger
         // let thiswinIndex=bodavm.memory.iframe['thisWindow']['this'].indexOf(this)
         // if  (thiswinIndex!=-1){
         //     return  bodavm.memory.iframe['thisWindow']['this'][thiswinIndex]
 
         // }
+        
+        // let documentBody = bodavm.toolsFunc.getProtoAttr(document.documentElement)
+        // // debugger
+        // let thisnode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this)
 
-        let documentBody = bodavm.toolsFunc.getProtoAttr(document.documentElement)
-        // debugger
-        let thisnode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this)
-        let filterThisNode = []
-        bodavm.toolsFunc.traverse(documentBody, node => {
-            if (node.nodeName == 'iframe') {
-                filterThisNode.push(node)
-            }
-        })
-        let isIndex = filterThisNode.indexOf(thisnode)
+        // let isIndex = filterThisNode.indexOf(thisnode)
         let contentwindow_ = null
+        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
         // debugger
-        if (isIndex != -1) {
-            // debugger
-            if (window[isIndex]) {
-                console.log_copy(`window `, isIndex, ` -> 已存在 直接返回 ->`)
+        let islive=0
+        let liveIframeList=boda$('iframe').get()
+        if(!liveIframeList){
+            console.log(this,`HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
 
-                return window[isIndex]
+            return null
+        }
+        for (const ifELe of liveIframeList) {
+            if (ifELe ==thisNode){
+                islive=1
             }
-            if (bodavm.memory.iframe['contentWindow']['this'] == this) {
-                let iframeRes = bodavm.memory.iframe['contentWindow']['res']
+        }
+        if (islive==0){
+            console.log(this,`HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
+            return null
+        }
+        // debugger
+        // if (isIndex != -1) {
+        // debugger
+        // if (window[isIndex]) {
+        //     console.log_copy(`window `, isIndex, ` -> 已存在 直接返回 ->`)
+
+        //     return window[isIndex]
+        // // }
+        for (let index = 0; index < bodavm.memory.iframe["contentWindow"].length; index++) {
+            let ele= bodavm.memory.iframe["contentWindow"][index];
+            if (ele['this']==this){
+                let iframeRes = ele['res']
                 console.log_copy(`bodavm.memory.iframe['contentWindow'] 已存在 直接返回 ->`, iframeRes)
                 return iframeRes
-
             }
-            let windowIframe = new Window('bobo')
-            windowIframe._boContentWindow = true
-            // contentwindow_=new Window('bobo')
-            // bodavm.memory.iframe
-            bodavm.memory.iframe['contentWindow']['res'] = Object.setPrototypeOf(windowIframe, globalThis)
-            bodavm.memory.iframe['contentWindow']['this'] = this
-            // debugger
-            contentwindow_ = bodavm.memory.iframe["contentWindow"]['res']
-            window[isIndex] = contentwindow_
-            // debugger
         }
+        // if (bodavm.memory.iframe['contentWindow']['this'] == this) {
+        //     let iframeRes = bodavm.memory.iframe['contentWindow']['res']
+        //     console.log_copy(`bodavm.memory.iframe['contentWindow'] 已存在 直接返回 ->`, iframeRes)
+        //     return iframeRes
+
+        // }
+        let windowIframe = new Window('bobo')
+        windowIframe._boContentWindow = true
+        windowIframe.self = windowIframe
+        windowIframe.iframe = windowIframe
+        // contentwindow_=new Window('bobo')
+        // bodavm.memory.iframe
+        let tempcontentWindow=''
+        tempcontentWindow= Object.setPrototypeOf(windowIframe, globalThis)
+        // tempcontentWindowthis = this
+        bodavm.memory.iframe["contentWindow"].push({'res':tempcontentWindow,'this':this})
+        // bodavm.memory.iframe['thisWindow']['this'].push(windowIframe)
+        // debugger
+        contentwindow_ = tempcontentWindow
+        // let windowInd=bodavm.memory.iframe['thisWindow']['this'].length-1
+        // window[windowInd] = contentwindow_
+        // window[windowInd].self = window[windowInd]
+        // window[windowInd].frames = window[windowInd]
+        // debugger
+        // }
         console.log(`HTMLIFrameElement_contentWindow_get ->res -> `, contentwindow_)
         return contentwindow_
     }

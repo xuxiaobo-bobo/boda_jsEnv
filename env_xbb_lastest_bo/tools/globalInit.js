@@ -106,7 +106,8 @@ var mytime_stamp = Date.now()
         let arg0 = arguments[0]
         let arg1 = arguments[1]
         try {
-            console.log_copy(`JSON.parse `, ` arg0:`, arg0.length > 40 ? arg0.substring(0, 40) + '...' : arg0, ` arg1:`, arg1)
+            // console.log_copy(`JSON.parse `, ` arg0:`, arg0.length > 200 ? arg0.substring(0, 200) + '...' : arg0, ` arg1:`, arg1)
+            console.log_copy(`JSON.parse `, ` arg0:`, arg0, ` arg1:`, arg1)
 
         } catch (e){ console.log_copy(e.message,e.stack);
             console.log_copy(`JSON.parse hook出错`,)
@@ -140,6 +141,7 @@ var mytime_stamp = Date.now()
             // debugger
 
             desc_res = Object.getOwnPropertyDescriptor_bo.call(this, arguments[0], arguments[1])
+            debugger
             if (desc_res && (desc_res['_boarg'] || desc_res['_boisinit'] || desc_res['_contentiframe'])) {
                 delete desc_res['_boarg']
                 delete desc_res['_boisinit']
@@ -450,7 +452,7 @@ var mytime_stamp = Date.now()
                     i--
                 }
             }
-            console.log_copy(`Object.entries `, `this ->`, bodavm.toolsFunc.getType(this), `->obj ->`, obj, `-> res ->`, res, `  !!!!!!检测!!!!`)
+            console.log_copy(`Object.entries `, `this ->`, this, `->obj ->`, obj, `  !!!!!!检测!!!!`)
 
         } catch (e){ console.log_copy(e.message,e.stack);
             console.log_copy(`Object.entries `, `hook 出错`)
@@ -467,7 +469,8 @@ var mytime_stamp = Date.now()
         try {
             // debugger
             let obj = arguments[0]
-            if (obj ==bodavm.memory.iframe["contentWindow"]['res']){
+            // debugger
+            if (obj._boContentWindow==true){
                 // debugger
                 let resKey=bodavm.memory.contentWindow_keys
                 console.log_copy(`Object.keys 获取iframe下的contentWindow`, `obj ->`, obj, `->`, `res ->!!!!!!检测!!!!`,resKey)
