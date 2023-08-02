@@ -2,7 +2,7 @@
 
 Notification = function Notification() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Notification)) {
+  if (arg != 'bobo' && !(this instanceof Notification)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'Notification': 1 argument required, but only 0 present.");
   }
   ;

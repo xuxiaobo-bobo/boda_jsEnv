@@ -2,7 +2,7 @@
 
 HTMLTableCaptionElement = function HTMLTableCaptionElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLTableCaptionElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLTableCaptionElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

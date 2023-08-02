@@ -2,7 +2,7 @@
 
 PresentationConnectionList = function PresentationConnectionList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PresentationConnectionList)) {
+  if (arg != 'bobo' && !(this instanceof PresentationConnectionList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

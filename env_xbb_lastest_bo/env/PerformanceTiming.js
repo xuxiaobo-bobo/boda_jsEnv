@@ -2,7 +2,7 @@
 
 PerformanceTiming = function PerformanceTiming() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PerformanceTiming)) {
+  if (arg != 'bobo' && !(this instanceof PerformanceTiming)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

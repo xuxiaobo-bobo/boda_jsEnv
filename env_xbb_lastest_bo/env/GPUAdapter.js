@@ -2,7 +2,7 @@
 
 GPUAdapter = function GPUAdapter() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUAdapter)) {
+  if (arg != 'bobo' && !(this instanceof GPUAdapter)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

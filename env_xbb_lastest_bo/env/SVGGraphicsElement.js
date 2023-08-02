@@ -2,7 +2,7 @@
 
 SVGGraphicsElement = function SVGGraphicsElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGGraphicsElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGGraphicsElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

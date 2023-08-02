@@ -2,7 +2,7 @@
 
 HTMLFieldSetElement = function HTMLFieldSetElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLFieldSetElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLFieldSetElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

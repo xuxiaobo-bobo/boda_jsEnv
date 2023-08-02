@@ -2,7 +2,7 @@
 
 ReadableStreamBYOBReader = function ReadableStreamBYOBReader() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ReadableStreamBYOBReader)) {
+  if (arg != 'bobo' && !(this instanceof ReadableStreamBYOBReader)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ReadableStreamBYOBReader': 1 argument required, but only 0 present.");
   }
   ;

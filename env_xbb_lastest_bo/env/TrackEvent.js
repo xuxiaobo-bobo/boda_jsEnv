@@ -2,7 +2,7 @@
 
 TrackEvent = function TrackEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TrackEvent)) {
+  if (arg != 'bobo' && !(this instanceof TrackEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'TrackEvent': 1 argument required, but only 0 present.");
   }
   ;

@@ -2,7 +2,7 @@
 
 ProgressEvent = function ProgressEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ProgressEvent)) {
+  if (arg != 'bobo' && !(this instanceof ProgressEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ProgressEvent': 1 argument required, but only 0 present.");
   }
   ;

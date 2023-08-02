@@ -2,7 +2,7 @@
 
 PerformanceLongTaskTiming = function PerformanceLongTaskTiming() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PerformanceLongTaskTiming)) {
+  if (arg != 'bobo' && !(this instanceof PerformanceLongTaskTiming)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 HTMLDirectoryElement = function HTMLDirectoryElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLDirectoryElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLDirectoryElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

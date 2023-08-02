@@ -2,7 +2,7 @@
 
 History = function History() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof History)) {
+  if (arg != 'bobo' && !(this instanceof History)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

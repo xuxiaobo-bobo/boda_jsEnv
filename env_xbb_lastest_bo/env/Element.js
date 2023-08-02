@@ -2,7 +2,7 @@
 
 Element = function Element() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Element)) {
+  if (arg != 'bobo' && !(this instanceof Element)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

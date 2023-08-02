@@ -2,7 +2,7 @@
 
 KeyboardEvent = function KeyboardEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof KeyboardEvent)) {
+  if (arg != 'bobo' && !(this instanceof KeyboardEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'KeyboardEvent': 1 argument required, but only 0 present.");
   }
   ;

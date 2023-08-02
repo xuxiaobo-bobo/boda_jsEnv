@@ -2,7 +2,7 @@
 
 XRWebGLBinding = function XRWebGLBinding() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRWebGLBinding)) {
+  if (arg != 'bobo' && !(this instanceof XRWebGLBinding)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'XRWebGLBinding': 2 arguments required, but only 0 present.");
   }
   ;

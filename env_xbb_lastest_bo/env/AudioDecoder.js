@@ -2,7 +2,7 @@
 
 AudioDecoder = function AudioDecoder() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AudioDecoder) {
+  if (arg != 'bobo' && !(this instanceof AudioDecoder)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'AudioDecoder': 1 argument required, but only 0 present.");
   }
   ;

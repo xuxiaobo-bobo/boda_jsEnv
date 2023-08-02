@@ -2,7 +2,7 @@
 
 HID = function HID() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HID)) {
+  if (arg != 'bobo' && !(this instanceof HID)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 CSSUnitValue = function CSSUnitValue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSUnitValue)) {
+  if (arg != 'bobo' && !(this instanceof CSSUnitValue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSUnitValue': 2 arguments required, but only 0 present.");
   }
   ;

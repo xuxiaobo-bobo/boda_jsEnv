@@ -2,7 +2,7 @@
 
 CanvasPattern = function CanvasPattern() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CanvasPattern)) {
+  if (arg != 'bobo' && !(this instanceof CanvasPattern)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

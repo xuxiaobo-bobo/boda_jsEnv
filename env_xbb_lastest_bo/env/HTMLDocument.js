@@ -2,7 +2,7 @@
 
 HTMLDocument = function HTMLDocument() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLDocument)) {
+  if (arg != 'bobo' && !(this instanceof HTMLDocument)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

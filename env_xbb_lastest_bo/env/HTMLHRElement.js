@@ -2,7 +2,7 @@
 
 HTMLHRElement = function HTMLHRElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLHRElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLHRElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

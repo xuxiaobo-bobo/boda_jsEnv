@@ -2,7 +2,7 @@
 
 AudioParam = function AudioParam() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof AudioParam)) {
+  if (arg != 'bobo' && !(this instanceof AudioParam)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

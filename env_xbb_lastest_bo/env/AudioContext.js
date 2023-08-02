@@ -1,6 +1,8 @@
 // AudioContext对象
 
 AudioContext = function AudioContext() {
+  let arg = arguments[0];
+
   bodavm.toolsFunc.symbolProperty(this);
   arg = arguments[0];
   if (arg != 'bobo') {

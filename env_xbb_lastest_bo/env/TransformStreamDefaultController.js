@@ -2,7 +2,7 @@
 
 TransformStreamDefaultController = function TransformStreamDefaultController() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TransformStreamDefaultController)) {
+  if (arg != 'bobo' && !(this instanceof TransformStreamDefaultController)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

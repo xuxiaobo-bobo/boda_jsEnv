@@ -2,7 +2,7 @@
 
 InputEvent = function InputEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof InputEvent)) {
+  if (arg != 'bobo' && !(this instanceof InputEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'InputEvent': 1 argument required, but only 0 present.");
   }
   ;

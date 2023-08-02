@@ -2,7 +2,7 @@
 
 TrustedScriptURL = function TrustedScriptURL() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TrustedScriptURL)) {
+  if (arg != 'bobo' && !(this instanceof TrustedScriptURL)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

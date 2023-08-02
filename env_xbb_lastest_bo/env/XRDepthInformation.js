@@ -2,7 +2,7 @@
 
 XRDepthInformation = function XRDepthInformation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRDepthInformation)) {
+  if (arg != 'bobo' && !(this instanceof XRDepthInformation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

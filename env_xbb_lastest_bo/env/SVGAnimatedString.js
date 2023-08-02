@@ -2,7 +2,7 @@
 
 SVGAnimatedString = function SVGAnimatedString() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimatedString)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimatedString)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

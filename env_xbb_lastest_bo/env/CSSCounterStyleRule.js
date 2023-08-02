@@ -2,7 +2,7 @@
 
 CSSCounterStyleRule = function CSSCounterStyleRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSCounterStyleRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSCounterStyleRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

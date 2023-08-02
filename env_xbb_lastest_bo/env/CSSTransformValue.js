@@ -2,7 +2,7 @@
 
 CSSTransformValue = function CSSTransformValue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSTransformValue)) {
+  if (arg != 'bobo' && !(this instanceof CSSTransformValue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSTransformValue': 1 argument required, but only 0 present.");
   }
   ;

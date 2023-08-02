@@ -2,7 +2,7 @@
 
 MIDIOutput = function MIDIOutput() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MIDIOutput)) {
+  if (arg != 'bobo' && !(this instanceof MIDIOutput)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

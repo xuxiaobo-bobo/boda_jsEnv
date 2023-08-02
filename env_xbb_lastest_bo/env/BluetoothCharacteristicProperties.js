@@ -2,7 +2,7 @@
 
 BluetoothCharacteristicProperties = function BluetoothCharacteristicProperties() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BluetoothCharacteristicProperties)) {
+  if (arg != 'bobo' && !(this instanceof BluetoothCharacteristicProperties)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

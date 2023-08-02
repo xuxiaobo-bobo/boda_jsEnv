@@ -2,7 +2,7 @@
 
 MediaStreamTrackEvent = function MediaStreamTrackEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaStreamTrackEvent)) {
+  if (arg != 'bobo' && !(this instanceof MediaStreamTrackEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaStreamTrackEvent': 2 arguments required, but only 0 present.");
   }
   ;

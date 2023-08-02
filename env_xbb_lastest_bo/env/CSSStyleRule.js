@@ -2,7 +2,7 @@
 
 CSSStyleRule = function CSSStyleRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSStyleRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSStyleRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

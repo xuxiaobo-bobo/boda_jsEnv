@@ -9,6 +9,17 @@
 // innerHTML：获取或设置元素的HTML内容。
 ;;
 (function () {
+
+    bodavm.envFunc.URL_createObjectURL=function (){
+        debugger
+        let arg=arguments[0]
+        let newUrl=`blob:${location.origin}/661f4a1e-88f8-44e8-9d85-635b0b7bbb3e`
+        console.log_copy(`URL_createObjectURL arg->` ,arg,`-> res->`, newUrl)
+
+        return newUrl
+
+    }
+
     bodavm.envFunc.HTMLScriptElement_async_set = function () {
         let async = arguments[0]
         bodavm.toolsFunc.setProtoAttr.call(this, 'async', async)
@@ -250,7 +261,7 @@
         let arg = arguments[0]
         let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         let res = boda$(thisNode).attr(arg)
-        console.log_copy(this, `-> Element_getAttribute res-> `, res)
+        console.log_copy(this, `-> Element_getAttribute `,`arg->`, arg ,`-> res-> `, res)
         return res
     }
     bodavm.envFunc.Node_childNodes_get = function () {
@@ -258,6 +269,7 @@
         // debugger
         let childs = thisNode.children
         let childNodes = []
+
         if (bodavm.memory.cache['Node_childNodes_get']['this'] == this) {
             let cacheValue = bodavm.memory.cache['Node_childNodes_get']['res']
             console.log_copy(this, `-> Node_childNodes_get 已存在,直接从cache中取值`, ' -> res- >', cacheValue)
@@ -280,39 +292,12 @@
         bodavm.memory.cache['Node_childNodes_get']['this'] = this
         bodavm.memory.cache['Node_childNodes_get']['res'] = childNodes
         console.log_copy(this, `-> Node_childNodes_get `, 'res- >', childNodes)
+
         return childNodes
 
 
     }
-    bodavm.envFunc.Element_children_get = function () {
-        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        // debugger
-        let tagName = thisNode.name
-        // debugger
-        if (!bodavm.memory.cache['Element_children_get'][tagName]) {
-            bodavm.memory.cache['Element_children_get'][tagName] = {}
-        }
-        if (bodavm.memory.collection[tagName] && bodavm.memory.cache['Element_children_get'][tagName]['this'] == this) {
-            let cacheValue = bodavm.memory.cache['Element_children_get'][tagName]["res"]
-            console.log_copy(this, `-> Element_children_get 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
-            return cacheValue
-        }
-        bodavm.memory.collection[tagName] = []
-        let childs = boda$(thisNode).children()
-        for (const child of childs) {
-            let newNode = bodavm.toolsFunc.setProto(child.name)
-            bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, child)
-            bodavm.memory.collection[tagName].push(newNode)
-        }
-        // debugger
-        bodavm.memory.collection[tagName].__proto__ = HTMLCollection.prototype
-        bodavm.memory.cache['Element_children_get'][tagName]['res'] = bodavm.memory.collection[tagName]
-        bodavm.memory.cache['Element_children_get'][tagName]['this'] = this
 
-        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
-        console.log_copy(this, `-> Element_children_get `, ' -> res- >', bodavm.memory.collection[tagName])
-        return bodavm.memory.collection[tagName]
-    }
 
     bodavm.envFunc.Element_className_set = function () {
         // debugger
@@ -701,25 +686,132 @@
             debugger;
         }
         ;
+        // debugger
         let targetNode = bodavm.toolsFunc.getProtoAttr(arguments[0]) ? bodavm.toolsFunc.getProtoAttr(arguments[0]) : bodavm.toolsFunc.getProtoAttr.call(arguments[0], arguments[0]); //目标node
         // debugger
-        if (bodavm.memory.collection[targetNode.name]) {
-            bodavm.memory.collection[targetNode.name].__proto__ = Array.prototype
-            let index_ = bodavm.memory.collection[targetNode.name].indexOf(arguments[0])
-            if (index_ != -1) {
-                bodavm.memory.collection[targetNode.name].splice(index_, 1)
+        let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this);
+        if (bodavm.memory.cache['Element_getElementsByTagName'][targetNode.name]) {
+            // debugger
+            let collection=bodavm.memory.cache['Element_getElementsByTagName'][targetNode.name]['res']
+            for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
+                // debugger
+                if (collection[key]==arguments[0]){
+                    delete collection['bo'+key]
+                }
             }
-            bodavm.memory.collection[targetNode.name].__proto__ = HTMLCollection.prototype
+            let newkeys=Object.keys(collection,'bobo')
+            let newlen=newkeys.length
+            for (let index = 0; index < newlen; index++) {
+                // debugger
+                    Object.defineProperty(collection,'bo'+index,{
+                        value:collection[newkeys[index]],
+                        writable:false,
+                        enumerable:true,
+                        configurable:true
+                    },'bobo')
+                
+            }
+            delete collection['bo'+(newlen)]
+        }
+        if (bodavm.memory.cache['Document_getElementsByTagName'][targetNode.name]) {
+            debugger
+            let collection=bodavm.memory.cache['Document_getElementsByTagName'][targetNode.name]['res']
+            for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
+                // debugger
+                if (collection[key]==arguments[0]){
+                    delete collection['bo'+key]
+                    // debugger
+
+                }
+            }
+            // debugger
+            let newkeys=Object.keys(collection,'bobo')
+            let newlen=newkeys.length
+            for (let index = 0; index < newlen; index++) {
+                // debugger
+                    Object.defineProperty(collection,'bo'+index,{
+                        value:collection[newkeys[index]],
+                        writable:false,
+                        enumerable:true,
+                        configurable:true
+                    },'bobo')
+                
+            }
+            delete collection['bo'+(newlen)]
+            // debugger
+        }
+        if (bodavm.memory.cache['Element_children_get'][thisNode.name]) {
+            // debugger
+            let collection=bodavm.memory.cache['Element_children_get'][thisNode.name]['res']
+            for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
+                // debugger
+                if (collection[key]==arguments[0]){
+                    delete collection['bo'+key]
+                    // debugger
+
+                }
+            }
+            // debugger
+            let newkeys=Object.keys(collection,'bobo')
+            let newlen=newkeys.length
+            for (let index = 0; index < newlen; index++) {
+                // debugger
+                    Object.defineProperty(collection,'bo'+index,{
+                        value:collection[newkeys[index]],
+                        writable:false,
+                        enumerable:true,
+                        configurable:true
+                    },'bobo')
+                
+            }
+            delete collection['bo'+(newlen)]
+            // debugger
+        }
+        // debugger
+        if (targetNode.name=='script' &&bodavm.memory.cache['Document_scripts_get']['res'] ) {
+            // debugger
+            let collection=bodavm.memory.cache['Document_scripts_get']['res']
+            for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
+                // debugger
+                if (collection[key]==arguments[0]){
+                    delete collection['bo'+key]
+                    // debugger
+
+                }
+            }
+            // debugger
+            let newkeys=Object.keys(collection,'bobo')
+            let newlen=newkeys.length
+            for (let index = 0; index < newlen; index++) {
+                // debugger
+                    Object.defineProperty(collection,'bo'+index,{
+                        value:collection[newkeys[index]],
+                        writable:false,
+                        enumerable:true,
+                        configurable:true
+                    },'bobo')
+                
+            }
+            delete collection['bo'+(newlen)]
+            // debugger
         }
 
-        let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this);
+
         console.log_copy(`Node_removeChild `, `child->${arguments[0]}`);
         // debugger
         let childs = boda$(thisNode).children()
         let isRemove = 0
         for (let index = 0; index < childs.length; index++) {
             if (childs[index] == targetNode) {
-                boda$(thisNode).children().eq(index).remove()
+                if (bodavm.memory.domDocument[targetNode.name]){
+                    let deldomDocInd=bodavm.memory.domDocument[targetNode.name].indexOf(targetNode)
+                    let delalldomDocInd=bodavm.memory.domDocument['all'].indexOf(targetNode)
+                    // debugger
+                    bodavm.memory.domDocument[targetNode.name].splice(deldomDocInd,1)
+                    bodavm.memory.domDocument['all'].splice(delalldomDocInd)
+                    boda$(thisNode).children().eq(index).remove()
+                }
+
                 isRemove = 1
                 break
             }
@@ -729,6 +821,98 @@
         }
         return arguments[0];
     };
+    bodavm.envFunc.HTMLCollection_length_get=function (){
+        let templen_=0
+        for (const key in Object.getOwnPropertyDescriptors_bo(this)) {
+            templen_+=1
+        }
+        console.log_copy(`HTMLCollection_length_get res->`,templen_)
+        return templen_
+    }
+    bodavm.envFunc.Element_children_get = function () {
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        // debugger
+        let tagName = thisNode.name
+        // debugger
+        if (!bodavm.memory.cache['Element_children_get'][tagName]) {
+            bodavm.memory.cache['Element_children_get'][tagName] = {}
+            bodavm.memory.cache['Element_children_get'][tagName]['res']={}
+
+        }
+        if (bodavm.memory.cache['Element_children_get'][tagName]&& bodavm.memory.cache['Element_children_get'][tagName]['this'] == this) {
+            let curLen=Object.keys(bodavm.memory.cache['Element_children_get'][tagName]["res"]).length
+            // debugger
+            if (curLen==boda$(thisNode).children().length){
+                let cacheValue = bodavm.memory.cache['Element_children_get'][tagName]["res"]
+                console.log_copy(this, `-> Element_children_get 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
+                return cacheValue
+            }
+   
+        }
+        let tempCollection = []
+        debugger
+        let childs = boda$(thisNode).children()
+        for (const child of childs) {
+            let newNode = bodavm.toolsFunc.setProto(child.name)
+            bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, child)
+            tempCollection.push(newNode)
+        }
+        for (let index = 0; index < tempCollection.length; index++) {
+            Object.defineProperty(bodavm.memory.cache['Element_children_get'][tagName]['res'],index,{
+                value:tempCollection[index],
+                writable:false,
+                enumerable:true,
+                configurable:true
+            },'bobo')
+        }
+
+        // debugger
+        bodavm.memory.cache['Element_children_get'][tagName]['res'].__proto__ = HTMLCollection.prototype
+        bodavm.memory.cache['Element_children_get'][tagName]['this'] = this
+        bodavm.memory.cache['Element_children_get'][tagName]['this'].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        bodavm.memory.cache['Element_children_get'][tagName]['res']=bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Element_children_get'][tagName]['res'],`HTMLCollection:proxyHTMLCollection`)
+
+        console.log_copy(this, `-> Element_children_get `, ' -> res- >', bodavm.memory.cache['Element_children_get'][tagName]['res'])
+        return bodavm.memory.cache['Element_children_get'][tagName]['res']
+    }
+
+    bodavm.envFunc.Document_scripts_get=function (){
+        let tagName='script'
+        let tempCollection = []
+        if (bodavm.memory.cache['Document_scripts_get']['res'] ) {
+            let curLen=Object.keys(bodavm.memory.cache['Document_scripts_get']["res"]).length
+            if (curLen==bodavm.memory.domDocument[tagName].length){
+                let cacheValue = bodavm.memory.cache['Document_scripts_get']["res"]
+                console.log_copy(`Document_scripts_get 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
+                return cacheValue
+            }
+      
+        }
+        if (bodavm.memory.domDocument[tagName]) {
+            for (let ind = 0; ind < bodavm.memory.domDocument[tagName].length; ind++) {
+                let newNode = bodavm.toolsFunc.setProto(tagName)
+                let currNode = bodavm.memory.domDocument[tagName][ind]
+                bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, currNode)
+                tempCollection.push(newNode)
+            }
+        }
+        bodavm.memory.cache['Document_scripts_get']['res']={}
+        for (let index = 0; index < tempCollection.length; index++) {
+            Object.defineProperty(bodavm.memory.cache['Document_scripts_get']['res'],index,{
+                value:tempCollection[index],
+                writable:false,
+                enumerable:true,
+                configurable:true
+            },'bobo')
+        }
+        bodavm.memory.cache['Document_scripts_get']['res'].__proto__ = HTMLCollection.prototype
+        bodavm.memory.cache['Document_scripts_get']['this'] = this
+        bodavm.memory.cache['Document_scripts_get']['res'].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        console.log_copy(`Document_scripts_get `, `arg ->`, tagName, ' -> res- >', bodavm.memory.cache['Document_scripts_get']['res'])
+        bodavm.memory.cache['Document_scripts_get']['res']=bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Document_scripts_get']['res'],`HTMLCollection:proxyHTMLCollection`)
+        return bodavm.memory.cache['Document_scripts_get']['res'];
+
+    }
     bodavm.envFunc.Document_getElementsByTagName = function () {
         if (bodavm.config.isdebug) {
             debugger;
@@ -736,30 +920,45 @@
         let tagName = arguments[0]
         if (!bodavm.memory.cache['Document_getElementsByTagName'][tagName]) {
             bodavm.memory.cache['Document_getElementsByTagName'][tagName] = {}
+            bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res']={}
+
         }
-        if (bodavm.memory.collection[tagName] && bodavm.memory.cache['Document_getElementsByTagName'][tagName]['this'] == this) {
-            let cacheValue = bodavm.memory.cache['Document_getElementsByTagName'][tagName]["res"]
-            console.log_copy(`Document_getElementsByTagName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
-            return cacheValue
+        if (bodavm.memory.cache['Document_getElementsByTagName'][tagName] && bodavm.memory.cache['Document_getElementsByTagName'][tagName]['this'] == this) {
+            let curLen=Object.keys(bodavm.memory.cache['Document_getElementsByTagName'][tagName]["res"]).length
+            if (curLen==bodavm.memory.domDocument[tagName].length){
+
+                let cacheValue = bodavm.memory.cache['Document_getElementsByTagName'][tagName]["res"]
+                console.log_copy(`Document_getElementsByTagName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
+                return cacheValue
+            }
         }
         // debugger
-        bodavm.memory.collection[tagName] = []
+        // bodavm.memory.collection[tagName] = []
+        let tempCollection = []
         if (bodavm.memory.domDocument[tagName]) {
             for (let ind = 0; ind < bodavm.memory.domDocument[tagName].length; ind++) {
                 let newNode = bodavm.toolsFunc.setProto(tagName)
                 let currNode = bodavm.memory.domDocument[tagName][ind]
                 bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, currNode)
-                bodavm.memory.collection[tagName].push(newNode)
+                tempCollection.push(newNode)
             }
         }
+        for (let index = 0; index < tempCollection.length; index++) {
+            Object.defineProperty(bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'],index,{
+                value:tempCollection[index],
+                writable:false,
+                enumerable:true,
+                configurable:true
+            },'bobo')
+        }
         // debugger
-        bodavm.memory.collection[tagName].__proto__ = HTMLCollection.prototype
-        bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'] = bodavm.memory.collection[tagName]
+        bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'].__proto__ = HTMLCollection.prototype
         bodavm.memory.cache['Document_getElementsByTagName'][tagName]['this'] = this
-
-        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
-        console.log_copy(`Document_getElementsByTagName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.collection[tagName])
-        return bodavm.memory.collection[tagName];
+        // bodavm.memory.cache['Document_getElementsByTagName'][tagName]['length']=bodavm.memory.domDocument[tagName].length
+        bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        console.log_copy(`Document_getElementsByTagName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'])
+        bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res']=bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'],`HTMLCollection:proxyHTMLCollection`)
+        return bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'];
     };
     bodavm.envFunc.Element_getElementsByTagName = function () {
         if (bodavm.config.isdebug) {
@@ -767,20 +966,27 @@
         }
         ///未完善  缺少
         ;
+        // debugger
         let tagName = arguments[0]
         if (!bodavm.memory.cache['Element_getElementsByTagName'][tagName]) {
             bodavm.memory.cache['Element_getElementsByTagName'][tagName] = {}
+            bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res']={}
         }
-        if (bodavm.memory.collection[tagName] && bodavm.memory.cache['Element_getElementsByTagName'][tagName]['this'] == this) {
-            let cacheValue = bodavm.memory.cache['Element_getElementsByTagName'][tagName]["res"]
-            console.log_copy(`Element_getElementsByTagName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
-            return cacheValue
+        if (bodavm.memory.cache['Element_getElementsByTagName'][tagName]&& bodavm.memory.cache['Element_getElementsByTagName'][tagName]['this'] == this) {
+            let curLen=Object.keys(bodavm.memory.cache['Element_getElementsByTagName'][tagName]["res"]).length
+            // debugger
+            if (curLen==bodavm.memory.domDocument[tagName].length){
+                let cacheValue = bodavm.memory.cache['Element_getElementsByTagName'][tagName]["res"]
+                console.log_copy(`Element_getElementsByTagName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
+                return cacheValue
+            }
+
         }
         // debugger
         let elesList = bodavm.memory.domDocument[tagName]
         let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        bodavm.memory.collection[tagName] = []
-
+        // let res={}
+        let tempCollection = []
         if (elesList) {
             let childrensList = boda$(thisNode).find('*').get() //获取所有子孙节点
             for (let node of elesList) {
@@ -788,25 +994,26 @@
                 if (indexele != -1) {
                     let newNode = bodavm.toolsFunc.setProto(tagName)
                     bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, node)
-                    bodavm.memory.collection[tagName].push(newNode)
+                    tempCollection.push(newNode)
                 }
             }
         }
-
-        // debugger
-        if (bodavm.memory.collection[tagName] && bodavm.memory.collection[tagName]['this'] == this) {
-            let cacheValue = bodavm.memory.collection[tagName]["res"]
-            console.log_copy(`Element_getElementsByTagName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
-            return cacheValue
+        for (let index = 0; index < tempCollection.length; index++) {
+            Object.defineProperty(bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'],index,{
+                value:tempCollection[index],
+                writable:false,
+                enumerable:true,
+                configurable:true
+            },'bobo')
         }
+        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'].__proto__ = HTMLCollection.prototype
+        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['this']=this
+        // bodavm.memory.cache['Element_getElementsByTagName'][tagName]['length']=bodavm.memory.domDocument[tagName].length
         // debugger
-
-        bodavm.memory.collection[tagName].__proto__ = HTMLCollection.prototype
-        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
-        console.log_copy(`Element_getElementsByTagName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.collection[tagName])
-        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'] = bodavm.memory.collection[tagName]
-        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['this'] = this
-        return bodavm.memory.collection[tagName];
+        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        console.log_copy(this,`-> Element_getElementsByTagName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'])
+        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res']=bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'],`HTMLCollection:proxyHTMLCollection`)
+        return bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'];
     };
 
     bodavm.envFunc.HTMLFormElement_action_set = function () {
@@ -875,9 +1082,10 @@
                 }
             }
         }
-
         let id_ = boda$(thisNode).attr('id')
+
         console.log_copy(`Element_id_get id->`, id_)
+
         return id_
     };
     bodavm.envFunc.Node_textContent_get = function () {
@@ -983,6 +1191,7 @@
         let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this);
         boda$(thisNode).attr('id', arg);
         // debugger
+
         let isForm = 0
         if (this instanceof HTMLInputElement) {
             for (let inp of bodavm.memory.form) {
@@ -999,6 +1208,7 @@
 
         }
         console.log_copy(`Element_id_set id->`, arg);
+
         return arguments[0];
     };
 
@@ -1320,7 +1530,7 @@
             console.log_copy(`Document_body_get ->`, `res->`, null);
             return null;
         }
-        if (bodavm.memory.cache['Document_body_get']['this'] == this && bodavm.memory.cache['Document_body_get']['domParserbody'] == domParserbody) {
+        if (bodavm.memory.cache['Document_body_get']['res']) {
             // console.log_copy(`Document_body_get 已存在缓存,直接获取`);
             return bodavm.memory.cache['Document_body_get']['res'];
         }
@@ -1329,9 +1539,9 @@
         let body = new HTMLBodyElement('bobo');
         domParserbody = bodavm.memory.domDocument['body'][0]
         bodavm.toolsFunc.setProtoAttr.call(body, body, domParserbody);
-        bodavm.memory.cache['Document_body_get']['this'] = this;
+        // bodavm.memory.cache['Document_body_get']['this'] = this;
         bodavm.memory.cache['Document_body_get']['res'] = body;
-        bodavm.memory.cache['Document_body_get']['domParserbody'] = domParserbody;
+        // bodavm.memory.cache['Document_body_get']['domParserbody'] = domParserbody;
         console.log_copy(`Document_body_get ->`, `res->`, body);
         return body;
     };
@@ -1348,8 +1558,12 @@
         let res = bodavm.toolsFunc.setProto(arg);
         let ele = ''
         switch (arg.toLowerCase()) {
+            case 'video':
+                ele=boda$('<video></video>')
+                break
             case "iframe":
                 ele = boda$('<iframe></iframe>')
+                // debugger
                 break
             case "fake":
                 ele = boda$('<fake></fake>')
@@ -1419,6 +1633,7 @@
                 break;
             case 'form':
                 ele = boda$('<form></form>');
+                debugger
                 break;
             case 'input':
                 ele = boda$('<input>');
@@ -1451,7 +1666,7 @@
                 console.log('Document_createElement 错误!!!标签未实现-->', arg);
         }
         // debugger
-        res = bodavm.toolsFunc.proxy2(res, arg)
+        res = bodavm.toolsFunc.proxy2(res, arg+':proxy2')
         bodavm.toolsFunc.setProtoAttr.call(res, res, ele[0]);
         console.log_copy(`Document_createElement arg->`, arg, ' -> res->', res);
         // debugger
@@ -1680,14 +1895,24 @@
         thisNode.children.push(targetNode)
         console.log_copy(this, ` -> Element_append -> arg ->`, arg);
         if (targetNode.name=='iframe'){
-            debugger
-            console.log_copy(`Node_appendChild -> arg ->`, arguments[0],`正在往${this}中添加iframe标签`);
+            // debugger
+            console.log_copy(`Element_append -> arg ->`, arguments[0],`正在往${this}中添加iframe标签`);
             window[window.length-1]=arg.contentWindow
             return 
         }
         if (bodavm.memory.domDocument['body'] && thisNode.name == 'head') {
             bodavm.memory.waitExec.push(targetNode)
         }
+        if (bodavm.memory.domParserScriptFlag==false){
+            if (!bodavm.memory.domDocument[targetNode.name]){
+                bodavm.memory.domDocument[targetNode.name]=[]
+            }
+            bodavm.memory.domDocument[targetNode.name].push(targetNode)
+            bodavm.memory.domDocument['all'].push(targetNode)
+            // debugger
+            //所有append元素的方法都需要添加这句话
+        }
+
 
     }
     bodavm.envFunc.Node_appendChild = function () {
@@ -1719,6 +1944,15 @@
         }
         if (bodavm.memory.domDocument['body'] && thisNode.name == 'head') {
             bodavm.memory.waitExec.push(targetNode)
+        }
+        if (bodavm.memory.domParserScriptFlag==false){
+            if (!bodavm.memory.domDocument[targetNode.name]){
+                bodavm.memory.domDocument[targetNode.name]=[]
+            }
+            bodavm.memory.domDocument[targetNode.name].push(targetNode)
+            bodavm.memory.domDocument['all'].push(targetNode)
+            // debugger
+            //所有append元素的方法都需要添加这句话
         }
 
         // debugger
@@ -1815,6 +2049,14 @@
         let type = event.type;
         let isdefine = null
         switch (event.type) {
+            case "deviceorientation":
+                let deviceorientation=new DeviceOrientationEvent('deviceorientation','bob')
+                isdefine = bodavm.toolsFunc.getProtoAttr.call(deviceorientation, 'isdefineProperty')
+                if (!isdefine) {
+                    bodavm.toolsFunc.defineProperty(deviceorientation, "isTrusted", { configurable: false, enumerable: true, get: function isTrusted() { return bodavm.toolsFunc.dispatch(this, deviceorientation, "isTrusted", "isTrusted_get", arguments) }, set: undefined });
+                }
+                event.callback.call(event.self, deviceorientation);
+                break
             case 'click':
                 // debugger
                 // Object.setPrototypeOf(event, PointerEvent.prototype);
@@ -1858,6 +2100,8 @@
                     let times = bodavm.memory.mousemoveListener[ind]['times'];
                     let button = bodavm.memory.mousemoveListener[ind]['button'];
                     bodavm.toolsFunc.setProtoAttr.call(mouseMove_, 'clientX', x)
+                    bodavm.toolsFunc.setProtoAttr.call(mouseMove_, 'clientY', y)
+
                     bodavm.toolsFunc.setProtoAttr.call(mouseMove_, 'screenx', screenx)
                     bodavm.toolsFunc.setProtoAttr.call(mouseMove_, 'screeny', screeny)
                     bodavm.toolsFunc.setProtoAttr.call(mouseMove_, 'times', times)
@@ -1866,7 +2110,7 @@
                     event.callback.call(event.self, mouseMove_);
                 }
                 break;
-
+            
 
             default:
                 //无需实现的事件unload  popstate
@@ -2026,7 +2270,7 @@
         if (bodavm.config.isdebug) {
             debugger;
         }
-        // debugger
+        debugger
         ;
         if (this._boContentWindow) {
             console.log_copy(`iframe下的document设置cookie,直接返回''`);

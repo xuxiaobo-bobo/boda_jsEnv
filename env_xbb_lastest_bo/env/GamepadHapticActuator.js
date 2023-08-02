@@ -2,7 +2,7 @@
 
 GamepadHapticActuator = function GamepadHapticActuator() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GamepadHapticActuator)) {
+  if (arg != 'bobo' && !(this instanceof GamepadHapticActuator)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

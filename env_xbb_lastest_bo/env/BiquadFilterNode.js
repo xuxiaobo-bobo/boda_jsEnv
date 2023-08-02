@@ -2,7 +2,7 @@
 
 BiquadFilterNode = function BiquadFilterNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BiquadFilterNode)) {
+  if (arg != 'bobo' && !(this instanceof BiquadFilterNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BiquadFilterNode': 1 argument required, but only 0 present.");
   }
   ;

@@ -2,7 +2,7 @@
 
 ShadowRoot = function ShadowRoot() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ShadowRoot)) {
+  if (arg != 'bobo' && !(this instanceof ShadowRoot)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

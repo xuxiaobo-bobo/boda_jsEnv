@@ -2,7 +2,7 @@
 
 PresentationRequest = function PresentationRequest() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PresentationRequest)) {
+  if (arg != 'bobo' && !(this instanceof PresentationRequest)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PresentationRequest': 1 argument required, but only 0 present.");
   }
   ;

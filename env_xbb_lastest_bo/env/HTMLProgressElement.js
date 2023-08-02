@@ -2,7 +2,7 @@
 
 HTMLProgressElement = function HTMLProgressElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLProgressElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLProgressElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

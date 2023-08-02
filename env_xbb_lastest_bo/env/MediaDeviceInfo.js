@@ -2,7 +2,7 @@
 
 MediaDeviceInfo = function MediaDeviceInfo() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaDeviceInfo)) {
+  if (arg != 'bobo' && !(this instanceof MediaDeviceInfo)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

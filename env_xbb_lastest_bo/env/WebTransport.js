@@ -2,7 +2,7 @@
 
 WebTransport = function WebTransport() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebTransport)) {
+  if (arg != 'bobo' && !(this instanceof WebTransport)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WebTransport': 1 argument required, but only 0 present.");
   }
   ;

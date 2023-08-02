@@ -2,7 +2,7 @@
 
 ImageData = function ImageData() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ImageData)) {
+  if (arg != 'bobo' && !(this instanceof ImageData)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ImageData': 2 arguments required, but only 0 present.");
   }
   ;

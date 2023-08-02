@@ -2,7 +2,7 @@
 
 GPUSampler = function GPUSampler() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUSampler)) {
+  if (arg != 'bobo' && !(this instanceof GPUSampler)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

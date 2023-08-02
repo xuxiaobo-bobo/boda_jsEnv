@@ -2,7 +2,7 @@
 
 AnimationEffect = function AnimationEffect() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AnimationEffect) {
+  if (arg != 'bobo' && !(this instanceof AnimationEffect)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

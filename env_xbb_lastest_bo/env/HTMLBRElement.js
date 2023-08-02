@@ -2,7 +2,7 @@
 
 HTMLBRElement = function HTMLBRElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLBRElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLBRElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

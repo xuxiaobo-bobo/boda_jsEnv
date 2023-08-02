@@ -2,7 +2,7 @@
 
 OffscreenCanvasRenderingContext2D = function OffscreenCanvasRenderingContext2D() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof OffscreenCanvasRenderingContext2D)) {
+  if (arg != 'bobo' && !(this instanceof OffscreenCanvasRenderingContext2D)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

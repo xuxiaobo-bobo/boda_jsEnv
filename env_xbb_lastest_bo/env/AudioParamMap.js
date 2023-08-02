@@ -2,7 +2,7 @@
 
 AudioParamMap = function AudioParamMap() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof AudioParamMap)) {
+  if (arg != 'bobo' && !(this instanceof AudioParamMap)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

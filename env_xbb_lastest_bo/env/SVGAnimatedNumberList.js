@@ -2,7 +2,7 @@
 
 SVGAnimatedNumberList = function SVGAnimatedNumberList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimatedNumberList)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimatedNumberList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

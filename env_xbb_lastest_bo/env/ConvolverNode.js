@@ -2,7 +2,7 @@
 
 ConvolverNode = function ConvolverNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ConvolverNode)) {
+  if (arg != 'bobo' && !(this instanceof ConvolverNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ConvolverNode': 1 argument required, but only 0 present.");
   }
   ;

@@ -2,7 +2,7 @@
 
 SVGSymbolElement = function SVGSymbolElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGSymbolElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGSymbolElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

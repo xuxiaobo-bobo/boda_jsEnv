@@ -2,7 +2,7 @@
 
 CSSTransition = function CSSTransition() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSTransition)) {
+  if (arg != 'bobo' && !(this instanceof CSSTransition)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

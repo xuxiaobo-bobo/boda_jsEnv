@@ -1,6 +1,6 @@
 // cancelAnimationFrame对象
-cancelAnimationFrame = () => {
-  console.log_copy(`使用cancelAnimationFrame arg->`, arguments);
+cancelAnimationFrame = (a) => {
+  console.log_copy(`使用cancelAnimationFrame arg->`, a);
 };
 bodavm.toolsFunc.safefunction(cancelAnimationFrame, "cancelAnimationFrame");
 bodavm.toolsFunc.defineProperty(cancelAnimationFrame, "length", {

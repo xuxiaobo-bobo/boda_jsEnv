@@ -2,7 +2,7 @@
 
 CSSUnparsedValue = function CSSUnparsedValue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSUnparsedValue)) {
+  if (arg != 'bobo' && !(this instanceof CSSUnparsedValue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSUnparsedValue': 1 argument required, but only 0 present.");
   }
   ;

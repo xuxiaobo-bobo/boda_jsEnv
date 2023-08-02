@@ -2,7 +2,7 @@
 
 XMLHttpRequestUpload = function XMLHttpRequestUpload() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XMLHttpRequestUpload)) {
+  if (arg != 'bobo' && !(this instanceof XMLHttpRequestUpload)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

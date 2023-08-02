@@ -2,7 +2,7 @@
 
 Attr = function Attr() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof Attr) {
+  if (arg != 'bobo' && !(this instanceof Attr)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

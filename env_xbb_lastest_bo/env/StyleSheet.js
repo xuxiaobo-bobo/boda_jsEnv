@@ -2,7 +2,7 @@
 
 StyleSheet = function StyleSheet() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof StyleSheet)) {
+  if (arg != 'bobo' && !(this instanceof StyleSheet)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

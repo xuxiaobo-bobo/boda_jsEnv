@@ -2,7 +2,7 @@
 
 Window = function Window() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Window)) {
+  if (arg != 'bobo' && !(this instanceof Window)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

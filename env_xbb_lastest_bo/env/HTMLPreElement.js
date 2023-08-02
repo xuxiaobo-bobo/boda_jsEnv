@@ -2,7 +2,7 @@
 
 HTMLPreElement = function HTMLPreElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLPreElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLPreElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

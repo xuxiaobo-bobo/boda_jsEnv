@@ -2,7 +2,7 @@
 
 GPUPipelineLayout = function GPUPipelineLayout() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUPipelineLayout)) {
+  if (arg != 'bobo' && !(this instanceof GPUPipelineLayout)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

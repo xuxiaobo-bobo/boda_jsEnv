@@ -2,7 +2,7 @@
 
 TimeRanges = function TimeRanges() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TimeRanges)) {
+  if (arg != 'bobo' && !(this instanceof TimeRanges)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 CSSAnimation = function CSSAnimation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSAnimation)) {
+  if (arg != 'bobo' && !(this instanceof CSSAnimation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 LockManager = function LockManager() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof LockManager)) {
+  if (arg != 'bobo' && !(this instanceof LockManager)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

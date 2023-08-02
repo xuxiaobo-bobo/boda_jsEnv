@@ -2,7 +2,7 @@
 
 LayoutShiftAttribution = function LayoutShiftAttribution() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof LayoutShiftAttribution)) {
+  if (arg != 'bobo' && !(this instanceof LayoutShiftAttribution)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

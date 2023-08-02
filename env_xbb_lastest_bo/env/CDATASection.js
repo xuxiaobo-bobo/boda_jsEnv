@@ -2,7 +2,7 @@
 
 CDATASection = function CDATASection() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CDATASection)) {
+  if (arg != 'bobo' && !(this instanceof CDATASection)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

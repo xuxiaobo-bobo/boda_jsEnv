@@ -2,7 +2,7 @@
 
 USBConfiguration = function USBConfiguration() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof USBConfiguration)) {
+  if (arg != 'bobo' && !(this instanceof USBConfiguration)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'USBConfiguration': 2 arguments required, but only 0 present.");
   }
   ;

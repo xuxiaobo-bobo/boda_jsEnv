@@ -2,7 +2,7 @@
 
 SVGFEFloodElement = function SVGFEFloodElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEFloodElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEFloodElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

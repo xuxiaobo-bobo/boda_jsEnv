@@ -2,7 +2,7 @@
 
 PerformanceResourceTiming = function PerformanceResourceTiming() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PerformanceResourceTiming)) {
+  if (arg != 'bobo' && !(this instanceof PerformanceResourceTiming)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

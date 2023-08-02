@@ -2,7 +2,7 @@
 
 HTMLTrackElement = function HTMLTrackElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLTrackElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLTrackElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

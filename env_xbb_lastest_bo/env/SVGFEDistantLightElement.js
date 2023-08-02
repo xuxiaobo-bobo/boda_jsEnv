@@ -2,7 +2,7 @@
 
 SVGFEDistantLightElement = function SVGFEDistantLightElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEDistantLightElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEDistantLightElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 FragmentDirective = function FragmentDirective() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FragmentDirective)) {
+  if (arg != 'bobo' && !(this instanceof FragmentDirective)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

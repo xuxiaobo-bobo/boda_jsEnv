@@ -2,7 +2,7 @@
 
 RTCIceCandidate = function RTCIceCandidate() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCIceCandidate)) {
+  if (arg != 'bobo' && !(this instanceof RTCIceCandidate)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'RTCIceCandidate': sdpMid and sdpMLineIndex are both null.");
   }
   ;

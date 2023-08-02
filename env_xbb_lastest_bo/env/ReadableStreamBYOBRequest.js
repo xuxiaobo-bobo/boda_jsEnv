@@ -2,7 +2,7 @@
 
 ReadableStreamBYOBRequest = function ReadableStreamBYOBRequest() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ReadableStreamBYOBRequest)) {
+  if (arg != 'bobo' && !(this instanceof ReadableStreamBYOBRequest)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

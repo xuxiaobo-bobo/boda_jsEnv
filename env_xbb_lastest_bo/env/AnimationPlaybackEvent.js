@@ -2,7 +2,7 @@
 
 AnimationPlaybackEvent = function AnimationPlaybackEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AnimationPlaybackEvent) {
+  if (arg != 'bobo' && !(this instanceof AnimationPlaybackEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'AnimationPlaybackEvent': 1 argument required, but only 0 present.");
   }
   ;

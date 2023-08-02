@@ -157,4 +157,3 @@ console.log('花费时间:', lastime - firsttime)
 fs.writeFileSync(`${user_path}/output.js`, codeTest)
 
 // // }()
-

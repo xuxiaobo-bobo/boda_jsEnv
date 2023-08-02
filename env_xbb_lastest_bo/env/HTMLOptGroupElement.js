@@ -2,7 +2,7 @@
 
 HTMLOptGroupElement = function HTMLOptGroupElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLOptGroupElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLOptGroupElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

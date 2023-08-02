@@ -2,7 +2,7 @@
 
 SVGEllipseElement = function SVGEllipseElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGEllipseElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGEllipseElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 IIRFilterNode = function IIRFilterNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IIRFilterNode)) {
+  if (arg != 'bobo' && !(this instanceof IIRFilterNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'IIRFilterNode': 2 arguments required, but only 0 present.");
   }
   ;

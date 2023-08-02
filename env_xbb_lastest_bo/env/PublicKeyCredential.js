@@ -2,7 +2,7 @@
 
 PublicKeyCredential = function PublicKeyCredential() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PublicKeyCredential)) {
+  if (arg != 'bobo' && !(this instanceof PublicKeyCredential)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

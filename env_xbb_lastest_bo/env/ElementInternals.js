@@ -2,7 +2,7 @@
 
 ElementInternals = function ElementInternals() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ElementInternals)) {
+  if (arg != 'bobo' && !(this instanceof ElementInternals)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 CSSContainerRule = function CSSContainerRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSContainerRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSContainerRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

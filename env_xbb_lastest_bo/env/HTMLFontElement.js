@@ -2,7 +2,7 @@
 
 HTMLFontElement = function HTMLFontElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLFontElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLFontElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

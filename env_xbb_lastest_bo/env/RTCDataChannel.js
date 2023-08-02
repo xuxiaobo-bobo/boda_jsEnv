@@ -2,7 +2,7 @@
 
 RTCDataChannel = function RTCDataChannel() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCDataChannel)) {
+  if (arg != 'bobo' && !(this instanceof RTCDataChannel)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

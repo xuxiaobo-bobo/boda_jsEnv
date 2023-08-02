@@ -2,7 +2,7 @@
 
 SVGRadialGradientElement = function SVGRadialGradientElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGRadialGradientElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGRadialGradientElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

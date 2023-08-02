@@ -2,7 +2,7 @@
 
 BaseAudioContext = function BaseAudioContext() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BaseAudioContext)) {
+  if (arg != 'bobo' && !(this instanceof BaseAudioContext)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

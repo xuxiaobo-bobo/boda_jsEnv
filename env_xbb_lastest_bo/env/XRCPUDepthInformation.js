@@ -2,7 +2,7 @@
 
 XRCPUDepthInformation = function XRCPUDepthInformation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRCPUDepthInformation)) {
+  if (arg != 'bobo' && !(this instanceof XRCPUDepthInformation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

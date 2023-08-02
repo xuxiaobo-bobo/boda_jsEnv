@@ -2,7 +2,7 @@
 
 PictureInPictureEvent = function PictureInPictureEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PictureInPictureEvent)) {
+  if (arg != 'bobo' && !(this instanceof PictureInPictureEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PictureInPictureEvent': 2 arguments required, but only 0 present.");
   }
   ;

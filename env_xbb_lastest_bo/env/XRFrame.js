@@ -2,7 +2,7 @@
 
 XRFrame = function XRFrame() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRFrame)) {
+  if (arg != 'bobo' && !(this instanceof XRFrame)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

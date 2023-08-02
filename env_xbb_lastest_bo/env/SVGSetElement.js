@@ -2,7 +2,7 @@
 
 SVGSetElement = function SVGSetElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGSetElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGSetElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

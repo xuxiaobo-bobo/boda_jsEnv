@@ -2,7 +2,7 @@
 
 CSSPropertyRule = function CSSPropertyRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSPropertyRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSPropertyRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

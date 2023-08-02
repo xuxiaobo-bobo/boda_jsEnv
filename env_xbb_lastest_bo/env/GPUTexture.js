@@ -2,7 +2,7 @@
 
 GPUTexture = function GPUTexture() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUTexture)) {
+  if (arg != 'bobo' && !(this instanceof GPUTexture)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

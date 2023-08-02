@@ -2,7 +2,7 @@
 
 XRView = function XRView() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRView)) {
+  if (arg != 'bobo' && !(this instanceof XRView)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

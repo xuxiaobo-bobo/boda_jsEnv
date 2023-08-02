@@ -2,7 +2,7 @@
 
 FileSystemDirectoryHandle = function FileSystemDirectoryHandle() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FileSystemDirectoryHandle)) {
+  if (arg != 'bobo' && !(this instanceof FileSystemDirectoryHandle)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

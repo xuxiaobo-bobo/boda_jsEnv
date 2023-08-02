@@ -1,6 +1,8 @@
 // Document对象
 
 Document = function Document() {
+  let arg = arguments[0];
+
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Document 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

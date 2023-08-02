@@ -2,7 +2,7 @@
 
 FileList = function FileList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FileList)) {
+  if (arg != 'bobo' && !(this instanceof FileList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

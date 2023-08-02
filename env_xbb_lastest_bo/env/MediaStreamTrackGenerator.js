@@ -2,7 +2,7 @@
 
 MediaStreamTrackGenerator = function MediaStreamTrackGenerator() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaStreamTrackGenerator)) {
+  if (arg != 'bobo' && !(this instanceof MediaStreamTrackGenerator)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaStreamTrackGenerator': 1 argument required, but only 0 present.");
   }
   ;

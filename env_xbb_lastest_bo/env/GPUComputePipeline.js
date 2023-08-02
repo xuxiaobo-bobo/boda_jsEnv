@@ -2,7 +2,7 @@
 
 GPUComputePipeline = function GPUComputePipeline() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUComputePipeline)) {
+  if (arg != 'bobo' && !(this instanceof GPUComputePipeline)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

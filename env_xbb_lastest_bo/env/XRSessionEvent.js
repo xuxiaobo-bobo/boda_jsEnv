@@ -2,7 +2,7 @@
 
 XRSessionEvent = function XRSessionEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRSessionEvent)) {
+  if (arg != 'bobo' && !(this instanceof XRSessionEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'XRSessionEvent': 2 arguments required, but only 0 present.");
   }
   ;

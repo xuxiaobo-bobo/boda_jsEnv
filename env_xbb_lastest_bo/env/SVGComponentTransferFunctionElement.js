@@ -2,7 +2,7 @@
 
 SVGComponentTransferFunctionElement = function SVGComponentTransferFunctionElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGComponentTransferFunctionElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGComponentTransferFunctionElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

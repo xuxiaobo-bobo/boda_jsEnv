@@ -2,7 +2,7 @@
 
 USBAlternateInterface = function USBAlternateInterface() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof USBAlternateInterface)) {
+  if (arg != 'bobo' && !(this instanceof USBAlternateInterface)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'USBAlternateInterface': 2 arguments required, but only 0 present.");
   }
   ;

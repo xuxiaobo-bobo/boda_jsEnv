@@ -2,7 +2,7 @@
 
 SVGFEMergeElement = function SVGFEMergeElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEMergeElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEMergeElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

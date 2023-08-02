@@ -2,7 +2,7 @@
 
 SVGTransform = function SVGTransform() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGTransform)) {
+  if (arg != 'bobo' && !(this instanceof SVGTransform)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

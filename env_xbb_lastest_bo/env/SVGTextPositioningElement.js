@@ -2,7 +2,7 @@
 
 SVGTextPositioningElement = function SVGTextPositioningElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGTextPositioningElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGTextPositioningElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

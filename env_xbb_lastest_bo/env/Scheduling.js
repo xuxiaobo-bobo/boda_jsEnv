@@ -2,7 +2,7 @@
 
 Scheduling = function Scheduling() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Scheduling)) {
+  if (arg != 'bobo' && !(this instanceof Scheduling)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

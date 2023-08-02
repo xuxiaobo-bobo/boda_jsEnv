@@ -2,7 +2,7 @@
 
 BluetoothRemoteGATTCharacteristic = function BluetoothRemoteGATTCharacteristic() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BluetoothRemoteGATTCharacteristic)) {
+  if (arg != 'bobo' && !(this instanceof BluetoothRemoteGATTCharacteristic)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

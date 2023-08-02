@@ -2,7 +2,7 @@
 
 XPathExpression = function XPathExpression() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XPathExpression)) {
+  if (arg != 'bobo' && !(this instanceof XPathExpression)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

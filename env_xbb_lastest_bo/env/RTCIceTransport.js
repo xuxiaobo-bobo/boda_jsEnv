@@ -2,7 +2,7 @@
 
 RTCIceTransport = function RTCIceTransport() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCIceTransport)) {
+  if (arg != 'bobo' && !(this instanceof RTCIceTransport)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

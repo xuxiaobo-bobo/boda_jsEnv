@@ -2,7 +2,7 @@
 
 PluginArray = function PluginArray() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PluginArray)) {
+  if (arg != 'bobo' && !(this instanceof PluginArray)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

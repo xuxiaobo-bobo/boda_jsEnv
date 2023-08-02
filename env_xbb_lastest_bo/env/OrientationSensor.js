@@ -2,7 +2,7 @@
 
 OrientationSensor = function OrientationSensor() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof OrientationSensor)) {
+  if (arg != 'bobo' && !(this instanceof OrientationSensor)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

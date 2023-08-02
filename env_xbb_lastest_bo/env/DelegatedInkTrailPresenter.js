@@ -2,7 +2,7 @@
 
 DelegatedInkTrailPresenter = function DelegatedInkTrailPresenter() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DelegatedInkTrailPresenter)) {
+  if (arg != 'bobo' && !(this instanceof DelegatedInkTrailPresenter)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

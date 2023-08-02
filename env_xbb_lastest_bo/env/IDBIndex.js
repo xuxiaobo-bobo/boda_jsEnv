@@ -2,7 +2,7 @@
 
 IDBIndex = function IDBIndex() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IDBIndex)) {
+  if (arg != 'bobo' && !(this instanceof IDBIndex)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

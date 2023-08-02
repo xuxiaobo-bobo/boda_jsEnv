@@ -2,7 +2,7 @@
 
 GPUSupportedFeatures = function GPUSupportedFeatures() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUSupportedFeatures)) {
+  if (arg != 'bobo' && !(this instanceof GPUSupportedFeatures)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

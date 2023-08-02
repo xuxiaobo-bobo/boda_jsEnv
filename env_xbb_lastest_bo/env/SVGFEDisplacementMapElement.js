@@ -2,7 +2,7 @@
 
 SVGFEDisplacementMapElement = function SVGFEDisplacementMapElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEDisplacementMapElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEDisplacementMapElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

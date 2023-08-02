@@ -2,7 +2,7 @@
 
 USBIsochronousOutTransferPacket = function USBIsochronousOutTransferPacket() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof USBIsochronousOutTransferPacket)) {
+  if (arg != 'bobo' && !(this instanceof USBIsochronousOutTransferPacket)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'USBIsochronousOutTransferPacket': 1 argument required, but only 0 present.");
   }
   ;

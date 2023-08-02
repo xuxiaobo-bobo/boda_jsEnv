@@ -2,7 +2,7 @@
 
 HTMLMetaElement = function HTMLMetaElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLMetaElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLMetaElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

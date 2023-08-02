@@ -2,7 +2,7 @@
 
 HTMLUnknownElement = function HTMLUnknownElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLUnknownElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLUnknownElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

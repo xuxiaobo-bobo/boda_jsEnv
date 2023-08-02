@@ -2,7 +2,7 @@
 
 OTPCredential = function OTPCredential() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof OTPCredential)) {
+  if (arg != 'bobo' && !(this instanceof OTPCredential)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

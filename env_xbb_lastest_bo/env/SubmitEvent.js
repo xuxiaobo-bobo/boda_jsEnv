@@ -2,7 +2,7 @@
 
 SubmitEvent = function SubmitEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SubmitEvent)) {
+  if (arg != 'bobo' && !(this instanceof SubmitEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'SubmitEvent': 1 argument required, but only 0 present.");
   }
   ;

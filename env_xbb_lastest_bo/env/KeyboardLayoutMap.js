@@ -2,7 +2,7 @@
 
 KeyboardLayoutMap = function KeyboardLayoutMap() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof KeyboardLayoutMap)) {
+  if (arg != 'bobo' && !(this instanceof KeyboardLayoutMap)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

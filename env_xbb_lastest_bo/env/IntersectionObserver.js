@@ -2,7 +2,7 @@
 
 IntersectionObserver = function IntersectionObserver() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IntersectionObserver)) {
+  if (arg != 'bobo' && !(this instanceof IntersectionObserver)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'IntersectionObserver': 1 argument required, but only 0 present.");
   }
   ;

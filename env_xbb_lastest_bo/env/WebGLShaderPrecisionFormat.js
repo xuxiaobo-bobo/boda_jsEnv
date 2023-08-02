@@ -2,7 +2,7 @@
 
 WebGLShaderPrecisionFormat = function WebGLShaderPrecisionFormat() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLShaderPrecisionFormat)) {
+  if (arg != 'bobo' && !(this instanceof WebGLShaderPrecisionFormat)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 ReadableStreamDefaultController = function ReadableStreamDefaultController() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ReadableStreamDefaultController)) {
+  if (arg != 'bobo' && !(this instanceof ReadableStreamDefaultController)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 CompositionEvent = function CompositionEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CompositionEvent)) {
+  if (arg != 'bobo' && !(this instanceof CompositionEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CompositionEvent': 1 argument required, but only 0 present.");
   }
   ;

@@ -2,7 +2,7 @@
 
 SVGMarkerElement = function SVGMarkerElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGMarkerElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGMarkerElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

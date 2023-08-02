@@ -2,7 +2,7 @@
 
 NavigationTransition = function NavigationTransition() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NavigationTransition)) {
+  if (arg != 'bobo' && !(this instanceof NavigationTransition)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

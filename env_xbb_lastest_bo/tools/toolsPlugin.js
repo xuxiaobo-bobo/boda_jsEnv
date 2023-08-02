@@ -2,6 +2,7 @@
 !function(){
 // 创建pluginArray
 // debugger
+
 bodavm.toolsFunc.createPluginArray = function createPluginArray(){
     let pluginArray = {};
     pluginArray = Object.setPrototypeOf(pluginArray, PluginArray.prototype);
@@ -37,13 +38,16 @@ bodavm.toolsFunc.addMimeType = function addMimeType(mimeType){
     if(mimeTypeArray === undefined){
         mimeTypeArray = bodavm.toolsFunc.createMimeTypeArray();
     }
-    Object.defineProperty(mimeTypeArray,bodavm.memory.symbolProperty,{
-        value:1,
-        enumerable:false,
-        writable:false,
-        configurable:false
-    },'bobo')
+    // Object.defineProperty(mimeTypeArray,bodavm.memory.symbolProperty,{
+    //     value:1,
+    //     enumerable:false,
+    //     writable:false,
+    //     configurable:false
+    // },'bobo')
+    // bodavm.memory.symbolProperty(mimeTypeArray)
+    bodavm.toolsFunc.symbolProperty(mimeTypeArray)
     let index = mimeTypeArray.length;
+    // debugger
     let flag = true;
     for(let i=0;i<index;i++){
         if(mimeTypeArray[i].type === mimeType.type){
@@ -70,7 +74,11 @@ bodavm.toolsFunc.createMimeType = function createMimeType(mimeTypeJson, plugin){
     bodavm.toolsFunc.setProtoAttr.call(mimeType, "suffixes", mimeTypeJson.suffixes);
     bodavm.toolsFunc.setProtoAttr.call(mimeType, "type", mimeTypeJson.type);
     bodavm.toolsFunc.setProtoAttr.call(mimeType, "enabledPlugin", plugin);
+    // debugger
+    // bodavm.toolsFunc.symbolProperty(mimeType)
+
     bodavm.toolsFunc.addMimeType(mimeType);
+
     return mimeType;
 }
 
@@ -93,6 +101,11 @@ bodavm.toolsPlugin.createPlugin = function createPlugin(data){
     bodavm.toolsFunc.addPlugin(plugin);
     return plugin;
 }
+
+// debugger
+
+
+
 
 }()
 

@@ -2,7 +2,7 @@
 
 GeolocationCoordinates = function GeolocationCoordinates() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GeolocationCoordinates)) {
+  if (arg != 'bobo' && !(this instanceof GeolocationCoordinates)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 SVGClipPathElement = function SVGClipPathElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGClipPathElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGClipPathElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

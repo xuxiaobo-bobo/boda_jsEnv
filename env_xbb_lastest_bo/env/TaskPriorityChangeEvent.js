@@ -2,7 +2,7 @@
 
 TaskPriorityChangeEvent = function TaskPriorityChangeEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TaskPriorityChangeEvent)) {
+  if (arg != 'bobo' && !(this instanceof TaskPriorityChangeEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'TaskPriorityChangeEvent': 2 arguments required, but only 0 present.");
   }
   ;

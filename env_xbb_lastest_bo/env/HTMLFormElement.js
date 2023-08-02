@@ -2,7 +2,7 @@
 
 HTMLFormElement = function HTMLFormElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLFormElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLFormElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 PushManager = function PushManager() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PushManager)) {
+  if (arg != 'bobo' && !(this instanceof PushManager)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

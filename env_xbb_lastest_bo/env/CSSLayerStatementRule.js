@@ -2,7 +2,7 @@
 
 CSSLayerStatementRule = function CSSLayerStatementRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSLayerStatementRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSLayerStatementRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

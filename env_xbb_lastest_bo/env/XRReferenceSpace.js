@@ -2,7 +2,7 @@
 
 XRReferenceSpace = function XRReferenceSpace() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRReferenceSpace)) {
+  if (arg != 'bobo' && !(this instanceof XRReferenceSpace)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

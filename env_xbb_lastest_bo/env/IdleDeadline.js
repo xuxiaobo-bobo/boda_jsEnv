@@ -1,8 +1,9 @@
 // IdleDeadline对象
 
 IdleDeadline = function IdleDeadline() {
+  
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IdleDeadline)) {
+  if (arg != 'bobo' && !(this instanceof IdleDeadline)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

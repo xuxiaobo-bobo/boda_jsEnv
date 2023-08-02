@@ -2,7 +2,7 @@
 
 AbstractRange = function AbstractRange() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AbstractRange) {
+  if (arg != 'bobo' && !(this instanceof AbstractRange)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 RTCDTMFSender = function RTCDTMFSender() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCDTMFSender)) {
+  if (arg != 'bobo' && !(this instanceof RTCDTMFSender)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

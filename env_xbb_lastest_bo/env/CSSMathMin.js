@@ -2,7 +2,7 @@
 
 CSSMathMin = function CSSMathMin() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSMathMin)) {
+  if (arg != 'bobo' && !(this instanceof CSSMathMin)) {
     return bodavm.toolsFunc.throwError("SyntaxError", "Failed to construct 'CSSMathMin': Arguments can't be empty");
   }
   ;

@@ -2,7 +2,7 @@
 
 SVGUseElement = function SVGUseElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGUseElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGUseElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

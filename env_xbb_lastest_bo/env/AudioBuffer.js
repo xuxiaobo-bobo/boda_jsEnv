@@ -2,7 +2,7 @@
 
 AudioBuffer = function AudioBuffer() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AudioBuffer) {
+  if (arg != 'bobo' && !(this instanceof AudioBuffer)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'AudioBuffer': 1 argument required, but only 0 present.");
   }
   ;

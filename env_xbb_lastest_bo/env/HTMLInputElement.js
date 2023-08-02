@@ -2,7 +2,7 @@
 
 HTMLInputElement = function HTMLInputElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLInputElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLInputElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

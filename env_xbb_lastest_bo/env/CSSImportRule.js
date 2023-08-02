@@ -2,7 +2,7 @@
 
 CSSImportRule = function CSSImportRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSImportRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSImportRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 FormDataEvent = function FormDataEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FormDataEvent)) {
+  if (arg != 'bobo' && !(this instanceof FormDataEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'FormDataEvent': 2 arguments required, but only 0 present.");
   }
   ;

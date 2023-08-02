@@ -2,7 +2,7 @@
 
 SharedWorker = function SharedWorker() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SharedWorker)) {
+  if (arg != 'bobo' && !(this instanceof SharedWorker)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'SharedWorker': 1 argument required, but only 0 present.");
   }
   ;

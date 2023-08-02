@@ -2,7 +2,7 @@
 
 HTMLOptionsCollection = function HTMLOptionsCollection() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLOptionsCollection)) {
+  if (arg != 'bobo' && !(this instanceof HTMLOptionsCollection)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

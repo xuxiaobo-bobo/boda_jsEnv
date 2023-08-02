@@ -2,7 +2,7 @@
 
 PushSubscription = function PushSubscription() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PushSubscription)) {
+  if (arg != 'bobo' && !(this instanceof PushSubscription)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

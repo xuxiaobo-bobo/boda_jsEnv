@@ -2,7 +2,7 @@
 
 VideoDecoder = function VideoDecoder() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof VideoDecoder)) {
+  if (arg != 'bobo' && !(this instanceof VideoDecoder)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'VideoDecoder': 1 argument required, but only 0 present.");
   }
   ;

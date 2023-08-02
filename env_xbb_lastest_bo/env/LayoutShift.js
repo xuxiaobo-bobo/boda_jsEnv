@@ -2,7 +2,7 @@
 
 LayoutShift = function LayoutShift() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof LayoutShift)) {
+  if (arg != 'bobo' && !(this instanceof LayoutShift)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

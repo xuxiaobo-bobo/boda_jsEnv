@@ -2,7 +2,7 @@
 
 Location = function Location() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Location)) {
+  if (arg != 'bobo' && !(this instanceof Location)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 SVGFEMorphologyElement = function SVGFEMorphologyElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEMorphologyElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEMorphologyElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

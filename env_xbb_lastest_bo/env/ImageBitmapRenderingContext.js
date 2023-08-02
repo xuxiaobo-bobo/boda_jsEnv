@@ -2,7 +2,7 @@
 
 ImageBitmapRenderingContext = function ImageBitmapRenderingContext() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ImageBitmapRenderingContext)) {
+  if (arg != 'bobo' && !(this instanceof ImageBitmapRenderingContext)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

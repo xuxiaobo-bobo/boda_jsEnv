@@ -2,7 +2,7 @@
 
 MediaKeySystemAccess = function MediaKeySystemAccess() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaKeySystemAccess)) {
+  if (arg != 'bobo' && !(this instanceof MediaKeySystemAccess)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

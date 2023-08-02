@@ -2,7 +2,7 @@
 
 GPUOutOfMemoryError = function GPUOutOfMemoryError() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUOutOfMemoryError)) {
+  if (arg != 'bobo' && !(this instanceof GPUOutOfMemoryError)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'GPUOutOfMemoryError': 1 argument required, but only 0 present.");
   }
   ;

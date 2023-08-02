@@ -2,7 +2,7 @@
 
 IDBRequest = function IDBRequest() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IDBRequest)) {
+  if (arg != 'bobo' && !(this instanceof IDBRequest)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

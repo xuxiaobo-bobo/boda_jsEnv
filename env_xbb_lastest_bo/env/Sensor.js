@@ -2,7 +2,7 @@
 
 Sensor = function Sensor() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Sensor)) {
+  if (arg != 'bobo' && !(this instanceof Sensor)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 ResizeObserverEntry = function ResizeObserverEntry() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ResizeObserverEntry)) {
+  if (arg != 'bobo' && !(this instanceof ResizeObserverEntry)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

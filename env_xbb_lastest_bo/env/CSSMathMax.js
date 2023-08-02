@@ -2,7 +2,7 @@
 
 CSSMathMax = function CSSMathMax() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSMathMax)) {
+  if (arg != 'bobo' && !(this instanceof CSSMathMax)) {
     return bodavm.toolsFunc.throwError("SyntaxError", "Failed to construct 'CSSMathMax': Arguments can't be empty");
   }
   ;

@@ -2,7 +2,7 @@
 
 VTTCue = function VTTCue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof VTTCue)) {
+  if (arg != 'bobo' && !(this instanceof VTTCue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'VTTCue': 3 arguments required, but only 0 present.");
   }
   ;

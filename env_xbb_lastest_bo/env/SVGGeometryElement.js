@@ -2,7 +2,7 @@
 
 SVGGeometryElement = function SVGGeometryElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGGeometryElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGGeometryElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

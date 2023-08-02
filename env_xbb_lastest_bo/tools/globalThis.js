@@ -1,5 +1,5 @@
 
-
+// debugger
 // // 删除浏览器中不存在的对象
 delete global;
 delete GLOBAL;
@@ -7,6 +7,8 @@ delete VMError;
 delete Buffer;
 delete process;
 delete root;
+delete __filename;
+delete __dirname;
 delete WindowProperties;
 delete globalThis[Symbol.toStringTag];
 delete SharedArrayBuffer
@@ -253,13 +255,15 @@ bodavm.toolsFunc.defineProperty(window, "locationbar", {configurable:true, enume
 bodavm.toolsFunc.defineProperty(window, "indexedDB", {configurable:true, enumerable:true, get:function indexedDB (){return bodavm.toolsFunc.dispatch(this, window, "window", "indexedDB_get", arguments)}, set:undefined});
 bodavm.toolsFunc.defineProperty(window, "trustedTypes", {configurable:true, enumerable:true, get:function trustedTypes (){return bodavm.toolsFunc.dispatch(this, window, "window", "trustedTypes_get", arguments)}, set:undefined});
 bodavm.toolsFunc.defineProperty(window, "caches", {configurable:true, enumerable:true, get:function caches (){return bodavm.toolsFunc.dispatch(this, window, "window", "caches_get", arguments)}, set:undefined});
-bodavm.toolsFunc.defineProperty(window, "alert", {configurable:true, enumerable:true, writable:true, value:function alert (){return bodavm.toolsFunc.dispatch(this, window, "window", "alert", arguments)}});
+// bodavm.toolsFunc.defineProperty(window, "alert", {configurable:true, enumerable:true, writable:true, value:function alert (){return bodavm.toolsFunc.dispatch(this, window, "window", "alert", arguments)}});
 
+alert=(a) => {
+    console.log_copy(`使用 alert arg->`, a);
+  };
 
+bodavm.toolsFunc.safefunction(alert,'alert')
 
-
-
-
+// debugger
 
 Element.prototype[Symbol.unscopables] = {
     after: true,
@@ -273,7 +277,8 @@ Element.prototype[Symbol.unscopables] = {
   };
 Element.prototype[Symbol.unscopables].__proto__ = null;
 
-
+bodavm.toolsFunc.safefunction(String.prototype.toString,'toString')
+bodavm.toolsFunc.safefunction(Array.prototype.toString,'toString')
 
 Object.defineProperty(window,'require',{
     value:undefined
@@ -287,6 +292,43 @@ Object.defineProperty(console,Symbol.toStringTag,{
 })
 // console[]
 
+// let bodaError=bodavm.toolsFunc.proxy2(bodavm.toolsFunc.proxy2(Error,'Error'),'Error')
+// debugger
+// let ErrorFlag=0
+// delete Error
+// Error.prepareStackTrace =function(error, stack,boflag) {
+//     // 在这里修改调用堆栈
+//     console.log_copy(` 调用堆栈检测 error ->`,error)
+//     console.log_copy(` 调用堆栈检测 stack ->`,stack)
+//     console.log_copy(` 调用堆栈检测 stack默认返回空 ->`,[])
+//     // debugger
+//     // Object.defineProperty_bo(Error,'prepareStackTrace',{
+//     //     value:function (){
+//     //         if (ErrorFlag==1){
+//     //             return undefined
+//     //         }
+//     //     }
+        
+//     // })
+//     // window.Error.prepareStackTrace=undefined
+//     return [];
+// };
+// Error=function (){}
+// Error.prototype.stack=[]
+Error.prepareStackTrace=undefined
+// Object.defineProperty(Error,'prepareStackTrace',{
+//     value:function (){
+//         return undefined
+//     },
+//     configurable:true
+    
+// })
+
+// let plugins=bodavm.memory.globalInit.pluginArray
+// debugger
+bodavm.memory.globalInit.pluginArrayCopy=bodavm.toolsFunc.proxyPlugin(bodavm.memory.globalInit.pluginArray,'plugin')
+
+// debugger
 // var boeval = eval
 // eval = function (x) {
 //     debugger
@@ -303,7 +345,7 @@ eval=new Proxy(eval,{
             return false
         }
         let arg=argumentsList[0]
-        if (arg.length>100){
+        if (arg && arg.length>100){
             arg=arg.substr(0,100)+'...太长只显示前100位'
         }
         console.log('eval执行  参数  -->',arg,` 结果为 -->`);
@@ -318,10 +360,10 @@ eval=new Proxy(eval,{
   })
 
 bodavm.toolsFunc.safefunction(eval,'eval')
-window=bodavm.toolsFunc.proxy(window,"window")
+// window=bodavm.toolsFunc.proxy(window,"window")
 if (!bodavm.config.proxy){
-    Object.defineProperty(this, 'window', {
-        get: function window() {
+Object.defineProperty(this, 'window', {
+        get: function () {
             // if (bodavm.config.proxy ){
             //     window=bodavm.toolsFunc.proxy(window,'window')
             //     return window
@@ -332,18 +374,23 @@ if (!bodavm.config.proxy){
         // writable: false,
         configurable: false,
         enumerable:true
-    });
-bodavm.toolsFunc.safeFunc(Object.getOwnPropertyDescriptor(this,'window').get,'get window')
-// 
+    },);
+    bodavm.toolsFunc.safeFunc(Object.getOwnPropertyDescriptor(this,'window').get,'get window')
+
 }
+
 // document对象;
 // document = new HTMLDocument('bobo');
 // document.location=window.location
 bodavm.toolsFunc.defineProperty(document, "location", {configurable:false, enumerable:true, get:function location (){return bodavm.toolsFunc.dispatch(this, document, "document", "location_get", arguments)}, set:function location (){return bodavm.toolsFunc.dispatch(this, document, "document", "location_set", arguments)}});
 
+Object.defineProperty(Function.prototype.toString,'prototype',{
+    value:undefined
+})
 
-
-
+Object.defineProperty(Function.prototype.toString,'name',{
+    value:'toString'
+})
 
 // debugger
 

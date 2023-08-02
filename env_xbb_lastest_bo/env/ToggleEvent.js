@@ -2,7 +2,7 @@
 
 ToggleEvent = function ToggleEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ToggleEvent)) {
+  if (arg != 'bobo' && !(this instanceof ToggleEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ToggleEvent': 1 argument required, but only 0 present.");
   }
   ;

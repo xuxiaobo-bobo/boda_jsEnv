@@ -2,7 +2,7 @@
 
 CryptoKey = function CryptoKey() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CryptoKey)) {
+  if (arg != 'bobo' && !(this instanceof CryptoKey)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

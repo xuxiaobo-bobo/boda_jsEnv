@@ -2,7 +2,7 @@
 
 XRDOMOverlayState = function XRDOMOverlayState() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRDOMOverlayState)) {
+  if (arg != 'bobo' && !(this instanceof XRDOMOverlayState)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

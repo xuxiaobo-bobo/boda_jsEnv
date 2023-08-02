@@ -2,7 +2,7 @@
 
 SVGMetadataElement = function SVGMetadataElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGMetadataElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGMetadataElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

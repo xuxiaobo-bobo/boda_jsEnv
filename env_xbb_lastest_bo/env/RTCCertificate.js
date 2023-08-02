@@ -2,7 +2,7 @@
 
 RTCCertificate = function RTCCertificate() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCCertificate)) {
+  if (arg != 'bobo' && !(this instanceof RTCCertificate)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

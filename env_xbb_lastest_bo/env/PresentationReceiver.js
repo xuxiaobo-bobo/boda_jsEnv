@@ -2,7 +2,7 @@
 
 PresentationReceiver = function PresentationReceiver() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PresentationReceiver)) {
+  if (arg != 'bobo' && !(this instanceof PresentationReceiver)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

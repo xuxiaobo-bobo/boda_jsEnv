@@ -2,7 +2,7 @@
 
 ProcessingInstruction = function ProcessingInstruction() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ProcessingInstruction)) {
+  if (arg != 'bobo' && !(this instanceof ProcessingInstruction)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

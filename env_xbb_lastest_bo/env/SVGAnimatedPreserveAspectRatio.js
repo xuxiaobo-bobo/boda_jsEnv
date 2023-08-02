@@ -2,7 +2,7 @@
 
 SVGAnimatedPreserveAspectRatio = function SVGAnimatedPreserveAspectRatio() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimatedPreserveAspectRatio)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimatedPreserveAspectRatio)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

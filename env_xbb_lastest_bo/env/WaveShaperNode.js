@@ -2,7 +2,7 @@
 
 WaveShaperNode = function WaveShaperNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WaveShaperNode)) {
+  if (arg != 'bobo' && !(this instanceof WaveShaperNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WaveShaperNode': 1 argument required, but only 0 present.");
   }
   ;

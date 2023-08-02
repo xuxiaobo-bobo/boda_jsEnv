@@ -2,7 +2,7 @@
 
 PresentationConnectionAvailableEvent = function PresentationConnectionAvailableEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PresentationConnectionAvailableEvent)) {
+  if (arg != 'bobo' && !(this instanceof PresentationConnectionAvailableEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PresentationConnectionAvailableEvent': 2 arguments required, but only 0 present.");
   }
   ;

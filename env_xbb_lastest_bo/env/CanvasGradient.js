@@ -2,7 +2,7 @@
 
 CanvasGradient = function CanvasGradient() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CanvasGradient)) {
+  if (arg != 'bobo' && !(this instanceof CanvasGradient)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

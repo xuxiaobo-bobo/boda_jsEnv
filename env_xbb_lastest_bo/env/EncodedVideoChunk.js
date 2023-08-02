@@ -2,7 +2,7 @@
 
 EncodedVideoChunk = function EncodedVideoChunk() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof EncodedVideoChunk)) {
+  if (arg != 'bobo' && !(this instanceof EncodedVideoChunk)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'EncodedVideoChunk': 1 argument required, but only 0 present.");
   }
   ;

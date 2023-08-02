@@ -2,7 +2,7 @@
 
 File = function File() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof File)) {
+  if (arg != 'bobo' && !(this instanceof File)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'File': 2 arguments required, but only 0 present.");
   }
   ;

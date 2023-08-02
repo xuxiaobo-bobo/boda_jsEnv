@@ -2,7 +2,7 @@
 
 GPUValidationError = function GPUValidationError() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUValidationError)) {
+  if (arg != 'bobo' && !(this instanceof GPUValidationError)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'GPUValidationError': 1 argument required, but only 0 present.");
   }
   ;

@@ -2,7 +2,7 @@
 
 HTMLLinkElement = function HTMLLinkElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLLinkElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLLinkElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

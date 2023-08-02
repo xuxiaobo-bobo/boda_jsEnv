@@ -2,7 +2,7 @@
 
 SyncManager = function SyncManager() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SyncManager)) {
+  if (arg != 'bobo' && !(this instanceof SyncManager)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

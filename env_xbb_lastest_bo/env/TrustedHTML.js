@@ -2,7 +2,7 @@
 
 TrustedHTML = function TrustedHTML() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TrustedHTML)) {
+  if (arg != 'bobo' && !(this instanceof TrustedHTML)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

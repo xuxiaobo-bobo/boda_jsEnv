@@ -2,7 +2,7 @@
 
 DOMImplementation = function DOMImplementation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DOMImplementation)) {
+  if (arg != 'bobo' && !(this instanceof DOMImplementation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 FontFace = function FontFace() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FontFace)) {
+  if (arg != 'bobo' && !(this instanceof FontFace)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'FontFace': 2 arguments required, but only 0 present.");
   }
   ;

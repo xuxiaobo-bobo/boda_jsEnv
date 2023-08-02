@@ -2,7 +2,7 @@
 
 CSSVariableReferenceValue = function CSSVariableReferenceValue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSVariableReferenceValue)) {
+  if (arg != 'bobo' && !(this instanceof CSSVariableReferenceValue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSVariableReferenceValue': 1 argument required, but only 0 present.");
   }
   ;

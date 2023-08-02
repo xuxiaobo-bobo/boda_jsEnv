@@ -2,7 +2,7 @@
 
 ResizeObserver = function ResizeObserver() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ResizeObserver)) {
+  if (arg != 'bobo' && !(this instanceof ResizeObserver)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ResizeObserver': 1 argument required, but only 0 present.");
   }
   ;

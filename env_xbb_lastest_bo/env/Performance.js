@@ -2,7 +2,7 @@
 
 Performance = function Performance() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Performance)) {
+  if (arg != 'bobo' && !(this instanceof Performance)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

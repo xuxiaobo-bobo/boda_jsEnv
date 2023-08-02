@@ -1,6 +1,6 @@
 bodavm.memory.notDefined['WindowProperties'] = function () {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof bodavm.memory.notDefined['WindowProperties'])) {
+  if (arg != 'bobo' && !(this instanceof bodavm.memory.notDefined['WindowProperties'])) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WindowControlsOverlayGeometryChangeEvent': 2 arguments required, but only 0 present.");
   }
   ;

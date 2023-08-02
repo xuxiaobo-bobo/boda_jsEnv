@@ -2,7 +2,7 @@
 
 IDBDatabase = function IDBDatabase() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IDBDatabase)) {
+  if (arg != 'bobo' && !(this instanceof IDBDatabase)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

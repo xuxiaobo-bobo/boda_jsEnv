@@ -2,7 +2,7 @@
 
 WebGLFramebuffer = function WebGLFramebuffer() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLFramebuffer)) {
+  if (arg != 'bobo' && !(this instanceof WebGLFramebuffer)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

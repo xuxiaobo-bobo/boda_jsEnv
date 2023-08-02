@@ -2,7 +2,7 @@
 
 ServiceWorkerRegistration = function ServiceWorkerRegistration() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ServiceWorkerRegistration)) {
+  if (arg != 'bobo' && !(this instanceof ServiceWorkerRegistration)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

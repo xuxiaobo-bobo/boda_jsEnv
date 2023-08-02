@@ -2,7 +2,7 @@
 
 TextTrackCueList = function TextTrackCueList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TextTrackCueList)) {
+  if (arg != 'bobo' && !(this instanceof TextTrackCueList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

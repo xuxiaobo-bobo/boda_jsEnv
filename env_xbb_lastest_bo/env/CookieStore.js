@@ -2,7 +2,7 @@
 
 CookieStore = function CookieStore() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CookieStore)) {
+  if (arg != 'bobo' && !(this instanceof CookieStore)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

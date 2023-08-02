@@ -2,7 +2,7 @@
 
 XRInputSourcesChangeEvent = function XRInputSourcesChangeEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRInputSourcesChangeEvent)) {
+  if (arg != 'bobo' && !(this instanceof XRInputSourcesChangeEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'XRInputSourcesChangeEvent': 2 arguments required, but only 0 present.");
   }
   ;

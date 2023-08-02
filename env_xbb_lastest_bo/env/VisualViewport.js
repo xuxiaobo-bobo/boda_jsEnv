@@ -2,7 +2,7 @@
 
 VisualViewport = function VisualViewport() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof VisualViewport)) {
+  if (arg != 'bobo' && !(this instanceof VisualViewport)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

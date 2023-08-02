@@ -2,7 +2,7 @@
 
 XRLightEstimate = function XRLightEstimate() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRLightEstimate)) {
+  if (arg != 'bobo' && !(this instanceof XRLightEstimate)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

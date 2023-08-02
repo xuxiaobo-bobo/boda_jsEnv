@@ -2,7 +2,7 @@
 
 HTMLOListElement = function HTMLOListElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLOListElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLOListElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

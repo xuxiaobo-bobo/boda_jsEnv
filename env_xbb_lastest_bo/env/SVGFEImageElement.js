@@ -2,7 +2,7 @@
 
 SVGFEImageElement = function SVGFEImageElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEImageElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEImageElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

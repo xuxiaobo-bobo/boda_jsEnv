@@ -2,7 +2,7 @@
 
 IntersectionObserverEntry = function IntersectionObserverEntry() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IntersectionObserverEntry)) {
+  if (arg != 'bobo' && !(this instanceof IntersectionObserverEntry)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

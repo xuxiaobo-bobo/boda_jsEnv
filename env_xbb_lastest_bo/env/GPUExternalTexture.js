@@ -2,7 +2,7 @@
 
 GPUExternalTexture = function GPUExternalTexture() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUExternalTexture)) {
+  if (arg != 'bobo' && !(this instanceof GPUExternalTexture)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

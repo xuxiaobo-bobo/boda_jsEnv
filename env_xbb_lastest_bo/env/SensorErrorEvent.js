@@ -2,7 +2,7 @@
 
 SensorErrorEvent = function SensorErrorEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SensorErrorEvent)) {
+  if (arg != 'bobo' && !(this instanceof SensorErrorEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'SensorErrorEvent': 2 arguments required, but only 0 present.");
   }
   ;

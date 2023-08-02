@@ -1,6 +1,6 @@
 // openDatabase对象
-openDatabase = () => {
-  console.log_copy(`openDatabase 使用 arg->`, arguments);
+openDatabase = (a) => {
+  console.log_copy(`openDatabase 使用 arg->`, a);
 };
 bodavm.toolsFunc.safefunction(openDatabase, "openDatabase");
 bodavm.toolsFunc.defineProperty(openDatabase, "length", {

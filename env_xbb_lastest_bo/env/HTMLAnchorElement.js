@@ -2,7 +2,7 @@
 
 HTMLAnchorElement = function HTMLAnchorElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLAnchorElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLAnchorElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

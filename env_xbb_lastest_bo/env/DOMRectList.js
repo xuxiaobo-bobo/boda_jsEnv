@@ -2,7 +2,7 @@
 
 DOMRectList = function DOMRectList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DOMRectList)) {
+  if (arg != 'bobo' && !(this instanceof DOMRectList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -1,6 +1,8 @@
 // DocumentTimeline对象
 
 DocumentTimeline = function DocumentTimeline() {
+  let arg = arguments[0];
+
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DocumentTimeline 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

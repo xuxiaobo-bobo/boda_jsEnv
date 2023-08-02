@@ -2,7 +2,7 @@
 
 SVGAnimateMotionElement = function SVGAnimateMotionElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimateMotionElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimateMotionElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

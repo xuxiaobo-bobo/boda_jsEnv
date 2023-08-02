@@ -1,6 +1,6 @@
 // webkitRequestFileSystem对象
-webkitRequestFileSystem = () => {
-  console.log_copy(`webkitRequestFileSystem 使用arg->`, arguments);
+webkitRequestFileSystem = (a) => {
+  console.log_copy(`webkitRequestFileSystem  使用--->`,a);
 };
 //debugger;
 bodavm.toolsFunc.safefunction(webkitRequestFileSystem, "webkitRequestFileSystem");

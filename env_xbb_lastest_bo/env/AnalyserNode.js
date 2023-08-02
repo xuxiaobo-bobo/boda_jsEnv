@@ -2,7 +2,7 @@
 
 AnalyserNode = function AnalyserNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AnalyserNode) {
+  if (arg != 'bobo' && !(this instanceof AnalyserNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'AnalyserNode': 1 argument required, but only 0 present.");
   }
   ;

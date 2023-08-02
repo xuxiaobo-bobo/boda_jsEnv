@@ -1,4 +1,5 @@
 var $=function (){
+    console.log_copy(`使用 $ ----> arg ->`,JSON.stringify(arguments))
 
 }
 
@@ -15,7 +16,10 @@ $.ajax=function (obj){
 }
 
 
-var axios=function(){}
+var axios=function(){
+    console.log_copy(`使用 axios ----> arg ->`,JSON.stringify(arguments))
+
+}
 axios.get=function(){
     console.log_copy(`axios.get -->`,'arg -> ',JSON.stringify(arguments))
 }

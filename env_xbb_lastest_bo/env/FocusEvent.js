@@ -2,7 +2,7 @@
 
 FocusEvent = function FocusEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FocusEvent)) {
+  if (arg != 'bobo' && !(this instanceof FocusEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'FocusEvent': 1 argument required, but only 0 present.");
   }
   ;

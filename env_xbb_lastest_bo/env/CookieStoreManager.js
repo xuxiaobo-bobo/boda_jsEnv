@@ -2,7 +2,7 @@
 
 CookieStoreManager = function CookieStoreManager() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CookieStoreManager)) {
+  if (arg != 'bobo' && !(this instanceof CookieStoreManager)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

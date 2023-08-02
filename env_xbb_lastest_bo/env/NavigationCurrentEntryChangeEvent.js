@@ -2,7 +2,7 @@
 
 NavigationCurrentEntryChangeEvent = function NavigationCurrentEntryChangeEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NavigationCurrentEntryChangeEvent)) {
+  if (arg != 'bobo' && !(this instanceof NavigationCurrentEntryChangeEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'NavigationCurrentEntryChangeEvent': 2 arguments required, but only 0 present.");
   }
   ;

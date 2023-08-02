@@ -2,7 +2,7 @@
 
 PermissionStatus = function PermissionStatus() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PermissionStatus)) {
+  if (arg != 'bobo' && !(this instanceof PermissionStatus)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

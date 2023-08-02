@@ -2,7 +2,7 @@
 
 XRBoundedReferenceSpace = function XRBoundedReferenceSpace() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRBoundedReferenceSpace)) {
+  if (arg != 'bobo' && !(this instanceof XRBoundedReferenceSpace)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 SVGStringList = function SVGStringList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGStringList)) {
+  if (arg != 'bobo' && !(this instanceof SVGStringList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

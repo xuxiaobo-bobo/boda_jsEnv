@@ -2,7 +2,7 @@
 
 PageTransitionEvent = function PageTransitionEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PageTransitionEvent)) {
+  if (arg != 'bobo' && !(this instanceof PageTransitionEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PageTransitionEvent': 1 argument required, but only 0 present.");
   }
   ;

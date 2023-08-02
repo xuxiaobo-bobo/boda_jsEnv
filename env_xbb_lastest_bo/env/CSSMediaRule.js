@@ -2,7 +2,7 @@
 
 CSSMediaRule = function CSSMediaRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSMediaRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSMediaRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 HTMLTemplateElement = function HTMLTemplateElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLTemplateElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLTemplateElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

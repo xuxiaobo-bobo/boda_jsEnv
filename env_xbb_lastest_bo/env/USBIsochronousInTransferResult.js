@@ -2,7 +2,7 @@
 
 USBIsochronousInTransferResult = function USBIsochronousInTransferResult() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof USBIsochronousInTransferResult)) {
+  if (arg != 'bobo' && !(this instanceof USBIsochronousInTransferResult)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'USBIsochronousInTransferResult': 1 argument required, but only 0 present.");
   }
   ;

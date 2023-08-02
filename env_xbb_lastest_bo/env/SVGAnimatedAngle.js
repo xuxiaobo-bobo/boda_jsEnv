@@ -2,7 +2,7 @@
 
 SVGAnimatedAngle = function SVGAnimatedAngle() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimatedAngle)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimatedAngle)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

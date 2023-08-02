@@ -1,6 +1,7 @@
 // MediaSource对象
 
 MediaSource = function MediaSource() {
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('MediaSource 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

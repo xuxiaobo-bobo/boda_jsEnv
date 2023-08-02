@@ -2,7 +2,7 @@
 
 HTMLAreaElement = function HTMLAreaElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLAreaElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLAreaElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

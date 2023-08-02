@@ -2,7 +2,7 @@
 
 SVGSwitchElement = function SVGSwitchElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGSwitchElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGSwitchElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

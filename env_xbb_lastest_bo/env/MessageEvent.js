@@ -2,7 +2,7 @@
 
 MessageEvent = function MessageEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MessageEvent)) {
+  if (arg != 'bobo' && !(this instanceof MessageEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MessageEvent': 1 argument required, but only 0 present.");
   }
   ;

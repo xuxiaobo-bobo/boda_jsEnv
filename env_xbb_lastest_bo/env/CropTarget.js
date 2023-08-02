@@ -2,7 +2,7 @@
 
 CropTarget = function CropTarget() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CropTarget)) {
+  if (arg != 'bobo' && !(this instanceof CropTarget)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 PerformanceNavigation = function PerformanceNavigation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PerformanceNavigation)) {
+  if (arg != 'bobo' && !(this instanceof PerformanceNavigation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

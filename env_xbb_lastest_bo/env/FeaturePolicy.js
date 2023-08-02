@@ -2,7 +2,7 @@
 
 FeaturePolicy = function FeaturePolicy() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FeaturePolicy)) {
+  if (arg != 'bobo' && !(this instanceof FeaturePolicy)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

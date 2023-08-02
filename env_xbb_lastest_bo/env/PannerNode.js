@@ -2,7 +2,7 @@
 
 PannerNode = function PannerNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PannerNode)) {
+  if (arg != 'bobo' && !(this instanceof PannerNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PannerNode': 1 argument required, but only 0 present.");
   }
   ;

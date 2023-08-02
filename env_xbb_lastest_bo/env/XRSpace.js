@@ -2,7 +2,7 @@
 
 XRSpace = function XRSpace() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRSpace)) {
+  if (arg != 'bobo' && !(this instanceof XRSpace)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

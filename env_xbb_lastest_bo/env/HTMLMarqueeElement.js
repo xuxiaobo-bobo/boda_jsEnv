@@ -2,7 +2,7 @@
 
 HTMLMarqueeElement = function HTMLMarqueeElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLMarqueeElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLMarqueeElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -1,6 +1,6 @@
 // getScreenDetails对象
-getScreenDetails = () => {
-  console.log(`使用 getScreenDetails arg->`, arguments);
+getScreenDetails = (a )=> {
+  console.log(`使用 getScreenDetails arg->`, a);
 };
 bodavm.toolsFunc.safefunction(getScreenDetails, "getScreenDetails");
 bodavm.toolsFunc.defineProperty(getScreenDetails, "length", {

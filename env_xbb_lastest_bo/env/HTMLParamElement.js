@@ -2,7 +2,7 @@
 
 HTMLParamElement = function HTMLParamElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLParamElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLParamElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

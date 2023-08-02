@@ -2,7 +2,7 @@
 
 GPUBindGroup = function GPUBindGroup() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUBindGroup)) {
+  if (arg != 'bobo' && !(this instanceof GPUBindGroup)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

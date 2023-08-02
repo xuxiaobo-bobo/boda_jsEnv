@@ -2,7 +2,7 @@
 
 NetworkInformation = function NetworkInformation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NetworkInformation)) {
+  if (arg != 'bobo' && !(this instanceof NetworkInformation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 TaskSignal = function TaskSignal() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TaskSignal)) {
+  if (arg != 'bobo' && !(this instanceof TaskSignal)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

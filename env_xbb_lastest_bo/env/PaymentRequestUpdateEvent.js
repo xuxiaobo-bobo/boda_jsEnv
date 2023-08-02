@@ -2,7 +2,7 @@
 
 PaymentRequestUpdateEvent = function PaymentRequestUpdateEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PaymentRequestUpdateEvent)) {
+  if (arg != 'bobo' && !(this instanceof PaymentRequestUpdateEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PaymentRequestUpdateEvent': 1 argument required, but only 0 present.");
   }
   ;

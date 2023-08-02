@@ -2,7 +2,7 @@
 
 PopStateEvent = function PopStateEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PopStateEvent)) {
+  if (arg != 'bobo' && !(this instanceof PopStateEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PopStateEvent': 1 argument required, but only 0 present.");
   }
   ;

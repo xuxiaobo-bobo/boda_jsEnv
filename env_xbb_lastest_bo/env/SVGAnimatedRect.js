@@ -2,7 +2,7 @@
 
 SVGAnimatedRect = function SVGAnimatedRect() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimatedRect)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimatedRect)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

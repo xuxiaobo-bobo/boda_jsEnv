@@ -2,7 +2,7 @@
 
 WebGLContextEvent = function WebGLContextEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLContextEvent)) {
+  if (arg != 'bobo' && !(this instanceof WebGLContextEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WebGLContextEvent': 1 argument required, but only 0 present.");
   }
   ;

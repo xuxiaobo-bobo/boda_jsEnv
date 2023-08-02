@@ -2,7 +2,7 @@
 
 BatteryManager = function BatteryManager() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BatteryManager)) {
+  if (arg != 'bobo' && !(this instanceof BatteryManager)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

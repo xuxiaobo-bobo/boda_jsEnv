@@ -2,7 +2,7 @@
 
 XRLightProbe = function XRLightProbe() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRLightProbe)) {
+  if (arg != 'bobo' && !(this instanceof XRLightProbe)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

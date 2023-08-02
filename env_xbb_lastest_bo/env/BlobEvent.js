@@ -2,7 +2,7 @@
 
 BlobEvent = function BlobEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BlobEvent)) {
+  if (arg != 'bobo' && !(this instanceof BlobEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BlobEvent': 2 arguments required, but only 0 present.");
   }
   ;

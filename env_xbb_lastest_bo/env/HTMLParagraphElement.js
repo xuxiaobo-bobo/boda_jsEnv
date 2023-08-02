@@ -2,7 +2,7 @@
 
 HTMLParagraphElement = function HTMLParagraphElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLParagraphElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLParagraphElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

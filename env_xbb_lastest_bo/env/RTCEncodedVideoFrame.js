@@ -2,7 +2,7 @@
 
 RTCEncodedVideoFrame = function RTCEncodedVideoFrame() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCEncodedVideoFrame)) {
+  if (arg != 'bobo' && !(this instanceof RTCEncodedVideoFrame)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 ScreenDetails = function ScreenDetails() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ScreenDetails)) {
+  if (arg != 'bobo' && !(this instanceof ScreenDetails)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

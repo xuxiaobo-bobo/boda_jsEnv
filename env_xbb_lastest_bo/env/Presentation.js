@@ -2,7 +2,7 @@
 
 Presentation = function Presentation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Presentation)) {
+  if (arg != 'bobo' && !(this instanceof Presentation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 BluetoothRemoteGATTDescriptor = function BluetoothRemoteGATTDescriptor() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BluetoothRemoteGATTDescriptor)) {
+  if (arg != 'bobo' && !(this instanceof BluetoothRemoteGATTDescriptor)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

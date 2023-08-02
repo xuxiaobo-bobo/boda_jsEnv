@@ -1,5 +1,24 @@
-// window=bodavm.toolsFunc.proxy(window,"window")
+// if (bodavm.config.proxy){
+//     window22=bodavm.toolsFunc.proxy(window,"window")
+    
+// }
 
+// Function=bodavm.toolsFunc.proxyObjHook(Function,'Function')
+// const originalFuncProto = Function.prototype;
+
+// const newFuncProto = bodavm.toolsFunc.proxyObjHook(originalFuncProto,'Function.prototype')
+
+// Function.prototype = newFuncProto;
+Function=bodavm.toolsFunc.proxyObjHook(Function,'Function::proxyObjHook')
+
+String=bodavm.toolsFunc.proxyObjHook(String,'String::proxyObjHook')
+// String.prototype.toString=bodavm.toolsFunc.proxyObjHook(String.prototype.toString,'String.prototype.toString::proxyObjHook')
+
+Array=bodavm.toolsFunc.proxyObjHook(Array,'Array::proxyObjHook')
+Array.prototype.toString=bodavm.toolsFunc.proxyObjHook(Array.prototype.toString,'Array.prototype.toString::proxyObjHook')
+Uint8Array=bodavm.toolsFunc.proxyObjHook(Uint8Array,'Uint8Array::proxyObjHook')
+// Uint8Array.prototype=bodavm.toolsFunc.proxyObjHook(Uint8Array.prototype,'TypedArray::proxyObjHook')
+RegExp=bodavm.toolsFunc.proxyObjHook(RegExp,'RegExp::proxyObjHook')
 // CSS=bodavm.toolsFunc.proxy(CSS,"CSS");
 // let newThi = {};
 // var proxy=function (o){

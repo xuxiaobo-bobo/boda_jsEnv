@@ -2,7 +2,7 @@
 
 RTCPeerConnectionIceEvent = function RTCPeerConnectionIceEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCPeerConnectionIceEvent)) {
+  if (arg != 'bobo' && !(this instanceof RTCPeerConnectionIceEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'RTCPeerConnectionIceEvent': 1 argument required, but only 0 present.");
   }
   ;

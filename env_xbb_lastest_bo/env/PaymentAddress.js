@@ -2,7 +2,7 @@
 
 PaymentAddress = function PaymentAddress() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PaymentAddress)) {
+  if (arg != 'bobo' && !(this instanceof PaymentAddress)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

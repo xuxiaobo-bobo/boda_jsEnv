@@ -2,7 +2,7 @@
 
 CanvasRenderingContext2D = function CanvasRenderingContext2D() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CanvasRenderingContext2D)) {
+  if (arg != 'bobo' && !(this instanceof CanvasRenderingContext2D)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

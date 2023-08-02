@@ -2,7 +2,7 @@
 
 BarProp = function BarProp() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BarProp)) {
+  if (arg != 'bobo' && !(this instanceof BarProp)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

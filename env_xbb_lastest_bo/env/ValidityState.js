@@ -2,7 +2,7 @@
 
 ValidityState = function ValidityState() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ValidityState)) {
+  if (arg != 'bobo' && !(this instanceof ValidityState)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

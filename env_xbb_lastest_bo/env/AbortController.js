@@ -1,6 +1,8 @@
 // AbortController对象
 
 AbortController = function AbortController() {
+  let arg = arguments[0];
+
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('AbortController 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

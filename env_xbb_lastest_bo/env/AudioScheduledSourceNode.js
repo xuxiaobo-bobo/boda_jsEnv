@@ -2,7 +2,7 @@
 
 AudioScheduledSourceNode = function AudioScheduledSourceNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof AudioScheduledSourceNode)) {
+  if (arg != 'bobo' && !(this instanceof AudioScheduledSourceNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

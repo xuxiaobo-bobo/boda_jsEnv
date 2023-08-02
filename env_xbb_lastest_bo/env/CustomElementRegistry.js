@@ -2,7 +2,7 @@
 
 CustomElementRegistry = function CustomElementRegistry() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CustomElementRegistry)) {
+  if (arg != 'bobo' && !(this instanceof CustomElementRegistry)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

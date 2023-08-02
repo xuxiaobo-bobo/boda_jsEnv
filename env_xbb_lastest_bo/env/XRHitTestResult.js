@@ -2,7 +2,7 @@
 
 XRHitTestResult = function XRHitTestResult() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRHitTestResult)) {
+  if (arg != 'bobo' && !(this instanceof XRHitTestResult)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

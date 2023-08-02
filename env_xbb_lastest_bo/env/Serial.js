@@ -2,7 +2,7 @@
 
 Serial = function Serial() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Serial)) {
+  if (arg != 'bobo' && !(this instanceof Serial)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

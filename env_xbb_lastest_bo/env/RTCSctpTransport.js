@@ -2,7 +2,7 @@
 
 RTCSctpTransport = function RTCSctpTransport() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCSctpTransport)) {
+  if (arg != 'bobo' && !(this instanceof RTCSctpTransport)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 HTMLCanvasElement = function HTMLCanvasElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLCanvasElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLCanvasElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

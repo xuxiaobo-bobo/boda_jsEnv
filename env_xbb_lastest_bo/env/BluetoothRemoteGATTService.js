@@ -2,7 +2,7 @@
 
 BluetoothRemoteGATTService = function BluetoothRemoteGATTService() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BluetoothRemoteGATTService)) {
+  if (arg != 'bobo' && !(this instanceof BluetoothRemoteGATTService)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

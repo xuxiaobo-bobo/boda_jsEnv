@@ -2,7 +2,7 @@
 
 SVGPatternElement = function SVGPatternElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGPatternElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGPatternElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

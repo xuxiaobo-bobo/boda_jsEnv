@@ -2,7 +2,7 @@
 
 NodeIterator = function NodeIterator() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NodeIterator)) {
+  if (arg != 'bobo' && !(this instanceof NodeIterator)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

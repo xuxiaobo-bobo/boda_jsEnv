@@ -2,7 +2,7 @@
 
 VideoEncoder = function VideoEncoder() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof VideoEncoder)) {
+  if (arg != 'bobo' && !(this instanceof VideoEncoder)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'VideoEncoder': 1 argument required, but only 0 present.");
   }
   ;

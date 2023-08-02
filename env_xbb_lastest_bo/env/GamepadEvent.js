@@ -2,7 +2,7 @@
 
 GamepadEvent = function GamepadEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GamepadEvent)) {
+  if (arg != 'bobo' && !(this instanceof GamepadEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'GamepadEvent': 1 argument required, but only 0 present.");
   }
   ;

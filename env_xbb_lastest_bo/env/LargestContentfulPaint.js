@@ -2,7 +2,7 @@
 
 LargestContentfulPaint = function LargestContentfulPaint() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof LargestContentfulPaint)) {
+  if (arg != 'bobo' && !(this instanceof LargestContentfulPaint)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

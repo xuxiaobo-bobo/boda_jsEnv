@@ -2,7 +2,7 @@
 
 TextTrack = function TextTrack() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TextTrack)) {
+  if (arg != 'bobo' && !(this instanceof TextTrack)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

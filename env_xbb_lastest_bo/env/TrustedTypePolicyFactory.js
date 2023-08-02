@@ -2,7 +2,7 @@
 
 TrustedTypePolicyFactory = function TrustedTypePolicyFactory() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TrustedTypePolicyFactory)) {
+  if (arg != 'bobo' && !(this instanceof TrustedTypePolicyFactory)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

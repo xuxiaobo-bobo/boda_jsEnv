@@ -2,7 +2,7 @@
 
 HighlightRegistry = function HighlightRegistry() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HighlightRegistry)) {
+  if (arg != 'bobo' && !(this instanceof HighlightRegistry)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

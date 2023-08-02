@@ -2,7 +2,7 @@
 
 InputDeviceInfo = function InputDeviceInfo() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof InputDeviceInfo)) {
+  if (arg != 'bobo' && !(this instanceof InputDeviceInfo)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

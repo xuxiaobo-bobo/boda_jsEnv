@@ -2,7 +2,7 @@
 
 TextMetrics = function TextMetrics() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TextMetrics)) {
+  if (arg != 'bobo' && !(this instanceof TextMetrics)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

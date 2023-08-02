@@ -2,7 +2,7 @@
 
 RTCDTMFToneChangeEvent = function RTCDTMFToneChangeEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCDTMFToneChangeEvent)) {
+  if (arg != 'bobo' && !(this instanceof RTCDTMFToneChangeEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'RTCDTMFToneChangeEvent': 2 arguments required, but only 0 present.");
   }
   ;

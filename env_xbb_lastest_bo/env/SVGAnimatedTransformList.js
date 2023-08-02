@@ -2,7 +2,7 @@
 
 SVGAnimatedTransformList = function SVGAnimatedTransformList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimatedTransformList)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimatedTransformList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

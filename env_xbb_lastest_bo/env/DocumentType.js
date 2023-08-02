@@ -2,7 +2,7 @@
 
 DocumentType = function DocumentType() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DocumentType)) {
+  if (arg != 'bobo' && !(this instanceof DocumentType)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

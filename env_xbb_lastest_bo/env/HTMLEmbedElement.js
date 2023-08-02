@@ -2,7 +2,7 @@
 
 HTMLEmbedElement = function HTMLEmbedElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLEmbedElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLEmbedElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 SourceBuffer = function SourceBuffer() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SourceBuffer)) {
+  if (arg != 'bobo' && !(this instanceof SourceBuffer)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 NavigateEvent = function NavigateEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NavigateEvent)) {
+  if (arg != 'bobo' && !(this instanceof NavigateEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'NavigateEvent': 2 arguments required, but only 0 present.");
   }
   ;

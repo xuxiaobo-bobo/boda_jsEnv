@@ -2,7 +2,7 @@
 
 WebTransportBidirectionalStream = function WebTransportBidirectionalStream() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebTransportBidirectionalStream)) {
+  if (arg != 'bobo' && !(this instanceof WebTransportBidirectionalStream)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -1,6 +1,6 @@
 // releaseEvents对象
-releaseEvents = () => {
-  console.log_copy(`使用 releaseEvents arg->`, arguments);
+releaseEvents = (a) => {
+  console.log_copy(`使用 releaseEvents arg->`, a);
 };
 bodavm.toolsFunc.safefunction(releaseEvents, "releaseEvents");
 bodavm.toolsFunc.defineProperty(releaseEvents, "length", {

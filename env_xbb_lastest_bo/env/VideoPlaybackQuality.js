@@ -2,7 +2,7 @@
 
 VideoPlaybackQuality = function VideoPlaybackQuality() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof VideoPlaybackQuality)) {
+  if (arg != 'bobo' && !(this instanceof VideoPlaybackQuality)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

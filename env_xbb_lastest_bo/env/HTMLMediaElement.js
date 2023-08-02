@@ -2,7 +2,7 @@
 
 HTMLMediaElement = function HTMLMediaElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLMediaElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLMediaElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

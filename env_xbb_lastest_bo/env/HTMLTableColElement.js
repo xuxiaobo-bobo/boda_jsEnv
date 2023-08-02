@@ -2,7 +2,7 @@
 
 HTMLTableColElement = function HTMLTableColElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLTableColElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLTableColElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

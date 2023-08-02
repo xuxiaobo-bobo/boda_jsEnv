@@ -2,7 +2,7 @@
 
 GPUSupportedLimits = function GPUSupportedLimits() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUSupportedLimits)) {
+  if (arg != 'bobo' && !(this instanceof GPUSupportedLimits)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

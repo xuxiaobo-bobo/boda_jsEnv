@@ -2,7 +2,7 @@
 
 MIDIPort = function MIDIPort() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MIDIPort)) {
+  if (arg != 'bobo' && !(this instanceof MIDIPort)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

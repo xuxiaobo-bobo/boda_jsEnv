@@ -2,7 +2,7 @@
 
 WebGLRenderbuffer = function WebGLRenderbuffer() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLRenderbuffer)) {
+  if (arg != 'bobo' && !(this instanceof WebGLRenderbuffer)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

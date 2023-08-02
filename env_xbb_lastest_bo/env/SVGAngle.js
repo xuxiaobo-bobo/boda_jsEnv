@@ -2,7 +2,7 @@
 
 SVGAngle = function SVGAngle() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAngle)) {
+  if (arg != 'bobo' && !(this instanceof SVGAngle)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

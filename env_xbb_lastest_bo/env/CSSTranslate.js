@@ -2,7 +2,7 @@
 
 CSSTranslate = function CSSTranslate() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSTranslate)) {
+  if (arg != 'bobo' && !(this instanceof CSSTranslate)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSTranslate': 2 arguments required, but only 0 present.");
   }
   ;

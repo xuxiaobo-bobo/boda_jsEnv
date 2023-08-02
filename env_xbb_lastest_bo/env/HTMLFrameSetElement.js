@@ -2,7 +2,7 @@
 
 HTMLFrameSetElement = function HTMLFrameSetElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLFrameSetElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLFrameSetElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

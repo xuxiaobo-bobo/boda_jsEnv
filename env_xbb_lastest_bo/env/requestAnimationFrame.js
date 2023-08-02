@@ -1,6 +1,6 @@
 // requestAnimationFrame对象
-requestAnimationFrame = () => {
-  console.log_copy(`使用 requestAnimationFrame arg->`, arguments);
+requestAnimationFrame = (a) => {
+  console.log_copy(`使用 requestAnimationFrame arg->`, a);
 };
 bodavm.toolsFunc.safefunction(requestAnimationFrame, "requestAnimationFrame");
 bodavm.toolsFunc.defineProperty(requestAnimationFrame, "length", {

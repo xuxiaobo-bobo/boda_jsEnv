@@ -2,7 +2,7 @@
 
 XRPose = function XRPose() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRPose)) {
+  if (arg != 'bobo' && !(this instanceof XRPose)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

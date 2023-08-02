@@ -2,7 +2,7 @@
 
 MediaStreamTrack = function MediaStreamTrack() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaStreamTrack)) {
+  if (arg != 'bobo' && !(this instanceof MediaStreamTrack)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

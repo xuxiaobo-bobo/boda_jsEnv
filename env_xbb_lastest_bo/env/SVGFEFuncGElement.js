@@ -2,7 +2,7 @@
 
 SVGFEFuncGElement = function SVGFEFuncGElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEFuncGElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEFuncGElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 USBEndpoint = function USBEndpoint() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof USBEndpoint)) {
+  if (arg != 'bobo' && !(this instanceof USBEndpoint)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'USBEndpoint': 3 arguments required, but only 0 present.");
   }
   ;

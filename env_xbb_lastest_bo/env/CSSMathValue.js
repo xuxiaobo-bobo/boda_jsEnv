@@ -2,7 +2,7 @@
 
 CSSMathValue = function CSSMathValue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSMathValue)) {
+  if (arg != 'bobo' && !(this instanceof CSSMathValue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

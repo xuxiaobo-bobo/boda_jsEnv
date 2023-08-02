@@ -2,7 +2,7 @@
 
 CSSNumericArray = function CSSNumericArray() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSNumericArray)) {
+  if (arg != 'bobo' && !(this instanceof CSSNumericArray)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

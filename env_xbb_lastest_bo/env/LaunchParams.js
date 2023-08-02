@@ -2,7 +2,7 @@
 
 LaunchParams = function LaunchParams() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof LaunchParams)) {
+  if (arg != 'bobo' && !(this instanceof LaunchParams)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

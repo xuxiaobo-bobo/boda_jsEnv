@@ -2,7 +2,7 @@
 
 SVGFEColorMatrixElement = function SVGFEColorMatrixElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEColorMatrixElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEColorMatrixElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

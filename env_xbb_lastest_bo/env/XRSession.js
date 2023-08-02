@@ -2,7 +2,7 @@
 
 XRSession = function XRSession() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRSession)) {
+  if (arg != 'bobo' && !(this instanceof XRSession)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

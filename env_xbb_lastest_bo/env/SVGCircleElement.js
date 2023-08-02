@@ -2,7 +2,7 @@
 
 SVGCircleElement = function SVGCircleElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGCircleElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGCircleElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

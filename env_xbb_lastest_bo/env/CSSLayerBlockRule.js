@@ -2,7 +2,7 @@
 
 CSSLayerBlockRule = function CSSLayerBlockRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSLayerBlockRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSLayerBlockRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

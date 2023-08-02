@@ -2,7 +2,7 @@
 
 CSSRuleList = function CSSRuleList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSRuleList)) {
+  if (arg != 'bobo' && !(this instanceof CSSRuleList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

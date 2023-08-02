@@ -2,7 +2,7 @@
 
 GPU = function GPU() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPU)) {
+  if (arg != 'bobo' && !(this instanceof GPU)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

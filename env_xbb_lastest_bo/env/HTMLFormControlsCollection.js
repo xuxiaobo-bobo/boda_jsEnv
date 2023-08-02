@@ -2,7 +2,7 @@
 
 HTMLFormControlsCollection = function HTMLFormControlsCollection() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLFormControlsCollection)) {
+  if (arg != 'bobo' && !(this instanceof HTMLFormControlsCollection)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

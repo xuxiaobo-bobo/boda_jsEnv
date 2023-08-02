@@ -2,7 +2,7 @@
 
 CSSMathNegate = function CSSMathNegate() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSMathNegate)) {
+  if (arg != 'bobo' && !(this instanceof CSSMathNegate)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSMathNegate': 1 argument required, but only 0 present.");
   }
   ;

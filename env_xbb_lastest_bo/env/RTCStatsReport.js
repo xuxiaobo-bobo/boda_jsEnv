@@ -2,7 +2,7 @@
 
 RTCStatsReport = function RTCStatsReport() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCStatsReport)) {
+  if (arg != 'bobo' && !(this instanceof RTCStatsReport)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 RTCDtlsTransport = function RTCDtlsTransport() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCDtlsTransport)) {
+  if (arg != 'bobo' && !(this instanceof RTCDtlsTransport)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

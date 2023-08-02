@@ -2,7 +2,7 @@
 
 NavigationDestination = function NavigationDestination() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NavigationDestination)) {
+  if (arg != 'bobo' && !(this instanceof NavigationDestination)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

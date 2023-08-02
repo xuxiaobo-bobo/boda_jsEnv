@@ -2,7 +2,7 @@
 
 SVGFECompositeElement = function SVGFECompositeElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFECompositeElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFECompositeElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

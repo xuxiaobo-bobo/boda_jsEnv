@@ -2,7 +2,7 @@
 
 DOMTokenList = function DOMTokenList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DOMTokenList)) {
+  if (arg != 'bobo' && !(this instanceof DOMTokenList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

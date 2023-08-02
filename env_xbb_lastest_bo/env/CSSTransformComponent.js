@@ -2,7 +2,7 @@
 
 CSSTransformComponent = function CSSTransformComponent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSTransformComponent)) {
+  if (arg != 'bobo' && !(this instanceof CSSTransformComponent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

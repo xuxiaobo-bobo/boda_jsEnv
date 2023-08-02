@@ -1,6 +1,6 @@
 // showDirectoryPicker对象
-showDirectoryPicker = () => {
-  console.log_copy(`使用 showDirectoryPicker arg->`, arguments);
+showDirectoryPicker = (a) => {
+  console.log_copy(`使用 showDirectoryPicker arg->`, a);
 };
 bodavm.toolsFunc.safefunction(showDirectoryPicker, "showDirectoryPicker");
 bodavm.toolsFunc.defineProperty(showDirectoryPicker, "length", {

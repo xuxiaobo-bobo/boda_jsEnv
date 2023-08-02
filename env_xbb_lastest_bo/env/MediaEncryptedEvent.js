@@ -2,7 +2,7 @@
 
 MediaEncryptedEvent = function MediaEncryptedEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaEncryptedEvent)) {
+  if (arg != 'bobo' && !(this instanceof MediaEncryptedEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaEncryptedEvent': 1 argument required, but only 0 present.");
   }
   ;

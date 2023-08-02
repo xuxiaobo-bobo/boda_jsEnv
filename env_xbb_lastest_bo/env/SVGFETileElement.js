@@ -2,7 +2,7 @@
 
 SVGFETileElement = function SVGFETileElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFETileElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFETileElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

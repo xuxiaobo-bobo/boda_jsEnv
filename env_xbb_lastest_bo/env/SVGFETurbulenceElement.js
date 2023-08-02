@@ -2,7 +2,7 @@
 
 SVGFETurbulenceElement = function SVGFETurbulenceElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFETurbulenceElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFETurbulenceElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

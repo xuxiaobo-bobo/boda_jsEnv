@@ -2,7 +2,7 @@
 
 WakeLock = function WakeLock() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WakeLock)) {
+  if (arg != 'bobo' && !(this instanceof WakeLock)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 ClipboardItem = function ClipboardItem() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ClipboardItem)) {
+  if (arg != 'bobo' && !(this instanceof ClipboardItem)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ClipboardItem': 1 argument required, but only 0 present.");
   }
   ;

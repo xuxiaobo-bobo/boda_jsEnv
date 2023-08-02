@@ -2,7 +2,7 @@
 
 CloseEvent = function CloseEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CloseEvent)) {
+  if (arg != 'bobo' && !(this instanceof CloseEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CloseEvent': 1 argument required, but only 0 present.");
   }
   ;

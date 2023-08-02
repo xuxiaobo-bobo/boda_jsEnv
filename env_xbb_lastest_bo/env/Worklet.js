@@ -2,7 +2,7 @@
 
 Worklet = function Worklet() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Worklet)) {
+  if (arg != 'bobo' && !(this instanceof Worklet)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

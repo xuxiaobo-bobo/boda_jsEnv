@@ -2,7 +2,7 @@
 
 HTMLObjectElement = function HTMLObjectElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLObjectElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLObjectElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

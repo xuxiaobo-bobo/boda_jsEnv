@@ -2,7 +2,7 @@
 
 SVGNumber = function SVGNumber() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGNumber)) {
+  if (arg != 'bobo' && !(this instanceof SVGNumber)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

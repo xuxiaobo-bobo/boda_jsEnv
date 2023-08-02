@@ -2,7 +2,7 @@
 
 AudioWorklet = function AudioWorklet() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof AudioWorklet)) {
+  if (arg != 'bobo' && !(this instanceof AudioWorklet)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

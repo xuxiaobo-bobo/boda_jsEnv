@@ -1,6 +1,8 @@
 // TaskController对象
 
 TaskController = function TaskController() {
+  let arg=arguments[0]
+
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('TaskController 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

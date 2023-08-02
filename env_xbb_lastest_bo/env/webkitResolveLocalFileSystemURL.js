@@ -1,6 +1,6 @@
 // webkitResolveLocalFileSystemURL对象
-webkitResolveLocalFileSystemURL = () => {
-  console.log_copy(`webkitResolveLocalFileSystemURL 使用arg->`, arguments);
+webkitResolveLocalFileSystemURL = (a) => {
+  console.log_copy(`webkitResolveLocalFileSystemURL 使用-->`,a);
 };
 bodavm.toolsFunc.safefunction(webkitResolveLocalFileSystemURL, "webkitResolveLocalFileSystemURL");
 bodavm.toolsFunc.defineProperty(webkitResolveLocalFileSystemURL, "length", {

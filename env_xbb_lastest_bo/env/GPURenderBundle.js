@@ -2,7 +2,7 @@
 
 GPURenderBundle = function GPURenderBundle() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPURenderBundle)) {
+  if (arg != 'bobo' && !(this instanceof GPURenderBundle)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

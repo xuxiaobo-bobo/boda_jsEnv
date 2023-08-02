@@ -2,7 +2,7 @@
 
 HIDConnectionEvent = function HIDConnectionEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HIDConnectionEvent)) {
+  if (arg != 'bobo' && !(this instanceof HIDConnectionEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'HIDConnectionEvent': 2 arguments required, but only 0 present.");
   }
   ;

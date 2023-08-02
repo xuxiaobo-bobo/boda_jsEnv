@@ -2,7 +2,7 @@
 
 StorageEvent = function StorageEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof StorageEvent)) {
+  if (arg != 'bobo' && !(this instanceof StorageEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'StorageEvent': 1 argument required, but only 0 present.");
   }
   ;

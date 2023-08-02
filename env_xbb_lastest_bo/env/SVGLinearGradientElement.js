@@ -2,7 +2,7 @@
 
 SVGLinearGradientElement = function SVGLinearGradientElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGLinearGradientElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGLinearGradientElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

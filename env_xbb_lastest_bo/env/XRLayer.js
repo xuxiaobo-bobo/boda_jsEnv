@@ -2,7 +2,7 @@
 
 XRLayer = function XRLayer() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRLayer)) {
+  if (arg != 'bobo' && !(this instanceof XRLayer)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

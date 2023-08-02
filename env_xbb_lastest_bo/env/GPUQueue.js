@@ -2,7 +2,7 @@
 
 GPUQueue = function GPUQueue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUQueue)) {
+  if (arg != 'bobo' && !(this instanceof GPUQueue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

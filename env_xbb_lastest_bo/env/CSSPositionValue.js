@@ -2,7 +2,7 @@
 
 CSSPositionValue = function CSSPositionValue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSPositionValue)) {
+  if (arg != 'bobo' && !(this instanceof CSSPositionValue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSPositionValue': 2 arguments required, but only 0 present.");
   }
   ;

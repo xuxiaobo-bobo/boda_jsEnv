@@ -2,7 +2,7 @@
 
 HTMLTableSectionElement = function HTMLTableSectionElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLTableSectionElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLTableSectionElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

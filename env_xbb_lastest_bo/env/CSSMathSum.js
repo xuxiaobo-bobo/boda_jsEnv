@@ -2,7 +2,7 @@
 
 CSSMathSum = function CSSMathSum() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSMathSum)) {
+  if (arg != 'bobo' && !(this instanceof CSSMathSum)) {
     return bodavm.toolsFunc.throwError("SyntaxError", "Failed to construct 'CSSMathSum': Arguments can't be empty");
   }
   ;

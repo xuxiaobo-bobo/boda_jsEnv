@@ -2,7 +2,7 @@
 
 IDBCursor = function IDBCursor() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IDBCursor)) {
+  if (arg != 'bobo' && !(this instanceof IDBCursor)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

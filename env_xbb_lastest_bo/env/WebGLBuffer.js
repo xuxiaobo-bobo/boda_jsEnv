@@ -2,7 +2,7 @@
 
 WebGLBuffer = function WebGLBuffer() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLBuffer)) {
+  if (arg != 'bobo' && !(this instanceof WebGLBuffer)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

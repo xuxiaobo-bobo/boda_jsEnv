@@ -2,7 +2,7 @@
 
 CSSSkew = function CSSSkew() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSSkew)) {
+  if (arg != 'bobo' && !(this instanceof CSSSkew)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSSkew': 2 arguments required, but only 0 present.");
   }
   ;

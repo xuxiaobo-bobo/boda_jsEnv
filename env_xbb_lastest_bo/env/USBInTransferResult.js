@@ -2,7 +2,7 @@
 
 USBInTransferResult = function USBInTransferResult() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof USBInTransferResult)) {
+  if (arg != 'bobo' && !(this instanceof USBInTransferResult)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'USBInTransferResult': 1 argument required, but only 0 present.");
   }
   ;

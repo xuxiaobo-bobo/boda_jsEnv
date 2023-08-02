@@ -2,7 +2,7 @@
 
 Keyboard = function Keyboard() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Keyboard)) {
+  if (arg != 'bobo' && !(this instanceof Keyboard)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

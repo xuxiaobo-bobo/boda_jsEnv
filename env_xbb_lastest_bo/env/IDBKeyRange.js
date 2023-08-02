@@ -2,7 +2,7 @@
 
 IDBKeyRange = function IDBKeyRange() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IDBKeyRange)) {
+  if (arg != 'bobo' && !(this instanceof IDBKeyRange)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

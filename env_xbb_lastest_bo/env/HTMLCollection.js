@@ -2,7 +2,7 @@
 
 HTMLCollection = function HTMLCollection() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLCollection)) {
+  if (arg != 'bobo' && !(this instanceof HTMLCollection)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

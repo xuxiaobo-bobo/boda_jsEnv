@@ -2,7 +2,7 @@
 
 ReadableStreamDefaultReader = function ReadableStreamDefaultReader() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ReadableStreamDefaultReader)) {
+  if (arg != 'bobo' && !(this instanceof ReadableStreamDefaultReader)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ReadableStreamDefaultReader': 1 argument required, but only 0 present.");
   }
   ;

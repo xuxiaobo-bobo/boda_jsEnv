@@ -2,7 +2,7 @@
 
 AudioDestinationNode = function AudioDestinationNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AudioDestinationNode) {
+  if (arg != 'bobo' && !(this instanceof AudioDestinationNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -1,6 +1,6 @@
 // cancelIdleCallback对象
-cancelIdleCallback = () => {
-  console.log_copy(`cancelIdleCallback arg->`, arguments);
+cancelIdleCallback = (a) => {
+  console.log_copy(`cancelIdleCallback arg->`, a);
 };
 bodavm.toolsFunc.safefunction(cancelIdleCallback, "cancelIdleCallback");
 bodavm.toolsFunc.defineProperty(cancelIdleCallback, "length", {

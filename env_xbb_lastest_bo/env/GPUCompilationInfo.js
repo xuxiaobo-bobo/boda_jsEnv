@@ -2,7 +2,7 @@
 
 GPUCompilationInfo = function GPUCompilationInfo() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUCompilationInfo)) {
+  if (arg != 'bobo' && !(this instanceof GPUCompilationInfo)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

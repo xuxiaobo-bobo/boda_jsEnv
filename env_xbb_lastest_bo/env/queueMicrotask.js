@@ -1,6 +1,6 @@
 // queueMicrotask对象
-queueMicrotask = () => {
-  console.log_copy(`使用 queueMicrotask arg->`, arguments);
+queueMicrotask = (a) => {
+  console.log_copy(`使用 queueMicrotask arg->`, a);
 };
 bodavm.toolsFunc.safefunction(queueMicrotask, "queueMicrotask");
 bodavm.toolsFunc.defineProperty(queueMicrotask, "length", {

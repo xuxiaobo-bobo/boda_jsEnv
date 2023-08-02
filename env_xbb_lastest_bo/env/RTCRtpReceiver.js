@@ -2,7 +2,7 @@
 
 RTCRtpReceiver = function RTCRtpReceiver() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCRtpReceiver)) {
+  if (arg != 'bobo' && !(this instanceof RTCRtpReceiver)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

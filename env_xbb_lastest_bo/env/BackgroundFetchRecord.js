@@ -2,7 +2,7 @@
 
 BackgroundFetchRecord = function BackgroundFetchRecord() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BackgroundFetchRecord)) {
+  if (arg != 'bobo' && !(this instanceof BackgroundFetchRecord)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

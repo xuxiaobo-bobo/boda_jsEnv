@@ -2,7 +2,7 @@
 
 CSSGroupingRule = function CSSGroupingRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSGroupingRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSGroupingRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 SVGTextPathElement = function SVGTextPathElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGTextPathElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGTextPathElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

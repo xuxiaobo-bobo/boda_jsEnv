@@ -2,7 +2,7 @@
 
 SVGDefsElement = function SVGDefsElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGDefsElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGDefsElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

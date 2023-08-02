@@ -2,7 +2,7 @@
 
 HTMLDialogElement = function HTMLDialogElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLDialogElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLDialogElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

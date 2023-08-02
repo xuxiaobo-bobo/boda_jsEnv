@@ -1,6 +1,6 @@
 // getSelection对象
-getSelection = () => {
-  console.log(`使用 getSelection arg->`, arguments);
+getSelection = (a) => {
+  console.log(`使用 getSelection arg->`, a);
 };
 bodavm.toolsFunc.safefunction(getSelection, "getSelection");
 bodavm.toolsFunc.defineProperty(getSelection, "length", {

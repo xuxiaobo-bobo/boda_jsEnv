@@ -1,6 +1,8 @@
 // Path2D对象
 
 Path2D = function Path2D() {
+  let arg = arguments[0];
+
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Path2D 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

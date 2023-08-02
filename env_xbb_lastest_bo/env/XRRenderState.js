@@ -2,7 +2,7 @@
 
 XRRenderState = function XRRenderState() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRRenderState)) {
+  if (arg != 'bobo' && !(this instanceof XRRenderState)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

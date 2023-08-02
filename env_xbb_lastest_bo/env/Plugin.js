@@ -2,7 +2,7 @@
 
 Plugin = function Plugin() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Plugin)) {
+  if (arg != 'bobo' && !(this instanceof Plugin)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

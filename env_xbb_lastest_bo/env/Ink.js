@@ -2,7 +2,7 @@
 
 Ink = function Ink() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Ink)) {
+  if (arg != 'bobo' && !(this instanceof Ink)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

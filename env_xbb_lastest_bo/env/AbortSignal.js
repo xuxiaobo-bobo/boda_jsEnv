@@ -2,7 +2,7 @@
 
 AbortSignal = function AbortSignal() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AbortSignal) {
+  if (arg != 'bobo' && !(this instanceof AbortSignal)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

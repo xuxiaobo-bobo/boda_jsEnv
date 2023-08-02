@@ -2,7 +2,7 @@
 
 HTMLOptionElement = function HTMLOptionElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLOptionElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLOptionElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

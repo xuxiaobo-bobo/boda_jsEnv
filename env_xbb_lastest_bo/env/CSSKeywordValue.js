@@ -2,7 +2,7 @@
 
 CSSKeywordValue = function CSSKeywordValue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSKeywordValue)) {
+  if (arg != 'bobo' && !(this instanceof CSSKeywordValue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSKeywordValue': 1 argument required, but only 0 present.");
   }
   ;

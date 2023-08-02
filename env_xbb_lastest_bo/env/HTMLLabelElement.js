@@ -2,7 +2,7 @@
 
 HTMLLabelElement = function HTMLLabelElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLLabelElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLLabelElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

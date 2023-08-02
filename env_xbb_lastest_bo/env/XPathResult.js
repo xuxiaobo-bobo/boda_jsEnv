@@ -2,7 +2,7 @@
 
 XPathResult = function XPathResult() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XPathResult)) {
+  if (arg != 'bobo' && !(this instanceof XPathResult)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

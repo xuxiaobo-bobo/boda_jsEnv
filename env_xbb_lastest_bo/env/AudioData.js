@@ -2,7 +2,7 @@
 
 AudioData = function AudioData() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AudioData) {
+  if (arg != 'bobo' && !(this instanceof AudioData)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'AudioData': 1 argument required, but only 0 present.");
   }
   ;

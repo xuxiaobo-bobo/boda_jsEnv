@@ -2,7 +2,7 @@
 
 HTMLHeadingElement = function HTMLHeadingElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLHeadingElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLHeadingElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

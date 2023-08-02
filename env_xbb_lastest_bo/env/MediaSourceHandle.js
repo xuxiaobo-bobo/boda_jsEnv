@@ -2,7 +2,7 @@
 
 MediaSourceHandle = function MediaSourceHandle() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaSourceHandle)) {
+  if (arg != 'bobo' && !(this instanceof MediaSourceHandle)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

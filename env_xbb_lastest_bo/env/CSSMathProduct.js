@@ -2,7 +2,7 @@
 
 CSSMathProduct = function CSSMathProduct() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSMathProduct)) {
+  if (arg != 'bobo' && !(this instanceof CSSMathProduct)) {
     return bodavm.toolsFunc.throwError("SyntaxError", "Failed to construct 'CSSMathProduct': Arguments can't be empty");
   }
   ;

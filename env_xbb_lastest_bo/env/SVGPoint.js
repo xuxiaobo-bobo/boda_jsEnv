@@ -2,7 +2,7 @@
 
 SVGPoint = function SVGPoint() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGPoint)) {
+  if (arg != 'bobo' && !(this instanceof SVGPoint)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

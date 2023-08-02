@@ -2,7 +2,7 @@
 
 WakeLockSentinel = function WakeLockSentinel() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WakeLockSentinel)) {
+  if (arg != 'bobo' && !(this instanceof WakeLockSentinel)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

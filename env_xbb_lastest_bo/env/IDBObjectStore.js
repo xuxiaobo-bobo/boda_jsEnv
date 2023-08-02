@@ -2,7 +2,7 @@
 
 IDBObjectStore = function IDBObjectStore() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IDBObjectStore)) {
+  if (arg != 'bobo' && !(this instanceof IDBObjectStore)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

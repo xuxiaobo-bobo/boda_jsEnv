@@ -2,7 +2,7 @@
 
 HTMLMapElement = function HTMLMapElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLMapElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLMapElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

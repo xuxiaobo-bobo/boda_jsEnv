@@ -2,7 +2,7 @@
 
 TextEvent = function TextEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TextEvent)) {
+  if (arg != 'bobo' && !(this instanceof TextEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

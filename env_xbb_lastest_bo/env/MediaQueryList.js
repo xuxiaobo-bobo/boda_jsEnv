@@ -2,7 +2,7 @@
 
 MediaQueryList = function MediaQueryList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaQueryList)) {
+  if (arg != 'bobo' && !(this instanceof MediaQueryList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

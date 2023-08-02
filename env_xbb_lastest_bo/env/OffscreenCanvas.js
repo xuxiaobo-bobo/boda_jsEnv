@@ -2,7 +2,7 @@
 
 OffscreenCanvas = function OffscreenCanvas() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof OffscreenCanvas)) {
+  if (arg != 'bobo' && !(this instanceof OffscreenCanvas)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'OffscreenCanvas': 2 arguments required, but only 0 present.");
   }
   ;

@@ -2,7 +2,7 @@
 
 PaymentRequest = function PaymentRequest() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PaymentRequest)) {
+  if (arg != 'bobo' && !(this instanceof PaymentRequest)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PaymentRequest': 1 argument required, but only 0 present.");
   }
   ;

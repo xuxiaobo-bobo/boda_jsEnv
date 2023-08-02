@@ -2,7 +2,7 @@
 
 HIDInputReportEvent = function HIDInputReportEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HIDInputReportEvent)) {
+  if (arg != 'bobo' && !(this instanceof HIDInputReportEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

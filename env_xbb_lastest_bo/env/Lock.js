@@ -2,7 +2,7 @@
 
 Lock = function Lock() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Lock)) {
+  if (arg != 'bobo' && !(this instanceof Lock)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

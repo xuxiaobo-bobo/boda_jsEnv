@@ -2,7 +2,7 @@
 
 HTMLVideoElement = function HTMLVideoElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLVideoElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLVideoElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

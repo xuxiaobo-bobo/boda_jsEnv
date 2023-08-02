@@ -2,7 +2,7 @@
 
 VideoFrame = function VideoFrame() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof VideoFrame)) {
+  if (arg != 'bobo' && !(this instanceof VideoFrame)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'VideoFrame': 1 argument required, but only 0 present.");
   }
   ;

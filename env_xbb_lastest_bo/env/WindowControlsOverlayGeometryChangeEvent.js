@@ -2,7 +2,7 @@
 
 WindowControlsOverlayGeometryChangeEvent = function WindowControlsOverlayGeometryChangeEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WindowControlsOverlayGeometryChangeEvent)) {
+  if (arg != 'bobo' && !(this instanceof WindowControlsOverlayGeometryChangeEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WindowControlsOverlayGeometryChangeEvent': 2 arguments required, but only 0 present.");
   }
   ;

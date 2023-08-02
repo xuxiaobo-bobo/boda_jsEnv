@@ -2,7 +2,7 @@
 
 XRAnchorSet = function XRAnchorSet() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRAnchorSet)) {
+  if (arg != 'bobo' && !(this instanceof XRAnchorSet)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 BeforeInstallPromptEvent = function BeforeInstallPromptEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BeforeInstallPromptEvent)) {
+  if (arg != 'bobo' && !(this instanceof BeforeInstallPromptEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BeforeInstallPromptEvent': 1 argument required, but only 0 present.");
   }
   ;

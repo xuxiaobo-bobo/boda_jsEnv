@@ -2,7 +2,7 @@
 
 MutationEvent = function MutationEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MutationEvent)) {
+  if (arg != 'bobo' && !(this instanceof MutationEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

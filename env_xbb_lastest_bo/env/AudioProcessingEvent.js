@@ -2,7 +2,7 @@
 
 AudioProcessingEvent = function AudioProcessingEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof AudioProcessingEvent)) {
+  if (arg != 'bobo' && !(this instanceof AudioProcessingEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'AudioProcessingEvent': 2 arguments required, but only 0 present.");
   }
   ;

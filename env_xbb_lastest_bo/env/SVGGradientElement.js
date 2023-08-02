@@ -2,7 +2,7 @@
 
 SVGGradientElement = function SVGGradientElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGGradientElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGGradientElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

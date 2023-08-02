@@ -2,7 +2,7 @@
 
 WindowControlsOverlay = function WindowControlsOverlay() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WindowControlsOverlay)) {
+  if (arg != 'bobo' && !(this instanceof WindowControlsOverlay)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

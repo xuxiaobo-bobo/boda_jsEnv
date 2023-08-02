@@ -2,7 +2,7 @@
 
 WritableStreamDefaultController = function WritableStreamDefaultController() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WritableStreamDefaultController)) {
+  if (arg != 'bobo' && !(this instanceof WritableStreamDefaultController)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

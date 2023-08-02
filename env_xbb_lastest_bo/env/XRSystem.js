@@ -2,7 +2,7 @@
 
 XRSystem = function XRSystem() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRSystem)) {
+  if (arg != 'bobo' && !(this instanceof XRSystem)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

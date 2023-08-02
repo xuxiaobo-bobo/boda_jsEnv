@@ -2,7 +2,7 @@
 
 XRInputSourceEvent = function XRInputSourceEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRInputSourceEvent)) {
+  if (arg != 'bobo' && !(this instanceof XRInputSourceEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'XRInputSourceEvent': 2 arguments required, but only 0 present.");
   }
   ;

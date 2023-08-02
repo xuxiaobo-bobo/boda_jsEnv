@@ -2,7 +2,7 @@
 
 ReadableByteStreamController = function ReadableByteStreamController() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ReadableByteStreamController)) {
+  if (arg != 'bobo' && !(this instanceof ReadableByteStreamController)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

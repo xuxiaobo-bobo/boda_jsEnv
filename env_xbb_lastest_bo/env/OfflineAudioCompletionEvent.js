@@ -2,7 +2,7 @@
 
 OfflineAudioCompletionEvent = function OfflineAudioCompletionEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof OfflineAudioCompletionEvent)) {
+  if (arg != 'bobo' && !(this instanceof OfflineAudioCompletionEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'OfflineAudioCompletionEvent': 2 arguments required, but only 0 present.");
   }
   ;

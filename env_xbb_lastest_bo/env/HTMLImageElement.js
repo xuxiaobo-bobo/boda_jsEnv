@@ -2,7 +2,7 @@
 
 HTMLImageElement = function HTMLImageElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLImageElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLImageElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

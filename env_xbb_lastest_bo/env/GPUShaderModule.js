@@ -2,7 +2,7 @@
 
 GPUShaderModule = function GPUShaderModule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUShaderModule)) {
+  if (arg != 'bobo' && !(this instanceof GPUShaderModule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

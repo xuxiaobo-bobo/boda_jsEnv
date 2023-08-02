@@ -2,7 +2,7 @@
 
 CustomEvent = function CustomEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CustomEvent)) {
+  if (arg != 'bobo' && !(this instanceof CustomEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CustomEvent': 1 argument required, but only 0 present.");
   }
   ;

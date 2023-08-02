@@ -91,7 +91,7 @@ var mytime_stamp = Date.now()
 
             }
         } catch (e){ console.log_copy(e.message,e.stack);
-            console.log_copy(`JSON.stringify hook出错`,)
+            console.log_copy(`JSON.stringify hook出错!!!!!!!!!!!!!!!!!!!!!!`,)
 
         }
         return stringres
@@ -110,7 +110,7 @@ var mytime_stamp = Date.now()
             console.log_copy(`JSON.parse `, ` arg0:`, arg0, ` arg1:`, arg1)
 
         } catch (e){ console.log_copy(e.message,e.stack);
-            console.log_copy(`JSON.parse hook出错`,)
+            console.log_copy(`JSON.parse hook出错!!!!!!!!!!!!!!!!!!!!!!`,)
 
         }
         return JSON.parse_bo.apply(this, arguments)
@@ -151,7 +151,7 @@ var mytime_stamp = Date.now()
             console.log_copy(`Object.getOwnPropertyDescriptor--> `, ` obj:`, obj, `->`, `prop:`, prop, ` ->`, `  res ->`, desc_res, ` !!!!检测`);
 
         } catch (e){ console.log_copy(e.message,e.stack);
-            console.log_copy(`Object.getOwnPropertyDescriptor hook出错`)
+            console.log_copy(`Object.getOwnPropertyDescriptor hook出错!!!!!!!!!!!!!!!!!!!!!!`)
 
         }
 
@@ -171,11 +171,12 @@ var mytime_stamp = Date.now()
             if (arguments[0] instanceof HTMLCollection) {
 
             }
-            if (descs_res && (descs_res['_boarg'] || descs_res['_boisinit'] || descs_res['_contentiframe'] || descs_res['__proto__'])) {
+            if (descs_res && (descs_res['_boarg'] || descs_res['_boisinit'] || descs_res['_contentiframe'] || descs_res['__proto__'] ||descs_res[bodavm.memory.myFunction_toString_symbol])) {
                 delete descs_res['_boarg']
                 delete descs_res['_boisinit']
                 delete descs_res['_contentiframe']
                 delete descs_res['__proto__']
+                delete descs_res[bodavm.memory.myFunction_toString_symbol]
             }
             // ldvm.toolsFunc.deleteProperty(descs_res,'length')
             // descs_res[0].configurable=true
@@ -188,7 +189,7 @@ var mytime_stamp = Date.now()
             }
             console.log_copy(`Object.getOwnPropertyDescriptors--> `, `arg0:`, arg0, ` ->`, `res ->`, descs_res, `!!!!检测`);
         } catch (e){ console.log_copy(e.message,e.stack);
-            console.log_copy(`Object.getOwnPropertyDescriptors hook出错`)
+            console.log_copy(`Object.getOwnPropertyDescriptors hook出错!!!!!!!!!!!!!!!!!!!!!!`)
 
         }
         return descs_res
@@ -202,30 +203,6 @@ var mytime_stamp = Date.now()
 
         try {
 
-            if (arg0 == alert) {
-                for (let i = 0; i < name_res.length; i++) {
-
-                    if ((name_res[i] == '_boarg') ||
-                        (name_res[i] == '_boisinit') ||
-                        (name_res[i] == '_contentiframe') ||
-                        (name_res[i] == 'arguments') ||
-                        (name_res[i] == 'caller') ||
-                        (name_res[i] == 'prototype') ||
-                        (name_res[i] == 'boallundefined') ||
-                        (name_res[i] == 'bofs') ||
-                        (name_res[i] == 'isWindowSystem') ||
-                        (name_res[i] == '__proto__')
-                    ) {
-                        name_res.splice(i, 1)
-                        i--
-                    }
-                }
-            }else if (arg0==navigator.plugins){
-                name_res=['0', '1', '2', '3', '4', 'PDF Viewer', 'Chrome PDF Viewer', 'Chromium PDF Viewer', 'Microsoft Edge PDF Viewer', 'WebKit built-in PDF']
-                console.log_copy(`Object.getOwnPropertyNames 检测 navigator.plugins res ->`,name_res)
-                return name_res
-            } 
-            else {
                 for (let i = 0; i < name_res.length; i++) {
 
                     if ((name_res[i] == '_boarg') ||
@@ -248,17 +225,11 @@ var mytime_stamp = Date.now()
                         name_res.splice(i, 1)
                         i--
                     }
-
-
-                }
             }
-
-
-            // debugger
 
             console.log_copy(`Object.getOwnPropertyNames--> `, `this ->`, this, `->`, ` arg0:`, arg0, ` ->`, ` name_res->`, JSON.stringify_bo(name_res), ` !!!检测`);
         } catch (e){ console.log_copy(e.message,e.stack);
-            console.log_copy(`Object.getOwnPropertyNames hook出错`)
+            console.log_copy(`Object.getOwnPropertyNames hook出错!!!!!!!!!!!!!!!!!!!!!!`)
 
         }
 
@@ -270,10 +241,11 @@ var mytime_stamp = Date.now()
     Object.getPrototypeOf_bo = Object.getPrototypeOf
     Object.getPrototypeOf = function (obj) {
         try {
+            // debugger
             console.log_copy(`Object.getPrototypeOf `, `this ->`, bodavm.toolsFunc.getType(this), `->`, ` obj:`, obj, '!!!!检测');
 
         } catch (e){ console.log_copy(e.message,e.stack);
-            console.log_copy(`Object.getPrototypeOf hook出错`)
+            console.log_copy(`Object.getPrototypeOf hook出错!!!!!!!!!!!!!!!!!!!!!!`)
 
         }
         return Object.getPrototypeOf_bo.apply(this, arguments)
@@ -290,15 +262,21 @@ var mytime_stamp = Date.now()
                 
                 return resSym
             }
-            let symbols_res = Object.getOwnPropertySymbols_bo.apply(this, arguments)
+            symbols_res = Object.getOwnPropertySymbols_bo.apply(this, arguments)
             debugger
-            console.log_copy('Object.getOwnPropertySymbols ', `->`, ` arg:`, bodavm.toolsFunc.getType(arg), ` symbols_res ->`, JSON.stringify_bo(symbols_res), ` !!!!检测`);
+            for (let index = 0; index < symbols_res.length; index++) {
+                if (symbols_res[index]==bodavm.memory.myFunction_toString_symbol){
+                    symbols_res.splice(index,1)
+                    index--
+                }
+       
+            }
+            console.log_copy('Object.getOwnPropertySymbols ', `->`, ` arg:`, bodavm.toolsFunc.getType(arg), ` symbols_res ->`, symbols_res, ` !!!!检测`);
 
         }
-        // if (arg ==alert){console.log('Object.getOwnPropertySymbols -> ',`arg -> alert 检测 返回`)}
-
-        catch (e){ console.log_copy(e.message,e.stack);
-            console.log_copy(`Object.getOwnPropertySymbols hook出错`)
+        catch (e){ 
+            console.log_copy(e.message,e.stack);
+            console.log_copy(`Object.getOwnPropertySymbols hook出错!!!!!!!!!!!!!!!!!!!!!!`)
 
         }
         return symbols_res
@@ -315,14 +293,6 @@ var mytime_stamp = Date.now()
         // if (prop=="referrer"){debugger}
         let res;
         try {
-            if (target.__proto__ == HTMLCollection.prototype) {
-
-                if (prop != null && (Number(prop) || Number(prop) == 0)) {
-                    return bodavm.toolsFunc.throwError(`TypeError: `, `Filed to set an indexed property on 'HTMLCollection': Index property setter is not supported.
-                    at Function.defineProperty (<anonymous>)`)
-
-                }
-            }
             let obj = arguments[2]
             let myfilter = arguments[3]
             if (myfilter == 'bobo') { return Object.defineProperty_bo.call(this, target, prop, obj) }
@@ -333,7 +303,7 @@ var mytime_stamp = Date.now()
 
         } catch (e){ console.log_copy(e.message,e.stack);
             debugger
-            console.log_copy(`Object.defineProperty hook出错`)
+            console.log_copy(`Object.defineProperty hook出错!!!!!!!!!!!!!!!!!!!!!!`)
 
         }
 
@@ -356,7 +326,7 @@ var mytime_stamp = Date.now()
             console.log_copy(`Object.defineProperties `, `target ->`, (target.toString()), `->`, `prop->`, (prop.toString()), `->`, `->`, `res ->`, res.toString(), `!!!!!检测`)
 
         } catch (e){ console.log_copy(e.message,e.stack);
-            console.log_copy(`Object.defineProperties hook出错`)
+            console.log_copy(`Object.defineProperties hook出错!!!!!!!!!!!!!!!!!!!!!!`)
         }
 
         return res
@@ -469,6 +439,7 @@ var mytime_stamp = Date.now()
         try {
             // debugger
             let obj = arguments[0]
+            let arg2=arguments[1]
             // debugger
             if (obj._boContentWindow==true){
                 // debugger
@@ -478,13 +449,9 @@ var mytime_stamp = Date.now()
                 return resKey
             }
             res = Object.keys_.call(this, obj)
-            // for (let i = 0; i < res.length; i++) {
-            //     if (res[i] == '_boisinit' || res[i] == '_boarg' || res[i] == '__proto__') {
-            //         res.splice(i, 1)
-            //         i = i - 1
-            //     }
-
-            // }
+            if (arg2=='bobo'){
+                return res
+            }
             // debugger
             console.log_copy(`Object.keys `, `obj ->`, obj, `->`, `res ->过长不显示}  !!!!!!检测!!!!`, res)
         } catch (e) {

@@ -2,7 +2,7 @@
 
 SVGAnimatedInteger = function SVGAnimatedInteger() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimatedInteger)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimatedInteger)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 PerformanceObserverEntryList = function PerformanceObserverEntryList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PerformanceObserverEntryList)) {
+  if (arg != 'bobo' && !(this instanceof PerformanceObserverEntryList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

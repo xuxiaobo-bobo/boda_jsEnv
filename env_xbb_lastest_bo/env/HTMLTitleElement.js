@@ -2,7 +2,7 @@
 
 HTMLTitleElement = function HTMLTitleElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLTitleElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLTitleElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

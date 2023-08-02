@@ -2,7 +2,7 @@
 
 SVGFEBlendElement = function SVGFEBlendElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEBlendElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEBlendElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 Navigator = function Navigator() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Navigator)) {
+  if (arg != 'bobo' && !(this instanceof Navigator)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 HTMLSelectElement = function HTMLSelectElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLSelectElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLSelectElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

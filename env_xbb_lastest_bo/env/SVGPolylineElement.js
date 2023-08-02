@@ -2,7 +2,7 @@
 
 SVGPolylineElement = function SVGPolylineElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGPolylineElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGPolylineElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

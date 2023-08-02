@@ -2,7 +2,7 @@
 
 SVGMatrix = function SVGMatrix() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGMatrix)) {
+  if (arg != 'bobo' && !(this instanceof SVGMatrix)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

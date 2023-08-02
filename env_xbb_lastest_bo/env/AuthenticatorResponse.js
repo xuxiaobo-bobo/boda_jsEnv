@@ -2,7 +2,7 @@
 
 AuthenticatorResponse = function AuthenticatorResponse() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof AuthenticatorResponse)) {
+  if (arg != 'bobo' && !(this instanceof AuthenticatorResponse)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

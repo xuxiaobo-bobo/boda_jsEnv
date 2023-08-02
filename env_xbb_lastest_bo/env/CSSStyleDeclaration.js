@@ -2,7 +2,7 @@
 
 CSSStyleDeclaration = function CSSStyleDeclaration() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSStyleDeclaration)) {
+  if (arg != 'bobo' && !(this instanceof CSSStyleDeclaration)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

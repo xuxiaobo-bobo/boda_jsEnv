@@ -2,7 +2,7 @@
 
 SVGAElement = function SVGAElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGAElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

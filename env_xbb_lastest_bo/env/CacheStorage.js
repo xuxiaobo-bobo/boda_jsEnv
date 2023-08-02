@@ -2,7 +2,7 @@
 
 CacheStorage = function CacheStorage() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CacheStorage)) {
+  if (arg != 'bobo' && !(this instanceof CacheStorage)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

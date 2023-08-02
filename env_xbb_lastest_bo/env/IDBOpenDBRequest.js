@@ -2,7 +2,7 @@
 
 IDBOpenDBRequest = function IDBOpenDBRequest() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IDBOpenDBRequest)) {
+  if (arg != 'bobo' && !(this instanceof IDBOpenDBRequest)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

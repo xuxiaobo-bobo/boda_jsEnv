@@ -2,7 +2,7 @@
 
 SVGFEOffsetElement = function SVGFEOffsetElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEOffsetElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEOffsetElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

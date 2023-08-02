@@ -2,7 +2,7 @@
 
 XRInputSource = function XRInputSource() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRInputSource)) {
+  if (arg != 'bobo' && !(this instanceof XRInputSource)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

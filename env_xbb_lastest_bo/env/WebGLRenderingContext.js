@@ -2,7 +2,7 @@
 
 WebGLRenderingContext = function WebGLRenderingContext() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLRenderingContext)) {
+  if (arg != 'bobo' && !(this instanceof WebGLRenderingContext)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 RemotePlayback = function RemotePlayback() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RemotePlayback)) {
+  if (arg != 'bobo' && !(this instanceof RemotePlayback)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

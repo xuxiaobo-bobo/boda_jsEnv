@@ -2,7 +2,7 @@
 
 MediaStreamTrackProcessor = function MediaStreamTrackProcessor() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaStreamTrackProcessor)) {
+  if (arg != 'bobo' && !(this instanceof MediaStreamTrackProcessor)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaStreamTrackProcessor': 1 argument required, but only 0 present.");
   }
   ;

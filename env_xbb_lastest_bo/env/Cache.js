@@ -2,7 +2,7 @@
 
 Cache = function Cache() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Cache)) {
+  if (arg != 'bobo' && !(this instanceof Cache)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

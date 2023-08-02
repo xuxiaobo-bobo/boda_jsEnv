@@ -2,7 +2,7 @@
 
 PictureInPictureWindow = function PictureInPictureWindow() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PictureInPictureWindow)) {
+  if (arg != 'bobo' && !(this instanceof PictureInPictureWindow)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

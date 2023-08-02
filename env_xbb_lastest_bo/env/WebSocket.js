@@ -2,9 +2,7 @@
 
 WebSocket = function WebSocket() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebSocket)) {
-    return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WebSocket': 1 argument required, but only 0 present.");
-  }
+
   ;
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {

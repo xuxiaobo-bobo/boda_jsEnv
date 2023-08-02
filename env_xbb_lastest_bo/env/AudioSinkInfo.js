@@ -2,7 +2,7 @@
 
 AudioSinkInfo = function AudioSinkInfo() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof AudioSinkInfo)) {
+  if (arg != 'bobo' && !(this instanceof AudioSinkInfo)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

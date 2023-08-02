@@ -2,7 +2,7 @@
 
 NavigatorUAData = function NavigatorUAData() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NavigatorUAData)) {
+  if (arg != 'bobo' && !(this instanceof NavigatorUAData)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

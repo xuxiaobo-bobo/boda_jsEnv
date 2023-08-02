@@ -2,7 +2,7 @@
 
 MediaElementAudioSourceNode = function MediaElementAudioSourceNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaElementAudioSourceNode)) {
+  if (arg != 'bobo' && !(this instanceof MediaElementAudioSourceNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaElementAudioSourceNode': 2 arguments required, but only 0 present.");
   }
   ;

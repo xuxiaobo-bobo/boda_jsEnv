@@ -2,7 +2,7 @@
 
 CSSScale = function CSSScale() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSScale)) {
+  if (arg != 'bobo' && !(this instanceof CSSScale)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSScale': 2 arguments required, but only 0 present.");
   }
   ;

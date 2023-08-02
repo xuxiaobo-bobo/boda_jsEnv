@@ -2,7 +2,7 @@
 
 WebGLSampler = function WebGLSampler() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLSampler)) {
+  if (arg != 'bobo' && !(this instanceof WebGLSampler)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

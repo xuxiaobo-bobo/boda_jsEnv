@@ -188,4 +188,15 @@ Promise.race = function (promises) {
 bodavm.toolsFunc.safeFunc(Promise.race,'race')
 bodavm.toolsFunc.safeProto(Promise, "Promise");
 
+// any  allSeettled
+Promise.any=function (){
+  console.log_copy('Promise.any 暂未实现')
+}
+bodavm.toolsFunc.safeFunc(Promise.any,'any')
 
+Promise.allSettled=function (){
+  console.log_copy('Promise.allSettled 暂未实现')
+
+}
+bodavm.toolsFunc.safeFunc(Promise.allSettled,'allSettled')
+// Promise=bodavm.toolsFunc.proxy2(Promise,'Promise')

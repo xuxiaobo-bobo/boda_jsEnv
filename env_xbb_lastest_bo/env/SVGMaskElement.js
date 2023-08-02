@@ -2,7 +2,7 @@
 
 SVGMaskElement = function SVGMaskElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGMaskElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGMaskElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

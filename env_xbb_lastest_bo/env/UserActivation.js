@@ -2,7 +2,7 @@
 
 UserActivation = function UserActivation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof UserActivation)) {
+  if (arg != 'bobo' && !(this instanceof UserActivation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

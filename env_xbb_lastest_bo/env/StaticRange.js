@@ -2,7 +2,7 @@
 
 StaticRange = function StaticRange() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof StaticRange)) {
+  if (arg != 'bobo' && !(this instanceof StaticRange)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'StaticRange': 1 argument required, but only 0 present.");
   }
   ;

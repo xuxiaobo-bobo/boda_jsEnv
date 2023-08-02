@@ -2,7 +2,7 @@
 
 DOMStringMap = function DOMStringMap() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DOMStringMap)) {
+  if (arg != 'bobo' && !(this instanceof DOMStringMap)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

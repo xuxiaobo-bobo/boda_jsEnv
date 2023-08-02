@@ -2,7 +2,7 @@
 
 PresentationConnectionCloseEvent = function PresentationConnectionCloseEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PresentationConnectionCloseEvent)) {
+  if (arg != 'bobo' && !(this instanceof PresentationConnectionCloseEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PresentationConnectionCloseEvent': 2 arguments required, but only 0 present.");
   }
   ;

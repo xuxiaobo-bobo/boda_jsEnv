@@ -2,7 +2,7 @@
 
 FontData = function FontData() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FontData)) {
+  if (arg != 'bobo' && !(this instanceof FontData)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 SVGLength = function SVGLength() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGLength)) {
+  if (arg != 'bobo' && !(this instanceof SVGLength)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

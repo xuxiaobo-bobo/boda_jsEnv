@@ -2,7 +2,7 @@
 
 SVGFEGaussianBlurElement = function SVGFEGaussianBlurElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEGaussianBlurElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEGaussianBlurElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

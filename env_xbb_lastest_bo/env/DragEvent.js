@@ -2,7 +2,7 @@
 
 DragEvent = function DragEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DragEvent)) {
+  if (arg != 'bobo' && !(this instanceof DragEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DragEvent': 1 argument required, but only 0 present.");
   }
   ;

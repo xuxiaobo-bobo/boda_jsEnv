@@ -2,7 +2,7 @@
 
 AnimationTimeline = function AnimationTimeline() {
   let arg = arguments[0];
-  if (arg != 'bobo' && this instanceof AnimationTimeline) {
+  if (arg != 'bobo' && !(this instanceof AnimationTimeline)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

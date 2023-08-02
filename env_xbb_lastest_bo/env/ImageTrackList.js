@@ -2,7 +2,7 @@
 
 ImageTrackList = function ImageTrackList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ImageTrackList)) {
+  if (arg != 'bobo' && !(this instanceof ImageTrackList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

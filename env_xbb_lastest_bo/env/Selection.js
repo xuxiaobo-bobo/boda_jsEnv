@@ -2,7 +2,7 @@
 
 Selection = function Selection() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Selection)) {
+  if (arg != 'bobo' && !(this instanceof Selection)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

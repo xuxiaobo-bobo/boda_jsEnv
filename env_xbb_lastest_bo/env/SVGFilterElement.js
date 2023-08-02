@@ -2,7 +2,7 @@
 
 SVGFilterElement = function SVGFilterElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFilterElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFilterElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

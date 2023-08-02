@@ -2,7 +2,7 @@
 
 GPURenderPassEncoder = function GPURenderPassEncoder() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPURenderPassEncoder)) {
+  if (arg != 'bobo' && !(this instanceof GPURenderPassEncoder)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

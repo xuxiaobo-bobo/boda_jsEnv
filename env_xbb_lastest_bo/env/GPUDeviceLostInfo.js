@@ -2,7 +2,7 @@
 
 GPUDeviceLostInfo = function GPUDeviceLostInfo() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUDeviceLostInfo)) {
+  if (arg != 'bobo' && !(this instanceof GPUDeviceLostInfo)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

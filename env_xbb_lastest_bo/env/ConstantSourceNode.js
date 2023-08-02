@@ -2,7 +2,7 @@
 
 ConstantSourceNode = function ConstantSourceNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ConstantSourceNode)) {
+  if (arg != 'bobo' && !(this instanceof ConstantSourceNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ConstantSourceNode': 1 argument required, but only 0 present.");
   }
   ;

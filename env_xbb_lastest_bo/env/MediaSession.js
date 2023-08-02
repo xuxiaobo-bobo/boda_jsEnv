@@ -2,7 +2,7 @@
 
 MediaSession = function MediaSession() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaSession)) {
+  if (arg != 'bobo' && !(this instanceof MediaSession)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

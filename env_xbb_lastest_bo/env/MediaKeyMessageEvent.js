@@ -2,7 +2,7 @@
 
 MediaKeyMessageEvent = function MediaKeyMessageEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaKeyMessageEvent)) {
+  if (arg != 'bobo' && !(this instanceof MediaKeyMessageEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaKeyMessageEvent': 2 arguments required, but only 0 present.");
   }
   ;

@@ -2,7 +2,7 @@
 
 SVGStopElement = function SVGStopElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGStopElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGStopElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

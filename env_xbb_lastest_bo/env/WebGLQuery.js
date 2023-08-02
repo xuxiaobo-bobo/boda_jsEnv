@@ -2,7 +2,7 @@
 
 WebGLQuery = function WebGLQuery() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLQuery)) {
+  if (arg != 'bobo' && !(this instanceof WebGLQuery)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

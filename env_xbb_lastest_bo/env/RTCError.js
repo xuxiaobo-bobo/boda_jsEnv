@@ -2,7 +2,7 @@
 
 RTCError = function RTCError() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCError)) {
+  if (arg != 'bobo' && !(this instanceof RTCError)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'RTCError': 1 argument required, but only 0 present.");
   }
   ;

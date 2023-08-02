@@ -2,7 +2,7 @@
 
 ImageCapture = function ImageCapture() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ImageCapture)) {
+  if (arg != 'bobo' && !(this instanceof ImageCapture)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ImageCapture': 1 argument required, but only 0 present.");
   }
   ;

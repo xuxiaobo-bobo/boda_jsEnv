@@ -12,9 +12,9 @@ let noexecListener={
     "mouseEvent":true,
     "touchstart":true,
     "touchmove":true,
-    "deviceorientation":true
+    // "deviceorientation":true
 }
-// debugger
+debugger
 
 if (bodavm.memory.asyncEvent.listener && bodavm.memory.asyncEvent.listener['load'] )  delete bodavm.memory.asyncEvent.listener['load']  //load事件已经执行,这边可以直接删除
 if (bodavm.memory.asyncEvent.listener) {
@@ -96,10 +96,12 @@ if (setTimeEvent && bodavm.config.settime_on) {
       
     for (let i = 0; i < setTimeEvent.length; i++) {
         let event = setTimeEvent[i]
+        // debugger
         if (event == undefined) { continue }
         console.log_copy(`定时器异步回调执行======>${JSON.stringify(event)}   callback:${event.callback+''.length>50?event.callback+''.substring(0,50):event.callback+''}`);
         try{
             if (event.type) {
+                // debugger
                 event.callback()
             } else {
                 eval(event.callback)

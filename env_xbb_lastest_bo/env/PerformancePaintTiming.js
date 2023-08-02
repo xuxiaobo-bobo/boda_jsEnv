@@ -2,7 +2,7 @@
 
 PerformancePaintTiming = function PerformancePaintTiming() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PerformancePaintTiming)) {
+  if (arg != 'bobo' && !(this instanceof PerformancePaintTiming)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

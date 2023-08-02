@@ -2,7 +2,7 @@
 
 SVGForeignObjectElement = function SVGForeignObjectElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGForeignObjectElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGForeignObjectElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

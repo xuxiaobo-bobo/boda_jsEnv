@@ -2,7 +2,7 @@
 
 IDBTransaction = function IDBTransaction() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IDBTransaction)) {
+  if (arg != 'bobo' && !(this instanceof IDBTransaction)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

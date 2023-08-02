@@ -2,7 +2,7 @@
 
 CanvasCaptureMediaStreamTrack = function CanvasCaptureMediaStreamTrack() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CanvasCaptureMediaStreamTrack)) {
+  if (arg != 'bobo' && !(this instanceof CanvasCaptureMediaStreamTrack)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

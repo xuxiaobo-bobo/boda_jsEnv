@@ -2,7 +2,7 @@
 
 WebTransportDatagramDuplexStream = function WebTransportDatagramDuplexStream() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebTransportDatagramDuplexStream)) {
+  if (arg != 'bobo' && !(this instanceof WebTransportDatagramDuplexStream)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

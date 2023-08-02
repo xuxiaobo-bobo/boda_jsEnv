@@ -2,7 +2,7 @@
 
 HIDDevice = function HIDDevice() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HIDDevice)) {
+  if (arg != 'bobo' && !(this instanceof HIDDevice)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

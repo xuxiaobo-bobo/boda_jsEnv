@@ -2,7 +2,7 @@
 
 WebGLSync = function WebGLSync() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLSync)) {
+  if (arg != 'bobo' && !(this instanceof WebGLSync)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

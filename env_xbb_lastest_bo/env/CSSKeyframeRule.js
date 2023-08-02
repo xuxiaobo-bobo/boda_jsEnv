@@ -2,7 +2,7 @@
 
 CSSKeyframeRule = function CSSKeyframeRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSKeyframeRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSKeyframeRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

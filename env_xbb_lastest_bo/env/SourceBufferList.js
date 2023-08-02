@@ -2,7 +2,7 @@
 
 SourceBufferList = function SourceBufferList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SourceBufferList)) {
+  if (arg != 'bobo' && !(this instanceof SourceBufferList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

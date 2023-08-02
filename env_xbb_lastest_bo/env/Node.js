@@ -2,7 +2,7 @@
 
 Node = function Node() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Node)) {
+  if (arg != 'bobo' && !(this instanceof Node)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

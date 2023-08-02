@@ -2,7 +2,7 @@
 
 GPUQuerySet = function GPUQuerySet() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUQuerySet)) {
+  if (arg != 'bobo' && !(this instanceof GPUQuerySet)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

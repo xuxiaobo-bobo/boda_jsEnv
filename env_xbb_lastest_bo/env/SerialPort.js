@@ -2,7 +2,7 @@
 
 SerialPort = function SerialPort() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SerialPort)) {
+  if (arg != 'bobo' && !(this instanceof SerialPort)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

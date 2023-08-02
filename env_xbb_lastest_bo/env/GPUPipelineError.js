@@ -2,7 +2,7 @@
 
 GPUPipelineError = function GPUPipelineError() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUPipelineError)) {
+  if (arg != 'bobo' && !(this instanceof GPUPipelineError)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'GPUPipelineError': 2 arguments required, but only 0 present.");
   }
   ;

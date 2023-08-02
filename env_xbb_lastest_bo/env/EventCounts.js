@@ -2,7 +2,7 @@
 
 EventCounts = function EventCounts() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof EventCounts)) {
+  if (arg != 'bobo' && !(this instanceof EventCounts)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

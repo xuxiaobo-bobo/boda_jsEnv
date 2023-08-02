@@ -2,7 +2,7 @@
 
 ByteLengthQueuingStrategy = function ByteLengthQueuingStrategy() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ByteLengthQueuingStrategy)) {
+  if (arg != 'bobo' && !(this instanceof ByteLengthQueuingStrategy)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'ByteLengthQueuingStrategy': 1 argument required, but only 0 present.");
   }
   ;

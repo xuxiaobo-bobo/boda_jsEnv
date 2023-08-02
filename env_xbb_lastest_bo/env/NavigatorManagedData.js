@@ -2,7 +2,7 @@
 
 NavigatorManagedData = function NavigatorManagedData() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NavigatorManagedData)) {
+  if (arg != 'bobo' && !(this instanceof NavigatorManagedData)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

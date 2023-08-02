@@ -2,7 +2,7 @@
 
 MathMLElement = function MathMLElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MathMLElement)) {
+  if (arg != 'bobo' && !(this instanceof MathMLElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

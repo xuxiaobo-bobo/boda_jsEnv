@@ -2,7 +2,7 @@
 
 MIDIAccess = function MIDIAccess() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MIDIAccess)) {
+  if (arg != 'bobo' && !(this instanceof MIDIAccess)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

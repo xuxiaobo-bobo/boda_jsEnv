@@ -2,7 +2,7 @@
 
 NamedNodeMap = function NamedNodeMap() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NamedNodeMap)) {
+  if (arg != 'bobo' && !(this instanceof NamedNodeMap)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

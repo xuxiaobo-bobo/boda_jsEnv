@@ -2,7 +2,7 @@
 
 SVGRect = function SVGRect() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGRect)) {
+  if (arg != 'bobo' && !(this instanceof SVGRect)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

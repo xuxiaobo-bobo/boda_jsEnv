@@ -2,7 +2,7 @@
 
 DeviceMotionEventRotationRate = function DeviceMotionEventRotationRate() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DeviceMotionEventRotationRate)) {
+  if (arg != 'bobo' && !(this instanceof DeviceMotionEventRotationRate)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

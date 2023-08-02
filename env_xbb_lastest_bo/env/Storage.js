@@ -2,7 +2,7 @@
 
 Storage = function Storage() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Storage)) {
+  if (arg != 'bobo' && !(this instanceof Storage)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

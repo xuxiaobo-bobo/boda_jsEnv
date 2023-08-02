@@ -2,7 +2,7 @@
 
 DeviceMotionEvent = function DeviceMotionEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DeviceMotionEvent)) {
+  if (arg != 'bobo' && !(this instanceof DeviceMotionEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DeviceMotionEvent': 1 argument required, but only 0 present.");
   }
   ;

@@ -2,7 +2,7 @@
 
 BackgroundFetchManager = function BackgroundFetchManager() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BackgroundFetchManager)) {
+  if (arg != 'bobo' && !(this instanceof BackgroundFetchManager)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

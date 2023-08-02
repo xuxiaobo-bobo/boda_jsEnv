@@ -2,7 +2,7 @@
 
 DOMError = function DOMError() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DOMError)) {
+  if (arg != 'bobo' && !(this instanceof DOMError)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DOMError': 1 argument required, but only 0 present.");
   }
   ;

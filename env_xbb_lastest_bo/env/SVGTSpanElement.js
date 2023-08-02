@@ -2,7 +2,7 @@
 
 SVGTSpanElement = function SVGTSpanElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGTSpanElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGTSpanElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

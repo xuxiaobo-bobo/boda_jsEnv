@@ -2,7 +2,7 @@
 
 HTMLAudioElement = function HTMLAudioElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLAudioElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLAudioElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

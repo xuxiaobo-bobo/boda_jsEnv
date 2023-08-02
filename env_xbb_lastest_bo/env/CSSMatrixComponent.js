@@ -2,7 +2,7 @@
 
 CSSMatrixComponent = function CSSMatrixComponent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSMatrixComponent)) {
+  if (arg != 'bobo' && !(this instanceof CSSMatrixComponent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSMatrixComponent': 1 argument required, but only 0 present.");
   }
   ;

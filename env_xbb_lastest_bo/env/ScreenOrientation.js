@@ -2,7 +2,7 @@
 
 ScreenOrientation = function ScreenOrientation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ScreenOrientation)) {
+  if (arg != 'bobo' && !(this instanceof ScreenOrientation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

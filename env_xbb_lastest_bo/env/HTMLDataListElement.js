@@ -2,7 +2,7 @@
 
 HTMLDataListElement = function HTMLDataListElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLDataListElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLDataListElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

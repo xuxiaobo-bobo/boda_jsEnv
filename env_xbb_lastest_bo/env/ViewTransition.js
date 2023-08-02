@@ -2,7 +2,7 @@
 
 ViewTransition = function ViewTransition() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ViewTransition)) {
+  if (arg != 'bobo' && !(this instanceof ViewTransition)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

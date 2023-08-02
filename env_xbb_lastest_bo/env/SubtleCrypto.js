@@ -2,7 +2,7 @@
 
 SubtleCrypto = function SubtleCrypto() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SubtleCrypto)) {
+  if (arg != 'bobo' && !(this instanceof SubtleCrypto)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

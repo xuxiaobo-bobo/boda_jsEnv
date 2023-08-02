@@ -2,7 +2,7 @@
 
 HTMLStyleElement = function HTMLStyleElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLStyleElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLStyleElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

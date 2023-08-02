@@ -2,7 +2,7 @@
 
 NavigationPreloadManager = function NavigationPreloadManager() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NavigationPreloadManager)) {
+  if (arg != 'bobo' && !(this instanceof NavigationPreloadManager)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

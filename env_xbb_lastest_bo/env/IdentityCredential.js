@@ -2,7 +2,7 @@
 
 IdentityCredential = function IdentityCredential() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IdentityCredential)) {
+  if (arg != 'bobo' && !(this instanceof IdentityCredential)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

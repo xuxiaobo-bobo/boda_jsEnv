@@ -2,7 +2,7 @@
 
 FederatedCredential = function FederatedCredential() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FederatedCredential)) {
+  if (arg != 'bobo' && !(this instanceof FederatedCredential)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'FederatedCredential': 1 argument required, but only 0 present.");
   }
   ;

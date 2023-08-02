@@ -2,7 +2,7 @@
 
 WebGLShader = function WebGLShader() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLShader)) {
+  if (arg != 'bobo' && !(this instanceof WebGLShader)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

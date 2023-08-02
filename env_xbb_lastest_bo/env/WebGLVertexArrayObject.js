@@ -2,7 +2,7 @@
 
 WebGLVertexArrayObject = function WebGLVertexArrayObject() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLVertexArrayObject)) {
+  if (arg != 'bobo' && !(this instanceof WebGLVertexArrayObject)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

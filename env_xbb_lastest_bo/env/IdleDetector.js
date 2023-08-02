@@ -1,6 +1,7 @@
 // IdleDetector对象
 
 IdleDetector = function IdleDetector() {
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('IdleDetector 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

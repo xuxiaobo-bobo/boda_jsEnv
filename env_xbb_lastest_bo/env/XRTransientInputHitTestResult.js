@@ -2,7 +2,7 @@
 
 XRTransientInputHitTestResult = function XRTransientInputHitTestResult() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRTransientInputHitTestResult)) {
+  if (arg != 'bobo' && !(this instanceof XRTransientInputHitTestResult)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

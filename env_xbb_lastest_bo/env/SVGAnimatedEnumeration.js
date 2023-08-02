@@ -2,7 +2,7 @@
 
 SVGAnimatedEnumeration = function SVGAnimatedEnumeration() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimatedEnumeration)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimatedEnumeration)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

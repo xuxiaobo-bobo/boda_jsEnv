@@ -2,7 +2,7 @@
 
 NavigationHistoryEntry = function NavigationHistoryEntry() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof NavigationHistoryEntry)) {
+  if (arg != 'bobo' && !(this instanceof NavigationHistoryEntry)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

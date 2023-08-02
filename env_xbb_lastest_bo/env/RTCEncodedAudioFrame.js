@@ -2,7 +2,7 @@
 
 RTCEncodedAudioFrame = function RTCEncodedAudioFrame() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCEncodedAudioFrame)) {
+  if (arg != 'bobo' && !(this instanceof RTCEncodedAudioFrame)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

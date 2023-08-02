@@ -2,7 +2,7 @@
 
 DataTransferItemList = function DataTransferItemList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DataTransferItemList)) {
+  if (arg != 'bobo' && !(this instanceof DataTransferItemList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

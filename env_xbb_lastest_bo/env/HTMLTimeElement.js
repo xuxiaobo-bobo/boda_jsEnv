@@ -2,7 +2,7 @@
 
 HTMLTimeElement = function HTMLTimeElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLTimeElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLTimeElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

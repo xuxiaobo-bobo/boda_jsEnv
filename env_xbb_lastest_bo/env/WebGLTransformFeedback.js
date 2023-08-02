@@ -2,7 +2,7 @@
 
 WebGLTransformFeedback = function WebGLTransformFeedback() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLTransformFeedback)) {
+  if (arg != 'bobo' && !(this instanceof WebGLTransformFeedback)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

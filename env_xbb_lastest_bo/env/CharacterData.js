@@ -2,7 +2,7 @@
 
 CharacterData = function CharacterData() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CharacterData)) {
+  if (arg != 'bobo' && !(this instanceof CharacterData)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

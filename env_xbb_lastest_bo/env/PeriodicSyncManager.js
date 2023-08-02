@@ -2,7 +2,7 @@
 
 PeriodicSyncManager = function PeriodicSyncManager() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PeriodicSyncManager)) {
+  if (arg != 'bobo' && !(this instanceof PeriodicSyncManager)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

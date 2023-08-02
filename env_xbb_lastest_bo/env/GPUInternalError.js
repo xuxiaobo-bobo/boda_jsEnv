@@ -2,7 +2,7 @@
 
 GPUInternalError = function GPUInternalError() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUInternalError)) {
+  if (arg != 'bobo' && !(this instanceof GPUInternalError)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'GPUInternalError': 1 argument required, but only 0 present.");
   }
   ;

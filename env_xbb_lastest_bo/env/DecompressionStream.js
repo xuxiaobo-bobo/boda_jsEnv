@@ -2,7 +2,7 @@
 
 DecompressionStream = function DecompressionStream() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DecompressionStream)) {
+  if (arg != 'bobo' && !(this instanceof DecompressionStream)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'DecompressionStream': 1 argument required, but only 0 present.");
   }
   ;

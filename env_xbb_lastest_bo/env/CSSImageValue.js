@@ -2,7 +2,7 @@
 
 CSSImageValue = function CSSImageValue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSImageValue)) {
+  if (arg != 'bobo' && !(this instanceof CSSImageValue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

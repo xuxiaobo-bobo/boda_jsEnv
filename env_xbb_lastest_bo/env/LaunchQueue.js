@@ -2,7 +2,7 @@
 
 LaunchQueue = function LaunchQueue() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof LaunchQueue)) {
+  if (arg != 'bobo' && !(this instanceof LaunchQueue)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 RTCDataChannelEvent = function RTCDataChannelEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof RTCDataChannelEvent)) {
+  if (arg != 'bobo' && !(this instanceof RTCDataChannelEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'RTCDataChannelEvent': 2 arguments required, but only 0 present.");
   }
   ;

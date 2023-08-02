@@ -2,7 +2,7 @@
 
 MediaKeySession = function MediaKeySession() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaKeySession)) {
+  if (arg != 'bobo' && !(this instanceof MediaKeySession)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 WebGLUniformLocation = function WebGLUniformLocation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WebGLUniformLocation)) {
+  if (arg != 'bobo' && !(this instanceof WebGLUniformLocation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

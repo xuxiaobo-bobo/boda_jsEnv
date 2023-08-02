@@ -2,7 +2,7 @@
 
 MimeTypeArray = function MimeTypeArray() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MimeTypeArray)) {
+  if (arg != 'bobo' && !(this instanceof MimeTypeArray)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

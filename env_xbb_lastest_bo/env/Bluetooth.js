@@ -2,7 +2,7 @@
 
 Bluetooth = function Bluetooth() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Bluetooth)) {
+  if (arg != 'bobo' && !(this instanceof Bluetooth)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

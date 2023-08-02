@@ -2,7 +2,7 @@
 
 CSSMathInvert = function CSSMathInvert() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSMathInvert)) {
+  if (arg != 'bobo' && !(this instanceof CSSMathInvert)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CSSMathInvert': 1 argument required, but only 0 present.");
   }
   ;

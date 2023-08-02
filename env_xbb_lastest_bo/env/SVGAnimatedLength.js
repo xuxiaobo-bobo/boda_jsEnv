@@ -2,7 +2,7 @@
 
 SVGAnimatedLength = function SVGAnimatedLength() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGAnimatedLength)) {
+  if (arg != 'bobo' && !(this instanceof SVGAnimatedLength)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

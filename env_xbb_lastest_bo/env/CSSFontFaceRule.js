@@ -2,7 +2,7 @@
 
 CSSFontFaceRule = function CSSFontFaceRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSFontFaceRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSFontFaceRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 BroadcastChannel = function BroadcastChannel() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BroadcastChannel)) {
+  if (arg != 'bobo' && !(this instanceof BroadcastChannel)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'BroadcastChannel': 1 argument required, but only 0 present.");
   }
   ;

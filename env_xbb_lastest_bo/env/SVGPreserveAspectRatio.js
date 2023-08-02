@@ -2,7 +2,7 @@
 
 SVGPreserveAspectRatio = function SVGPreserveAspectRatio() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGPreserveAspectRatio)) {
+  if (arg != 'bobo' && !(this instanceof SVGPreserveAspectRatio)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

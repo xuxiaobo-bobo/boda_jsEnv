@@ -2,7 +2,7 @@
 
 BluetoothUUID = function BluetoothUUID() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BluetoothUUID)) {
+  if (arg != 'bobo' && !(this instanceof BluetoothUUID)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

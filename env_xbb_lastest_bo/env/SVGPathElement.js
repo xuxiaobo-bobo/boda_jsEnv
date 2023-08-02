@@ -2,7 +2,7 @@
 
 SVGPathElement = function SVGPathElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGPathElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGPathElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

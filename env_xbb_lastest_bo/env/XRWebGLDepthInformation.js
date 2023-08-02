@@ -2,7 +2,7 @@
 
 XRWebGLDepthInformation = function XRWebGLDepthInformation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRWebGLDepthInformation)) {
+  if (arg != 'bobo' && !(this instanceof XRWebGLDepthInformation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

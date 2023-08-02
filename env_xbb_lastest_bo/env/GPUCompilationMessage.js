@@ -2,7 +2,7 @@
 
 GPUCompilationMessage = function GPUCompilationMessage() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUCompilationMessage)) {
+  if (arg != 'bobo' && !(this instanceof GPUCompilationMessage)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

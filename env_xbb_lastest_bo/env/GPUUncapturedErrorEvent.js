@@ -2,7 +2,7 @@
 
 GPUUncapturedErrorEvent = function GPUUncapturedErrorEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUUncapturedErrorEvent)) {
+  if (arg != 'bobo' && !(this instanceof GPUUncapturedErrorEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'GPUUncapturedErrorEvent': 2 arguments required, but only 0 present.");
   }
   ;

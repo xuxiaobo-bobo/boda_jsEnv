@@ -2,7 +2,7 @@
 
 Credential = function Credential() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Credential)) {
+  if (arg != 'bobo' && !(this instanceof Credential)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

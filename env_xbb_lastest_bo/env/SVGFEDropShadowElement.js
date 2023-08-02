@@ -2,7 +2,7 @@
 
 SVGFEDropShadowElement = function SVGFEDropShadowElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEDropShadowElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEDropShadowElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

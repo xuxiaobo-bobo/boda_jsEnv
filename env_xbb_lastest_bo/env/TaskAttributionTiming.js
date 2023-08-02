@@ -2,7 +2,7 @@
 
 TaskAttributionTiming = function TaskAttributionTiming() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TaskAttributionTiming)) {
+  if (arg != 'bobo' && !(this instanceof TaskAttributionTiming)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

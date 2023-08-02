@@ -2,7 +2,7 @@
 
 HTMLIFrameElement = function HTMLIFrameElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLIFrameElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLIFrameElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

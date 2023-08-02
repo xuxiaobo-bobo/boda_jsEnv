@@ -2,7 +2,7 @@
 
 MIDIInput = function MIDIInput() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MIDIInput)) {
+  if (arg != 'bobo' && !(this instanceof MIDIInput)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

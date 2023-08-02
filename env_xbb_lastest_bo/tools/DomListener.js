@@ -2726,6 +2726,6 @@ bodavm.memory.clickListener=[Math.floor(Math.random() * (200 - 100 + 1)) + 100,M
 //mousemove 完成
 //click    完成
 // load  完成
-
+//readystatechange 完成
 
 

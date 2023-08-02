@@ -1,6 +1,6 @@
 // structuredClone对象
-structuredClone = () => {
-  console.log_copy(`使用 structuredClone arg->`, arguments);
+structuredClone = (a) => {
+  console.log_copy(`使用 structuredClone arg->`, a);
 };
 bodavm.toolsFunc.safefunction(structuredClone, "structuredClone");
 bodavm.toolsFunc.defineProperty(structuredClone, "length", {

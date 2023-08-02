@@ -2,7 +2,7 @@
 
 Gamepad = function Gamepad() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Gamepad)) {
+  if (arg != 'bobo' && !(this instanceof Gamepad)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

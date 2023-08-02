@@ -2,7 +2,7 @@
 
 SpeechSynthesisEvent = function SpeechSynthesisEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SpeechSynthesisEvent)) {
+  if (arg != 'bobo' && !(this instanceof SpeechSynthesisEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'SpeechSynthesisEvent': 2 arguments required, but only 0 present.");
   }
   ;

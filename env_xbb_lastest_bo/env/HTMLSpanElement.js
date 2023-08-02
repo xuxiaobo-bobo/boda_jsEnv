@@ -2,7 +2,7 @@
 
 HTMLSpanElement = function HTMLSpanElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLSpanElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLSpanElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

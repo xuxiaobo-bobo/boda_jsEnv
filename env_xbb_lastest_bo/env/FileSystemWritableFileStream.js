@@ -2,7 +2,7 @@
 
 FileSystemWritableFileStream = function FileSystemWritableFileStream() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof FileSystemWritableFileStream)) {
+  if (arg != 'bobo' && !(this instanceof FileSystemWritableFileStream)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

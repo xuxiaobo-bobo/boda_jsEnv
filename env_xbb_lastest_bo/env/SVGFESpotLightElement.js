@@ -2,7 +2,7 @@
 
 SVGFESpotLightElement = function SVGFESpotLightElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFESpotLightElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFESpotLightElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

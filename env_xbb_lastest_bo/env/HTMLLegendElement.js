@@ -2,7 +2,7 @@
 
 HTMLLegendElement = function HTMLLegendElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLLegendElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLLegendElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

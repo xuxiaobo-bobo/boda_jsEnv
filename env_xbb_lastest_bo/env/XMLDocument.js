@@ -2,7 +2,7 @@
 
 XMLDocument = function XMLDocument() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XMLDocument)) {
+  if (arg != 'bobo' && !(this instanceof XMLDocument)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

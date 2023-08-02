@@ -2,7 +2,7 @@
 
 Geolocation = function Geolocation() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof Geolocation)) {
+  if (arg != 'bobo' && !(this instanceof Geolocation)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

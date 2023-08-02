@@ -2,7 +2,7 @@
 
 HTMLDivElement = function HTMLDivElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLDivElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLDivElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

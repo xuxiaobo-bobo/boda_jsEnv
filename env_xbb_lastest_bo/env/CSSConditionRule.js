@@ -2,7 +2,7 @@
 
 CSSConditionRule = function CSSConditionRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSConditionRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSConditionRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

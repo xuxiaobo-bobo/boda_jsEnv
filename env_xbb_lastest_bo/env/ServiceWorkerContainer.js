@@ -2,7 +2,7 @@
 
 ServiceWorkerContainer = function ServiceWorkerContainer() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ServiceWorkerContainer)) {
+  if (arg != 'bobo' && !(this instanceof ServiceWorkerContainer)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

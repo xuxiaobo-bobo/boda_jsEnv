@@ -2,7 +2,7 @@
 
 MediaStreamAudioDestinationNode = function MediaStreamAudioDestinationNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaStreamAudioDestinationNode)) {
+  if (arg != 'bobo' && !(this instanceof MediaStreamAudioDestinationNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'MediaStreamAudioDestinationNode': 1 argument required, but only 0 present.");
   }
   ;

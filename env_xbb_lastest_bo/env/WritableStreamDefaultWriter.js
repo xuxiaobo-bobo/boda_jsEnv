@@ -2,7 +2,7 @@
 
 WritableStreamDefaultWriter = function WritableStreamDefaultWriter() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof WritableStreamDefaultWriter)) {
+  if (arg != 'bobo' && !(this instanceof WritableStreamDefaultWriter)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'WritableStreamDefaultWriter': 1 argument required, but only 0 present.");
   }
   ;

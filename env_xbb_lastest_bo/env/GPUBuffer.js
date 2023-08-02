@@ -2,7 +2,7 @@
 
 GPUBuffer = function GPUBuffer() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUBuffer)) {
+  if (arg != 'bobo' && !(this instanceof GPUBuffer)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

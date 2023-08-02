@@ -2,7 +2,7 @@
 
 CSSPageRule = function CSSPageRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSPageRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSPageRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

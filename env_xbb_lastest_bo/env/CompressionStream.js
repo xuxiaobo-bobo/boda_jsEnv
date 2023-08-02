@@ -2,7 +2,7 @@
 
 CompressionStream = function CompressionStream() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CompressionStream)) {
+  if (arg != 'bobo' && !(this instanceof CompressionStream)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'CompressionStream': 1 argument required, but only 0 present.");
   }
   ;

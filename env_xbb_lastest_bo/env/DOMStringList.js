@@ -2,7 +2,7 @@
 
 DOMStringList = function DOMStringList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DOMStringList)) {
+  if (arg != 'bobo' && !(this instanceof DOMStringList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -1,6 +1,7 @@
 // XPathEvaluator对象
 
 XPathEvaluator = function XPathEvaluator() {
+  let arg=arguments[0]
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('XPathEvaluator 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

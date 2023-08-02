@@ -2,7 +2,7 @@
 
 XRCamera = function XRCamera() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRCamera)) {
+  if (arg != 'bobo' && !(this instanceof XRCamera)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 GainNode = function GainNode() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GainNode)) {
+  if (arg != 'bobo' && !(this instanceof GainNode)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'GainNode': 1 argument required, but only 0 present.");
   }
   ;

@@ -2,7 +2,7 @@
 
 GPUComputePassEncoder = function GPUComputePassEncoder() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPUComputePassEncoder)) {
+  if (arg != 'bobo' && !(this instanceof GPUComputePassEncoder)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 DeviceMotionEventAcceleration = function DeviceMotionEventAcceleration() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof DeviceMotionEventAcceleration)) {
+  if (arg != 'bobo' && !(this instanceof DeviceMotionEventAcceleration)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

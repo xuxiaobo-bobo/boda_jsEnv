@@ -2,7 +2,7 @@
 
 KeyframeEffect = function KeyframeEffect() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof KeyframeEffect)) {
+  if (arg != 'bobo' && !(this instanceof KeyframeEffect)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'KeyframeEffect': 1 argument required, but only 0 present.");
   }
   ;

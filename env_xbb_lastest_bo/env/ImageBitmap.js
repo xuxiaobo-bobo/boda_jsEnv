@@ -2,7 +2,7 @@
 
 ImageBitmap = function ImageBitmap() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof ImageBitmap)) {
+  if (arg != 'bobo' && !(this instanceof ImageBitmap)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

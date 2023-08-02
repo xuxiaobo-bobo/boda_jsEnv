@@ -2,7 +2,7 @@
 
 MediaKeyStatusMap = function MediaKeyStatusMap() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaKeyStatusMap)) {
+  if (arg != 'bobo' && !(this instanceof MediaKeyStatusMap)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

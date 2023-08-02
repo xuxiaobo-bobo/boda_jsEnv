@@ -2,7 +2,7 @@
 
 XRViewerPose = function XRViewerPose() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRViewerPose)) {
+  if (arg != 'bobo' && !(this instanceof XRViewerPose)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 TouchList = function TouchList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TouchList)) {
+  if (arg != 'bobo' && !(this instanceof TouchList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

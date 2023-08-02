@@ -2,7 +2,7 @@
 
 GPURenderPipeline = function GPURenderPipeline() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof GPURenderPipeline)) {
+  if (arg != 'bobo' && !(this instanceof GPURenderPipeline)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

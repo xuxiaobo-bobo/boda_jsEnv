@@ -2,7 +2,7 @@
 
 CSSNamespaceRule = function CSSNamespaceRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSNamespaceRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSNamespaceRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

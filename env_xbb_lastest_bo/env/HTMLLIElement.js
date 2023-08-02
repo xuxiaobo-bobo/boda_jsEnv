@@ -2,7 +2,7 @@
 
 HTMLLIElement = function HTMLLIElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLLIElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLLIElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

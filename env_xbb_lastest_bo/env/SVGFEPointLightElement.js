@@ -2,7 +2,7 @@
 
 SVGFEPointLightElement = function SVGFEPointLightElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEPointLightElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEPointLightElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

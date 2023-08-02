@@ -2,7 +2,7 @@
 
 XMLHttpRequestEventTarget = function XMLHttpRequestEventTarget() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XMLHttpRequestEventTarget)) {
+  if (arg != 'bobo' && !(this instanceof XMLHttpRequestEventTarget)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

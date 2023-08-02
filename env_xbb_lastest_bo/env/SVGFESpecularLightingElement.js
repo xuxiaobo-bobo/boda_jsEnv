@@ -2,7 +2,7 @@
 
 SVGFESpecularLightingElement = function SVGFESpecularLightingElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFESpecularLightingElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFESpecularLightingElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

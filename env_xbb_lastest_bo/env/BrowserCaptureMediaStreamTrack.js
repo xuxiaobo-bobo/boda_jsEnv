@@ -2,7 +2,7 @@
 
 BrowserCaptureMediaStreamTrack = function BrowserCaptureMediaStreamTrack() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof BrowserCaptureMediaStreamTrack)) {
+  if (arg != 'bobo' && !(this instanceof BrowserCaptureMediaStreamTrack)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

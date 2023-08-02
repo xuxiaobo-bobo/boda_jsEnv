@@ -2,7 +2,7 @@
 
 XRViewport = function XRViewport() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof XRViewport)) {
+  if (arg != 'bobo' && !(this instanceof XRViewport)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 CSSFontPaletteValuesRule = function CSSFontPaletteValuesRule() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof CSSFontPaletteValuesRule)) {
+  if (arg != 'bobo' && !(this instanceof CSSFontPaletteValuesRule)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -1,6 +1,6 @@
 // getComputedStyle对象
-getComputedStyle = () => {
-  console.log(`使用 getComputedStyle arg->`, arguments);
+getComputedStyle = (a) => {
+  console.log(`使用 getComputedStyle arg->`, a);
 };
 bodavm.toolsFunc.safefunction(getComputedStyle, "getComputedStyle");
 bodavm.toolsFunc.defineProperty(getComputedStyle, "length", {

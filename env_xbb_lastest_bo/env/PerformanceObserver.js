@@ -2,7 +2,7 @@
 
 PerformanceObserver = function PerformanceObserver() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PerformanceObserver)) {
+  if (arg != 'bobo' && !(this instanceof PerformanceObserver)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PerformanceObserver': 1 argument required, but only 0 present.");
   }
   ;

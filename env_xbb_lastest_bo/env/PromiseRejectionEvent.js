@@ -2,7 +2,7 @@
 
 PromiseRejectionEvent = function PromiseRejectionEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof PromiseRejectionEvent)) {
+  if (arg != 'bobo' && !(this instanceof PromiseRejectionEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'PromiseRejectionEvent': 2 arguments required, but only 0 present.");
   }
   ;

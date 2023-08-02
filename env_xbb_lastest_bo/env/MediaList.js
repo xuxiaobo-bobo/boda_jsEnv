@@ -2,7 +2,7 @@
 
 MediaList = function MediaList() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaList)) {
+  if (arg != 'bobo' && !(this instanceof MediaList)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

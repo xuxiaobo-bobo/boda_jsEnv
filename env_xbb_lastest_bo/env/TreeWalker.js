@@ -2,7 +2,7 @@
 
 TreeWalker = function TreeWalker() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof TreeWalker)) {
+  if (arg != 'bobo' && !(this instanceof TreeWalker)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 External = function External() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof External)) {
+  if (arg != 'bobo' && !(this instanceof External)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

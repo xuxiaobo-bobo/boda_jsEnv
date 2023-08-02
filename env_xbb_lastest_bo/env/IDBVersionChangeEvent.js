@@ -2,7 +2,7 @@
 
 IDBVersionChangeEvent = function IDBVersionChangeEvent() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof IDBVersionChangeEvent)) {
+  if (arg != 'bobo' && !(this instanceof IDBVersionChangeEvent)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'IDBVersionChangeEvent': 1 argument required, but only 0 present.");
   }
   ;

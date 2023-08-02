@@ -2,7 +2,7 @@
 
 MediaCapabilities = function MediaCapabilities() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaCapabilities)) {
+  if (arg != 'bobo' && !(this instanceof MediaCapabilities)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

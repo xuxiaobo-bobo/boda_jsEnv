@@ -2,7 +2,7 @@
 
 HTMLQuoteElement = function HTMLQuoteElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLQuoteElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLQuoteElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 HTMLPictureElement = function HTMLPictureElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof HTMLPictureElement)) {
+  if (arg != 'bobo' && !(this instanceof HTMLPictureElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

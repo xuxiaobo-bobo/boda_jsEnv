@@ -2,7 +2,7 @@
 
 MediaError = function MediaError() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof MediaError)) {
+  if (arg != 'bobo' && !(this instanceof MediaError)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;

@@ -2,7 +2,7 @@
 
 OfflineAudioContext = function OfflineAudioContext() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof OfflineAudioContext)) {
+  if (arg != 'bobo' && !(this instanceof OfflineAudioContext)) {
     return bodavm.toolsFunc.throwError("TypeError", "Failed to construct 'OfflineAudioContext': 1 argument required, but only 0 present.");
   }
   ;

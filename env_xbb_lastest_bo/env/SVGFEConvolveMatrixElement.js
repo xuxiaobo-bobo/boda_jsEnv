@@ -2,7 +2,7 @@
 
 SVGFEConvolveMatrixElement = function SVGFEConvolveMatrixElement() {
   let arg = arguments[0];
-  if (arg != 'bobo' && (this instanceof SVGFEConvolveMatrixElement)) {
+  if (arg != 'bobo' && !(this instanceof SVGFEConvolveMatrixElement)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
   }
   ;
