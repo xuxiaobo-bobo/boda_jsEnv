@@ -1706,7 +1706,7 @@
                 break
             case "webgl":
                 // context = context.getContext('2d')
-                context = new WebGL2RenderingContext('bobo')
+                context = new WebGLRenderingContext('bobo')
                 bodavm.toolsFunc.setProtoAttr.call(this, 'getContext', type)
                 bodavm.toolsFunc.setProtoAttr.call(this, 'context', context)
                 bodavm.toolsFunc.setProtoAttr.call(context, 'canvas', this)
@@ -1715,7 +1715,7 @@
                 break
             case "webgl2":
                 // context = context.getContext('2d')
-                context = new WebGLRenderingContext('bobo')
+                context = new WebGL2RenderingContext('bobo')
                 bodavm.toolsFunc.setProtoAttr.call(this, 'getContext', type)
                 bodavm.toolsFunc.setProtoAttr.call(this, 'context', context)
                 bodavm.toolsFunc.setProtoAttr.call(context, 'canvas', this)
