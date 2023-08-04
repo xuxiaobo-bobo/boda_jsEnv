@@ -44,7 +44,13 @@ bodavm.memory.waitExec = []
 bodavm.memory.domDocument['html'] = [boda$('html')[0]]
 bodavm.memory.domDocument.all.push(boda$('html')[0])
 bodavm.memory.initDone=true
-// debugger
+bodavm.memory.domCache=null  //解决死递归 script标签插入script标签,
+/*会造成死循环的问题
+var hm = document.createElement("script");
+hm.src = "https://hm.baidu.com/hm.js?2a795944b81b391f12d70da5971ba616";
+var s = document.getElementsByTagName("script")[0];
+s.parentNode.insertBefore(hm, s);
+*/// debugger
 function bodaParseScript(thisNode) {
   //解析script 标签
   let attr = boda$(thisNode).attr()
@@ -66,8 +72,8 @@ function bodaParseScript(thisNode) {
 
     bodaPath += 1
     try{
-      scriptCode = bofs.readFileSync('env_xbb_lastest_bo\\run\\new\\' + mypath + '.js').toString()
-
+      scriptCode = bofs.readFileSync('.\\env_xbb_lastest_bo\\run\\new\\' + mypath + '.js').toString()
+      console.log_copy(scriptCode)
     }catch{
       console.log_copy(`读取`,'env_xbb_lastest_bo\\run\\new\\' + mypath + '.js','失败')
     }
@@ -149,8 +155,13 @@ function bodaExecEle(thisNode) {
 function bodatraverse(node) {
 
   for (let index = 0; index < node.children().length; index++) {
-
+      if (bodavm.memory.domCache==node.children()[index]){
+        debugger
+        index++
+      }
     let thisNode = node.children()[index];
+    if(!thisNode){break}
+    bodavm.memory.domCache=thisNode
     if (!bodavm.memory.domDocument[thisNode.name]) {
       bodavm.memory.domDocument[thisNode.name] = []
     }

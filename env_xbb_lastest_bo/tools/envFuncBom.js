@@ -13,55 +13,200 @@
 // height：屏幕的高度。
 ;;
 (function () {
-    bodavm.envFunc.Navigator_wakeLock_get=function (){
-        if (bodavm.memory.cache['Navigator_wakeLock_get']){
+    bodavm.envFunc.Navigator_xr_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'xr')
+        if (islive){
+            console.log(`Navigator_xr_get 已存在返回`,islive)
+            return islive
+        }
+        let xr = new XRSystem('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'xr',xr)
+        console.log_copy(`Navigator_xr_get -> xr -> ${xr}`)
+        return xr
+    }
+    bodavm.envFunc.Navigator_serial_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'serial')
+        if (islive){
+            console.log(`Navigator_serial_get 已存在返回`,islive)
+            return islive
+        }
+        let serial = new Serial('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'serial',serial)
+        console.log_copy(`Navigator_serial_get -> serial -> ${serial}`)
+        return serial
+    }
+
+    bodavm.envFunc.Navigator_presentation_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'presentation')
+        if (islive){
+            console.log(`Navigator_presentation_get 已存在返回`,islive)
+            return islive
+        }
+        let presentation = new Presentation('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'presentation',presentation)
+        console.log_copy(`Navigator_presentation_get -> presentation -> ${presentation}`)
+        return presentation
+    }
+
+    bodavm.envFunc.Navigator_permissions_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'permissions')
+        if (islive){
+            console.log(`Navigator_permissions_get 已存在返回`,islive)
+            return islive
+        }
+        let permissions = new Permissions('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'permissions',permissions)
+        console.log_copy(`Navigator_permissions_get -> permissions -> ${permissions}`)
+        return permissions
+    }
+    bodavm.envFunc.Navigator_mediaSession_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'mediaSession')
+        if (islive){
+            console.log(`Navigator_mediaSession_get 已存在返回`,islive)
+            return islive
+        }
+        let mediaSession = new MediaSession('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'mediaSession',mediaSession)
+        console.log_copy(`Navigator_mediaSession_get -> mediaSession -> ${mediaSession}`)
+        return mediaSession
+    }
+
+    bodavm.envFunc.Navigator_keyboard_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'keyboard')
+        if (islive){
+            console.log(`Navigator_keyboard_get 已存在返回`,islive)
+            return islive
+        }
+        let keyboard = new Keyboard('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'keyboard',keyboard)
+        console.log_copy(`Navigator_keyboard_get -> keyboard -> ${keyboard}`)
+        return keyboard
+    }
+
+    bodavm.envFunc.Navigator_hid_get=function (){
+        let ishid=bodavm.toolsFunc.getProtoAttr.call(this,'hid')
+        if (ishid){
+            console.log(`Navigator_hid_get 已存在返回`,ishid)
+            return ishid
+        }
+        let hid = new HID('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'hid',hid)
+        console.log_copy(`Navigator_hid_get -> hid -> ${hid}`)
+        return hid
+    }
+    bodavm.envFunc.Navigator_credentials_get=function (){
+        let iscredentials=bodavm.toolsFunc.getProtoAttr.call(this,'credentials')
+        if (iscredentials){
+            console.log(`Navigator_credentials_get 已存在返回`,iscredentials)
+            return iscredentials
+        }
+        let credentials = new CredentialsContainer('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'credentials',credentials)
+        console.log_copy(`Navigator_credentials_get -> credentials -> ${credentials}`)
+        return credentials
+    }
+    bodavm.envFunc.Navigator_clipboard_get=function (){
+        let isclipboard=bodavm.toolsFunc.getProtoAttr.call(this,'clipboard')
+        if (isclipboard){
+            console.log(`Navigator_clipboard_get 已存在返回`,isclipboard)
+            return isclipboard
+        }
+        let clipboard = new Clipboard('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'clipboard',clipboard)
+        console.log_copy(`Navigator_clipboard_get -> clipboard -> ${clipboard}`)
+        return clipboard
+    }
+    bodavm.envFunc.MessagePort_onmessage_set = function () {
+        let arg = arguments[0]
+        let event = {
+            'self': this,
+            'callback': arg
+        }
+        bodavm.memory.asyncEvent['MessageChannel']['onmessage'].push(event)
+        console.log_copy(`MessagePort_onmessage_set arg ->`, arg)
+        return arg
+    }
+    bodavm.envFunc.Navigator_mediaDevices_get = function () {
+        let ismediaDevices=bodavm.toolsFunc.getProtoAttr.call(this,'mediaDevices')
+        if (ismediaDevices){
+            console.log(`Navigator_mediaDevices_get 已存在返回`,ismediaDevices)
+            return ismediaDevices
+        }
+        let medias = new MediaDevices('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'mediaDevices',medias)
+        console.log_copy(`Navigator_mediaDevices_get -> medias -> ${medias}`)
+        return medias
+
+    }
+    bodavm.envFunc.MediaDevices_enumerateDevices=function (){
+        if (bodavm.memory.cache['MediaDevices_enumerateDevices']["res"] ) {
+            console.log_copy(`MediaDevices_enumerateDevices cache已存在直接返回`)
+            return bodavm.memory.cache['MediaDevices_enumerateDevices']["res"] 
+        }
+
+        let enulist=[new InputDeviceInfo('bobo'),new InputDeviceInfo('bobo'),new MediaDeviceInfo('bobo')]
+        let promise=new Promise((resolve, reject) => {
+            resolve(enulist);
+        });
+        console.log_copy(`MediaDevices_enumerateDevices  `, '获取当前可用媒体设备信息 ->', enulist, ` ->返回值为异步promise ->`, promise);
+        bodavm.memory.cache['MediaDevices_enumerateDevices']["res"] = promise;
+        // bodavm.memory.cache['MediaDevices_enumerateDevices']["this"] = this;
+        return promise;
+    }
+
+    bodavm.envFunc.Navigator_wakeLock_get = function () {
+        if (bodavm.memory.cache['Navigator_wakeLock_get']) {
             console.log_copy(`Navigator_wakeLock_get cache已存在直接返回`)
             return bodavm.memory.cache['Navigator_wakeLock_get']
         }
 
-        let lock=new WakeLock('bobo')
-        bodavm.toolsFunc.setProtoAttr.call(lock,'issymbolProperty',true)
-        bodavm.memory.cache['Navigator_wakeLock_get']=lock
-        console.log_copy(`Navigator_wakeLock_get -> res ->`,lock)
+        let lock = new WakeLock('bobo')
+        // bodavm.toolsFunc.setProtoAttr.call(lock,'issymbolProperty',true)
+        bodavm.memory.cache['Navigator_wakeLock_get'] = lock
+        console.log_copy(`Navigator_wakeLock_get -> res ->`, lock)
         return lock
     }
-    bodavm.envFunc.location_origin_get=function (){
-        let origin=bodavm.memory.location['origin']
+    bodavm.envFunc.location_origin_get = function () {
+        let origin = bodavm.memory.location['origin']
         console.log_copy(`location_origin_get res->`, origin)
 
         return origin
     }
-    bodavm.envFunc.WebSocket_onmessage_set=function (){
-        let arg=arguments[0]
+    bodavm.envFunc.WebSocket_onmessage_set = function () {
+        let arg = arguments[0]
         bodavm.memory.asyncEvent['websocket']['onmessage'].push(arg)
-        console.log_copy(this, ` -> WebSocket_onmessage_set -> arg ->`,arg)
+        console.log_copy(this, ` -> WebSocket_onmessage_set -> arg ->`, arg)
         return arg
 
     }
-    bodavm.envFunc.window_onerror_set=function (){
-        let arg=arguments[0]
+    bodavm.envFunc.window_onerror_set = function () {
+        let arg = arguments[0]
         bodavm.memory.asyncEvent['window']['onerror'].push(arg)
-        console.log_copy(this, ` -> window_onerror_set -> arg ->`,arg)
+        console.log_copy(this, ` -> window_onerror_set -> arg ->`, arg)
         return arg
 
     }
-    bodavm.envFunc.History_replaceState=function (){
-        let arg0=arguments[0]
-        let arg1=arguments[1]
-        let arg2=arguments[2]
+    bodavm.envFunc.History_length_get=function (){
+        console.log(`History_length_get res->默认返回2`)
+        return 2
+    }
+    bodavm.envFunc.History_replaceState = function () {
+        let arg0 = arguments[0]
+        let arg1 = arguments[1]
+        let arg2 = arguments[2]
 
-        console.log_copy(this, ` -> History_replaceState   需要触发popstate事件,暂时不实现-> arg0,arg1,arg2 ->`,arg0,' -> ',arg1, ' -> ',arg2)
-        let _href=bodavm.memory.location['_href']
-        let _search=bodavm.memory.location['_search']
-        let sufIndex=arg2.indexOf('?')
-        if (sufIndex !=-1){
-            let temp=arg2.slice(sufIndex)
-            bodavm.memory.location['search']=_search+temp
-            bodavm.memory.location['href']=_href+temp
+        console.log_copy(this, ` -> History_replaceState   需要触发popstate事件,暂时不实现-> arg0,arg1,arg2 ->`, arg0, ' -> ', arg1, ' -> ', arg2)
+        let _href = bodavm.memory.location['_href']
+        let _search = bodavm.memory.location['_search']
+        let sufIndex = arg2.indexOf('?')
+        if (sufIndex != -1) {
+            let temp = arg2.slice(sufIndex)
+            bodavm.memory.location['search'] = _search + temp
+            bodavm.memory.location['href'] = _href + temp
 
-        }else{
-            bodavm.memory.location['search']=''
-            bodavm.memory.location['href']=_href+arg2
+        } else {
+            bodavm.memory.location['search'] = ''
+            bodavm.memory.location['href'] = _href + arg2
 
         }
     }
@@ -80,20 +225,20 @@
         console.log_copy(`PerformanceEntry_name_get res->`, _name)
         return _name
     }
-    bodavm.envFunc.Navigator_vendor_get=function (){
-        let res=bodavm.memory.navigator['vendor']
+    bodavm.envFunc.Navigator_vendor_get = function () {
+        let res = bodavm.memory.navigator['vendor']
         console.log_copy(`Navigator_vendor_get res->`, res);
 
         return res
     }
     bodavm.envFunc.Navigator_cookieEnabled_get = function () {
-        let res=bodavm.memory.navigator['cookieEnabled']
+        let res = bodavm.memory.navigator['cookieEnabled']
         console.log_copy(`Navigator_cookieEnabled_get res->`, res);
 
         return true
     }
-    bodavm.envFunc.Navigator_javaEnabled=function (){
-        let res=bodavm.memory.navigator['javaEnabled']
+    bodavm.envFunc.Navigator_javaEnabled = function () {
+        let res = bodavm.memory.navigator['javaEnabled']
         console.log_copy(`Navigator_javaEnabled res->`, res);
 
         return res
@@ -112,21 +257,21 @@
         return arg
     }
 
-    bodavm.envFunc.Crypto_getRandomValues=function (){
-        let arg=arguments[0]
-        if (arg instanceof Uint8Array){
+    bodavm.envFunc.Crypto_getRandomValues = function () {
+        let arg = arguments[0]
+        if (arg instanceof Uint8Array) {
             // debugger
             for (let index = 0; index < arg.length; index++) {
-                arg[index]=1
-                
+                arg[index] = 1
+
             }
             // res.__proto__=TypedArray.prototype
             // debugger
-            console.log_copy(`Crypto_getRandomValues arg->`,arg,`长度->${arg.length} ->默认全部为1`)
+            console.log_copy(`Crypto_getRandomValues arg->`, arg, `长度->${arg.length} ->默认全部为1`)
             // debugger
             return arg
-        }else{
-            console.log_copy(`Crypto_getRandomValues arg->`,arg ,`类型未实现!!!!!!!!!!!!`)
+        } else {
+            console.log_copy(`Crypto_getRandomValues arg->`, arg, `类型未实现!!!!!!!!!!!!`)
 
         }
     }
@@ -146,13 +291,13 @@
     }
 
     bodavm.envFunc.Screen_width_get = function Screen_width_get() {
-        let width = bodavm.memory.screen["width"]
+        let width = 1440
         console.log_copy(`Screen_width_get `, `${width}  `)
         if (bodavm.config.isdebug) { debugger }
         return width
     }
     bodavm.envFunc.Screen_height_get = function Screen_height_get() {
-        let height = bodavm.memory.screen["height"]
+        let height = 960
         console.log_copy(`Screen_height_get `, `${height}  `)
         if (bodavm.config.isdebug) { debugger }
         return height
@@ -164,13 +309,13 @@
         return pixelDepth
     }
     bodavm.envFunc.Screen_colorDepth_get = function Screen_colorDepth_get() {
-        let colorDepth = bodavm.memory.screen["colorDepth"]
+        let colorDepth = 24
         console.log_copy(`Screen_colorDepth_get `, `${colorDepth}  `)
         if (bodavm.config.isdebug) { debugger }
         return colorDepth
     }
     bodavm.envFunc.Screen_availWidth_get = function Screen_availWidth_get() {
-        let availWidth = bodavm.memory.screen["availWidth"]
+        let availWidth = 1440
         console.log_copy(`Screen_availWidth_get `, `${availWidth}  `)
         if (bodavm.config.isdebug) { debugger }
         return availWidth
@@ -201,7 +346,7 @@
         return isExtended
     }
     bodavm.envFunc.Screen_availHeight_get = function Screen_availHeight_get() {
-        let availHeight = bodavm.memory.screen["availHeight"]
+        let availHeight = 912
         console.log_copy(`Screen_availHeight_get `, `${availHeight}  `)
         if (bodavm.config.isdebug) { debugger }
         return availHeight
@@ -330,7 +475,7 @@
     bodavm.envFunc.window_screen_get = function () {
         let res__ = bodavm.memory.cache["window_screen_get"]
         if (res__) {
-            console.log_copy(`window_screen_get cache已存在,直接返回`, res__)
+            // console.log_copy(`window_screen_get cache已存在,直接返回`, res__)
             return res__
         }
         let res_ = new Screen('bobo')
@@ -485,13 +630,12 @@
 
     bodavm.envFunc.window_navigator_get = function () {
         if (bodavm.memory.cache["window_navigator_get"]) {
-            console.log_copy(`navigator_ cache已存在,直接返回`, bodavm.memory.cache['window_navigator_get'])
-
             return bodavm.memory.cache["window_navigator_get"]
         }
         let navigator_ = new Navigator('bobo')
         console.log_copy(`window_navigator_get res->`, navigator_)
         bodavm.memory.cache["window_navigator_get"] = navigator_
+
         return navigator_
     }
     bodavm.envFunc.window_indexedDB_get = function () {
@@ -765,7 +909,7 @@
             debugger;
         }
         ;
-        let innerHeight = 809;
+        let innerHeight = 803;
         console.log_copy(`window_innerHeight_get `, `innerHeight ->${innerHeight}`);
         return innerHeight;
     };
@@ -930,11 +1074,11 @@
         console.log_copy(`--------------------页面跳转停止执行--------------------`,);
         console.log_copy(`--------------------直接执行lastDeal--------------------`,);
         console.log_copy(document.cookie)
-        throw ('End', `--------------------直接执行lastDeal--------------------`)
+        // throw ('End', `--------------------直接执行lastDeal--------------------`)
 
     }
 
-    bodavm.envFunc.Navigator_plugins_get = function () {    
+    bodavm.envFunc.Navigator_plugins_get = function () {
         let pluginArray_ = bodavm.memory.globalInit.pluginArrayCopy
         // pluginArray_=bodavm.toolsFunc.proxy2(pluginArray_,'pluginArray:proxy2')
         console.log_copy(`Navigator_plugins_get res ->`, pluginArray_)
@@ -1049,108 +1193,108 @@
         console.log_copy(`BarProp_visible_get `, `boolres ->${boolres}`, `未完善`);
         return boolres;
     };
-    bodavm.envFunc.XMLHttpRequest_setRequestHeader=function (){
-        let header=arguments[0]
-        let value=arguments[1]
-        bodavm.toolsFunc.setProtoAttr.call(this,'setRequestHeader',arguments)
+    bodavm.envFunc.XMLHttpRequest_setRequestHeader = function () {
+        let header = arguments[0]
+        let value = arguments[1]
+        bodavm.toolsFunc.setProtoAttr.call(this, 'setRequestHeader', arguments)
         // debugger
         console.log_copy(`XMLHttpRequest_setRequestHeader `, `header -> ${header} ->value->${value}`);
 
     }
-    
-    bodavm.envFunc.XMLHttpRequest_responseText_get=function (){        
-        let responseText=bodavm.toolsFunc.getProtoAttr.call(this,'responseText')?bodavm.toolsFunc.getProtoAttr.call(this,'responseText'):null
+
+    bodavm.envFunc.XMLHttpRequest_responseText_get = function () {
+        let responseText = bodavm.toolsFunc.getProtoAttr.call(this, 'responseText') ? bodavm.toolsFunc.getProtoAttr.call(this, 'responseText') : null
         console.log_copy(`XMLHttpRequest_responseText_get `, `responseText -> ${responseText}`);
 
         return responseText
     }
-    bodavm.envFunc.XMLHttpRequest_responseXML_get=function (){        
-        let responseXML=bodavm.toolsFunc.getProtoAttr.call(this,'responseXML')?bodavm.toolsFunc.getProtoAttr.call(this,'responseXML'):null
+    bodavm.envFunc.XMLHttpRequest_responseXML_get = function () {
+        let responseXML = bodavm.toolsFunc.getProtoAttr.call(this, 'responseXML') ? bodavm.toolsFunc.getProtoAttr.call(this, 'responseXML') : null
         console.log_copy(`XMLHttpRequest_responseXML_get `, `responseXML -> ${responseXML}`);
 
         return responseXML
     }
-    bodavm.envFunc.XMLHttpRequest_responseType_get=function (){        
-        let responseType=bodavm.toolsFunc.getProtoAttr.call(this,'responseType')?bodavm.toolsFunc.getProtoAttr.call(this,'responseType'):null
+    bodavm.envFunc.XMLHttpRequest_responseType_get = function () {
+        let responseType = bodavm.toolsFunc.getProtoAttr.call(this, 'responseType') ? bodavm.toolsFunc.getProtoAttr.call(this, 'responseType') : null
         console.log_copy(`XMLHttpRequest_responseType_get `, `responseType -> ${responseType}`);
 
         return responseType
     }
-    bodavm.envFunc.XMLHttpRequest_response_get=function (){        
-        let response=bodavm.toolsFunc.getProtoAttr.call(this,'response')?bodavm.toolsFunc.getProtoAttr.call(this,'response'):null
+    bodavm.envFunc.XMLHttpRequest_response_get = function () {
+        let response = bodavm.toolsFunc.getProtoAttr.call(this, 'response') ? bodavm.toolsFunc.getProtoAttr.call(this, 'response') : null
         console.log_copy(`XMLHttpRequest_response_get `, `response -> ${response}`);
 
         return response
     }
-    bodavm.envFunc.XMLHttpRequest_statusText_get=function (){        
-        let statusText=bodavm.toolsFunc.getProtoAttr.call(this,'statusText')?bodavm.toolsFunc.getProtoAttr.call(this,'statusText'):null
+    bodavm.envFunc.XMLHttpRequest_statusText_get = function () {
+        let statusText = bodavm.toolsFunc.getProtoAttr.call(this, 'statusText') ? bodavm.toolsFunc.getProtoAttr.call(this, 'statusText') : null
         console.log_copy(`XMLHttpRequest_statusText_get `, `statusText -> ${statusText}`);
 
         return statusText
     }
-    bodavm.envFunc.XMLHttpRequest_status_get=function (){        
-        let status=bodavm.toolsFunc.getProtoAttr.call(this,'status')?bodavm.toolsFunc.getProtoAttr.call(this,'status'):null
+    bodavm.envFunc.XMLHttpRequest_status_get = function () {
+        let status = bodavm.toolsFunc.getProtoAttr.call(this, 'status') ? bodavm.toolsFunc.getProtoAttr.call(this, 'status') : null
         console.log_copy(`XMLHttpRequest_status_get `, `status -> ${status}`);
 
         return status
     }
-    bodavm.envFunc.XMLHttpRequest_responseURL_get=function (){        
-        let responseURL=bodavm.toolsFunc.getProtoAttr.call(this,'responseURL')?bodavm.toolsFunc.getProtoAttr.call(this,'responseURL'):null
+    bodavm.envFunc.XMLHttpRequest_responseURL_get = function () {
+        let responseURL = bodavm.toolsFunc.getProtoAttr.call(this, 'responseURL') ? bodavm.toolsFunc.getProtoAttr.call(this, 'responseURL') : null
         console.log_copy(`XMLHttpRequest_responseURL_get `, `responseURL -> ${responseURL}`);
 
         return responseURL
     }
-    bodavm.envFunc.XMLHttpRequest_withCredentials_get=function (){        
-        let withCredentials=bodavm.toolsFunc.getProtoAttr.call(this,'withCredentials')?bodavm.toolsFunc.getProtoAttr.call(this,'withCredentials'):null
+    bodavm.envFunc.XMLHttpRequest_withCredentials_get = function () {
+        let withCredentials = bodavm.toolsFunc.getProtoAttr.call(this, 'withCredentials') ? bodavm.toolsFunc.getProtoAttr.call(this, 'withCredentials') : null
         console.log_copy(`XMLHttpRequest_withCredentials_get `, `withCredentials -> ${withCredentials}`);
 
         return withCredentials
     }
-    
-    bodavm.envFunc.XMLHttpRequestEventTarget_onloadend_set=function (){
-        let onloadend=arguments[0]
-        
-        bodavm.toolsFunc.setProtoAttr.call(this,'onloadend',onloadend)
+
+    bodavm.envFunc.XMLHttpRequestEventTarget_onloadend_set = function () {
+        let onloadend = arguments[0]
+
+        bodavm.toolsFunc.setProtoAttr.call(this, 'onloadend', onloadend)
         console.log_copy(`XMLHttpRequestEventTarget_onloadend_set `, `onload -> ${onloadend}`);
 
         return onloadend
     }
-    bodavm.envFunc.XMLHttpRequestEventTarget_onload_set=function (){
-        let onload=arguments[0]
-        
-        bodavm.toolsFunc.setProtoAttr.call(this,'onload',onload)
+    bodavm.envFunc.XMLHttpRequestEventTarget_onload_set = function () {
+        let onload = arguments[0]
+
+        bodavm.toolsFunc.setProtoAttr.call(this, 'onload', onload)
         console.log_copy(`XMLHttpRequestEventTarget_onload_set `, `onload -> ${onload}`);
 
         return onload
     }
-    bodavm.envFunc.XMLHttpRequest_onreadystatechange_set=function (){
-        let onreadystatechange=arguments[0]
+    bodavm.envFunc.XMLHttpRequest_onreadystatechange_set = function () {
+        let onreadystatechange = arguments[0]
         // debugger
-        bodavm.toolsFunc.setProtoAttr.call(this,'onreadystatechange',onreadystatechange)
+        bodavm.toolsFunc.setProtoAttr.call(this, 'onreadystatechange', onreadystatechange)
         console.log_copy(`XMLHttpRequest_onreadystatechange_set `, `onreadystatechange -> ${onreadystatechange}`);
 
         return onreadystatechange
     }
-    
-    bodavm.envFunc.XMLHttpRequest_timeout_get=function (){
-        let timeout=bodavm.toolsFunc.getProtoAttr.call(this,'timeout')?bodavm.toolsFunc.getProtoAttr.call(this,'timeout'):null
+
+    bodavm.envFunc.XMLHttpRequest_timeout_get = function () {
+        let timeout = bodavm.toolsFunc.getProtoAttr.call(this, 'timeout') ? bodavm.toolsFunc.getProtoAttr.call(this, 'timeout') : null
         console.log_copy(`XMLHttpRequest_timeout_get `, `timeout -> ${timeout}`);
 
         return timeout
     }
-    bodavm.envFunc.XMLHttpRequest_readyState_get=function (){
+    bodavm.envFunc.XMLHttpRequest_readyState_get = function () {
         // debugger
         // if (){}
-        let isopen=bodavm.toolsFunc.getProtoAttr.call(this,'open')?1:0
-        let issend=bodavm.toolsFunc.getProtoAttr.call(this,'send')?2:isopen
+        let isopen = bodavm.toolsFunc.getProtoAttr.call(this, 'open') ? 1 : 0
+        let issend = bodavm.toolsFunc.getProtoAttr.call(this, 'send') ? 2 : isopen
         // let iscompleted=bodavm.toolsFunc.getProtoAttr.call(this,'onload')?4:issend  //默认不需要3,直接4
-        let readyState=bodavm.toolsFunc.getProtoAttr.call(this,'readyState')?bodavm.toolsFunc.getProtoAttr.call(this,'readyState'):issend
+        let readyState = bodavm.toolsFunc.getProtoAttr.call(this, 'readyState') ? bodavm.toolsFunc.getProtoAttr.call(this, 'readyState') : issend
         console.log_copy(`XMLHttpRequest_readyState_get `, `readyState -> ${readyState}`);
 
         return readyState
     }
-    bodavm.envFunc.XMLHttpRequest_onreadystatechange_get=function (){
-        let onreadystatechange=bodavm.toolsFunc.getProtoAttr.call(this,'onreadystatechange')?bodavm.toolsFunc.getProtoAttr.call(this,'onreadystatechange'):null
+    bodavm.envFunc.XMLHttpRequest_onreadystatechange_get = function () {
+        let onreadystatechange = bodavm.toolsFunc.getProtoAttr.call(this, 'onreadystatechange') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onreadystatechange') : null
         console.log_copy(`XMLHttpRequest_onreadystatechange_get `, `onreadystatechange -> ${onreadystatechange}`);
 
         return onreadystatechange
@@ -1160,7 +1304,7 @@
             debugger;
         }
         ;
-        let upload = bodavm.toolsFunc.getProtoAttr.call(this, 'upload')?bodavm.toolsFunc.getProtoAttr.call(this, 'upload'):null;
+        let upload = bodavm.toolsFunc.getProtoAttr.call(this, 'upload') ? bodavm.toolsFunc.getProtoAttr.call(this, 'upload') : null;
         console.log_copy(`XMLHttpRequestEventTarget_upload_get `, `upload -> ${upload}`);
         return upload;
     };
@@ -1169,7 +1313,7 @@
             debugger;
         }
         ;
-        let ontimeout = bodavm.toolsFunc.getProtoAttr.call(this, 'ontimeout')?bodavm.toolsFunc.getProtoAttr.call(this, 'ontimeout'):null;
+        let ontimeout = bodavm.toolsFunc.getProtoAttr.call(this, 'ontimeout') ? bodavm.toolsFunc.getProtoAttr.call(this, 'ontimeout') : null;
         console.log_copy(`XMLHttpRequestEventTarget_ontimeout_get `, `ontimeout -> ${ontimeout}`);
         return ontimeout;
     };
@@ -1178,7 +1322,7 @@
             debugger;
         }
         ;
-        let onprogress = bodavm.toolsFunc.getProtoAttr.call(this, 'onprogress')?bodavm.toolsFunc.getProtoAttr.call(this, 'onprogress'):null;
+        let onprogress = bodavm.toolsFunc.getProtoAttr.call(this, 'onprogress') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onprogress') : null;
         console.log_copy(`XMLHttpRequestEventTarget_onprogress_get `, `onprogress -> ${onprogress}`);
         return onprogress;
     };
@@ -1187,7 +1331,7 @@
             debugger;
         }
         ;
-        let onloadend = bodavm.toolsFunc.getProtoAttr.call(this, 'onloadend')?bodavm.toolsFunc.getProtoAttr.call(this, 'onloadend'):null;
+        let onloadend = bodavm.toolsFunc.getProtoAttr.call(this, 'onloadend') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onloadend') : null;
         console.log_copy(`XMLHttpRequestEventTarget_onloadend_get `, `onloadend -> ${onloadend}`);
         return onloadend;
     };
@@ -1197,7 +1341,7 @@
         }
         ;
         // debugger
-        let onloadstart = bodavm.toolsFunc.getProtoAttr.call(this, 'onloadstart')?bodavm.toolsFunc.getProtoAttr.call(this, 'onloadstart'):null;
+        let onloadstart = bodavm.toolsFunc.getProtoAttr.call(this, 'onloadstart') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onloadstart') : null;
         console.log_copy(`XMLHttpRequestEventTarget_onloadstart_get `, `onloadstart -> ${onloadstart}`);
         return onloadstart;
     };
@@ -1206,7 +1350,7 @@
             debugger;
         }
         ;
-        let onerror = bodavm.toolsFunc.getProtoAttr.call(this, 'onerror')?bodavm.toolsFunc.getProtoAttr.call(this, 'onerror'):null;
+        let onerror = bodavm.toolsFunc.getProtoAttr.call(this, 'onerror') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onerror') : null;
         console.log_copy(`XMLHttpRequestEventTarget_onerror_get `, `onerror -> ${onerror}`);
         return onerror;
     };
@@ -1215,7 +1359,7 @@
             debugger;
         }
         ;
-        let onload = bodavm.toolsFunc.getProtoAttr.call(this, 'onload')?bodavm.toolsFunc.getProtoAttr.call(this, 'onload'):null;
+        let onload = bodavm.toolsFunc.getProtoAttr.call(this, 'onload') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onload') : null;
         console.log_copy(`XMLHttpRequestEventTarget_onload_get `, `onerror -> ${onload}`);
         return onload;
     };
@@ -1225,22 +1369,22 @@
         }
         ;
         // debugger
-        let onabort = bodavm.toolsFunc.getProtoAttr.call(this, 'onabort')?bodavm.toolsFunc.getProtoAttr.call(this, 'onabort'):null;
+        let onabort = bodavm.toolsFunc.getProtoAttr.call(this, 'onabort') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onabort') : null;
         console.log_copy(`XMLHttpRequestEventTarget_onabort_get `, `onabort -> ${onabort}`);
         return onabort;
     };
-    
-    bodavm.envFunc.XMLHttpRequestEventTarget_onerror_set=function (){
+
+    bodavm.envFunc.XMLHttpRequestEventTarget_onerror_set = function () {
         let arg = arguments[0];
         // this._boarg.withCredentials = arg
-        bodavm.toolsFunc.setProtoAttr.call(this,'onerror', arg);
+        bodavm.toolsFunc.setProtoAttr.call(this, 'onerror', arg);
         console.log_copy(`XMLHttpRequestEventTarget_onerror_set `, `arg -> ${arg}`);
         return arg;
     }
-    bodavm.envFunc.XMLHttpRequestEventTarget_ontimeout_set=function (){
+    bodavm.envFunc.XMLHttpRequestEventTarget_ontimeout_set = function () {
         let arg = arguments[0];
         // this._boarg.withCredentials = arg
-        bodavm.toolsFunc.setProtoAttr.call(this,'ontimeout', arg);
+        bodavm.toolsFunc.setProtoAttr.call(this, 'ontimeout', arg);
         console.log_copy(`XMLHttpRequestEventTarget_ontimeout_set `, `arg -> ${arg}`);
         return arg;
     }
@@ -1252,7 +1396,7 @@
         // debugger
         let arg = arguments[0];
         // this._boarg.withCredentials = arg
-        bodavm.toolsFunc.setProtoAttr.call(this,'withCredentials', arg);
+        bodavm.toolsFunc.setProtoAttr.call(this, 'withCredentials', arg);
         console.log_copy(`XMLHttpRequest_withCredentials_set `, `arg -> ${arg}`);
         return arg;
     };
@@ -1361,8 +1505,8 @@
         for (let i = 2; i < length; i++) {
             argList.push(arguments[i]);
         }
-        if (!argList){
-            argList=undefined
+        if (!argList) {
+            argList = undefined
         }
         // func = func.toString().replace(/debugger/, "").replace(/function ()/, "function xxx");
         console.log_copy(`window_setTimeout `, `func->${func} `, `delay->${delay} `, `argList->${argList}  `);
@@ -1376,15 +1520,15 @@
             "timeoutID": bodavm.memory.globalInit.timeoutID,
             'settime_name': 'setTimeout'
         };
-        if (issrc && delay ==0){
-                //第一个src标签的settimeout为0时会在文件加载完成后立马执行
-                if(!bodavm.memory.SrcSetTimeOut){
-                    bodavm.memory.SrcSetTimeOut=[]
-                }
-                bodavm.memory.SrcSetTimeOut.push(event)
-                // issrc=0
-                console.log_copy(`window_setTimeout `, `当前为src标签,并且delay为0,当前script执行完成后,立马调用  `);
-                return bodavm.memory.globalInit.timeoutID
+        if (issrc && delay == 0) {
+            //第一个src标签的settimeout为0时会在文件加载完成后立马执行
+            if (!bodavm.memory.SrcSetTimeOut) {
+                bodavm.memory.SrcSetTimeOut = []
+            }
+            bodavm.memory.SrcSetTimeOut.push(event)
+            // issrc=0
+            console.log_copy(`window_setTimeout `, `当前为src标签,并且delay为0,当前script执行完成后,立马调用  `);
+            return bodavm.memory.globalInit.timeoutID
 
         }
         // if (delay == 0) {
@@ -1395,11 +1539,11 @@
         // }
         // debugger
         // else {
-            if (bodavm.memory.asyncEvent.setTimeout === undefined) {
-                bodavm.memory.asyncEvent.setTimeout = [];
-            }
-            // bodavm.toolsFunc.symbolProperty(event)
-            bodavm.memory.asyncEvent.setTimeout.push(event);
+        if (bodavm.memory.asyncEvent.setTimeout === undefined) {
+            bodavm.memory.asyncEvent.setTimeout = [];
+        }
+        // bodavm.toolsFunc.symbolProperty(event)
+        bodavm.memory.asyncEvent.setTimeout.push(event);
         // }
 
         return bodavm.memory.globalInit.timeoutID;
@@ -1463,9 +1607,9 @@
             'settime_name': 'setInterval'
         };
 
-            if (bodavm.memory.asyncEvent.setTimeout === undefined) {
-                bodavm.memory.asyncEvent.setTimeout = [];
-            }
+        if (bodavm.memory.asyncEvent.setTimeout === undefined) {
+            bodavm.memory.asyncEvent.setTimeout = [];
+        }
 
         // bodavm.toolsFunc.symbolProperty(event)
         bodavm.memory.asyncEvent.setTimeout.push(event);
@@ -1569,7 +1713,7 @@
         ;
         let method = arguments[0];
         let url = arguments[1];
-        let type=arguments[2]
+        let type = arguments[2]
         console.log_copy(`XMLHttpRequest_open `, `[${method}] `, `[${url}]  [${type}]`);
         if (bodavm.config.isdebug) {
             debugger;
@@ -1595,24 +1739,24 @@
 
         console.log_copy(`使用send发送数据,立马调用onreadystatechange或onload 事件`)
         // debugger
-        let onreadystatechange=bodavm.toolsFunc.getProtoAttr.call(this,'onreadystatechange')?bodavm.toolsFunc.getProtoAttr.call(this,'onreadystatechange'):null
-        if (onreadystatechange){
-            bodavm.toolsFunc.setProtoAttr.call(this,'readyState',4)
-            bodavm.toolsFunc.setProtoAttr.call(this,'status',200)
-            bodavm.toolsFunc.setProtoAttr.call(this,'responseText','这是测试数据')
-            bodavm.toolsFunc.setProtoAttr.call(this,'response',new Uint8Array(32))
-            bodavm.toolsFunc.setProtoAttr.call(this,'responseURL','这是测试url,需要根据实际网站修改')
+        let onreadystatechange = bodavm.toolsFunc.getProtoAttr.call(this, 'onreadystatechange') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onreadystatechange') : null
+        if (onreadystatechange) {
+            bodavm.toolsFunc.setProtoAttr.call(this, 'readyState', 4)
+            bodavm.toolsFunc.setProtoAttr.call(this, 'status', 200)
+            bodavm.toolsFunc.setProtoAttr.call(this, 'responseText', '这是测试数据')
+            bodavm.toolsFunc.setProtoAttr.call(this, 'response', new Uint8Array(32))
+            bodavm.toolsFunc.setProtoAttr.call(this, 'responseURL', '这是测试url,需要根据实际网站修改')
             // bodavm.toolsFunc.setProtoAttr.call(this,'responseType','json')
             // bodavm.toolsFunc.setProtoAttr.call(this,'responseType','document')
             onreadystatechange(boreadystatechange)
         }
-        let onload=bodavm.toolsFunc.getProtoAttr.call(this,'onload')?bodavm.toolsFunc.getProtoAttr.call(this,'onload'):null
-        if (onload){
-            bodavm.toolsFunc.setProtoAttr.call(this,'readyState',4)
-            bodavm.toolsFunc.setProtoAttr.call(this,'status',200)
-            bodavm.toolsFunc.setProtoAttr.call(this,'responseText','这是测试数据')
-            bodavm.toolsFunc.setProtoAttr.call(this,'response',new Uint8Array(32))
-            bodavm.toolsFunc.setProtoAttr.call(this,'responseURL','这是测试url,需要根据实际网站修改')
+        let onload = bodavm.toolsFunc.getProtoAttr.call(this, 'onload') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onload') : null
+        if (onload) {
+            bodavm.toolsFunc.setProtoAttr.call(this, 'readyState', 4)
+            bodavm.toolsFunc.setProtoAttr.call(this, 'status', 200)
+            bodavm.toolsFunc.setProtoAttr.call(this, 'responseText', '这是测试数据')
+            bodavm.toolsFunc.setProtoAttr.call(this, 'response', new Uint8Array(32))
+            bodavm.toolsFunc.setProtoAttr.call(this, 'responseURL', '这是测试url,需要根据实际网站修改')
             // bodavm.toolsFunc.setProtoAttr.call(this,'responseType','json')
             // bodavm.toolsFunc.setProtoAttr.call(this,'responseType','document')
             onload(boxhronload)
@@ -1739,8 +1883,8 @@
         //   }
         ;
         let index = arguments[0];
-        itemindex=index % 42949672960
-        console.log_copy(`PluginArray_item -> `,`arg -> `,index);
+        itemindex = index % 42949672960
+        console.log_copy(`PluginArray_item -> `, `arg -> `, index);
         return this[itemindex];
     };
 
@@ -1770,7 +1914,7 @@
         //   }
         ;
         let res = bodavm.toolsFunc.getProtoAttr.call(this, "description");
-      
+
         console.log_copy(`MimeType_description_get - >res ->`, res)
 
         return res

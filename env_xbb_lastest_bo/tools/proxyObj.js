@@ -9,16 +9,33 @@
 // const newFuncProto = bodavm.toolsFunc.proxyObjHook(originalFuncProto,'Function.prototype')
 
 // Function.prototype = newFuncProto;
-Function=bodavm.toolsFunc.proxyObjHook(Function,'Function::proxyObjHook')
 
-String=bodavm.toolsFunc.proxyObjHook(String,'String::proxyObjHook')
+// Function=bodavm.toolsFunc.proxyObjHook(Function,'Function::proxyObjHook')
+// bodavm.toolsFunc.safefunction(Function,'Function')
+
+// String=bodavm.toolsFunc.proxyObjHook(String,'String::proxyObjHook')
+// bodavm.toolsFunc.safefunction(String,'String')
+// addEventListener=bodavm.toolsFunc.proxyObjHook(addEventListener,'addEventListener::proxyObjHook')
+// bodavm.toolsFunc.safefunction(addEventListener,'addEventListener')
+
 // String.prototype.toString=bodavm.toolsFunc.proxyObjHook(String.prototype.toString,'String.prototype.toString::proxyObjHook')
+// decodeURIComponent=bodavm.toolsFunc.proxyObjHook(decodeURIComponent,'decodeURIComponent:proxyObjHook')
+// bodavm.toolsFunc.safefunction(decodeURIComponent,'decodeURIComponent')
 
-Array=bodavm.toolsFunc.proxyObjHook(Array,'Array::proxyObjHook')
-Array.prototype.toString=bodavm.toolsFunc.proxyObjHook(Array.prototype.toString,'Array.prototype.toString::proxyObjHook')
-Uint8Array=bodavm.toolsFunc.proxyObjHook(Uint8Array,'Uint8Array::proxyObjHook')
+encodeURIComponent=bodavm.toolsFunc.proxyObjHook(encodeURIComponent,'encodeURIComponent:proxyObjHook')
+bodavm.toolsFunc.safefunction(encodeURIComponent,'encodeURIComponent')
+
+// Array=bodavm.toolsFunc.proxyObjHook(Array,'Array::proxyObjHook')
+// bodavm.toolsFunc.safefunction(Array,'Array')
+
+// Array.prototype.toString=bodavm.toolsFunc.proxyObjHook(Array.prototype.toString,'Array.prototype.toString::proxyObjHook')
+// Uint8Array=bodavm.toolsFunc.proxyObjHook(Uint8Array,'Uint8Array::proxyObjHook')
+// bodavm.toolsFunc.safefunction(Uint8Array,'Uint8Array')
+
 // Uint8Array.prototype=bodavm.toolsFunc.proxyObjHook(Uint8Array.prototype,'TypedArray::proxyObjHook')
-RegExp=bodavm.toolsFunc.proxyObjHook(RegExp,'RegExp::proxyObjHook')
+// RegExp=bodavm.toolsFunc.proxyObjHook(RegExp,'RegExp::proxyObjHook')
+// bodavm.toolsFunc.safefunction(RegExp,'RegExp')
+
 // CSS=bodavm.toolsFunc.proxy(CSS,"CSS");
 // let newThi = {};
 // var proxy=function (o){
@@ -127,7 +144,7 @@ console.log(`===================================================================
 
 // delete DeprecatedStorageInfo
 // delete Database;
-debugger;
+// debugger;
 
 
 

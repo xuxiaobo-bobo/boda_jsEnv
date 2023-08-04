@@ -9,7 +9,142 @@
 // innerHTML：获取或设置元素的HTML内容。
 ;;
 (function () {
+    bodavm.envFunc.DOMRectList_length_get=function (){
+        console.log(this,` -> DOMRectList_length_get res  ->  默认返回1`)
 
+        return 1
+    }
+    bodavm.envFunc.Element_getClientRects=function (){
+        let getClientRects=new DOMRectList('bobo')
+        console.log(this,` -> Element_getClientRects getClientRects  -> `,getClientRects)
+
+        return getClientRects
+    }
+    bodavm.envFunc.HTMLElement_innerText_set=function (){
+        // debugger
+        let arg=arguments[0]
+        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        boda$(thisNode).empty()
+        boda$(thisNode).text(arg)
+        console.log(this ,`-> HTMLElement_innerText_set innerText  -> `,arg)
+
+        return arg
+    }
+
+    bodavm.envFunc.HTMLElement_style_set=function (){
+        // debugger
+        let style=arguments[0]
+        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        boda$(thisNode).attr('style',style)
+        console.log(this,`- > HTMLElement_style_set style  -> `,style)
+        return style
+    }
+    bodavm.envFunc.HTMLElement_dataset_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'dataset')
+        if (islive){
+            console.log(this, `-> HTMLElement_dataset_get 已存在返回`,islive)
+            return islive
+        }
+        let dataset = new DOMStringMap('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'dataset',dataset)
+        console.log_copy(`HTMLElement_dataset_get -> xr -> ${dataset}`)
+        return dataset
+    }
+    bodavm.envFunc.Document_pointerLockElement_get=function(){
+        let pointerLockElement=bodavm.toolsFunc.getProtoAttr.call(this,'pointerLockElement')?bodavm.toolsFunc.getProtoAttr.call(this,'pointerLockElement'):null
+        console.log(`Document_pointerLockElement_get res->`,pointerLockElement)
+        return pointerLockElement
+    }
+    bodavm.envFunc.Document_pictureInPictureElement_get=function(){
+        let pictureInPictureElement=bodavm.toolsFunc.getProtoAttr.call(this,'pictureInPictureElement')?bodavm.toolsFunc.getProtoAttr.call(this,'pictureInPictureElement'):null
+        console.log(`Document_pictureInPictureElement_get res->`,pictureInPictureElement)
+        return pictureInPictureElement
+    }
+    bodavm.envFunc.Document_xmlVersion_get=function(){
+        let xmlVersion=bodavm.toolsFunc.getProtoAttr.call(this,'xmlVersion')?bodavm.toolsFunc.getProtoAttr.call(this,'xmlVersion'):null
+        console.log(`Document_xmlVersion_get res->`,xmlVersion)
+        return xmlVersion
+    }
+
+    bodavm.envFunc.Document_xmlEncoding_get=function(){
+        let xmlEncoding=bodavm.toolsFunc.getProtoAttr.call(this,'xmlEncoding')?bodavm.toolsFunc.getProtoAttr.call(this,'xmlEncoding'):null
+        console.log(`Document_xmlEncoding_get res->`,xmlEncoding)
+        return xmlEncoding
+    }
+    bodavm.envFunc.Document_ontransitionrun_get=function(){
+        let ontransitionrun=bodavm.toolsFunc.getProtoAttr.call(this,'ontransitionrun')?bodavm.toolsFunc.getProtoAttr.call(this,'ontransitionrun'):null
+        console.log(`Document_ontransitionrun_get res->`,ontransitionrun)
+        return ontransitionrun
+    }
+    bodavm.envFunc.Document_ontransitionend_get=function(){
+        let ontransitionend=bodavm.toolsFunc.getProtoAttr.call(this,'ontransitionend')?bodavm.toolsFunc.getProtoAttr.call(this,'ontransitionend'):null
+        console.log(`Document_ontransitionend_get res->`,ontransitionend)
+        return ontransitionend
+    }
+    bodavm.envFunc.Document_ontransitioncancel_get=function(){
+        let ontransitioncancel=bodavm.toolsFunc.getProtoAttr.call(this,'ontransitioncancel')?bodavm.toolsFunc.getProtoAttr.call(this,'ontransitioncancel'):null
+        console.log(`Document_ontransitioncancel_get res->`,ontransitioncancel)
+        return ontransitioncancel
+    }
+    bodavm.envFunc.Document_pictureInPictureEnabled_get=function (){
+        console.log(`Document_pictureInPictureEnabled_get res-> 默认返回true`,true)
+        return true
+    }
+    bodavm.envFunc.Document_onresume_get=function (){
+        let onresume=bodavm.toolsFunc.getProtoAttr.call(this,'onresume')?bodavm.toolsFunc.getProtoAttr.call(this,'onresume'):null
+        console.log(`Document_onresume_get res->`,onresume)
+        return onresume
+    }
+    bodavm.envFunc.Document_onpointerlockerror_get=function (){
+        let onpointerlockerror=bodavm.toolsFunc.getProtoAttr.call(this,'onpointerlockerror')?bodavm.toolsFunc.getProtoAttr.call(this,'onpointerlockerror'):null
+        console.log(`Document_onpointerlockerror_get res->`,onpointerlockerror)
+        return onpointerlockerror
+    }
+    bodavm.envFunc.Document_featurePolicy_get=function (){
+        let isfeaturePolicy=bodavm.toolsFunc.getProtoAttr.call(this,'featurePolicy')
+        if (isfeaturePolicy){
+            console.log(`Document_featurePolicy_get cache已存在返回->`,isfeaturePolicy)
+            return isfeaturePolicy
+        }
+        let feature=new FeaturePolicy('boob')
+        console.log(`Document_featurePolicy_get res->`,feature)
+        bodavm.toolsFunc.setProtoAttr.call(this,'featurePolicy',feature)
+        return feature
+    }
+    bodavm.envFunc.Document_onmousemove_get=function (){
+        let onmousemove=bodavm.toolsFunc.getProtoAttr.call(this,'onmousemove')?bodavm.toolsFunc.getProtoAttr.call(this,'onmousemove'):null
+        console.log(`Document_onmousemove_get res->`,onmousemove)
+        return onmousemove
+
+    }
+    bodavm.envFunc.HTMLElement_onmouseenter_get=function (){
+        let onmouseenter=bodavm.toolsFunc.getProtoAttr.call(this,'onmouseenter')
+        console.log(`HTMLElement_onmouseenter_get -> res -> `,onmouseenter)
+        return onmouseenter
+    }
+    bodavm.envFunc.Document_scrollingElement_get=function (){
+        let ele=document.documentElement
+        console.log(`Document_scrollingElement_get ->默认返回html`,ele)
+        return ele
+    }
+    bodavm.envFunc.HTMLElement_onresize_get=function (){
+
+        // let onresize=bodavm.memory.asyncEvent['HTMLElement']['onresize']
+        // if (!onresize.length) {
+        //     console.log_copy(`HTMLElement_onresize_get res->`,null)
+        //     return null
+        // }
+        let onresize=bodavm.toolsFunc.getProtoAttr.call(this,'onresize')?bodavm.toolsFunc.getProtoAttr.call(this,'onresize'):null   
+         console.log_copy(`HTMLElement_onresize_get res->`,onresize)
+
+        return onresize
+    }
+    bodavm.envFunc.Document_onselectionchange_get=function (){
+        let res=bodavm.toolsFunc.getProtoAttr.call(this,'onselectionchange')?bodavm.toolsFunc.getProtoAttr.call(this,'onselectionchange'):null
+
+        console.log_copy(`Document_onselectionchange_get -> res->`, res)
+        return res
+    }
     bodavm.envFunc.URL_createObjectURL=function (){
         debugger
         let arg=arguments[0]
@@ -714,7 +849,7 @@
             delete collection['bo'+(newlen)]
         }
         if (bodavm.memory.cache['Document_getElementsByTagName'][targetNode.name]) {
-            debugger
+            // debugger
             let collection=bodavm.memory.cache['Document_getElementsByTagName'][targetNode.name]['res']
             for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
                 // debugger
@@ -925,7 +1060,8 @@
         }
         if (bodavm.memory.cache['Document_getElementsByTagName'][tagName] && bodavm.memory.cache['Document_getElementsByTagName'][tagName]['this'] == this) {
             let curLen=Object.keys(bodavm.memory.cache['Document_getElementsByTagName'][tagName]["res"]).length
-            if (curLen==bodavm.memory.domDocument[tagName].length){
+                debugger
+            if (curLen==0||curLen==bodavm.memory.domDocument[tagName].length){
 
                 let cacheValue = bodavm.memory.cache['Document_getElementsByTagName'][tagName]["res"]
                 console.log_copy(`Document_getElementsByTagName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
@@ -1452,9 +1588,9 @@
         }
         ;
         // debugger
+     
         if (bodavm.memory.cache["HTMLElement_style_get"]['this'] == this) {
             let cacheValue = bodavm.memory.cache["HTMLElement_style_get"]['res'];
-            console.log_copy(this, ` -> HTMLElement_style_get 已存在,直接从cache中取值`, 'res- >', cacheValue);
             return cacheValue;
         }
         let _style = new CSSStyleDeclaration('bobo');
@@ -1558,6 +1694,9 @@
         let res = bodavm.toolsFunc.setProto(arg);
         let ele = ''
         switch (arg.toLowerCase()) {
+            case "audio":
+                ele=boda$('<audio></audio>')
+                break;
             case 'video':
                 ele=boda$('<video></video>')
                 break
@@ -1707,6 +1846,7 @@
             case "webgl":
                 // context = context.getContext('2d')
                 context = new WebGLRenderingContext('bobo')
+                
                 bodavm.toolsFunc.setProtoAttr.call(this, 'getContext', type)
                 bodavm.toolsFunc.setProtoAttr.call(this, 'context', context)
                 bodavm.toolsFunc.setProtoAttr.call(context, 'canvas', this)
@@ -1802,7 +1942,7 @@
     }
 
     bodavm.envFunc.HTMLCanvasElement_toDataURL = function () {
-        debugger
+        // debugger
         let canvasType = bodavm.toolsFunc.getProtoAttr.call(this, 'getContext')
         if (canvasType == '2d') {
             let ddres = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O"
@@ -2197,8 +2337,83 @@
             case 'video/x-matroska; codecs="theora, vorbis"':
                 res = '';
                 break;
+            case 'audio/3gpp':
+                res=''
+                break
+            case 'audio/3gpp2':
+                res=''
+                break
+            case 'audio/AMR-NB':
+                res=''
+                break
+            case 'audio/AMR-WB':
+                res=''
+                break
+            case 'audio/GSM':
+                res=''
+                break
+            case 'audio/aac':
+                res='probably'
+                break
+            case 'audio/basic':
+                res=''
+                break 
+            case 'audio/flac':
+                res='probably'
+                break  
+            case 'audio/midi':
+                res=''
+                break
+            case 'audio/mpeg':
+                res='probably'
+                break
+            case 'audio/mp4; codecs="mp4a.40.2"':
+                res='probably'
+                break
+            case 'audio/mp4; codecs="ac-3"':
+                res=''
+                break
+            case 'audio/mp4; codecs="ec-3"':
+                res=''
+                break
+            case 'audio/ogg; codecs="flac"':
+                res='probably'
+                break
+            case 'audio/ogg; codecs="opus"':
+                res='probably'
+                break
+            case 'audio/webm; codecs="vorbis"':
+                res='probably'
+                break
+            case 'audio/x-aiff':
+                res=''
+                break
+            case 'audio/x-mpegurl':
+                res=''
+                break
+            case 'video/mp4; codecs="flac"':
+                res='probably'
+                break
+            case 'video/mp4; codecs="H.264, mp3"':
+                res=''
+                break
+            case 'video/mp4; codecs="H.264, aac"':
+                res=''
+                break
+            case 'video/mpeg; codec="H.264"':
+                res=''
+                break
+            case 'video/ogg; codecs="opus"':
+                res='probably'
+                break
+            case 'video/webm; codecs="vp9, opus"':
+                res='probably'
+                break
+            case 'audio/webm; codecs="opus"':
+                res='probably'
+                break
             default:
-                console.log_copy(`HTMLMediaElement_canPlayType `, `canplaytype->${canplaytype}未实现 `);
+                console.log_copy(`HTMLMediaElement_canPlayType `, `canplaytype->${canplaytype}未实现 !!!!!!!!!`);
         }
         console.log_copy(`HTMLMediaElement_canPlayType `, `canplaytype ->${canplaytype}`, `-> res ->${res}`);
         return res;
@@ -2270,7 +2485,7 @@
         if (bodavm.config.isdebug) {
             debugger;
         }
-        debugger
+        // debugger
         ;
         if (this._boContentWindow) {
             console.log_copy(`iframe下的document设置cookie,直接返回''`);

@@ -262,7 +262,9 @@ alert=(a) => {
   };
 
 bodavm.toolsFunc.safefunction(alert,'alert')
-
+Object.defineProperty(alert,'length',{
+    value: 0, writable: false, enumerable: false, configurable: true
+})
 // debugger
 
 Element.prototype[Symbol.unscopables] = {
@@ -339,7 +341,7 @@ bodavm.memory.globalInit.pluginArrayCopy=bodavm.toolsFunc.proxyPlugin(bodavm.mem
 
 eval=new Proxy(eval,{
     apply(target, thisArg, argumentsList) {
-        // debugger
+        // debuggerde
         if(argumentsList[0]=='!new function(){eval("this.a=1")}().a'){
             console.log('eval执行  参数  -->',argumentsList[0],` 结果为 -->`,false);
             return false
@@ -348,6 +350,8 @@ eval=new Proxy(eval,{
         if (arg && arg.length>100){
             arg=arg.substr(0,100)+'...太长只显示前100位'
         }
+        // debugger
+
         console.log('eval执行  参数  -->',arg,` 结果为 -->`);
         // debugger
         // argumentsList[0]=argumentsList[0].replace('try{','try{debugger;')
@@ -392,6 +396,14 @@ Object.defineProperty(Function.prototype.toString,'name',{
     value:'toString'
 })
 
+window.addEventListener.prototype=undefined
+Object.defineProperty(addEventListener,'length',{
+    value:2,
+    writable: false, 
+    enumerable: false,
+    configurable: true
+})
+// delete window.addEventListener.
 // debugger
 
 // debugger;

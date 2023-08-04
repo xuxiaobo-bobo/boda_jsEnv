@@ -298,7 +298,7 @@ var mytime_stamp = Date.now()
             if (myfilter == 'bobo') { return Object.defineProperty_bo.call(this, target, prop, obj) }
             // debugger
             res = Object.defineProperty_bo.call(this, target, prop, obj)
-            console.log_copy(`Object.defineProperty `, `target ->`, (target.toString()), `->`, `prop->`, (prop.toString()), `->`, `obj ->`, (obj.toString()), `->`, `res ->`, res.toString(), `!!!!!检测`)
+            // console.log_copy(`Object.defineProperty `, `target ->`, (target.toString()), `->`, `prop->`, (prop.toString()), `->`, `obj ->`, (obj.toString()), `->`, `res ->`, res.toString(), `!!!!!检测`)
             // console.log_copy(`Object.defineProperty `, `target ->`,(target.toString()),`->`, `prop->`,(JSON.stringify_bo(prop)),`->`, `obj ->`,(JSON.stringify_bo(obj)),`->`, `res ->`,JSON.stringify_bo(res), `!!!!!检测`)
 
         } catch (e){ console.log_copy(e.message,e.stack);

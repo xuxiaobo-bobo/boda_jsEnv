@@ -1,6 +1,164 @@
 // 浏览器接口具体的实现
 ;
 (function () {
+    bodavm.envFunc.WebGLRenderingContext_clear=function (){
+        let arg=arguments[0]
+        bodavm.toolsFunc.setProtoAttr.call(this,'clear',arg)
+        console.log_copy(`WebGLRenderingContext_clear ->arg -> `,arg)
+    }
+    bodavm.envFunc.WebGLRenderingContext_depthFunc=function (){
+        let arg=arguments[0]
+        bodavm.toolsFunc.setProtoAttr.call(this,'depthFunc',arg)
+        console.log_copy(`WebGLRenderingContext_depthFunc ->arg -> `,arg)
+    }
+    bodavm.envFunc.WebGLRenderingContext_enable=function (){
+        let arg=arguments[0]
+        bodavm.toolsFunc.setProtoAttr.call(this,'enable',arg)
+        console.log_copy(`WebGLRenderingContext_enable ->arg -> `,arg)
+    }
+    bodavm.envFunc.WebGLRenderingContext_clearColor=function (){
+        let arg=arguments[0]
+        bodavm.toolsFunc.setProtoAttr.call(this,'clearColer',arg)
+        console.log_copy(`WebGLRenderingContext_clearColor ->arg -> `,arg)
+    }
+    bodavm.envFunc.BaseAudioContext_createDynamicsCompressor=function (){
+        let dynami=new DynamicsCompressorNode('bobo')
+        console.log_copy(`BaseAudioContext_createDynamicsCompressor ->res -> `,dynami)
+        return dynami
+    }
+    bodavm.envFunc.AudioParam_value_set=function (){
+        let arg=arguments[0]
+        bodavm.toolsFunc.setProtoAttr.call(this,'value',arg)
+        console.log_copy(`AudioParam_value_set ->arg -> `,arg)
+        return arg
+    }
+    bodavm.envFunc.OscillatorNode_frequency_get=function (){
+        if (bodavm.memory.cache['OscillatorNode_frequency_get']['res'] && bodavm.memory.cache['OscillatorNode_frequency_get']['this']==this){
+            console.log_copy(`OscillatorNode_frequency_get -> cache已存在直接返回 `)
+
+            return bodavm.memory.cache['OscillatorNode_frequency_get']['res']
+        }
+        let freq=new AudioParam('bobo')
+        console.log_copy(`OscillatorNode_frequency_get ->res -> `,freq)
+        bodavm.memory.cache['OscillatorNode_frequency_get']['res']=freq
+        bodavm.memory.cache['OscillatorNode_frequency_get']['this']=this
+        return freq
+    }
+    bodavm.envFunc.OscillatorNode_type_set=function (){
+        let arg=arguments[0]
+        bodavm.toolsFunc.setProtoAttr.call(this,'type',arg)
+        console.log_copy(`OscillatorNode_type_set ->arg -> `,arg)
+
+        return arg
+    }
+    bodavm.envFunc.BaseAudioContext_createOscillator=function (){
+        let oscillator =new OscillatorNode('bobo')
+        console.log_copy(`BaseAudioContext_createOscillator ->res -> `,oscillator)
+        return oscillator
+    }
+    bodavm.envFunc.WebGL2RenderingContext_getSupportedExtensions=function (){
+        // let arg=arguments[0]
+        let ext=['EXT_color_buffer_float', 'EXT_color_buffer_half_float', 'EXT_disjoint_timer_query_webgl2', 'EXT_float_blend', 'EXT_texture_compression_bptc',
+         'EXT_texture_compression_rgtc', 'EXT_texture_filter_anisotropic', 'EXT_texture_norm16', 'KHR_parallel_shader_compile', 
+         'OES_draw_buffers_indexed', 'OES_texture_float_linear', 'OVR_multiview2', 
+         'WEBGL_compressed_texture_s3tc', 'WEBGL_compressed_texture_s3tc_srgb', 'WEBGL_debug_renderer_info',
+          'WEBGL_debug_shaders', 'WEBGL_lose_context', 'WEBGL_multi_draw', 'WEBGL_provoking_vertex']
+        console.log_copy(`WebGL2RenderingContext_getSupportedExtensions ->res -> `,ext)
+        
+        return ext
+
+    }
+    bodavm.envFunc.WebGL2RenderingContext_canvas_get=function (){
+        let cavans=new HTMLCanvasElement('bobo')
+        console.log_copy(`WebGL2RenderingContext_canvas_get ->res -> `,cavans)
+
+        return cavans
+    }
+    bodavm.envFunc.WebGL2RenderingContext_drawArrays=function (){
+        console.log_copy(`WebGL2RenderingContext_drawArrays -> args ->${arguments[0]} ->${arguments[1]} ->${arguments[2]}`)
+        bodavm.toolsFunc.setProtoAttr.call(this,'drawArrays',arguments)
+    }
+    bodavm.envFunc.WebGL2RenderingContext_uniform2f=function (){
+        console.log_copy(`WebGL2RenderingContext_uniform2f -> arg0 ->${arguments[0]} -> arg1 -> ${arguments[1]} -> arg2 -> ${arguments[2]}`)
+        bodavm.toolsFunc.setProtoAttr.call(this,'uniform2f',arguments)
+        // return 0
+    }
+
+    bodavm.envFunc.WebGL2RenderingContext_vertexAttribPointer=function (){
+        console.log_copy(`WebGL2RenderingContext_vertexAttribPointer ->args -> ${arguments}`)
+        // return 0
+        bodavm.toolsFunc.setProtoAttr.call(this,'vertexAttribPointer',arguments)
+
+    }   
+
+    bodavm.envFunc.WebGL2RenderingContext_enableVertexAttribArray=function (){
+        console.log_copy(`WebGL2RenderingContext_enableVertexAttribArray -> arg ->${arguments[0]}`)
+        // return 0
+        bodavm.toolsFunc.setProtoAttr.call(this,'enableVertexAttribArray',arguments[0])
+    }  
+
+     bodavm.envFunc.WebGL2RenderingContext_getUniformLocation=function (){
+        console.log_copy(`WebGL2RenderingContext_getUniformLocation -> arg0 ->${arguments[0]} -> arg1 -> ${arguments[1]}  默认返回null`)
+        return  null
+        // return 0
+    }
+
+    bodavm.envFunc.WebGL2RenderingContext_getAttribLocation=function (){
+        console.log_copy(`WebGL2RenderingContext_getAttribLocation -> arg0 ->${arguments[0]} -> arg1 -> ${arguments[1]}  默认返回0`)
+        return 0
+    }
+    bodavm.envFunc.WebGL2RenderingContext_useProgram=function (){
+        console.log_copy(`WebGL2RenderingContext_useProgram -> arg ->  ${arguments[0]}`)
+        bodavm.toolsFunc.setProtoAttr.call(this,'useProgram',arguments)
+    }
+    bodavm.envFunc.WebGL2RenderingContext_linkProgram=function (){
+        console.log_copy(`WebGL2RenderingContext_linkProgram -> arg ->  ${arguments[0]}`)
+        bodavm.toolsFunc.setProtoAttr.call(this,'linkProgram',arguments)
+    }
+    bodavm.envFunc.WebGL2RenderingContext_attachShader=function (){
+        console.log_copy(`WebGL2RenderingContext_attachShader -> arg0 -> ${arguments[0]} -> arg1 -> ${arguments[1]}`)
+        bodavm.toolsFunc.setProtoAttr.call(this,'attachShader',arguments)
+    }
+    bodavm.envFunc.WebGL2RenderingContext_compileShader=function (){
+        console.log_copy(`WebGL2RenderingContext_compileShader -> arg ->`,arguments[0])
+        bodavm.toolsFunc.setProtoAttr.call(this,'compileShader',arguments[0])
+    }
+    bodavm.envFunc.WebGL2RenderingContext_shaderSource=function (){
+        // let createShader=new WebGLShader('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'shaderSource',arguments)
+        console.log_copy(`WebGL2RenderingContext_shaderSource -> arg0 ->`,arguments[0],`-> arg1 ->`,arguments[1])
+        // return createShader
+    }
+    bodavm.envFunc.WebGL2RenderingContext_createShader=function (){
+        let createShader=new WebGLShader('bobo')
+        console.log_copy(`WebGL2RenderingContext_createShader -> arg -> ${arguments[0]} -> res ->`,createShader)
+        return createShader
+    }
+
+    bodavm.envFunc.WebGL2RenderingContext_createProgram=function (){
+        let program=new WebGLProgram('bobo')
+        console.log_copy(`WebGL2RenderingContext_createProgram -> -> res ->`,program)
+
+        return program
+    }
+    bodavm.envFunc.WebGL2RenderingContext_bufferData=function (){
+        
+        console.log_copy(`WebGL2RenderingContext_bufferData -> arg0 -> ${arguments[0]} -> arg1 -> ${arguments[1]} -> arg2 -> ${arguments[2]}`,)
+        bodavm.toolsFunc.setProtoAttr.call(this,'bufferData',arguments)
+        // return buf
+    }
+
+    bodavm.envFunc.WebGL2RenderingContext_bindBuffer=function (){
+        
+        console.log_copy(`WebGL2RenderingContext_bindBuffer -> arg0 -> ${arguments[0]} -> arg1 ->${arguments[1]}`)
+        bodavm.toolsFunc.setProtoAttr.call(this,'bindBuffer',arguments)
+        // return buf
+    }
+    bodavm.envFunc.WebGL2RenderingContext_createBuffer=function (){
+        let buf=new WebGLBuffer('bobo')
+        console.log_copy(`WebGL2RenderingContext_createBuffer -> res ->`,buf)
+        return buf
+    }
     bodavm.envFunc.WebGLRenderingContext_getParameter = function WebGLRenderingContext_getParameter() {
         let pname = Number(arguments[0])
         if (bodavm.config.isdebug) { debugger }
@@ -24,7 +182,10 @@
             36347: 4096,
             35724: 'WebGL GLSL ES 1.0 (OpenGL ES GLSL ES 1.0 Chromium)',
             3415: 0,
-            7938: 'WebGL 1.0 (OpenGL ES 2.0 Chromium)'
+            7938: 'WebGL 1.0 (OpenGL ES 2.0 Chromium)',
+            33902: new Float32Array([1,1]),
+            33901: new Float32Array([1,1024]),
+            3386: new Int32Array([32767,32767])
         }
         res = resDict[pname]
         if (res === undefined) return console.log_copy(`WebGLRenderingContext_getParameter `, `${pname} 未实现`);
@@ -103,7 +264,7 @@
         if (bodavm.config.isdebug) { debugger };
         bodavm.toolsFunc.setProtoAttr.call(this, 'drawArrays', arguments)
 
-        console.log_copy(`WebGLRenderingContext_drawArrays !!!!!!!!!未完善!!!!!!!!!!!!`, `mode:${mode}  first:${first}  count:${count}   `);
+        console.log_copy(`WebGLRenderingContext_drawArrays `, `mode:${mode}  first:${first}  count:${count}   `);
 
     }
     bodavm.envFunc.WebGLRenderingContext_uniform2f = function WebGLRenderingContext_uniform2f() {
@@ -113,7 +274,7 @@
         if (bodavm.config.isdebug) { debugger };
         bodavm.toolsFunc.setProtoAttr.call(this, 'uniform2f', arguments)
 
-        console.log_copy(`WebGLRenderingContext_uniform2f !!!!!!!!!未完善!!!!!!!!!!!!`, `location:${location222} v0:${v0}  v1:${v1}  `);
+        console.log_copy(`WebGLRenderingContext_uniform2f `, `location:${location222} v0:${v0}  v1:${v1}  `);
     }
     bodavm.envFunc.WebGLRenderingContext_vertexAttribPointer = function WebGLRenderingContext_vertexAttribPointer() {
         let index = arguments[0]
@@ -125,39 +286,39 @@
         if (bodavm.config.isdebug) { debugger };
         bodavm.toolsFunc.setProtoAttr.call(this, 'vertexAttribPointer', arguments)
 
-        console.log_copy(`WebGLRenderingContext_vertexAttribPointer !!!!!!!!!未完善!!!!!!!!!!!!`, `index:${index}  size:${size} type:${type}  normalized:${normalized}  stride:${stride}  offset${offset}   `);
+        console.log_copy(`WebGLRenderingContext_vertexAttribPointer `, `index:${index}  size:${size} type:${type}  normalized:${normalized}  stride:${stride}  offset${offset}   `);
     }
     bodavm.envFunc.WebGLRenderingContext_enableVertexAttribArray = function WebGLRenderingContext_enableVertexAttribArray() {
         let index = arguments[0]; if (bodavm.config.isdebug) { debugger };
 
-        console.log_copy(`WebGLRenderingContext_enableVertexAttribArray !!!!!!!!!未完善!!!!!!!!!!!!`, `index:${index}  `);
+        console.log_copy(`WebGLRenderingContext_enableVertexAttribArray `, `index:${index}  `);
         bodavm.toolsFunc.setProtoAttr.call(this, 'enableVertexAttribArray', index)
 
     }
     bodavm.envFunc.WebGLRenderingContext_getUniformLocation = function WebGLRenderingContext_getUniformLocation() {
         let program = arguments[0]
         let name = arguments[1];
-        if (bodavm.config.isdebug) { debugger }; console.log_copy(`WebGLRenderingContext_getUniformLocation `, `program:${program} name:${name}`, `!!!!!!!!!未完善!!!!!!!!!!!!`);
+        if (bodavm.config.isdebug) { debugger }; console.log_copy(`WebGLRenderingContext_getUniformLocation `, `program:${program} name:${name}`,);
         return null
     }
     bodavm.envFunc.WebGLRenderingContext_getAttribLocation = function WebGLRenderingContext_getAttribLocation() {
         let program = arguments[0]
         let name = arguments[1]
-        console.log_copy(`WebGLRenderingContext_getAttribLocation `, `program:${program} name:${name}  `, `!!!!!!!!!未完善!!!!!!!!!!!!`);
+        console.log_copy(`WebGLRenderingContext_getAttribLocation `, `program:${program} name:${name}  `, `默认返回0`);
 
         if (bodavm.config.isdebug) { debugger };
-        return null
+        return 0
     }
     bodavm.envFunc.WebGLRenderingContext_useProgram = function WebGLRenderingContext_useProgram() {
         let program = arguments[0]
-        console.log_copy(`WebGLRenderingContext_useProgram !!!!!!!!!未完善!!!!!!!!!!!!`, `program:${program}  `);
+        console.log_copy(`WebGLRenderingContext_useProgram `, `program:${program}  `);
         if (bodavm.config.isdebug) { debugger };
         bodavm.toolsFunc.setProtoAttr.call(this, 'useProgram', program)
 
     }
     bodavm.envFunc.WebGLRenderingContext_linkProgram = function WebGLRenderingContext_linkProgram() {
         let program = arguments[0]
-        console.log_copy(`WebGLRenderingContext_linkProgram !!!!!!!!!未完善!!!!!!!!!!!!`, `program:${program}  `);
+        console.log_copy(`WebGLRenderingContext_linkProgram `, `program:${program}  `);
         if (bodavm.config.isdebug) { debugger };
 
         bodavm.toolsFunc.setProtoAttr.call(this, 'linkProgram', program)
@@ -168,7 +329,7 @@
         let shader = arguments[1]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log_copy(`WebGLRenderingContext_attachShader !!!!!!!!!未完善!!!!!!!!!!!!`, `program:${program}  shader:${shader}   `);
+        console.log_copy(`WebGLRenderingContext_attachShader `, `program:${program}  shader:${shader}   `);
         bodavm.toolsFunc.setProtoAttr.call(this, 'attachShader', arguments)
 
     }
@@ -176,7 +337,7 @@
         let compileShader = arguments[0]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log_copy(`WebGLRenderingContext_compileShader !!!!!!!!!未完善!!!!!!!!!!!!`, `${compileShader}  `);
+        console.log_copy(`WebGLRenderingContext_compileShader `, `${compileShader}  `);
         bodavm.toolsFunc.setProtoAttr.call(this, 'compileShader', compileShader)
 
     }
@@ -185,7 +346,7 @@
         let source = arguments[1]
         if (bodavm.config.isdebug) { debugger };
 
-        console.log_copy(`WebGLRenderingContext_shaderSource !!!!!!!!!未完善!!!!!!!!!!!!`, `shader:${shader}  source:${source}  `);
+        console.log_copy(`WebGLRenderingContext_shaderSource `, `shader:${shader}  source:${source}  `);
         bodavm.toolsFunc.setProtoAttr.call(this, 'shaderSource', arguments)
     }
     bodavm.envFunc.WebGLRenderingContext_createShader = function WebGLRenderingContext_createShader() {
@@ -220,7 +381,7 @@
         let r3 = arguments[2]
         let r4 = arguments[3]
         let r5 = arguments[4]
-        console.log_copy(`WebGLRenderingContext_bufferData !!!!!!!!!未完善!!!!!!!!!!!!`, `r1:${r1},r2:${r2},r3:${r3},r4:${r4},r5:${r5}  `);
+        console.log_copy(`WebGLRenderingContext_bufferData `, `r1:${r1},r2:${r2},r3:${r3},r4:${r4},r5:${r5}  `);
         bodavm.toolsFunc.setProtoAttr.call(this, "bufferData", arguments)
 
     }
@@ -228,7 +389,7 @@
         if (bodavm.config.isdebug) { debugger }
         let r1 = arguments[0]
         let r2 = arguments[1]
-        console.log_copy(`WebGLRenderingContext_bindBuffer !!!!!!!!!未完善!!!!!!!!!!!!`, `r1:${r1}  r2:${r2}  `);
+        console.log_copy(`WebGLRenderingContext_bindBuffer `, `r1:${r1}  r2:${r2}  `);
         bodavm.toolsFunc.setProtoAttr.call(this, "bindBuffer", arguments)
     }
 
