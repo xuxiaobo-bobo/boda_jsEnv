@@ -26,6 +26,7 @@ function get_cookie(){
         // b:new XMLHttpRequest().open(''),
         cookie:document.cookie,
         // url:rsurl
+        params:window.bbb
     }
     
     return res
