@@ -17,7 +17,12 @@
     bodavm.envFunc.Element_getClientRects=function (){
         let getClientRects=new DOMRectList('bobo')
         console.log(this,` -> Element_getClientRects getClientRects  -> `,getClientRects)
-
+        Object.defineProperty_bo(getClientRects,'0',{
+            value:new DOMRect('bobo'),
+            writable:false,
+            enumerable:true,
+            configurable:true
+        })
         return getClientRects
     }
     bodavm.envFunc.HTMLElement_innerText_set=function (){
