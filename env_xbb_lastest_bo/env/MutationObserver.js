@@ -1,10 +1,13 @@
 // MutationObserver对象
 
 MutationObserver = function MutationObserver() {
-	//debugger
+  //debugger
   let arg = arguments[0];
- 
+  if (arguments.length < 1) {
+    return bodavm.toolsFunc.throwError('TypeError', `Failed to construct 'MutationObserver': 1 argument required, but only 0 present.`);
+  }
   ;
+  debugger;
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('MutationObserver 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

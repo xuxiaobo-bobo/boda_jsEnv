@@ -1,7 +1,9 @@
 // showOpenFilePicker对象
-showOpenFilePicker = (a) => {
-  console.log_copy(`使用 showOpenFilePicker arg->`, a);
-};
+showOpenFilePicker = {
+  showOpenFilePicker(a) {
+    console.log_copy(`showOpenFilePicker 使用-- >`, a);
+  }
+}.showOpenFilePicker;
 bodavm.toolsFunc.safefunction(showOpenFilePicker, "showOpenFilePicker");
 bodavm.toolsFunc.defineProperty(showOpenFilePicker, "length", {
   configurable: true,

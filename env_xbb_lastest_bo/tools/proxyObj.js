@@ -22,8 +22,8 @@
 // decodeURIComponent=bodavm.toolsFunc.proxyObjHook(decodeURIComponent,'decodeURIComponent:proxyObjHook')
 // bodavm.toolsFunc.safefunction(decodeURIComponent,'decodeURIComponent')
 
-encodeURIComponent=bodavm.toolsFunc.proxyObjHook(encodeURIComponent,'encodeURIComponent:proxyObjHook')
-bodavm.toolsFunc.safefunction(encodeURIComponent,'encodeURIComponent')
+// encodeURIComponent=bodavm.toolsFunc.proxyObjHook(encodeURIComponent,'encodeURIComponent:proxyObjHook')
+// bodavm.toolsFunc.safefunction(encodeURIComponent,'encodeURIComponent')
 
 // Array=bodavm.toolsFunc.proxyObjHook(Array,'Array::proxyObjHook')
 // bodavm.toolsFunc.safefunction(Array,'Array')

@@ -6,6 +6,14 @@ let boMouseUp = new MouseEvent('mouseup', 'bobo')
 mousemove_ = bodavm.toolsFunc.proxy2(boMouseUp, 'mouseup')
 bodavm.memory.listenerProxy['mouseup']['res'] = boMouseUp
 
+let bomouseDown=new MouseEvent('mousedown','bobo')
+bomouseDown = bodavm.toolsFunc.proxy2(bomouseDown, 'bomouseDown')
+bodavm.memory.listenerProxy['mousedown']['res'] = bomouseDown
+
+let bomouseUp=new MouseEvent('mouseup','bobo')
+bomouseUp = bodavm.toolsFunc.proxy2(bomouseUp, 'bomouseUp')
+bodavm.memory.listenerProxy['mouseup']['res'] = bomouseUp
+
 let boClick = new PointerEvent('click', 'bobo')
 boClick = bodavm.toolsFunc.proxy2(boClick, 'click')
 bodavm.memory.listenerProxy['click']['res'] = boClick

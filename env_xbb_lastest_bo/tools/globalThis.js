@@ -91,7 +91,7 @@ bodavm.toolsFunc.defineProperty(window, "chrome", {
 //bodavm.toolsFunc.defineProperty(window, "webkitRequestFileSystem", { writable: true, enumerable: true, configurable: true, value: function webkitRequestFileSystem() { return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestFileSystem", arguments) } });
 bodavm.toolsFunc.defineProperty(window, "fetch", { writable: true, enumerable: true, configurable: true, value: function fetch() { return bodavm.toolsFunc.dispatch(this, window, "window", "fetch", arguments) } });
 bodavm.toolsFunc.defineProperty(window, "devicePixelRatio", { configurable: true, enumerable: true, get: function devicePixelRatio() { return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_get", arguments) }, set: function devicePixelRatio() { return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_set", arguments) } });
-//bodavm.toolsFunc.defineProperty(window, "getComputedStyle", { configurable: true, enumerable: true, writable: true, value: function getComputedStyle() { return bodavm.toolsFunc.dispatch(this, window, "window", "getComputedStyle", arguments) } });
+// bodavm.toolsFunc.defineProperty(window, "getComputedStyle", { configurable: true, enumerable: true, writable: true, value: function getComputedStyle() { return bodavm.toolsFunc.dispatch(this, window, "window", "getComputedStyle", arguments) } });
 bodavm.toolsFunc.defineProperty(window, "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, window, "window", "length_get", arguments)}, set:function length (){return bodavm.toolsFunc.dispatch(this, window, "window", "length_set", arguments)}});
 //bodavm.toolsFunc.defineProperty(window, "openDatabase", {configurable:true, enumerable:true, writable:true, value:function openDatabase (){return bodavm.toolsFunc.dispatch(this, window, "window", "openDatabase", arguments)}});
 bodavm.toolsFunc.defineProperty(window, "find", {configurable:true, enumerable:true, writable:true, value:function find (){return bodavm.toolsFunc.dispatch(this, window, "window", "find", arguments)}});
@@ -342,10 +342,12 @@ bodavm.memory.globalInit.pluginArrayCopy=bodavm.toolsFunc.proxyPlugin(bodavm.mem
 eval=new Proxy(eval,{
     apply(target, thisArg, argumentsList) {
         // debuggerde
+        // debugger
         if(argumentsList[0]=='!new function(){eval("this.a=1")}().a'){
             console.log('eval执行  参数  -->',argumentsList[0],` 结果为 -->`,false);
             return false
         }
+        if (argumentsList[0]=='__g'){debugger}
         let arg=argumentsList[0]
         if (arg && arg.length>100){
             arg=arg.substr(0,100)+'...太长只显示前100位'
@@ -361,7 +363,8 @@ eval=new Proxy(eval,{
 
         return res
     },
-  })
+  })  
+  //eval 可能被检测
 
 bodavm.toolsFunc.safefunction(eval,'eval')
 // window=bodavm.toolsFunc.proxy(window,"window")

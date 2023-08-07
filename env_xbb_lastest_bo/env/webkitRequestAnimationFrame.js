@@ -1,7 +1,9 @@
 // webkitRequestAnimationFrame对象
-webkitRequestAnimationFrame = (a) => {
-  console.log_copy(`webkitRequestAnimationFrame 使用--->`,a);
-};
+webkitRequestAnimationFrame = {
+  webkitRequestAnimationFrame(a) {
+    console.log_copy(`webkitRequestAnimationFrame 使用-- >`, a);
+  }
+}.webkitRequestAnimationFrame;
 bodavm.toolsFunc.safefunction(webkitRequestAnimationFrame, "webkitRequestAnimationFrame");
 bodavm.toolsFunc.defineProperty(webkitRequestAnimationFrame, "length", {
   configurable: true,

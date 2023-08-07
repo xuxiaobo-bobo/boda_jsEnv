@@ -21,7 +21,7 @@
     }
     //hook console,让他自动调用printlog
     console.log_ = console.log;
-    console.log = function log(type,...args) {
+    console.log = { log(type,...args) {
 
         // let index=args[0]?args[0]:args
         // if (typeof index =='string'&&  index.indexOf('属性:')!=-1){    
@@ -54,7 +54,7 @@
 
         //自动生成hook代码
         return console.log_.apply(this, arguments)
-    };
+    }}.log
     console.log_copy=console.log
     bodavm.toolsFunc.safeFunc(console.log,'log')
     // Object.defineProperty(console,'log',{

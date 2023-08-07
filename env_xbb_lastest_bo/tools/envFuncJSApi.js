@@ -1,6 +1,129 @@
 // 浏览器接口具体的实现
 ;
 (function () {
+    // bodavm.envFunc.RTCPeerConnection_onicecandidate_set=function (){
+        
+    // }
+    bodavm.envFunc.OfflineAudioContext_oncomplete_set=function (){
+        let arg=arguments[0]
+        let event={
+            'self':this,
+            'callback':arg
+        }
+        bodavm.memory.asyncEvent['OfflineAudioContext']['oncomplete'].push(event)
+        bodavm.toolsFunc.setProtoAttr.call(this,'oncomplete',arg)
+        console.log_copy(`OfflineAudioContext_oncomplete_set arg -> `,arg)
+
+        return arg
+    }
+    bodavm.envFunc.OfflineAudioContext_startRendering=function (){
+        // debugger
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'startRendering')
+        if (islive){
+           console.log_copy(`OfflineAudioContext_startRendering cache已存在返回 -> `,islive)
+           return islive
+        }
+        let renderbuf=new AudioBuffer('bobo')
+        let promise=new Promise((resolve, reject) => {
+            resolve(renderbuf);
+        });
+        bodavm.toolsFunc.setProtoAttr.call(this,'startRendering',promise)
+
+        return promise
+    }
+    bodavm.envFunc.AudioScheduledSourceNode_start=function (){
+        let arg=arguments[0]
+        console.log_copy(`AudioScheduledSourceNode_start arg -> `,arg)
+    }
+    bodavm.envFunc.BaseAudioContext_destination_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'destination')
+        if (islive){
+           console.log_copy(`BaseAudioContext_destination_get cache已存在返回 -> `,islive)
+           return islive
+        }
+        let destination=new AudioDestinationNode('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'destination',destination)
+         console.log_copy(`BaseAudioContext_destination_get ->destination -> `,destination)
+
+    }
+    bodavm.envFunc.AudioNode_connect=function (){
+        // debugger
+        let res=arguments[0]
+        console.log_copy(`AudioNode_connect res -> `,res)
+
+        return res
+
+    }
+    bodavm.envFunc.DynamicsCompressorNode_release_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'release')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_release_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let release=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'release',release)
+         console.log_copy(`DynamicsCompressorNode_release_get ->knee -> `,release)
+
+         return release
+
+    }
+    bodavm.envFunc.DynamicsCompressorNode_attack_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'attack')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_attack_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let attack=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'attack',attack)
+         console.log_copy(`DynamicsCompressorNode_attack_get ->knee -> `,attack)
+
+         return attack
+
+    }
+    bodavm.envFunc.DynamicsCompressorNode_reduction_get=function (){
+        console.log_copy(`DynamicsCompressorNode_reduction_get 默认返回0`)
+        return 0
+    }
+    bodavm.envFunc.DynamicsCompressorNode_ratio_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'ratio')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_ratio_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let ratio=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'ratio',ratio)
+         console.log_copy(`DynamicsCompressorNode_ratio_get ->knee -> `,ratio)
+
+         return ratio
+
+    }
+    bodavm.envFunc.DynamicsCompressorNode_knee_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'knee')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_knee_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let knee=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'knee',knee)
+         console.log_copy(`DynamicsCompressorNode_knee_get ->knee -> `,knee)
+
+         return knee
+
+    }
+
+    bodavm.envFunc.DynamicsCompressorNode_threshold_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'threshold')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_threshold_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let thres=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'threshold',thres)
+         console.log_copy(`DynamicsCompressorNode_threshold_get ->thres -> `,thres)
+
+         return thres
+
+    }
     bodavm.envFunc.WebGLRenderingContext_clear=function (){
         let arg=arguments[0]
         bodavm.toolsFunc.setProtoAttr.call(this,'clear',arg)
@@ -185,12 +308,15 @@
             7938: 'WebGL 1.0 (OpenGL ES 2.0 Chromium)',
             33902: new Float32Array([1,1]),
             33901: new Float32Array([1,1024]),
-            3386: new Int32Array([32767,32767])
+            3386: new Int32Array([32767,32767]),
+            3410:8,
+            7937:'WebKit WebGL',
+            7936:'WebKit'
         }
-        res = resDict[pname]
-        if (res === undefined) return console.log_copy(`WebGLRenderingContext_getParameter `, `${pname} 未实现`);
-        console.log_copy(`WebGLRenderingContext_getParameter `, `${pname}  `, `-> res ->${res}`)
-        return res
+        let resgetParameter = resDict[pname]
+        if (resgetParameter === undefined) return console.log_copy(`WebGLRenderingContext_getParameter `, `${pname} 未实现`);
+        console.log_copy(`WebGLRenderingContext_getParameter `, `${pname}  `, `-> res ->${resgetParameter}`)
+        return resgetParameter
     }
     bodavm.envFunc.WebGLShaderPrecisionFormat_precision_get = function WebGLShaderPrecisionFormat_precision_get() {
         console.log_copy(`WebGLShaderPrecisionFormat_precision_get `, 23);

@@ -1,7 +1,7 @@
 // DOMRect对象
 
 DOMRect = function DOMRect() {
-	let arg=arguments[0]
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMRect 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

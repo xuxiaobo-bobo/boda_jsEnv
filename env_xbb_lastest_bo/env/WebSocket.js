@@ -2,8 +2,8 @@
 
 WebSocket = function WebSocket() {
   let arg = arguments[0];
-  if (arg=='itsgonnafail'){
-	  bodavm.toolsFunc.throwError('DOMException',`Failed to construct 'WebSocket': The URL 'itsgonnafail' is invalid.`)
+  if (arg == 'itsgonnafail') {
+    bodavm.toolsFunc.throwError('DOMException', `Failed to construct 'WebSocket': The URL 'itsgonnafail' is invalid.`);
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);

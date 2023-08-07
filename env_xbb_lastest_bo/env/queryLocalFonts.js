@@ -1,7 +1,9 @@
 // queryLocalFonts对象
-queryLocalFonts = (a) => {
-  console.log_copy(`使用 queryLocalFonts arg->`, a);
-};
+queryLocalFonts = {
+  queryLocalFonts(a) {
+    console.log_copy(`queryLocalFonts 使用-- >`, a);
+  }
+}.queryLocalFonts;
 bodavm.toolsFunc.safefunction(queryLocalFonts, "queryLocalFonts");
 bodavm.toolsFunc.defineProperty(queryLocalFonts, "length", {
   configurable: true,

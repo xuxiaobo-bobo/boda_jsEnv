@@ -46,16 +46,16 @@ bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['MemoryInfo'].prototype
 delete bodavm.memory.notDefined['MemoryInfo'].prototype.constructor;
 Object.defineProperty(console, 'memory', {
   get: function () {
-    debugger;
-    console.log(`bodavm.memory.notDefined[MemoryInfo]  console.memory get 检测 !!!`);
-    res = {
+    //debugger;
+    console.log_copy(`bodavm.memory.notDefined[MemoryInfo]  console.memory get 检测 !!!`);
+    let memoryres = {
       _boisinit: true,
       jsHeapSizeLimit: 2190000000,
       totalJSHeapSize: 15200000,
       usedJSHeapSize: 13400000
     };
-    res.__proto__ = bodavm.memory.notDefined['MemoryInfo'].prototype;
-    return res;
+    memoryres.__proto__ = bodavm.memory.notDefined['MemoryInfo'].prototype;
+    return memoryres;
   },
   set: function () {
     console.log_copy(' bodavm.memory.notDefined[MemoryInfo]  console memory set 检测');

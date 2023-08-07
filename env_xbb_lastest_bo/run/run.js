@@ -4881,6 +4881,7 @@ function a() {
       debugger
     _0x3a70f3['content'] = _0x3e873f, _0x3a70f3["channel"] = _0x5295d0 + '', _0x3a70f3["token"] = _0x2fa433, _0x3a70f3["version"] = 0x1 + '', _0x3a70f3["type"] = _0x187781 + '', _0x3a70f3["timestamp"] = _0x21c3de + '';
     window.bbb=_0x3a70f3;
+    console.log('AAAAAAAAAAAAAA',JSON.stringify(_0x3a70f3))
       var _0x3e015e = {};
     _0x3e015e["req"] = _0x3a70f3;
     return _0x3e015e;

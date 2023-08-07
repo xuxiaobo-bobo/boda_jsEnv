@@ -100,7 +100,7 @@
         // }
 
     }
-    bodavm.toolsFunc.setProto = function setpro(dom) {
+    bodavm.toolsFunc.setProto = function setpro(dom,self) {
         //设置原型链
         let tagpro = dom.toUpperCase()
         switch (tagpro) {
@@ -245,33 +245,26 @@
         }
         return false
     }
-    bodavm.toolsFunc.proxyObjHook=function (obj, objName) {
+    bodavm.toolsFunc.proxyHelper=function (obj, objName) {
+        //这个方法的proxy为必要,不能关闭
         let handler = {
             get(target, prop, receiver) {
                 // let 
-           
+                
                 let result = Reflect.get(target, prop, receiver)
-                // if (prop=='prepareStackTrace'  ){
-                //     return undefined
-                // }
-                if (prop==bodavm.memory.myFunction_toString_symbol){
-                    return result
+                if (bodavm.toolsFunc.filterProxyProp(prop)) {
+                    return result;
                 }
-                if (bodavm.memory.proxyCache [prop] ){
-                    return result
-                }
-                bodavm.memory.proxyCache [prop]=prop
-
                 console.log_copy('      [' + objName + ']', '   获取属性:   ', prop, '   value:   ', result,);
-    
-
                 return result;
             },
             set(target, propKey, value, receiver) {
-                if (propKey == 'isTrusted') {
-                    console.log_copy('      [' + objName + ']', "   设置属性:   ", propKey, "   value:   ", false);
-
-                    return false
+                if (target instanceof CSSStyleDeclaration){
+                    let val=`${propKey}: ${value};`
+                    let thisNode=bodavm.toolsFunc.getProtoAttr.call(receiver,receiver)
+                    let isliveStyle=boda$(thisNode).attr()['style']?boda$(thisNode).attr()['style']:''
+                    let newStyle=isliveStyle+val
+                    boda$(thisNode).attr('style',newStyle)
                 }
                 console.log_copy('      [' + objName + ']', "   设置属性:   ", propKey, "   value:   ", value);
 
@@ -282,28 +275,29 @@
             //     console.log_copy('['+objName+']',`->  has -> 正在判断对象是否具有属性${prop}`);
             //     return Reflect.has(target, prop);
             //   },
-            deleteProperty(target, prop) {
-                if (Number(prop)>=0){
-                    console.log_copy('      [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为-> [false]`);
-                    return false
-                }
-                let result=null
-                let isbo=''
-                if (prop.startsWith('bo')){
-                    isbo=prop.slice(2)
-                }
-                if (isbo){
-                     result=Reflect.deleteProperty(target, isbo);
+            // deleteProperty(target, prop) {
+            //     // debugger
+            //     if (Number(prop)>=0){
+            //         console.log_copy('      [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为-> [false]`);
+            //         return false
+            //     }
+            //     let result=null
+            //     let isbo=''
+            //     if (prop.startsWith('bo')){
+            //         isbo=prop.slice(2)
+            //     }
+            //     if (isbo){
+            //          result=Reflect.deleteProperty(target, isbo);
 
-                }else{
-                     result=Reflect.deleteProperty(target, prop);
-                     console.log_copy('     [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为 ->`,[result]);
+            //     }else{
+            //          result=Reflect.deleteProperty(target, prop);
+            //          console.log_copy('     [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为 ->`,[result]);
 
-                }
+            //     }
         
 
-                return result
-            },
+            //     return result
+            // },
             // ownKeys(target) {
             //     // if (target._boContentWindow){
             //     //     let resKeys=Reflect.ownKeys(target)
@@ -318,26 +312,26 @@
             //     // debugger
             //     console.log_copy('['+objName+']',`正在获取属性${prop}的描述符`);
             //     return Reflect.getOwnPropertyDescriptor(target, prop);
+            // //   },
+            //   defineProperty(target, prop, descriptor) {
+            //     // debugger
+            //     if (Number(prop)>=0){
+            //         return bodavm.toolsFunc.throwError('TypeError',`Failed to set an indexed property on 'HTMLCollection': Index property setter is not supported.`)
+            //     }
+            //     let isbo=''
+            //     if (prop.startsWith('bo')){
+            //         isbo=prop.slice(2)
+            //     }
+            //     if (isbo){
+            //         result=Reflect.defineProperty(target, isbo,descriptor);
+
+            //    }else{
+            //         result=Reflect.defineProperty(target, prop,descriptor);
+            //         console.log_copy('      ['+objName+']',`-> defineProperty -> 正在定义属性${prop} -> res->`,result);
+
+            //    }
+            //     return result
             //   },
-              defineProperty(target, prop, descriptor) {
-                // debugger
-                if (Number(prop)>=0){
-                    return bodavm.toolsFunc.throwError('TypeError',`Failed to set an indexed property on 'HTMLCollection': Index property setter is not supported.`)
-                }
-                let isbo=''
-                if (prop.startsWith('bo')){
-                    isbo=prop.slice(2)
-                }
-                if (isbo){
-                    result=Reflect.defineProperty(target, isbo,descriptor);
-
-               }else{
-                    result=Reflect.defineProperty(target, prop,descriptor);
-                    console.log_copy('      ['+objName+']',`-> defineProperty -> 正在定义属性${prop} -> res->`,result);
-
-               }
-                return result
-              },
             // preventExtensions(target) {
             //     console.log_copy('[' + objName + ']', '-> preventExtensions -> 正在禁止对象扩展');
             //     return Reflect.preventExtensions(target);
@@ -357,9 +351,6 @@
                 return Reflect.apply(target, thisArg, argArray);
             },
             construct(target, argArray, newTarget) {
-                if( argArray[0]=="\\[native code\\]"){
-                    debugger
-                }
                 console.log_copy('      [' + objName + ']', '正在创建对象实例construct -> argArray ->',JSON.stringify_bo(argArray),` -> newTarget ->`,newTarget);
                 // return new Promise222(argArray)
                 // let result=new target(...argArray)
@@ -980,7 +971,7 @@
             out += bodavm.toolsFunc.base64.base64EncodeChars.charAt(((c2 & 0xF) << 2) | ((c3 & 0xC0) >> 6));
             out += bodavm.toolsFunc.base64.base64EncodeChars.charAt(c3 & 0x3F);
         };
-        debugger
+        // debugger
         console.log_copy(`使用bs64编码:${str}`, 
         `编码后${out}`);
         return out;

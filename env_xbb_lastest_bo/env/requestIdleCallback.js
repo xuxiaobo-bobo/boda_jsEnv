@@ -1,7 +1,9 @@
 // requestIdleCallback对象
-requestIdleCallback = (a) => {
-  console.log_copy(`使用 requestIdleCallback arg->`, a);
-};
+requestIdleCallback = {
+  requestIdleCallback(a) {
+    console.log_copy(`requestIdleCallback 使用-- >`, a);
+  }
+}.requestIdleCallback;
 bodavm.toolsFunc.safefunction(requestIdleCallback, "requestIdleCallback");
 bodavm.toolsFunc.defineProperty(requestIdleCallback, "length", {
   configurable: true,

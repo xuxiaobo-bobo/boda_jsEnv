@@ -1,8 +1,11 @@
 // RTCPeerConnection对象
 
-RTCPeerConnection = function RTCPeerConnection() { 
-   let arg = arguments[0];
-
+RTCPeerConnection = function RTCPeerConnection() {
+  let arg = arguments[0];
+  //debugger
+  if (JSON.stringify_bo(arg).indexOf('stun:stun1.l.google.com:19302?transport=udp') != -1) {
+    return bodavm.toolsFunc.throwError('DOMException', `Failed to construct 'RTCPeerConnection': 'stun:stun1.l.google.com:19302?transport=udp' is not a valid stun or turn URL.`);
+  }
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('RTCPeerConnection 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {

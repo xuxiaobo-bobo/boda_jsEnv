@@ -1,7 +1,9 @@
 // NodeFilter对象
-NodeFilter = (a) => {
-  console.log_copy(`NodeFilter 使用 arg->`, a);
-};
+NodeFilter = {
+  NodeFilter(a) {
+    console.log_copy(`NodeFilter 使用-- >`, a);
+  }
+}.NodeFilter;
 bodavm.toolsFunc.safefunction(NodeFilter, "NodeFilter");
 bodavm.toolsFunc.defineProperty(NodeFilter, "length", {
   configurable: true,

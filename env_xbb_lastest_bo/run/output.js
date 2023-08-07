@@ -7722,7 +7722,7 @@ bodavm.toolsFunc.safeFunc(Promise.allSettled,'allSettled')
             }
         }
         log += "\r\n"
-        bofs.appendFileSync(`D:/My_Dir/env_xbb_lastest_bo/run/log.txt`, log)
+        bofs.appendFileSync(`D:/My_Dir2/env_xbb_lastest_bo/run/log.txt`, log)
     }
     //hook console,让他自动调用printlog
     console.log_ = console.log;
@@ -90117,8 +90117,8 @@ var mytime_stamp = Date.now()
 // decodeURIComponent=bodavm.toolsFunc.proxyObjHook(decodeURIComponent,'decodeURIComponent:proxyObjHook')
 // bodavm.toolsFunc.safefunction(decodeURIComponent,'decodeURIComponent')
 
-encodeURIComponent=bodavm.toolsFunc.proxyObjHook(encodeURIComponent,'encodeURIComponent:proxyObjHook')
-bodavm.toolsFunc.safefunction(encodeURIComponent,'encodeURIComponent')
+// encodeURIComponent=bodavm.toolsFunc.proxyObjHook(encodeURIComponent,'encodeURIComponent:proxyObjHook')
+// bodavm.toolsFunc.safefunction(encodeURIComponent,'encodeURIComponent')
 
 // Array=bodavm.toolsFunc.proxyObjHook(Array,'Array::proxyObjHook')
 // bodavm.toolsFunc.safefunction(Array,'Array')
@@ -95405,6 +95405,7 @@ function a() {
       debugger
     _0x3a70f3['content'] = _0x3e873f, _0x3a70f3["channel"] = _0x5295d0 + '', _0x3a70f3["token"] = _0x2fa433, _0x3a70f3["version"] = 0x1 + '', _0x3a70f3["type"] = _0x187781 + '', _0x3a70f3["timestamp"] = _0x21c3de + '';
     window.bbb=_0x3a70f3;
+    console.log('AAAAAAAAAAAAAA',JSON.stringify(_0x3a70f3))
       var _0x3e015e = {};
     _0x3e015e["req"] = _0x3a70f3;
     return _0x3e015e;

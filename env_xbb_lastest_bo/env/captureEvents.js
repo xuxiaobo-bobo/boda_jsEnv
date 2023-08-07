@@ -1,7 +1,9 @@
 // captureEvents对象
-captureEvents = (a) => {
-  console.log_copy(`captureEvents arg->`, a);
-};
+captureEvents = {
+  captureEvents(a) {
+    console.log_copy(`captureEvents 使用-- >`, a);
+  }
+}.captureEvents;
 bodavm.toolsFunc.safefunction(captureEvents, "captureEvents");
 bodavm.toolsFunc.defineProperty(captureEvents, "length", {
   configurable: true,

@@ -13,10 +13,28 @@
 // height：屏幕的高度。
 ;;
 (function () {
+    bodavm.envFunc.MediaDeviceInfo_deviceId_get=function (){
+        // debugger
+        console.log_copy(`MediaDeviceInfo_deviceId_get  ->res -> `,'默认返回""')
+        return ''
+
+    }
+    bodavm.envFunc.location_ancestorOrigins_get=function (){
+        debugger
+        let res=new DOMStringList('bobo')
+        console.log_copy(`location_ancestorOrigins_get  ->res -> `,res)
+
+        return res
+    }
+    bodavm.envFunc.location_toString=function (){
+        let string=location.href
+        console.log_copy(`location_toString  ->res -> `,string)
+        return string
+    }
     bodavm.envFunc.Navigator_xr_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'xr')
         if (islive){
-            console.log(`Navigator_xr_get 已存在返回`,islive)
+            console.log_copy(`Navigator_xr_get 已存在返回`,islive)
             return islive
         }
         let xr = new XRSystem('bobo')
@@ -27,7 +45,7 @@
     bodavm.envFunc.Navigator_serial_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'serial')
         if (islive){
-            console.log(`Navigator_serial_get 已存在返回`,islive)
+            console.log_copy(`Navigator_serial_get 已存在返回`,islive)
             return islive
         }
         let serial = new Serial('bobo')
@@ -39,7 +57,7 @@
     bodavm.envFunc.Navigator_presentation_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'presentation')
         if (islive){
-            console.log(`Navigator_presentation_get 已存在返回`,islive)
+            console.log_copy(`Navigator_presentation_get 已存在返回`,islive)
             return islive
         }
         let presentation = new Presentation('bobo')
@@ -51,7 +69,7 @@
     bodavm.envFunc.Navigator_permissions_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'permissions')
         if (islive){
-            console.log(`Navigator_permissions_get 已存在返回`,islive)
+            console.log_copy(`Navigator_permissions_get 已存在返回`,islive)
             return islive
         }
         let permissions = new Permissions('bobo')
@@ -62,7 +80,7 @@
     bodavm.envFunc.Navigator_mediaSession_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'mediaSession')
         if (islive){
-            console.log(`Navigator_mediaSession_get 已存在返回`,islive)
+            console.log_copy(`Navigator_mediaSession_get 已存在返回`,islive)
             return islive
         }
         let mediaSession = new MediaSession('bobo')
@@ -74,7 +92,7 @@
     bodavm.envFunc.Navigator_keyboard_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'keyboard')
         if (islive){
-            console.log(`Navigator_keyboard_get 已存在返回`,islive)
+            console.log_copy(`Navigator_keyboard_get 已存在返回`,islive)
             return islive
         }
         let keyboard = new Keyboard('bobo')
@@ -86,7 +104,7 @@
     bodavm.envFunc.Navigator_hid_get=function (){
         let ishid=bodavm.toolsFunc.getProtoAttr.call(this,'hid')
         if (ishid){
-            console.log(`Navigator_hid_get 已存在返回`,ishid)
+            console.log_copy(`Navigator_hid_get 已存在返回`,ishid)
             return ishid
         }
         let hid = new HID('bobo')
@@ -97,7 +115,7 @@
     bodavm.envFunc.Navigator_credentials_get=function (){
         let iscredentials=bodavm.toolsFunc.getProtoAttr.call(this,'credentials')
         if (iscredentials){
-            console.log(`Navigator_credentials_get 已存在返回`,iscredentials)
+            console.log_copy(`Navigator_credentials_get 已存在返回`,iscredentials)
             return iscredentials
         }
         let credentials = new CredentialsContainer('bobo')
@@ -108,7 +126,7 @@
     bodavm.envFunc.Navigator_clipboard_get=function (){
         let isclipboard=bodavm.toolsFunc.getProtoAttr.call(this,'clipboard')
         if (isclipboard){
-            console.log(`Navigator_clipboard_get 已存在返回`,isclipboard)
+            console.log_copy(`Navigator_clipboard_get 已存在返回`,isclipboard)
             return isclipboard
         }
         let clipboard = new Clipboard('bobo')
@@ -129,7 +147,7 @@
     bodavm.envFunc.Navigator_mediaDevices_get = function () {
         let ismediaDevices=bodavm.toolsFunc.getProtoAttr.call(this,'mediaDevices')
         if (ismediaDevices){
-            console.log(`Navigator_mediaDevices_get 已存在返回`,ismediaDevices)
+            console.log_copy(`Navigator_mediaDevices_get 已存在返回`,ismediaDevices)
             return ismediaDevices
         }
         let medias = new MediaDevices('bobo')
@@ -187,7 +205,7 @@
 
     }
     bodavm.envFunc.History_length_get=function (){
-        console.log(`History_length_get res->默认返回2`)
+        console.log_copy(`History_length_get res->默认返回2`)
         return 2
     }
     bodavm.envFunc.History_replaceState = function () {
@@ -687,7 +705,7 @@
         return document_
     }
     bodavm.envFunc.Performance_now = function () {
-        console.log(`Performance_now -> res`, 4809.79999999702)
+        console.log_copy(`Performance_now -> res`, 4809.79999999702)
         return 4809.79999999702
     }
 
@@ -705,7 +723,7 @@
         ///
         let arg = arguments[0]
         bodavm.memory.window['onbeforeunload'] = arg
-        console.log(`window_onbeforeunload_set 未完善`)
+        console.log_copy(`window_onbeforeunload_set 未完善`)
         return arg
     }
 
@@ -1520,7 +1538,8 @@
             "timeoutID": bodavm.memory.globalInit.timeoutID,
             'settime_name': 'setTimeout'
         };
-        if (issrc && delay == 0) {
+        // debugger
+        if (issrc && delay <= 10) {
             //第一个src标签的settimeout为0时会在文件加载完成后立马执行
             if (!bodavm.memory.SrcSetTimeOut) {
                 bodavm.memory.SrcSetTimeOut = []
@@ -1530,6 +1549,10 @@
             console.log_copy(`window_setTimeout `, `当前为src标签,并且delay为0,当前script执行完成后,立马调用  `);
             return bodavm.memory.globalInit.timeoutID
 
+        }
+        if (bodavm.memory.listenerFlag=='pending' && delay<=10){
+            console.log_copy(`当前处于事件调用内,delay 小于 10 直接进行调用 -->`)
+            event['callback'].apply(window,event.args)
         }
         // if (delay == 0) {
         //     // debugger

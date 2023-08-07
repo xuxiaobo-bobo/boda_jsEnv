@@ -1,7 +1,9 @@
 // stop对象
-stop = (a) => {
-  console.log_copy(`使用 stop arg->`, a);
-};
+stop = {
+  stop(a) {
+    console.log_copy(`stop 使用-- >`, a);
+  }
+}.stop;
 bodavm.toolsFunc.safefunction(stop, "stop");
 bodavm.toolsFunc.defineProperty(stop, "length", {
   configurable: true,

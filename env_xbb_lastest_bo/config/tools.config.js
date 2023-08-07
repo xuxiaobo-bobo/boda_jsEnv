@@ -22,7 +22,6 @@ function getCode(){
     code+=getFile("envFuncBom")
     code+=getFile("envFuncDom")
     code+=getFile("envFuncJSApi")
-    // code+=getFile("envFuncOther")
 
     code+=getFile("toolsPromise")
     return code

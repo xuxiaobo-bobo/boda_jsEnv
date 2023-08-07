@@ -1,7 +1,6 @@
 // SpeechGrammar对象
 bodavm.memory.notDefined['webkitSpeechGrammar'] = function () {
-  let arg=arguments[0]
-
+  let arg = arguments[0];
   if (arg != 'bobo') {
     console.log_copy('webkitSpeechGrammar 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {

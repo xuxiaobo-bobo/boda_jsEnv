@@ -46,12 +46,12 @@ let cbb =null
 if (isWindowSystem){
     //  cbb = require("cbb");
 
-    // window_config_code=fs.readFileSync(`${tools_path}/winSystemFunc.js`)
+    window_config_code=fs.readFileSync(`${tools_path}/winSystemFunc.js`)
     // let myundefine={}
     // cbb.cbbnative.undfObject(myundefine)
-
-    var boallundefined=  new xtd();
     // var boallundefined= new myundefine.ldObj()
+    var boallundefined=  new xtd();
+
     // debugger
     vm.setGlobal('boallundefined',boallundefined)
 }
@@ -101,12 +101,14 @@ const scriptDom=fs.readFileSync(`${tools_path}/scriptDomExec.js`)
 const globadlThis = fs.readFileSync(`${tools_path}/globalThis.js`)
 const domListener = fs.readFileSync(`${tools_path}/DomListener.js`)
 const pluginCode=fs.readFileSync(`${tools_path}/toolsPlugin.js`)
+    // code+=getFile("toolsCSSStyleDeclaration")
+const CssCode=fs.readFileSync(`${tools_path}/toolsCSSStyleDeclaration.js`)
 // const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globalInit}${userInit}${changeDom}${proxyObj}${jscode}${asyncCode}`+"\r\n"+"debugger";
 const last_deal = fs.readFileSync(`${user_path}\\lastDeal.js`)
 
 // const codeTest = `${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${myReqCode}${window_config_code}${globalInit}${proxyObj};${beforeDomRun};try{;${scriptDom};${jscode}${asyncCode}}catch(e){console.log(e.message,e.stack);}finally{;console.table(myloglist);debugger;${last_deal};}`;
 // const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globadlThis}${globalInit}${userInit}${proxyObj}${jscode}${asyncCode};console.table(myloglist);`+"\r\n"+"debugger";
-const codeTest = `${configCode};;${toolsCode};${log_code}${envCode}${pluginCode}${userInit};;${globadlThis}${myReqCode}${window_config_code}${globalInit}${proxyObj};${beforeDomRun};;${scriptDom};${asyncLoadCode};${jscode}${domListener};${asyncOtherCode};debugger;${last_deal};`;
+const codeTest = `${configCode};;${toolsCode};${log_code}${envCode}${CssCode}${pluginCode}${userInit};;${globadlThis}${myReqCode}${window_config_code}${globalInit}${proxyObj};${beforeDomRun};;${scriptDom};${asyncLoadCode};${jscode}${domListener};${asyncOtherCode};debugger;${last_deal};`;
 
 // console.log(code)
 //创建执行脚本
@@ -140,7 +142,7 @@ const boda$ = cheerio.load(bohtml);
 // vm.setGlobal('cbb',cbb)
 // vm.setGlobal('bodaDom',[scriptDomlist,glboalDom] )
 vm.setGlobal('boda$',boda$)
-// vm.setGlobal('setTimeout',setTimeout)
+vm.setGlobal('bodacheerio',cheerio)
 // vm.setGlobal('setTimeout',setTimeout)
 // vm.setGlobal('Promise',Promise)
 
@@ -157,7 +159,7 @@ let result = vm.run(script);
 // let cookie_url=getcookie()
 //输出结果
 debugger
-console.log(result())
+console.log('参数:::',result())
 let lastime = +new Date()
 console.log('花费时间:', lastime - firsttime)
 //

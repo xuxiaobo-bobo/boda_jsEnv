@@ -1,7 +1,9 @@
 // showSaveFilePicker对象
-showSaveFilePicker = (a) => {
-  console.log_copy(`使用 showSaveFilePicker arg->`, a);
-};
+showSaveFilePicker = {
+  showSaveFilePicker(a) {
+    console.log_copy(`showSaveFilePicker 使用-- >`, a);
+  }
+}.showSaveFilePicker;
 bodavm.toolsFunc.safefunction(showSaveFilePicker, "showSaveFilePicker");
 bodavm.toolsFunc.defineProperty(showSaveFilePicker, "length", {
   configurable: true,

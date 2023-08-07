@@ -1,7 +1,9 @@
 // webkitRequestFileSystem对象
-webkitRequestFileSystem = (a) => {
-  console.log_copy(`webkitRequestFileSystem  使用--->`,a);
-};
+webkitRequestFileSystem = {
+  webkitRequestFileSystem(a) {
+    console.log_copy(`webkitRequestFileSystem 使用-- >`, a);
+  }
+}.webkitRequestFileSystem;
 //debugger;
 bodavm.toolsFunc.safefunction(webkitRequestFileSystem, "webkitRequestFileSystem");
 bodavm.toolsFunc.defineProperty(webkitRequestFileSystem, "length", {

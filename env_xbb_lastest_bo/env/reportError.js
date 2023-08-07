@@ -1,7 +1,9 @@
 // reportError对象
-reportError = (a) => {
-  console.log_copy(`使用 reportError arg->`, a);
-};
+reportError = {
+  reportError(a) {
+    console.log_copy(`reportError 使用-- >`, a);
+  }
+}.reportError;
 bodavm.toolsFunc.safefunction(reportError, "reportError");
 bodavm.toolsFunc.defineProperty(reportError, "length", {
   configurable: true,

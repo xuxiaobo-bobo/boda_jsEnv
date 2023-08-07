@@ -1,7 +1,9 @@
 // postMessage对象
-postMessage = (a) => {
-  console.log_copy(`使用 postMessage arg->`, a);
-};
+postMessage = {
+  postMessage(a) {
+    console.log_copy(`postMessage 使用-- >`, a);
+  }
+}.postMessage;
 bodavm.toolsFunc.safefunction(postMessage, "postMessage");
 bodavm.toolsFunc.defineProperty(postMessage, "length", {
   configurable: true,
