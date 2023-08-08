@@ -1553,6 +1553,8 @@
         if (bodavm.memory.listenerFlag=='pending' && delay<=10){
             console.log_copy(`当前处于事件调用内,delay 小于 10 直接进行调用 -->`)
             event['callback'].apply(window,event.args)
+			 return bodavm.memory.globalInit.timeoutID
+
         }
         // if (delay == 0) {
         //     // debugger
