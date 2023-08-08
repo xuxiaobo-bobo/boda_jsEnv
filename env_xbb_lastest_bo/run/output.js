@@ -11,9 +11,13 @@ var bodavm = {
     "toolsPlugin": {} //Plugin相关
 }
 bodavm.memory.myFunction_toString_symbol=''
+bodavm.toolsFunc.setProtoCache={}
 bodavm.memory.initDone=false  //标签实现Illegal invocationat报错 配合issymbolProperty一起使用
 bodavm.config.issymbolProperty = true  //改变这个值true:开,false:关闭 //过检测 r={};r.__proto__=document;r.location以及var cc={};cc.__proto__=Storage.prototype cc.setItem('name',123)  可能存在误报,报错后,查看报错堆栈
 bodavm.memory.tag = []          //存放标签
+
+bodavm.memory.innerListener=[]  //存放事件内创建的事件
+bodavm.memory.listenerFlag= 'init' //判断当前事件的状态
 bodavm.memory.globalobj = {}    //全局对象
 bodavm.memory.domParser = ''    //存在parse5解析的dom
 bodavm.memory.domParserScriptFlag = true  //判断当前是否处于domParserScriptFlag  script标签执行
@@ -119,6 +123,12 @@ bodavm.memory.proxyCache = {
 }//代理set属性的缓存
 
 bodavm.memory.listenerProxy = {
+    'mouseup':{
+        'res':''
+    },
+    'mousedown':{
+        'res':""
+    },
     'mousemove': {
         'res': ''
     },
@@ -147,7 +157,8 @@ bodavm.memory.asyncEvent = {
     window:{onerror:[]},
     websocket:{onmessage:[]},
     document:{onmousemove:[]},
-    MessageChannel:{onmessage:[]}
+    MessageChannel:{onmessage:[]},
+    OfflineAudioContext:{oncomplete :[]}
 
 }; //异步事件存储  包含load等等
 
@@ -393,7 +404,6 @@ bodavm.memory.globalInit.jsonCookie = {};// json格式的cookie
 bodavm.config.settime_on = true  //执行定时器
 bodavm.memory.userInit = {}
 
-bodavm.memory.listenerDone = 0 //异步事件标签
 
 //存储tag标签
 bodavm.memory.all = []
@@ -536,34 +546,35 @@ bodavm.memory.IDBOpenDBRequest = {
 
 //以下代码配合changeDom一起使用,获取网站变量值
 
+
 bodavm.memory.location={
-    origin:"https://lotsmg.dpm.org.cn",
+    origin:"http://qikan.cqvip.com",
     hash:"",
-    pathname:"/manage/workspace",
-    search:"",
-    href:"https://lotsmg.dpm.org.cn/manage/workspace",
+    pathname:"/Qikan/Search/Advance",
+    search:"?from=index",
+    href:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
     port:"",
-    protocol:"https:",
-    host:"lotsmg.dpm.org.cn",
+    protocol:"http:",
+    host:"qikan.cqvip.com",
     ancestorOrigins:'{}',
-    hostname:"lotsmg.dpm.org.cn",
-    _href:"https://lotsmg.dpm.org.cn/manage/workspace",
-    _search:"",
+    hostname:"qikan.cqvip.com",
+    _href:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
+    _search:"?from=index",
 
 };
 
 bodavm.memory.document={
-    URL:"https://lotsmg.dpm.org.cn/manage/workspace",
-    referrer:"https://lotsmg.dpm.org.cn/admin/storeMerchant/cu/auth?code=CF7D1FE5EC26407284A22F1F3FF1A347&channel=corpUser&productCode=lots_mall&state=userInfo",
-    documentURI:"https://lotsmg.dpm.org.cn/manage/workspace",
+    URL:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
+    referrer:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
+    documentURI:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
     compatMode:"CSS1Compat",
     dir:"",
-    title:'故宫博物院',
+    title:'',
     designMode:"off",
-    readyState:"complete",
+    readyState:"loading",
     contentType:"text/html",
     inputEncoding:"UTF-8",
-    domain:"lotsmg.dpm.org.cn",
+    domain:"qikan.cqvip.com",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
@@ -597,9 +608,9 @@ bodavm.memory.screen={
     colorDepth:24,
     availLeft:0,
     availTop:0,
-    isExtended:false,
+    isExtended:undefined,
     orientation:{},
-    onchange:null,
+    onchange:undefined,
 };
 
 bodavm.memory.navigator={
@@ -612,30 +623,30 @@ bodavm.memory.navigator={
     cookieEnabled:true,
     languages:["zh-CN","zh"],
     productSub:"20030107",
-    userAgentData:{"brands":[{"brand":"Not/A)Brand","version":"99"},{"brand":"Google Chrome","version":"115"},{"brand":"Chromium","version":"115"}],"mobile":false,"platform":"Windows"},
-    xr:{},
+    userAgentData:undefined,
+    xr:undefined,
     platform:'Win32',
     webkitPersistentStorage:{},
     connection:{},
     javaEnabled:false,
     product:'Gecko',
     vendorSub:"",
-    deviceMemory:8,
+    deviceMemory:undefined,
     maxTouchPoints:0
 };
 bodavm.memory.window={
-    name:"",
-    origin:"https://lotsmg.dpm.org.cn",
+    name:"$_YWTU=tJwmBQ4eczEzEKWGu0Ugf4dnMOJlHAGaVpPh8wtqHe3&$_YVTX=JG&vdFm=",
+    origin:"http://qikan.cqvip.com",
     defaultStatus:undefined,
     defaultstatus:undefined,
     devicePixelRatio:1.5,
-    isSecureContext:true,
+    isSecureContext:false,
     length:0,
     status:"",
     onmessage:null,
     onbeforeunload:null,
     closed:false,
-    isSecureContext:true,
+    isSecureContext:false,
     onappinstalled:null,
     onbeforeinstallprompt:null,
     onbeforexrselect:null,
@@ -647,19 +658,19 @@ bodavm.memory.window={
     onsearch:null,
     opener:null,
     // frameElement:null,
-    isSecureContext:true,
-    // customElements:[object CustomElementRegistry]
+    isSecureContext:false,
+    // customElements:null
     
 
 };
 
 
-bodavm.memory.localStorage={"e6cfe709bd7dcc4c":"1691130940117|0101A9C21D21C9B4AA47ABDDE354B528B098A396C5BB28D7934DDD27CE1E9D2507E58DA79573B0F14F3C3D8F|","_AMap_AMap.MapType":"{\"version\":\"1671592305593\",\"script\":\"g.Qaa=g.da.extend({Ni:\\\".amap-maptypecontrol{z-index:150;position:absolute;top:12px;right:12px;z-index:304}.amap-maptype-wrap{position:absolute;top:0;right:0;width:64px;height:64px}.amap-maptype-con{position:absolute;top:0;right:0;width:60px;height:60px;background:#fff;border:solid 1px #ccc;cursor:pointer}.amap-maptype-win{position:absolute;top:1px;right:1px;width:56px;height:56px;overflow:hidden;background:#ccc;border:solid 1px #ccc}.amap-maptype-title{position:absolute;bottom:0;left:0;width:60px;height:20px;color:#333;text-align:center;font-size:12px;line-height:20px;background:#fff}.amap-maptype-title:hover{background-color:#eee}.amap-maptype-list{position:absolute;top:64px;right:0;width:100px;background:#fff;border:solid 1px #ccc;overflow:hidden}.amap-maptype-list p{width:100px;height:20px;margin:0;cursor:pointer;background:#fff}.amap-maptype-lsit p:hover{background:#eee}.amap-maptype-check{display:inline-block;width:15px;height:15px;margin-left:2px;background:url(../../theme/v1.3/maptype-bg.png) no-repeat -30px 4px}.amap-maptype-checked{background-position:0 4px}.amap-maptype-check-hover{background-position:-15px 4px}.amap-maptype-label{display:inline-block;width:60px;height:15px;color:#333;font-size:12px;line-height:15px;margin-left:10px}\\\", ka:[g.va],A:function(a){this.CLASS_NAME=\\\"AMap.MapType\\\";g.c.ya(this,a);this.b3=0;this.m9=this.Uz=!1;this.visible=!0;a&&(\\\"undefined\\\"!==typeof a.defaultType&&(this.b3=a.defaultType),\\\"undefined\\\"!==typeof a.showTraffic&&(this.Uz=a.showTraffic),\\\"undefined\\\"!==typeof a.showRoad&&(this.m9=a.showRoad));this.Os=[{title:\\\"\\\\u5730\\\\u56fe\\\",q:new z.q.sb({innerLayer:!0}),lf:[\\\"traffic\\\"]},{title:\\\"\\\\u536b\\\\u661f\\\",q:new z.q.sb.HW({innerLayer:!0}),lf:[\\\"traffic\\\",\\\"road\\\"]}];this.lf={traffic:{title:\\\"\\\\u8def\\\\u51b5\\\",q:new z.q.sb.PW({innerLayer:!0}), show:this.Uz},road:{title:\\\"\\\\u8def\\\\u7f51\\\",q:new z.q.sb.EW({innerLayer:!0}),show:this.m9}};this.moa()},zu:function(a,b){this.map=a;this.vf=b;b.appendChild(this.j.K);this.fn();this.$0(this.b3);this.YX()},Yv:function(){this.mn();this.vf.removeChild(this.j.K);this.map=this.vf=null},moa:function(){this.ks=-1;var a={};a.K=g.f.create(\\\"div\\\",null,\\\"amap-maptypecontrol\\\");a.Cl=g.f.create(\\\"div\\\",a.K,\\\"amap-maptype-wrap\\\");a.uQ=g.f.create(\\\"div\\\",a.Cl,\\\"amap-maptype-con\\\");a.NV=g.f.create(\\\"div\\\",a.uQ,\\\"amap-maptype-win\\\"); a.title=g.f.create(\\\"div\\\",a.uQ,\\\"amap-maptype-title\\\");a.list=g.f.create(\\\"div\\\",a.K,\\\"amap-maptype-list\\\");for(var b in this.lf)if(this.lf.hasOwnProperty(b)){var c=g.f.create(\\\"p\\\",a.list,\\\"amap-maptype-item\\\");c.qy=g.f.create(\\\"span\\\",c,\\\"amap-maptype-check\\\");this.lf[b].show&&g.f.Wa(c.qy,\\\"amap-maptype-checked\\\");c.fta=g.f.create(\\\"span\\\",c,\\\"amap-maptype-label\\\");c.fta.innerHTML=this.lf[b].title;this.lf[b].ce=c}a.list.style.width=\\\"60px\\\";this.j=a},QX:function(){for(var a in this.lf)if(this.lf.hasOwnProperty(a)){var b= this.lf[a],c=b.q.get(\\\"zooms\\\"),d=this.map.getZoom();b.map=this.map;b.ce.title=d>c[1]||d<c[0]?\\\"\\\\u5f53\\\\u524d\\\\u7ea7\\\\u522b\\\\u4e0d\\\\u63d0\\\\u4f9b\\\"+b.title+\\\"\\\\u6570\\\\u636e\\\":\\\"\\\"}},fn:function(){this.Va={UFa:g.event.addListener(this.map,\\\"mapmove\\\",this.kH,this),R$:g.event.addListener(this.map,\\\"zoomend\\\",this.kH,this),sAa:g.event.addListener(this.map,\\\"zoomchange\\\",this.QX,this),rua:g.event.addListener(this.map,\\\"moveend\\\",this.kH,this),oDa:g.event.Y(this.j.uQ,\\\"click\\\",this.Jha,this),lDa:g.event.Y(this.j.K,\\\"mouseover\\\",this.Lha, this),kDa:g.event.Y(this.j.K,\\\"mouseout\\\",this.Kha,this)};for(var a in this.lf)if(this.lf.hasOwnProperty(a)){var b=this.lf[a];b.map=this.map;this.Va[\\\"subclick\\\"+a]=g.event.Y(b.ce,\\\"click\\\",this.Rha,b);this.Va[\\\"submouseover\\\"+a]=g.event.Y(b.ce,\\\"mouseover\\\",this.Tha,b);this.Va[\\\"submouseout\\\"+a]=g.event.Y(b.ce,\\\"mouseout\\\",this.Sha,b)}this.QX()},mn:function(){if(this.Va)for(var a in this.Va)this.Va.hasOwnProperty(a)&&g.event.removeListener(this.Va[a])},Jha:function(){this.$0((this.ks+1)%this.Os.length)},Rha:function(){g.f.fb(this.ce.qy, \\\"amap-maptype-check-hover\\\");this.show?(g.f.fb(this.ce.qy,\\\"amap-maptype-checked\\\"),this.q.setMap(null),this.show=!1):(g.f.Wa(this.ce.qy,\\\"amap-maptype-checked\\\"),this.q.setMap(this.map),this.show=!0)},Tha:function(){this.show||g.f.Wa(this.ce.qy,\\\"amap-maptype-check-hover\\\")},Sha:function(){g.f.fb(this.ce.qy,\\\"amap-maptype-check-hover\\\")},Lha:function(){this.wea()},Kha:function(){this.YX()},YX:function(){this.mN=60;this.lN=20;this.uX()},wea:function(a){this.mN=100;this.lN=20*this.Os[this.ks].lf.length;this.uX(a)}, uX:function(a){this.k1();var b=this;this.fO=setInterval(function(){var c=Number(g.f.$c(b.j.list,\\\"width\\\").replace(\\\"px\\\",\\\"\\\")),d=Number(g.f.$c(b.j.list,\\\"height\\\").replace(\\\"px\\\",\\\"\\\")),e=b.mN-c,f=b.lN-d;0!==e||0!==f?(e=5<e?c+5:-5>e?c-5:b.mN,f=5<f?d+5:-5>f?d-5:b.lN,b.j.list.style.width=e+\\\"px\\\",b.j.list.style.height=f+\\\"px\\\"):(clearInterval(b.fO),a&&a.call(b))},50)},k1:function(){this.fO&&clearInterval(this.fO)},m4:function(a){var b=[];if(this.Os[a]){b.push(this.Os[a].q);a=this.Os[a].lf;a=g.a.isArray(a)?a.join(): \\\"\\\";for(var c in this.lf)this.lf.hasOwnProperty(c)&&-1!==a.indexOf(c)&&this.lf[c].show&&b.push(this.lf[c].q)}return b},$0:function(a){a!==this.ks&&(this.map.remove(this.m4(this.ks)),-1==this.ks&&this.map.remove(this.map.getDefaultLayer()),this.map.add(this.m4(a)),this.ks=a,this.kH(),this.Fka())},kH:function(){var a=this.Os[(this.ks+1)%this.Os.length];this.j.title.innerHTML=a.title;var b=Number(g.f.$c(this.j.NV,\\\"width\\\").replace(\\\"px\\\",\\\"\\\")),c=Number(g.f.$c(this.j.NV,\\\"height\\\").replace(\\\"px\\\",\\\"\\\"))||56,d=this.map.getSize().width, e=this.map.getSize().height;if(!(0>=b||0>=c||0>=d||0>=e)){var f=this.map.lc(this.map.getCenter()),f=f.add(new g.H(d/2-14-b/2,14+c/2-e/2)),f=this.map.Xh(f);this.Kka(this.j.NV,f,this.map,a.q,b,c)}},Fka:function(){this.k1();var a=this.Os[this.ks].lf;if(0===a.length)this.j.list.style.display=\\\"none\\\";else{this.j.list.style.display=\\\"block\\\";this.j.list.style.height=20*a.length+\\\"px\\\";var a=a.join(\\\",\\\"),b;for(b in this.lf)this.lf.hasOwnProperty(b)&&(-1!==a.indexOf(b)?this.lf[b].ce.style.display=\\\"block\\\":this.lf[b].ce.style.display= \\\"none\\\")}},Kka:function(a,b,c,d,e,f){a.Xk||(a.Xk=[]);var h=d.getZooms(),k=Math.ceil(c.getZoom()),k=Math.min(Math.max(k,h[0]),h[1]);b=c.lc(b,k);c=Math.floor((b.y-f/2)/256);for(var h=Math.floor((b.x+e/2)/256),l=Math.floor((b.y+f/2)/256),m=0,n=Math.floor((b.x-e/2)/256);n<=h;n+=1)for(var p=c;p<=l;p+=1){a.Xk.length<=m&&a.Xk.push(g.f.create(\\\"img\\\",a));var q=a.Xk[m];q.style.visibility=\\\"inherit\\\";q.style.position=\\\"absolute\\\";q.style.left=256*n-b.x+e/2+\\\"px\\\";q.style.top=256*p-b.y+f/2+\\\"px\\\";var r=d.getTileUrl(n, p,k);q.src=r;m+=1}for(;m<a.Xk.length;)a.Xk[m].style.visibility=\\\"hidden\\\",m+=1},vb:function(a){(this.visible=a.visible)?g.f.ab(this.j.K,{visibility:\\\"visible\\\"}):g.f.ab(this.j.K,{visibility:\\\"hidden\\\"})},hide:function(){g.c.add(this,\\\"hide\\\");this.vb({visible:!1});g.event.O(this,\\\"hide\\\")},show:function(){g.c.add(this,\\\"show\\\");this.vb({visible:!0});g.event.O(this,\\\"show\\\")},Ty:function(){return this.visible?[120,80,0,0]:[0,0,0,0]}});window.AMap.MapType=g.Qaa; \"}","_AMap_AMap.Scale":"{\"version\":\"1671592305593\",\"script\":\"g.pba=g.da.extend({ka:[g.va,g.$e],Ni:\\\".amap-scalecontrol{position:absolute;z-index:150}.amap-scale-text{text-align:center;font-size:10px}.amap-scale-line{position:relative;height:8px}.amap-scale-line div{-webkit-box-sizing:content-box!important;-moz-box-sizing:content-box!important;box-sizing:content-box!important}.amap-scale-edgeleft,.amap-scale-middle,.amap-scale-edgeright{position:absolute;background-color:#333;overflow:hidden}.amap-scale-edgeleft,.amap-scale-edgeright{width:1px;_width:3px;height:6px;_height:8px;border:solid 1px #fff}.amap-scale-middle{height:2px;_height:4px;left:2px;top:2px;border-top:solid 1px #fff;border-bottom:solid 1px #fff}\\\", A:function(a){this.CLASS_NAME=\\\"AMap.Scale\\\";g.c.ya(this,a);this.position=\\\"LB\\\";this.offset=new g.H(2,20);this.visible=!0;this.j={};this.j.K=g.f.create(\\\"div\\\",null,\\\"amap-scalecontrol\\\");this.j.text=g.f.create(\\\"div\\\",this.j.K,\\\"amap-scale-text\\\");this.j.NJ=g.f.create(\\\"div\\\",this.j.K,\\\"amap-scale-line\\\");this.j.KDa=g.f.create(\\\"div\\\",this.j.NJ,\\\"amap-scale-edgeleft\\\");this.j.xpa=g.f.create(\\\"div\\\",this.j.NJ,\\\"amap-scale-edgeright\\\");this.j.jua=g.f.create(\\\"div\\\",this.j.NJ,\\\"amap-scale-middle\\\");this.vb(a)},zu:function(a, b){this.map=a;b.appendChild(this.j.K);this.vf=b;this.fn()},Yv:function(){this.mn();this.vf.removeChild(this.j.K);this.map=this.vf=null},vb:function(a){for(var b in a)\\\"_\\\"!==b.substr(0,1)&&void 0!==this[b]&&(this[b]=a[b]);this.position&&this.offset&&this.cC(this.position,this.offset);this.visible?g.f.ab(this.j.K,{visibility:\\\"visible\\\"}):g.f.ab(this.j.K,{visibility:\\\"hidden\\\"})},IR:function(a){return this[a]},cC:function(a,b){switch(a){case \\\"LT\\\":g.f.ab(this.j.K,{left:b.wf()+\\\"px\\\",top:b.ve()+\\\"px\\\",right:\\\"\\\", bottom:\\\"\\\"});break;case \\\"RT\\\":g.f.ab(this.j.K,{right:b.wf()+\\\"px\\\",top:b.ve()+\\\"px\\\",left:\\\"\\\",bottom:\\\"\\\"});break;case \\\"LB\\\":g.f.ab(this.j.K,{left:b.wf()+\\\"px\\\",bottom:b.ve()+\\\"px\\\",right:\\\"\\\",top:\\\"\\\"});break;case \\\"RB\\\":g.f.ab(this.j.K,{right:b.wf()+\\\"px\\\",bottom:b.ve()+\\\"px\\\",left:\\\"\\\",top:\\\"\\\"})}this.vf&&(this.vf.removeChild(this.j.K),this.vf.appendChild(this.j.K))},ela:function(a,b){this.j.text.innerHTML=a;g.f.ab(this.j.text,{width:b+8+\\\"px\\\"}).ab(this.j.jua,{width:b+\\\"px\\\"}).ab(this.j.xpa,{left:b+1+\\\"px\\\"})},O0:[[1E7,\\\"10000\\\"], [5E6,\\\"5000\\\"],[2E6,\\\"2000\\\"],[1E6,\\\"1000\\\"],[5E5,\\\"500\\\"],[2E5,\\\"200\\\"],[1E5,\\\"100\\\"],[1E5,\\\"100\\\"],[5E4,\\\"50\\\"],[2E4,\\\"20\\\"],[1E4,\\\"10\\\"],[5E3,\\\"5\\\"],[2E3,\\\"2\\\"],[1E3,\\\"1\\\"],[500,\\\"500\\\"],[200,\\\"200\\\"],[200,\\\"200\\\"],[100,\\\"100\\\"],[50,\\\"50\\\"],[20,\\\"20\\\"],[10,\\\"10\\\"]],fn:function(){this.po();this.Va={R$:g.event.addListener(this.map,\\\"zoomend\\\",this.po,this),rua:g.event.addListener(this.map,\\\"moveend\\\",this.po,this)};this.X(\\\"lang\\\",this.map)},langChanged:function(){this.po()},mn:function(){if(this.Va)for(var a in this.Va)this.Va.hasOwnProperty(a)&& g.event.removeListener(this.Va[a]);this.yl(\\\"lang\\\")},po:function(){var a=Math.round(this.map.get(\\\"zoom\\\")),b=this.map.getResolution(),b=this.O0[a][0]/b,c=this.O0[a][1],c=13>=a?\\\"en\\\"==this.map.getLang()?c+\\\" KM\\\":\\\"zh_en\\\"==this.map.getLang()?c+\\\" \\\\u516c\\\\u91cc/KM\\\":c+\\\" \\\\u516c\\\\u91cc\\\":\\\"en\\\"==this.map.getLang()?c+\\\" M\\\":\\\"zh_en\\\"==this.map.getLang()?c+\\\" \\\\u7c73/M\\\":c+\\\" \\\\u7c73\\\";this.ela(c,b)},show:function(){g.c.add(this,\\\"show\\\");this.vb({visible:!0});g.event.O(this,\\\"show\\\")},hide:function(){g.c.add(this,\\\"hide\\\");this.vb({visible:!1}); g.event.O(this,\\\"hide\\\")},Ty:function(){var a=[0,0,0,0];if(this.j.K){var b=g.f.$c(this.j.K,\\\"width\\\"),c=g.f.$c(this.j.K,\\\"height\\\"),b=this.offset.wf()+parseFloat(b),c=this.offset.ve()+parseFloat(c);-1!==this.position.indexOf(\\\"T\\\")&&(a[0]=c);-1!==this.position.indexOf(\\\"R\\\")&&(a[1]=b);-1!==this.position.indexOf(\\\"B\\\")&&(a[2]=c);-1!==this.position.indexOf(\\\"L\\\")&&(a[3]=b)}return a}});window.AMap.Scale=g.pba; \"}","channel":"corpUser","_AMap_sync":"{\"version\":\"1671592305593\",\"script\":\"(function(){if(g.o.Nc){var a=function(){var a=g.o.Nc.split(\\\".\\\"),b=window;do if(b=b[a.shift()],!b)return null;while(a.length);return b||null},b=function(b){var c=a();if(c){if(\\\"function\\\"!==typeof c)throw Error(g.o.Nc+\\\" is not a function!\\\");setTimeout(c,1)}else if(b)throw Error(\\\"Can not find callback: \\\"+g.o.Nc+\\\", try define it before load JsApi!\\\");};document.body&&a()?b():setTimeout(function(){b(!0)},300)}var c=(new Date).getTime(),c=[\\\"s=rsv3&product=JsInit&key=\\\"+g.o.key,\\\"t=\\\"+c];c.push(\\\"resolution=\\\"+ window.screen.width+\\\"*\\\"+window.screen.height);c.push(\\\"mob=\\\"+(g.l.ba?1:0));c.push(\\\"vt=\\\"+(g.l.Yp?1:0));c.push(\\\"dpr=\\\"+window.devicePixelRatio);c.push(\\\"scale=\\\"+g.l.BL||0);c.push(\\\"detect=\\\"+g.l.ja);g.o.Xa&&c.push(\\\"jscode=\\\"+g.o.Xa);c=g.o.fd+\\\"/v3/log/init?\\\"+c.join(\\\"&\\\");new g.kb.Ab(c,{callback:\\\"callback\\\"})})(); \"}","e6cfe709871c0f8d":"2seBEeLZ125L7EpJyISXVkMPwF/Kitxm0vUUDv3EzzGvmhC5ClBaqbqd7dGyVz2PVDrddg==","e6cfe709f1fe7b11":"8c145af531d84128a651e8e8605ae743","_AMap_AMap.Autocomplete":"{\"version\":\"1671592305593\",\"script\":\"g.UV=g.da.extend({Ni:\\\".amap-sug-result{position:absolute;z-index:1024;background-color:#fefefe;border:1px solid #d1d1d1;bottom:auto}.auto-item:hover{background-color:#cae1ff}.auto-item{white-space:nowrap;font-size:12px;cursor:pointer;padding:4px}.auto-item-span{color:#c1c1c1;padding-left:4px}\\\",ka:[g.va],A:function(a){this.CLASS_NAME=\\\"AMap.Autocomplete\\\";g.c.ya(this,a);this.N=a||{};this.url=g.o.fd+\\\"/v3/assistant/inputtips\\\";void 0==this.N.closeResultOnScroll&&(this.N.closeResultOnScroll=!0);void 0== this.N.outPutDirAuto&&(this.N.outPutDirAuto=!0);this.N.output&&(\\\"string\\\"===typeof this.N.output?this.Vb=document.getElementById(this.N.output):g.a.HJ(this.N.output)&&(this.Vb=this.N.output));if(this.N.input){\\\"string\\\"===typeof this.N.input?this.input=document.getElementById(this.N.input):g.a.HJ(this.N.input)&&(this.input=this.N.input);this.input&&this.vsa();this.Vb||(this.Vb=g.f.create(\\\"div\\\",document.body,\\\"amap-sug-result\\\"),this.Vb.style.visibility=\\\"hidden\\\",this.f7=!0);var b=this;a=function(){b.Vb.style.visibility= \\\"hidden\\\"};var c=g.f.getElementsByClassName(\\\"amap-maps\\\");if(c&&c.length)for(var d=0;d<c.length;d+=1)g.F.h(c[d],\\\"click\\\",a);g.F.h(document,\\\"click\\\",a);g.F.h(document,\\\"mousewheel\\\",a);g.F.h(window,\\\"resize\\\",this.wK,this);this.N.closeResultOnScroll?g.F.h(window,\\\"scroll\\\",this.closeResult,this):g.F.h(window,\\\"scroll\\\",this.wK,this)}},closeResult:function(){this.Vb&&(this.Vb.style.visibility=\\\"hidden\\\")},vsa:function(){\\\"oninput\\\"in this.input&&g.F.h(this.input,\\\"input\\\",this.Pua,this);g.F.h(this.input,\\\"keyup\\\",this.Vua, this);g.F.h(this.input,\\\"keydown\\\",function(a){g.F.stopPropagation(a)},this)},Pua:function(){this.Vb&&this.V1()},Vua:function(a){var b=(a||window.event).keyCode;if(a=this.Vb){var c=a.tI;40===b?a.Jj&&a.Jj.length&&(a.childNodes[c]&&(a.childNodes[c].style.background=\\\"\\\"),c=(c+1)%a.Jj.length,a.tI=c,a.childNodes[c].style.background=\\\"#CAE1FF\\\",this.input.value=a.Jj[c].name,this.r(\\\"choose\\\",{poi:this.Vb.Jj[c]})):38===b?a.Jj&&a.Jj.length&&(a.childNodes[c]&&(a.childNodes[c].style.background=\\\"\\\"),c=(c-1+a.Jj.length)% a.Jj.length,a.tI=c,a.childNodes[c].style.background=\\\"#CAE1FF\\\",this.input.value=a.Jj[c].name,this.r(\\\"choose\\\",{poi:this.Vb.Jj[c]})):13===b?(a=this.Vb)&&-1!==a.tI&&this.Q8(c):\\\"oninput\\\"in this.input||this.V1()}},Q8:function(a){var b=this.input;if(this.Vb&&this.Vb.Jj){var c=this.Vb.Jj[a].name;this.r(\\\"select\\\",{poi:this.Vb.Jj[a]});b.value=c;this.Vb.Jj=\\\"\\\";this.Vb.style.display=\\\"none\\\"}},V1:function(){var a=this.input.value;0<a.length?this.e6!==a&&this.search(a):(this.e6=\\\"\\\",this.Vb.style.display=\\\"none\\\")},GU:function(a){this.N.noshowDistrict= a},rma:function(a){this.Vb.innerHTML=\\\"\\\";var b=this,c=document.createDocumentFragment();if(a&&0<a.length&&this.input){for(var d=function(a){b.Q8(a.target.f8)},e=0;e<a.length;e++){var f=g.f.create(\\\"div\\\",c,\\\"auto-item\\\");f.id=\\\"amap-sug\\\"+e;f.f8=e;g.f.fillText(f,a[e].name);g.F.h(f,\\\"click\\\",d);b.N.noshowDistrict||!a[e].district&&!a[e].city||(f=g.f.create(\\\"span\\\",f,\\\"auto-item-span\\\"),g.f.fillText(f,a[e].district||a[e].city),f.f8=e)}this.Vb.tI=-1;this.Vb.Jj=a;this.Vb.appendChild(c);this.Vb.style.display=\\\"block\\\"; this.Vb.style.visibility=\\\"visible\\\"}else this.Vb.style.visibility=\\\"hidden\\\";this.f7&&this.wK()},setType:function(a){g.c.add(this,\\\"setType\\\");this.N.type=a},setLang:function(a){g.c.add(this,\\\"setLang\\\");this.N.lang=a||\\\"zh_cn\\\"},getLang:function(){return this.N.lang},setCity:function(a){g.c.add(this,\\\"setCity\\\");this.N.city=a},setCityLimit:function(a){this.N.citylimit=a},search:function(a,b){g.c.add(this,\\\"search\\\");if(a){this.e6=a;var c=[\\\"s=rsv3\\\"];c.push(\\\"key=\\\"+g.o.key);g.o.Xa&&c.push(\\\"jscode=\\\"+g.o.Xa);this.N.datatype&& c.push(\\\"datatype=\\\"+this.N.datatype);this.Er(this.N,{city:\\\"city\\\",type:\\\"type\\\",citylimit:\\\"citylimit\\\",lang:\\\"language\\\"},c);var d=this,c=new g.kb.Ab(d.url+(0<c.length?\\\"?\\\"+c.join(\\\"&\\\"):\\\"\\\"),{callback:\\\"callback\\\",II:{keywords:a}});c.h(\\\"complete\\\",function(a){d.Mc(a,b)},d);c.h(\\\"error\\\",function(a){d.nc(a,b)},d)}else b&&\\\"function\\\"===typeof b&&b(\\\"error\\\",\\\"NO_PARAMS\\\")},nc:function(a,b){z.event.O(this,\\\"error\\\",a);b&&\\\"function\\\"===typeof b&&b(\\\"error\\\",a.info)},Qb:function(a){a=parseInt(a,10);return isNaN(a)?0:a},pK:function(a){return a instanceof Array&&!a.length?\\\"\\\":a},Mc:function(a,b){var c;if(parseInt(a.status,10))if(a.tips&&0!==a.tips.length){for(c=0;c<a.tips.length;c+=1){var d=a.tips[c];d.location&&d.location.length&&(d.location=g.a.Ka(d.location.split(\\\",\\\")));d.location=this.pK(d.location);d.adcode=this.pK(d.adcode);d.district=this.pK(d.district);d.id=this.pK(d.id)}c={info:a.info,count:this.Qb(a.count),tips:a.tips};z.event.O(this,\\\"complete\\\",c);b&&\\\"function\\\"===typeof b&&b(\\\"complete\\\",c);this.input&&this.rma(a.tips)}else this.Vb&&(this.Vb.innerHTML= \\\"\\\",this.Vb.style.visibility=\\\"hidden\\\"),c={info:\\\"ok\\\"===a.info.toLowerCase()?\\\"NO_DATA\\\":a.info},z.event.O(this,\\\"complete\\\",c),b&&\\\"function\\\"===typeof b&&b(\\\"no_data\\\",{});else c={info:a.info},z.event.O(this,\\\"error\\\",c),b&&\\\"function\\\"===typeof b&&b(\\\"error\\\",a.info)},wK:function(){var a=this.input.getBoundingClientRect(),b=this.Vb.getBoundingClientRect(),c=b.height;void 0===c&&(c=b.bottom-b.top);b=a.width;void 0===b&&(b=a.right-a.left);var d=document.documentElement.scrollTop||window.pageYOffset||document.body.scrollTop; this.Vb.style.left=a.left+(document.documentElement.scrollLeft||window.pageXOffset||document.body.scrollLeft)-1+\\\"px\\\";var e=document.documentElement.clientHeight;this.Vb.style.top=this.N.outPutDirAuto&&a.bottom+c+10>e&&a.bottom>c?a.top+d-c-2+\\\"px\\\":a.bottom+d+2+\\\"px\\\";this.Vb.style.minWidth=b+2+\\\"px\\\";return this},Er:function(a,b,c){for(var d in a)\\\"undefined\\\"!==typeof a[d]&&\\\"undefined\\\"!==typeof b[d]&&c.push(b[d]+\\\"=\\\"+a[d])}});window.AMap.Autocomplete=g.UV; \"}","xjsc_merchantInfoId_2018_11_13_czc":"2655","payCenterToken":"undefined","_AMap_AMap.CircleEditor":"{\"version\":\"1671592305593\",\"script\":\"g.XV=g.da.extend({ka:[g.va],A:function(a,b,c,d){this.CLASS_NAME=\\\"AMap.CircleEditor\\\";g.c.ya(this,d);this.e=a;this.Lb=b;this.Lb.setOptions({draggable:c||!1});this.Hb=g.o.Hb;d&&d.yI&&(this.yI=!0)},open:function(){g.c.add(this,\\\"open\\\");this.qf&&this.ac||this.Zt();this.qf&&this.qf.setMap(this.e);if(this.ac)for(var a=0,b=this.ac.length;a<b;a+=1)this.ac[a].setMap(this.e);this.DO=this.Lb.getOptions().draggable;this.Lb.h(\\\"dragstart\\\",this.t_,this);this.Lb.h(\\\"dragging\\\",this.s_,this);this.Lb.h(\\\"setCenter\\\",this.EC, this);this.Lb.h(\\\"setRadius\\\",this.rE,this)},EC:function(){var a=this.Lb.getCenter(),b=this.qf.getPosition(),b=a.bb(b);this.ac[0].setPosition(this.ac[0].getPosition().add(b));this.qf.setPosition(a)},rE:function(){var a=this.Lb.getCenter(),b=this.Lb.getRadius(),c=b*Math.cos(Math.PI/4);this.ac[0].setPosition(a.offset(c,c));this.ac[0].setLabel({content:\\\"\\\\u534a\\\\u5f84:\\\"+b+\\\"\\\\u7c73\\\"})},close:function(){g.c.add(this,\\\"close\\\");this.qf&&(this.qf.setMap(null),delete this.qf);if(this.ac){for(var a=0,b=this.ac.length;a< b;a+=1)this.ac[a].setMap(null);delete this.ac}this.Lb.setOptions({draggable:this.DO});this.Lb.G(\\\"dragstart\\\",this.t_,this);this.Lb.G(\\\"dragging\\\",this.s_,this);this.Lb.G(\\\"setCenter\\\",this.EC,this);this.Lb.G(\\\"setRadius\\\",this.rE,this);this.r(\\\"end\\\",{type:\\\"end\\\",target:this.Lb})},t_:function(a){this.XW=a.lnglat},s_:function(a){var b=a.lnglat.bb(this.XW);this.XW=a.lnglat;this.qf.setPosition(this.qf.getPosition().add(b));this.ac[0].setPosition(this.ac[0].getPosition().add(b))},Zt:function(){this.XM();this.ZM()}, XM:function(){var a=this.Lb.getCenter();this.yI?(this.qf=new z.B.wb({position:a,visible:!1,innerOverlay:!0}),this.qf.Da=!0):this.qf=this.ii(a)},ZM:function(){var a=this.Lb.getCenter(),a=this.xG(a);this.ac=[];this.ac.push(this.ii(a,!0))},xG:function(a){var b=this.Lb.getRadius()*Math.cos(Math.PI/4);return a.offset(b,b)},ii:function(a,b){var c=new z.B.wb({position:a,draggable:!0,icon:new z.B.di({size:new g.zd(11,11),imageOffset:new g.H(0,0),image:this.Hb+\\\"/images/dd-via.png\\\",innerOverlay:!0}),offset:new g.H(-6, -6),zIndex:this.Lb.get(\\\"zIndex\\\")+1E3,innerOverlay:!0});c.Da=!0;b&&(c.setLabel({content:\\\"\\\\u534a\\\\u5f84:\\\"+this.Lb.getRadius()+\\\"\\\\u7c73\\\",offset:new AMap.Pixel(15,-4)}),c.setTitle(\\\"\\\\u62d6\\\\u62fd\\\\u4fee\\\\u6539\\\\u534a\\\\u5f84\\\"));this.TA(c);return c},TA:function(a){a.h(\\\"dragstart\\\",this.U_,this).h(\\\"dragging\\\",this.cn,this).h(\\\"dragend\\\",this.Gr,this)},A1:function(a){a.G(\\\"dragstart\\\",this.U_,this).G(\\\"dragging\\\",this.cn,this).G(\\\"dragend\\\",this.Gr,this)},U_:function(){},eo:function(){this.Lb.ypa=!0;this.Lb.r(\\\"edit\\\")},cn:function(a){a= a.target;var b=a.getPosition();a===this.qf?this.wO(b):this.$B(b)},Gr:function(){this.eo();this.r(\\\"dragend\\\",{type:\\\"dragend\\\",target:this.Lb})},wO:function(a){if(!this.yI){var b=this.ac[0].getPosition().add(a.bb(this.Lb.getCenter()));this.ac[0].setPosition(b);this.Lb.setCenter(a,!0);this.r(\\\"move\\\",{type:\\\"move\\\",lnglat:a,target:this.Lb})}},$B:function(a){var b=this.Lb.getCenter();a=Math.round(b.distance(a));this.Lb.setRadius(a,!0);this.ac[0].setLabel({content:\\\"\\\\u534a\\\\u5f84:\\\"+a+\\\"\\\\u7c73\\\"});this.r(\\\"adjust\\\", {type:\\\"adjust\\\",radius:a,target:this.Lb})}});window.AMap.CircleEditor=g.XV; \"}","_AMap_AMap.ToolBar":"{\"version\":\"1671592305593\",\"script\":\"g.xba=g.da.extend({ka:[g.va],Ni:'.amap-toolbar{z-index:150}.amap-toolbar{position:absolute;width:52px;overflow:visible}.amap-pancontrol{width:52px;height:52px;background:url(../../theme/v1.3/map_view.png) 0 -140px;position:absolute;_background:url(../../theme/v1.3/map_view.gif)}.amap-pan-left,.amap-pan-top,.amap-pan-right,.amap-pan-bottom{position:absolute;cursor:pointer}.amap-pan-left,.amap-pan-right{width:12px;height:18px;top:17px}.amap-pan-top,.amap-pan-bottom{width:18px;height:12px;left:17px}.amap-pan-left{left:8px}.amap-pan-right{left:32px}.amap-pan-top{top:8px}.amap-pan-bottom{top:31px}.amap-pan-left:hover,.amap-pan-top:hover,.amap-pan-right:hover,.amap-pan-bottom:hover{background:url(../../theme/v1.3/map_view.png);_background:url(../../theme/v1.3/map_view.gif)}.amap-pan-left:hover{background-position:-52px -110px}.amap-pan-top:hover{background-position:-70px -112px}.amap-pan-right:hover{background-position:-61px -110px}.amap-pan-bottom:hover{background-position:-84px -110px}.amap-pan-left-hover{_background:url(../../theme/v1.3/map_view.gif);background-position:-52px -110px}.amap-pan-top-hover{_background:url(../../theme/v1.3/map_view.gif);background-position:-70px -112px}.amap-pan-right-hover{_background:url(../../theme/v1.3/map_view.gif);background-position:-61px -110px}.amap-pan-bottom-hover{_background:url(../../theme/v1.3/map_view.gif);background-position:-84px -110px}.amap-zoomcontrol{width:24px;position:absolute;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none}.amap-zoom-plus,.amap-zoom-minus,.amap-zoom-cursor,.amap-zoom-label-street,.amap-zoom-label-city,.amap-zoom-label-province,.amap-zoom-label-country{background:url(../../theme/v1.3/map_view.png);_background:url(../../theme/v1.3/map_view.gif);cursor:pointer}.amap-zoom-ruler,.amap-zoom-mask{background:url(../../theme/v1.3/toolbar_rbg.png);cursor:pointer}.amap-zoom-ruler{overflow:visible}.amap-zoom-plus,.amap-zoom-minus{width:24px;height:21px}.amap-zoom-plus{background-position:0 -217px}.amap-zoom-plus:hover{background-position:0 -194px}.amap-zoom-minus{background-position:-26px -224px}.amap-zoom-minus:hover{background-position:-26px -195px}.amap-zoom-plus2:hover{background-position:-50px -194px;cursor:default}.amap-zoom-minus2:hover{background-position:-50px -223px;cursor:default}.amap-zoom-ruler{width:12px;height:147px;position:relative;left:6px;background-position:0 0}.amap-zoom-mask,.amap-zoom-cursor,.amap-zoom-labels,.amap-zoom-label-street,.amap-zoom-label-city,.amap-zoom-label-province,.amap-zoom-label-country{position:absolute}.amap-zoom-mask{width:12px;height:106px;background-position:-14px 0}.amap-zoom-cursor{width:24px;height:20px;left:-6px;top:106px;background-position:-127px -164px}.amap-zoom-cursor:hover{background-position:-127px -141px}.amap-zoom-labels{display:none}.amap-zoom-label-street,.amap-zoom-label-city,.amap-zoom-label-province,.amap-zoom-label-country{width:39px;height:31px;left:20px}.amap-zoom-label-street{top:0;background-position:-87px -140px}.amap-zoom-label-city{top:54px;background-position:-87px -171px}.amap-zoom-label-province{top:92px;background-position:-87px -203px}.amap-zoom-label-country{top:129px;background-position:-87px -235px}.amap-locate{position:absolute;width:18px;height:18px;background:url(../../theme/v1.3/map_view.png);_background:url(../../theme/v1.3/map_view.gif);background-position:-130px -185px;cursor:pointer}.amap-geo{width:30px;height:30px;cursor:pointer;bottom:18px;right:7px}.amap-toolbar-geo{position:absolute}.amap-touch-toolbar .amap-zoomcontrol{position:absolute;right:4px;bottom:-80px;z-index:500;width:35px;background-color:white;background-color:rgba(255,255,255,0.9);border-radius:3px;border:1px solid #ccc;box-shadow:1px 1px 10px 0 #ccc}.amap-touch-toolbar .amap-zoomcontrol:after{position:absolute;content:\\\"\\\";height:1px;background:#ddd;top:48px;width:60%;margin:auto;left:0;right:0}.amap-toolbar-geo-secc{background-image:url(../../theme/v1.3/markers/b/loc.png)!important;background-size:22px 22px!important;background-position-x:6px!important}.amap-touch-toolbar .amap-geo{background:#fff url(../../theme/v1.3/markers/b/loc_gray.png) 50% 50% no-repeat;width:35px;height:35px;border:1px solid #ccc;border-radius:3px;right:4px}.amap-touch-toolbar .amap-locate-loading{background-image:url(../../theme/v1.3/loading.gif)}.amap-zoom-touch-plus{margin-bottom:5px}amap-zoom-touch-plus,.amap-zoom-touch-minus{width:100%;height:43px;background-color:white;background-color:rgba(255,255,255,0.5)}.amap-zoom-touch-plus>div,.amap-zoom-touch-minus>div{margin:auto;font-size:26px;line-height:43px;font-family:verdana;text-align:center;color:#666;height:100%;cursor:pointer}.amap-zoom-touch>div{opacity:.2}', A:function(a){this.CLASS_NAME=\\\"AMap.ToolBar\\\";g.c.ya(this,a);this.Ug(a||{});this.j={};this.j.K=g.f.create(\\\"div\\\",null,\\\"amap-toolbar\\\");this.j.Qv=g.f.create(\\\"div\\\",this.j.K,\\\"amap-pancontrol\\\");this.j.left=g.f.create(\\\"div\\\",this.j.Qv,\\\"amap-pan-left\\\");this.j.top=g.f.create(\\\"div\\\",this.j.Qv,\\\"amap-pan-top\\\");this.j.right=g.f.create(\\\"div\\\",this.j.Qv,\\\"amap-pan-right\\\");this.j.bottom=g.f.create(\\\"div\\\",this.j.Qv,\\\"amap-pan-bottom\\\");this.j.ff=g.f.create(\\\"div\\\",this.j.K,\\\"amap-locate\\\");this.j.zoom=g.f.create(\\\"div\\\",this.j.K, \\\"amap-zoomcontrol\\\");this.j.rk=g.f.create(\\\"div\\\",this.j.zoom,\\\"amap-zoom-plus\\\");this.j.Uh=g.f.create(\\\"div\\\",this.j.zoom,\\\"amap-zoom-ruler\\\");this.j.zf=g.f.create(\\\"div\\\",this.j.zoom,\\\"amap-zoom-minus\\\");this.j.Oc=g.f.create(\\\"div\\\",this.j.Uh,\\\"amap-zoom-mask\\\");this.j.cursor=g.f.create(\\\"div\\\",this.j.Uh,\\\"amap-zoom-cursor\\\");this.j.labels=g.f.create(\\\"div\\\",this.j.Uh,\\\"amap-zoom-labels\\\");this.j.street=g.f.create(\\\"div\\\",this.j.labels,\\\"amap-zoom-label-street\\\");this.j.city=g.f.create(\\\"div\\\",this.j.labels,\\\"amap-zoom-label-city\\\"); this.j.d8=g.f.create(\\\"div\\\",this.j.labels,\\\"amap-zoom-label-province\\\");this.j.country=g.f.create(\\\"div\\\",this.j.labels,\\\"amap-zoom-label-country\\\");(this.Or=(this.vla=g.l.ba)||a&&a.liteStyle)?(this.Lxa(),this.position=\\\"RB\\\",this.offset=new g.H(10,110)):g.f.ab(this.j.Qv,{position:\\\"relative\\\"}).ab(this.j.ff,{position:\\\"relative\\\",left:\\\"17px\\\"}).ab(this.j.zoom,{position:\\\"relative\\\",left:\\\"14px\\\"});this.vb(a);this.LP&&this.yP()},Ug:function(a){this.Hza=a.useNative||!1;this.dj=\\\"toolbar\\\";this.j9=this.ff=this.direction= this.Uh=this.visible=!0;this.position=\\\"LT\\\";this.offset=new g.H(10,10);this.LP=!1;this.timeout=a.timeout||5E3;this.Mta=g.o.Hb+\\\"/theme/v1.3/small_loading.gif\\\";this.Bq=new z.B.wb({position:this.Hh,offset:new g.H(-11,-11),innerOverlay:!0,content:\\\"<div style='width:23px;height:23px;overflow:hidden;'><img style='position:relative;cursor:pointer;' width='23px' height='23px' src='\\\"+g.o.Ii+\\\"/loc.png'></div>\\\"});this.Bq.Da=!0},zu:function(a,b){this.map=a;b.appendChild(this.j.K);this.vf=b;this.M1();this.fn(); var c=this;setTimeout(function(){c.map&&c.j0()},0)},Yv:function(){this.mn();this.vf.removeChild(this.j.K);this.map=this.vf=null;this.xP()},Lxa:function(){var a=g.f.create(\\\"div\\\",this.j.rk);a.innerHTML=\\\"&#43;\\\";g.f.fb(this.j.rk,\\\"amap-zoom-plus\\\");g.f.Wa(this.j.rk,\\\"amap-zoom-touch-plus\\\");g.f.fb(this.j.ff,\\\"amap-locate\\\");g.f.Wa(this.j.ff,\\\"amap-geo\\\");g.f.Wa(this.j.ff,\\\"amap-toolbar-geo\\\");a=g.f.create(\\\"div\\\",this.j.zf);a.innerHTML=\\\"&#8722;\\\";g.f.fb(this.j.zf,\\\"amap-zoom-minus\\\");g.f.Wa(this.j.zf,\\\"amap-zoom-touch-minus\\\"); g.f.Wa(this.j.K,\\\"amap-touch-toolbar\\\")},Mxa:function(a){a.direction=!1;!0!==a.locate&&(a.locate=!1);a.ruler=!1;return a},vb:function(a){a=a||{};this.Or&&(a=this.Mxa(a));for(var b in a)a.hasOwnProperty(b)&&\\\"_\\\"!==b.substr(0,1)&&void 0!==this[b]&&(this[b]=a[b]);this.offset=void 0!==a.offset?a.offset:this.offset;this.position=void 0!==a.position?a.position:this.position;this.Uh=void 0!==a.ruler?a.ruler:this.Uh;this.ff=void 0!==a.locate?a.locate:this.ff;this.direction=void 0!==a.direction?a.direction:this.direction; this.LP=void 0!==a.autoPosition?a.autoPosition:this.LP;void 0!==a.locationMarker&&(this.Bq.getMap===this.map&&(this.Bq.setMap(null),a.locationMarker.setPosition(this.Bq.getPosition()),a.locationMarker.setMap(this.map)),this.Bq=a.locationMarker);this.hha();this.position&&this.offset&&this.cC(this.position,this.offset);this.direction?g.f.ab(this.j.Qv,{display:\\\"block\\\"}):g.f.ab(this.j.Qv,{display:\\\"none\\\"});this.ff?g.f.ab(this.j.ff,{display:\\\"block\\\"}):g.f.ab(this.j.ff,{display:\\\"none\\\"});!this.Uh||this.map&& 270>this.map.getSize().getHeight()?g.f.ab(this.j.Uh,{display:\\\"none\\\"}):g.f.ab(this.j.Uh,{display:\\\"block\\\"});this.visible?g.f.ab(this.j.K,{visibility:\\\"visible\\\"}):g.f.ab(this.j.K,{visibility:\\\"hidden\\\"})},IR:function(a){return this[a]},cC:function(a,b){switch(a){case \\\"LT\\\":g.f.ab(this.j.K,{left:b.wf()+\\\"px\\\",top:b.ve()+\\\"px\\\",right:\\\"\\\",bottom:\\\"\\\"});break;case \\\"RT\\\":g.f.ab(this.j.K,{right:b.wf()+\\\"px\\\",top:b.ve()+\\\"px\\\",left:\\\"\\\",bottom:\\\"\\\"});break;case \\\"LB\\\":g.f.ab(this.j.K,{left:b.wf()+\\\"px\\\",bottom:b.ve()+\\\"px\\\",right:\\\"\\\", top:\\\"\\\"});break;case \\\"RB\\\":g.f.ab(this.j.K,{right:b.wf()+\\\"px\\\",bottom:b.ve()+\\\"px\\\",left:\\\"\\\",top:\\\"\\\"})}this.vf&&(this.vf.removeChild(this.j.K),this.vf.appendChild(this.j.K))},j0:function(){this.Za=null;this.M1();this.mP(this.map.get(\\\"zoom\\\"))},fn:function(){this.mP(this.map.get(\\\"zoom\\\"));this.Va={Za:g.event.addListener(this.map,\\\"zooms\\\",this.j0,this),left:g.event.Y(this.j.left,\\\"click\\\",this.Uha,this),top:g.event.Y(this.j.top,\\\"click\\\",this.Kia,this),right:g.event.Y(this.j.right,\\\"click\\\",this.qia,this),bottom:g.event.Y(this.j.bottom, \\\"click\\\",this.Eha,this),ff:g.event.Y(this.j.ff,\\\"click\\\",this.Xha,this),vGa:g.event.Y(this.j.K,\\\"mousedown\\\",function(a){g.F.preventDefault(a)},this),HDa:g.event.Y(this.j.cursor,\\\"mousedown\\\",this.gu,this),xDa:g.event.Y(this.j.cursor,\\\"mouseover\\\",this.Pha,this),wDa:g.event.Y(this.j.cursor,\\\"mouseout\\\",this.Qha,this),FDa:g.event.Y(document,\\\"mousemove\\\",this.eu,this),GDa:g.event.Y(document,\\\"mouseup\\\",this.fu,this),cursor:g.event.Y(this.j.cursor,\\\"click\\\",this.Oha,this),rk:g.event.Y(this.j.rk,\\\"click\\\",this.nia,this), zf:g.event.Y(this.j.zf,\\\"click\\\",this.Zha,this),qHa:g.event.Y(this.j.Uh,\\\"mouseover\\\",this.W_,this),JIa:g.event.Y(this.j.zoom,\\\"mouseout\\\",this.V_,this),AFa:g.event.Y(this.j.labels,\\\"mouseover\\\",this.W_,this),zFa:g.event.Y(this.j.labels,\\\"mouseout\\\",this.V_,this),Uh:g.event.Y(this.j.Uh,\\\"click\\\",this.Iia,this),street:g.event.Y(this.j.street,\\\"click\\\",this.Jia,this),city:g.event.Y(this.j.city,\\\"click\\\",this.Iha,this),d8:g.event.Y(this.j.d8,\\\"click\\\",this.oia,this),country:g.event.Y(this.j.country,\\\"click\\\",this.Nha,this), R$:g.event.addListener(this.map,\\\"zoomend\\\",this.po,this),aIa:g.event.Y(this.j.K,\\\"touchstart\\\",g.a.A3,g.F.stopPropagation),resize:g.event.addListener(this.map,\\\"resize\\\",this.pia,this)};g.l.Ai&&(this.Va.EFa=g.event.Y(this.j.left,\\\"mouseover\\\",this.Wha,this),this.Va.ZHa=g.event.Y(this.j.top,\\\"mouseover\\\",this.Mia,this),this.Va.bHa=g.event.Y(this.j.right,\\\"mouseover\\\",this.tia,this),this.Va.WCa=g.event.Y(this.j.bottom,\\\"mouseover\\\",this.Gha,this),this.Va.DFa=g.event.Y(this.j.left,\\\"mouseout\\\",this.Vha,this),this.Va.YHa= g.event.Y(this.j.top,\\\"mouseout\\\",this.Lia,this),this.Va.aHa=g.event.Y(this.j.right,\\\"mouseout\\\",this.sia,this),this.Va.VCa=g.event.Y(this.j.bottom,\\\"mouseout\\\",this.Fha,this))},Pha:function(){this.j.cursor.style.top=parseInt(this.j.cursor.style.top)-2+\\\"px\\\"},Qha:function(){this.j.cursor.style.top=parseInt(this.j.cursor.style.top)+2+\\\"px\\\"},mn:function(){if(this.Va)for(var a in this.Va)this.Va.hasOwnProperty(a)&&g.event.removeListener(this.Va[a])},Uha:function(){this.map.panBy(this.map.getSize().width/2-1, 0)},Eha:function(){this.map.panBy(0,-this.map.getSize().height/2+1)},qia:function(){this.map.panBy(-this.map.getSize().width/2+1,0)},Wha:function(){this.j.left.className+=\\\" amap-pan-left-hover\\\"},tia:function(){this.j.right.className+=\\\" amap-pan-right-hover\\\"},Mia:function(){this.j.top.className+=\\\" amap-pan-top-hover\\\"},Gha:function(){this.j.bottom.className+=\\\" amap-pan-bottom-hover\\\"},Vha:function(){this.j.left.className=this.j.left.className.replace(\\\" amap-pan-left-hover\\\",\\\"\\\")},sia:function(){this.j.right.className= this.j.right.className.replace(\\\" amap-pan-right-hover\\\",\\\"\\\")},Lia:function(){this.j.top.className=this.j.top.className.replace(\\\" amap-pan-top-hover\\\",\\\"\\\")},Fha:function(){this.j.bottom.className=this.j.bottom.className.replace(\\\" amap-pan-bottom-hover\\\",\\\"\\\")},Kia:function(){this.map.panBy(0,this.map.getSize().height/2-1)},hha:function(){navigator.geolocation||(this.ff=!1)},M1:function(){this.Za||(this.Za=this.map?this.map.get(\\\"zooms\\\"):[3,18]);this.j9=5<this.Za[0]||17>this.Za[1]?!1:!0},Xha:function(){this.Hh? this.xP():this.yP()},ACa:function(a,b){var c=g.o.fd+\\\"/v3/assistant/coordinate/convert?coordsys=gps&s=rsv3&output=json\\\",c=c+\\\"&locations=\\\"+a.toString()+\\\"&key=\\\"+g.o.key;g.o.Xa&&(c+=\\\"&jscode=\\\"+g.o.Xa);c=new g.kb.Ab(c,{callback:\\\"callback\\\"});c.h(\\\"complete\\\",b,this);c.h(\\\"error\\\",b,this)},yP:function(){if(navigator.geolocation){this.Or||(this.j.Ke||(this.j.Ke=g.f.create(\\\"img\\\",this.j.ff),this.j.Ke.src=this.Mta,g.f.ab(this.j.Ke,{margin:(this.Or?10:4)+\\\"px\\\"})),this.j.ff.appendChild(this.j.Ke));g.f.Wa(this.j.ff, \\\"amap-locate-loading\\\");var a=this;g.ub.load(\\\"AMap.Geolocation\\\",function(){a.geolocation||(a.geolocation=new g.Vn({useNative:this.Hza,showButton:!1,showMarker:!1,showCircle:!1,panToLocation:!1,maximumAge:6E5}));a.geolocation.getCurrentPosition(function(b,c){g.f.fb(a.j.ff,\\\"amap-locate-loading\\\");\\\"complete\\\"===b?(a.iha(c),g.event.O(a,\\\"location-success\\\",c)):(a.gha(),g.event.O(a,\\\"location-failed\\\",c))})})}},xP:function(){this.Or?g.f.fb(this.j.ff,\\\"amap-toolbar-geo-secc\\\"):g.f.ab(this.j.ff,{backgroundPosition:\\\"-130px -185px\\\"}); this.Zfa();this.Hh=null},lla:function(){var a=this;if(this.Hh)if(this.Tb=this.Bq,this.Tb.setMap(this.map),this.Bq instanceof z.B.wb&&this.Bq.setPosition(this.Hh),this.MA&&(this.Qa=new z.B.Ze({isCustom:!0,innerOverlay:!0,content:\\\"<span style='display: block; width:80px;background: #fff;border: 1px solid blue;font-size: 12px;border-radius: 3px;'>\\\\u5b9a\\\\u4f4d\\\\u7cbe\\\\u5ea6:\\\"+this.MA+\\\"\\\\u7c73</span>\\\",offset:new g.H(25,0)}),this.Tb.h(\\\"mouseover\\\",function(){a.Qa.open(a.map,a.Tb.getPosition())}),this.Tb.h(\\\"mouseout\\\", function(){a.Qa.close()})),this.MA){this.Lb=new z.B.hh({center:this.Hh,radius:this.MA,strokeColor:\\\"#0093FF\\\",strokeOpacity:0.3,strokeWeight:1,fillColor:\\\"#02B0FF\\\",fillOpacity:0.25,innerOverlay:!0});this.Lb.Da=!0;this.Lb.setMap(this.map);var b=this.map.getSize(),b=Math.min(b.width,b.height)/4,b=Math.floor(Math.LOG2E*Math.log(b*Math.cos(this.Hh.getLat()*Math.PI/180)*12756274*Math.PI/256/this.MA));this.map.setZoomAndCenter(b,this.Hh)}else this.map.setCenter(this.Hh);g.event.O(this,\\\"location\\\",{type:\\\"location\\\", lnglat:this.Hh})},Zfa:function(){this.Tb&&(this.Tb.setMap(null),this.Tb=null);this.Lb&&(this.Lb.setMap(null),this.Lb=null);this.Bq.setMap(null)},kla:function(){this.j9&&this.j.labels&&g.f.ab(this.j.labels,{display:\\\"block\\\"})},Yfa:function(){this.j.labels&&g.f.ab(this.j.labels,{display:\\\"none\\\"})},rA:function(a,b){var c=b-a;c&&g.event.O(this,\\\"zoomchanged\\\",{type:0===c?void 0:0<c?\\\"zoomin\\\":\\\"zoomout\\\"})},mP:function(a){var b=+g.f.$c(this.j.Uh,\\\"height\\\").replace(\\\"px\\\",\\\"\\\"),c=this.Za;a>c[1]&&(a=c[1]);a<c[0]&&(a= c[0]);b=c[0]===c[1]?0:Math.floor((b-10)*(c[1]-a)/(c[1]-c[0]));g.f.ab(this.j.Oc,{height:b+\\\"px\\\"});g.f.ab(this.j.cursor,{top:b+\\\"px\\\"});this.Or?(a===c[1]?g.f.Wa(this.j.rk,\\\"amap-zoom-touch\\\"):g.f.fb(this.j.rk,\\\"amap-zoom-touch\\\"),a===c[0]?g.f.Wa(this.j.zf,\\\"amap-zoom-touch\\\"):g.f.fb(this.j.zf,\\\"amap-zoom-touch\\\")):(a===c[1]?g.f.Wa(this.j.rk,\\\"amap-zoom-plus2\\\"):g.f.fb(this.j.rk,\\\"amap-zoom-plus2\\\"),a===c[0]?g.f.Wa(this.j.zf,\\\"amap-zoom-minus2\\\"):g.f.fb(this.j.zf,\\\"amap-zoom-minus2\\\"))},kZ:function(){var a=+g.f.$c(this.j.Uh, \\\"height\\\").replace(\\\"px\\\",\\\"\\\"),b=this.Za,c=+g.f.$c(this.j.Oc,\\\"height\\\").replace(\\\"px\\\",\\\"\\\");return b[1]-Math.round((b[1]-b[0])*c/(a-10))},gu:function(a){this.map&&this.map.getStatus().zoomEnable&&(g.F.stopPropagation(a).preventDefault(a),this.y=g.F.mm(a,this.j.zoom).ve(),this.xc=+g.f.$c(this.j.cursor,\\\"top\\\").replace(\\\"px\\\",\\\"\\\"),this.Yu=!0)},eu:function(a){if(this.Yu){g.F.stopPropagation(a).preventDefault(a);a=g.F.mm(a,this.j.zoom).ve()-this.y;a=this.xc+a;var b=+g.f.$c(this.j.Uh,\\\"height\\\").replace(\\\"px\\\",\\\"\\\");0<= a&&a<b-10&&(g.f.ab(this.j.cursor,{top:a+\\\"px\\\"}),g.f.ab(this.j.Oc,{height:a+2+\\\"px\\\"}))}},fu:function(){if(this.Yu){var a=this.map.get(\\\"zoom\\\"),b=this.kZ();this.map.setZoom(b);this.rA(a,b);this.Yu=!1}},Oha:function(a){g.F.stopPropagation(a).preventDefault(a)},po:function(){this.mP(this.map.get(\\\"zoom\\\"))},nia:function(a){g.F.stopPropagation(a).preventDefault(a);this.map.zoomIn();g.event.O(this,\\\"zoomchanged\\\",{type:\\\"zoomin\\\"})},Zha:function(a){g.F.stopPropagation(a).preventDefault(a);this.map.zoomOut();g.event.O(this, \\\"zoomchanged\\\",{type:\\\"zoomout\\\"})},W_:function(){this.W5=!0;this.kla()},V_:function(){this.W5=!1;var a=this;setTimeout(function(){a.W5||a.Yfa()},1E3)},Iia:function(a){if(this.map&&this.map.getStatus().zoomEnable){a=g.F.mm(a,this.j.Uh).y;var b=+g.f.$c(this.j.Uh,\\\"height\\\").replace(\\\"px\\\",\\\"\\\");a>b-10&&(a=b-10);g.f.ab(this.j.cursor,{top:a+\\\"px\\\"}).ab(this.j.Oc,{height:a+\\\"px\\\"});a=this.map.get(\\\"zoom\\\");b=this.kZ();this.map.setZoom(b);this.rA(a,b)}},Jia:function(a){this.map&&this.map.getStatus().zoomEnable&&(g.F.stopPropagation(a).preventDefault(a), this.map.setZoom(17),a=this.map.get(\\\"zoom\\\"),this.rA(a,17))},Iha:function(a){this.map&&this.map.getStatus().zoomEnable&&(g.F.stopPropagation(a).preventDefault(a),this.map.setZoom(11),a=this.map.get(\\\"zoom\\\"),this.rA(a,11))},oia:function(a){this.map&&this.map.getStatus().zoomEnable&&(g.F.stopPropagation(a).preventDefault(a),this.map.setZoom(7),a=this.map.get(\\\"zoom\\\"),this.rA(a,7))},Nha:function(a){this.map&&this.map.getStatus().zoomEnable&&(g.F.stopPropagation(a).preventDefault(a),this.map.setZoom(3), a=this.map.get(\\\"zoom\\\"),this.rA(a,3))},pia:function(){this.vb({locate:this.ff})},iha:function(a){try{this.Hh=a.position,this.MA=a.accuracy,this.j.Ke&&this.j.Ke.parentNode&&this.j.Ke.parentNode.removeChild(this.j.Ke),this.Or?g.f.Wa(this.j.ff,\\\"amap-toolbar-geo-secc\\\"):g.f.ab(this.j.ff,{backgroundPosition:\\\"-130px -211px\\\"}),this.lla({locations:this.Hh+\\\"\\\"})}catch(b){}},gha:function(){this.Hh=null;try{this.j.ff.removeChild(this.j.Ke),this.Or||g.f.ab(this.j.ff,{backgroundPosition:\\\"-130px -185px\\\"})}catch(a){}}, getOffset:function(){g.c.add(this,\\\"getOffset\\\");return this.offset},setOffset:function(a){g.c.add(this,\\\"setOffset\\\");this.vb({offset:a})},hideRuler:function(){g.c.add(this,\\\"hideRuler\\\");this.vb({ruler:!1})},showRuler:function(){g.c.add(this,\\\"showRuler\\\");this.vb({ruler:!0})},hideDirection:function(){g.c.add(this,\\\"hideDirection\\\");this.vb({direction:!1})},showDirection:function(){g.c.add(this,\\\"showDirection\\\");this.vb({direction:!0})},hideLocation:function(){g.c.add(this,\\\"hideLocation\\\");this.vb({locate:!1})}, showLocation:function(){g.c.add(this,\\\"showLocation\\\");this.vb({locate:!0})},hide:function(){g.c.add(this,\\\"hide\\\");this.vb({visible:!1});g.event.O(this,\\\"hide\\\")},show:function(){g.c.add(this,\\\"show\\\");this.vb({visible:!0});g.event.O(this,\\\"show\\\")},doLocation:function(){g.c.add(this,\\\"doLocation\\\");this.Hh&&this.xP();this.yP()},getLocation:function(){g.c.add(this,\\\"getLocation\\\");return this.Hh},Ty:function(){var a=[0,0,0,0];if(this.j.K){var b=g.f.$c(this.j.K,\\\"width\\\"),c=g.f.$c(this.j.K,\\\"height\\\"),b=this.offset.wf()+ parseFloat(b),c=this.offset.ve()+parseFloat(c)+5;-1!==this.position.indexOf(\\\"T\\\")&&(a[0]=c);-1!==this.position.indexOf(\\\"R\\\")&&(a[1]=b);-1!==this.position.indexOf(\\\"B\\\")&&(a[2]=c);-1!==this.position.indexOf(\\\"L\\\")&&(a[3]=b)}return a}});window.AMap.ToolBar||(window.AMap.ToolBar=g.xba); \"}","tyAuthToken":"6A0B2BD5C7C74B24A03388CEB3688353","grayMerchantFlag":"true","_AMap_vectorlayer":"{\"version\":\"1671592305593\",\"script\":\"g.jk={h$:function(){0===g.Ca.Ke&&g.jk.Z4()},lIa:function(a,b){if(!a)return!1;for(var c=0,d=a.length;c<d;c++)if(a[c]&&a[c].Ck===b)return!0},Bna:function(a,b){var c=\\\"limg-\\\"+a.key+\\\"-\\\"+b.g.mc;g.Ca.Gj[c]&&delete g.Ca.Gj[c]},T3:function(a){return g.Ca.Gj[a.Ck?a.Ck:a]},vm:function(a,b){var c=null,d=null,e=!1,f=g.Ca.Gj;a.Ck?(c=a,d=c.Ck,(a=c.url)&&(e=!0)):d=a;var h=f[d];e&&h&&h.src!==a&&(h=f[d]=null);if(!h){var e=function(a){this.rJ(a);g.a.Qh(b)&&b(!0,{wJ:a.target})},k=function(a){this.Y4(a);g.a.Qh(b)&&b(!1, {wJ:a.target})};if(a){var l=\\\"data:\\\"===a.substr(0,5),h=document.createElement(\\\"img\\\");l||(h.crossOrigin=\\\"Anonymous\\\");f[d]=h;h.loaded=!1;g.Ca.Ke+=1;g.F.Dj(h,\\\"load\\\",e,this);g.F.Dj(h,\\\"error\\\",k,this);var m=this;h.hr=g.a.eg();l||void 0!==this.hQ||(this.hQ=setInterval(function(){if(0===g.Ca.Ke||0===g.Ca.mr.length)clearInterval(m.hQ),m.hQ=void 0;else{var a=g.a.eg(),b=g.Ca.Gj,c=!1,d;for(d in b)if(b.hasOwnProperty(d)){var e=b[d];!e.loaded&&!e.timeout&&300<=a-e.hr&&(c=e.timeout=!0)}c&&m.Z4()}},100));h.src=a; c&&(h.ICa=d)}}},Z4:function(){for(var a=0;a<g.Ca.mr.length;a+=1)g.Ca.mr[a].set(\\\"display\\\")},D2:function(a){g.F.G(a,\\\"load\\\",this.rJ,this);g.F.G(a,\\\"error\\\",this.Y4,this)},rJ:function(a){a=a.target;a.loaded=!0;g.Ca.Ke-=1;this.D2(a);this.h$()},Y4:function(a){a=a.target;a.loaded=!1;g.Ca.Ke-=1;this.D2(a);this.h$()}};g.q.fi=g.q.Zb.extend({A:function(a,b,c){this.Yl=c;g.Ca.mr.push(this);this.mc=g.a.i4(\\\"layer\\\");this.Ua=2;a.get(\\\"textRatio\\\");this.gW=25;this.X(\\\"tiles\\\",a);this.Kza=a.get(\\\"vdataUrl\\\")||b.D.get(\\\"vdataUrl\\\")||g.o.yL;this.Ei=!0;this.S=a;this.Jl=!1;this.e=b;this.$i=this.Zi=!0;this.bf(\\\"zoom center centerCoords resolution coordsBound styleID iconsID businessIconsID forceBig mode display\\\".split(\\\" \\\"),b);this.bf(\\\"zooms detectRetina visible merge sort zIndex textIndex watermark opacity\\\".split(\\\" \\\"),a);this.X(\\\"lang\\\", b,!0);this.get(\\\"watermark\\\")&&(this.DL=new Image,this.DL.src=this.get(\\\"watermark\\\"));this.wL=\\\"v4\\\";this.oa={};this.gm={};this.Fd=256;this.Nv=[];this.Bf=this.jg=0;this.ja=g.l.ja&&this.get(\\\"detectRetina\\\");this.Fd=256*(this.ja?2:1);this.X(\\\"mapStyle\\\",b);this.X(\\\"style\\\",b);this.fq=0;this.X(\\\"features\\\",b);this.gf=18;this.X(\\\"reload\\\",a)},mapStyleChanged:function(){this.get(\\\"mapStyle\\\");this.Be=!!this.e.get(\\\"showBuildingBlock\\\");this.featuresChanged()},featuresChanged:function(){this.set(\\\"reload\\\")},langChanged:function(){this.set(\\\"reload\\\"); this.S.ct()},zla:function(){var a=!1,b=this.eZ();if(b){if(this.Xi){var c=\\\"active\\\"===this.Xi.sB;b.XA(this.Xi);c&&(b.Wt(this.Xi,\\\"active\\\"),a=!0)}g.l.vna&&!a&&b.AH()}},OA:function(){this.zla()},$E:function(a,b){var c=!0;if(\\\"hotspotout\\\"===a)this.e.D.set(\\\"optimalCursor\\\",null);else if(\\\"hotspotover\\\"===a)this.e.D.set(\\\"optimalCursor\\\",\\\"pointer\\\");else if(\\\"mouseup\\\"===a||\\\"mousedown\\\"===a)c=!1;var d=this.eZ();if(d)switch(a){case \\\"hotspotout\\\":d.FH(b);break;case \\\"hotspotover\\\":d.Wt(b,\\\"hover\\\");break;case \\\"mouseup\\\":d.Wt(b, \\\"hoverup\\\");break;case \\\"mousedown\\\":d.Wt(b,\\\"active\\\")}c&&(c=b.za,c=new g.H(c[0],c[1]),c=this.e.Qd(c,3),this.e.D.r(a,{name:b.name,lnglat:c,id:b.Ys,isIndoorPOI:b.L5}))},eZ:function(){if(!g.l.l5){var a=this.M||this.Cf;if(!a)return null;var b=this.e?this.e.D.get(\\\"hotspotOptions\\\"):{},b=g.extend({},b);if(b.disableHighlight)return null;this.fC||(this.fC=new g.q.fi.tba(a));return this.fC}},Fr:function(a){(a=this.u4(a))&&this.$E(\\\"hotspotclick\\\",a)},Nx:function(a){var b=\\\"mousemove\\\"===a.type;if(!this.e.sg||!b){var c= this.u4(a);c&&c.mk||(c=null);switch(a.type){case \\\"mousemove\\\":case \\\"mouseup\\\":case \\\"mousedown\\\":c&&this.Xi!==c&&(this.Xi&&this.$E(\\\"hotspotout\\\",this.Xi),this.$E(\\\"hotspotover\\\",c)),!c&&this.Xi&&this.$E(\\\"hotspotout\\\",this.Xi),c&&!b&&this.$E(a.type,c)}this.Xi=c}},textIndexChanged:function(){this.set(\\\"display\\\")},Yua:function(){this.e.h(\\\"click\\\",this.Fr,this);this.e.h(\\\"mousemove\\\",this.Nx,this);this.e.h(\\\"mousedown\\\",this.Nx,this);this.e.h(\\\"mouseup\\\",this.Nx,this)},lQ:function(){this.e.G(\\\"click\\\",this.Fr,this);this.e.G(\\\"mousemove\\\", this.Nx,this);this.e.G(\\\"mousedown\\\",this.Nx,this);this.e.G(\\\"mouseup\\\",this.Nx,this)},Ro:function(){return null},ne:function(){var a=this.zv?null:this.e.D.get(\\\"forceZooms\\\");return{Ei:!0,Fd:256,visible:this.get(\\\"visible\\\"),qo:this.qo,Za:a||this.get(\\\"zooms\\\"),aI:this.Jl&&this.Ra,Zi:!this.e.pt,$i:!this.e.pt,opacity:this.get(\\\"opacity\\\"),Kc:!1,Oc:this.zn()}},bm:function(a){if(g.M.canvas.fi)return new g.M.canvas.fi(this,a)},CC:function(a){0===a.indexOf(\\\"amap://styles/\\\")&&(a=\\\"normal\\\");var b=this.get(\\\"forceBig\\\")|| g.l.ba&&!this.ja?\\\"6\\\":\\\"5\\\";this.url=g.o.Cc+\\\"://\\\"+this.Kza+\\\"/tiles?mapType=\\\"+a+\\\"&v=\\\"+(g.Ue?3:2)+\\\"&style=\\\"+b;this.url+=\\\"&key=\\\"+g.o.key;this.url+=\\\"&version=\\\"+g.o.Xl;this.url+=this.ja?\\\"&rd=2\\\":\\\"&rd=1\\\";this.url+=\\\"&flds=\\\"+this.ha;this.url+=\\\"&t=\\\"},styleChanged:function(){this.e.Dd||this.featuresChanged()}}); g.q.qd=g.q.fi.extend({bm:function(a){var b=this;if(!b.DL&&g.l.Nf&&\\\"vw\\\"===b.e.get(\\\"baseRender\\\")){var c=[\\\"wgl\\\"];this.e.Dd&&c.push(\\\"wgl2\\\");if(g.ub.KD(c))return new g.M.Ye.qd(b,a)}else if(c=[\\\"cgl\\\"],this.e.Dd&&c.push(\\\"cgl2\\\"),g.ub.KD(c))return new g.M.canvas.qd(b,a);g.ub.Gg(c,function(){b.set(\\\"display\\\")})},featuresChanged:function(){var a=this.get(\\\"features\\\"),b=[];\\\"all\\\"===a?b=this.Yl:a&&(-1!==g.a.indexOf(a,\\\"bg\\\")&&-1!==g.a.indexOf(this.Yl,\\\"region\\\")&&b.push(\\\"region\\\"),-1!==g.a.indexOf(a,\\\"building\\\")&&-1!== g.a.indexOf(this.Yl,\\\"building\\\")&&b.push(\\\"building\\\"),-1!==g.a.indexOf(a,\\\"road\\\")&&-1!==g.a.indexOf(this.Yl,\\\"road\\\")&&b.push(\\\"road\\\"));this.ha=b;this.CC(this.get(\\\"mapStyle\\\")||\\\"normal\\\");this.set(\\\"reload\\\")}});g.q.Hba=g.q.qd.extend({A:function(){this.Dh(arguments);this.gf=this.$o=17;this.ha=[\\\"building\\\"];this.Be=!0;this.CC(this.get(\\\"mapStyle\\\")||\\\"normal\\\");this.zv=!0},featuresChanged:function(){},mapStyleChanged:function(){}}); g.q.Qj=g.q.fi.extend({bm:function(a){this.Di=!0;var b=this;if(this.sS()){if(this.lA=!0,g.M.canvas.rM)return this.k2(),a=new g.M.canvas.rM(this,a),a.h(\\\"afterLabelRender\\\",this.OA,this),a}else{b.lA=!1;if(g.M.canvas.qM)return a=new g.M.canvas.qM(this,a),a.h(\\\"afterLabelRender\\\",this.OA,this),a;g.ub.Gg([\\\"labelcanvas\\\"],function(){b.set(\\\"display\\\")})}},sS:function(){var a=this.get(\\\"mapStyle\\\");return\\\"normal\\\"!==a&&\\\"amap://styles/normal\\\"!==a||this.e.get(\\\"nolimg\\\")?!1:g.l.lA?!0:!1},esa:function(){var a=this.get(\\\"mapStyle\\\"); return\\\"normal\\\"!==a&&\\\"amap://styles/normal\\\"!==a||this.e.get(\\\"nolimg\\\")||g.l.Kc||g.l.ba?!1:!0},featuresChanged:function(){var a=this.get(\\\"features\\\"),b=this.get(\\\"mapStyle\\\"),c=[];\\\"all\\\"===a?c=[\\\"roadlabel\\\",\\\"poilabel\\\"]:a&&(-1!==g.a.indexOf(a,\\\"road\\\")&&c.push(\\\"roadlabel\\\"),-1!==g.a.indexOf(a,\\\"point\\\")&&c.push(\\\"poilabel\\\"));a=this.sS();c.length&&(a||this.esa())&&c.unshift(\\\"limg\\\");this.ha=c;this.CC(b);this.set(\\\"reload\\\");(b=this.M||this.Cf)&&a^this.lA&&(this.fC&&(this.fC=this.fC.M=null),b.G(\\\"afterLabelRender\\\",this.OA, this),b.ak(),this.Cf=this.M=null)},k2:function(){this.Ev=g.o.Cc+\\\"://\\\"+(this.S.get(\\\"vdataUrl\\\")||this.e.D.get(\\\"vdataUrl\\\")||g.o.yL)+\\\"/limg?\\\";var a=this.ja?2:1;this.Ev+=\\\"&font=\\\"+(g.l.ba&&!this.ja?\\\"big\\\":\\\"small\\\");this.Ev+=\\\"&scl=\\\"+a;this.Ev+=\\\"&t=\\\"},u4:function(a){return a.Of?(a=this.d4(this.e.lc(a.Of,20),!0))?a[0]:null:null},d4:function(a,b){var c=this.e.Ry();if(c&&(c=c.Bs(this)))return c.xn(a,b)}});g.q.fi.tba=g.da.extend({A:function(a){this.dla(a)},dla:function(a){this.M=a},FH:function(a){if(a.sB){a.sB=!1;var b=this.M;b&&b.FH.apply(b,arguments)}},XA:function(a){a.sB=!1;var b=this.M;b&&b.XA.apply(b,arguments)},Wt:function(a,b){b||(console.warn(\\\"hlStyle is required, e.g. hover, active..\\\"),b=\\\"hover\\\");if(a.sB!==b){a.sB=b;var c=this.M;c&&c.Wt.apply(c,arguments)}},AH:function(){var a=this.M;a&&a.AH()}});g.q.bx=g.da.extend({A:function(){this.Ua=2;this.gW=g.l.Zl?16:12;this.ixa={road:0,region:0,building:1,poilabel:1,roadlabel:1};this.pw=[new g.pg,new g.pg,new g.pg,new g.pg,new g.pg,new g.pg,new g.pg];this.Mza=[{type:\\\"roadlabel\\\",show:!0,Ci:1},{type:\\\"poilabel\\\",show:!0,Ci:1},null,{type:\\\"region\\\",show:!0,Ci:0},{type:\\\"road\\\",show:!0,Ci:0},{type:\\\"building\\\",show:!0,Ci:0},null];this.fq=0},xy:function(a,b,c,d,e){if(\\\"first\\\"!==b){c&&(c.Od=d);var f;switch(e){case \\\"roadlabel\\\":f=0;break;case \\\"poilabel\\\":f=1;break;case \\\"labels\\\":f= 2;break;case \\\"region\\\":f=3;break;case \\\"road\\\":f=4;break;case \\\"building\\\":f=5;break;case \\\"allbase\\\":f=6}d=this.pw[f].tza;c&&c.Je&&(d=this.pw[f].push);\\\"groupcomplete\\\"===b?d.call(this.pw[f],[\\\"groupcomplete\\\",f,c,a]):\\\"tileComplete\\\"===b?d.call(this.pw[f],[\\\"co\\\",7,c,a]):(d.call(this.pw[f],[\\\"co\\\",f,c,a]),\\\"\\\"!==b&&d.call(this.pw[f],[b,f,c,a]));this.fq>f&&(this.fq=f);this.aya()}},H7:function(){var a=new Date,b=!1;do if(b=this.parse(),new Date-a>=this.gW)break;while(!b);this.z7=b?null:g.a.Xc(this.H7,this)},aya:function(){this.z7|| (this.z7=g.a.Xc(this.H7,this))},roa:function(){return document.createElement(\\\"canvas\\\")},parse:function(){var a,b=!1,c=this.fq,d=this.pw[this.fq];if(d.vh())6===c&&(b=!0),this.fq=(this.fq+1)%7;else{a=d.xua();var e=a[3],f=e.ja?512:256;if(\\\"groupcomplete\\\"===a[0])e.set(\\\"display\\\",0);else{var h=a[2];if(e.oa.Nd(h.key))if(\\\"co\\\"===a[0])if(3===a[1])this.NT(e,h,f),h.ra.region&&e.$a.MK(h.ra.region,0,h.ta.z);else if(4===a[1])this.NT(e,h,f),h.ra.road&&e.$a.y8(h.ra.road,h.ta.z);else if(5===a[1]&&h.ra&&h.ra.building)a= g.Nj&&g.Nj.K5(e.e.D),e.Be?h.uf=h.ra.building:(this.NT(e,h,f),e.$a.MK(h.ra.building,1,h.ta.z,void 0,a));else{if(7===a[1]){h.ld&&(e.DL&&0===(h.ta.x+h.ta.y)%2&&h.ld.getContext(\\\"2d\\\").drawImage(e.DL,0,0),h.wma=!0,g.l.GD&&h.ld.toDataURL&&(f=new Image,f.src=h.ld.toDataURL(),h.ld=f));if(\\\"3D\\\"===(e.e.D&&e.e.D.getViewMode_())){if(h.ml){h.ml.cf=null;h.Vh=null;a=e.e.Hc;if(e.Cf&&a.Cf){c=a.Cf.cI(a.Cf.ca,h.ml);c.mc=a.Cf.mc;a={ni:c,tagName:\\\"CANVAS\\\",width:h.ml.width,height:h.ml.height};c=0;for(f=h.ha.length;c<f;c+= 1)for(var k=h.ha[c],l=0,m=k.Ca.length;l<m;l+=1)k.Ca[l]==h.ml&&(k.Ca[l]=a);h.ha.wya=!0}h.ml=null}}else a[3].e.J.be&&this.G3(h);h.yua||(h.Ra=h.Ba=!0);e.set(\\\"display\\\")}}else g.Maa.yva(h,a[0],this.Mza[a[1]].type,e)}d.vh()&&(6===c&&(b=!0),this.fq=(this.fq+1)%7)}return b},NT:function(a,b,c){a.$a||(a.$a=new g.M.canvas.qd.hd(a),a.$a.J=a.e.J);var d=1;18==b.ta.z&&(d=a.S.get(\\\"map\\\",null,!0).get(\\\"zooms\\\")[1],d=Math.pow(2,18-d));b.ld||(b.ld=this.roa(),b.ld.width=b.ld.height=c/d,b.wma=!1);b.ld&&(a.$a.xa=b.ld,a.$a.Hg= d,a.$a.Rb=1/d)},G3:function(a){if(a.ha)for(var b=0,c=a.ha.length;b<c;b++){var d=a.ha[b];if(d.mk){var e=this.Wd(d),f=d.Ca.length;if(d.rc)for(var h=0,k=d.rc.length;h<k;h++)this.dna(d,h,e,f)}}},dna:function(a,b,c,d){d+=b;var e=a.rc[b][8],f=a.fontSize,h=a.vI,k=parseInt(f/h*e[2]),l=e[3]+f-h,m=k-e[2],f=f-h;switch(c){case \\\"middle\\\":a.aa[d][0]=e[0]-(k-e[2])/2;a.aa[d][1]=e[1]-(l-e[3])/2;break;case \\\"left\\\":a.aa[d][0]=e[0]-(k-e[2])/2+m/2;a.aa[d][1]=e[1]-(l-e[3])/2+f*b;break;case \\\"right\\\":a.aa[d][0]=e[0]-(k-e[2])/ 2-m/2;a.aa[d][1]=e[1]-(l-e[3])/2+f*b;break;case \\\"top\\\":a.aa[d][0]=e[0]-(k-e[2])/2;a.aa[d][1]=e[1]-(l-e[3])/2+(2*b+1)/2*f;break;case \\\"bottom\\\":b=(2*(a.rc.length-b-1)+1)/2*f;a.aa[d][0]=e[0]-(k-e[2])/2;a.aa[d][1]=e[1]-(l-e[3])/2-b;break;default:a.aa[d][0]=e[0]-(k-e[2])/2,a.aa[d][1]=e[1]-(l-e[3])/2}a.aa[d][2]=k;a.aa[d][3]=l},pD:function(a){return Math.abs(a[2]/2+a[0])},qD:function(a){return Math.abs(a[3]/2+a[1])},Wd:function(a){var b=a.aa;if(1===b.length)return\\\"\\\";var c=b[0],d=b[1];return b.length===a.Ca.length? \\\"top\\\":1>=this.pD(c)&&1>=this.pD(d)?1>=this.qD(c)&&1>=this.qD(d)?\\\"middle\\\":c[1]<d[1]?\\\"top\\\":\\\"bottom\\\":c[0]<d[0]?\\\"left\\\":\\\"right\\\"}});g.q.bx.Bi=new g.q.bx;g.ax={AC:function(a,b){this.e.D.xq&&(this.ug={},this.ug.$Ea=g.a.zb(this.ug),b.Lc||(b.Lc=g.JW()),this.Lc=b.Lc,this.Lc.h(\\\"tiles\\\",this.dE,this),this.Lc.h(\\\"ack\\\",this.cE,this),this.Lc.h(\\\"disable\\\",this.aE,this))},sza:function(){this.e.D.xq&&(this.ug=null,this.Lc&&(this.Lc.G(\\\"tiles\\\",this.dE,this),this.Lc.G(\\\"ack\\\",this.cE,this),this.Lc.G(\\\"disable\\\",this.aE,this),this.Lc=null))},ay:function(){if(!1===this.e.D.get(\\\"workerMode\\\"))return!1;g.Kk.y5||this.BZ(g.Kk);g.Fc.y5||(this.BZ(g.Fc),g.Fc.xS&&z.event.fy(this.e.D, \\\"complete\\\",function(){g.Fc.xS()}));if(this.Di&&!this.Vo&&g.Kk.Oza||this.Vo&&g.Kk.jta||!this.Vo&&!this.Di&&this.Ei&&g.Fc.u5)return!0},BZ:function(a){a.xf(null,{Ue:g.Ue});a.y5=!0},cha:function(a){g.a.Ub(a,function(a){g.jk.vm(a)})},Bz:function(a){if(this.g&&a.PS===this.g.mc){this.he||this.hf?this.SB([this.g,\\\"groupcomplete\\\",null,null,\\\"allbase\\\"]):(this.dk(),this.Vj.xy(this.g,\\\"groupcomplete\\\",null,null,\\\"allbase\\\"));for(var b=0,c=a.Pc.length;b<c;b+=1)this.eE(a.Pc[b],a.Gv,a.Sq,a.ba)}},eE:function(a,b){var c= a.Gd,d=this.oa.get(a.Pi);if(d){var e=this.g.ha,f=\\\"\\\";(this.e.Dm&&!this.e.Dd||this.e.Dd)&&this.RI(c,a.Oa,a.Ig.z);\\\"poilabel\\\"===c||\\\"roadlabel\\\"===c?(a.td||(f=a.Oa,a.td=null),d.ha||(d.ha=[]),d.ha.push.apply(d.ha,a.Oa),c===this.g.ha[this.g.ha.length-1]&&(d.td=null)):d.ra[c]=a.Oa;\\\"building\\\"!==c&&\\\"poilabel\\\"!==c||!a.Cn||d.qe||(d.qe={},d.qe.uf=a.Cn,g.Mj&&g.Mj.r(\\\"vecTileParsed.buildings\\\",{tp:d}));if(\\\"roadlabel\\\"!==c&&\\\"poilabel\\\"!==c||this.D5||!g.l.m3&&!this.e.Dd)this.he||this.hf?this.SB([this.g,f,d,b,c]):(this.dk(), this.Vj.xy(this.g,f,d,b,c));c===e[e.length-1]&&(c=\\\"roadlabel\\\"===c||\\\"poilabel\\\"===c?\\\"labels\\\":\\\"allbase\\\",this.he||this.hf?this.SB([this.g,\\\"tileComplete\\\",d,b,c]):(this.dk(),this.Vj.xy(this.g,\\\"tileComplete\\\",d,b,c)))}},bG:function(){if(this.e){var a=this.e.D.getMapStyle();this.Eq=a;this.Hga(a);this.Lc&&this.Lc.T5()&&(-1!==a.indexOf(\\\"amap://styles\\\")&&(a=\\\"normal\\\"),a={command:\\\"status\\\",payload:{mapType:a,style:g.l.ba&&!this.g.ja?\\\"6\\\":\\\"5\\\",rd:this.g.ja?2:1}},this.ay()?(g.Fc.fna(a,g.a.Ts),this.Lc.jFa()||this.Lc.close()): this.Lc.send(a))}},mapStyleChanged:function(){this.bG()},styleChanged:function(){this.bG()},aE:function(){for(var a in this.ug)this.ug.hasOwnProperty(a)&&this.ug[a].Jb&&(this.Ml(this.ug[a].Jb,this.ug[a].Od),delete this.ug[a]);this.Lc=null;this.yl(\\\"mapStyle\\\");this.set(\\\"display\\\",1)},cE:function(a){var b=a.reqId;this.ug[b]&&(!a.content.status&&this.ug[b]&&this.Ml(this.ug[b].Jb,this.ug[b].Od),delete this.ug[b])},dE:function(a){var b=a.reqId;if((!/-1$/.test(b)||!this.dC())&&this.ug[b]){var c=a.content.opt, d=this.ug[b].Jb[0];c!==this.gb&&!d.Je||d.Je&&2<(this.dC()||Math.abs(c-this.gb))?this.Ml(this.ug[b].Jb,this.ug[b].Od):this.Ws(a.content.data,c)}},K1:function(a,b){if(g.Oj){var c=a.Ug,c={\\\"x-vd-v\\\":c.df,tv:c.Oh,bgc:this.e.Ee,vdataVersion:c.mf,url:this.Ny(a.Od,[]),q:this.g,Be:this.e.D.get(\\\"showBuildingBlock\\\")};b?a.Jb.length&&(c.td=!0,c.data=g.a.map(a.Jb,function(a){return{key:a.key,data:JSON.stringify({key:a.key,td:a.td,ha:a.ha,qe:a.qe})}})):this.DV||(c.Nf=!!this.kl,c.Pc=this.kl||this.Ei?a.Iu:a.data.Pc); g.Oj.set(c)}},XS:function(a,b){var c=2<arguments.length&&void 0!==arguments[2]?arguments[2]:!1;if(this.Di&&\\\"zh_cn\\\"!==this.lang)for(var d=0;d<a.length;d+=1)a[d].status=\\\"loaded\\\",a[d].Ba=!0;else{var e=[],f=this;this.fka(a,b,g.a.bind(function(a,d){var f=this;if(d.length){for(var m=0,n=d.length;m<n;m++){var p=d[m].ta,q=p.x,r=p.y,p=p.z;if(10>p){var s=Math.pow(2,p);if(q>=s||0>q)q=(q+s)%s}q=g.a.HI(q,r,p).join(\\\",\\\");g.a.ka(e,q)||e.push(q)}if(this.ay())if(m=this.Xea({Dya:d,Je:c,Od:b,hr:e}),m.FCa=(new Date).getTime(), this.Di)g.Kk.yh(m,function(a,c){if(f.e)if(c.S5){var d=c.Jb.map(function(a){return f.oa.get(a.key)}).filter(function(a){return a});f.Ml(d,b)}else f.Vo?(g.a.Ub(c.Jb,function(a){this.oa.set(a.key,a);a.td&&!a.td.loaded&&(g.jk.vm(a.td),a.td.loaded=!0);a.qe&&a.qe.uf&&g.Mj&&g.Mj.r(\\\"vecTileParsed.buildings\\\",{tp:a})},f),f.set(\\\"display\\\"),f.K1(c,!0)):(g.a.Ub(c.Jb,function(a){var b=this.oa.get(a.key);b&&(b.status=a.status,a.L&&a.L.Ca&&this.cha(a.L.Ca))},f),c.data&&f.Bz(c.data))});else{var u=g.Fc.s6;this.e.D.Ra&& !g.Fc.Toa&&this.e.D.xq||(u=g.Fc.yh);this.bG();u(m,function(a,c){if(f.e){if(c.S5){var d=c.Jb.map(function(a){return f.oa.get(a.key)}).filter(function(a){return a});f.Ml(d,b)}if(u===g.Fc.s6){if(c.disabled){g.Fc.Toa=!0;f.set(\\\"display\\\");return}if(c.Pla)return}c.data&&(f.e.Ee!==c.Fu&&(f.e.Ee=c.Fu),g.a.Ub(c.Jb,function(a){var b=this.oa.get(a.key);b&&(b.status=a.status)},f),f.K1(c),c.data&&f.Bz(c.data))}})}else!this.Di&&this.Lc&&this.Lc.T5()?this.e.D.get(\\\"workerMode\\\")?this.RG(d,b,e,c):(1>this.Lc.za.length|| 3<this.ru?this.RG(d,b,e,c):((2===this.Lc.za.length||this.Lc.GJ())&&this.bG(),this.eha(d,b,e,c)),this.Lc.xHa(this.Lc.za.length+1),this.Lc.h6&&this.Lc.LCa(Math.ceil((new Date-this.Lc.h6)/1E3)),this.Lc.h6=new Date):this.RG(d,b,e,c)}},this));window.renderDelay&&(this.KK=setTimeout(function(){f.bK&&f.set(\\\"display\\\",!1);f.bK=!1;f.KK=null},window.renderDelay))}},Hga:function(a){a&&\\\"normal\\\"!==a&&0!==a.indexOf(\\\"amap://styles/\\\")?this.DV=!0:this.DV=!1},fka:function(a,b,c){var d=g.Oj;if(d&&!this.DV&&18>=b){var e= this,f=this.e,h=f.D;f.QS||void 0!==f.YS||(\\\"dv\\\"===h.get(\\\"baseRender\\\")?f.YS=1:f.YS=2);d.get({type:h.Ra?\\\"NFS\\\":\\\"FS\\\",Be:this.g.zv||this.g.Be,yya:a,Nf:!!this.kl,q:this.g,url:this.Ny(b,[]),timeout:1E3},function(d,h){if(e.g){if(d)return c(null,a);h.I6.length&&c(null,h.I6);if(h.lS.length)if(h.lS.length===a.length&&(f.QS&&f.YS--,e.e.D.Ra||e.Di||e.HD||e.e.fU()),h.Pc){e.df=h.Ug[\\\"x-vd-v\\\"];e.Oh=h.Ug.tv;var m=h.Ug.bgc;e.e.Ee!==m&&(e.e.Ee=m);g.a.forEach(h.lS,function(a){a.status=\\\"loaded\\\"});e.D7(h.Pc,b)}else h.o6&& (g.a.forEach(h.o6,function(a){var b=e.oa.get(a.key);if(b){b.status=\\\"loaded\\\";b.qe=a.qe;if(a.td){b.td=a.td;b.ha=a.ha;var c=\\\"limg-\\\"+a.key+\\\"-\\\"+e.g.mc;b.td.Ck=c;b.ha&&(g.a.forEach(b.ha,function(a){a.Ca&&g.a.forEach(a.Ca,function(b,d){b&&0===b.indexOf(\\\"limg-\\\")&&(a.Ca[d]=c)})}),g.jk.vm(b.td),b.td.loaded=!0)}b.qe&&b.qe.uf&&g.Mj&&g.Mj.r(\\\"vecTileParsed.buildings\\\",{tp:b});b.Ba=b.Ra=!0;e.oa.set(a.key,b)}}),e.set(\\\"display\\\"))}})}else c(null,a)},eha:function(a,b,c,d){if(!d||!this.dC()){var e=[(new Date).getTime(), this.Lc.za.length+1&65535,d?1:0].join(\\\"-\\\"),f={command:\\\"tiles\\\",reqId:e,payload:{t:c,opt:b,cs:{level:b,flds:this.g.ha.join(\\\",\\\"),v:g.Ue?\\\"3\\\":\\\"2\\\"}}},h;if(!this.Lc.GJ()){var k=this;setTimeout(function(){k.Lc&&!k.Lc.GJ()&&(k.ru?k.ru++:k.ru=1,k.Lc.upa(h)&&(delete k.ug[e],k.RG(a,b,c,d)))},300)}h=this.Lc.send(f);this.ug[e]={Jb:a,Od:b}}},pT:function(a){if(!a.Ra||a.Je)a.status=\\\"\\\",a.Ra=void 0,a.Ba=null,a.ld=null,this.oa.Cw(a.key)},Xea:function(a){var b=a.Dya,c=a.Od,d=a.hr;a=a.Je;return{mc:+new Date+\\\"_\\\"+Math.random(), Fu:this.e.Ee,Dd:this.e.Dd,Di:this.Di,Vo:this.Vo,Be:this.g.Be,Csa:!!g.Ue,Vf:this.J.type,Nf:this.kl,OS:this.g.mc,ha:this.g.ha,Kc:this.g.ja,Ua:this.g.Ua,ZR:Math.ceil(this.qk.Xy),Jb:g.a.filter(b,function(a){return\\\"loaded\\\"!==a.status}),Od:c,hr:d,Je:a,url:this.Ny(c,d,b),Ch:this.$Y(c,[]),PFa:this.e.D.Ra}},$Y:function(a,b){return{AS:\\\"3D\\\"===this.J.type,ZP:this.g.Be,Xr:g.o.Xr||null,bDa:this.g.get(\\\"businessIconsID\\\"),df:this.df,Dd:this.e.Dd,Oh:this.Oh,ZEa:this.g.get(\\\"iconsID\\\"),PS:this.g.mc,Gv:a,az:this.g.az, Pf:!this.g.zn()&&this.g.S.get(\\\"merge\\\"),Pc:b,ba:this.g.get(\\\"forceBig\\\")||g.l.ba,Vf:this.J.type,mode:this.g.get(\\\"mode\\\"),ewa:g.o.Cc,D8:this.g.get(\\\"forceBig\\\")?1:this.g.Ua,Sq:this.g.get(\\\"forceBig\\\")?!1:this.g.ja,iy:this.g.get(\\\"forceBig\\\")||g.l.ba&&!this.g.ja?1:0}},cB:function(a){a=a.split(\\\";\\\");for(var b=0,c=a.length;b<c;b+=1){a[b]=a[b].split(\\\",\\\");for(var d=0,e=a[b].length;d<e;d+=1)a[b][d]=parseInt(a[b][d],36)}return a},D7:function(a,b){if(a.length){var c=this,d=null;this.kl?(d=g.Fc,d=d.parseDataToWebGL): d=this.Di?g.Kk.parseLabel:g.Fc.parseDataToVector;var e=c.$Y(b,a);e.Ue=g.Ue;d&&d instanceof Function&&d(e,function(a,b){if(c.g&&!a){var d=b.icons;if(d)for(var e=0;e<d.length;e+=1)g.jk.vm(d[e]);b.data&&c.Bz(b.data)}})}},Ws:function(a,b,c){if(this.g){for(var d=[],e=0,f=a.length;e<f;e+=1){var h=a[e];h&&(c&&(h=JSON.parse(h)),h[\\\"x-vd-v\\\"]?(this.df=h[\\\"x-vd-v\\\"],this.Oh=h.tv,this.mf=[h.tv,h.vdv].join(\\\"-\\\"),h.bgc&&(h=\\\"#\\\"+h.bgc.substring(2),this.e.Ee!==h&&(this.e.Ee=h))):this.bE(h,b,d))}this.D7(d,b)}},bE:function(a, b,c){function d(d,e,f){e=[f,d,e].join(\\\"/\\\");18<b&&!l.kl&&(e+=\\\"/\\\"+b);if((d=l.oa.get(e))&&\\\"loaded\\\"!==d.status)if(l.V9(d,p)||d.Je){if(-1!==n.indexOf(m))if(\\\"limg\\\"===m){if(e=a[1],d.td=e,\\\"string\\\"===typeof e.b&&(e.b=l.cB(e.b)),f=\\\"\\\",f=\\\"object\\\"===typeof e.u?e.u.url:e.u)d={url:f,Ck:\\\"limg-\\\"+d.key+\\\"-\\\"+l.g.mc},e.u=d,g.jk.vm(d)}else{e={Ig:d.ta,Pi:e,Oa:a,Gd:m,az:l.g.az,ly:l.e.Ee,HD:\\\"building\\\"===m,Ci:\\\"poilabel\\\"===m||\\\"roadlabel\\\"===m||\\\"building\\\"===m&&l.g.Be};if(\\\"poilabel\\\"===m||\\\"roadlabel\\\"===m)e.td=d.td;m===n[n.length- 1]&&(d.status=\\\"loaded\\\");c.push(e)}}else l.JU(b,d,p,g.a.bind(l.pT,l))}var e=a[0].split(\\\"-\\\"),f=parseInt(e[1]),h=parseInt(e[2]),k=parseInt(e[0]),l=this,m=e[3],n=this.g.ha,p=18<b?Math.pow(2,b-18):1,e=l.qk.Xy,q=Math.pow(2,k);10>k&&(f<=e&&d(f+q,h,k),f>=q-e&&d(f-q,h,k));d(f,h,k)},SB:function(a){this.xu||(this.xu=[]);this.xu.push(a)},dk:function(){if(this.xu&&this.xu.length){for(var a=0,b=this.xu.length;a<b;a+=1)this.Vj.xy.apply(this.Vj,this.xu[a]);this.xu=[]}},Ml:function(a,b){for(var c=18<b?Math.pow(2, b-18):1,d=0;d<a.length;d+=1){var e=a[d];this.JU(b,e,c,g.a.bind(this.pT,this));18<b&&this.oa.Cw(e.key+\\\"/\\\"+b)}g.Oj&&g.Oj.Cw({Jb:a,url:this.Ny(b,[]),q:this.g,Nf:!!this.kl,Be:this.g.Be})},Ny:function(a,b,c){return this.g.url+b.join(\\\";\\\")+\\\"&lv=\\\"+a+\\\"&csid=\\\"+g.a.kr()+\\\"&key=\\\"+g.o.key+\\\"&preload=\\\"+(c&&c[0]&&c[0].Je?1:0)},dCa:function(){var a=this.g.url,b=\\\"rb\\\";if(/\\\\/limg/.test(a)||/flds=[^&]+label/.test(a))b=\\\"rl\\\";return b},DCa:function(){},RG:function(a,b,c){function d(a,c){var d=a.split(\\\"|\\\");d[0]=c+d[0];var e= d,f=\\\"\\\";d[d.length-1]&&(f=d[d.length-1],e=d.splice(0,d.length-1));k.Ws(e,b,!0);return f}var e=3<arguments.length&&void 0!==arguments[3]?arguments[3]:!1,f=new XMLHttpRequest;f.AE=[(new Date).getTime(),e?1:0].join(\\\"-\\\");var e=this.Ny(b,c,a),h=0,k=this;f.Oq=\\\"\\\";f.onreadystatechange=function(){if(k.g&&!(2>f.readyState)){var c=4===f.readyState&&0===f.status;b!==k.gb&&c&&!f.Ot?(f.Ot=!0,k.Ml(a,b),f.onreadystatechange=\\\"\\\",c||f.abort()):f.Ot||(3===f.readyState?(c=f.responseText.substring(h),f.Oq=d(c,f.Oq),h=f.responseText.length): 4===f.readyState&&(c=f.responseText.substring(h),k.Di&&(c+=\\\"|\\\"),d(c,f.Oq),f.Oq=\\\"\\\"))}};f.onerror=function(){};this.Nra||(this.Nra=1);f.open(\\\"GET\\\",e,!0);f.send()},V9:function(a,b){var c=this.Jw||this.qk,d=a.ta.x,e=a.ta.y;return d>Math.floor(c.Ic/b)||d<Math.floor(c.Jc/b)||e>Math.floor(c.tc/b)||e<Math.floor(c.hc/b)?!1:!0},JU:function(a,b,c,d){d(b)}};g.M.canvas.Qj=g.M.Ui.extend({ka:[g.ax],A:function(a,b){arguments.callee.ma.apply(this,arguments);this.mc=g.a.zb(this);this.ao=300;this.gf=a.gf;this.Di=this.Ei=!0;this.X(\\\"mapStyle\\\",a.e);this.X(\\\"style\\\",a.e);this.Vo=!0;this.Wx=1;var c=this;this.uZ=function(){c.U6=!0;c.set(\\\"display\\\",0)};this.Zg();this.US(a)},US:function(a){a=g.l.ba||a.ja?\\\"big\\\":\\\"small\\\";var b=g.o.Cc+\\\"://vdata.amap.com/style_icon/icon-biz-\\\"+a+\\\".png\\\";g.jk.vm(g.o.Cc+\\\"://vdata.amap.com/style_icon/icon-normal-\\\"+a+\\\".png\\\");g.jk.vm(b)},dB:function(a){g.jk.Bna(a, this);var b=g.M.canvas.Qj.cd.dB;b&&b.apply(this,arguments)},Zg:function(){this.$m=document.createElement(\\\"canvas\\\");this.$m.className=\\\"amap-labels\\\";this.$m.draggable=!1;this.$m.O5=!0;this.Rk=this.$m.getContext(\\\"2d\\\",{alpha:!0});this.i6=[];this.Ds=10},$v:function(a){var b=Math.pow(2,a.P.zoom-this.oe),c=this.g.ja?this.g.Ua:1,d=a.P.mb.bb(this.Ls).nd(this.Hg);this.transform={translate:this.transform.translate.add(d.Pd(c)),scale:b/c,rotate:0};this.mb=a.P.mb},Nz:function(a,b){this.Na=this.J.Na;this.ze=!1; this.currentTime=+new Date;this.EV=b.EV;this.ge=[this.Ha.kc.x,this.Ha.kc.y];this.Jl=b.aI;var c=this.Jg;this.he=this.zoom<<0!==this.zoom;var d=this.mb.bb(this.Na);d.x<-g.a.Fa/2&&(d.x+=g.a.Fa);d.x>g.a.Fa/2&&(d.x-=g.a.Fa);this.dQ=d.nd(this.Hg);for(d=c.length-1;0<=d;d-=1){var e=c[d];if(e.length){var f=e[0].ta.z,h=!1;if(e.wg&&!g.Ca.Ke&&(\\\"stable\\\"==this.Hf||f<=this.zoom&&\\\"zoomIn\\\"===this.Hf||f>=this.zoom&&\\\"zoomOut\\\"===this.Hf)&&(!this.labels||!this.labels.length||this.MJ||a.Gi||!this.sE(this.labels.xk,this.qk)|| this.xJ(a)||this.ue!==a.ue)){h=!0;h=[];a.ue&&(h.push.apply(h,a.ue),this.ue=a.ue);a.ob.length?(h.push.apply(h,a.ob),this.QN=a.ob.hI):this.QN=null;for(var k=e.length-1;0<=k;k-=1){var l=e[k],m=!1,n=l.ha;l.se&&(l.se=!1,this.RI(\\\"poilabel\\\",l.ha,void 0,!0),this.Vj.G3(l));!n&&l.pb&&l.pb.ha&&(n=l.pb.ha,m=!0);if(n)for(var p=0,l=n.length;p<l;p+=1){n[p].reverse=m;var q=!1,r=n[p].za;this.QN&&g.a.Ub(this.QN,function(a){!q&&g.yd.Ud(r,a.Rf[0].za)&&(q=!0)});q||h.push(n[p])}}e=[];k={};if(h.length)for(m=0,l=h.length;m< l;m++)h[m].id in k||(k[h[m].id]=1,e.push(h[m]));e.zoom=f;this.eT(e);e.sort(function(a,b){return a.zIndex!==b.zIndex?a.zIndex>b.zIndex?-1:1:!a.Ed^!b.Ed?a.Ed?1:-1:a.Ed==b.Ed?a.id==b.id?a.te==b.te?a.name<b.name?-1:1:a.te>b.te?-1:1:a.id<b.id?-1:1:a.Ed>b.Ed?-1:1});this.labels=e;this.labels.xk=this.qk;this.MJ=!1}}}if(this.gQ(a)){this.Bd();if(!this.e.D.Ra)return;this.lU(a);this.sh=this.labels}this.U6=!1;this.Oe(a)},eT:function(a){this.labels&&this.labels.opacity||(this.labels=[],this.labels.opacity={}); for(var b={},c=0;c<a.length;c+=1){var d=a[c].id;d&&(d in this.labels.opacity?(b[d]=this.labels.opacity[d],delete this.labels.opacity[d]):b[d]=0,a[c].yj=!0)}for(var c=0,e=this.labels.length;c<e;c+=1)d=this.labels[c].id,this.labels.opacity[d]&&(a.push(this.labels[c]),b[d]=this.labels.opacity[d],this.labels[c].yj=!1);a.opacity=b},Bd:function(){if(this.wg&&!this.g.Ra){var a=this.g;a.Ra=!0;a.Ld?a.qa(\\\"renderComplete\\\"):(a.Ld=!0,a.qa(\\\"complete\\\"))}},pc:function(a,b){this.lang=a.lang;this.Eq=a.Eq;this.up=a.up; this.ip(a,b);this.he||this.dk();this.Ls&&(a.mL||a.UE&&g.l.Zl||a.hf&&!a.he&&a.Z1)?this.$v(a,b):this.Nz(a,b);this.Ls=this.mb;this.ze&&this.set(\\\"display\\\",0);this.NS=this.Hf},Oe:function(a){var b=this.mb.bb(this.Na);b.x<-g.a.Fa/2&&(b.x+=g.a.Fa);b.x>g.a.Fa/2&&(b.x-=g.a.Fa);this.transform={translate:new g.H(a.P.Ha.Ac.x*(this.g.ja?this.g.Ua:1),a.P.Ha.Ac.y*(this.g.ja?this.g.Ua:1)),scale:1/(this.g.ja?this.g.Ua:1),rotate:0}},sE:function(a,b){return a.hc===b.hc&&a.Jc===b.Jc&&a.tc===b.tc&&a.Ic===b.Ic},xn:function(a, b){var c;if(this.zoom){var d=a.nd(Math.pow(2,20-this.zoom));this.labels&&(c=this.Lqa(d,b))&&(c.L5=!1);!c&&this.ob&&(c=this.Kqa(d))&&(c.L5=!0)}return c?[c]:[]},Lqa:function(a,b){for(var c=a.x,d=a.y,e=this.labels.CFa||this.labels,f=e.length-1;0<=f;f-=1){var h=e[f],k=h.za[0]/this.T,l=h.za[1]/this.T;if((h.Ys||!b)&&this.H5(h,c,d,k,l))return h}},Kqa:function(a){var b=a.x;a=a.y;for(var c=this.ob.length-1;0<=c;c-=1){var d=this.ob[c],e=d.za[0]/this.T,f=d.za[1]/this.T;if(d.Ys&&this.H5(d,b,a,e,f))return d}}, H5:function(a,b,c,d,e){for(var f=0;f<a.aa.length;f+=1){var h=a.aa[f][2],k=a.aa[f][3],l=a.aa[f][0],m=a.aa[f][1];this.g.ja&&(h/=this.g.Ua,k/=this.g.Ua,l/=this.g.Ua,m/=this.g.Ua);if(b>=d+l-1&&b<=d+l+h+1&&c>=e+m-1&&c<=e+m+k+1)return!0}return!1},reloadChanged:function(){this.g&&(this.g.Ra=!1);this.oa.count&&(this.oa.clear(),g.Oj&&g.Oj.clear());this.labels=[];this.i6=[];this.Ob&&this.Ob.parentNode&&this.Ob.parentNode.removeChild(this.Ob);this.$m&&this.$m.parentNode&&this.$m.parentNode.removeChild(this.$m); this.set(\\\"display\\\")},vj:function(){return this.$m},reCalcLabelPos:function(){this.oa&&this.oa.forEach(function(a){a.se=!0})},styleChanged:function(){this.reCalcLabelPos&&this.reCalcLabelPos()},RI:function(a,b,c,d){if(b&&(\\\"roadlabel\\\"===a||\\\"poilabel\\\"===a))for(a=0;a<b.length;a+=1){var e=b[a];if((!d||e.mk)&&e.Cm){var f=\\\"\\\",h=\\\"\\\",k=\\\"\\\";e.rc&&(k=e.rc[0],f=k[3],h=k[4],k=e.Bj?\\\"\\\":k[7]);if(f=this.J.Py&&this.J.Py(f,h,k,e.Cm,e.Uu,c))if(e.visible=f[4],e.wk=f[3],e.xd=f[0],e.rc)for(h=0;h<e.rc.length;h+=1)k=e.rc[h], k[3]=f[0],k[4]=f[1],e.mk&&(k[7]=f[2],e.vI||(e.vI=k[2]),e.fontSize=f[6]?f[6]:k[2])}}}});g.sM={Ny:function(a,b,c){return this.g.Ev+b.join(\\\";\\\")+\\\"&lv=\\\"+a+\\\"&key=\\\"+g.o.key+\\\"&preload=\\\"+(c&&c[0]&&c[0].Je?1:0)},Ws:function(a,b){if(this.g){for(var c=[],d=[],e=0,f=a.length;e<f;e+=1){var h=a[e];h&&(h=JSON.parse(h),h[\\\"x-vd-v\\\"]?(this.df=h[\\\"x-vd-v\\\"],this.mf=[h.tv||\\\"\\\",h.vdv].join(\\\"-\\\"),this.Oh=h.tv,this.e.Ee=\\\"#\\\"+h.bgc.substring(2)):(h=this.bE(h,b,c,this.df||\\\"v4\\\"))&&d.push(h))}this.set(\\\"display\\\")}},Hz:function(a,b){var c=0,d=0,e=1,c=256*b.x,d=256*b.y,e=b.T;return[(c+a[0])*e,(d+a[1])*e]},bE:function(a, b,c,d,e){function f(c,f,m){c=[m,c,f].join(\\\"/\\\");if(c=q.oa.get(c)){f=c.ta;var n=\\\"3D\\\"==q.J.type?0:-3;if(c&&\\\"loaded\\\"!==c.status)if(q.V9(c,u)||c.Je){if(-1!==s.indexOf(r))if(\\\"limg\\\"===r)a[1]&&(c.td={url:\\\"data:image/png;base64,\\\"+a[1],Ck:\\\"limg-\\\"+c.key+\\\"-\\\"+q.g.mc},g.jk.vm(c.td));else{if(\\\"roadlabel\\\"===r)for(var p=1;p<a.length;p+=1){var w=a[p],A=g.a.Bw(w[1],d);if(!(0>A[0]||256<=A[0]||0>A[1]||256<=A[1])){var B=q.Hz(A,f),A={margin:0,z:m,zIndex:9E3,za:B,name:w[0],Bj:!0,Ta:A,Ca:[],aa:[],visible:!0,wk:!0};A.id=\\\"roadlabel_\\\"+ g.a.zb(A);A.Wq=15>w[2]%90||75<w[2]%90?90*Math.floor((w[2]+15)/90):w[2];B=w[3];0<=w[8]&&(A.mH={name:w[6],Q9:w[7],dir:w[8]});var G=B[2],H=B[3],n=-Math.floor(H/2);if(w[4]){A.Bv=!0;var I=w[5].split(\\\":\\\"),P=I[1],P=parseInt(P)-1,I=g.o.Cc+\\\"://vdata.amap.com/style_icon/icon-normal-\\\"+(k||l?\\\"big\\\":\\\"small\\\")+\\\".png\\\";A.Ca.push(I);var I=Math.floor(P/10),L=P%10,M=0,K=0,F=0;l?(M=48,F=K=40):k?(M=K=40,F=36):(M=K=24,F=20);var Q=M*Math.max(G+2,F)/F,I=[-Q/2,-M/2,Q,M,K*L,K*I,K,K];A.te=7;A.aa.push(I)}A.Ca.push(c.td.Ck);A.te= 11;A.aa.push([-Math.floor(G/2),n,G,H,B[0],B[1],B[2],B[3]]);c.ha||(c.ha=[]);c.ha.push(A)}}else if(\\\"poilabel\\\"===r){for(var N=[],p=1;p<a.length;p+=1)if(w=a[p],A=g.a.Bw(w[1],d),!(0>A[0]||256<=A[0]||0>A[1]||256<=A[1])){B=q.Hz(A,f);A={id:w[4],margin:n,zIndex:9001,za:B,name:w[0].replace(\\\"^\\\",\\\"\\\"),mk:!0,Ta:A,Ca:[],aa:[],visible:!0,wk:!0};A.id||(A.id=\\\"poilabel_\\\"+g.a.zb(A));P=0;A.Ed=w[8];w[6]&&(I=w[6].split(\\\":\\\"),P=I[1],H=Math.floor((parseInt(I[0].split(\\\"_\\\")[1])-28)/2));if(P&&w[3]){I=g.o.Cc+\\\"://vdata.amap.com/style_icon/icon-\\\"+ (1===H?\\\"biz-\\\":\\\"normal-\\\")+(k||l?\\\"big\\\":\\\"small\\\")+\\\".png\\\";A.Ca.push(I);P=parseInt(P)-1;I=Math.floor(P/10);L=P%10;l?(M=48,K=40,F=28):k?(M=K=40,F=28):(M=K=24,F=20);Q=M;if(151===P||152===P||153===P)F-=4,G=w[7][0][2],Q=M*Math.max(G+2,F)/F;I=[-Q/2,-M/2,Q,M,K*L,K*I,K,K];A.aa.push(I)}if(w[2]&&w[7])for(G=w[2],I=0;I<w[2].length;I+=1)A.Ca.push(c.td.Ck),B=w[7][I],l&&!e&&(G[I][0]=Math.round(G[I][0]*v),G[I][1]=Math.round(G[I][1]*v),G[I][2]=Math.round(G[I][2]*v),G[I][3]=Math.round(G[I][3]*v)),L=G[I][0],M=G[I][1]-(l? 4:2),K=B[3],F=B[2],L<-F&&P&&w[3]&&(L=-F+A.aa[0][0]),L-=2,A.te=K-4,4===m&&\\\"\\\\u5317\\\\u4eac\\\"===A.name&&(M=l?-50:-26),A.aa.push([L,M,F,B[3],B[0],B[1],B[2],B[3]]);A.Hs=w[5];A.Hs&&N.push(A.Hs);A.Ys=w[4];A.Ji=w[9];A.D6=w[10];A.fg=P;A.rv=H;c.ha||(c.ha=[]);c.ha.push(A)}c.qe||(c.qe={},c.qe.uf=N,g.Mj&&g.Mj.r(\\\"vecTileParsed.buildings\\\",{tp:c}))}r===s[s.length-1]&&(c.status=\\\"loaded\\\",h=c,c.Ra=c.Ba=!0)}}else q.JU(b,c,u,g.a.bind(q.pT,q))}}var h=null,k=g.l.ba,l=this.g.ja,m=a[0].split(\\\"-\\\");1===m.length&&(m=a[0].split(\\\"_\\\")); c=parseInt(m[1]);var n=parseInt(m[2]),p=parseInt(m[0]),q=this,r=m[3],s=this.g.ha,u=18<b?Math.pow(2,b-18):1,m=Math.ceil(q.qk.Xy),v=this.g.ja?this.g.Ua:1,w=Math.pow(2,p);10>p&&(c<=m&&f(c+w,n,p),c>=w-m&&f(c-w,n,p));f(c,n,p);return h}};g.M.canvas.rM=g.M.canvas.Qj.extend({ka:[g.sM]});g.M.canvas.Qj.Ib({lU:function(a){this.Wx++;var b=this.$m,c=this.Rk;this.Wy={};var d=this.g.ja?this.g.Ua:1;this.lh=d;var e;0!==a.P.rotation?(e=2*Math.floor(a.P.Ha.Ac.x)*d,d*=2*Math.floor(a.P.Ha.Ac.y)):(e=a.size.width*d,d*=a.size.height);g.f.zm(b,e,d,!0);g.l.wna&&b.parentNode&&b.parentNode.appendChild(b);c.textBaseline=\\\"bottom\\\";this.gk=0;this.labels&&this.KT(this.labels);this.labels&&this.Mwa(this.labels,c,g.Nj.Uqa(this.e.D),this.jd,e,d);this.f6=[];this.labels&&(this.labels.pp=this.zoom,this.labels.op= this.mb,this.labels.Rq=this.rotation,this.labels.NK=this.g.ja,this.labels.size=a.size);a.ob&&(this.ob=a.ob);this.ob&&(this.ob.pp=this.zoom,this.ob.op=this.mb,this.ob.Rq=this.rotation,this.ob.size=a.size);this.r(\\\"afterLabelRender\\\")},Lwa:function(a,b,c){var d=void 0===b.wk?!0:b.wk,e=1,f=void 0===b.visible?!0:b.visible,h=null,k=this.e.J.be;if(b.Cm&&k){var l=k=h=\\\"\\\";b.rc&&b.rc.length&&this.LQ&&(l=b.rc[0],h=l[3],k=l[4],l=b.Bj?\\\"\\\":l[7]);if(h=this.J.Py&&this.J.Py(h,k,l,b.Cm,b.Uu))f=h[4],d=h[3],e=h[5]}if(f){if(this.Rk.globalAlpha!== c||e)this.Rk.globalAlpha=c||e;f=0;for(k=b.Ca.length;f<k;f+=1)(d||\\\"CANVAS\\\"===b.Ca[f].tagName)&&this.gpa(a,b.Ca[f],b.aa[f],b.Wq,c||e);this.Rk.globalAlpha!==c&&(this.Rk.globalAlpha=c);b.rc&&this.LQ&&(b.qj?this.ipa(a,b,h):b.rc.length&&this.LQ(a,b,h))}},gpa:function(a,b,c,d){var e=this.Rk;b=this.Oo(b);if(!b)return 1;var f=c[2],h=c[3],k=c[0],l=c[1];d=(d||0)%360*-Math.PI/180;if(0!==d){var m=Math.cos(d),n=Math.sin(d),p=a[0],q=a[1];e.transform(m,n,-n,m,(1-m)*p+n*q,(1-m)*q-n*p)}k=a[0]+k;a=a[1]+l;4===c.length? b.loaded&&e.drawImage(b,k,a,f,h):e.drawImage(b,c[4],c[5],c[6],c[7],k,a,f,h);0!==d&&e.setTransform(1,0,0,1,0,0)},Oo:function(a){if(!a)return null;if(\\\"IMG\\\"===a.tagName||\\\"CANVAS\\\"===a.tagName||(a=g.jk.T3(a))&&a.loaded)return a},mJ:function(a,b){var c=a[0];b&&(c>g.a.Fa/2?c-=g.a.Fa:c<-g.a.Fa/2&&(c+=g.a.Fa));return this.Mu(c,a[1])},Mu:function(a,b){var c=this.g.ja?this.g.Ua:1,d=this.T,e=0,f=0,e=(a-this.ge[0])/d,f=(b-this.ge[1])/d;return[Math.round(e*c),Math.round(f*c)]},h4:function(a,b){var c=a[0];b&&(c> g.a.Fa/2?c-=g.a.Fa:c<g.a.Fa/2&&(c+=g.a.Fa));return[c/this.T,a[1]/this.T]},cta:function(a,b){var c=a.za;return c[0]>b.Xd.x||c[1]>b.Xd.y||c[0]<b.kc.x||c[1]<b.kc.y?!1:!0},uEa:function(a){var b=this.f6;if(this.f6.zoom!==this.labels.zoom)for(var c=0,d=b.length;c<d;c+=1){var e=b[c];e.mk&&this.cta(e,a.P.Ha)&&(this.i6.push(e),e.zoom=b.zoom,e.YEa=new Date)}},tq:function(a,b){var c=this.h4(a.za,a.reverse);if(a.mk)return this.p5(c,a,b);if(a.Bj){var d=!1,e=a.za;if(a.qj){var f=Math.pow(2,20-this.zoom),h=20*f, c=[],k=[],l=[],m=!0;for(g.mw.font=a.dr+\\\"px \\\"+a.font;m;){for(var n=[],p=[],q=!0,r=0;r<a.name.length;r+=1){var s=g.mw.measureText(a.name[r]).width/this.lh*f,u=g.ei.HP(e,s/2+h),h=h+s;if(!u){m=q=!1;break}if(s=this.rS(this.h4(u),5,b))p.push(s),n.push(u);else{q=!1;break}}h+=256*f;q&&(k.push.apply(k,n),c.push.apply(c,p))}if(k.length){d=!0;for(r=0;r<k.length;r+=1)f=k[r][2],f=(new g.H(e[f+1][0]-e[f][0],e[f+1][1]-e[f][1])).direction(),l.push(360-f);a.RS=k;a.ita=l}return d?c:!1}return a.jm?this.p5(c,a,b):this.zoom< a.z?!1:!0}},KT:function(a){function b(b){a.opacity[b]<1-e?(a.opacity[b]+=e,d.ze=1,d.gk=1):a.opacity[b]=1}function c(b){a.opacity[b]>e?(a.opacity[b]-=e,d.ze=1,d.gk=1):a.opacity[b]=0}var d=this,e=0.34;if(!a.qF||\\\"stable\\\"==this.Hf&&\\\"stable\\\"!=this.NS){for(var f=0,h=a.length;f<h;f+=1){var k=a[f],e=k.jm||g.l.ba?1:0.34,l=k.id;if(k.yj){var m=this.tq(k);m?(this.rp(m),k.Xg=!0,b(l)):(k.Xg=!1,c(l))}else l in a.opacity&&(a.opacity[l]>e?(a.opacity[l]-=e,this.gk=this.ze=1):delete a.opacity[l])}a.qF=!0}else if(\\\"zoomIn\\\"== this.Hf){f=0;for(h=a.length;f<h;f+=1)k=a[f],e=k.jm||g.l.ba?1:0.34,l=k.id,k.yj?k.Xg&&(m=this.tq(k,!0),this.rp(m),b(l)):l in a.opacity&&(a.opacity[l]>e?(a.opacity[l]-=e,this.gk=this.ze=1):delete a.opacity[l]);f=0;for(h=a.length;f<h;f+=1)k=a[f],e=k.jm||g.l.ba?1:0.34,l=k.id,k.yj&&!k.Xg&&((m=this.tq(k))?(this.rp(m),k.Xg=!0,b(l)):(k.Xg=!1,c(l)))}else if(\\\"zoomOut\\\"==this.Hf||a.zoom>this.zoom)for(f=0,h=a.length;f<h;f+=1)k=a[f],e=k.jm||g.l.ba?1:0.34,l=k.id,k.yj?k.Xg?(m=this.tq(k))?(this.rp(m),k.Xg=!0,b(l)): (k.Xg=!1,c(l)):c(l):l in a.opacity&&(a.opacity[l]>e?(a.opacity[l]-=e,this.gk=this.ze=1):delete a.opacity[l]);else for(f=0,h=a.length;f<h;f+=1)k=a[f],e=k.jm||g.l.ba?1:0.34,l=k.id,k.yj?k.Xg?b(l):c(l):l in a.opacity&&(a.opacity[l]>e?(a.opacity[l]-=e,this.gk=this.ze=1):delete a.opacity[l]);return!1},Mwa:function(a,b,c,d,e,f){d=!1;18===a.zoom&&18<this.zoom&&(d=!1);b.globalAlpha=1;b=0;for(var h=a.length;b<h;b+=1){var k=a[b];if(!(d&&k.Bj||k.Fp&&c&&0<=c.indexOf(k.Fp))){var l=this.mJ(k.za,k.reverse);-256> l[0]||l[0]>e+256||-256>l[1]||l[1]>f+256||a.opacity[k.id]&&this.Lwa(l,k,a.opacity[k.id])}}},xJ:function(a){if(a.ob&&a.ob.length)if(this.ob&&this.ob.length){if(this.ob!==a.ob||this.ob.pp!==this.zoom||this.ob.op!==this.mb||this.ob.Rq!==this.rotation||!this.ob.size.hb(a.size))return!0}else return!0;else if(this.ob&&this.ob.length)return!0},gQ:function(a){this.sh&&this.sh.NK!==this.g.ja&&this.g.set(\\\"reload\\\");return this.gk||this.xJ(a)||this.labels&&(this.e.kR||this.labels!==this.sh||!this.sh||this.sh.pp!== this.zoom||this.sh.op!==this.mb||a.Gi||this.sh.Rq!==this.rotation||this.sh.NK!==this.g.ja||!this.sh.size.hb(a.size))?!0:!1},p5:function(a,b,c){var d,e=b.aa.length,f=[];if(b.Ji>this.zoom)d=!0;else for(var h=0;h<e;h+=1){var k=b.aa[h];if(!k[8]){var l=k[2],m=k[3],n=k[0],k=k[1];this.g.ja&&(l/=2,m/=2,n/=2,k/=2);var p=b.margin,n=n-p,k=k-p,l=l+2*p,m=m+2*p,n=a[0]+n,k=a[1]+k,l=Math.ceil((n+l)/this.Ds),m=Math.ceil((k+m)/this.Ds),n=Math.floor(n/this.Ds),k=Math.floor(k/this.Ds);(m=c?[n,l,k,m]:this.q5(n,k,l,m))? f.push(m):d=!0}}return d?!1:f},rS:function(a,b,c){var d=a[0]-b/2;a=a[1]-b/2;var e=Math.ceil((d+b)/this.Ds);b=Math.ceil((a+b)/this.Ds);d=Math.floor(d/this.Ds);a=Math.floor(a/this.Ds);return c?[d,e,a,b]:this.q5(d,a,e,b)},rp:function(a){for(var b=0;b<a.length;b+=1)for(var c=a[b][0],d=a[b][2],e=a[b][3],f=0,h=a[b][1]-c;f<=h;f+=1)for(var k=0,l=e-d;k<=l;k+=1)this.Wy[c+f]||(this.Wy[c+f]={}),this.Wy[c+f][d+k]=1},q5:function(a,b,c,d){for(var e=0,f=c-a;e<=f;e+=1)if(this.Wy[a+e])for(var h=0,k=d-b;h<=k;h+=1){if(1=== this.Wy[a+e][b+h])return!1}else this.Wy[a+e]={};return[a,c,b,d]}});g.M.canvas.Qj.Aaa=g.da.extend({A:function(a){this.M=a},cla:function(a){this.Eq=a;return this.hP([0,0,0])?!0:this.Eq=!1},NZ:function(){return this.M.he?!1:!0},$fa:function(a){if(a){var b=Array.prototype.slice.call(arguments,0);switch(a.type){case \\\"icon\\\":return this.cga.apply(this,b);case \\\"label\\\":return this.dga.apply(this,b);default:console.error(\\\"Unknown type\\\",a)}}},WY:function(a,b,c){a=null;try{a=b.getImageData.apply(b,c)}catch(d){console.error(d),a=null}return a},yla:function(a){return 0>a?0:255< a?255:Math.round(a)},y1:function(a,b){for(var c=0;4>c;c++)a[b+c]=this.yla(a[b+c]);return a},gP:function(a,b){var c=259*(b+255)/(255*(259-b));return[c*(a[0]-128)+128,c*(a[1]-128)+128,c*(a[2]-128)+128]},Tka:function(a){return[255-a[0],255-a[1],255-a[2]]},hP:function(a,b){isNaN(b)&&(b=20);var c=Math.max(0,0.299*a[0]+0.587*a[1]+0.114*a[2]-b);switch(this.Eq){case \\\"amap://styles/normal\\\":case \\\"normal\\\":return[1*c,1.2*c,255];case \\\"amap://styles/light\\\":case \\\"light\\\":return[1*c,1*c,255];case \\\"amap://styles/fresh\\\":case \\\"fresh\\\":return[1* c,1*c,220];case \\\"amap://styles/grey\\\":case \\\"amap://styles/dark\\\":case \\\"insight\\\":case \\\"dark\\\":return[1.5*a[0],1.5*a[1],1*a[2]];case \\\"amap://styles/blue\\\":case \\\"amap://styles/darkblue\\\":case \\\"blue_night\\\":case \\\"mapv\\\":return[2*a[0],1.5*a[1],1*a[2]]}return!1},ega:function(a,b){var c=20,d=10;switch(b.So){case \\\"active\\\":c+=20,d+=20}return this.gP(this.hP(a,c),d)},sZ:function(a,b){var c=-110;switch(b.So){case \\\"active\\\":c+=30}return this.gP(this.hP(this.Tka(a),c),50)},bga:function(a){return this.gP(a,20)},rZ:function(a, b,c,d,e,f){var h=a[b],k=a[b+1],l=a[b+2];a=a[b+3];0<a?(e=e.call(this,[h,k,l,a],f),c[d]=e[0],c[d+1]=e[1],c[d+2]=e[2]):(c[d]=h,c[d+1]=k,c[d+2]=l);c[d+3]=a;this.y1(c,d)},mfa:function(a){var b=a.data,c=a.width;a=a.height;for(var d=0,e=0,f=[Infinity,Infinity],h=[-Infinity,-Infinity],k=0;k<c;k++)for(var l=0;l<a;l++){var m=4*this.FN(k,l,c,a);if(!(76.5>b[m+3])){e++;k<f[0]&&(f[0]=k);l<f[1]&&(f[1]=l);k>h[0]&&(h[0]=k);l>h[1]&&(h[1]=l);for(var n=!0,p=0;4>p;p++)if(220>b[m+p]){n=!1;break}n&&d++}}return{aAa:0<e? d/e:0,Tna:[f[0],f[1],h[0]-f[0]+1,h[1]-f[1]+1]}},FN:function(a,b,c){return b*c+a},yH:function(a,b,c,d,e,f,h){var k=this.FN(b,c,d,e);d=a[4*k+0];e=a[4*k+1];var l=a[4*k+2];a=a[4*k+3];if(a/255<h.G6||h.L9&&!h.L9.call(this,d,e,l,a))return!1;f.push([b,c]);return!0},Tja:function(a,b){var c=Math.abs(a[0]-b[0]),d=Math.abs(a[1]-b[1]);return Math.sqrt(c*c+d*d)},Px:function(a,b){return 0.1>Math.abs(a[0]-b[0])&&0.1>Math.abs(a[1]-b[1])},nla:function(a,b){for(var c=[a[0]],d=1,e=a.length;d<e;d++){var f=a[d];this.Tja(f, c[c.length-1])<=b&&c.push(f)}return this.Px(c[c.length-1],a[a.length-1])?c:null},yCa:function(){},nda:function(a,b,c,d){d=g.extend({G6:0.2,B6:4},d);var e,f,h=[],k=[],l=[],m=[];for(e=0;e<c;e++){for(f=0;f<b&&!this.yH(a,f,e,b,c,h,d);f++);for(f=b-1;0<=f&&!this.yH(a,f,e,b,c,k,d);f--);}if(!h.length||!k.length)return null;for(f=0;f<b;f++){var n;e=h[0][0];n=k[0][0];if(f>=e&&f<=n)for(e=0;e<c&&!this.yH(a,f,e,b,c,l,d);e++);e=h[h.length-1][0];n=k[k.length-1][0];if(f>=e&&f<=n)for(e=c-1;0<=e&&!this.yH(a,f,e,b, c,m,d);e--);}if(!l.length||!m.length)return null;m.reverse();h.reverse();if(this.Px(l[l.length-1],k[0])&&this.Px(k[k.length-1],m[0])&&this.Px(m[m.length-1],h[0])&&this.Px(h[h.length-1],l[0])){b=[m,h,l,k];e=0;for(a=b.length;e<a;e++)if(!(2>b[e].length||(b[e]=this.nla(b[e],d.B6),b[e])))return null;return[].concat(b[0]).concat(b[1].slice(1)).concat(b[2].slice(1)).concat(b[3].slice(1))}return null},Qea:function(a){for(var b=[Infinity,Infinity],c=[-Infinity,-Infinity],d=0,e=a.length;d<e;d++){var f=a[d][0], h=a[d][1];b[0]>f&&(b[0]=f);b[1]>h&&(b[1]=h);c[0]<f&&(c[0]=f);c[1]<h&&(c[1]=h)}return b.concat([c[0]-b[0]+1,c[1]-b[1]+1])},hZ:function(a,b){this.p1||(this.p1=document.createElement(\\\"canvas\\\"));var c=this.p1;c.width=a;c.height=b;return c},vfa:function(a){switch(a.length){case 2:return\\\"lineTo\\\";case 4:return\\\"quadraticCurveTo\\\"}return null},xY:function(a){switch(a.length){case 2:return[a[0]+0.5,a[1]+0.5];case 4:return[a[0]+0.5,a[1]+0.5,a[2]+0.5,a[3]+0.5]}return a},DX:function(a,b){a.beginPath();for(var c= 0,d=b.length;c<d;c++){var e=b[c];0===c?(2<e.length&&(4===e.length?e=e.slice(-2):console.error(\\\"Unknown start point: \\\",b)),a.moveTo.apply(a,this.xY(e))):a[this.vfa(e)].apply(a,this.xY(e))}},Yea:function(a){a=this.sZ([255,255,255],{So:a.So});this.y1(a,0);return\\\"rgba(\\\"+a.slice(0,3).join(\\\",\\\")+\\\", 0.8)\\\"},aga:function(a,b,c){function d(a){return[Math.round((a[0]-n)*q+n-m[0]),Math.round((a[1]-p)*r+p-m[1])]}c=g.extend({So:\\\"hover\\\",Sr:!0,padding:[1.5,1.5]},c);var e=a.width,f=a.height,h=this.hZ(2*e+10,f),k=h.getContext(\\\"2d\\\"), l=this.Qea(b),m=c.padding;g.l.Kc&&(m[0]+=2.5,m[1]+=2.5);for(var n=l[0],p=l[1],q=(l[2]+2*m[0])/l[2],r=(l[3]+2*m[1])/l[3],l=0,s=b.length;l<s;l++)switch(b[l].length){case 2:b[l]=d(b[l]);break;case 4:b[l]=d(b[l]).concat(d(b[l].slice(2)));break;default:console.error(\\\"Unknown point: \\\",b[l])}k.save();this.DX(k,b);k.closePath();k.fillStyle=c.fillStyle||\\\"rgba(255,255,255,0.85)\\\";k.fill();k.putImageData(a,e+6,0);k.drawImage(h,e+6,0,e,f,0,0,e,f);a=c.Sr&&10<b.length;var u=c.strokeStyle||this.Yea(c);k.strokeStyle= a?\\\"#fff\\\":u;k.lineCap=\\\"butt\\\";k.lineJoin=\\\"round\\\";k.lineWidth=g.l.Kc?2:1.2;k.stroke();k.restore();return{Ba:h,pi:[0,0,e,f],Bd:a?function(a,c){this.pla(a,c,b,u)}:null}},pla:function(a,b,c,d){this.rda();var e=this.M.Wx;this.tX(a,c,{duration:200,ET:0,startTime:Date.now(),wxa:function(a){a.strokeStyle=d;a.lineCap=\\\"butt\\\";a.lineJoin=\\\"round\\\";a.lineWidth=g.l.Kc?2:1;a.translate(b[0],b[1])},bAa:function(){return this.M.Wx!==e}})},rda:function(){this.FM&&g.a.si(this.FM)},tX:function(a,b,c,d){this.NZ()?this.FM= g.a.Xc(function(){this.FM=null;if(c.bAa.call(this))d&&d.call(this);else{var e=(Date.now()-c.startTime)/c.duration;1<e&&(e=1);var f=Math.round(b.length*e);if(c.ET<f){var h=1===e?b:b.slice(c.ET,f+1);h.length&&(a.save(),c.wxa.call(this,a,e),this.DX(a,h),a.stroke(),a.restore());c.ET=f}1>e?this.tX(a,b,c,d):d&&d.call(this)}},this):d&&d.call(this)},Dda:function(a,b,c){a=a.createImageData(b.width,b.height);var d=a.data,e=a.width,f=a.height,h=c[0]+c[2],k=c[1],l=c[1]+c[3];for(c=c[0];c<h;c++)for(var m=k;m<l;m++)for(var n= 4*this.FN(c,m,e,f),p=0;4>p;p++)d[n+p]=b.data[n+p];return a},Xga:function(a,b,c){var d=a[1]+(b[1]-a[1])*c;return[Math.round(a[0]+(b[0]-a[0])*c),Math.round(d)]},yga:function(a,b,c){for(var d=1/c,e=[],f=1;f<c;f++){var h=this.Xga(a,b,d*f);e.length&&this.Px(h,e[e.length-1])||e.push(h)}return e},zga:function(a,b){for(var c=1,d=a.length;c<d;c++){var e=a[c-1],f=a[c];2===f.length&&(4===e.length&&(e=e.slice(2)),2===e.length&&(e=this.yga(e,f,b),a.splice.apply(a,[c,0].concat(e)),c+=e.length,d+=e.length))}},zfa:function(a, b,c,d,e){e=Math.round(Math.min(c,d)*e);c--;d--;e?a=[[a+c,b+d-e],[a+c,b+d,a+c-e,b+d],[a+e,b+d],[a,b+d,a,b+d-e],[a,b+e],[a,b,a+e,b],[a+c-e,b],[a+c,b,a+c,b+e],[a+c,b+d-e]]:(e=[a+c,b+d],a=[e,[a,b+d],[a,b],[a+c,b],e]);this.zga(a,5);return a},cga:function(a,b,c,d,e,f){b=a.pi;var h=c?c.uS:this.WY(d,e,b);if(h){var k=c?c.d5:null,l=h,m=a.padding,n=m?m[0]:0,p=m?m[1]:0;(m=0<n*p)&&(l=this.Dda(e,l,[n,p,l.width-2*n,l.height-2*p]));d=l.data;b=l.width;var q=l.height;if(b&&q){c=(c=this.M.e)&&c.D?c.D.get(\\\"hotspotOptions\\\"): {};c=g.extend({borderAnimation:!0},c);l=this.mfa(l);a=!a.Nsa&&0.46<=l.aAa;var r=e.createImageData(b,q);e=r.data;for(var s=a?this.sZ:this.bga,u=0,v=d.length;u<v;u+=4)this.rZ(d,u,e,u,s,{So:f});if(m&&(e=a&&!g.l.Kc?this.nda(d,b,q,{L9:a?function(a,b,c){return!(220<a&&220<b&&220<c)}:null,G6:0.2,B6:4}):null,e||(e=l.Tna,e=this.zfa(e[0],e[1],e[2],e[3],0.2)),e)){var w=this.aga(r,e,{So:f,fillStyle:\\\"active\\\"!==f?null:\\\"#ddd\\\",hK:h,Sr:c.borderAnimation&&\\\"hover\\\"===f&&!k,padding:a?[1.5,1.5]:[2.5,2.5]}),r=null;return{hK:h, Mz:function(a,b){k&&h&&a.putImageData(h,b[0],b[1]);a.drawImage(w.Ba,w.pi[0],w.pi[1],w.pi[2],w.pi[3],b[0],b[1],b[2],b[3]);w.Bd&&(w.Bd.call(this,a,b),w.Bd=null)}}}return{hK:h,Mz:function(a,b){if(m){var c=this.hZ(r.width,r.height);c.getContext(\\\"2d\\\").putImageData(r,0,0);a.clearRect(b[0]+n,b[1]+p,b[2]-2*n,b[3]-2*p);a.drawImage(c,0,0,c.width,c.height,b[0],b[1],b[2],b[3])}else a.putImageData(r,b[0],b[1]);r=null}}}}},dga:function(a,b,c,d,e,f){a=a.pi;if(c=c?c.uS:this.WY(d,e,a))if(d=c.data,a=c.width,b=c.height, a&&b){var h=e.createImageData(a,b);e=h.data;a=0;for(b=d.length;a<b;a+=4)this.rZ(d,a,e,a,this.ega,{So:f});return{hK:c,Mz:function(a,b){a.putImageData(h,b[0],b[1]);h=null}}}},jZ:function(a,b,c){var d=c[2],e=c[3],f=a[0]+c[0];a=a[1]+c[1];if(4===c.length||c.HZ){if((b=this.M.Oo(b))&&b.loaded)return c=[4,4],g.l.Kc&&(c[0]*=2,c[1]*=2),{type:\\\"icon\\\",Nsa:b.src&&b.src.indexOf&&0<=b.src.indexOf(\\\"/indoor_icon/\\\"),padding:c,pi:[f-c[0],a-c[1],d+2*c[0],e+2*c[1]]}}else return{type:\\\"label\\\",pi:[f,a,d,e]}}}); g.M.canvas.Qj.Ib({UY:function(){this.NN||(this.NN=new g.M.canvas.Qj.Aaa(this));return!1===this.NN.cla(this.Eq)?null:this.NN},Wt:function(a,b){var c=this.UY();if(c&&c.NZ()&&a&&a.Ca&&a.aa&&0===this.rotation){var d=this.Wx,e=this.mJ(a.za),f=[],h;a.Ir||(a.Ir=[]);var k=a.Ir;for(h=a.aa.length-1;0<=h;h--){if(k[h]){if(k[h].rev!==d)continue;if(k[h].d5===b)continue}var l=c.jZ(e,a.Ca[h],a.aa[h]);if(l){var m=c.$fa(l,a,k[h],this.$m,this.Rk,b);m&&(k[h]={d5:b,rev:d,uS:m.hK},f.push({Mz:m.Mz,pi:l.pi,pE:\\\"icon\\\"===l.type? 2:1}))}}f.sort(function(a,b){return a.pE-b.pE});h=0;for(d=f.length;h<d;h++)f[h].Mz.call(c,this.Rk,f[h].pi),f[h].Mz=null}},XA:function(a){a.Ir&&(a.Ir.length=0,a.Ir=null)},AH:function(){var a=this.Rk;a&&a.putImageData&&a.putImageData(a.getImageData(0,0,1,1),0,0)},FH:function(a){if(a&&a.Ca&&a.aa&&a.Ir){var b=this.Rk,c=this.UY();if(c){for(var d=this.Wx,e=this.mJ(a.za),f=a.Ir,h=0,k=a.aa.length;h<k;h++){var l=f[h];if(l&&(f[h]=null,d===l.rev)){var m=c.jZ(e,a.Ca[h],a.aa[h]);m&&m.pi&&b.putImageData(l.uS,m.pi[0], m.pi[1])}}a.Ir=null;this.Wx++}}}});g.Qw={h:function(a,b,c,d,e){if(this.we(a,b,c||this))return this;var f=this.nf=this.nf||{};f[a]=f[a]||[];e?f[a].unshift({yb:b,cf:c||this,Dj:d}):f[a].push({yb:b,cf:c||this,Dj:d});\\\"complete\\\"===a&&this.Ra&&this.r(a);return this},we:function(a,b,c){var d=this.nf;if(b&&c){if(d&&a in d&&d[a])for(var e=0;e<d[a].length;e+=1)if(d[a][e].yb===b&&d[a][e].cf===c)return!0;return!1}return d&&a in d&&d[a]&&0<d[a].length},G:function(a,b,c){if(!this.we(a))return this;var d=this.nf;if(d&&d[a])for(var e=0;e<d[a].length;e+= 1)if(!(d[a][e].yb!==b&&\\\"mv\\\"!==b||c&&d[a][e].cf!==c)){d[a].splice(e,1);d[a].length||(d[a]=null);break}return this},fK:function(a,b){if(!this.we(a))return this;var c=this.nf;if(c&&c[a])for(var d=0;d<c[a].length;d+=1)if(!b||c[a][d].cf===b){c[a].splice(d,1);c[a].length||(c[a]=null);break}return this},r:function(a,b){function c(a){var b=Array.prototype.slice.call(arguments,1),c,d,e,f;d=0;for(e=b.length;d<e;d+=1)for(c in f=b[d]||{},f)Object.prototype.hasOwnProperty.call(f,c)&&(a[c]=f[c]);return a}if(!this.we(a))return this; var d={type:a};b||\\\"string\\\"!==typeof b&&\\\"number\\\"!==typeof b&&\\\"boolean\\\"!==typeof b?(\\\"object\\\"===typeof HTMLElement?b instanceof HTMLElement:b&&\\\"object\\\"===typeof b&&1===b.nodeType&&\\\"string\\\"===typeof b.nodeName)?d.value=b:d=c(d,b):d.value=b;for(var e=[].concat(this.nf[a]),f=0;f<e.length;f+=1)e[f].yb&&(e[f].yb.call(e[f].cf||this,d),e[f]&&e[f].Dj&&this.nf[a]&&this.nf[a].splice(f,1));return this},ui:function(a){a?this.nf&&this.nf[a]&&(this.nf[a]=null):this.nf=null;return this}};(function(){if(!g.Kk){g.Kk=g.KL();var a=g.a.oD({Hz:\\\"posToCoord\\\",cB:\\\"_decodeBoundsList\\\"});g.Kk.xf(null,new Function(\\\"\\\\n    return {\\\\n      \\\"+a.posToCoord+\\\": \\\"+g.sM.Hz.toString()+\\\",\\\\n      \\\"+a._decodeBoundsList+\\\": \\\"+g.ax.cB.toString()+\\\"\\\\n  }\\\"));g.Kk.xf(null,function(){return{zb:function(){var a=0;return function(c){c._amap_label_id_||(a+=1,c._amap_label_id_=a);return c._amap_label_id_}}(),Ws:function(a,c){a.Ch.Ue||(a.Ch.Ue=this.Ue);a.Vo?this.Mua.call(this,a,c):this.Nua.call(this,a,c)},Nua:function(a, c){for(var d=a.fF,e=a.Dn,f=[],h=0,k=d.length;h<k;h+=1){var l=d[h];l&&(a.BS&&(l=JSON.parse(l)),l[\\\"x-vd-v\\\"]?(this.df=a.Ch.df=l[\\\"x-vd-v\\\"],this.mf=a.Ch.mf=[l.tv||\\\"\\\",l.vdv].join(\\\"-\\\"),this.Oh=a.Ch.Oh=l.tv):this.Lua(this.extend({},a,{RC:l,Pc:f})))}f.length?this.parseLabel(this.extend({},a.Ch,{Pc:f}),function(d,f){var h=f.data,k=f.Zra;c(d,{mc:a.mc,Jb:a.Jb.filter(function(a){return\\\"loaded\\\"===a.status}),data:h,Zra:k,Dn:e,Ug:{df:a.Ch.df,mf:a.Ch.mf,Oh:a.Ch.Oh,Od:a.Od}},{Iq:!e,dl:e})}):c(null,{mc:a.mc,data:null, Dn:e},{Iq:!e,dl:e})},Lua:function(a){function c(a,b,c){var n=[c,a,b].join(\\\"/\\\");18<h&&!m&&(n+=\\\"/\\\"+h);if((a=d.filter(function(a){return a.key===n})[0])&&\\\"loaded\\\"!==a.status&&-1!==l.indexOf(v))if(\\\"limg\\\"===v)b=f[1],a.td=b,\\\"string\\\"===typeof b.b&&(b.b=u.cB(b.b)),c=\\\"\\\",(c=\\\"object\\\"===typeof b.u?b.u.url:b.u)&&(b.u={url:c,Ck:\\\"limg-\\\"+a.key+\\\"-\\\"+e});else{b={Ig:a.ta,Pi:n,Oa:f,Gd:v,HD:\\\"building\\\"===v,Ci:\\\"poilabel\\\"===v||\\\"roadlabel\\\"===v||\\\"building\\\"===v&&p};if(\\\"poilabel\\\"===v||\\\"roadlabel\\\"===v)b.td=a.td;v===l[l.length- 1]&&(a.status=\\\"loaded\\\");k.push(b)}}var d=a.Jb,e=a.OS,f=a.RC,h=a.Od,k=a.Pc,l=a.ha,m=a.Nf,n=a.ZR,p=a.Be,q=f[0].split(\\\"-\\\");a=parseInt(q[1]);var r=parseInt(q[2]),s=parseInt(q[0]),u=this,v=q[3],q=Math.pow(2,s);10>s&&(a<=n&&c(a+q,r,s),a>=q-n&&c(a-q,r,s));c(a,r,s)},Mua:function(a,c){for(var d=a.fF,e=a.Dn,f=[],h=0,k=d.length;h<k;h+=1){var l=d[h];l&&(a.BS&&(l=JSON.parse(l)),l[\\\"x-vd-v\\\"]?(this.df=a.Ch.df=l[\\\"x-vd-v\\\"],this.mf=a.Ch.mf=[l.tv||\\\"\\\",l.vdv].join(\\\"-\\\"),this.Oh=a.Ch.Oh=l.tv):this.Kua(this.extend({},a,{RC:l, Pc:f,df:this.df||\\\"v4\\\"})))}d=a.Jb.filter(function(a){return\\\"loaded\\\"===a.status});if(d.length)for(f=a.Jb.length-1;0<=f;f--)\\\"loaded\\\"===a.Jb[f].status&&a.Jb.splice(f,1);c(null,{mc:a.mc,vDa:[],Jb:d,Dn:e,Ug:{df:a.Ch.df,mf:a.Ch.mf,Oh:a.Ch.Oh,Od:a.Od}},{Iq:!e,dl:e})},Kua:function(a){function c(a,b,c,f){var l=[f,b,c].join(\\\"/\\\");if(a=a.filter(function(a){return a.key===l})[0])if(b=a.ta,a&&\\\"loaded\\\"!==a.status&&-1!==k.indexOf(x))if(\\\"limg\\\"===x)p[1]&&(a.td={url:\\\"data:image/png;base64,\\\"+p[1],Ck:\\\"limg-\\\"+a.key+\\\"-\\\"+ n});else{if(\\\"roadlabel\\\"===x)for(c=1;c<p.length;c+=1){var m=p[c],v=d.Bw(m[1],q);if(!(0>v[0]||256<=v[0]||0>v[1]||256<=v[1])){var u=t.Hz(v,b),v={margin:0,z:f,zIndex:9E3,za:u,name:m[0],Bj:!0,Ta:v,Ca:[],aa:[],visible:!0,wk:!0};v.id=\\\"roadlabel_\\\"+d.zb(v);v.Wq=15>m[2]%90||75<m[2]%90?90*Math.floor((m[2]+15)/90):m[2];u=m[3];0<=m[8]&&(v.mH={name:m[6],Q9:m[7],dir:m[8]});var w=u[2],L=u[3],M=-Math.floor(L/2);if(m[4]){v.Bv=!0;var K=m[5].split(\\\":\\\"),F=K[1],F=parseInt(F)-1,K=r.Cc+\\\"://vdata.amap.com/style_icon/icon-normal-\\\"+ (s||h?\\\"big\\\":\\\"small\\\")+\\\".png\\\";v.Ca.push(K);var K=Math.floor(F/10),Q=F%10,N=0,J=0,O=0;h?(N=48,O=J=40):s?(N=J=40,O=36):(N=J=24,O=20);var V=N*Math.max(w+2,O)/O,K=[-V/2,-N/2,V,N,J*Q,J*K,J,J];v.te=7;v.aa.push(K)}v.Ca.push(a.td.Ck);v.te=11;v.aa.push([-Math.floor(w/2),M,w,L,u[0],u[1],u[2],u[3]]);a.ha||(a.ha=[]);a.ha.push(v)}}else if(\\\"poilabel\\\"===x){M=[];for(c=1;c<p.length;c+=1)if(m=p[c],v=d.Bw(m[1],q),!(0>v[0]||256<=v[0]||0>v[1]||256<=v[1])){u=t.Hz(v,b);v={id:m[4],margin:e,zIndex:9001,za:u,name:m[0].replace(\\\"^\\\", \\\"\\\"),mk:!0,Ta:v,Ca:[],aa:[],visible:!0,wk:!0};v.id||(v.id=\\\"poilabel_\\\"+d.zb(v));F=0;v.Ed=m[8];m[6]&&(K=m[6].split(\\\":\\\"),F=K[1],L=Math.floor((parseInt(K[0].split(\\\"_\\\")[1])-28)/2));if(F&&m[3]){K=r.Cc+\\\"://vdata.amap.com/style_icon/icon-\\\"+(1===L?\\\"biz-\\\":\\\"normal-\\\")+(s||h?\\\"big\\\":\\\"small\\\")+\\\".png\\\";v.Ca.push(K);F=parseInt(F)-1;K=Math.floor(F/10);Q=F%10;O=J=N=0;h?(N=48,J=40,O=28):s?(N=J=40,O=28):(N=J=24,O=20);V=N;if(151===F||152===F||153===F)O-=4,w=m[7][0][2],V=N*Math.max(w+2,O)/O;K=[-V/2,-N/2,V,N,J*Q,J*K,J,J];2<= F&&5>=F&&(K[8]=!0);v.aa.push(K)}if(m[2]&&m[7])for(w=m[2],K=0;K<m[2].length;K+=1)v.Ca.push(a.td.Ck),u=m[7][K],h&&(w[K][0]=Math.round(w[K][0]*y),w[K][1]=Math.round(w[K][1]*y),w[K][2]=Math.round(w[K][2]*y),w[K][3]=Math.round(w[K][3]*y)),Q=w[K][0],N=w[K][1]-(h?4:2),J=u[3],O=u[2],Q<-O&&F&&m[3]&&(Q=-O+v.aa[0][0]),Q-=2,v.te=J-4,4===f&&\\\"\\\\u5317\\\\u4eac\\\"===v.name&&(N=h?-50:-26),v.aa.push([Q,N,O,u[3],u[0],u[1],u[2],u[3]]);v.Hs=m[5];v.Hs&&M.push(v.Hs);v.Ys=m[4];v.Ji=m[9];v.D6=m[10];v.fg=F;v.rv=L;a.ha||(a.ha=[]); a.ha.push(v)}a.qe||(a.qe={},a.qe.uf=M)}x===k[k.length-1]&&(a.status=\\\"loaded\\\",a.Ra=a.Ba=!0)}}var d=this,e=\\\"3D\\\"==a.Vf?0:-3,f=a.Jb,h=a.Kc,k=a.ha,l=a.ZR,m=a.Ua,n=a.OS,p=a.RC,q=a.df,r=this.o,s=this.l.ba,u=p[0].split(\\\"-\\\");1===u.length&&(u=p[0].split(\\\"_\\\"));a=parseInt(u[1]);var v=parseInt(u[2]),w=parseInt(u[0]),t=this,x=u[3],y=h?m:1,m=Math.pow(2,w);10>w&&(a<=l&&c(f,a+m,v,w),a>=m-l&&c(f,a-m,v,w));c(f,a,v,w)}}},function(a){a||(g.Kk.jta=!0)})}})();(function(){if(!g.Fc){g.Fc=g.KL();var a=g.a.oD({h:\\\"on\\\",we:\\\"hasEvents\\\",G:\\\"off\\\",fK:\\\"offByContext\\\",r:\\\"emit\\\",ui:\\\"clearEvents\\\"});g.Fc.xf(null,function(){return{psa:function(){var a=this;this.as=[];this.bs={};if(\\\"undefined\\\"!==typeof worker)for(var c=0;10>c;c++){var d=new Worker(this.tna);d.status={index:c,k5:!0,DK:!1,hL:0};d.addEventListener(\\\"message\\\",function(c){var d=c.data;c=c.target;d.ping&&200===d.status?(c.status.DK=!0,a.as.filter(function(a){return a.status.DK}).length===a.as.length&&(a.as.DK=!0)): d.result&&a.dwa(c,d)});this.as.push(d);d.postMessage({cmd:\\\"ping\\\",ts:(new Date).getTime()})}},dwa:function(a,c){var d=c.parentTaskId,e=c.taskId,f=this.bs[d],h=!1;f[e].data=c;f[e].index=a.status.index;for(var k=0,l=f.length;k<l;k++){var m=f[k];if(m&&m.Nc)if(m.data){var n=m.data;m.Nc(n.err,n.result,m.GL);m.GL.dl&&(h=!0);m.data=null;m.Xu=!0;m.Nc=null;m.GL=null;f[k]=null}else if(!m.Xu)break}h&&e===f.length-1&&!f[e]&&delete this.bs[d];0===--a.status.hL&&(a.status.k5=!0)},nma:function(a,c,d){var e=a.parentTaskId; this.as.sort(function(a,b){return a.status.hL-b.status.hL});void 0===this.bs[e]&&(this.bs[e]=[]);this.bs[e].push({GL:c,Nc:d});c=this.as[0];c.status.k5=!1;c.status.hL++;a.taskId=this.bs[e].length-1;a.ts=(new Date).getTime();a.workerIndex=c.status.index;c.postMessage(a)},s6:function(a,c){var d=this;if(3<this.ru||this.disabled)return this.yh(a,c);var e=a.Jb,f=a.Od,h=a.Je,k=a.hr,l=a.Csa,m=a.ha;if(h&&this.dC())this.Ml(e,c);else if(!this.c5(a,function(a,b){var c=a.Jb,d=a.hr;b.reverse().forEach(function(a){a= c.indexOf(a);-1!==a&&d.splice(a,1)})},c)){var n=[(new Date).getTime(),this.za.length+1&65535,h?1:0,(\\\"\\\"+Math.random()).slice(2,7)].join(\\\"-\\\");this.Rp[n]={Jb:e,Od:f,w:a,Nc:c,Je:h};h||(this.Sk[n]=1);var e={command:\\\"tiles\\\",reqId:n,payload:{t:k,opt:f,cs:{level:f,flds:m.join(\\\",\\\"),v:l?\\\"3\\\":\\\"2\\\"}}},p=this.send(e);this.GJ()||setTimeout(function(){d.GJ()||(d.ru?d.ru++:d.ru=1,d.upa(p)&&(delete d.Rp[n],delete d.Sk[n],d.yh(a,c)))},300);this.h(\\\"tiles\\\",this.dE,this);this.h(\\\"ack\\\",this.cE,this);this.h(\\\"disable\\\",this.aE, this)}},fna:function(a){this.T5()&&this.send(a)},aE:function(){this.disabled=!0;this.close();for(var a in this.Rp)this.Rp.hasOwnProperty(a)&&this.rY(a)},rY:function(a){var c=this.Rp[a];c&&(this.Ml(c.Jb,c.Nc),delete this.Rp[a],delete this.Sk[a])},cE:function(a){var c=a.reqId,d=this.Rp[c];d&&(a.content.status?d.Nc&&(d.Nc(null,{mc:d.w.mc,Pla:!0,oFa:!0},{Iq:!1,dl:!0}),delete this.Rp[c],delete this.Sk[c]):this.rY(c))},dE:function(a){var c=this.Rp[a.reqId];if(c)if(c.Je){a=a.content.data;for(var d=0,e=a.length;d< e;d++)if(a[d]){var f=a[d];if(f.length){var h=f[0].split(\\\"-\\\").slice(0,-1).join(\\\"/\\\");this.Wj[h]?this.Wj[h].push(f):(this.Wj[h]=[f],this.Tt++);this.Wj[h].length===c.w.ha.length&&(this.Wj[h].ZZ=!0)}}}else this.Ws(this.extend({Dn:!1},c.w,{fF:a.content.data,Od:a.content.opt}),c.Nc)},Dva:function(a,c,d){var e=c.Dn,f=c.Ch;c.Iu||(c.Iu=[]);if(a.length){for(var h=function(a,b){var e=2<arguments.length&&void 0!==arguments[2]?arguments[2]:p;a||(q.Jb=c.Jb.filter(function(a){return\\\"loaded\\\"===a.status}).map(function(a){return{key:a.key, status:a.status}}),q.data=b.data,q.Dn=e.dl,q.Dn&&(q.Iu=c.Iu,c.Iu=null));d(a,q,e)},k=this.extend({},f),l=0,m=a.length;l<m;l++){var n=a[l];n&&c.Iu.push({Pi:n.Pi,Gd:n.Gd,Oa:JSON.stringify(n)})}var p={Iq:!e,dl:!!e},q={mc:c.mc,Fu:c.Fu,Iu:[],Ug:{df:f.df,Oh:f.Oh,mf:f.mf,Od:c.Od}},e=c.Nf?\\\"parseDataToWebGL\\\":\\\"parseDataToVector\\\";if(c.Nf&&this.as&&this.as.DK)for(f=0,l=Math.ceil(a.length/15);f<l;f++)m=null,m=f===l-1?p:{Iq:!0,dl:!1},k.Pc=a.slice(15*f,15*(f+1)),this.nma({cmd:e,args:[k],parentTaskId:c.mc},m,h);else k.Pc= a,k.Ue=this.Ue,this[e](k,h)}else e&&(this.bs?(a=this.bs[c.mc])&&a.length&&a[a.length-1]&&(a[a.length-1].GL={Iq:!1,dl:!0}):d(null,{mc:c.mc,Jb:[],data:null,Dn:e},{Iq:!e,dl:!!e}))},Ws:function(a,c){for(var d=a.fF,e=[],f=0,h=d.length;f<h;f++){var k=d[f];k&&(a.BS&&(k=JSON.parse(k)),k[\\\"x-vd-v\\\"]?(this.df=a.Ch.df=k[\\\"x-vd-v\\\"],this.Oh=a.Ch.Oh=k.tv,this.mf=a.mf=[k.tv||\\\"\\\",k.vdv].join(\\\"-\\\"),k.bgc&&(k=\\\"#\\\"+k.bgc.substring(2),a.Fu!==k&&(a.Fu=k))):this.bE(this.extend({},a,{RC:k,Pc:e})))}this.Dva(e,a,c)},MGa:function(a){for(var c= 0,d=a.length;c<d;c++){var e=a[c];e.Sp&&(self.Au(e.Sp),delete e.Sp)}}}});g.Fc.xf(null,new Function(\\\"\\\\n    return {\\\\n      \\\"+a.on+\\\": \\\"+g.Qw.h.toString()+\\\",\\\\n      \\\"+a.hasEvents+\\\": \\\"+g.Qw.we.toString()+\\\",\\\\n      \\\"+a.off+\\\": \\\"+g.Qw.G.toString()+\\\",\\\\n      \\\"+a.offByContext+\\\": \\\"+g.Qw.fK.toString()+\\\",\\\\n      \\\"+a.emit+\\\": \\\"+g.Qw.r.toString()+\\\",\\\\n      \\\"+a.clearEvents+\\\": \\\"+g.Qw.ui.toString()+\\\"\\\\n    }\\\\n  \\\"));g.JW?g.Fc.xf(null,g.JW,function(a){a||(g.Fc.u5=!0)}):g.Fc.u5=!0}})(); \"}","_AMap_AMap.OverView":"{\"version\":\"1671592305593\",\"script\":\"g.$aa=g.da.extend({ka:[g.va],Ni:\\\".amap-overviewcontrol{z-index:150;width:120px;height:120px;background:#fff;position:absolute;right:0;bottom:0}.amap-overview-main{width:115px;height:115px;position:absolute;left:5px;top:5px;overflow:hidden}.amap-overviewcontrol,.amap-overview-main{border-top:solid 1px #ccc;border-left:solid 1px #ccc}.amap-overview-map{position:absolute}.amap-overview-button{width:17px;height:17px;position:absolute;right:0;bottom:0;background:url(../../theme/v1.3/mapcontrols.png);background-position:-40px -386px;cursor:pointer}.amap-overview-win{width:62px;height:35px;background:#91a3d8;opacity:.25;border:solid 2px #44b;filter:alpha(opacity=25);position:absolute;top:40px;left:26px;cursor:move}\\\", A:function(a){this.CLASS_NAME=\\\"AMap.OverView\\\";g.c.ya(this,a);this.ssa();this.j={};this.j.K=g.f.create(\\\"div\\\",null,\\\"amap-overviewcontrol\\\");this.j.pk=g.f.create(\\\"div\\\",this.j.K,\\\"amap-overview-main\\\");this.j.map=g.f.create(\\\"div\\\",this.j.pk,\\\"amap-overview-map\\\");this.j.OV=g.f.create(\\\"div\\\",this.j.pk,\\\"amap-overview-win\\\");this.j.Ct=g.f.create(\\\"div\\\",this.j.pk,\\\"amap-overview-win\\\");this.j.button=g.f.create(\\\"div\\\",this.j.K,\\\"amap-overview-button\\\");this.vb(a||{})},ssa:function(){this.dj=\\\"overview\\\";this.visible=!0;this.En= !1;this.Za=[3,18];this.height=this.width=120;this.ow=null},zu:function(a,b){this.map=a;b.appendChild(this.j.K);this.vf=b;this.fn();this.bo&&(this.En?g.f.ab(this.bo,{right:this.width+\\\"px\\\"}):g.f.ab(this.bo,{right:\\\"17px\\\"}))},Yv:function(){this.mn();this.vf.removeChild(this.j.K);this.map=this.vf=null},vb:function(a){for(var b in a)\\\"_\\\"!==b.substr(0,1)&&void 0!==this[b]&&(this[b]=a[b]);b=this.En;this.ow=void 0!==a.tileLayer?a.tileLayer:this.ow;this.En=void 0!==a.isOpen?a.isOpen:this.En;this.visible=void 0!== a.visible?a.visible:this.visible;this.width&&this.height&&g.f.ab(this.j.K,{width:this.width+\\\"px\\\",height:this.height+\\\"px\\\"}).ab(this.j.pk,{width:this.width-5+\\\"px\\\",height:this.height-5+\\\"px\\\"}).ab(this.j.map,{width:this.width-5+\\\"px\\\",height:this.height-5+\\\"px\\\"});this.En||g.f.ab(this.j.K,{width:\\\"17px\\\",height:\\\"17px\\\"}).ab(this.j.button,{backgroundPosition:\\\"-40px -405px\\\"});!b&&this.En&&this.open();this.visible?g.f.ab(this.j.K,{visibility:\\\"visible\\\"}):g.f.ab(this.j.K,{visibility:\\\"hidden\\\"})},IR:function(a){return this[a]}, fn:function(){this.jC();this.Va={button:g.event.Y(this.j.button,\\\"click\\\",this.Hha,this),sIa:g.event.Y(this.j.Ct,\\\"mousedown\\\",this.gu,this),tIa:g.event.Y(document,\\\"mousemove\\\",this.eu,this),xIa:g.event.Y(document,\\\"mouseup\\\",this.fu,this),wIa:g.event.Y(this.j.Ct,\\\"touchstart\\\",this.gu,this),vIa:g.event.Y(document,\\\"touchmove\\\",this.eu,this),uIa:g.event.Y(document,\\\"touchend\\\",this.fu,this),QFa:g.event.addListener(this.map,\\\"moveend\\\",this.jC,this),SFa:g.event.addListener(this.map,\\\"zoomend\\\",this.jC,this),RFa:g.event.addListener(this.map, \\\"resize\\\",this.jC,this)}},mn:function(){if(this.Va)for(var a in this.Va)this.Va.hasOwnProperty(a)&&g.event.removeListener(this.Va[a])},Hha:function(){this.En?this.close():this.open()},gu:function(a){g.F.stopPropagation(a).preventDefault(a);a=g.F.mm(\\\"touchstart\\\"===a.type?a.touches[0]:a,this.j.map);this.x=a.wf();this.y=a.ve();this.hz=+g.f.$c(this.j.Ct,\\\"left\\\").replace(\\\"px\\\",\\\"\\\");this.xc=+g.f.$c(this.j.Ct,\\\"top\\\").replace(\\\"px\\\",\\\"\\\");this.Yu=!0},eu:function(a){if(this.Yu){this.d6=\\\"touchmove\\\"===a.type?a.touches[0]: a;var b=g.F.mm(this.d6,this.j.map);a=b.wf()-this.x;var b=b.ve()-this.y,c=this.hz+a,d=this.xc+b;this.cD=a;this.dD=b;g.f.ab(this.j.Ct,{left:c+\\\"px\\\",top:d+\\\"px\\\"})}},fu:function(){if(this.Yu){var a=g.F.mm(this.d6,this.j.map),b=a.wf()-this.x,c=a.ve()-this.y,d=this.hz,e=this.xc,f=this;g.l.Uf&&(b=this.cD,c=this.dD);var h=this.hz+b,k=this.xc+c,l=Math.round(b/10),m=Math.round(c/10),n=setInterval(function(){g.f.ab(f.j.OV,{left:d+\\\"px\\\",top:e+\\\"px\\\"});if(Math.abs(h-d)<Math.abs(l)||Math.abs(k-e)<Math.abs(m))window.clearInterval(n), g.f.ab(f.j.OV,{left:h+\\\"px\\\",top:k+\\\"px\\\"}),f.map.panBy(Math.round(-b/Math.pow(2,f.d3)),Math.round(-c/Math.pow(2,f.d3)));d+=l;e+=m},15);this.Yu=!1}},open:function(){g.c.add(this,\\\"open\\\");var a=17,b=17,c=Math.round((this.width-17)/10),d=Math.round((this.height-17)/10),e,f=this;e=setInterval(function(){a+=c;b+=d;g.f.ab(f.j.K,{width:a+\\\"px\\\",height:b+\\\"px\\\"});f.bo&&g.f.ab(f.bo,{right:a+\\\"px\\\"});if(a>=f.width||b>=f.height)window.clearInterval(e),g.f.ab(f.j.K,{width:f.width+\\\"px\\\",height:f.height+\\\"px\\\"}).ab(f.j.button, {backgroundPosition:\\\"-40px -386px\\\"}),f.bo&&g.f.ab(f.bo,{right:f.width+\\\"px\\\"}),f.En=!0,f.j.K.removeChild(f.j.pk),f.j.K.insertBefore(f.j.pk,f.j.button)},15);g.event.O(this,\\\"open\\\")},close:function(){g.c.add(this,\\\"close\\\");var a=this.width,b=this.width,c=Math.round((this.width-17)/10),d=Math.round((this.height-17)/10),e,f=this;e=setInterval(function(){a-=c;b-=d;g.f.ab(f.j.K,{width:a+\\\"px\\\",height:b+\\\"px\\\"});f.bo&&g.f.ab(f.bo,{right:a+\\\"px\\\"});if(17>=a||17>=b)window.clearInterval(e),g.f.ab(f.j.K,{width:\\\"17px\\\", height:\\\"17px\\\"}).ab(f.j.button,{backgroundPosition:\\\"-40px -405px\\\"}),f.bo&&g.f.ab(f.bo,{right:\\\"17px\\\"}),f.En=!1,f.j.K.removeChild(f.j.pk),f.j.K.insertBefore(f.j.pk,f.j.button)},15);g.event.O(this,\\\"close\\\")},getTileLayer:function(){g.c.add(this,\\\"getTileLayer\\\");return this.ow},setTileLayer:function(a){g.c.add(this,\\\"setTileLayer\\\");this.ow=a;this.map&&this.jC()},show:function(){g.c.add(this,\\\"show\\\");this.vb({visible:!0});g.event.O(this,\\\"show\\\")},hide:function(){g.c.add(this,\\\"hide\\\");this.vb({visible:!1});g.event.O(this, \\\"hide\\\")},jC:function(){var a=this.map.getSize(),b=this.map.getCenter(),c=this.Za,d=this.pfa(a.width,a.height,this.width-5,this.height-5);a.width*a.height*Math.pow(2,2*d)*4>this.width*this.height&&(d-=1);var e=this.map.getZoom()+d;this.d3=d;var f=0,h=0;e>=c[0]&&e<=c[1]?(f=Math.round(Math.pow(2,d)*a.width),h=Math.round(Math.pow(2,d)*a.height)):e=c[0];this.Qka(f,h);this.Gka(b,e)},Gka:function(a,b){this.Xk||(this.Xk=[]);for(var c=this.map.lc(a,b),d=this.width-5,e=this.height-5,f=Math.floor((c.y-e/2)/ 256),h=Math.floor((c.x+d/2)/256),k=Math.floor((c.y+e/2)/256),l=0,m=Math.floor((c.x-d/2)/256);m<=h;m+=1)for(var n=f;n<=k;n+=1){this.Xk.length<=l&&this.Xk.push(g.f.create(\\\"img\\\",this.j.map));var p=this.Xk[l];g.f.ab(p,{visibility:\\\"inherit\\\",position:\\\"absolute\\\",left:256*m-c.x+d/2+\\\"px\\\",top:256*n-c.y+e/2+\\\"px\\\"});p.src=this.Ar(m,n,b);l+=1}for(;l<this.Xk.length;)g.f.ab(this.Xk[l],{visibility:\\\"hidden\\\"}),l+=1},pfa:function(a,b,c,d){a=Math.log(c/a)/Math.LN2;b=Math.log(d/b)/Math.LN2;return Math.floor(Math.min(a, b))},Qka:function(a,b){var c={};0<a&&0<b?(c.width=a+\\\"px\\\",c.height=b+\\\"px\\\",c.left=Math.round((this.width-5-a)/2)+\\\"px\\\",c.top=Math.round((this.height-5-b)/2)+\\\"px\\\",c.display=\\\"block\\\"):c.display=\\\"none\\\";g.f.ab([this.j.OV,this.j.Ct],c);this.j.pk.removeChild(this.j.Ct);this.j.pk.appendChild(this.j.Ct)},Ar:function(a,b,c){this.ow||(this.ow=new z.q.sb({innerLayer:!0,getTileUrl:g.o.Cc+\\\"://webrd01.is.autonavi.com/appmaptile?lang=\\\"+this.map.get(\\\"lang\\\")+\\\"&size=1&scale=1&style=7&x=[x]&y=[y]&z=[z]\\\"}));return this.ow.getTileUrl(a, b,c)},Ty:function(){return[0,this.En?this.width+5:22,this.En?this.height+5:22,0]}});window.AMap.OverView||(window.AMap.OverView=g.$aa); \"}","_AMap_AMap.Geolocation":"{\"version\":\"1671592305593\",\"script\":\"g.Vn=g.da.extend({ka:[g.va],Ni:\\\".amap-geolocation-con .amap-geo{background:#fff url(../../theme/v1.3/markers/b/loc_gray.png) 50% 50% no-repeat;width:35px;height:35px;border:1px solid #ccc;border-radius:3px;right:4px}.amap-locate-loading .amap-geo{background-image:url(../../theme/v1.3/loading.gif)}.amap-locate{position:absolute;width:18px;height:18px;background:url(../../theme/v1.3/map_view.png);_background:url(../../theme/v1.3/map_view.gif);background-position:-130px -185px;cursor:pointer}\\\",A:function(a){this.CLASS_NAME= \\\"AMap.Geolocation\\\";g.c.ya(this,a);this.options={enableHighAccuracy:!1,timeout:5E3,maximumAge:0,GeoLocationFirst:!1,convert:!0,convertUrl:g.o.fd+\\\"/v3/assistant/coordinate/convert?coordsys=gps&output=json&s=rsv3&locations={x},{y}&key=\\\"+g.o.key,showButton:!0,buttonDom:'<div class=\\\"amap-geo\\\"></div>',buttonPosition:\\\"LB\\\",buttonOffset:new g.H(10,20),showMarker:!0,markerOptions:{innerOverlay:!0,offset:new g.H(-11,-11),content:\\\"<div style='width:23px;height:23px;overflow:hidden;'><img style='position:relative;cursor:pointer;'  width='23px' height='23px'  src='\\\"+ g.o.Ii+\\\"/loc.png'></div>\\\"},showCircle:!0,circleOptions:{innerOverlay:!0,strokeColor:\\\"#0093FF\\\",noSelect:!0,strokeOpacity:0.5,strokeWeight:1,fillColor:\\\"#02B0FF\\\",fillOpacity:0.25},panToLocation:!0,zoomToAccuracy:!1,noIpLocate:0,noGeoLocation:0,useNative:!1,extensions:\\\"base\\\",stopWhenPermissionDenied:!0};if(a)for(var b in a)b in this.options&&(this.options[b]=a[b]);switch(this.options.noGeoLocation){case 0:this.kA=!0;break;case 1:this.kA=!g.l.ba;break;case 2:this.kA=g.l.ba;break;case 3:this.kA=!1;break; default:this.kA=!0}switch(this.options.noIpLocate){case 0:this.Ew=!0;break;case 1:this.Ew=!g.l.ba;break;case 2:this.Ew=g.l.ba;break;case 3:this.Ew=!1;break;case !0:this.Ew=!1;break;default:this.Ew=!0}this.Lb=this.Tb=this.MM=this.rx=this.hi=this.e=null;this.$X=g.event.addListener(this,\\\"complete\\\",this.Hua,this);this.sY=g.event.addListener(this,\\\"error\\\",this.Iua,this)},isSupported:function(){return!!navigator.geolocation},Ul:function(a){new g.kb.Ab(g.o.Cc+\\\"://webapi.amap.com/count?\\\"+[\\\"type=loc\\\",\\\"k=\\\"+ g.o.key,\\\"u=\\\"+g.o.Ao,\\\"m=\\\"+(g.l.ba?1:0),\\\"pf=\\\"+g.l.Fz,\\\"suc=\\\"+a].join(\\\"&\\\"))},Cqa:function(a){function b(b){b.status=1;d.Lv(b,function(b,c){c.info=\\\"SUCCESS\\\";a&&a(\\\"complete\\\",c);g.event.O(d,\\\"complete\\\",c)})}function c(b){function c(f){f.message=b.message+f.message;f.status=1;d.Lv(f,function(b,c){c.info=\\\"SUCCESS\\\";a&&a(\\\"complete\\\",c);g.event.O(d,\\\"complete\\\",c)})}function h(c){b.message+=c.message;b.info=\\\"FAILED\\\";b.status=0;a&&a(\\\"error\\\",b);g.event.O(d,\\\"error\\\",b)}d.kA?d.g4(c,h):h({message:\\\"GeoLocation is closed by noGeoLocation option,pass Geolocation.\\\"})} var d=this;d.Ew?d.l4(b,c):c({message:\\\"IpLocation is closed by noIpLocate option,pass IpLocation.\\\"})},g4:function(a,b){if(this.isSupported()){var c=this;g.a.HR(function(d,e){if(d)c.Ul(\\\"err\\\"),b({message:d?d.message:\\\"\\\"});else{var f=setTimeout(function(){f=null;b({message:\\\"Get geolocation time out.\\\"});c.Ul(\\\"waitetimeout\\\");h=!0},c.options.timeout),h=!1;e.getCurrentPosition(function(d){if(!h)if(clearTimeout(f),d.coords&&d.coords.longitude){c.Ul(\\\"success\\\");d={position:new g.U(d.coords.longitude,d.coords.latitude), location_type:\\\"html5\\\",message:\\\"Get geolocation success.\\\",accuracy:d.coords.accuracy};var e=!1;g.l.O3&&(e=!0);c.options.convert?e?(d.isConverted=!0,d.message+=\\\"Don't need convert.\\\",a(d)):c.sI(d,function(b){a(b)}):(e?(d.message+=\\\"Don't need convert.\\\",d.isConverted=!0):(d.isConverted=!1,d.message+=\\\"convert option is false,pass convert.\\\"),a(d))}else c.Ul(\\\"failed\\\"),b({code:2,info:\\\"POSITION_UNAVAILABLE\\\",message:\\\"Get geolocation failed.\\\"})},function(a){h||(clearTimeout(f),1===a.code?(a={code:1,info:\\\"PERMISSION_DENIED\\\", message:\\\"Geolocation permission denied.\\\"},c.Ul(\\\"denied\\\"),b(a)):3===a.code?(a={code:3,info:\\\"TIME_OUT\\\",message:\\\"Get geolocation time out.\\\"},c.Ul(\\\"timeout\\\"),b(a)):2===a.code&&(a={code:3,info:\\\"POSITION_UNAVAILABLE\\\",message:\\\"Get geolocation failed.\\\"},c.Ul(\\\"failed\\\"),b(a)))},this.options)}},{timeout:c.options.timeout})}else b({message:\\\"Browser not Support html5 geolocation.\\\"})},sI:function(a,b){var c=a.position,c=this.options.convertUrl.replace(\\\"{x}\\\",c.R).replace(\\\"{y}\\\",c.Q);g.o.Xa&&(c+=\\\"&jscode=\\\"+g.o.Xa); c=new g.kb.Ab(c,{callback:\\\"callback\\\"});g.event.addListener(c,\\\"complete\\\",function(c){1===parseInt(c.status)&&c.locations?(c=c.locations.split(\\\",\\\"),c=new g.U(parseFloat(c[0]),parseFloat(c[1])),a.position=c,a.isConverted=!0,a.message+=\\\"Convert Success.\\\"):(a.isConverted=!1,a.message+=\\\"Convert failed.\\\");b(a)},this);g.event.addListener(c,\\\"error\\\",function(){a.message+=\\\"Convert request failed.\\\";a.isConverted=!1;b(a)},this)},l4:function(a,b){var c=new g.kb.Ab(g.o.Cc+\\\"://webapi.amap.com/maps/ipLocation?key=\\\"+ g.o.key,{callback:\\\"callback\\\"});c.h(\\\"complete\\\",function(c){c.status&&c.lng&&c.lat?(c.position=g.a.Hoa(c.lng,c.lat),delete c.lng,delete c.lat,c.message=\\\"Get ipLocation success.\\\",c.location_type=\\\"ip\\\",c.accuracy=null,c.isConverted=!0,a(c)):b({message:\\\"Get ipLocation failed.\\\"})},this);c.h(\\\"error\\\",function(){b({message:\\\"Request ipLocation failed.\\\"})},this)},Bqa:function(a){function b(b){function e(e){e.message=b.message+e.message;e.status=1;c.Lv(e,function(b,d){d.info=\\\"SUCCESS\\\";a&&a(\\\"complete\\\",d);g.event.O(c, \\\"complete\\\",d)})}function f(e){b.message+=e.message;if(1===e.code)b.info=\\\"FAILED\\\",b.status=0,a&&a(\\\"error\\\",b),g.event.O(c,\\\"error\\\",b);else{e=function(e){b.message+=e.message;b.info=\\\"FAILED\\\";b.status=0;a&&a(\\\"error\\\",b);g.event.O(c,\\\"error\\\",b)};var f=function(e){e.status=1;e.message=b.message+e.message;c.Lv(e,function(b,d){d.info=\\\"SUCCESS\\\";a&&a(\\\"complete\\\",d);g.event.O(c,\\\"complete\\\",d)})};c.Ew?c.l4(f,e):e({message:\\\"IpLocation is closed by noIpLocate option,pass ipLocation.\\\"})}}c.kA?c.g4(e,f):f({message:\\\"Geolocation is closed by noGeoLocation option,pass Geolocation.\\\"})} var c=this;this.options.useNative&&g.l.Zl?this.Nta(function(b){b.status=1;c.Lv(b,function(b,d){d.info=\\\"SUCCESS\\\";a&&a(\\\"complete\\\",d);g.event.O(c,\\\"complete\\\",d)})},function(a){b(a)}):b({message:\\\"\\\"})},getCurrentPosition:function(a){g.c.add(this,\\\"getCurrentPosition\\\");this.jO=!0;g.f.Wa(this.hi,\\\"amap-locate-loading\\\");g.l.ba||this.options.GeoLocationFirst?this.Bqa(a):this.Cqa(a)},getCityInfo:function(a){g.c.add(this,\\\"getCityInfo\\\");var b=new g.kb.Ab(g.o.Cc+\\\"://webapi.amap.com/maps/ipCity?key=\\\"+g.o.key,{callback:\\\"callback\\\"}); b.h(\\\"complete\\\",function(b){b.center&&1===b.status?(b.isConverted=!0,b.info=\\\"SUCCESS\\\",b.message=\\\"Get city by ip success.\\\",a&&a(\\\"complete\\\",b)):(b.info=\\\"FAILED\\\",b.message=\\\"Get city by ip failed.\\\",a&&a(\\\"error\\\",b))},this);b.h(\\\"error\\\",function(){a&&a(\\\"error\\\",{status:0,message:\\\"Request ipCity failed.\\\",info:\\\"FAILED\\\"})},this)},watchPosition:function(){if(this.options.useNative&&window.AMapAndroidLoc)this.Xza();else if(g.c.add(this,\\\"watchPosition\\\"),this.isSupported()){if(g.l.ba){var a=this;return g.a.HR(function(b, c,d){if(b)g.event.O(a,\\\"error\\\",{status:0,info:\\\"FAILED\\\",message:\\\"Get geolocation error on watch.\\\"});else return b=c.watchPosition(function(b){if(b.coords&&b.coords.longitude){b={position:new g.U(b.coords.longitude,b.coords.latitude),location_type:\\\"html5\\\",message:\\\"Watch position success by GeoLocation.\\\",status:1,accuracy:b.coords.accuracy};var c=!1;g.l.O3&&(c=!0);var d=function(b){a.Lv(b,function(b,c){c.info=\\\"SUCCESS\\\";g.event.O(a,\\\"complete\\\",c)})};a.options.convert?c?(b.message+=\\\"Don't need convert.\\\", b.isConverted=!0,d(b)):a.sI(b,function(a){d(a)}):(c?(b.message+=\\\"Don't need convert.\\\",b.isConverted=!0):(b.message+=\\\"convert option is false,pass convert.\\\",b.isConverted=!1),d(b))}else g.event.O(a,\\\"error\\\",{status:0,info:\\\"FAILED\\\",message:\\\"Watch position failed by GeoLocation,incorrect position.\\\"})},function(){g.event.O(a,\\\"error\\\",{status:0,info:\\\"FAILED\\\",message:\\\"Watch position failed by GeoLocation.\\\"})},a.options),d&&g.a.Fxa(d,b),b},{Uza:!0})}g.event.O(this,\\\"error\\\",{status:0,info:\\\"NOT_SUPPORT\\\",message:\\\"Forbidden watchPosition on PC device.\\\"})}else return g.event.O(this, \\\"error\\\",{status:0,info:\\\"NOT_SUPPORT\\\",message:\\\"Browser not Support html5 GeoLocation.\\\"}),null},clearWatch:function(a){g.c.add(this,\\\"clearWatch\\\");if(this.options.useNative&&window.AMapAndroidLoc)g.Vn.Mw.Bi.fya(this);else if(this.isSupported())return g.a.HR(function(b,c){b||g.a.Tza(a,function(b,e){b||(g.a.Ena(a),c.clearWatch(e))})})},zu:function(a,b){if(!this.hi){var c=document.createElement(\\\"div\\\");this.jO&&g.f.Wa(c,\\\"amap-locate-loading\\\");g.f.Wa(c,\\\"amap-geolocation-con\\\");\\\"object\\\"===typeof this.options.buttonDom? c.appendChild(this.options.buttonDom):c.innerHTML=this.options.buttonDom;c.style.position=\\\"absolute\\\";c.style.zIndex=\\\"9999\\\";this.options.showButton||(c.style.visibility=\\\"hidden\\\");this.cC(c,this.options.buttonPosition,this.options.buttonOffset);this.hi=c}this.e=a;b.appendChild(this.hi);this.rx=b;this.MM=g.event.Y(this.hi,\\\"click\\\",this.Gua,this)},Yv:function(){g.event.removeListener(this.$X);this.$X=null;g.event.removeListener(this.sY);this.sY=null;g.event.removeListener(this.MM);this.MM=null;this.rx.removeChild(this.hi); this.e=this.rx=null;this.Tb&&(this.Tb.setMap(null),this.Tb=null);this.Lb&&(this.Lb.setMap(null),this.Lb=null)},cC:function(a,b,c){\\\"LT\\\"!==b&&\\\"RT\\\"!==b&&\\\"LB\\\"!==b&&\\\"RB\\\"!==b&&(b=\\\"LT\\\");switch(b){case \\\"LT\\\":g.f.ab(a,{left:c.x+\\\"px\\\",top:c.y+\\\"px\\\",right:\\\"\\\",bottom:\\\"\\\"});break;case \\\"RT\\\":g.f.ab(a,{right:c.x+\\\"px\\\",top:c.y+\\\"px\\\",left:\\\"\\\",bottom:\\\"\\\"});break;case \\\"LB\\\":g.f.ab(a,{left:c.x+\\\"px\\\",bottom:c.y+\\\"px\\\",right:\\\"\\\",top:\\\"\\\"});break;case \\\"RB\\\":g.f.ab(a,{right:c.x+\\\"px\\\",bottom:c.y+\\\"px\\\",left:\\\"\\\",top:\\\"\\\"})}this.rx&&(this.rx.removeChild(a), this.rx.appendChild(a))},Txa:function(a,b){if(this.e){var c=this.options;c.showMarker&&(this.Tb||(this.Tb=new z.B.wb(c.markerOptions),this.Tb.Da=!0),this.Tb.setPosition(a),this.Tb.setMap(this.e));c.showCircle&&(this.Lb||(this.Lb=new z.B.hh(c.circleOptions)),this.Lb.setCenter(a),this.Lb.setRadius(b||0),this.Lb.setMap(this.e),this.Lb.Da=!0);c.panToLocation&&this.e.panTo(a);c.zoomToAccuracy&&this.Lb&&this.e.setFitView([this.Lb])}},XEa:function(){this.Tb&&this.Tb.setMap(null);this.Lb&&this.Lb.setMap(null)}, Lv:function(a,b){var c=this,d=a.position;g.ub.load(\\\"AMap.Geocoder\\\",function(){c.P3||(c.P3=new g.jW({extensions:c.options.extensions}));c.P3.getAddress(d,function(c,d){\\\"complete\\\"===c?(g.extend(a,d.regeocode),a.message+=\\\"Get address success.\\\"):a.message+=\\\"Get address fail,check your key or network.\\\";b(\\\"complete\\\",a)})})},Gua:function(){this.getCurrentPosition()},Hua:function(a){this.jO=!1;g.f.fb(this.hi,\\\"amap-locate-loading\\\");this.Txa(a.position,a.accuracy)},Iua:function(){this.jO=!1;g.f.fb(this.hi, \\\"amap-locate-loading\\\")},Nta:function(a,b){function c(a){1!==a&&d.Ul(\\\"sdkerror\\\");b&&b.call&&b.call(d,{message:\\\"Get sdkLocation failed.\\\"})}if(window.AMapAndroidLoc)this.Ota(a,b);else{var d=this,e=new g.kb.Ab(\\\"http://127.0.0.1:43689/geolocation?to=3000&_=\\\"+(new Date).getTime(),{callback:\\\"callback\\\"});e.h(\\\"complete\\\",function(b){a&&a.call&&b.location&&b.location.x&&b.location.y?(a.call(d,{position:new g.U(b.location.x,b.location.y),accuracy:b.location.precision,message:\\\"Get sdkLocation success.\\\",location_type:\\\"sdk\\\", isConverted:!0}),d.Ul(\\\"sdksuccess\\\")):(c(1),d.Ul(\\\"sdkfail\\\"))});e.h(\\\"error\\\",c)}},Ota:function(a,b){var c=this;g.Vn.Mw.Bi.bra(this,function(d){a&&a.call&&d.result&&d.result.x&&d.result.y?(a.call(c,{position:new g.U(d.result.x,d.result.y),accuracy:d.result.precision,message:\\\"Get sdkLocation success.\\\",location_type:\\\"sdk\\\",isConverted:!0}),c.Ul(\\\"sdksuccess\\\")):(b&&b.call&&b.call(c,{sdkErrorInfo:d.errorInfo,sdkLocationDetail:d.locationDetail,message:\\\"Get sdkLocation failed.\\\"}),c.Ul(\\\"sdkfail\\\"))})},Xza:function(){var a= this;g.Vn.Mw.Bi.Wza(this,function(b){b.result&&b.result.x&&b.result.y?(b={position:new g.U(b.result.x,b.result.y),location_type:\\\"sdk\\\",message:\\\"Watch position success by Android SDK.\\\",status:1,accuracy:b.result.precision},b.message+=\\\"Don't need convert.\\\",b.isConverted=!0,function(b){a.Lv(b,function(b,c){c.info=\\\"SUCCESS\\\";g.event.O(a,\\\"complete\\\",c)})}(b)):g.event.O(a,\\\"error\\\",{status:0,info:\\\"FAILED\\\",message:\\\"Watch position failed by Android SDK,incorrect position.\\\"})})}});window.AMap.Geolocation=g.Vn; g.Vn.cbk=function(a){a=JSON.parse(a);var b=g.Vn.Mw.Bi;b.r(\\\"get\\\",a);b.r(\\\"watch\\\",a)}; g.Vn.Mw=g.da.extend({ka:[g.va],A:function(){},bra:function(a,b){var c=window.AMapAndroidLoc;this.h(\\\"get\\\",b,a,!0);this.we(\\\"watch\\\")||c.getLocation(JSON.stringify({to:a.options.timeout,useGPS:1,watch:0,callback:\\\"AMap.Geolocation.cbk\\\"}))},Wza:function(a,b){this.we(\\\"watch\\\")||window.AMapAndroidLoc.getLocation(JSON.stringify({to:a.options.timeout,useGPS:1,watch:1,interval:a.options.watchInterval||5,callback:\\\"AMap.Geolocation.cbk\\\"}));this.h(\\\"watch\\\",b,a)},fya:function(a){var b=window.AMapAndroidLoc;this.fK(\\\"watch\\\", a);this.we(\\\"watch\\\")||b.stopLocation()}});g.Vn.Mw.Bi=new g.Vn.Mw; \"}","vuex":"{\"lineManage\":{\"ruleShow\":false,\"carLineFlag\":false,\"lineIsLoading\":false,\"distInfo\":{\"distType\":\"\",\"salePolicy\":\"\",\"distPolicy\":\"\"},\"ruleBuy\":{\"name\":\"\",\"buyFarthestType\":\"\",\"buyFarthestDay\":\"\",\"bookBeginTime\":\"00:00\",\"bookEndTime\":\"23:59\",\"minCount\":1,\"maxCount\":5,\"earlyBookDay\":\"\",\"isRealnameAuth\":\"\",\"buyFartMinute\":\"\",\"remark\":\"\"},\"ruleSold\":{\"name\":\"\",\"type\":\"\",\"retreatPeriodType\":\"\",\"isRetreat\":\"\",\"isRefundAudit\":\"\",\"isChCommission\":\"\",\"isChange\":\"\",\"isReCommission\":\"\",\"refundChargeType\":\"\",\"changeChargeType\":\"\",\"remark\":\"\",\"isAutoCheck\":\"F\",\"autoCheckDay\":0,\"autoCheckHour\":0,\"autoCheckMinute\":0,\"ruleSoldRefundCharges\":[],\"ruleSoldChangeCharges\":[]},\"lineInfo\":{\"routeCode\":\"\",\"routeName\":\"\",\"routeType\":\"01\",\"routeTrainType\":\"0\",\"routeCheckType\":\"0\",\"thirdProCode\":\"\",\"distType\":\"\",\"runBeginTime\":\"\",\"runEndTime\":\"\",\"goodDetailIntr\":\"\",\"goodBriefIntr\":\"\",\"distPolicy\":\"\",\"salePolicy\":\"\",\"priceDist\":\"\",\"wapUrl\":\"\",\"linkMobileImg\":\"\",\"refundTel\":\"\",\"orderCustomPlugins\":[],\"id\":\"\"},\"lineTimeList\":{\"show\":[{\"busNo\":\"\",\"driveBeginTime\":\"\",\"flag\":0}],\"hide\":[]},\"distList\":[],\"siteList\":{\"show\":[],\"hide\":[]},\"lineList\":[],\"styleNumberList\":[],\"carManTime\":{\"showCarManList\":[]},\"busScheduleVos\":{\"hide\":[]},\"stockListparams\":{}},\"menu\":{\"userDefine\":false,\"menuList\":{\"data\":[{\"id\":722,\"funName\":\"购票\",\"funCode\":\"tongye\",\"funIco\":\"https://www.lotsmall.cn/manage/#/tongye/index\",\"funUrl\":\"\",\"funType\":\"\",\"optType\":\"\",\"sortNo\":7,\"hierarchy\":0,\"openType\":\"_blank\",\"functionType\":\"menu\",\"list\":[{\"funCode\":\"旅行社购票\",\"funName\":\"旅行社购票\",\"funUrl\":\"\",\"list\":[{\"funCode\":\"购票\",\"funName\":\"购票\",\"funUrl\":\"/tongye/distribution/area/index\",\"id\":\"0_0\"}]},{\"funCode\":\"订单管理\",\"funName\":\"订单管理\",\"funUrl\":\"\",\"list\":[{\"funCode\":\"已买订单列表\",\"funName\":\"已买订单列表\",\"funUrl\":\"/tongye/zhiyoubaoOrderList\",\"id\":\"1_0\"}]},{\"funCode\":\"合作商管理\",\"funName\":\"合作商管理\",\"funUrl\":\"\",\"list\":[{\"funCode\":\"导游管理\",\"funName\":\"导游管理\",\"funUrl\":\"/tongye/travelAgency/guide\",\"id\":\"2_0\"}]}],\"userInfoAccName\":\"\",\"defaultUrl\":\"\",\"grayscaleUrl\":\"\"}]},\"activeName\":\"\",\"openName\":\"\",\"asyncRouter\":[],\"title\":\"\",\"userStoreInfo\":{\"realName\":\"18516835778\",\"userName\":\"18516835778\",\"accType\":\"4\",\"logoUrl\":\"https://ggpw-public.oss-accelerate.aliyuncs.com/image/20220701/b15c32bb52d349338dde8ed4038d8ee5.png\",\"corpName\":\"北京纵贯线国际旅游有限公司\",\"mainUserInfoId\":\"\",\"imgShow\":true,\"corpId\":\"\",\"corpCode\":\"BJZGXGJLYYXGS\",\"roleType\":6,\"id\":\"\",\"zybCorpCode\":\"GGBWY\"},\"disOneKeyInfo\":{\"supplierId\":\"\",\"oneKeyLogin\":\"\",\"name\":\"\"},\"merchantInfo\":{\"sessionId\":\"1a92f81e-f3f8-41f4-8dd6-7d3ef942d858\",\"id\":17472,\"name\":\"18516835778\",\"realName\":\"18516835778\",\"time\":0,\"corpCode\":\"5c305683-6795-4a9d-8f1a-c8d917588ab9\",\"accType\":\"4\",\"mainUserInfoId\":16626,\"merchantInfoId\":2655,\"merchantInfoDto\":{\"id\":2655,\"code\":\"66931764aca24428ab5d9397f37fea60\",\"name\":\"故宫博物院\",\"logoAddr\":\"http://192.168.200.189:8080/static//fileupload/20180327/2018032720391478t5m5.png\",\"addrDetail\":\"故宫\",\"enabled\":\"T\",\"payNumLimit\":\"0\",\"isGrayMerchant\":true,\"isGrayRollback\":false,\"maintainerId\":7750021414424576,\"merchantType\":\"4\",\"corpCode\":\"GGBWY\",\"grayMerchantFlag\":true,\"registerType\":\"newRegister\",\"grayStatus\":true,\"merchantCode\":\"sdzfxggbwyfx\"},\"themeAuth\":true,\"authStr\":\"##\",\"logoUrl\":\"https://ggpw-public.oss-accelerate.aliyuncs.com/image/20220701/b15c32bb52d349338dde8ed4038d8ee5.png\",\"corpUserAuth\":{\"accessToken\":\"E844D507361A489F83E950BEDBA92654\",\"userId\":33114,\"userNo\":\"7800533704581120\",\"username\":\"18516835778\",\"nickname\":\"北京纵贯线国际旅游有限公司\",\"corpId\":7800533705236480,\"corpUnionId\":\"kdCfHJNV07AcxNv5\",\"corpCode\":\"20220709145818YRWx6i\",\"corpType\":1,\"corpFullName\":\"北京纵贯线国际旅游有限公司\"},\"principalInfo\":{\"merchantAuthId\":295,\"corpCode\":\"BJZGXGJLYYXGS\",\"roleType\":6,\"maintainerId\":7750021414424576,\"maintainerCorpCode\":\"GGBWY\"},\"principalInfoReady\":true,\"teamYearCardCorpLogin\":false,\"token\":\"6A0B2BD5C7C74B24A03388CEB3688353\",\"oneKeyToLogin\":false,\"corpName\":\"北京纵贯线国际旅游有限公司\",\"signType\":false,\"platId\":33114,\"zybCorpCode\":\"GGBWY\",\"applySubjectId\":16626,\"ifPlatSubAccount\":\"F\",\"admin\":false},\"detail\":{\"sessionId\":\"1a92f81e-f3f8-41f4-8dd6-7d3ef942d858\",\"id\":17472,\"name\":\"18516835778\",\"realName\":\"18516835778\",\"time\":0,\"corpCode\":\"5c305683-6795-4a9d-8f1a-c8d917588ab9\",\"accType\":\"4\",\"mainUserInfoId\":16626,\"merchantInfoId\":2655,\"merchantInfoDto\":{\"id\":2655,\"code\":\"66931764aca24428ab5d9397f37fea60\",\"name\":\"故宫博物院\",\"logoAddr\":\"http://192.168.200.189:8080/static//fileupload/20180327/2018032720391478t5m5.png\",\"addrDetail\":\"故宫\",\"enabled\":\"T\",\"payNumLimit\":\"0\",\"isGrayMerchant\":true,\"isGrayRollback\":false,\"maintainerId\":7750021414424576,\"merchantType\":\"4\",\"corpCode\":\"GGBWY\",\"grayMerchantFlag\":true,\"registerType\":\"newRegister\",\"grayStatus\":true,\"merchantCode\":\"sdzfxggbwyfx\"},\"themeAuth\":true,\"authStr\":\"##\",\"logoUrl\":\"https://ggpw-public.oss-accelerate.aliyuncs.com/image/20220701/b15c32bb52d349338dde8ed4038d8ee5.png\",\"corpUserAuth\":{\"accessToken\":\"E844D507361A489F83E950BEDBA92654\",\"userId\":33114,\"userNo\":\"7800533704581120\",\"username\":\"18516835778\",\"nickname\":\"北京纵贯线国际旅游有限公司\",\"corpId\":7800533705236480,\"corpUnionId\":\"kdCfHJNV07AcxNv5\",\"corpCode\":\"20220709145818YRWx6i\",\"corpType\":1,\"corpFullName\":\"北京纵贯线国际旅游有限公司\"},\"principalInfo\":{\"merchantAuthId\":295,\"corpCode\":\"BJZGXGJLYYXGS\",\"roleType\":6,\"maintainerId\":7750021414424576,\"maintainerCorpCode\":\"GGBWY\"},\"principalInfoReady\":true,\"teamYearCardCorpLogin\":false,\"token\":\"6A0B2BD5C7C74B24A03388CEB3688353\",\"oneKeyToLogin\":false,\"corpName\":\"北京纵贯线国际旅游有限公司\",\"signType\":false,\"platId\":33114,\"zybCorpCode\":\"GGBWY\",\"applySubjectId\":16626,\"ifPlatSubAccount\":\"F\",\"admin\":false},\"nextRoute\":\"\",\"iframeUrl\":\"\",\"zybCorpCodeArr\":[\"sdzfxjlscbsfx\"],\"isShowSubAuth\":false,\"systemInfo\":{\"title\":\"故宫博物院\",\"documentTitle\":\"故宫博物院\",\"showRegister\":true,\"corpCode\":\"\",\"corpName\":\"浙江深大智能科技有限公司\",\"isMessageShow\":false,\"logoUrl\":\"https://ggpw-public.oss-accelerate.aliyuncs.com/image/20220701/de24b25199284aab9dcff3e3c164d257.png\",\"showYear\":true},\"nextMeta\":{},\"hasTravel\":true}}","xjsc_2018_token":"1a92f81e-f3f8-41f4-8dd6-7d3ef942d858","xjsc_2018_userId":"17472","e6cfe709d29118e0":"v2:wqkB3F9CedUu7pOH75bhDwk5YYQVDf2XkISpS2AGlNEfkxpzxw3+EVBKVqatR/Mpx3G+KI46sjz3z1631PG9IqIK+VpO0FdUbRRa6kC2kn8XJAO5D0alsq8yAS4/xl0a55L2Wa+FiG+PawttkMYj5nh3gnBmLFe2dDGU3qbz4XEqc/NmO8+bvZD+3dV/+xKN6vFWMHlT3z2ElaqgGEO6quUQ/J/nDzBVyQ/FIO5+rYtC/YapuU4J||1691116540298||1691116600298","corpName":"北京纵贯线国际旅游有限公司","_AMap_AMap.PlaceSearch":"{\"version\":\"1671592305593\",\"script\":\"g.IF=g.da.extend({ka:[g.va],A:function(a){this.CLASS_NAME=\\\"AMap.PlaceSearch\\\";g.c.ya(this,a);this.N=g.extend({showCover:!0,autoFitView:!0},a||{});this.N.pageIndex=this.N.pageIndex||1;this.N.pageSize=\\\"number\\\"!==typeof this.N.pageSize||0>this.N.pageSize?10:50<this.N.pageSize?50:this.N.pageSize;this.url=g.o.fd+\\\"/v3/place\\\";this.iU=this.N.renderEngine||\\\"PlaceSearchRenderByMarkerList\\\";if(this.N.map||this.N.panel)g.ub.load(\\\"AMap.\\\"+this.iU),this.N.extensions=\\\"all\\\";this.N.children&&(this.N.extensions=\\\"all\\\")}, clear:function(){g.c.add(this,\\\"clear\\\");this.M&&this.M.clear()},setLang:function(a){g.c.add(this,\\\"setLang\\\");this.N.lang=a||\\\"zh_cn\\\"},getLang:function(){return this.N.lang||\\\"zh_cn\\\"},search:function(a,b){var c=[\\\"s=rsv3\\\",\\\"children=\\\"+(this.N.children?\\\"1\\\":\\\"\\\")];c.push(\\\"key=\\\"+g.o.key);this.Er(this.N,{city:\\\"city\\\",rankBy:\\\"sortrule\\\",type:\\\"types\\\",pageIndex:\\\"page\\\",pageSize:\\\"offset\\\",extensions:\\\"extensions\\\",citylimit:\\\"citylimit\\\"},c);this.fH(this.url+\\\"/text\\\",c,b,{keywords:a||\\\"\\\"},\\\"KEYWORD\\\",arguments)},searchInBounds:function(a, b,c){g.c.add(this,\\\"searchInBounds\\\");if(b){var d=[\\\"polygon=\\\"+b,\\\"s=rsv3\\\",\\\"children=\\\"+(this.N.children?\\\"1\\\":\\\"\\\")];d.push(\\\"key=\\\"+g.o.key);this.Er(this.N,{city:\\\"city\\\",rankBy:\\\"sortrule\\\",type:\\\"types\\\",pageIndex:\\\"page\\\",pageSize:\\\"offset\\\",extensions:\\\"extensions\\\",citylimit:\\\"citylimit\\\"},d);this.fH(this.url+\\\"/polygon\\\",d,c,{keywords:a||\\\"\\\"},\\\"POLYGON\\\",arguments)}else g.event.O(this,\\\"error\\\",{info:\\\"NO_PARAMS\\\"}),c&&\\\"function\\\"===typeof c&&c(\\\"error\\\",\\\"NO_PARAMS\\\")},searchNearBy:function(a,b,c,d){g.c.add(this,\\\"searchNearBy\\\"); if(b){b=g.a.Ka(b);var e=[\\\"location=\\\"+b,\\\"s=rsv3\\\",\\\"children=\\\"+(this.N.children?\\\"1\\\":\\\"\\\")];e.push(\\\"key=\\\"+g.o.key);c&&e.push(\\\"radius=\\\"+c);this.Er(this.N,{city:\\\"city\\\",rankBy:\\\"sortrule\\\",type:\\\"types\\\",pageIndex:\\\"page\\\",pageSize:\\\"offset\\\",extensions:\\\"extensions\\\",citylimit:\\\"citylimit\\\"},e);this.fH(this.url+\\\"/around\\\",e,d,{keywords:a||\\\"\\\"},\\\"NEARBY\\\",arguments)}else g.event.O(this,\\\"error\\\",{info:\\\"NO_PARAMS\\\"}),d&&\\\"function\\\"===typeof d&&d(\\\"error\\\",\\\"NO_PARAMS\\\")},getDetails:function(a,b){g.c.add(this,\\\"getDetails\\\");if(a){var c= [\\\"id=\\\"+a,\\\"s=rsv3\\\"];c.push(\\\"key=\\\"+g.o.key);c.push(\\\"language=\\\"+this.getLang());this.fH(this.url+\\\"/detail\\\",c,b,{},\\\"ID\\\")}else g.event.O(this,\\\"error\\\",{info:\\\"NO_PARAMS\\\"}),b&&\\\"function\\\"===typeof b&&b(\\\"error\\\",\\\"NO_PARAMS\\\")},setType:function(a){g.c.add(this,\\\"setType\\\");this.N.type=a},setPageIndex:function(a){g.c.add(this,\\\"setPageIndex\\\");this.N.pageIndex=a||1},setPageSize:function(a){g.c.add(this,\\\"setPageSize\\\");this.N.pageSize=\\\"number\\\"!==typeof a||0>a?10:50<a?50:a},setCity:function(a){g.c.add(this,\\\"setCity\\\"); this.N.city=a},setCityLimit:function(a){this.N.citylimit=a},Er:function(a,b,c){for(var d in a)\\\"undefined\\\"!==typeof a[d]&&\\\"undefined\\\"!==typeof b[d]&&c.push(b[d]+\\\"=\\\"+a[d]);c.push(\\\"language=\\\"+this.getLang())},fH:function(a,b,c,d,e,f){0<b.length&&g.o.Xa&&b.push(\\\"jscode=\\\"+g.o.Xa);a+=0<b.length?\\\"?\\\"+b.join(\\\"&\\\"):\\\"\\\";a=new g.kb.Ab(a,{callback:\\\"callback\\\",Gd:e,jy:!0,II:d});a.h(\\\"complete\\\",function(a){this.Mc(a,c,e,f)},this);a.h(\\\"error\\\",function(a){this.nc(a,c)},this)},ga:function(a){return a instanceof Array&& 0===a.length||\\\"undefined\\\"===typeof a?\\\"\\\":a},GY:function(a){for(var b in a)a.hasOwnProperty(b)&&(a[b]=this.ga(a[b]),\\\"object\\\"===typeof a[b]&&this.GY(a[b]))},Jd:function(a){if(a){var b=a.split(\\\",\\\");return 2===b.length?new g.U(b[0],b[1]):a}return a},NO:function(a){function b(a){return a?(a=a.split(\\\",\\\"),new g.U(a[0],a[1])):null}this.GY(a);var c={id:a.id,name:a.name,type:a.type,location:b(a.location),address:a.address,tel:a.tel,distance:parseFloat(a.distance),shopinfo:a.shopinfo};c.shopinfo=a.shopinfo&& a.shopinfo.length?a.shopinfo:\\\"\\\";if(a.children){for(var d=a.children,e=0,f=d.length;e<f;e++)d[e].location=b(d[e].location);c.children=d}d={website:a.website,pcode:a.pcode,citycode:a.citycode,adcode:a.adcode,postcode:a.postcode,pname:a.pname,cityname:a.cityname,adname:a.adname,email:a.email,photos:a.photos,entr_location:b(a.entr_location),exit_location:b(a.exit_location),groupbuy:\\\"0\\\"!==a.groupbuy_num,discount:\\\"0\\\"!==a.discount_num};\\\"1\\\"===a.indoor_map?(d.indoor_map=!0,d.indoor_data={cpid:this.ga(a.indoor_data.cpid), floor:this.ga(a.indoor_data.floor),truefloor:this.ga(a.indoor_data.truefloor)}):d.indoor_map=!1;e={groupbuys:\\\"\\\",discounts:\\\"\\\",deep_type:\\\"\\\",dining:\\\"\\\",hotel:\\\"\\\",cinema:\\\"\\\",scenic:\\\"\\\"};if(a.rich_content){if(d.groupbuy){var f=a.rich_content.groupbuys,h=f.length;0<h&&(e.groupbuys=[]);for(var k=0;k<h;k+=1)e.groupbuys.push({title:f[k].title,type_code:f[k].typecode,type:f[k].type,detail:f[k].detail,stime:f[k].start_time,etime:f[k].end_time,count:f[k].num,sold_num:parseInt(f[k].sold_num),original_price:parseFloat(f[k].original_price), groupbuy_price:parseFloat(f[k].groupbuy_price),discount:parseFloat(f[k].discount),ticket_address:f[k].ticket_address,ticket_tel:f[k].ticket_tel,photos:f[k].photos,url:f[k].url,provider:\\\"\\\"})}if(d.discount)for(f=a.rich_content.discounts,h=f.length,0<h&&(e.discounts=[]),k=0;k<h;k+=1)e.discounts.push({title:f[k].title,detail:f[k].detail,start_time:f[k].start_time,end_time:f[k].end_time,sold_num:parseInt(f[k].sold_num),photos:f[k].photos,url:f[k].url,provider:\\\"\\\"})}if(a.deep_info)switch(e.deep_type=a.deep_info.type, f=a.deep_info,e.deep_type){case \\\"cinema\\\":e.cinema={intro:f.intro,rating:f.rating,deep_src:\\\"\\\",parking:f.parking,opentime_GDF:f.opentime_GDF,opentime:f.opentime,photos:f.photos};e.deep_type=\\\"CINEMA\\\";break;case \\\"dining\\\":e.dining={cuisines:f.cuisines,tag:f.tag,intro:f.intro,rating:f.rating,cp_rating:f.cp_rating,deep_src:\\\"\\\",taste_rating:f.taste_rating,environment_rating:f.environment_rating,service_rating:f.service_rating,cost:f.cost,recommend:f.recommend,atmosphere:f.atmosphere,ordering_wap_url:f.ordering_wap_url, ordering_web_url:f.ordering_web_url,ordering_app_url:f.ordering_app_url,opentime_GDF:f.opentime_GDF,opentime:f.opentime,addition:f.addition,photos:f.photos};e.deep_type=\\\"DINING\\\";break;case \\\"scenic\\\":e.scenic={intro:f.intro,rating:f.rating,deep_src:\\\"\\\",level:f.level,price:f.price,season:f.season,recommend:f.recommend,theme:f.theme,ordering_wap_url:f.ordering_wap_url,ordering_web_url:f.ordering_web_url,opentime_GDF:f.opentime_GDF,opentime:f.opentime,photos:f.photos};e.deep_type=\\\"SCENIC\\\";break;case \\\"hotel\\\":e.hotel= {rating:f.rating,star:f.star,intro:f.intro,lowest_price:f.lowest_price,faci_rating:f.faci_rating,health_rating:f.health_rating,environment_rating:f.environment_rating,service_rating:f.service_rating,traffic:f.traffic,addition:f.addition,deep_src:\\\"\\\",photos:f.photos},e.deep_type=\\\"HOTEL\\\"}var f={},l;for(l in c)c.hasOwnProperty(l)&&(f[l]=c[l]);if(this.N.extensions&&\\\"base\\\"!==this.N.extensions){for(var m in e)e.hasOwnProperty(m)&&e[m]&&(f[m]=e[m]);for(var n in d)d.hasOwnProperty(n)&&(f[n]=d[n]);if(a.$H)for(var p in a.$H)a.$H.hasOwnProperty(p)&& a.$H[p].length&&void 0===f[p]&&(f[p]=a.$H[p])}return f},close:function(){g.c.add(this,\\\"close\\\");this.closed=!0},open:function(){g.c.add(this,\\\"open\\\");this.closed=!1},poiOnAMAP:function(a){g.c.add(this,\\\"poiOnAMAP\\\");var b={},c=g.a.Ka(a.location);b.id=a.id;c&&(b.y=c.Q,b.x=c.R);b.name=a.name;b.address=a.address;g.ai.ot(g.ai.x4(b))},detailOnAMAP:function(a){g.c.add(this,\\\"detailOnAMAP\\\");var b={},c=g.a.Ka(a.location);b.id=a.id;c&&(b.y=c.Q,b.x=c.R);b.name=a.name;g.ai.ot(g.ai.v4(b))},Mc:function(a,b,c,d){if(!this.closed){var e; if(parseInt(a.status,10)){e={info:a.info,poiList:{}};e.poiList={pois:[],count:parseInt(a.count,10),pageIndex:this.N.pageIndex,pageSize:this.N.pageSize};if(a.pois)for(var f=0;f<a.pois.length;f+=1)e.poiList.pois[f]=this.NO(a.pois[f]);a.suggestion&&a.suggestion.keywords.length&&(e.keywordList=a.suggestion.keywords,e.info=\\\"TIP_KEYWORDS\\\");if(a.suggestion&&a.suggestion.cities.length){for(var f=a.suggestion.cities,h=[],k=0;k<f.length;k+=1){var l=f[k],m;for(m in l)l.hasOwnProperty(m)&&\\\"num\\\"===m&&(l.count= l[m],delete l[m]);l.count=parseInt(l.count);h.push(l)}e.info=\\\"TIP_CITIES\\\";e.cityList=h}a.count&&0!==parseInt(a.count,10)||e.cityList||e.keywordList?(g.event.O(this,\\\"complete\\\",e),(this.N.map||this.N.panel)&&this.QA(e,c,d),b&&\\\"function\\\"===typeof b&&b(\\\"complete\\\",e)):(e.info=\\\"ok\\\"===a.info.toLowerCase()?\\\"NO_DATA\\\":a.info,g.event.O(this,\\\"complete\\\",e),(this.N.map||this.N.panel)&&this.QA(e,c,d),b&&\\\"function\\\"===typeof b&&(e.cityList||e.keywordList?b(\\\"complete\\\",e):b(\\\"no_data\\\",{})))}else e={info:a.info},z.event.O(this, \\\"error\\\",e),b&&\\\"function\\\"===typeof b&&b(\\\"error\\\",a.info)}},QA:function(a,b,c){var d=this;g.ub.load(\\\"AMap.\\\"+this.iU,function(){d.M||(d.render=d.M=new window.AMap[d.iU](d.N.showCover));d.M.autoRender({data:a,eventTrigger:function(a,b){g.event.O(d,a,b)},methodName:{KEYWORD:\\\"search\\\",NEARBY:\\\"searchNearBy\\\",POLYGON:\\\"searchInBounds\\\",ROUTE:\\\"searchNearRoute\\\"}[b],placeSearchInstance:d,methodArgumments:c,renderStyle:d.N.renderStyle||\\\"newpc\\\",panel:d.N.panel,map:d.N.map,autoFitView:d.N.autoFitView});d.pH=d.M.searchCircle})}, nc:function(a,b){z.event.O(this,\\\"error\\\",a);b&&\\\"function\\\"===typeof b&&b(\\\"error\\\",a.info)}});window.AMap.PlaceSearch=g.IF; \"}","_AMap_wgl":"{\"version\":\"1671592305593\",\"script\":\"g.l.sp&&(g.D$=function(a){function b(a,b,c,e,f,h,k){var l=a.Oa;c=[];e=a.Ig;var m=null,n=null,s;a.Oa=[];h=h&&16<b;for(var w=[],t=[],Q=[],N=1,J=l.length;N<J;N+=1){var O=l[N],V=O[1].split(\\\"&\\\"),m=p(x?x:V[0]),n=p(V[4]);s=O[6];var R=O[0],S=O[3]*Math.pow(2,2)*k,T=O[4],W={},U=O[5],O=[];if(U&&U.length)for(var X=0,Z=U.length;X<Z;X+=1){var Y=U[X].split(\\\"-\\\"),V=Y[1].split(\\\"^\\\");O[Y[0]]=V;for(var Y=0,aa=V.length;Y<aa;Y+=1)-1===d(c,V[Y])&&c.push(V[Y])}if(T&&T.length)for(U=0,Z=T.length;U<Z;U+=1){V=T[U].split(\\\"-\\\"); Y=parseInt(V[0]);W[Y]={};for(var aa=1,da=V.length;aa<da;aa+=1)W[Y][parseInt(V[aa])]=!0}U=0;for(T=R.length;U<T;U+=1){V=R[U];y||(w=[],Q=[],t=[]);for(var V=r(V,v,b),Z=q(V,e,f,!0),V=Z[1],Y=[],X=da=aa=0,Aa=V.length-1;X<Aa;X+=1){var ha=V[X],ea=V[X+1],aa=aa+ha[0],da=da+ea[1];if(!W[U]||!W[U][X])if(h){var la=ea[0]-ha[0],ia=ea[1]-ha[1],ta=5E3+la+(5E3+ia)/1E4,ia=Math.sqrt(Math.pow(la,2)+Math.pow(ia,2)),la=Math.round(S/64),ia=Math.ceil(ia/64);la?t.push(0,0,ia,la,0,la,0,0,ia,0,ia,la):t.push(-1,-1,-1,-1,-1,-1, -1,-1,-1,-1,-1,-1);w.push(ha[0],ha[1],-S,ta);w.push(ea[0],ea[1],0,ta);w.push(ha[0],ha[1],0,ta);w.push(ha[0],ha[1],-S,ta);w.push(ea[0],ea[1],-S,ta);w.push(ea[0],ea[1],0,ta)}else Q.push(ha[0],ha[1],0,-1,ea[0],ea[1],0,-1);Y.push([ha[0],ha[1]])}X=V.length-1;aa=[aa/X+215440491,da/X+106744817];V=u.Wh(h?Y:V,[],0,1);Y=0;for(da=V.length;Y<da;Y+=1)X=-S,h||(X=0),t.push(-1,-1),w.push(V[Y][0],V[Y][1],X,0);!y&&w.length&&(V=[m,n,s],Z=[new Float32Array(w),new Float32Array(t),new Float32Array(Q),V,Z[1],aa],O[U]&& (Z.Qra=O[U]),a.Oa.push(Z))}}y&&w.length&&(b=256*Math.pow(2,20-e.z),aa=[e.x*b+128,e.y*b+128],Z=[new Float32Array(w),new Float32Array(t),new Float32Array(Q),[m,n,s],null,aa],a.Oa.push(Z));a.Cn=c;return a}function c(a,b,c,e,f,h){c=a.Oa;e=[];for(var k=a.Ig,l=null,m=null,n={},s=1,w=c.length;s<w;s+=1){var t=c[s],y=t[1].split(\\\"&\\\"),l=p(x?x:y[0]),m=p(y[2]),N=y[0]+y[2];n[N]||(n[N]={f$:[],G8:[],Nb:[],le:[],cR:l,borderColor:m,Zc:t[6]});var l=n[N].f$,m=n[N].G8,y=n[N].Nb,N=n[N].le,J=t[0],O=t[3]*Math.pow(2,2),V= t[4],R={};if((t=t[5])&&t.length)for(var S=0,T=t.length;S<T;S+=1)for(var W=t[S].split(\\\"-\\\")[1].split(\\\"^\\\"),U=0,X=W.length;U<X;U+=1)-1===d(e,W[U])&&e.push(W[U]);if(V&&V.length)for(t=0,S=V.length;t<S;t+=1)for(T=V[t].split(\\\"-\\\"),W=parseInt(T[0]),R[W]={},U=1,X=T.length;U<X;U+=1)R[W][parseInt(T[U])]=!0;t=0;for(V=J.length;t<V;t+=1){for(var Z=J[t],Z=r(Z,v,b),Z=q(Z,k,f,!0)[1],S=[],T=0,W=Z.length-1;T<W;T+=1){var U=Z[T],X=Z[T+1],Y=[U[0]-0*O,U[1]-0.3*O],aa=[X[0]-0*O,X[1]-0.3*O];R[t]&&R[t][T]||(h?((X[0]-U[0])*(Y[1]- U[1])<(Y[0]-U[0])*(X[1]-U[1])&&(l.push(Y[0],Y[1],2),l.push(X[0],X[1],-1),l.push(U[0],U[1],-1),l.push(Y[0],Y[1],2),l.push(aa[0],aa[1],2),l.push(X[0],X[1],-1),N.push([U,X,aa,Y])),y.push(Y[0],Y[1],-1,aa[0],aa[1],-1)):y.push(U[0],U[1],-1,X[0],X[1],2));S.push([Y[0],Y[1]])}Z.pop();T=u.Wh(h?S:Z,[],0,1);N.push(h?S:Z);Z=0;for(S=T.length;Z<S;Z+=1)m.push(T[Z][0],T[Z][1],3)}}a.Oa=[];for(Z in n)n.hasOwnProperty(Z)&&(y=[n[Z].cR,n[Z].borderColor,n[Z].Zc],a.Oa.push([new Float32Array(n[Z].f$),new Float32Array(n[Z].G8), new Float32Array(n[Z].Nb),y,n[Z].le]));a.Cn=e;return a}function d(a,b){if(a&&!a.length)return-1;if(a.indexOf)return a.indexOf(b);for(var c=0;c<a.length;c+=1)if(a[c]===b)return c;return-1}function e(a,b,c){var d=a.Oa,e=[],f={0:\\\"ffde0000\\\",1:\\\"ffffcc00\\\",2:\\\"ff33b100\\\",3:\\\"ff8c0e0e\\\",4:\\\"ffadadad\\\"};c&&(c.congested&&(f[0]=c.congested),c.slow&&(f[1]=c.slow),c.smooth&&(f[2]=c.smooth),c.seriousCongested&&(f[3]=c.seriousCongested),c.unknown&&(f[4]=c.unknown));c=0;for(var h=d.length;c<h;c++){for(var l=[],m=0,n=d[c].length;m< n;m++){var s=[],r=[];k(s,r,d[c][m][1],a.ta,b);s.forEach(function(a,b){l.push([a,r[b]])})}if(l.length){var q=[[],[],{width:0.75*d[c][0][0],borderColor:p(f[c])}];l.forEach(function(a){var b=q[0].length/9;b&&(a[1]=a[1].map(function(a){return a+b}));q[0]=q[0].concat(a[0]);q[1]=q[1].concat(a[1])});q[0]=new Float32Array(q[0]);q[1]=new Uint16Array(q[1]);e.push(q)}}a.Oa=e;return a}function f(a,b,c,d,e,f){function k(a){for(var b=0,c=0,d=a.length;c<d;c++)b+=a[c][0].length/s-1;return b}function l(){Ba.Z.push(new Float32Array(la)); Ba.cc.push(new Uint16Array(ia))}function m(){la=[];ia=[];ta=[];Ha=Ia=0}function n(a,b){for(var c=0,d=a.length;c<d;c++)a[c]+=b;return a}for(var s=11,r=\\\"solid solid_roundcap solid_squarecap dash railway dash_crewel\\\".split(\\\" \\\"),q=a.Oa.slice(1),v=q.length-1;0<=v;v--)q[v].t5=v;q.sort(function(a,b){return a[2]>b[2]?1:a.t5>b.t5?1:-1});for(var u={},v=0,t=q.length;v<t;v+=1){var x=q[v],y=x[1].split(\\\"&\\\"),R,S,T,W,U;R=S=T=W=U=null;var X,Z,Y,aa,da=null,Aa=!1;X=Z=Y=aa=null;y[1]&&(R=p(y[1]));S=parseInt(y[0]);T=y[2]; T!==r[0]&&(T===r[1]?X=\\\"round\\\":T===r[2]?X=\\\"square\\\":0===T.indexOf(r[5])?(da=!0,Y=[3,2]):0===T.indexOf(r[3])?(Y=T.substring(5).split(\\\")\\\")[0].split(\\\",\\\"),Y.forEach(function(a,b){Y[b]*=e})):0===T.indexOf(r[4])&&(W=R,R=y[4]?p(y[4]):[1,1,1,R[3]],Y=[12,12],Aa=!0,U=3,S=1));y[3]&&y[4]&&3<y.length&&(U=S+parseInt(y[3]),W=p(y[4]),T=y[5],T!==r[0]&&(T===r[1]?Z=\\\"round\\\":T===r[2]?Z=\\\"square\\\":0!==T.indexOf(r[5])&&0===T.indexOf(r[3])&&(U+=1,aa=T.substring(5).split(\\\")\\\")[0].split(\\\",\\\"),aa.forEach(function(a,b){aa[b]*=e})))); if(c){if(Y)for(y=Y.length-1;0<=y;y-=1)Y[y]*=e;if(aa)for(y=aa.length-1;0<=y;y-=1)aa[y]*=e}var ha=[];ha.Uc=0;T=[];var ea=[];h(ha,ea,T,x[0],a.Ig,b,c,d,e,X);\\\"app\\\"===w&&(S/=4,U/=4);y=[S,R,Y,U,W,aa,da,Aa,X,Z,x[3],x[4],x[4].id];x=x[2];u[x]||(u[x]=[]);R=[ha,ea,y];f&&R.push(T);u[x].push(R)}var la=void 0,ia=void 0,ta=void 0,Ia=void 0,Ha=void 0,Ba={Z:[],cc:[],hash:{}};m();for(var Ca in u)if(u.hasOwnProperty(Ca)){b=u[Ca];65535<k(b)+ia[ia.length-1]+10&&(l(),m());c=[];d=Ba.cc.length;f=0;for(r=b.length;f<r;f++)q= b[f],v=null,la=la.concat(q[0]),ia=ia.concat(n(q[1],Ia)),v=new Float32Array([d,q[1].length,2*Ha]),c.push(v),Ia+=q[0].length/s,Ha+=q[1].length,q[2].jva=q[3],b[f]=q[2];Ba.hash[Ca]=c;ta.push(Ca)}l();u.buffer=Ba;a.Oa=u;return a}function h(a,b,c,d,e,f,h,k,l,m){for(var n=0,p=d.length;n<p;n+=1){var s=a.length/11,u=s+6,w=r(d[n],v,f),t=q(w,e,k);if(1<t[1].length){for(var w=t[0],x=t[2],y=0,t=t[1].length;y<t;y+=1){if(0<y){var R=w[2*y]-w[2*y-2],S=w[2*y+1]-w[2*y-1];a.Uc+=Math.sqrt(R*R+S*S)*(h?l:1)}var R=w[2*y], S=w[2*y+1],T=x[y][0],W=x[y][1],U,X;y===t-1?(U=w[2*t-2],X=w[2*t-1]):(U=w[2*y+2],X=w[2*y+3]);var Z,Y;0===y?(Z=R,Y=S):(Z=w[2*y-2],Y=w[2*y-1]);if(0!==y){var aa=y===t-1?0:-1;a.push(R,S,T,W,1,Z,Y,aa,U,X,a.Uc);a.push(R,S,T,W,-1,Z,Y,aa,U,X,a.Uc)}else a.push(R,S,T,W,0,Z,Y,0,U,X,a.Uc),a.push(R,S,T,W,1,Z,Y,0,U,X,a.Uc),a.push(R,S,T,W,1,Z,Y,1,U,X,a.Uc),a.push(R,S,T,W,0,Z,Y,1,U,X,a.Uc),a.push(R,S,T,W,-1,Z,Y,1,U,X,a.Uc),a.push(R,S,T,W,-1,Z,Y,0,U,X,a.Uc),m&&(b.push(s+2,s+0,s+3),b.push(s+2,s+1,s+0),b.push(s+3,s+0, s+4),b.push(s+4,s+0,s+5));y!==t-1?(aa=0===y?0:1,a.push(R,S,T,W,1,Z,Y,aa,U,X,a.Uc),a.push(R,S,T,W,-1,Z,Y,aa,U,X,a.Uc)):(a.push(R,S,T,W,0,Z,Y,0,U,X,a.Uc),a.push(R,S,T,W,1,Z,Y,0,U,X,a.Uc),a.push(R,S,T,W,1,Z,Y,-1,U,X,a.Uc),a.push(R,S,T,W,0,Z,Y,-1,U,X,a.Uc),a.push(R,S,T,W,-1,Z,Y,-1,U,X,a.Uc),a.push(R,S,T,W,-1,Z,Y,0,U,X,a.Uc));y!==t-1?(b.push(u+4*y,u+4*y+3,u+4*y+1),b.push(u+4*y,u+4*y+2,u+4*y+3)):m&&(R=u+4*(t-1),b.push(R+1,R+2,R+0),b.push(R+2,R+3,R+0),b.push(R+0,R+4,R+5),b.push(R+0,R+3,R+4))}c.push(x)}}} function k(a,b,c,d,e){for(var f=[],h=0,k=c.length;h<k;h+=1){var l=[],m=[],n=r(c[h]),p=q(n,d,e);f.push(p[2]);if(1<p[1].length){var s=p[1].length;p[1].forEach(function(a,b,c){var d=c[b-1];c=c[b+1];0===b?d=a:b===s-1&&(c=a);l.push(a[0],a[1],p[2][b][0],p[2][b][1],1,d[0],d[1],c[0],c[1]);l.push(a[0],a[1],p[2][b][0],p[2][b][1],-1,d[0],d[1],c[0],c[1]);0===b?m.push(0,1,2):b!=s-1?(m.push(2*(b-1)+1,2*b+1,2*b),m.push(2*b,2*b+1,2*(b+1))):m.push(2*(b-1)+1,2*b+1,2*b)});a.push(l);b.push(m)}}}function l(a,b,c,d,e, f,h,k){for(var l=0,m=d.length;l<m;l+=1){var n=a.length/2,p=q(r(d[l],v,f),e,h);if(2<p[1].length&&(n=u.Wh(p[1],[],n),n.length&&(a.push.apply(a,p[0]),b.push.apply(b,n),c.push(p[2]),k)))for(var n=0,s=p[2].length;n<s;n+=1){var w=p[2][n][0]/512,t=p[2][n][1]/512;1==e.x%2&&(w+=0.5);1==e.y%2&&(t+=0.5);k.push(w,t)}}}function m(a,b,c,d){function e(a,b){for(var c=0,d=a.length;c<d;c++)a[c]+=b;return a}var f=a.Oa,h=[],k=[],m=[],s=[];n(a,k,m,c);for(var r=[[[0,0],[255,0],[255,255],[0,255]]],q=[[0,0],[255,0],[0,255], [255,255]],v=a.Ig,u=0,w=q.length;u<w;u+=1){var t=q[u][0]/512,x=q[u][1]/512;1==v.x%2&&(t+=0.5);1==v.y%2&&(x+=0.5);s.push(t,x)}h.push([k,m,p(\\\"ff\\\"+a.ly.substr(1)),\\\"regions:land\\\",r,s,\\\"30001:1\\\"]);f.sort(function(a,b){return\\\"string\\\"===typeof a?-1:\\\"string\\\"===typeof b?1:a[2]>b[2]?1:a[2]<b[2]?-1:0});q=1;for(v=f.length;q<v;q+=1)u=f[q],k=[],m=[],r=[],s=[],w=p(u[1].split(\\\"&\\\")[0]),l(k,m,r,u[0],a.Ig,b,c,s),k=[k,m,w,u[3],null,s,u[4]],d&&(k[4]=r),h.push(k);b={wp:[],Xe:[],Z:[],cc:[],Al:[]};f=d=c=0;for(r=h.length;f< r;f++)k=h[f],b.Z.push.apply(b.Z,k[0]),b.cc.push.apply(b.cc,e(k[1],c)),b.Al.push.apply(b.Al,k[5]),b.Xe.push([k[2],k[6]]),b.wp.push([k[1].length,2*d]),d+=k[1].length,c+=k[0].length/2,delete k[0],delete k[1],delete k[5];b.Z=new Float32Array(b.Z);b.cc=new Uint16Array(b.cc);b.Al=new Float32Array(b.Al);h.buffer=b;a.Oa=h;return a}function n(a,b,c,d){var e=a.Ig;a=256*e.x*d-215440491;e=256*e.y*d-106744817;b.push(a,e);var f=256*d;d=a+f;b.push(d,e);e+=f;b.push(a,e);b.push(d,e);c.push(0,1,2,1,3,2)}function p(a){for(var b= [],c=0,d=a.length;c<d;c+=2)b.push(parseInt(a.substr(c,2),16)/255);b.push(b.shift());return b}function q(a,b,c,d){var e=0,f=0,e=256*b.x,f=256*b.y;b=[];for(var h=[],k=[],l=0,m=a.length;l<m;l+=2){var n=(e+a[l])*c-215440491,p=(f+a[l+1])*c-106744817,s=k.length;if(d||0===b.length)k.push(n),k.push(p),b.push([n,p]),h.push([a[l],a[l+1]]);else if(n!==k[s-2]||p!==k[s-1])n===k[s-2]&&n===k[s-4]?(k[s-1]=p,b[b.length-1][1]=p,h[b.length-1][1]=a[l+1]):p===k[s-1]&&p===k[s-3]?(k[s-2]=n,b[b.length-1][0]=n,h[b.length- 1][0]=a[l]):(k.push(n),k.push(p),b.push([n,p]),h.push([a[l],a[l+1]]))}return[k,b,h]}function r(a,b,c){var d=\\\"ASDFGHJKLQWERTYUIO!sdfghjkleiu3~yr5-P&mq9`%zCN*b=8@^xpVM\\\";b=b||\\\"v5\\\";var e,f;\\\"v5\\\"<b?(e=d.length,f=512):(e=27,d=d.substr(0,27),f=333);var h,k,l,m,n;k=[];l=NaN;m=0;for(n=a.length;m<n;m++)h=a[m],h=d.indexOf(h),isNaN(l)?l=h*e:(h=l+h-f,18===c&&\\\"v5\\\"<b&&(h/=4),k.push(h),l=NaN);return k}function s(a,b){for(var c=0,d=b.length;c<d;c++)a.push(b[c])}var u=null,v=1,w,t=!1,x=null,y=!0;return{parseDataToWebGL:function(d, e){function h(a,b){var c=[];if(\\\"road\\\"===b){if(a.Oa&&a.Oa.buffer)for(var d=a.Oa.buffer,e=0,f=d.Z.length;e<f;e++)c.push(d.Z[e].buffer,d.cc[e].buffer)}else if(\\\"region\\\"===b)a.Oa&&a.Oa.buffer&&(d=a.Oa.buffer,c.push(d.cc.buffer,d.Al.buffer,d.Z.buffer));else if(\\\"building\\\"===b&&a.Oa)for(d=0,e=a.Oa.length;d<e;d++)f=a.Oa[d],c.push(f[0].buffer,f[1].buffer),f[2].byteLength&&c.push(f[2].buffer);c.length&&this.Au(c)}function k(a){var b=a.Oa;s&&b&&1<b.length&&b.slice(1).forEach(function(b){if(b&&null===b[1]){var c= b[b.length-1],d=s[c];b[1]=d.browserStyle[d.levelStyleMapping[n]];\\\"road\\\"===a.Gd&&(b[1]=b[1][0],b[4]=d,b[4].id=c)}})}u=this.Wh?this:g.Fc;v=d.df;t=d.AS;w=d.mode;y=d.Pf;var l=t?b:c,n=d.Gv,p=d.Sq,s=null;x=d.Xr;var r=d.ba,q=[],M=Math.pow(2,20-n),K=!!d.Dd;void 0!==d.iy&&(s=d.Ue[d.iy].stylemaps);for(var F=0,Q=d.Pc.length;F<Q;F+=1){var N=d.Pc[F],J=N.Gd,O=null;k(N);switch(J){case \\\"region\\\":O=m(N,n,M,K);break;case \\\"road\\\":O=f(N,n,p,M,d.D8,K);break;case \\\"building\\\":O=l(N,n,p,r,M,d.ZP,d.az)}a&&h.call(self.Au?self: this,O,J);O&&q.push(O)}delete d.Ue;d.Pc=q;e(null,{data:d})},Jva:function(a,b){u=this.Wh?this:g.Fc;for(var c=a.Pc,d=Math.pow(2,20-a.Od),f=[],h=0,k=c.length;h<k;h++)f.push(e(c[h],d,a.Hya));a.Pc=f;b(null,{data:a})},G7:function(a,b){u=this.Wh?this:g.Fc;for(var c=a.Rv,d=0;d<c.length;d+=1){for(var e=[],f=0;f<c[d].length;f+=1)e.push(c[d][f][0],c[d][f][1]);c[d]=e}var h,d=[],e=[];a:{for(var k={x:0,y:0},l,m=[],n=[],f=[],p=0;p<c.length;p+=1){var r=c[p].length;4<=r&&c[p][0]==c[p][r-2]&&c[p][1]==c[p][r-1]&&c[p].splice(r- 2);r=q(c[p],k,1);if(0==p){if(3>r[1].length)break a;l=r[1];h=r[0]}else 2<r[1].length&&(m.push(r[1]),n.push(r[2]),f.push(r[0]))}c=u.Wh(l,m,0);if(c.length)for(s(e,c),s(d,h),p=0;p<f.length;p+=1)s(d,f[p])}h=[new Float32Array(d),65535<d.length/2?new Uint32Array(e):new Uint16Array(e),{},[]];b(null,{data:h})},A7:function(a,b){u=this.Wh?this:g.Fc;var c=a.nb,d=a.ul,e=0,f=Math.PI/180*6,h=[],k=[];h.push(c[0],c[1]);for(var l=0;60>l;l++)h.push(c[0]+d*Math.cos(e),c[1]+d*Math.sin(e)),e+=f,0<l&&k.push(0,l,l+1),59== l&&k.push(0,l+1,1);b(null,{data:[h,k]})},LGa:function(){}}},g.Fc&&(g.Fc.xf(null,g.tF),g.Fc.xf(null,g.NL),g.Fc.xf(null,g.D$)));(function(){function a(){function a(b,c,d,e,f,k){var l=[0,0,0,0,0],m=d.slice(0,4).concat(l),r=[],q=Math.PI/180*6,B=void 0,G=void 0,B=d.slice(0,2),H=n(e),I=n(f),G=s.normalize((new h(H)).zf(new h(B))),P=s.normalize((new h(I)).zf(new h(B)));s.FS(G,k)?(B=s.zJ(G),G=s.zJ(P)):(B=s.zJ(P),G=s.zJ(G),k=[I,H],H=k[0],I=k[1],f=[f,e],e=f[0],f=f[1]);H=Math.ceil(Math.abs(G-B)/q);30<=H&&(H=60-H);for(k=0;k<H;k++)0===k?(m.push.apply(m,e.slice(0,4)),m.push.apply(m,l)):(I=(k*q+B)%(2*Math.PI),m.push.apply(m,d.slice(0,2).concat([0, 0])),m.push(1*Math.cos(I),1*Math.sin(I),0,0,0)),0<k&&r.push(0,k,k+1);m.push.apply(m,f.slice(0,4));m.push.apply(m,l);r.push(0,H,H+1);var L=b.length/p;b.push.apply(b,m);c.push.apply(c,r.map(function(a){return a+L}));return m.length/p}function c(c,d,e,f,k,l){function r(a,b,c,d,e){var f=void 0;a.$u(b)||s.N5(a,b)?f=b:c&&d&&e?f=a:c&&!d&&e?f=b:c||d||e?c||!d||e?(f=s.normalize(a.rk(b)),H=s.cos(f,a),f=f.ps(H)):f=a:f=b;return f}function q(a,b,c){if(void 0===c||!0===c)d.push(a[0],a[1]),d.push(-b.y,b.x,0,0),d.push(G, 0,0),l.push(a[2]);if(void 0===c||!1===c)d.push(a[0],a[1]),d.push(b.y,-b.x,0,0),d.push(G,0,0),l.push(a[2])}function D(a,b){var c=a*p,e=c+p,f=e+p,k=f+p,l=m;I?(f=n(d.slice(e,f)),c=n(d.slice(c,e)),c=s.normalize((new h(f)).zf(new h(c))),c=Math.abs(s.cos(b,c)/s.sin(b,c)*2),d[e+l]=-c,d[k+l]=c):(k=n(d.slice(c,e)),e=n(d.slice(e,f)),e=s.normalize((new h(k)).zf(new h(e))),e=Math.abs(s.cos(e,b)/s.sin(e,b)*2),d[c+l]=-e,d[f+l]=e)}var A=c.length,B=0,G=0,H=void 0,I=void 0;k&&(f=\\\"bevel\\\");for(var P=0,L=c.length;P< L;P+=1){var M=c[P-1],K=c[P],F=c[P+1],Q=void 0;M&&(G+=s.Vd(K,M));if(0===P||P===A-1)0===P?(void 0===F&&(F=K),M=K,Q=s.normalize(new h(F[0]-K[0],F[1]-K[1])),e.push(0,1,2)):(F=K,Q=s.normalize(new h(K[0]-M[0],K[1]-M[1])),F=d.length/p+2,4===F?e.push(3,2,1):e.push(F-3-B,F-1,F-2)),q(K,Q);else{var N=s.normalize(new h(K[0]-M[0],K[1]-M[1])),J=s.normalize(new h(F[0]-K[0],F[1]-K[1])),O=s.normalize(N.multiply(-1).rk(J)),I=s.FS(O,N),H=s.cos(O,N);q(K,r(N,J,I,!0,!0),!0);q(K,r(N,J,I,!0,!1),!1);q(K,r(N,J,I,!1,!0),!0); q(K,r(N,J,I,!1,!1),!1);F=d.length/p;Q=F-4;M=Q+2;D(Q,N);s.N5(N,J)?e.push(Q,Q+1,Q-2-B):e.push(Q,Q-1-B,Q+1);\\\"miter\\\"==f&&(I?q(K,r(N,J,0,!0,!0),!0):q(K,r(N,J,0,!0,!0),!1),B=1);if(\\\"round\\\"===f){J=N=B=void 0;I?(B=d.slice((Q+1)*p,(Q+2)*p),N=d.slice(Q*p,(Q+1)*p),J=d.slice(M*p,(M+1)*p)):(B=d.slice(Q*p,(Q+1)*p),N=d.slice((Q+1)*p,(Q+2)*p),J=d.slice((M+1)*p,(M+2)*p));B=a(d,e,B,N,J,O.multiply(-1));if(l)for(;0<B--;)l.push(K[2]);B=d.length/p-F}e.push(M,M+1,M+2+B);k||\\\"bevel\\\"!=f&&\\\"miter\\\"!=f||(I?e.push(M,Q,Q+1):e.push(M, M-1,M+1),\\\"miter\\\"==f&&(I?e.push(M+2,M-2,M):e.push(M+2,M+1,M-1)))}}}function d(a,b,c,d){function e(a,b){var c=void 0;if(a.$u(b))c=b;else{var c=s.normalize(a.rk(b)),d=s.cos(c,a);d>Math.sqrt(3)/2&&(d=Math.sqrt(3)/2);c=c.ps(d)}return c}function f(a,c,e){if(void 0===e||!0===e)b.push(a[0],a[1]),b.push(-c.y,c.x,0,0),b.push(n,0,0),d.push(a[2]);if(void 0===e||!1===e)b.push(a[0],a[1]),b.push(c.y,-c.x,0,0),b.push(n,0,0),d.push(a[2])}for(var k=a[0],l=a[a.length-1],n=0,r=void 0;k[0]===l[0]&&k[1]===l[1]&&k!==l;)a.pop(), l=a[a.length-1];a.push(k);a.push(a[1]);a.unshift(l);var q=a.length;a.forEach(function(a,d,k){var l=k[d-1];k=k[d+1];var u=void 0;l&&(n+=s.Vd(a,l));if(0===d||d===q-1)0===d?(u=s.normalize(new h(k[0]-a[0],k[1]-a[1])),c.push(0,1,2)):(u=s.normalize(new h(a[0]-l[0],a[1]-l[1])),d=b.length/p+2,c.push(d-3,d-1,d-2)),f(a,u);else{d=s.normalize(new h(a[0]-l[0],a[1]-l[1]));k=s.normalize(new h(k[0]-a[0],k[1]-a[1]));l=s.normalize(d.multiply(-1).rk(k));r=s.FS(l,d);f(a,e(d,k),!0);f(a,e(d,k),!1);f(a,e(d,k),!0);f(a,e(d, k),!1);a=b.length/p-4;k=a+2;var u=a*p,t=u+p,E=t+p,C=E+p;d=Math.abs(s.cos(d,l)/s.sin(d,l));l=m;r?(b[u+l]=d,b[t+l]=-d,b[E+l]=-d,b[C+l]=d):(b[u+l]=-d,b[t+l]=d,b[E+l]=d,b[C+l]=-d);c.push(a,a-1,a+1);c.push(k,k+1,k+2)}})}function e(c,d,e){function f(a,b){if(r)for(;0<a--;)r.push(b)}function m(a,b){A.push.apply(A,a.slice(0,k));A.push(b.x,b.y);A.push.apply(A,a.slice(l));A.push.apply(A,a)}var n=3<arguments.length&&void 0!==arguments[3]?arguments[3]:\\\"butt\\\",r=arguments[4],q=c.length-1,D=d.length,A=[],B=[],G= [d.slice(0,p),d.slice(p,2*p)],H=[d.slice(D-p,D),d.slice(D-2*p,D-p)];\\\"square\\\"===n?(n=s.normalize((new h(c[0])).zf(new h(c[1]))),m(G[0],n),m(G[1],n),n=s.normalize((new h(c[q])).zf(new h(c[q-1]))),m(H[0],n),m(H[1],n),B.push(0,2,3,3,1,0),B.push(6,7,4,4,7,5),r&&(r.push(c[0][2]),r.push(c[q][2]))):\\\"round\\\"===n&&(n=G[0].slice(0,2).concat(0,0,0,0).concat(G[0].slice(l)),G=a(d,e,n,G[0],G[1],s.normalize((new h(c[0])).zf(new h(c[1])))),f(G,c[0][2]),n=H[0].slice(0,2).concat(0,0,0,0).concat(H[0].slice(l)),G=a(d, e,n,H[0],H[1],s.normalize((new h(c[q])).zf(new h(c[q-1])))),f(G,c[q][2]));d.push.apply(d,A);e.push.apply(e,B.map(function(a){return a+D/p}))}function f(a,b){var c=[];a.forEach(function(a){var d=a[0],e=a[1];a=a[2];b&&(d-=r[0],e-=r[1]);var f=c.length-1;if(-1===f)c.push([d,e,a]);else if(d!==c[f][0]||e!==c[f][1]||a!==c[f][2])if(1<=f){var k=s.normalize(new h(d-c[f][0],e-c[f][1])),l=s.normalize(new h(c[f][0]-c[f-1][0],c[f][1]-c[f-1][1]));k.$u(l)&&a===c[f][2]?c[f]=[d,e,a]:c.push([d,e,a])}else c.push([d, e,a])});return c}function h(a,b){\\\"object\\\"===typeof a&&a.length&&(b=a[1],a=a[0]);this.x=a;this.y=b}var k,l,m;function n(a){return[a[0]+q*a[2],a[1]+q*a[3]]}var p=9,q=1;k=4;l=6;m=7;var r=[215440491,106744817],s={normalize:function(a){var b=this.length(a);return a.ps(b)},Mf:function(a,b){return a.multiply(b)},js:function(a,b){return a.x*b.y-a.y*b.x},length:function(a){return Math.sqrt(Math.pow(a.x,2)+Math.pow(a.y,2))},sin:function(a,b){return this.js(a,b)/(this.length(a)*this.length(b))},cos:function(a, b){return this.Mf(a,b)/(this.length(a)*this.length(b))},FS:function(a,b){return 0<this.js(a,b)},Vd:function(a,b){return Math.sqrt(Math.pow(b[0]-a[0],2)+Math.pow(b[1]-a[1],2))},N5:function(a,b){return a.multiply(-1).$u(b)},zJ:function(a){a=Math.atan2(a.y,a.x);0>=a&&(a+=2*Math.PI);return a}};h.prototype={rk:function(a){return new h(this.x+a.x,this.y+a.y)},zf:function(a){return new h(this.x-a.x,this.y-a.y)},multiply:function(a){return\\\"number\\\"===typeof a?new h(this.x*a,this.y*a):this.x*a.x+this.y*a.y}, ps:function(a){return new h(this.x/a,this.y/a)},$u:function(a){var b=a.y;return this.x===a.x&&this.y===b}};return{parse:function(a,b){var h=a.lineJoin,h=void 0===h?\\\"bevel\\\":h,k=a.lineCap,k=void 0===k?\\\"butt\\\":k,l=a.Qsa,l=void 0===l?!1:l,m=a.ez,n=void 0===m?!1:m,r=a.v7,m=a.Mya,s=void 0===m?!0:m,m=a.Gsa,q=[],B=[],G=f(a.Rv,void 0===r?!0:r),r=[];l?(d(G,q,B,r),h=q.length,[0,1,2,h/p-1,h/p-2].forEach(function(a){q[a*p+8]=-1})):(c(G,q,B,h,n,r),e(G,q,B,k,r));s&&(q=new Float32Array(q),B=65535<q.length/9?new Uint32Array(B): new Uint16Array(B));h=[q,B];m&&h.push(r);if(b)b(null,{data:h});else return h}}}g.KV=a();g.Yza=new g.KA(a,{lazy:\\\"untilCall\\\"})})();g.Km={ysa:function(a,b,c){b=g.Km.createProgram(a,b,c);if(!b)return console.log(\\\"Failed to create program\\\"),!1;a.useProgram(b);a.pa=b;return!0},createProgram:function(a,b,c){b=g.Km.u6(a,a.VERTEX_SHADER,b);c=g.Km.u6(a,a.FRAGMENT_SHADER,c);if(!b||!c)return null;var d=a.createProgram();if(!d)return null;a.attachShader(d,b);a.attachShader(d,c);a.bindAttribLocation(d,0,\\\"a_Position\\\");a.linkProgram(d);var e=a.getProgramParameter(d,a.LINK_STATUS);a.deleteShader(c);a.deleteShader(b);return e?d:(console.log(\\\"Failed to link program: \\\"+ a.getProgramInfoLog(d)),a.deleteProgram(d),null)},u6:function(a,b,c){b=a.createShader(b);if(null===b)return console.log(\\\"unable to create shader\\\"),null;a.shaderSource(b,c);a.compileShader(b);return a.getShaderParameter(b,a.COMPILE_STATUS)?b:(console.log(\\\"Failed to compile shader: \\\"+a.getShaderInfoLog(b)),a.deleteShader(b),null)},Ff:function(a,b,c,d){var e=d;\\\"number\\\"!==typeof d&&(e=d.toString());if(c.F1!==e){var f=\\\"uniform\\\"+b;if(2===b.length)a[f].apply(a,[c].concat(d));else a[f](c,d);c.F1=e}},JC:function(a){a.length|| (a=[a]);for(var b=0,c=a.length;b<c;b++)delete a[b].F1}};g.M.Ye.qd=g.M.ce.Ui.extend({ka:[g.ax],A:function(a,b){this.ij=20;this.Ua=Math.min(2,window.devicePixelRatio||1);this.bp=1;arguments.callee.ma.apply(this,arguments);this.X(\\\"mapStyle\\\",a.e);this.X(\\\"style\\\",a.e);this.kl=this.Ei=!0;a.e.D.xq&&this.AC(a,b);this.ao=0;this.Wk={};this.yJ()||this.set(\\\"reload\\\")},Jq:function(){this.oa.forEach(function(a){this.Lf(a)},this);this.ca.deleteProgram(this.ca.pa);g.F.G(this.xa,\\\"webglcontextlost\\\",this.zz,this);var a=this.ca.getExtension(\\\"WEBGL_lose_context\\\");a&&a.loseContext(); this.xa=this.ca=null;for(var b in this)this.hasOwnProperty(b)&&g.a.dya(b,\\\"u_\\\")&&delete this[b];arguments.callee.ma.apply(this,arguments)},Lf:function(a){if(a.ra){if(a.ra.region&&a.ra.region.length){for(var b=a.ra.region.buffer,c=0,d=a.ra.region.length;c<d;c+=1){var e=a.ra.region[c];e[2]=null;e[4]=null}if(b){this.ca.deleteBuffer(b.Z);this.ca.deleteBuffer(b.cc);for(var f in b)b.hasOwnProperty(f)&&(b[f]=null);a.ra.region.buffer=null}delete a.ra.region}if(a.ra.road){for(c in a.ra.road)if(a.ra.road.hasOwnProperty(c))if(\\\"buffer\\\"!== c)delete a.ra.road[c];else if(b=a.ra.road.buffer){if(b.Z&&b.Z.length)for(d=0,e=b.Z.length;d<e;d++)this.ca.deleteBuffer(b.Z[d]),this.ca.deleteBuffer(b.cc[d]);for(f in b)b.hasOwnProperty(f)&&(b[f]=null);a.ra.road.buffer=null}delete a.ra.road}if(a.ra.building){c=0;for(d=a.ra.building.length;c<d;c+=1)e=a.ra.building[c],this.ca.deleteBuffer(e[0]),e[0]=null,e[1]&&this.ca.deleteBuffer(e[1]),e[1]=null,this.ca.deleteBuffer(e[2]),e[2]=null,e[3]=null,e[4]=null,e[5]=null;delete a.ra.building}delete a.ra}},Dba:\\\"precision highp float;attribute vec4 a_Position;attribute vec3 a_op,a_Next,a_Previous;attribute float a_Tags;uniform float u_xDelta,u_width;uniform lowp int u_type;uniform mat4 u_othMatrix,u_zoomMatrix,u_modelMatrix;uniform float u_scale;varying float v_distance;varying vec2 v_op;varying float v_TB;varying float v_cap;varying lowp float v_Tags;void main() {vec4 position=a_Position;position.x+=u_xDelta;if (u_type==0) {gl_Position=u_othMatrix*u_zoomMatrix*u_modelMatrix*position;}else if(u_type>1) {v_op=a_op.xy;v_TB=a_op.z;vec3 curPos=position.xyz;v_distance=a_Next.z;float ddis=0.0;vec3 previous=vec3(a_Previous.x+u_xDelta,a_Previous.y,0);vec3 next=vec3(a_Next.x+u_xDelta,a_Next.y,0);vec4 up,dir;v_distance *= u_scale;if(previous==curPos){ dir= vec4(normalize(next-curPos).xy,0,0);}else if(next==curPos){dir= -vec4(normalize(previous-curPos).xy,0,0);}else {vec3 dir0=previous-curPos;vec3 dir1=next-curPos;vec3 dir2=normalize(dir0);vec3 dir3=normalize(dir1);float f0=dir0.x*dir1.y-dir1.x*dir0.y;dir = vec4(0); v_cap=1.0;if(f0==0.0){up = vec4(dir3.y,-dir3.x,0,0); }else{vec3 dir4=normalize(dir2+dir3);float sinA=length(cross(dir4,dir2));float cosA=dot(dir4,dir2);if(sinA<0.5){sinA=0.5;}up= vec4(dir4,0)/sinA;ddis=abs(length(up)*cosA*u_width*0.5);if(f0<0.0){up=-up;ddis=-ddis;}v_distance += v_TB*a_Previous.z*ddis;}}if(previous==curPos||next==curPos){ up = vec4(dir.y,-dir.x,0,0); if(u_type==4){v_cap=sqrt(v_TB*v_TB+a_Previous.z*a_Previous.z);}else if(u_type==3){v_cap=1.0;}else{dir = vec4(0);}}vec4 pos=u_zoomMatrix*u_modelMatrix*position;pos=pos+(up*v_TB-dir*a_Previous.z)*u_width*0.5;gl_Position=u_othMatrix*pos;}else if (u_type==1) {v_Tags=a_Tags;gl_Position=u_othMatrix*u_zoomMatrix*u_modelMatrix*position;}}\\\", naa:\\\"precision lowp float;uniform vec4 u_FragColor,u_FragColor2;varying lowp float v_distance,v_TB;varying vec2 v_op;varying lowp float v_Tags;varying float v_cap;uniform lowp int u_type;uniform int u_isDash,u_onlyBorder;uniform vec4 u_dash;void main() {vec4 color=u_FragColor;if (u_type==0) {}else if(u_type>1) {if(v_op.x<-0.2||v_op.x>256.2||v_op.y<-0.2||v_op.y>256.2){discard;}if(v_cap>1.0){discard;}if(u_isDash==1){float all = u_dash[0] + u_dash[1] + u_dash[2] + u_dash[3];float off = mod(v_distance - u_dash[0], all);if(off> u_dash[0]&&off<=(u_dash[0]+u_dash[1])||off>(all-u_dash[3])){discard;}}if(u_onlyBorder==1&&v_TB<=0.7&&v_TB>=-0.7){discard;}}else if(u_type==1) {color=v_Tags==3.0?u_FragColor2:vec4((u_FragColor+(u_FragColor2-u_FragColor)*v_Tags/3.0).xyzw);}gl_FragColor=color;}\\\", reloadChanged:function(){this.g&&(this.g.Ra=!1);this.oa.clear();this.xa&&this.xa.parentNode&&this.xa.parentNode.removeChild(this.xa);this.set(\\\"display\\\")},Bz:function(a){if(this.g&&a.PS===this.g.mc)for(var b=0,c=a.Pc.length;b<c;b+=1)this.eE(a.Pc[b],a.Gv,a.Sq,a.ba)},bU:function(a,b){for(var c=this.ca,d=a.buffer,e=0,f=a.length;e<f;e+=1){var h=a[e];this.e.Dm&&h[3]&&!this.e.Dd&&(h[2]=this.J.zs(h[2],h[3],!1,b),d.Xe[e][0]=h[2])}d.Z=this.Ad(c.ARRAY_BUFFER,d.Z);d.cc=this.Ad(c.ELEMENT_ARRAY_BUFFER,d.cc)},yU:function(a, b){for(var c=this.ca,d=a.buffer,e=0,f=a.buffer.Z.length;e<f;e++)d.Z[e]=this.Ad(c.ARRAY_BUFFER,d.Z[e]),d.cc[e]=this.Ad(c.ELEMENT_ARRAY_BUFFER,d.cc[e]);if(this.e.Dm&&!this.e.Dd){var c=d.hash,d=null,h;for(h in c)if(c.hasOwnProperty(h))for(e=0,f=a[h].length;e<f;e++)d=a[h][e],d[10]&&(d[1]=this.J.km(d[1],d[10],1,!1,b),d[4]=this.J.km(d[4],d[10],0,!1,b))}},$P:function(a,b){for(var c=0,d=a.length;c<d;c+=1){var e=a[c];e.VD=e[0].length/3;e[0]=this.Ad(this.ca.ARRAY_BUFFER,e[0]);e.$J=e[1].length/3;e[1]=this.Ad(this.ca.ARRAY_BUFFER, e[1]);e.WD=e[2].length/3;e[2]=this.Ad(this.ca.ARRAY_BUFFER,e[2]);if(this.e.Dm&&e[3][2]&&!this.e.Dd){var f=this.J.Oy(e[3][0],e[3][1],e[3][2],!1,b);e[3][0]=f[0];e[3][1]=f[1]}}},Ad:function(a,b){if(b.length){var c=this.ca,d=c.createBuffer();c.bindBuffer(a,d);c.bufferData(a,b,c.STATIC_DRAW);return d}},eE:function(a){var b=a.Gd,c=this.oa.get(a.Pi);if(c){var d=a.Ig.z;c.ra[b]=a.Oa;\\\"region\\\"===b?this.bU(a.Oa,d):\\\"road\\\"===b?this.yU(a.Oa,d):\\\"building\\\"===b&&(this.$P(a.Oa,d),a.Cn&&a.Cn.length&&!c.qe&&(c.qe={}, c.qe.uf=a.Cn,g.Mj&&g.Mj.r(\\\"vecTileParsed.buildings\\\",{tp:c})));b===this.g.ha[this.g.ha.length-1]&&(c.Ba=!0,this.set(\\\"display\\\"))}},Bd:function(){if(this.wg&&!this.g.Ra){var a=this.g;a.Ra=!0;a.Ld?a.qa(\\\"renderComplete\\\"):(a.Ld=!0,a.qa(\\\"complete\\\"))}},pc:function(a,b){!window.oa&&this.oa&&(window.oa=this.oa);this.up=a.up;this.ip(a,b);this.Bd();a.xD||(a.tma=this.wg,this.Nz(a,b),this.Ls=this.mb,this.ze&&this.set(\\\"display\\\",0))},vj:function(){return this.xa},zz:function(){g.M.Ye.qd.is+=1;this.xa&&g.F.G(this.xa, \\\"webglcontextlost\\\",this.zz,this);this.xa.parentNode&&this.xa.parentNode.removeChild(this.xa);if(1<g.M.Ye.qd.is)this.kK();else{var a=this.xa.className;this.xa=document.createElement(\\\"canvas\\\");this.xa.className=a;this.yJ()}this.set(\\\"reload\\\");new g.kb.Ab(g.o.Cc+\\\"://webapi.amap.com/count?\\\"+[\\\"type=glfail\\\",\\\"c=\\\"+g.M.Ye.qd.is,\\\"crd=\\\"+g.l.WR,\\\"k=\\\"+g.o.key,\\\"u=\\\"+g.o.Ao,\\\"m=\\\"+(g.l.ba?1:0),\\\"pf=\\\"+g.l.Fz,\\\"dpr=\\\"+window.devicePixelRatio,\\\"scale=\\\"+(g.l.BL||0),\\\"detect=\\\"+g.l.ja].join(\\\"&\\\"))},kK:function(){g.l.Nf=!1;this.g&& this.g.e.D&&(this.g.e.set(\\\"baseRender\\\",g.l.Yp?\\\"dv\\\":\\\"d\\\"),this.g.e.D.bT(),this.g.M=null,this.g.S.ct(),this.g=null);this.xa=this.J=null},Zg:function(a){this.xa=document.createElement(\\\"canvas\\\");this.xa.className=a||\\\"amap-layer\\\"},yJ:function(){if(1<g.M.Ye.qd.is)return this.kK(),!1;var a=this.ca=this.xa.getContext(g.l.B$,g.l.C$);if(a)g.F.h(this.xa,\\\"webglcontextlost\\\",this.zz,this);else return this.kK(),!1;g.Km.ysa(a,this.Dba,this.naa);this.yV=a.getUniformLocation(a.pa,\\\"u_xDelta\\\");this.m$=a.getUniformLocation(a.pa, \\\"u_othMatrix\\\");this.q$=a.getUniformLocation(a.pa,\\\"u_zoomMatrix\\\");this.k$=a.getUniformLocation(a.pa,\\\"u_modelMatrix\\\");this.Sd=a.getAttribLocation(a.pa,\\\"a_Position\\\");this.hj=a.getAttribLocation(a.pa,\\\"a_op\\\");this.gj=a.getAttribLocation(a.pa,\\\"a_Previous\\\");this.Rg=a.getAttribLocation(a.pa,\\\"a_Next\\\");this.cy=a.getAttribLocation(a.pa,\\\"a_Tags\\\");a.enableVertexAttribArray(this.Sd);this.Kj=a.getUniformLocation(a.pa,\\\"u_FragColor\\\");this.gA=a.getUniformLocation(a.pa,\\\"u_FragColor2\\\");this.zk=a.getUniformLocation(a.pa, \\\"u_type\\\");this.zw=a.getUniformLocation(a.pa,\\\"u_width\\\");this.oV=a.getUniformLocation(a.pa,\\\"u_isDash\\\");this.qV=a.getUniformLocation(a.pa,\\\"u_onlyBorder\\\");this.lV=a.getUniformLocation(a.pa,\\\"u_dash\\\");this.vV=a.getUniformLocation(a.pa,\\\"u_scale\\\");a.enable(a.BLEND);a.enable(a.CULL_FACE);a.cullFace(a.FRONT);a.blendEquationSeparate(a.FUNC_ADD,a.FUNC_ADD);a.blendFuncSeparate(a.SRC_ALPHA,a.ONE_MINUS_SRC_ALPHA,a.ONE,a.ONE_MINUS_SRC_ALPHA);a.clearColor(0,0,0,0);this.sT=this.CQ=this.ez=void 0;this.qA=0;return!0}, $v:function(a){var b=Math.pow(2,a.P.zoom-this.Df),c=a.P.mb.bb(this.Ls).nd(this.ym);this.transform={translate:this.transform[0].translate.add(c),scale:b,rotate:0};this.mb=a.P.mb},Nz:function(a,b){var c=this.RP(a,b),d=this.ca,e=this.J.Ee;\\\"function\\\"===typeof e&&e(a.P.zoom);d.clear(d.COLOR_BUFFER_BIT);var e=this.g.ja?this.Ua:this.bp,f=0,h=0;0!==a.P.rotation?(f=2*Math.floor(a.P.Ha.Ac.x)*e,h=2*Math.floor(a.P.Ha.Ac.y)*e):(f=a.size.width*e,h=a.size.height*e);f&&h&&(this.xa.width=f,this.xa.height=h,d.viewport(0, 0,this.xa.width,this.xa.height),this.dt.apply(this,c),this.Oe(a))},ar:256*Math.pow(2,20),NQ:function(a,b){g.Km.JC([this.Kj]);for(var c=this.J.be,d=0,e=b.length;d<e;d++){var f=b[d],h=f.pb?f.pb.ra:f.ra;if(!h)break;if((h=h.region)&&h.length){this.$r(f.bl*this.ar);f=h.buffer;a.bindBuffer(a.ARRAY_BUFFER,f.Z);a.bindBuffer(a.ELEMENT_ARRAY_BUFFER,f.cc);for(var k=0,l=f.wp.length;k<l;k++){var m=f.Xe[k],n=m[0];(m=m[1])&&c&&(n=this.J.zs(n,m),h[k].xd=n);n&&(a.vertexAttribPointer(this.Sd,2,a.FLOAT,!1,8,0),a.uniform4f(this.Kj, n[0],n[1],n[2],n[3]),a.drawElements(a.TRIANGLES,f.wp[k][0],a.UNSIGNED_SHORT,f.wp[k][1]))}}}},OQ:function(a,b){var c=g.Km,d=this.g.ja?this.Ua:this.bp,e=this.J.be;c.JC([this.Kj,this.zk,this.zw]);for(var f={},h=0,k=b.length;h<k;h++){var l=b[h];if(l=l.pb?l.pb.ra:l.ra)if(l=l.road){var l=l.buffer.hash,m;for(m in l)l.hasOwnProperty(m)&&(f[m]?f[m].push(h):f[m]=[h])}}for(var n in f)if(f.hasOwnProperty(n))for(h=f[n],k=0,m=h.length;k<m;k++){for(var l=b[h[k]],p=(l.pb?l.pb.ra:l.ra).road,q=p.buffer,r=q.hash[n], p=p[n],s=!1,u=0,v=p.length;u<v;u++){var w=p[u],t=w,x=r[u],y=t[4],E=t[12],C=this.JN(t)[1],D=t[0];t.Mg&&(D=t.Mg.Kg[0]);E&&e&&(y=this.J.km(y,E,0),w.xd=y,(w=this.J.nv(E))&&w.strokeWidth&&w.fillWidth?C=w.fillWidth+2*w.strokeWidth:w&&w.strokeWidth?C=D+2*w.strokeWidth:w&&w.fillWidth&&(C=w.fillWidth+C-D));if(y&&C){c.Ff(a,\\\"1i\\\",this.zk,\\\"square\\\"===t[9]?3:\\\"round\\\"===t[9]?4:2);this.$r(l.bl*this.ar);if(0===u||s)a.bindBuffer(a.ARRAY_BUFFER,q.Z[x[0]]),a.bindBuffer(a.ELEMENT_ARRAY_BUFFER,q.cc[x[0]]),s&&(s=!1);a.vertexAttribPointer(this.Sd, 2,a.FLOAT,!1,44,0);a.vertexAttribPointer(this.hj,3,a.FLOAT,!1,44,8);a.vertexAttribPointer(this.gj,3,a.FLOAT,!1,44,20);a.vertexAttribPointer(this.Rg,3,a.FLOAT,!1,44,32);c.Ff(a,\\\"1f\\\",this.zw,C*d);c.Ff(a,\\\"4f\\\",this.Kj,y);this.Zp(t[5]?1:0,t[5],0);a.drawElements(a.TRIANGLES,x[1],a.UNSIGNED_SHORT,x[2])}else 0===u&&1<p.length&&(s=!0)}s=!1;u=0;for(v=p.length;u<v;u++)if(t=w=p[u],x=r[u],y=t[1],D=t[12],C=t.Mg.Kg[0],D&&e&&(y=this.J.km(y,D,1),w.xd=y,(w=this.J.nv(D))&&w.fillWidth&&(C=w.fillWidth)),C&&y){c.Ff(a,\\\"1i\\\", this.zk,\\\"square\\\"===t[8]?3:\\\"round\\\"===t[8]?4:2);this.$r(l.bl*this.ar);if(0===u||s)a.bindBuffer(a.ARRAY_BUFFER,q.Z[x[0]]),a.bindBuffer(a.ELEMENT_ARRAY_BUFFER,q.cc[x[0]]),s&&(s=!1);a.vertexAttribPointer(this.Sd,2,a.FLOAT,!1,44,0);a.vertexAttribPointer(this.hj,3,a.FLOAT,!1,44,8);a.vertexAttribPointer(this.gj,3,a.FLOAT,!1,44,20);a.vertexAttribPointer(this.Rg,3,a.FLOAT,!1,44,32);c.Ff(a,\\\"1f\\\",this.zw,C*d);c.Ff(a,\\\"4f\\\",this.Kj,y);this.Zp(t[2]?1:0,t[2],t[6]?1:0);a.drawElements(a.TRIANGLES,x[1],a.UNSIGNED_SHORT, x[2])}else 0===u&&1<p.length&&(s=!0)}},ec:new g.H(215440491,106744817),dt:function(a,b,c){if(a.length){this.jd+=1;b=this.xa.width;c=this.xa.height;var d=this.ca;b=(new g.Dc).IU(-b/2,b/2,c/2,-c/2,0,1);c=Math.pow(2,this.zoom-this.ij)*(this.g.ja?this.Ua:this.bp);c=(new g.Dc).scale(c,c,1);var e=this.mb.nd(this.T/Math.pow(2,this.ij-this.zoom)).bb(this.ec),e=(new g.Dc).translate(-e.x,-e.y,0);d.uniformMatrix4fv(this.m$,!1,b.elements);d.uniformMatrix4fv(this.q$,!1,c.elements);d.uniformMatrix4fv(this.k$,!1, e.elements);d.uniform1f(this.vV,Math.pow(2,this.zoom-this.ij)*(this.g.ja?this.Ua:1));b=this.Ok=[];for(c=a.length-1;0<=c;c-=1){e=a[c];d.disableVertexAttribArray(this.hj);d.disableVertexAttribArray(this.gj);d.disableVertexAttribArray(this.Rg);d.disableVertexAttribArray(this.cy);this.Zp(0,void 0,void 0);d.uniform1i(this.zk,0);this.$r(0);for(var f=0,h=e.length;f<h;f+=1){var k=e[f];if(k.pb?k.pb.ra:k.ra)k.jd=this.jd,b.push(k)}this.NQ(d,e);d.enableVertexAttribArray(this.hj);d.enableVertexAttribArray(this.gj); d.enableVertexAttribArray(this.Rg);d.disableVertexAttribArray(this.cy);e.length&&this.OQ(d,e);if(!(14>this.zoom))for(d.uniform1i(this.zk,1),this.Zp(0,void 0,void 0),d.disableVertexAttribArray(this.hj),d.disableVertexAttribArray(this.gj),d.disableVertexAttribArray(this.Rg),d.enableVertexAttribArray(this.cy),f=0,h=e.length;f<h;f+=1)k=e[f],(k.pb?k.pb.ra:k.ra)&&(k.pb?k.pb.ra:k.ra).building&&this.FI(d,k)}}},FI:function(a,b){for(var c=this.J.be,d=(b.pb?b.pb.ra:b.ra).building,e=0;e<d.length;e+=1){var f= d[e],h=f[3][0],k=f[3][1];if(!f||!h)break;var l=f[3][2];l&&c&&(k=this.J.Oy(h,k,l),h=k[0],k=k[1],f.xd=h);if(h||k)h||(h=[0,0,0,0]),k||(k=[0,0,0,0]),a.uniform4f(this.gA,h[0],h[1],h[2],h[3]),a.uniform4f(this.Kj,k[0],k[1],k[2],k[3]),f.VD&&(a.bindBuffer(a.ARRAY_BUFFER,f[0]),a.vertexAttribPointer(this.Sd,2,a.FLOAT,!1,12,0),a.vertexAttribPointer(this.cy,1,a.FLOAT,!1,12,8),a.drawArrays(a.TRIANGLES,0,f.VD)),f.WD&&(a.bindBuffer(a.ARRAY_BUFFER,f[2]),a.vertexAttribPointer(this.Sd,2,a.FLOAT,!1,12,0),a.vertexAttribPointer(this.cy, 1,a.FLOAT,!1,12,8),a.drawArrays(a.LINES,0,f.WD)),f.$J&&(a.bindBuffer(a.ARRAY_BUFFER,f[1]),a.vertexAttribPointer(this.Sd,2,a.FLOAT,!1,12,0),a.vertexAttribPointer(this.cy,1,a.FLOAT,!1,12,8),a.drawArrays(a.TRIANGLES,0,f.$J))}},Zp:function(a,b,c){var d=this.ca;a!==this.ez&&(d.uniform1i(this.oV,a),this.ez=a);a&&b!==this.CQ&&(this.CQ=b,d.uniform4f(this.lV,b[0],b[1],b[2]||0,b[3]||0));c!==this.sT&&(d.uniform1i(this.qV,c),this.sT=c)},$r:function(a){a!==this.qA&&(this.ca.uniform1f(this.yV,a),this.qA=a)},Oe:function(){this.transform= {translate:{x:this.xa.width/2,y:this.xa.height/2},scale:this.g.ja?1/this.Ua:1/this.bp,rotate:0}},AP:function(a,b,c){var d=null;if(a.length&&c)d=a[11].id+\\\"-\\\"+c,this.Wk[d]&&(a[0]=this.Wk[d][0],a[3]=this.Wk[d][3]);else return c=[],b&&b[0]&&(c=b[0].split(\\\"&\\\")),(b=c[2])&&0===b.indexOf(\\\"railway\\\")?(a[0]=1,a[3]=3):a[0]=parseInt(c[0])||0,c[3]&&c[4]&&3<c.length?(a[3]=a[0]+parseInt(c[3]),0===g.a.indexOf(c[5],\\\"dash\\\")&&(a[3]+=1)):a[3]=0,d&&void 0===this.Wk[d]&&(this.Wk[d]=[a[0],0,0,a[3]]),a},JN:function(a){var b= this.zoom;if(a.Mg&&a.Mg.zoom===b)return a.Mg.Kg;var c=a[11].browserStyle,d=a[11].levelStyleMapping;if(18<this.zoom){var e=this.Qk(a,18,c,d),c=Math.pow(2,this.zoom-18);a.Mg={zoom:b,Kg:[e[0]*c,e[3]*c]}}else if(g.a.M5(this.zoom))e=this.Qk(a,this.zoom,c,d),a.Mg={zoom:b,Kg:[e[0],e[3]]};else{var e=this.Qk(a,Math.floor(this.zoom),c,d),d=this.Qk(a,Math.ceil(this.zoom),c,d),f=function(a,b,c){var d;a&&b?d=a+c%1*(b-a):0===a&&b?d=Math.max(0,c%1-0.5)/0.5*b:0===a&&0===b?d=0:0!==a&&0===b&&(d=0);return g.a.xb(d, 3)},c=f(e[0],d[0],this.zoom),e=f(e[3],d[3],this.zoom);a.Mg={zoom:b,Kg:[c,e]}}return a.Mg.Kg},Qk:function(a,b,c,d){a=a[11].id+\\\"-\\\"+b;this.Wk[a]||(this.Wk[a]=this.AP([],c[d[b]]));return this.Wk[a]}});g.M.Ye.qd.is=0;(function(){if(g.Fc&&!g.Fc.xS){var a=g.a.oD({Ue:\\\"anole\\\",Au:\\\"addTransferList\\\"});g.Fc.xS=function(){var b=\\\"\\\\n      let handlers = {}\\\\n      let transferList = []\\\\n      let _handlers = [ (\\\"+g.D$+\\\")(true) ]\\\\n\\\\n      for (let i = 0, l = _handlers.length; i < l; i++) {\\\\n        let _handlerObj = _handlers[i]\\\\n\\\\n        for (let methodName in _handlerObj) {\\\\n          if (_handlerObj.hasOwnProperty(methodName)) {\\\\n            handlers[methodName] = _handlerObj[methodName]    \\\\n          }\\\\n        }\\\\n      }\\\\n\\\\n      handlers.anole = \\\"+ JSON.stringify(g.Ue)+\\\";\\\\n\\\\n      handlers.\\\"+a.addTransferList+\\\" = function(transferObjects) {\\\\n        transferList.push.apply(transferList, transferObjects)\\\\n      };\\\\n\\\\n      self.addEventListener('message', function (e) {\\\\n        let data = e.data\\\\n\\\\n        // console.log(data.cmd, new Date().getTime() - data.ts)\\\\n\\\\n        if (data.cmd === 'ping') {\\\\n          self.postMessage({\\\\n            ping: true,\\\\n            status: 200,\\\\n            ts: data.ts,\\\\n            _ts: new Date().getTime()\\\\n          })\\\\n\\\\n          return\\\\n        }\\\\n\\\\n        if (typeof handlers[data.cmd] === 'function') {\\\\n\\\\n          data.args.push(function (err, result) {\\\\n            self.postMessage({\\\\n              err,\\\\n              result,\\\\n              taskId: data.taskId,\\\\n              parentTaskId: data.parentTaskId,\\\\n              ts: data.ts,\\\\n              _ts: new Date().getTime()\\\\n            }, transferList)\\\\n\\\\n            transferList = []\\\\n          })\\\\n\\\\n          if (handlers.anole) {\\\\n            data.args[0].\\\"+ a.anole+\\\" = handlers.anole\\\\n          }\\\\n        \\\\n          handlers[data.cmd].apply(handlers, data.args)\\\\n        }\\\\n      })\\\\n    \\\";if(b=g.a.createObjectURL(b))this.url=b,g.Fc.xf(null,{tna:b},function(){g.Fc.psa()})}}})(); \"}","_AMap_AMap.PolyEditor":"{\"version\":\"1671592305593\",\"script\":\"g.eba=g.da.extend({ka:[g.va],A:function(a,b){this.e=a;this.Sc=b;this.Hb=g.o.Hb;this.CLASS_NAME=\\\"AMap.PolyEditor\\\";g.c.ya(this)},yQ:function(){this.lb||this.Zt();for(var a=0;a<this.lb.length;a+=1)for(var b=this.lb[a],c=0;c<b.length;c+=1)b[c].setMap(this.e),b[c].no&&b[c].no.setMap(this.e)},cU:function(){if(this.lb){for(var a=0;a<this.lb.length;a+=1)for(var b=this.lb[a],c=0;c<b.length;c+=1)b[c].setMap(null),b[c].ui(),b[c].no&&(b[c].no.setMap(null),b[c].no.ui());delete this.lb}},m7:function(){this.cU(); this.Sc.G(\\\"setPath\\\",this.qK,this);this.Sc.h(\\\"dragend\\\",this.l7,this,!0)},l7:function(){this.Xs&&(this.yQ(),this.Sc.h(\\\"setPath\\\",this.qK,this))},open:function(){this.Xs||(this.Xs=!0,g.c.add(this,\\\"open\\\"),this.yQ(),this.Sc.h(\\\"dragstart\\\",this.m7,this),this.Sc.h(\\\"setPath\\\",this.qK,this))},qK:function(){this.cU();this.yQ()},close:function(){this.Xs&&(this.Xs=!1,g.c.add(this,\\\"close\\\"),this.cU(),this.Sc.G(\\\"dragstart\\\",this.m7,this,!0),this.Sc.G(\\\"dragend\\\",this.l7,this,!0),this.Sc.G(\\\"setPath\\\",this.qK,this),g.event.O(this, \\\"end\\\",{type:\\\"end\\\",target:this.Sc}))},Zt:function(){this.lb=[];var a=this.Sc.getPath();if(a.length){a[0]instanceof g.U?a=[a]:g.a.isArray(a[0])&&g.a.isArray(a[0][0])&&(a=a.concat.apply([],a));this.bu=a;for(var b=0;b<a.length;b+=1){var c=a[b];this.lb[b]=[];for(var d=0,e=0,f=0,d=0,f=c.length;d<f;d+=1)e=this.ii(c[d],d,b),e.h(\\\"click\\\",this.FO,this),this.lb[b].push(e);d=0;for(e=f-1;d<f;e=d,d+=1)if(0!==d||z.B.Ec&&this.Sc instanceof z.B.Ec)c=this.lb[b][e],e=this.lb[b][d],this.iG(c,e,b),this.IH(c,e)}}},ii:function(a, b,c){var d=new z.B.wb({position:a,draggable:!0,icon:new z.B.di({size:new g.zd(11,11),imageOffset:new g.H(0,0),image:this.Hb+\\\"/images/dd-via.png\\\",innerOverlay:!0}),offset:new g.H(-6,-6),cursor:\\\"pointer\\\",zIndex:this.Sc.get(\\\"zIndex\\\")+1E3,innerOverlay:!0});d.Da=!0;d.vCa=a;d.Gh=b;d.Rl=c;d.h(\\\"dragging\\\",this.cn,this);d.h(\\\"dragend\\\",function(a){this.eo(a);var b={target:this.Sc};b.lnglat=a.target.getPosition();a=this.e.lngLatToContainer(b.lnglat);b.pixel=new g.H(a.x,a.y,1);g.event.O(this,\\\"adjust\\\",b)},this); return d},hH:function(a){var b=a.Gh;a.setMap(null);this.lb[a.Rl].splice(b,1);this.bu[a.Rl].splice(b,1);this.fw(this.bu,!0);this.B1(this.lb[a.Rl]);a.G(\\\"dragging\\\",this.cn,this).G(\\\"dragend\\\",this.eo,this).G(\\\"click\\\",this.FO,this)},eo:function(){this.Sc.ypa=!0;this.Sc.r(\\\"edit\\\")},cn:function(a){a=a.target;a.Cd=!0;a.IB&&a.IB.setPosition(this.IN(a.Sx,a));a.no&&a.no.setPosition(this.IN(a,a.Mx));this.bu[a.Rl][a.Gh]=a.getPosition();this.fw(this.bu,!0)},FO:function(a){if(a.target.Cd||this.bu[a.target.Rl].length<= (this.Sc instanceof z.B.$b?2:3))a.target.Cd=!1;else{var b=a.target;this.hH(b);var c={target:this.Sc};c.lnglat=a.target.getPosition();a=this.e.lngLatToContainer(c.lnglat);c.pixel=new g.H(a.x,a.y,1);g.event.O(this,\\\"removenode\\\",c);this.IH(b.Sx,b.Mx);b.IB&&b.IB.setMap(null);b.no&&b.no.setMap(null);b.Sx&&b.Mx?this.iG(b.Sx,b.Mx,b.Rl):b.Sx?b.Mx||(b.Sx.no=null):b.Mx.IB=null;this.eo()}},B1:function(a){for(var b=0,c=a.length;b<c;b+=1)a[b].Gh=b},fw:function(a){if(this.Sc){if(this.Sc instanceof z.B.$b)a=a[0]; else{var b=this.Sc.getPath();if(b[0]instanceof g.U)a=a[0];else if(!(g.a.isArray(b[0])&&b[0][0]instanceof g.U)){for(var c=[],d=0,e=0;e<b.length;e+=1)c[e]=a.slice(d,d+b[e].length),d+=b[e].length;a=c}}this.Sc.setPath(a,!0)}},iG:function(a,b,c){var d=this.IN(a,b),e=this.ii(d),f,h,k;e.setOpacity(0.5);e.Rl=c;a.no=b.IB=e;h=function(){var c=b.Gh;e.Gh=c;e.Cd=!0;e.G(\\\"click\\\",f,this).h(\\\"click\\\",this.FO,this);d=e.getPosition();this.bu[e.Rl].splice(c,0,d);this.fw(this.bu,!0);this.lb[e.Rl].splice(c,0,e);e.setOpacity(1); this.B1(this.lb[e.Rl]);this.IH(a,e);this.IH(e,b)};k=function(c){e.Cd=!1;e.G(\\\"dragstart\\\",h,this);e.G(\\\"dragend\\\",k,this);if(e.getMap()){var d={target:this.Sc};d.lnglat=c.target.getPosition();c=this.e.lngLatToContainer(d.lnglat);d.pixel=new g.H(c.x,c.y,1);g.event.O(this,\\\"addnode\\\",d);this.iG(a,e,e.Rl);this.iG(e,b,e.Rl)}};f=function(a){h.call(this);k.call(this,a);this.eo()};e.h(\\\"click\\\",f,this).h(\\\"dragstart\\\",h,this).h(\\\"dragend\\\",k,this);e.setMap(this.e)},IH:function(a,b){a&&(a.Mx=b);b&&(b.Sx=a)},IN:function(a, b){var c=this.e,d=c.lc(a.getPosition()),e=c.lc(b.getPosition());return c.Xh(d.add(e).nd(2))}});window.AMap.PolyEditor=g.eba; \"}","_AMap_overlay":"{\"version\":\"1671592305593\",\"script\":\"g.Aa.Ec=g.Aa.Pe.extend({A:function(a,b){var c=a.length;this.Rf=Array(c);for(var d,e,f=0;f<c;f+=1)if(d=a[f],e=new g.Aa.VL(d),this.Rf[f]=e,!b)if(0===f){if(0===d.length)break;e.vq(d)||d.reverse()}else 0!==d.length&&e.vq(d)&&d.reverse()},Md:function(){if(0===this.Rf.length)return[Infinity,Infinity,-Infinity,-Infinity];if(!this.yg){for(var a=this.Rf[0].Md(),b=1;b<this.Rf.length;b+=1){var c=this.Rf[b].Md();g.I.Q2(a,c)||g.I.extend(a,c)}this.yg=a}return this.yg},E4:function(){return this.Rf},HEa:function(){for(var a= 0;a<this.Rf.length;a+=1);},zi:function(){return g.Aa.Qe.GF},Ud:function(a){for(var b=this.Rf,c,d=0,e=b.length;d<e&&(c=b[d].Ud(a),0<d&&(c=!c),c);d+=1);return c},boa:function(a){for(var b=this.Rf,c,d=[],e=0,f=b.length;e<f;e+=1)(c=g.yd.vq(b[e].za))?d.length&&d[d.length-1].push(e):d.push([e]);e=0;for(f=d.length;e<f;e+=1){c=!1;for(var h=0,k=d[e].length;h<k&&(c=g.Aa.VL.prototype.Ud.call(b[d[e][h]],a),0<h&&(c=!c),c);h+=1);if(c)return!0}}});g.Aa.zp=g.Aa.Pe.extend({A:function(a){var b=a.length;this.ke=Array(b);for(var c=0;c<b;c+=1){var d=new g.Aa.Ec(a[c]);this.ke[c]=d}},Md:function(){if(!this.yg){for(var a=[Infinity,Infinity,-Infinity,-Infinity],b=this.ke,c=0,d=b.length;c<d;c+=1)g.I.extend(a,b[c].Md());this.yg=a}return this.yg},uR:function(){return this.za},zi:function(){return g.Aa.Qe.CF},X3:function(){return this.ke},Ud:function(a){for(var b=!1,c=0,d=this.ke.length;c<d;c+=1)if(this.ke[c].Ud(a)){b=!0;break}return b}});g.Aa.tr=g.Aa.Pe.extend({A:function(a){this.za=a},Md:function(){if(!this.yg){for(var a=[Infinity,Infinity,-Infinity,-Infinity],b=0,c=this.za.length;b<c;b+=1)g.I.KI(a,this.za[b]);this.yg=a}return this.yg},uR:function(){return this.za},zi:function(){return g.Aa.Qe.RL},Aqa:function(){return this.za.length},Gy:function(a){return g.yd.os(a,this.za)}});g.Aa.VL=g.Aa.tr.extend({zi:function(){return g.Aa.Qe.rW},vq:g.yd.vq,Ud:function(a){return g.yd.Ud(a,this.za)}});g.Aa.Ww=g.Aa.Pe.extend({A:function(a){var b=a.length;this.za=a;this.ke=Array(b);for(var c=0;c<b;c+=1){var d=new g.Aa.tr(a[c]);this.ke[c]=d}},X3:function(){return this.ke},Md:function(){if(!this.yg){for(var a=[Infinity,Infinity,-Infinity,-Infinity],b=this.ke,c=0,d=b.length;c<d;c+=1)g.I.extend(a,b[c].Md());this.yg=a}return this.yg},uR:function(){return this.za},zi:function(){return g.Aa.Qe.bM},Aqa:function(){return this.za.length},Gy:function(a){for(var b=Infinity,c=0,d=this.ke.length;c<d;c+=1)b=Math.min(b, this.ke[c].Gy(a));return b}});g.B.$b=g.B.Fh.extend({A:function(a,b){arguments.callee.ma.apply(this,arguments);this.UH=a;this.X(\\\"options\\\",a);this.X(\\\"geodesic\\\",a);this.X(\\\"path\\\",a);this.X(\\\"noSelect\\\",a);this.Hu();this.X(\\\"display\\\",b);b.h(\\\"zoomend\\\",this.po,this)},$p:function(){if(\\\"3D\\\"==this.map.D.view.type){var a=this.L;a&&(a.fc().Uj=!0)}},deltaPosChanged:function(){this.set(\\\"display\\\")},geodesicChanged:function(){this.pathChanged()},ap:function(a){var b=Math.pow(2,20-this.map.get(\\\"zoom\\\")),c=this.get(\\\"path\\\"),d=a.Pd(b),e=[],f,h,b=0;for(f= c.length;b<f;b+=1)h=this.map.Cb(c[b]).add(d),e.push(this.map.Qd(h));0<e.length&&this.set(\\\"path\\\",e);if(this.ku&&0<this.ku.length)for(b=0,c=this.ku.length;b<c;b+=1)this.ku[b].ap(a)},tz:function(a,b,c){a=this.get(\\\"deltaPos\\\")||[0,0];this.set(\\\"deltaPos\\\",[c.x+a[0],c.y+a[1]]);this.UH.r(\\\"change\\\",{type:\\\"change\\\",target:this.UH})},oB:function(a){this.get(\\\"options\\\");return this.Bga()?this.ifa(a):this.BN(a)},Bga:function(){var a=this.get(\\\"options\\\");return a&&!!a.geodesic},getStrokeWeight:function(){return this.get(\\\"options\\\").strokeWeight}, ifa:function(a){if(!a||!a.length)return[];var b,c=[],d,e,f=[],h,k=this.map.get(\\\"resolution\\\"),l=this.get(\\\"options\\\").geodesicInterpolatePixelWidth||17;c.push(a[0]);f.push(this.CN(a[0]));d=1;for(e=a.length;d<e;d+=1)h=this.CN(a[d]),b=Math.round(Math.abs(h[0]-f[f.length-1][0])/k),b=Math.min(31,Math.round(b/l),Math.round(Math.abs(a[d-1].R-a[d].R))),\\\"3D\\\"==this.map.D.view.type&&(b=Math.round(b/1.2)),b=g.U.Qqa(a[d-1],a[d],b),c.push.apply(c,b),f.push.apply(f,this.BN(b)),c.push(a[d]),f.push(h);return f},rD:function(a, b,c){return[(b[0]-a[0])*c+a[0],(b[1]-a[1])*c+a[1]]},dI:function(a,b,c){var d=g.l.Fn?1:0,e=[],f=[],h,k,l,m,n,p,q;m=a.fc();m instanceof g.Aa.tr?q=[m]:m instanceof g.Aa.Ww&&(q=m.ke);var r=\\\"\\\",s=a.Ma.rotation;a=this.map.get(\\\"size\\\");m=Math.PI*s/180;var u=(Math.abs(a.width*Math.cos(m))+Math.abs(a.height*Math.sin(m)))/2,v=(Math.abs(a.width*Math.sin(m))+Math.abs(a.height*Math.cos(m)))/2;a=[];h=0;for(k=q.length;h<k;h+=1)if(l=q[h].za,l.length){var w=0;n=0;for(p=l.length;n<p;n+=1)if(m=l[n],e=this.ig(m),e[0]= g.a.xb(e[0]+u,d),e[1]=g.a.xb(e[1]+v,d),0===n)f[0]=e[0],f[1]=e[1],r+=\\\" M\\\"+e[0]+\\\" \\\"+e[1];else if(e[0]!==f[0]||e[1]!==f[1]){if(b){var t=Math.sqrt(Math.pow(e[0]-f[0],2)+Math.pow(e[1]-f[1],2));if(40<t+w){var s=f,x=e;x[0]===s[0]?s=x[1]>s[1]?Math.PI:0:x[1]===s[1]?s=x[0]>s[0]?Math.PI/2:-Math.PI/2:(m=x[0]-s[0],x=x[1]-s[1],s=Math.atan(m/x),0<m&&0<x?s=Math.PI-s:0>m&&0>x?s=-s:0<m&&0>x?s=-s:0>m&&0<x&&(s=Math.PI-s));for(m=40-w;m<t;)x=this.rD(f,e,m/t),a.push(x[0],x[1],s),m+=40;w=(t-(40-w))%40}else w+=t}r+=\\\" L\\\"+ e[0]+\\\" \\\"+e[1];f[0]=e[0];f[1]=e[1]}}b=[r];if(a.length){f=\\\"\\\";c/=2;m=3*Math.PI/4;for(q=0;q<a.length;q+=3)r=a[q],u=a[q+1],k=a[q+2]+m,h=a[q+2]-m,e=r+Math.sin(k)*c,k=u-Math.cos(k)*c,l=r+Math.sin(h)*c,h=u-Math.cos(h)*c,f+=\\\" M\\\"+g.a.xb(e,d)+\\\" \\\"+g.a.xb(k,d),f+=\\\" L\\\"+g.a.xb(r,d)+\\\" \\\"+g.a.xb(u,d),f+=\\\" L\\\"+g.a.xb(l,d)+\\\" \\\"+g.a.xb(h,d);b.push(f)}return b},Hu:function(){if(this.map&&!this.L){var a=this.map,b=this.get(\\\"path\\\"),b=this.L=new g.bi({wN:this.Mb.OG,name:\\\"polyline-\\\"+g.a.zb(this),zIndex:this.get(\\\"options\\\").zIndex|| 1,map:a,W:new g.Aa.tr(this.oB(b)),style:this.get(\\\"options\\\")});b.vo=this;b.fc().Uj=!0;this.X(\\\"resolution\\\",a);this.X(\\\"center\\\",a);this.X(\\\"coords\\\",b);this.X(\\\"style\\\",b);b.bf(\\\"noSelect visible zIndex strokeWeight isOutline deltaPos\\\".split(\\\" \\\"),this)}},pathChanged:function(){var a=this.L,b=this.get(\\\"path\\\");a&&(this.$p(),this.set(\\\"coords\\\",this.oB(b)),a.se=!0,\\\"c\\\"!==this.map.get(\\\"overlayRender\\\")&&a.Ma?(b=this.Mb.get(\\\"showDir\\\")&&g.l.FL,b=this.dI(a,b,this.Mb.get(\\\"strokeWeight\\\")),0===b[0].length&&a.Ma?(g.f.remove(a.Ma.Ph), g.f.remove(a.Ma.Rc),g.f.remove(a.Ma.dir),a.Ma=null):g.l.Fn?(a.Ma.Ph.setAttribute(\\\"d\\\",b[0]),a.Ma.Rc&&a.Ma.Rc.setAttribute(\\\"d\\\",b[0]),a.Ma.dir&&b[1]&&a.Ma.dir.setAttribute(\\\"d\\\",b[1])):(b=b[0]+\\\" e\\\",a.Ma.Ph.path=b,a.Ma.Rc&&(a.Ma.Rc.path=b))):this.set(\\\"display\\\"))},po:function(){},visibleChanged:function(){this.L&&(this.L.Ma?this.get(\\\"visible\\\")?(this.L.Ma.Ph.style.display=\\\"block\\\",this.L.Ma.Rc&&(this.L.Ma.Rc.style.display=\\\"block\\\"),this.L.Ma.dir&&(this.L.Ma.dir.style.display=\\\"block\\\")):(this.L.Ma.Ph.style.display= \\\"none\\\",this.L.Ma.Rc&&(this.L.Ma.Rc.style.display=\\\"none\\\"),this.L.Ma.dir&&(this.L.Ma.dir.style.display=\\\"none\\\")):this.set(\\\"display\\\"))},optionsChanged:function(){this.$p();this.L&&(this.L.style=this.get(\\\"options\\\"),this.L.zIndex=this.get(\\\"options\\\").zIndex,this.L.vs(),this.L.Ma&&(g.f.remove(this.L.Ma.Ph),g.f.remove(this.L.Ma.Rc),g.f.remove(this.L.Ma.dir)));this.set(\\\"display\\\")}});g.B.uA=g.B.$b.extend({A:function(a,b){this.hma=a;arguments.callee.ma.apply(this,arguments);this.X(\\\"tolerance\\\",a);b.h(\\\"zoomend\\\",this.po,this)},ap:function(a){var b=Math.pow(2,20-this.map.get(\\\"zoom\\\")),c=this.get(\\\"path\\\"),d=a.Pd(b),e=[],f,h,b=0;for(f=c.length;b<f;b+=1){h=this.map.Cb(c[b]).add(d);var k=this.map.Qd(h);e.push(k);if(c[b].controlPoints){k.controlPoints=[];for(var l=c[b].controlPoints,m=0,n=l.length;m<n;m+=1)h=this.map.Cb(l[m]).add(d),k.controlPoints.push(this.map.Qd(h))}}0<e.length&&this.set(\\\"path\\\", e);if(this.ku&&0<this.ku.length)for(b=0,c=this.ku.length;b<c;b+=1)this.ku[b].ap(a)},tz:function(a,b,c){a=this.get(\\\"deltaPos\\\")||[0,0];this.set(\\\"deltaPos\\\",[c.x+a[0],c.y+a[1]]);this.UH.r(\\\"change\\\",{type:\\\"change\\\",target:this.UH})},BN:function(a){var b=Math.pow(2,20-Math.round(this.map.get(\\\"zoom\\\")));return g.Nw.k4(a,this.map.nj,b,this.hma.w)},toleranceChanged:function(){this.pathChanged()},po:function(){this.pathChanged()},Ut:function(a,b){for(var c=[],d=void 0,e=void 0,f=void 0,d=0,e=a.length;d<e;d+=1){f= this.map.Cb(a[d]);f.x+=b[0];f.y+=b[1];var h=this.map.Qd(f);c.push(h);if(a[d].controlPoints){h.controlPoints=[];for(var k=a[d].controlPoints,l=0,m=k.length;l<m;l+=1)f=this.map.Cb(k[l]),f.x+=b[0],f.y+=b[1],h.controlPoints.push(this.map.Qd(f))}}return c}});g.B.Ec=g.B.Fh.extend({A:function(a,b){arguments.callee.ma.apply(this,arguments);this.vC=a;this.X(\\\"options\\\",a);this.X(\\\"path\\\",a);this.Hu();this.X(\\\"display\\\",b)},$p:function(){if(\\\"3D\\\"==this.map.D.view.type){var a=this.L;if(a)for(var a=a.fc().ke,b=0;b<a.length;b+=1)a[b].Uj=!0}},deltaPosChanged:function(){this.set(\\\"display\\\")},ap:function(a){var b=Math.pow(2,20-this.map.get(\\\"zoom\\\")),c=this.get(\\\"path\\\");a=a.Pd(b);var b=[],d,e,f;c.length&&c[0]instanceof g.U&&(c=[c],e=!0);if(c.length){c[0]instanceof g.U?(c= [[c]],e=!0):c[0]instanceof Array&&c[0][0]instanceof g.U&&(f=!0,c=[c]);for(var h=0,k=c.length;h<k;h+=1){for(var l=c[h],m=[],n=0,p=l.length;n<p;n+=1){for(var q=l[n],r=[],s=0,u=q.length;s<u;s+=1)d=this.map.Cb(q[s]).add(a),r.push(this.map.Qd(d));m.push(r)}b.push(m)}this.vC.r(\\\"movepoly\\\",{tK:a});0<b.length&&(e?b=b[0][0]:f&&(b=b[0]),this.set(\\\"path\\\",b))}},tz:function(a,b,c){a=this.get(\\\"deltaPos\\\")||[0,0];this.set(\\\"deltaPos\\\",[c.x+a[0],c.y+a[1]]);this.vC.r(\\\"movepoly\\\",{tK:c});this.vC.r(\\\"change\\\",{type:\\\"change\\\", target:this.vC});this.vC.r(\\\"setPath\\\")},Ut:function(a,b){var c=this.map.D,d=[];if(g.a.isArray(a)){if(g.a.isArray(a[0]))for(c=0;c<a.length;c+=1)d[c]=this.Ut(a[c],b);else for(var e=0,f=a.length;e<f;e++){var h=c.Cb(a[e]);h.x+=b[0];h.y+=b[1];d.push(c.Qd(h))}return d}},hna:function(){var a=0<arguments.length&&void 0!==arguments[0]?arguments[0]:[];return a.length?a[0]instanceof g.U?[[a]]:a[0]instanceof Array&&a[0][0]instanceof g.U?[a]:a:a},oB:function(){for(var a=0<arguments.length&&void 0!==arguments[0]? arguments[0]:[],a=this.hna(a),b,c,d=[],e=this.map,f=0;f<a.length;f+=1){for(var h=a[f],k=[],l=0;l<h.length;l+=1){var m=h[l],n=[];b=0;for(c=m.length;b<c;b+=1){var p=e.Cb(m[b]);n.push([p.x,p.y])}k.push(n)}d.push(k)}return d},Hu:function(){if(this.map&&!this.L){var a=this.map,b=this.get(\\\"path\\\"),b=this.L=new g.bi({wN:this.Mb.OG,name:\\\"polygon-\\\"+g.a.zb(this),zIndex:this.get(\\\"options\\\").zIndex||1,map:a,W:new g.Aa.zp(this.oB(b)),style:this.get(\\\"options\\\")});b.vo=this;for(var c=b.fc().ke,d=0;d<c.length;d+=1)c[d].Uj= !0;this.X(\\\"resolution\\\",a);this.X(\\\"center\\\",a);this.X(\\\"coords\\\",b);this.X(\\\"style\\\",b);b.bf([\\\"visible\\\",\\\"zIndex\\\",\\\"strokeWeight\\\",\\\"deltaPos\\\"],this)}},pathChanged:function(){var a=this.L,b=this.get(\\\"path\\\");a&&(this.set(\\\"coords\\\",this.oB(b)),this.$p(),a.se=!0,\\\"c\\\"!==this.map.get(\\\"overlayRender\\\")&&a.fa?(b=this.eI(a),0===b.length?(a.fa.parentNode.removeChild(a.fa),a.fa=null):g.l.Fn?a.fa.setAttribute(\\\"d\\\",b.join(\\\" \\\")):(b.push(\\\"e\\\"),a.fa.path=b.join(\\\" \\\"))):this.set(\\\"display\\\"))},getStrokeWeight:function(){return this.get(\\\"options\\\").strokeWeight}, visibleChanged:function(){this.L&&(this.L.fa?this.get(\\\"visible\\\")?this.L.fa.style.display=\\\"block\\\":this.L.fa.style.display=\\\"none\\\":this.set(\\\"display\\\"))},optionsChanged:function(){this.$p();this.L&&(this.L.style=this.get(\\\"options\\\"),this.L.zIndex=this.get(\\\"options\\\").zIndex,this.L.vs());this.set(\\\"display\\\")},eI:function(a){var b=[NaN,NaN,0],c=[NaN,NaN],d,e,f,h,k,l,m,n=a.fa.rotation,p=this.map.get(\\\"size\\\");e=Math.PI*n/180;n=(Math.abs(p.width*Math.cos(e))+Math.abs(p.height*Math.sin(e)))/2;p=(Math.abs(p.width* Math.sin(e))+Math.abs(p.height*Math.cos(e)))/2;a=a.fc();a instanceof g.Aa.Ec?d=[a]:a instanceof g.Aa.zp&&(d=a.ke);var q=[];a=0;for(e=d.length;a<e;a+=1)if(b=d[a],f=b.Rf,h=f.length,0<h)for(var r=0;r<h;r+=1){var s;k=f[r].za;l=0;for(m=k.length;l<m;l+=1)if(b=k[l],b=this.ig(b),b[0]=Math.ceil(b[0]+n),b[1]=Math.ceil(b[1]+p),0===l)c[0]=NaN,c[1]=NaN,s=b,q.push(\\\"M\\\"+b[0]+\\\" \\\"+b[1]);else if(b[0]!==c[0]||b[1]!==c[1])q.push(\\\"L\\\"+b[0]+\\\" \\\"+b[1]),c=b;s&&q.push(\\\"L\\\"+s[0]+\\\" \\\"+s[1])}return q}});g.B.hh=g.B.Fh.extend({A:function(a,b){arguments.callee.ma.apply(this,arguments);this.X(\\\"center\\\",a);this.X(\\\"draggable\\\",a);this.X(\\\"unit\\\",a,!0);this.X(\\\"radius\\\",a);this.X(\\\"options\\\",a);this.Hu();this.X(\\\"display\\\",b)},ap:function(a){var b=this.get(\\\"center\\\");a=a.Pd(Math.pow(2,20-this.map.get(\\\"zoom\\\")));a=this.map.Cb(b).add(a);b instanceof g.U?this.set(\\\"center\\\",this.map.Qd(a)):this.set(\\\"center\\\",a)},tz:function(a,b,c){a=this.get(\\\"deltaPos\\\")||[0,0];this.set(\\\"deltaPos\\\",[c.x+a[0],c.y+a[1]]);this.Mb.r(\\\"change\\\", {type:\\\"change\\\",target:this.Mb})},Hu:function(){if(this.map&&!this.L){var a=this.map,b=a.Cb(this.get(\\\"center\\\")),c=\\\"px\\\"===this.get(\\\"unit\\\"),b=this.L=new g.bi({yB:!0,wN:this.Mb.OG,name:\\\"circle-\\\"+g.a.zb(this),zIndex:this.get(\\\"options\\\").zIndex||1,map:a,W:new g.Aa.Ng([b.x,b.y]),style:this.get(\\\"options\\\")});b.Av=c;b.vo=this;b.fc().Uj=!0;this.X(\\\"resolution\\\",a);this.X(\\\"coords\\\",b);this.X(\\\"style\\\",b);b.X(\\\"visible\\\",this,!0);b.bf(\\\"radius center unit resolution zIndex strokeWeight deltaPos\\\".split(\\\" \\\"),this)}},$p:function(){if(\\\"3D\\\"== this.map.D.view.type){var a=this.L;a&&(a.fc().Uj=!0)}},deltaPosChanged:function(){this.set(\\\"display\\\")},getStrokeWeight:function(){return this.get(\\\"options\\\").strokeWeight},centerChanged:function(){var a=this.L,b=this.map.Cb(this.get(\\\"center\\\"));a&&(a.fc().za=[b.x,b.y],this.$p(),this.set(\\\"coords\\\",[b.x,b.y]),this.se=!0,a.fa?this.h8():this.set(\\\"display\\\"))},visibleChanged:function(){this.L&&(this.L.fa?this.get(\\\"visible\\\")?this.L.fa.style.display=\\\"block\\\":this.L.fa.style.display=\\\"none\\\":this.set(\\\"display\\\"))}, optionsChanged:function(){this.L&&(this.$p(),this.L.style=this.get(\\\"options\\\"),this.L.zIndex=this.get(\\\"options\\\").zIndex,this.L.vs(),this.L.se=!0,this.set(\\\"display\\\"))},VP:function(a){var b=[],c=[],d,c=a.fc();c instanceof g.Aa.Ng&&(d=[c]);var c=this.map.D.nj.oq(Math.floor(this.map.get(\\\"zoom\\\"))),e=a.fa.rotation,b=this.map.get(\\\"size\\\"),f=Math.PI*e/180,e=(Math.abs(b.width*Math.cos(f))+Math.abs(b.height*Math.sin(f)))/2,f=(Math.abs(b.width*Math.sin(f))+Math.abs(b.height*Math.cos(f)))/2,b=this.ig(d[0].za); b[0]=Math.round(b[0]+e);b[1]=Math.round(b[1]+f);a=a.get(\\\"remain\\\")?5.23:a.Av?this.get(\\\"radius\\\"):this.get(\\\"radius\\\")/(c*Math.cos(Math.PI*this.get(\\\"center\\\").Q/180));return c=[\\\"M\\\",b[0],b[1]-a,\\\"A\\\",a,a,0,1,1,b[0]-0.01,b[1]-a,\\\"Z\\\"].join(\\\" \\\")},h8:function(){var a=this.L,b=this.get(\\\"radius\\\");if(\\\"c\\\"!==this.map.get(\\\"overlayRender\\\")&&a.fa)if(g.l.Fn)b=this.VP(a),a.fa.setAttribute(\\\"d\\\",b);else{b=this.map.D.nj.oq(Math.floor(this.map.get(\\\"zoom\\\")));b=a.Av?this.get(\\\"radius\\\"):this.get(\\\"radius\\\")/(b*Math.cos(Math.PI*this.get(\\\"center\\\").Q/ 180));a.fa.style.width=Math.round(2*b);a.fa.style.height=Math.round(2*b);var c=this.map.get(\\\"size\\\").width/2,d=this.map.get(\\\"size\\\").height/2,e=this.ig(a.fc().za);e[0]=Math.round(e[0]+c);e[1]=Math.round(e[1]+d);a.fa.style.top=Math.round(e[1]-b);a.fa.style.left=Math.round(e[0]-b)}else this.set(\\\"display\\\")},radiusChanged:function(){var a=this.L,b=this.get(\\\"radius\\\");a&&(this.$p(),a.style.radius=b,a.se=!0,a.r(\\\"rad\\\",{target:a,ul:b}),this.h8())}}); \"}","_AMap_mouse":"{\"version\":\"1671592305593\",\"script\":\"g.Sb.Ib({rN:\\\"_docMsMov\\\",Fca:function(){var a=this.Ya.ad;g.F.h(a,\\\"mousedown\\\",this.Q4,this);g.F.h(document,\\\"mousedown\\\",this.W4,this);this.Epa||g.l.Ve||(this.hw=g.a.ND(this.hw,150,this),this.Epa=!0);this.s7();g.F.h(document,\\\"mouseout\\\",this.hw,this);this.h(this.rN,this.K6,this);g.F.h(a,\\\"mouseover\\\",this.R4,this);g.F.h(a,\\\"mouseup\\\",this.S4,this);g.F.h(a,\\\"contextmenu\\\",this.KF,this);g.F.h(a,\\\"rightclick\\\",this.KF,this)},zha:function(){var a=this.Ya.ad;g.F.G(a,\\\"mousedown\\\",this.Q4,this);g.F.G(document,\\\"mousedown\\\", this.W4,this);this.Jna();g.F.G(document,\\\"mouseout\\\",this.hw,this);this.G(this.rN,this.K6,this);g.F.G(a,\\\"mouseover\\\",this.R4,this);g.F.G(a,\\\"mouseup\\\",this.S4,this);g.F.G(a,\\\"contextmenu\\\",this.KF,this);g.F.G(a,\\\"rightclick\\\",this.KF,this)},Hca:function(){g.F.h(this.Ya.ad,\\\"mousewheel\\\",this.P4,this)},p_:function(){g.F.G(this.Ya.ad,\\\"mousewheel\\\",this.P4,this)},Kna:function(){g.F.G(document,\\\"mousemove\\\",this.hw,this);g.F.G(this.Ya.ad,\\\"mousemove\\\",this.$R,this)},s7:function(){g.F.h(document,\\\"mousemove\\\",this.hw,this); g.F.h(this.Ya.ad,\\\"mousemove\\\",this.$R,this)},Jna:function(){g.F.G(document,\\\"mousemove\\\",this.hw,this);g.F.G(this.Ya.ad,\\\"mousemove\\\",this.$R,this)},R4:function(){this.IG=!0},W4:function(){this.IG=!1},hw:function(a){if(!this.Kf&&!this.sg&&this.Ya){var b=this.Mi(a,!0,!0);this.r(this.rN,{event:a,TJ:b})}},Gca:function(){this.h(\\\"mousemove\\\",this.N_);this.h(\\\"mouseout\\\",this.O_);this.h(\\\"mouseover\\\",this.P_);this.h(\\\"mouseup\\\",this.Q_);this.h(\\\"mousedown\\\",this.M_);this.h(\\\"rightclick\\\",this.S_);this.h(\\\"contextmenu\\\", this.E_);this.h(\\\"rdblclick\\\",this.T_)},Bha:function(){this.G(\\\"mousemove\\\",this.N_);this.G(\\\"mouseout\\\",this.O_);this.G(\\\"mouseover\\\",this.P_);this.G(\\\"mouseup\\\",this.Q_);this.G(\\\"mousedown\\\",this.M_);this.G(\\\"rightclick\\\",this.S_);this.G(\\\"contextmenu\\\",this.E_);this.G(\\\"rdblclick\\\",this.T_)},keyboardEnableChanged:function(){this.get(\\\"keyboardEnable\\\")?this.Dca():this.CO()},scrollWheelChanged:function(){this.get(\\\"scrollWheel\\\")?this.h(\\\"mousewheel\\\",this.R_):this.G(\\\"mousewheel\\\",this.R_)},KF:function(a){g.F.preventDefault(a)}, qha:function(a){var b=this.Mi(a,!1,!0),c=0;\\\"3D\\\"==this.D.view.type?(this.qa(\\\"mousewheel\\\",b),a.wheelDelta?(c=a.wheelDelta,window.opera&&g.a.Qh(window.opera.version)&&9.5>parseFloat(window.opera.version())&&(c=-c),0==c/120%1&&(c/=2)):a.detail&&(c=-a.detail,120!==c&&-120!==c&&(c*=20)),a=c/800,a=this.get(\\\"zoom\\\")+a,this.v2(a,b.Ta,!0)):(a.wheelDelta?(c=a.wheelDelta/120,window.opera&&g.a.Qh(window.opera.version)&&9.5>parseFloat(window.opera.version())&&(c=-c)):a.detail&&(c=-a.detail),this.V.VC=(this.V.VC|| 0)+c,this.r(\\\"mousewheel\\\",b))},P4:function(a){\\\"info\\\"!=a.af&&this.get(\\\"scrollWheel\\\")&&this.qha(a)},cS:function(a,b){b=this.Mi(a,!1,!0);if(!this.Sv(b.Db,this.V.Hx)){var c=this.V;c.Hx=b.Db;if(c.Cr){if(!c.Cd&&(b.Db.x!==c.jo.x||b.Db.y!==c.jo.y)){var d;this.$N(c.au)&&c.au.get(\\\"draggable\\\")&&(d=c.au);!d&&this.get(\\\"dragEnable\\\")&&(d=this);d&&(c.Cd=!0,c.kq=d,c.gg=c.jo,c.jq=c.MT)}c.Cd&&(c.bk=b,b.button=a.buttons||a.button||0,this.UO())}}},qJ:function(){var a=this.TJ;g.f.fb(this.K,\\\"amap-drag\\\");g.f.Bpa();g.f.r3(); this.V&&(this.V.Cd=!1);this.V.Gp&&(this.V.Gp=!1,this.V.kq.r(\\\"dragend\\\",a));this.V.Cr=!1;this.V.Hx=null;this.V.gg=null;g.F.G(document,\\\"mousemove\\\",this.cS,this);g.F.G(document,\\\"mouseup\\\",this.qJ,this);try{g.F.G(window.parent.document,\\\"mouseup\\\",this.qJ,this)}catch(b){}this.Ya&&(this.Kf&&(this.sg=this.Kf=!1),g.F.vza(this.Ya.ad),this.s7())},Mra:function(a,b){b=b||this.Mi(a,!1,!1,a.srcElement||a.target);var c=this.get(\\\"size\\\"),d;0<=b.Db.x&&b.Db.x<=c.width&&0<=b.Db.y&&b.Db.y<=c.height&&(d=!0);this.J5&&!d?this.r(\\\"mouseout\\\", b):!this.J5&&d&&this.r(\\\"mouseover\\\",b);this.J5=d},$R:function(a){if(!this.Kf&&!this.sg&&this.Ya&&\\\"info\\\"!=a.af&&(g.F.preventDefault(a),g.l.Gs&&(a=window.event),a)){a=this.Mi(a,!1,!1,a.srcElement||a.target);var b=this.V,c=a.kd,d;if(c){this.V.Cr||(c instanceof g.B.Fh?d=c.Mb.get(\\\"cursor\\\"):c instanceof g.q.Zb&&(d=c.get(\\\"cursor\\\")),d&&c!==this||(d=this.D.De.defaultCursor),d=this.D.get(\\\"optimalCursor\\\")||d,this.K.style.cursor=d||\\\"\\\");d=b.Rga;var e=a.uu;d!==e&&(d&&b.XZ&&b.XZ.r(\\\"mouseout\\\",a),e&&c&&(c.r(\\\"mouseover\\\", a),c.get(\\\"topWhenMouseOver\\\")&&(c.Mb.C=!0,c.Mb.setTop(!0),c.Mb.C=!1)));a.kd.r(\\\"mousemove\\\",a);a.kd!==this&&this.r(\\\"mousemove\\\",a);b.Rga=a.uu||null;b.XZ=a.kd||null}}},Q4:function(a){if(\\\"info\\\"!=a.af&&(this.IG=!0,g.f.Soa(),g.f.e3(),this.V.Hx=null,this.V.gg=null,\\\"info\\\"!=a.af)){var b=this.Mi(a,!0,!1,a.srcElement||a.target);if(b.kd){this.V.i3=new Date;this.V.au=b.kd;this.V.jo=b.Db;this.V.Nga=b.button;this.V.Cr=!0;this.V.Oga=b;this.V.Cd||(this.V.MT=b);this.Ie&&this.Ie.stop();var c=b.kd;!c.Mb&&c.get(\\\"dragEnable\\\")&& (this.V.Cr=!0);g.f.Wa(this.K,\\\"amap-drag\\\");c=!1;b.kd.r(\\\"mousedown\\\",b);b.kd!==this&&(this.r(\\\"mousedown\\\",b),c=b.kd.get(\\\"draggable\\\"));c=c||this.get(\\\"dragEnable\\\");g.F.uxa(this.Ya.ad);g.F.h(document,\\\"mousemove\\\",this.cS,this);g.F.h(document,\\\"mouseup\\\",this.qJ,this);try{window.parent.document&&g.l.Gs&&g.F.h(window.parent.document,\\\"mouseup\\\",this.qJ,this)}catch(d){}g.F.stopPropagation(a);c&&this.Kna()}}},K6:function(a){this.Mra(a.event,a.TJ)},DDa:function(a){this.cS(a.event,a.TJ)},S4:function(a){if(\\\"info\\\"!= a.af){this.TJ=a=this.Mi(a,!1,!1,a.srcElement||a.target);var b=a.kd;if(b){var c=this.D.get(\\\"allBubble\\\")||b.get(\\\"bubble\\\");b!==document&&(b.r(\\\"mouseup\\\",a),a.kd!==this&&c&&this.r(\\\"mouseup\\\",a));this.V.jo&&this.Sv(a.Db,this.V.jo)&&(this.bg&&this.Sv(this.V.Ex,a.Db)&&a.button===this.V.Nga?(clearTimeout(this.bg),this.bg=null,g.F.P5(a)?c?(b.r(\\\"dblclick\\\",a),b!==this&&this.r(\\\"dblclick\\\",a)):b.r(\\\"dblclick\\\",a):b.r(\\\"rdblclick\\\",a),this.V.Ex=null):(g.F.P5(a)?(this.r(\\\"clickstart\\\",a),c?(b.r(\\\"click\\\",a),b!==this&&this.r(\\\"click\\\", a)):(b.r(\\\"click\\\",a),this.r(\\\"closeOverlays\\\",a)),b.get(\\\"topWhenClick\\\")&&(b.Mb.C=!0,b.Mb.setTop(!0),b.Mb.C=!1),this.r(\\\"clickend\\\",a)):c?(b.r(\\\"rightclick\\\",a),b!==this&&this.r(\\\"rightclick\\\",a),this.r(\\\"contextmenu\\\",a)):(b.r(\\\"rightclick\\\",a),b.r(\\\"contextmenu\\\",a)),this.V.Ex=a.Db,this.bg&&clearTimeout(this.bg),this.bg=setTimeout(g.a.bind(function(){clearTimeout(this.bg);this.bg=null;this.V.Ex=null},this),260)))}}}});g.Sb.Ib({R_:function(a){this.qa(\\\"mousewheel\\\",a);var b=this;if(1<=Math.abs(this.V.VC)&&!this.P$){var c=this.V.VC;if(1<=c)c=1;else if(-1>=c)c=-1;else return;b.eH(a.Ta,c);this.V.VC=0;this.P$=!0;setTimeout(function(){b.P$=!1;b.V.VC=0},g.l.pz?50:40)}},N_:function(a){this.qa(\\\"mousemove\\\",a)},O_:function(a){this.qa(\\\"mouseout\\\",a)},P_:function(a){this.qa(\\\"mouseover\\\",a)},Q_:function(a){this.qa(\\\"mouseup\\\",a)},M_:function(a){this.qa(\\\"mousedown\\\",a)},S_:function(a){this.qa(\\\"rightclick\\\",a)},E_:function(a){this.qa(\\\"contextmenu\\\", a)},T_:function(a){this.get(\\\"doubleClickZoom\\\")&&this.get(\\\"zoomEnable\\\")&&this.eH(a.Ta,-1);this.qa(\\\"rdblclick\\\",a)}});g.Sb.Ib({tga:function(){this.BB={left:[37],right:[39],IQ:[40],dF:[38],Qi:[187,107,61],Ri:[189,109,173]};this.pda={left:this.by(this.cH(100,0)),right:this.by(this.cH(-100,0)),IQ:this.by(this.cH(0,-100)),dF:this.by(this.cH(0,100)),Qi:this.by(this.J1(1)),Ri:this.by(this.J1(-1))}},Dca:function(){this.get(\\\"keyboardEnable\\\")&&(this.BB||this.tga(),g.F.h(document,\\\"keydown\\\",this.aH,this),g.F.h(document,\\\"keyup\\\",this.A_,this))},CO:function(){g.F.G(document,\\\"keydown\\\",this.aH,this);g.F.G(document,\\\"keyup\\\",this.A_, this)},A_:function(a){var b=a.keyCode;!a.ctrlKey||37!==b&&39!==b||this.set(\\\"refresh\\\",1)},aH:function(a){var b=a.keyCode,c;for(c in this.BB)if(this.BB.hasOwnProperty(c))for(var d=0;d<this.BB[c].length;d+=1)if(b===this.BB[c][d]){if(!this.IG)return;if(!a.ctrlKey&&!a.shiftKey){this.pda[c]();g.F.preventDefault(a);return}37===b?(this.Wga(),g.F.preventDefault(a)):39===b?(this.Vka(),g.F.preventDefault(a)):38===b?(this.Sja(),g.F.preventDefault(a)):40===b&&(this.Rja(),g.F.preventDefault(a))}},by:function(a){return function(){a()}}, Wga:function(){this.get(\\\"rotateEnable\\\")&&(this.r(\\\"rotate\\\"),this.set(\\\"rotation\\\",-8+parseFloat(this.get(\\\"rotation\\\"))%360))},Vka:function(){this.get(\\\"rotateEnable\\\")&&(this.r(\\\"rotate\\\"),this.set(\\\"rotation\\\",8+parseFloat(this.get(\\\"rotation\\\"))%360))},Rja:function(){this.get(\\\"rotateEnable\\\")&&this.set(\\\"pitch\\\",-4+parseFloat(this.get(\\\"pitch\\\")))},Sja:function(){this.get(\\\"rotateEnable\\\")&&this.set(\\\"pitch\\\",4+parseFloat(this.get(\\\"pitch\\\")))},J1:function(a){var b=this.D;return function(){b.C=!0;1===a?b.zoomIn():b.zoomOut(); b.C=!1}},cH:function(a,b){var c=this.D;return function(){c.C=!0;c.panBy(a,b);c.C=!1}}}); \"}","e6cfe709ebaf4915":"o9ZCTbNdG+D/ChbYSST5YdcNyQGInESbdD5bvERh8zG2pB7a/otCI2gPoxZXZKIBOiaEgA==","length":28}
+bodavm.memory.localStorage={"length":0}
 
 
 bodavm.memory.Performance={
-    'getEntriesByType':[{"name":"https://aeu.alicdn.com/waf/antidomxss_v702.js","entryType":"resource","startTime":89.90000000596046,"duration":127.90000000596046,"initiatorType":"script","nextHopProtocol":"h2","renderBlockingStatus":"blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":89.90000000596046,"domainLookupStart":89.90000000596046,"domainLookupEnd":89.90000000596046,"connectStart":89.90000000596046,"secureConnectionStart":89.90000000596046,"connectEnd":89.90000000596046,"requestStart":103.40000000596046,"responseStart":194.80000001192093,"firstInterimResponseStart":0,"responseEnd":217.80000001192093,"transferSize":52677,"encodedBodySize":52377,"decodedBodySize":222526,"responseStatus":0,"serverTiming":[]},{"name":"https://aeu.alicdn.com/waf/interfaceacting230515.js","entryType":"resource","startTime":90.09999999403954,"duration":137,"initiatorType":"script","nextHopProtocol":"h2","renderBlockingStatus":"blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":90.09999999403954,"domainLookupStart":90.09999999403954,"domainLookupEnd":90.09999999403954,"connectStart":90.09999999403954,"secureConnectionStart":90.09999999403954,"connectEnd":90.09999999403954,"requestStart":189.2000000178814,"responseStart":224.80000001192093,"firstInterimResponseStart":0,"responseEnd":227.09999999403954,"transferSize":10691,"encodedBodySize":10391,"decodedBodySize":31788,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/js/styles.14240a4e.js","entryType":"resource","startTime":90.2000000178814,"duration":304.5,"initiatorType":"script","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":90.2000000178814,"domainLookupStart":90.2000000178814,"domainLookupEnd":90.2000000178814,"connectStart":90.2000000178814,"secureConnectionStart":90.2000000178814,"connectEnd":90.2000000178814,"requestStart":357.7000000178814,"responseStart":394,"firstInterimResponseStart":0,"responseEnd":394.7000000178814,"transferSize":889,"encodedBodySize":589,"decodedBodySize":589,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/js/chunk-local-vendors.49f65c2c.js","entryType":"resource","startTime":90.40000000596046,"duration":439.30000001192093,"initiatorType":"script","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":90.40000000596046,"domainLookupStart":90.40000000596046,"domainLookupEnd":90.40000000596046,"connectStart":90.40000000596046,"secureConnectionStart":90.40000000596046,"connectEnd":90.40000000596046,"requestStart":394.80000001192093,"responseStart":429.2000000178814,"firstInterimResponseStart":0,"responseEnd":529.7000000178814,"transferSize":501850,"encodedBodySize":501550,"decodedBodySize":501550,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/js/chunk-vendors.9b608817.js","entryType":"resource","startTime":90.40000000596046,"duration":1113.0999999940395,"initiatorType":"script","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":90.40000000596046,"domainLookupStart":358,"domainLookupEnd":358,"connectStart":358,"secureConnectionStart":388.7000000178814,"connectEnd":419.7000000178814,"requestStart":419.80000001192093,"responseStart":456.7000000178814,"firstInterimResponseStart":0,"responseEnd":1203.5,"transferSize":4489565,"encodedBodySize":4489265,"decodedBodySize":4489265,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/css/styles.801fb927.css","entryType":"resource","startTime":90.5,"duration":181.2000000178814,"initiatorType":"link","nextHopProtocol":"http/1.1","renderBlockingStatus":"blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":90.5,"domainLookupStart":90.5,"domainLookupEnd":90.5,"connectStart":90.5,"secureConnectionStart":90.5,"connectEnd":90.5,"requestStart":102.40000000596046,"responseStart":171.90000000596046,"firstInterimResponseStart":0,"responseEnd":271.7000000178814,"transferSize":205258,"encodedBodySize":204958,"decodedBodySize":793022,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/js/app.61a131a6.js","entryType":"resource","startTime":90.5,"duration":543.8000000119209,"initiatorType":"script","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":90.5,"domainLookupStart":358.5,"domainLookupEnd":358.5,"connectStart":358.5,"secureConnectionStart":390.59999999403954,"connectEnd":423.90000000596046,"requestStart":424,"responseStart":491.30000001192093,"firstInterimResponseStart":0,"responseEnd":634.3000000119209,"transferSize":319799,"encodedBodySize":319499,"decodedBodySize":319499,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/css/chunk-vendors.3b3330e8.css","entryType":"resource","startTime":90.7000000178814,"duration":127,"initiatorType":"link","nextHopProtocol":"http/1.1","renderBlockingStatus":"blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":90.7000000178814,"domainLookupStart":102.7000000178814,"domainLookupEnd":102.80000001192093,"connectStart":102.80000001192093,"secureConnectionStart":141.80000001192093,"connectEnd":174.40000000596046,"requestStart":174.5,"responseStart":216.09999999403954,"firstInterimResponseStart":216.09999999403954,"responseEnd":217.7000000178814,"transferSize":300,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/css/app.270048a9.css","entryType":"resource","startTime":90.80000001192093,"duration":137,"initiatorType":"link","nextHopProtocol":"http/1.1","renderBlockingStatus":"blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":90.80000001192093,"domainLookupStart":103,"domainLookupEnd":103.09999999403954,"connectStart":103.09999999403954,"secureConnectionStart":141.59999999403954,"connectEnd":177.2000000178814,"requestStart":177.2000000178814,"responseStart":225.09999999403954,"firstInterimResponseStart":0,"responseEnd":227.80000001192093,"transferSize":7972,"encodedBodySize":7672,"decodedBodySize":29015,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/jsencrypt.min.js","entryType":"resource","startTime":90.90000000596046,"duration":243.5,"initiatorType":"script","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":90.90000000596046,"domainLookupStart":90.90000000596046,"domainLookupEnd":90.90000000596046,"connectStart":90.90000000596046,"secureConnectionStart":90.90000000596046,"connectEnd":90.90000000596046,"requestStart":218,"responseStart":258.30000001192093,"firstInterimResponseStart":0,"responseEnd":334.40000000596046,"transferSize":70231,"encodedBodySize":69931,"decodedBodySize":69931,"responseStatus":0,"serverTiming":[]},{"name":"https://webapi.amap.com/maps?v=1.4.10&key=b547d05d07535668173a50b6d644ffce&plugin=AMap.Geolocation,AMap.Autocomplete,AMap.PlaceSearch,AMap.Scale,AMap.OverView,AMap.ToolBar,AMap.MapType,AMap.PolyEditor,AMap.CircleEditor","entryType":"resource","startTime":91.2000000178814,"duration":283.39999997615814,"initiatorType":"script","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":91.2000000178814,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"firstInterimResponseStart":0,"responseEnd":374.59999999403954,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":0,"serverTiming":[]},{"name":"https://statics.lotsmall.cn/dll/vendor.dll.js","entryType":"resource","startTime":91.30000001192093,"duration":134,"initiatorType":"script","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":91.30000001192093,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"firstInterimResponseStart":0,"responseEnd":225.30000001192093,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":0,"serverTiming":[]},{"name":"https://restapi.amap.com/v3/log/init?s=rsv3&product=JsInit&key=b547d05d07535668173a50b6d644ffce&t=1691116535520&resolution=1440*960&mob=0&vt=1&dpr=1.5&scale=1.5&detect=true&callback=jsonp_636009_&platform=JS&logversion=2.0&appname=https%3A%2F%2Flotsmg.dpm.org.cn%2Fmanage%2Fworkspace&csid=3577EA10-43AA-4FC9-90A6-01EE82B936A6&sdkversion=1.4.22","entryType":"resource","startTime":547.3000000119209,"duration":94.19999998807907,"initiatorType":"script","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":547.3000000119209,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"firstInterimResponseStart":0,"responseEnd":641.5,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":0,"serverTiming":[]},{"name":"https://lotsmg.dpm.org.cn/admin/getMenu","entryType":"resource","startTime":1404,"duration":177,"initiatorType":"xmlhttprequest","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":1404,"domainLookupStart":1409.2000000178814,"domainLookupEnd":1409.2000000178814,"connectStart":1409.2000000178814,"secureConnectionStart":1451,"connectEnd":1494.9000000059605,"requestStart":1495.0999999940395,"responseStart":1579.0999999940395,"firstInterimResponseStart":0,"responseEnd":1581,"transferSize":516,"encodedBodySize":216,"decodedBodySize":299,"responseStatus":200,"serverTiming":[]},{"name":"https://g.alicdn.com/AWSC/AWSC/awsc.js?t=2045","entryType":"resource","startTime":1405,"duration":80,"initiatorType":"script","nextHopProtocol":"h2","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":1405,"domainLookupStart":1409.7000000178814,"domainLookupEnd":1409.7000000178814,"connectStart":1409.7000000178814,"secureConnectionStart":1428.800000011921,"connectEnd":1453.5,"requestStart":1453.7000000178814,"responseStart":1480.0999999940395,"firstInterimResponseStart":0,"responseEnd":1485,"transferSize":4223,"encodedBodySize":3923,"decodedBodySize":12002,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/gugong.ico","entryType":"resource","startTime":1492,"duration":37.70000001788139,"initiatorType":"other","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":1492,"domainLookupStart":1492,"domainLookupEnd":1492,"connectStart":1492,"secureConnectionStart":1492,"connectEnd":1492,"requestStart":1496.0999999940395,"responseStart":1528.4000000059605,"firstInterimResponseStart":0,"responseEnd":1529.7000000178814,"transferSize":17258,"encodedBodySize":16958,"decodedBodySize":16958,"responseStatus":0,"serverTiming":[]},{"name":"https://tyfx.dpm.org.cn//zybuser/user/userMsg","entryType":"resource","startTime":1585.9000000059605,"duration":227.69999998807907,"initiatorType":"xmlhttprequest","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":1585.9000000059605,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"firstInterimResponseStart":0,"responseEnd":1813.5999999940395,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":200,"serverTiming":[]},{"name":"https://tyfx.dpm.org.cn//zybuser/menu/list","entryType":"resource","startTime":1816.9000000059605,"duration":136.59999999403954,"initiatorType":"xmlhttprequest","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":1816.9000000059605,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"firstInterimResponseStart":0,"responseEnd":1953.5,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":200,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/css/chunk-common.cdd84130.css","entryType":"resource","startTime":1959.5,"duration":94.09999999403954,"initiatorType":"link","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":1959.5,"domainLookupStart":1959.5,"domainLookupEnd":1959.5,"connectStart":1959.5,"secureConnectionStart":1959.5,"connectEnd":1959.5,"requestStart":1975.5999999940395,"responseStart":2041.0999999940395,"firstInterimResponseStart":0,"responseEnd":2053.5999999940395,"transferSize":110859,"encodedBodySize":110559,"decodedBodySize":677092,"responseStatus":0,"serverTiming":[]},{"name":"https://ggpwosspu.dpm.org.cn/lotsmallmg_vue/js/chunk-common.0b3822ef.js","entryType":"resource","startTime":1960.4000000059605,"duration":655,"initiatorType":"script","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":1960.4000000059605,"domainLookupStart":1960.4000000059605,"domainLookupEnd":1960.4000000059605,"connectStart":1960.4000000059605,"secureConnectionStart":1960.4000000059605,"connectEnd":1960.4000000059605,"requestStart":1976,"responseStart":2010.800000011921,"firstInterimResponseStart":0,"responseEnd":2615.4000000059605,"transferSize":5892557,"encodedBodySize":5892257,"decodedBodySize":5892257,"responseStatus":0,"serverTiming":[]},{"name":"https://lotsmg.dpm.org.cn/product/api/travel/checkService?timestamp=1691116537688","entryType":"resource","startTime":2717.5,"duration":131.2000000178814,"initiatorType":"xmlhttprequest","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":2717.5,"domainLookupStart":2717.5,"domainLookupEnd":2717.5,"connectStart":2717.5,"secureConnectionStart":2717.5,"connectEnd":2717.5,"requestStart":2731.0999999940395,"responseStart":2846.5999999940395,"firstInterimResponseStart":0,"responseEnd":2848.7000000178814,"transferSize":347,"encodedBodySize":47,"decodedBodySize":40,"responseStatus":200,"serverTiming":[]},{"name":"https://lotsmg.dpm.org.cn/admin/userLoginConfig/getcofingByHost?host=lotsmg.dpm.org.cn","entryType":"resource","startTime":2719.0999999940395,"duration":193.5,"initiatorType":"xmlhttprequest","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":2719.0999999940395,"domainLookupStart":2731.5,"domainLookupEnd":2731.5,"connectStart":2731.5,"secureConnectionStart":2771.2000000178814,"connectEnd":2807.2000000178814,"requestStart":2807.2000000178814,"responseStart":2910.5,"firstInterimResponseStart":0,"responseEnd":2912.5999999940395,"transferSize":679,"encodedBodySize":379,"decodedBodySize":646,"responseStatus":200,"serverTiming":[]},{"name":"https://lotsmg.dpm.org.cn/admin/userStore/detail","entryType":"resource","startTime":2923.300000011921,"duration":159.90000000596046,"initiatorType":"xmlhttprequest","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":2923.300000011921,"domainLookupStart":2923.300000011921,"domainLookupEnd":2923.300000011921,"connectStart":2923.300000011921,"secureConnectionStart":2923.300000011921,"connectEnd":2923.300000011921,"requestStart":2939.5999999940395,"responseStart":3081.5999999940395,"firstInterimResponseStart":0,"responseEnd":3083.2000000178814,"transferSize":1271,"encodedBodySize":971,"decodedBodySize":1631,"responseStatus":200,"serverTiming":[]},{"name":"https://ggpw-public.oss-accelerate.aliyuncs.com/image/20220701/b15c32bb52d349338dde8ed4038d8ee5.png","entryType":"resource","startTime":3115.800000011921,"duration":224.19999998807907,"initiatorType":"img","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":3115.800000011921,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"firstInterimResponseStart":0,"responseEnd":3340,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":0,"serverTiming":[]},{"name":"https://lotsmg.dpm.org.cn/admin/storeMerchant/checkAnnualAuditStatus","entryType":"resource","startTime":3124.5999999940395,"duration":135.7000000178814,"initiatorType":"xmlhttprequest","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":3124.5999999940395,"domainLookupStart":3124.5999999940395,"domainLookupEnd":3124.5999999940395,"connectStart":3124.5999999940395,"secureConnectionStart":3124.5999999940395,"connectEnd":3124.5999999940395,"requestStart":3163.0999999940395,"responseStart":3244.5999999940395,"firstInterimResponseStart":0,"responseEnd":3260.300000011921,"transferSize":358,"encodedBodySize":58,"decodedBodySize":54,"responseStatus":200,"serverTiming":[]},{"name":"https://lotsmg.dpm.org.cn/admin/getMarketData?mainUserId=17472","entryType":"resource","startTime":3125.800000011921,"duration":226.7999999821186,"initiatorType":"xmlhttprequest","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":3125.800000011921,"domainLookupStart":3163.300000011921,"domainLookupEnd":3163.300000011921,"connectStart":3163.300000011921,"secureConnectionStart":3196.5,"connectEnd":3229.4000000059605,"requestStart":3229.5,"responseStart":3350.4000000059605,"firstInterimResponseStart":0,"responseEnd":3352.5999999940395,"transferSize":397,"encodedBodySize":97,"decodedBodySize":123,"responseStatus":200,"serverTiming":[]},{"name":"https://lotsmg.dpm.org.cn/admin/noteDataGrid","entryType":"resource","startTime":3126.7000000178814,"duration":111.89999997615814,"initiatorType":"xmlhttprequest","nextHopProtocol":"http/1.1","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":3126.7000000178814,"domainLookupStart":3126.7000000178814,"domainLookupEnd":3126.7000000178814,"connectStart":3126.7000000178814,"secureConnectionStart":3126.7000000178814,"connectEnd":3126.7000000178814,"requestStart":3162.300000011921,"responseStart":3237.300000011921,"firstInterimResponseStart":0,"responseEnd":3238.5999999940395,"transferSize":2144,"encodedBodySize":1844,"decodedBodySize":5037,"responseStatus":200,"serverTiming":[]},{"name":"https://browsertdidticket.m.qq.com/","entryType":"resource","startTime":4741.300000011921,"duration":352.09999999403954,"initiatorType":"xmlhttprequest","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":4741.300000011921,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"firstInterimResponseStart":0,"responseEnd":5093.4000000059605,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":200,"serverTiming":[]},{"name":"https://browsertdidticket.m.qq.com/","entryType":"resource","startTime":4763.5,"duration":249.7000000178814,"initiatorType":"xmlhttprequest","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":4763.5,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"firstInterimResponseStart":0,"responseEnd":5013.200000017881,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":200,"serverTiming":[]},{"name":"https://flysec.m.qq.com/jprx/1941","entryType":"resource","startTime":5130,"duration":190.59999999403954,"initiatorType":"xmlhttprequest","nextHopProtocol":"","renderBlockingStatus":"non-blocking","workerStart":0,"redirectStart":0,"redirectEnd":0,"fetchStart":5130,"domainLookupStart":0,"domainLookupEnd":0,"connectStart":0,"secureConnectionStart":0,"connectEnd":0,"requestStart":0,"responseStart":0,"firstInterimResponseStart":0,"responseEnd":5320.5999999940395,"transferSize":0,"encodedBodySize":0,"decodedBodySize":0,"responseStatus":200,"serverTiming":[]}],
-    'timeOrigin':1691116534974.3
+    'getEntriesByType':[],
+    'timeOrigin':1691400728172.6
 
 
 
@@ -767,7 +778,7 @@ bodavm.memory.Performance={
         // }
 
     }
-    bodavm.toolsFunc.setProto = function setpro(dom) {
+    bodavm.toolsFunc.setProto = function setpro(dom,self) {
         //设置原型链
         let tagpro = dom.toUpperCase()
         switch (tagpro) {
@@ -912,33 +923,26 @@ bodavm.memory.Performance={
         }
         return false
     }
-    bodavm.toolsFunc.proxyObjHook=function (obj, objName) {
+    bodavm.toolsFunc.proxyHelper=function (obj, objName) {
+        //这个方法的proxy为必要,不能关闭
         let handler = {
             get(target, prop, receiver) {
                 // let 
-           
+                
                 let result = Reflect.get(target, prop, receiver)
-                // if (prop=='prepareStackTrace'  ){
-                //     return undefined
-                // }
-                if (prop==bodavm.memory.myFunction_toString_symbol){
-                    return result
+                if (bodavm.toolsFunc.filterProxyProp(prop)) {
+                    return result;
                 }
-                if (bodavm.memory.proxyCache [prop] ){
-                    return result
-                }
-                bodavm.memory.proxyCache [prop]=prop
-
                 console.log_copy('      [' + objName + ']', '   获取属性:   ', prop, '   value:   ', result,);
-    
-
                 return result;
             },
             set(target, propKey, value, receiver) {
-                if (propKey == 'isTrusted') {
-                    console.log_copy('      [' + objName + ']', "   设置属性:   ", propKey, "   value:   ", false);
-
-                    return false
+                if (target instanceof CSSStyleDeclaration){
+                    let val=`${propKey}: ${value};`
+                    let thisNode=bodavm.toolsFunc.getProtoAttr.call(receiver,receiver)
+                    let isliveStyle=boda$(thisNode).attr()['style']?boda$(thisNode).attr()['style']:''
+                    let newStyle=isliveStyle+val
+                    boda$(thisNode).attr('style',newStyle)
                 }
                 console.log_copy('      [' + objName + ']', "   设置属性:   ", propKey, "   value:   ", value);
 
@@ -949,28 +953,29 @@ bodavm.memory.Performance={
             //     console.log_copy('['+objName+']',`->  has -> 正在判断对象是否具有属性${prop}`);
             //     return Reflect.has(target, prop);
             //   },
-            deleteProperty(target, prop) {
-                if (Number(prop)>=0){
-                    console.log_copy('      [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为-> [false]`);
-                    return false
-                }
-                let result=null
-                let isbo=''
-                if (prop.startsWith('bo')){
-                    isbo=prop.slice(2)
-                }
-                if (isbo){
-                     result=Reflect.deleteProperty(target, isbo);
+            // deleteProperty(target, prop) {
+            //     // debugger
+            //     if (Number(prop)>=0){
+            //         console.log_copy('      [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为-> [false]`);
+            //         return false
+            //     }
+            //     let result=null
+            //     let isbo=''
+            //     if (prop.startsWith('bo')){
+            //         isbo=prop.slice(2)
+            //     }
+            //     if (isbo){
+            //          result=Reflect.deleteProperty(target, isbo);
 
-                }else{
-                     result=Reflect.deleteProperty(target, prop);
-                     console.log_copy('     [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为 ->`,[result]);
+            //     }else{
+            //          result=Reflect.deleteProperty(target, prop);
+            //          console.log_copy('     [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为 ->`,[result]);
 
-                }
+            //     }
         
 
-                return result
-            },
+            //     return result
+            // },
             // ownKeys(target) {
             //     // if (target._boContentWindow){
             //     //     let resKeys=Reflect.ownKeys(target)
@@ -985,26 +990,26 @@ bodavm.memory.Performance={
             //     // debugger
             //     console.log_copy('['+objName+']',`正在获取属性${prop}的描述符`);
             //     return Reflect.getOwnPropertyDescriptor(target, prop);
+            // //   },
+            //   defineProperty(target, prop, descriptor) {
+            //     // debugger
+            //     if (Number(prop)>=0){
+            //         return bodavm.toolsFunc.throwError('TypeError',`Failed to set an indexed property on 'HTMLCollection': Index property setter is not supported.`)
+            //     }
+            //     let isbo=''
+            //     if (prop.startsWith('bo')){
+            //         isbo=prop.slice(2)
+            //     }
+            //     if (isbo){
+            //         result=Reflect.defineProperty(target, isbo,descriptor);
+
+            //    }else{
+            //         result=Reflect.defineProperty(target, prop,descriptor);
+            //         console.log_copy('      ['+objName+']',`-> defineProperty -> 正在定义属性${prop} -> res->`,result);
+
+            //    }
+            //     return result
             //   },
-              defineProperty(target, prop, descriptor) {
-                // debugger
-                if (Number(prop)>=0){
-                    return bodavm.toolsFunc.throwError('TypeError',`Failed to set an indexed property on 'HTMLCollection': Index property setter is not supported.`)
-                }
-                let isbo=''
-                if (prop.startsWith('bo')){
-                    isbo=prop.slice(2)
-                }
-                if (isbo){
-                    result=Reflect.defineProperty(target, isbo,descriptor);
-
-               }else{
-                    result=Reflect.defineProperty(target, prop,descriptor);
-                    console.log_copy('      ['+objName+']',`-> defineProperty -> 正在定义属性${prop} -> res->`,result);
-
-               }
-                return result
-              },
             // preventExtensions(target) {
             //     console.log_copy('[' + objName + ']', '-> preventExtensions -> 正在禁止对象扩展');
             //     return Reflect.preventExtensions(target);
@@ -1024,9 +1029,6 @@ bodavm.memory.Performance={
                 return Reflect.apply(target, thisArg, argArray);
             },
             construct(target, argArray, newTarget) {
-                if( argArray[0]=="\\[native code\\]"){
-                    debugger
-                }
                 console.log_copy('      [' + objName + ']', '正在创建对象实例construct -> argArray ->',JSON.stringify_bo(argArray),` -> newTarget ->`,newTarget);
                 // return new Promise222(argArray)
                 // let result=new target(...argArray)
@@ -1647,7 +1649,7 @@ bodavm.memory.Performance={
             out += bodavm.toolsFunc.base64.base64EncodeChars.charAt(((c2 & 0xF) << 2) | ((c3 & 0xC0) >> 6));
             out += bodavm.toolsFunc.base64.base64EncodeChars.charAt(c3 & 0x3F);
         };
-        debugger
+        // debugger
         console.log_copy(`使用bs64编码:${str}`, 
         `编码后${out}`);
         return out;
@@ -1723,10 +1725,28 @@ bodavm.memory.Performance={
 // height：屏幕的高度。
 ;;
 (function () {
+    bodavm.envFunc.MediaDeviceInfo_deviceId_get=function (){
+        // debugger
+        console.log_copy(`MediaDeviceInfo_deviceId_get  ->res -> `,'默认返回""')
+        return ''
+
+    }
+    bodavm.envFunc.location_ancestorOrigins_get=function (){
+        debugger
+        let res=new DOMStringList('bobo')
+        console.log_copy(`location_ancestorOrigins_get  ->res -> `,res)
+
+        return res
+    }
+    bodavm.envFunc.location_toString=function (){
+        let string=location.href
+        console.log_copy(`location_toString  ->res -> `,string)
+        return string
+    }
     bodavm.envFunc.Navigator_xr_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'xr')
         if (islive){
-            console.log(`Navigator_xr_get 已存在返回`,islive)
+            console.log_copy(`Navigator_xr_get 已存在返回`,islive)
             return islive
         }
         let xr = new XRSystem('bobo')
@@ -1737,7 +1757,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Navigator_serial_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'serial')
         if (islive){
-            console.log(`Navigator_serial_get 已存在返回`,islive)
+            console.log_copy(`Navigator_serial_get 已存在返回`,islive)
             return islive
         }
         let serial = new Serial('bobo')
@@ -1749,7 +1769,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Navigator_presentation_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'presentation')
         if (islive){
-            console.log(`Navigator_presentation_get 已存在返回`,islive)
+            console.log_copy(`Navigator_presentation_get 已存在返回`,islive)
             return islive
         }
         let presentation = new Presentation('bobo')
@@ -1761,7 +1781,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Navigator_permissions_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'permissions')
         if (islive){
-            console.log(`Navigator_permissions_get 已存在返回`,islive)
+            console.log_copy(`Navigator_permissions_get 已存在返回`,islive)
             return islive
         }
         let permissions = new Permissions('bobo')
@@ -1772,7 +1792,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Navigator_mediaSession_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'mediaSession')
         if (islive){
-            console.log(`Navigator_mediaSession_get 已存在返回`,islive)
+            console.log_copy(`Navigator_mediaSession_get 已存在返回`,islive)
             return islive
         }
         let mediaSession = new MediaSession('bobo')
@@ -1784,7 +1804,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Navigator_keyboard_get=function (){
         let islive=bodavm.toolsFunc.getProtoAttr.call(this,'keyboard')
         if (islive){
-            console.log(`Navigator_keyboard_get 已存在返回`,islive)
+            console.log_copy(`Navigator_keyboard_get 已存在返回`,islive)
             return islive
         }
         let keyboard = new Keyboard('bobo')
@@ -1796,7 +1816,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Navigator_hid_get=function (){
         let ishid=bodavm.toolsFunc.getProtoAttr.call(this,'hid')
         if (ishid){
-            console.log(`Navigator_hid_get 已存在返回`,ishid)
+            console.log_copy(`Navigator_hid_get 已存在返回`,ishid)
             return ishid
         }
         let hid = new HID('bobo')
@@ -1807,7 +1827,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Navigator_credentials_get=function (){
         let iscredentials=bodavm.toolsFunc.getProtoAttr.call(this,'credentials')
         if (iscredentials){
-            console.log(`Navigator_credentials_get 已存在返回`,iscredentials)
+            console.log_copy(`Navigator_credentials_get 已存在返回`,iscredentials)
             return iscredentials
         }
         let credentials = new CredentialsContainer('bobo')
@@ -1818,7 +1838,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Navigator_clipboard_get=function (){
         let isclipboard=bodavm.toolsFunc.getProtoAttr.call(this,'clipboard')
         if (isclipboard){
-            console.log(`Navigator_clipboard_get 已存在返回`,isclipboard)
+            console.log_copy(`Navigator_clipboard_get 已存在返回`,isclipboard)
             return isclipboard
         }
         let clipboard = new Clipboard('bobo')
@@ -1839,7 +1859,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Navigator_mediaDevices_get = function () {
         let ismediaDevices=bodavm.toolsFunc.getProtoAttr.call(this,'mediaDevices')
         if (ismediaDevices){
-            console.log(`Navigator_mediaDevices_get 已存在返回`,ismediaDevices)
+            console.log_copy(`Navigator_mediaDevices_get 已存在返回`,ismediaDevices)
             return ismediaDevices
         }
         let medias = new MediaDevices('bobo')
@@ -1897,7 +1917,7 @@ bodavm.memory.Performance={
 
     }
     bodavm.envFunc.History_length_get=function (){
-        console.log(`History_length_get res->默认返回2`)
+        console.log_copy(`History_length_get res->默认返回2`)
         return 2
     }
     bodavm.envFunc.History_replaceState = function () {
@@ -2397,7 +2417,7 @@ bodavm.memory.Performance={
         return document_
     }
     bodavm.envFunc.Performance_now = function () {
-        console.log(`Performance_now -> res`, 4809.79999999702)
+        console.log_copy(`Performance_now -> res`, 4809.79999999702)
         return 4809.79999999702
     }
 
@@ -2415,7 +2435,7 @@ bodavm.memory.Performance={
         ///
         let arg = arguments[0]
         bodavm.memory.window['onbeforeunload'] = arg
-        console.log(`window_onbeforeunload_set 未完善`)
+        console.log_copy(`window_onbeforeunload_set 未完善`)
         return arg
     }
 
@@ -3230,7 +3250,8 @@ bodavm.memory.Performance={
             "timeoutID": bodavm.memory.globalInit.timeoutID,
             'settime_name': 'setTimeout'
         };
-        if (issrc && delay == 0) {
+        // debugger
+        if (issrc && delay <= 10) {
             //第一个src标签的settimeout为0时会在文件加载完成后立马执行
             if (!bodavm.memory.SrcSetTimeOut) {
                 bodavm.memory.SrcSetTimeOut = []
@@ -3240,6 +3261,10 @@ bodavm.memory.Performance={
             console.log_copy(`window_setTimeout `, `当前为src标签,并且delay为0,当前script执行完成后,立马调用  `);
             return bodavm.memory.globalInit.timeoutID
 
+        }
+        if (bodavm.memory.listenerFlag=='pending' && delay<=10){
+            console.log_copy(`当前处于事件调用内,delay 小于 10 直接进行调用 -->`)
+            event['callback'].apply(window,event.args)
         }
         // if (delay == 0) {
         //     // debugger
@@ -3853,152 +3878,298 @@ bodavm.memory.Performance={
 // innerHTML：获取或设置元素的HTML内容。
 ;;
 (function () {
-    bodavm.envFunc.DOMRectList_length_get=function (){
-        console.log(this,` -> DOMRectList_length_get res  ->  默认返回1`)
+    bodavm.envFunc.CSSStyleDeclaration_getPropertyValue=function (){
+        let arg=arguments[0]
+        if (arg=='color'){
+            let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+            // debugger
+            let color=boda$(thisNode).html()
+            let colorgb=''
+            switch (color){
+                case 'green':
+                    colorgb= 'rgb(0, 128, 0)'
+                    break
+                case 'red':
+                    colorgb='rgb(255, 0, 0)'
+                    break
+                case 'black':
+                    colorgb='rgb(0, 0, 0)'
+                    break
+                case 'secondp':
+                    colorgb="rgb(0, 0, 255)"
+                    break
+                case 'bar':
+                    colorgb="rgb(255, 0, 0)"
+                    break
+                default :
+                    console.log_copy(`CSSStyleDeclaration_getPropertyValue -> `,color,`未实现!!!!!!!`)
+                
+            }
+            console.log_copy(`CSSStyleDeclaration_getPropertyValue arg ->`,arg ,` -> rgb ->`,colorgb)
+
+            return colorgb
+        }
+        console.log_copy(`CSSStyleDeclaration_getPropertyValue arg ->`,arg ,`未实现!!!!!!!!!!!`)
+
+
+    }
+    bodavm.envFunc.Element_remove=function (){
+        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        if (!thisNode){
+           return bodavm.toolsFunc.throwError('typeError','错误thisNode不存在!!!!!!!!!11')
+        }
+        boda$(thisNode).remove()
+        console.log_copy(this, ` -> Element_remove`)
+
+    }
+    bodavm.envFunc.CSSRuleList_length_get=function (){
+        // debugger
+        let len=Object.keys(this,'bobo').length
+        console.log_copy(this, ` -> CSSRuleList_length_get length-> `, len)
+
+        return len
+    }
+    bodavm.envFunc.CSSStyleSheet_cssRules_get = function () {
+        let islive = bodavm.toolsFunc.getProtoAttr.call(this, 'cssRules')
+        if (islive) {
+            console.log_copy(this, ` -> CSSStyleSheet_cssRules_get cache已存在返回-> `, islive)
+            return islive
+
+        }
+        let rule = new CSSRuleList('bobo')
+        // let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        // debugger
+        console.log_copy(this, ` -> CSSStyleSheet_cssRules_get 默认返回一个 需要根据实际进行调整!!!!!-> `,)
+        Object.defineProperty_bo(rule, '0', {
+            value: new CSSStyleRule('bobo'),
+            writable: false,
+            enumerable: true,
+            configurable: true
+        })
+        rule=bodavm.toolsFunc.proxy2(rule,'CSSRuleList::proxy2')
+        bodavm.toolsFunc.setProtoAttr.call(this,'cssRules',rule)
+        return rule
+    }
+
+    bodavm.envFunc.HTMLStyleElement_sheet_get = function () {
+        let islive = bodavm.toolsFunc.getProtoAttr.call(this, 'sheet')
+        if (islive) {
+            console.log_copy(this, ` -> HTMLStyleElement_sheet_get cache已存在返回-> `, islive)
+
+            return islive
+
+        }
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        // debugger
+        let isinDom = boda$('style').get().indexOf(thisNode)
+        if (isinDom == -1) {
+            console.log_copy(this, ` -> HTMLStyleElement_sheet_get  不存在html中返回null-> `, null)
+
+            return null
+        }
+
+        let sheet = new CSSStyleSheet('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this, 'sheet', sheet)
+        // bodavm.toolsFunc.setProtoAttr.call(sheet, sheet, thisNode)
+        console.log_copy(this, ` -> HTMLStyleElement_sheet_get sheet-> `, sheet)
+
+        return sheet
+    }
+    bodavm.envFunc.Node_replaceChild = function () {
+        let newChild = arguments[0]
+        let oldChild = arguments[1]
+        let parentNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        // debugger
+        console.log_copy(this, ` -> Node_replaceChild newChild-> `, newChild, ` -> oldChild -> `, oldChild)
+        let newChildNode = bodavm.toolsFunc.getProtoAttr.call(newChild, newChild)
+        let oldChildNode = bodavm.toolsFunc.getProtoAttr.call(oldChild, oldChild)
+        // debugger
+        boda$(oldChildNode).replaceWith(boda$(newChildNode));
+
+        return oldChild
+    }
+    bodavm.envFunc.Node_cloneNode = function () {
+        let deep = arguments[0]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        let cloneNode = null
+        let resNode = null
+        if (deep) {
+            cloneNode = boda$(thisNode).get(0)
+            resNode = bodavm.toolsFunc.setProto(cloneNode.name)
+            // bodavm.toolsFunc.setProto.call
+            bodavm.toolsFunc.setProtoAttr.call(resNode, resNode, cloneNode)
+        }
+        else {
+            let attrs = boda$(thisNode).attr()
+            cloneNode = document.createElement(thisNode.name)
+            if (attrs) {
+                for (let i in attrs) {
+                    cloneNode[i] = attrs[i]
+                }
+            }
+            resNode = cloneNode
+        }
+
+
+        console.log_copy(this, ` -> Node_cloneNode  deep -> ${arguments[0]} -> res  ->`, resNode)
+        // debugger
+        return resNode
+
+    }
+    bodavm.envFunc.CharacterData_data_set = function () {
+        let arg = arguments[0]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        // debugger
+        boda$(thisNode).text(arguments[0])
+        console.log_copy(this, ` -> CharacterData_data_set arg  ->  arg`)
+        return arg
+    }
+    bodavm.envFunc.DOMRectList_length_get = function () {
+        console.log_copy(this, ` -> DOMRectList_length_get res  ->  默认返回1`)
 
         return 1
     }
-    bodavm.envFunc.Element_getClientRects=function (){
-        let getClientRects=new DOMRectList('bobo')
-        console.log(this,` -> Element_getClientRects getClientRects  -> `,getClientRects)
-        Object.defineProperty_bo(getClientRects,'0',{
-            value:new DOMRect('bobo'),
-            writable:false,
-            enumerable:true,
-            configurable:true
+    bodavm.envFunc.Element_getClientRects = function () {
+        let getClientRects = new DOMRectList('bobo')
+        console.log_copy(this, ` -> Element_getClientRects getClientRects  -> `, getClientRects)
+        Object.defineProperty_bo(getClientRects, '0', {
+            value: new DOMRect('bobo'),
+            writable: false,
+            enumerable: true,
+            configurable: true
         })
         return getClientRects
     }
-    bodavm.envFunc.HTMLElement_innerText_set=function (){
+    bodavm.envFunc.HTMLElement_innerText_set = function () {
         // debugger
-        let arg=arguments[0]
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        let arg = arguments[0]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         boda$(thisNode).empty()
         boda$(thisNode).text(arg)
-        console.log(this ,`-> HTMLElement_innerText_set innerText  -> `,arg)
+        console.log_copy(this, `-> HTMLElement_innerText_set innerText  -> `, arg)
 
         return arg
     }
 
-    bodavm.envFunc.HTMLElement_style_set=function (){
+    bodavm.envFunc.HTMLElement_style_set = function () {
         // debugger
-        let style=arguments[0]
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        boda$(thisNode).attr('style',style)
-        console.log(this,`- > HTMLElement_style_set style  -> `,style)
+        let style = arguments[0]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        boda$(thisNode).attr('style', style)
+        console.log_copy(this, `- > HTMLElement_style_set style  -> `, style)
         return style
     }
-    bodavm.envFunc.HTMLElement_dataset_get=function (){
-        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'dataset')
-        if (islive){
-            console.log(this, `-> HTMLElement_dataset_get 已存在返回`,islive)
+    bodavm.envFunc.HTMLElement_dataset_get = function () {
+        let islive = bodavm.toolsFunc.getProtoAttr.call(this, 'dataset')
+        if (islive) {
+            console.log_copy(this, `-> HTMLElement_dataset_get 已存在返回`, islive)
             return islive
         }
         let dataset = new DOMStringMap('bobo')
-        bodavm.toolsFunc.setProtoAttr.call(this,'dataset',dataset)
+        bodavm.toolsFunc.setProtoAttr.call(this, 'dataset', dataset)
         console.log_copy(`HTMLElement_dataset_get -> xr -> ${dataset}`)
         return dataset
     }
-    bodavm.envFunc.Document_pointerLockElement_get=function(){
-        let pointerLockElement=bodavm.toolsFunc.getProtoAttr.call(this,'pointerLockElement')?bodavm.toolsFunc.getProtoAttr.call(this,'pointerLockElement'):null
-        console.log(`Document_pointerLockElement_get res->`,pointerLockElement)
+    bodavm.envFunc.Document_pointerLockElement_get = function () {
+        let pointerLockElement = bodavm.toolsFunc.getProtoAttr.call(this, 'pointerLockElement') ? bodavm.toolsFunc.getProtoAttr.call(this, 'pointerLockElement') : null
+        console.log_copy(`Document_pointerLockElement_get res->`, pointerLockElement)
         return pointerLockElement
     }
-    bodavm.envFunc.Document_pictureInPictureElement_get=function(){
-        let pictureInPictureElement=bodavm.toolsFunc.getProtoAttr.call(this,'pictureInPictureElement')?bodavm.toolsFunc.getProtoAttr.call(this,'pictureInPictureElement'):null
-        console.log(`Document_pictureInPictureElement_get res->`,pictureInPictureElement)
+    bodavm.envFunc.Document_pictureInPictureElement_get = function () {
+        let pictureInPictureElement = bodavm.toolsFunc.getProtoAttr.call(this, 'pictureInPictureElement') ? bodavm.toolsFunc.getProtoAttr.call(this, 'pictureInPictureElement') : null
+        console.log_copy(`Document_pictureInPictureElement_get res->`, pictureInPictureElement)
         return pictureInPictureElement
     }
-    bodavm.envFunc.Document_xmlVersion_get=function(){
-        let xmlVersion=bodavm.toolsFunc.getProtoAttr.call(this,'xmlVersion')?bodavm.toolsFunc.getProtoAttr.call(this,'xmlVersion'):null
-        console.log(`Document_xmlVersion_get res->`,xmlVersion)
+    bodavm.envFunc.Document_xmlVersion_get = function () {
+        let xmlVersion = bodavm.toolsFunc.getProtoAttr.call(this, 'xmlVersion') ? bodavm.toolsFunc.getProtoAttr.call(this, 'xmlVersion') : null
+        console.log_copy(`Document_xmlVersion_get res->`, xmlVersion)
         return xmlVersion
     }
 
-    bodavm.envFunc.Document_xmlEncoding_get=function(){
-        let xmlEncoding=bodavm.toolsFunc.getProtoAttr.call(this,'xmlEncoding')?bodavm.toolsFunc.getProtoAttr.call(this,'xmlEncoding'):null
-        console.log(`Document_xmlEncoding_get res->`,xmlEncoding)
+    bodavm.envFunc.Document_xmlEncoding_get = function () {
+        let xmlEncoding = bodavm.toolsFunc.getProtoAttr.call(this, 'xmlEncoding') ? bodavm.toolsFunc.getProtoAttr.call(this, 'xmlEncoding') : null
+        console.log_copy(`Document_xmlEncoding_get res->`, xmlEncoding)
         return xmlEncoding
     }
-    bodavm.envFunc.Document_ontransitionrun_get=function(){
-        let ontransitionrun=bodavm.toolsFunc.getProtoAttr.call(this,'ontransitionrun')?bodavm.toolsFunc.getProtoAttr.call(this,'ontransitionrun'):null
-        console.log(`Document_ontransitionrun_get res->`,ontransitionrun)
+    bodavm.envFunc.Document_ontransitionrun_get = function () {
+        let ontransitionrun = bodavm.toolsFunc.getProtoAttr.call(this, 'ontransitionrun') ? bodavm.toolsFunc.getProtoAttr.call(this, 'ontransitionrun') : null
+        console.log_copy(`Document_ontransitionrun_get res->`, ontransitionrun)
         return ontransitionrun
     }
-    bodavm.envFunc.Document_ontransitionend_get=function(){
-        let ontransitionend=bodavm.toolsFunc.getProtoAttr.call(this,'ontransitionend')?bodavm.toolsFunc.getProtoAttr.call(this,'ontransitionend'):null
-        console.log(`Document_ontransitionend_get res->`,ontransitionend)
+    bodavm.envFunc.Document_ontransitionend_get = function () {
+        let ontransitionend = bodavm.toolsFunc.getProtoAttr.call(this, 'ontransitionend') ? bodavm.toolsFunc.getProtoAttr.call(this, 'ontransitionend') : null
+        console.log_copy(`Document_ontransitionend_get res->`, ontransitionend)
         return ontransitionend
     }
-    bodavm.envFunc.Document_ontransitioncancel_get=function(){
-        let ontransitioncancel=bodavm.toolsFunc.getProtoAttr.call(this,'ontransitioncancel')?bodavm.toolsFunc.getProtoAttr.call(this,'ontransitioncancel'):null
-        console.log(`Document_ontransitioncancel_get res->`,ontransitioncancel)
+    bodavm.envFunc.Document_ontransitioncancel_get = function () {
+        let ontransitioncancel = bodavm.toolsFunc.getProtoAttr.call(this, 'ontransitioncancel') ? bodavm.toolsFunc.getProtoAttr.call(this, 'ontransitioncancel') : null
+        console.log_copy(`Document_ontransitioncancel_get res->`, ontransitioncancel)
         return ontransitioncancel
     }
-    bodavm.envFunc.Document_pictureInPictureEnabled_get=function (){
-        console.log(`Document_pictureInPictureEnabled_get res-> 默认返回true`,true)
+    bodavm.envFunc.Document_pictureInPictureEnabled_get = function () {
+        console.log_copy(`Document_pictureInPictureEnabled_get res-> 默认返回true`, true)
         return true
     }
-    bodavm.envFunc.Document_onresume_get=function (){
-        let onresume=bodavm.toolsFunc.getProtoAttr.call(this,'onresume')?bodavm.toolsFunc.getProtoAttr.call(this,'onresume'):null
-        console.log(`Document_onresume_get res->`,onresume)
+    bodavm.envFunc.Document_onresume_get = function () {
+        let onresume = bodavm.toolsFunc.getProtoAttr.call(this, 'onresume') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onresume') : null
+        console.log_copy(`Document_onresume_get res->`, onresume)
         return onresume
     }
-    bodavm.envFunc.Document_onpointerlockerror_get=function (){
-        let onpointerlockerror=bodavm.toolsFunc.getProtoAttr.call(this,'onpointerlockerror')?bodavm.toolsFunc.getProtoAttr.call(this,'onpointerlockerror'):null
-        console.log(`Document_onpointerlockerror_get res->`,onpointerlockerror)
+    bodavm.envFunc.Document_onpointerlockerror_get = function () {
+        let onpointerlockerror = bodavm.toolsFunc.getProtoAttr.call(this, 'onpointerlockerror') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onpointerlockerror') : null
+        console.log_copy(`Document_onpointerlockerror_get res->`, onpointerlockerror)
         return onpointerlockerror
     }
-    bodavm.envFunc.Document_featurePolicy_get=function (){
-        let isfeaturePolicy=bodavm.toolsFunc.getProtoAttr.call(this,'featurePolicy')
-        if (isfeaturePolicy){
-            console.log(`Document_featurePolicy_get cache已存在返回->`,isfeaturePolicy)
+    bodavm.envFunc.Document_featurePolicy_get = function () {
+        let isfeaturePolicy = bodavm.toolsFunc.getProtoAttr.call(this, 'featurePolicy')
+        if (isfeaturePolicy) {
+            console.log_copy(`Document_featurePolicy_get cache已存在返回->`, isfeaturePolicy)
             return isfeaturePolicy
         }
-        let feature=new FeaturePolicy('boob')
-        console.log(`Document_featurePolicy_get res->`,feature)
-        bodavm.toolsFunc.setProtoAttr.call(this,'featurePolicy',feature)
+        let feature = new FeaturePolicy('boob')
+        console.log_copy(`Document_featurePolicy_get res->`, feature)
+        bodavm.toolsFunc.setProtoAttr.call(this, 'featurePolicy', feature)
         return feature
     }
-    bodavm.envFunc.Document_onmousemove_get=function (){
-        let onmousemove=bodavm.toolsFunc.getProtoAttr.call(this,'onmousemove')?bodavm.toolsFunc.getProtoAttr.call(this,'onmousemove'):null
-        console.log(`Document_onmousemove_get res->`,onmousemove)
+    bodavm.envFunc.Document_onmousemove_get = function () {
+        let onmousemove = bodavm.toolsFunc.getProtoAttr.call(this, 'onmousemove') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onmousemove') : null
+        console.log_copy(`Document_onmousemove_get res->`, onmousemove)
         return onmousemove
 
     }
-    bodavm.envFunc.HTMLElement_onmouseenter_get=function (){
-        let onmouseenter=bodavm.toolsFunc.getProtoAttr.call(this,'onmouseenter')
-        console.log(`HTMLElement_onmouseenter_get -> res -> `,onmouseenter)
+    bodavm.envFunc.HTMLElement_onmouseenter_get = function () {
+        let onmouseenter = bodavm.toolsFunc.getProtoAttr.call(this, 'onmouseenter')
+        console.log_copy(`HTMLElement_onmouseenter_get -> res -> `, onmouseenter)
         return onmouseenter
     }
-    bodavm.envFunc.Document_scrollingElement_get=function (){
-        let ele=document.documentElement
-        console.log(`Document_scrollingElement_get ->默认返回html`,ele)
+    bodavm.envFunc.Document_scrollingElement_get = function () {
+        let ele = document.documentElement
+        console.log_copy(`Document_scrollingElement_get ->默认返回html`, ele)
         return ele
     }
-    bodavm.envFunc.HTMLElement_onresize_get=function (){
+    bodavm.envFunc.HTMLElement_onresize_get = function () {
 
         // let onresize=bodavm.memory.asyncEvent['HTMLElement']['onresize']
         // if (!onresize.length) {
         //     console.log_copy(`HTMLElement_onresize_get res->`,null)
         //     return null
         // }
-        let onresize=bodavm.toolsFunc.getProtoAttr.call(this,'onresize')?bodavm.toolsFunc.getProtoAttr.call(this,'onresize'):null   
-         console.log_copy(`HTMLElement_onresize_get res->`,onresize)
+        let onresize = bodavm.toolsFunc.getProtoAttr.call(this, 'onresize') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onresize') : null
+        console.log_copy(`HTMLElement_onresize_get res->`, onresize)
 
         return onresize
     }
-    bodavm.envFunc.Document_onselectionchange_get=function (){
-        let res=bodavm.toolsFunc.getProtoAttr.call(this,'onselectionchange')?bodavm.toolsFunc.getProtoAttr.call(this,'onselectionchange'):null
+    bodavm.envFunc.Document_onselectionchange_get = function () {
+        let res = bodavm.toolsFunc.getProtoAttr.call(this, 'onselectionchange') ? bodavm.toolsFunc.getProtoAttr.call(this, 'onselectionchange') : null
 
         console.log_copy(`Document_onselectionchange_get -> res->`, res)
         return res
     }
-    bodavm.envFunc.URL_createObjectURL=function (){
+    bodavm.envFunc.URL_createObjectURL = function () {
         debugger
-        let arg=arguments[0]
-        let newUrl=`blob:${location.origin}/661f4a1e-88f8-44e8-9d85-635b0b7bbb3e`
-        console.log_copy(`URL_createObjectURL arg->` ,arg,`-> res->`, newUrl)
+        let arg = arguments[0]
+        let newUrl = `blob:${location.origin}/661f4a1e-88f8-44e8-9d85-635b0b7bbb3e`
+        console.log_copy(`URL_createObjectURL arg->`, arg, `-> res->`, newUrl)
 
         return newUrl
 
@@ -4021,7 +4192,15 @@ bodavm.memory.Performance={
         let nodeList = []
         if (resNodeList) {
             for (const resNode of resNodeList) {
-                let newNode = bodavm.toolsFunc.setProto(resNode.name)
+                let newNode=null
+                let isliveNode=bodavm.toolsFunc.getProtoAttr.call(resNode,resNode)
+                if (isliveNode){
+                    newNode=isliveNode
+                }else{
+                    newNode = bodavm.toolsFunc.setProto(resNode.name)
+                    bodavm.toolsFunc.setProtoAttr.call(resNode, resNode, newNode)
+                }
+                // let newNode = bodavm.toolsFunc.setProto(resNode.name)
                 bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, resNode)
                 nodeList.push(newNode)
             }
@@ -4044,7 +4223,15 @@ bodavm.memory.Performance={
         let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         // debugger
         let target = boda$(thisNode).children().first()[0]
-        let newNode = bodavm.toolsFunc.setProto(target.name)
+        let newNode=null
+        let isliveNode=bodavm.toolsFunc.getProtoAttr.call(target,target)
+        if (isliveNode){
+            newNode=isliveNode
+        }else{
+            newNode = bodavm.toolsFunc.setProto(target.name)
+            bodavm.toolsFunc.setProtoAttr.call(target, target, newNode)
+        }
+        // let newNode = bodavm.toolsFunc.setProto(target.name)
         bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, target)
         console.log_copy(this, ` -> Element_firstElementChild_get -> res ->`, newNode)
 
@@ -4053,46 +4240,18 @@ bodavm.memory.Performance={
     bodavm.envFunc.Document_createTextNode = function () {
         // debugger
         let arg = arguments[0]
+        let textnode = boda$(boda$.parseHTML(arg)).get(0)
+        // debugger
+
         let newNode = bodavm.toolsFunc.setProto('TEXT')
-        bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, arg)
+        bodavm.toolsFunc.setProtoAttr.call(textnode,textnode,newNode)
+        bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, textnode)
         console.log_copy(this, ` -> Document_createTextNode -> res ->`, newNode)
 
         return newNode
     }
 
-    bodavm.envFunc.Document_getElementsByClassName = function () {
-        let tagName = arguments[0]
-        let classList = boda$(`.${tagName}`)
-        if (!bodavm.memory.cache['Document_getElementsByClassName'][tagName]) {
-            bodavm.memory.cache['Document_getElementsByClassName'][tagName] = {}
-        }
-        if (bodavm.memory.collection[tagName] && bodavm.memory.cache['Document_getElementsByClassName'][tagName]['this'] == this) {
-            let cacheValue = bodavm.memory.cache['Document_getElementsByClassName'][tagName]["res"]
-            console.log_copy(`Document_getElementsByClassName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
-            return cacheValue
-        }
-        // debugger
-        bodavm.memory.collection[tagName] = []
-        if (classList) {
-            for (let ind = 0; ind < classList.length; ind++) {
-                let newNode = bodavm.toolsFunc.setProto(classList[ind].name)
-                let currNode = classList[ind]
-                bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, currNode)
-                bodavm.memory.collection[tagName].push(newNode)
-            }
-        }
-        // debugger
-        bodavm.memory.collection[tagName].__proto__ = HTMLCollection.prototype
-        bodavm.memory.cache['Document_getElementsByClassName'][tagName]['res'] = bodavm.memory.collection[tagName]
-        bodavm.memory.cache['Document_getElementsByClassName'][tagName]['this'] = this
 
-        bodavm.memory.collection[tagName].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
-        console.log_copy(`Document_getElementsByClassName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.collection[tagName])
-        // debugger
-
-        return bodavm.memory.collection[tagName];
-
-    }
     bodavm.envFunc.Document_dir_set = function () {
         let arg = arguments[0]
         bodavm.memory.document['dir'] = arg
@@ -4133,7 +4292,14 @@ bodavm.memory.Performance={
     bodavm.envFunc.Document_currentScript_get = function () {
         let currentNode = bodaCurrentElement
         if (currentNode.name == 'script') {
-            let newNode = bodavm.toolsFunc.setProto(currentNode.name)
+            let newNode=null
+            let isliveNode=bodavm.toolsFunc.getProtoAttr.call(currentNode,currentNode)
+            if (isliveNode){
+                newNode=isliveNode
+            }else{
+                newNode = bodavm.toolsFunc.setProto(currentNode.name)
+                bodavm.toolsFunc.setProtoAttr.call(currentNode, currentNode, newNode)
+            }
             bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, currentNode)
             console.log_copy(this, `-> Document_currentScript_get -> res ->`, newNode)
             return newNode
@@ -4158,7 +4324,14 @@ bodavm.memory.Performance={
             return null
         }
         let name = nextNode.name ? nextNode.name : nextNode.type
-        let newNode = bodavm.toolsFunc.setProto(name)
+        let newNode=null
+        let isliveNode=bodavm.toolsFunc.getProtoAttr.call(nextNode,nextNode)
+        if (isliveNode){
+            newNode=isliveNode
+        }else{
+            newNode = bodavm.toolsFunc.setProto(name)
+            bodavm.toolsFunc.setProtoAttr.call(nextNode, nextNode, newNode)
+        }
         bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, nextNode)
         bodavm.memory.cache["Node_nextSibling_get"]['this'] = this
         bodavm.memory.cache["Node_nextSibling_get"]['res'] = newNode
@@ -4188,7 +4361,15 @@ bodavm.memory.Performance={
 
             return null
         }
-        let newNode = bodavm.toolsFunc.setProto(node_.name)
+        let newNode=null
+        let isliveNode=bodavm.toolsFunc.getProtoAttr.call(node_,node_)
+        if (isliveNode){
+            newNode=isliveNode
+        }else{
+            newNode = bodavm.toolsFunc.setProto(node_.name)
+            bodavm.toolsFunc.setProtoAttr.call(node_, node_, newNode)
+        }
+      
         bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, node_)
         console.log_copy(this, `-> Node_firstChild_get res->`, newNode)
         bodavm.memory.cache["Node_firstChild_get"]['this'] = this
@@ -4224,8 +4405,17 @@ bodavm.memory.Performance={
             return null
         }
         // debugger
-        let newNode = bodavm.toolsFunc.setProto(parentEle.name)
+        let newNode =null
+        let isliveNode=bodavm.toolsFunc.getProtoAttr.call(parentEle,parentEle)
+        if (isliveNode){
+            newNode=isliveNode
+        }else{
+            newNode=bodavm.toolsFunc.setProto(parentEle.name)
+            bodavm.toolsFunc.setProtoAttr.call(parentEle,parentEle,newNode)
+        }
+        // = 
         bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, parentEle)
+
         console.log_copy(this, `-> Node_parentElement_get res->`, newNode)
         bodavm.memory.cache['Node_parentElement_get']['res'] = newNode
         bodavm.memory.cache['Node_parentElement_get']['this'] = this
@@ -4245,7 +4435,7 @@ bodavm.memory.Performance={
         let arg = arguments[0]
         let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         let res = boda$(thisNode).attr(arg)
-        console.log_copy(this, `-> Element_getAttribute `,`arg->`, arg ,`-> res-> `, res)
+        console.log_copy(this, `-> Element_getAttribute `, `arg->`, arg, `-> res-> `, res)
         return res
     }
     bodavm.envFunc.Node_childNodes_get = function () {
@@ -4265,9 +4455,18 @@ bodavm.memory.Performance={
             for (let child of childs) {
                 if (child.type === 'tag' || child.type === 'text') {
                     // debugger
-                    let name = child.name ? child.name : child.type
-                    let newNode = bodavm.toolsFunc.setProto(name)
-                    bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, child)
+                    let newNode=null
+                    let isliveNode=bodavm.toolsFunc.getProtoAttr.call(child,child)
+                    if (isliveNode){
+                        newNode=isliveNode
+                    }else{
+                        let name = child.name ? child.name : child.type
+
+                        newNode = bodavm.toolsFunc.setProto(name)
+                        bodavm.toolsFunc.setProtoAttr.call(child,child,newNode)
+                        bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, child)
+
+                    }
                     childNodes.push(newNode);
                 }
             }
@@ -4299,12 +4498,20 @@ bodavm.memory.Performance={
         let resNode = boda$(thisNode).find(arg)
         let newNode = null
         if (resNode) {
+            let isliveNode=bodavm.toolsFunc.getProtoAttr.call(resNode[0],resNode[0])
+            if (isliveNode){
+                console.log_copy(this,`Element_querySelector arg->`, arg, ` -> res->`, isliveNode)
+
+                return isliveNode
+            }
             newNode = bodavm.toolsFunc.setProto(resNode[0].name)
+            bodavm.toolsFunc.setProtoAttr.call(resNode[0], resNode[0], newNode)
+
             bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, resNode[0])
 
         }
 
-        console.log_copy(this, `-> Element_querySelector res->`, newNode)
+        console.log_copy(this, `-> Element_querySelector arg ->` ,arg, `-> res->`, newNode)
         return newNode
 
     }
@@ -4324,15 +4531,26 @@ bodavm.memory.Performance={
         let target = arguments[0]
         let target2 = arguments[1]
         let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        let targetNode = bodavm.toolsFunc.getProtoAttr.call(target, target)
-        let target2sNode = bodavm.toolsFunc.getProtoAttr.call(target2, target2)
+        let newNode = bodavm.toolsFunc.getProtoAttr.call(target, target)
+        let referenceNode = bodavm.toolsFunc.getProtoAttr.call(target2, target2)
         // debugger
-        if (targetNode.name == 'script' && target2sNode.name == 'script') {
+        let newEl = boda$(newNode);
+
+        if (newNode.name == 'script' && referenceNode.name == 'script') {
             debugger
             bodavm.memory.waitExec.push(targetNode)
 
         }
-        boda$(target2sNode).before(targetNode)
+
+        if (!referenceNode) {
+            // referenceNode 为 null,插入到最后
+            // debugger
+            boda$(thisNode).append(newEl);
+        } else {
+            // debugger
+            const ref = boda$(referenceNode);
+            ref.before(newEl);
+        }
         console.log_copy(this, `-> Node_insertBefore newNode->`, target, `-> referenceNode ->`, target2)
         return target
 
@@ -4343,7 +4561,15 @@ bodavm.memory.Performance={
         let res = boda$(arg).get()[0]
         let newNode = null
         if (res) {
+            let isliveNode=bodavm.toolsFunc.getProtoAttr.call(res,res)
+            if (isliveNode){
+                console.log_copy(`Document_querySelector arg->`, arg, ` -> res->`, isliveNode)
+
+                return isliveNode
+            }
             newNode = bodavm.toolsFunc.setProto(res.name)
+            bodavm.toolsFunc.setProtoAttr.call(res, res, newNode)
+
             bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, res)
         }
 
@@ -4403,8 +4629,14 @@ bodavm.memory.Performance={
         let res = null
         if (element.length > 0) {
             res = element[0]
+            let isliveNode=bodavm.toolsFunc.getProtoAttr.call(res,res)
+            if (isliveNode){
+                console.log_copy(`Document_getElementById arg->`, arg, ` -> res->`, isliveNode)
 
+                return isliveNode
+            }
             let newNode = bodavm.toolsFunc.setProto(res.name)
+            bodavm.toolsFunc.setProtoAttr.call(res,res,newNode)
             bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, res)
             console.log_copy(`Document_getElementById arg->`, arg, ` -> res->`, newNode)
 
@@ -4548,69 +4780,69 @@ bodavm.memory.Performance={
 
     bodavm.envFunc.DOMRectReadOnly_top_get = function () {
         // debugger
-        console.log(`DOMRectReadOnly_top_get  res-> 默认返回`, 8)
+        console.log_copy(`DOMRectReadOnly_top_get  res-> 默认返回`, 8)
         return 8
     }
     bodavm.envFunc.DOMRectReadOnly_bottom_get = function () {
         // debugger
-        console.log(`DOMRectReadOnly_bottom_get  res-> 默认返回`, 245.33334350585938)
+        console.log_copy(`DOMRectReadOnly_bottom_get  res-> 默认返回`, 245.33334350585938)
         return 245.33334350585938
     }
     bodavm.envFunc.DOMRectReadOnly_left_get = function () {
         // debugger
-        console.log(`DOMRectReadOnly_left_get  res-> 默认返回`, 8)
+        console.log_copy(`DOMRectReadOnly_left_get  res-> 默认返回`, 8)
         return 8
     }
 
     bodavm.envFunc.DOMRectReadOnly_right_get = function () {
         // debugger
-        console.log(`DOMRectReadOnly_right_get  res-> 默认返回`, 1432)
+        console.log_copy(`DOMRectReadOnly_right_get  res-> 默认返回`, 1432)
         return 1432
     }
     bodavm.envFunc.DOMRect_height_get = function () {
         // debugger
-        console.log(`DOMRect_height_get  res-> 默认返回`, 237.33334350585938)
+        console.log_copy(`DOMRect_height_get  res-> 默认返回`, 237.33334350585938)
         return 1424
     }
     bodavm.envFunc.DOMRect_width_get = function () {
         // debugger
-        console.log(`DOMRect_width_get  res-> 默认返回`, 1424)
+        console.log_copy(`DOMRect_width_get  res-> 默认返回`, 1424)
         return 1424
     }
     bodavm.envFunc.DOMRect_y_get = function () {
         // debugger
-        console.log(`DOMRect_y_get  res-> 默认返回`, 8)
+        console.log_copy(`DOMRect_y_get  res-> 默认返回`, 8)
         return 8
     }
     bodavm.envFunc.DOMRect_x_get = function () {
         // debugger
-        console.log(`DOMRect_x_get  res-> 默认返回`, 8)
+        console.log_copy(`DOMRect_x_get  res-> 默认返回`, 8)
         return 8
     }
     bodavm.envFunc.Element_getBoundingClientRect = function () {
         let DomRect = new DOMRect('bobo')
-        console.log(`Element_getBoundingClientRect  res->`, DomRect)
+        console.log_copy(`Element_getBoundingClientRect  res->`, DomRect)
 
         return DomRect
     }
     bodavm.envFunc.Element_clientTop_get = function () {
         // debugger
         let thisEvent = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        console.log(`Element_clientTop_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
+        console.log_copy(`Element_clientTop_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
 
         return 0
     }
     bodavm.envFunc.Element_clientLeft_get = function () {
         // debugger
         let thisEvent = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        console.log(`Element_clientLeft_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
+        console.log_copy(`Element_clientLeft_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
 
         return 0
     }
     bodavm.envFunc.Element_scrollTop_get = function () {
         // debugger
         let thisEvent = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        console.log(`Element_scrollTop_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
+        console.log_copy(`Element_scrollTop_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
 
         return 0
     }
@@ -4618,28 +4850,28 @@ bodavm.memory.Performance={
     bodavm.envFunc.Element_scrollLeft_get = function () {
         // debugger
         let thisEvent = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        console.log(`Element_scrollLeft_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
+        console.log_copy(`Element_scrollLeft_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
 
         return 0
     }
     bodavm.envFunc.MouseEvent_pageY_get = function () {
         // debugger
         let thisEvent = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        console.log(`MouseEvent_pageY_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
+        console.log_copy(`MouseEvent_pageY_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
 
         return 0
     }
     bodavm.envFunc.MouseEvent_pageX_get = function () {
         // debugger
         let thisEvent = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        console.log(`MouseEvent_pageX_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
+        console.log_copy(`MouseEvent_pageX_get  当前事件为 -->`, thisEvent, ` - >默认返回 0`)
 
         return 0
     }
     bodavm.envFunc.Event_target_get = function () {
         // debugger
         let thisEvent = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        console.log(`Event_target_get  当前事件为 -->`, thisEvent, ` - >默认返回 body`)
+        console.log_copy(`Event_target_get  当前事件为 -->`, thisEvent, ` - >默认返回 body`)
 
         if (thisEvent == 'click' || thisEvent == 'mousemove') {
             return document.body
@@ -4650,7 +4882,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.Event_srcElement_get = function () {
         // debugger
         let thisEvent = bodavm.toolsFunc.getProtoAttr.call(this, this)
-        console.log(`Event_srcElement_get  当前事件为 -->`, thisEvent, ` - >默认返回 body`)
+        console.log_copy(`Event_srcElement_get  当前事件为 -->`, thisEvent, ` - >默认返回 body`)
 
         if (thisEvent == 'click' || thisEvent == 'mousemove') {
             return document.body
@@ -4662,8 +4894,65 @@ bodavm.memory.Performance={
 
     bodavm.envFunc.MediaQueryList_matches_get = function () {
         let matches_ = bodavm.toolsFunc.getProtoAttr.call(this, 'matchMedia')
-        console.log_copy(`MediaQueryList_matches_get `, `-> res ->${matches_}`);
-        return matches_
+        // debugger
+        let ismatch=null
+        switch (matches_){
+            case '(prefers-color-scheme: dark)':
+                ismatch=false
+                break
+            case "(prefers-color-scheme: light)":
+                ismatch=true
+                break
+            case "(prefers-color-scheme: no-preference)":
+                ismatch=false
+                break
+            case "(prefers-reduced-motion: no-preference)":
+                ismatch=true
+                break
+            case "(prefers-reduced-motion: reduce)":
+                ismatch=false
+                break
+            case '(any-pointer: fine )':
+                ismatch=true
+                break
+            case '(any-pointer: coarse )':
+                ismatch=false
+                break
+            case '(any-pointer: none )':
+                ismatch=false
+                break
+            case '(any-pointer )':
+                ismatch=true
+                break
+            case '(any-hover: hover )':
+                ismatch=true
+                break
+            case '(any-hover: on-demand )':
+                ismatch=false
+                break
+            case '(any-hover: none )':
+                ismatch=false
+                break
+            case '(any-hover )':
+                ismatch=true
+                break
+            case '(color-gamut: srgb )':
+                ismatch=true
+                break
+            case '(color-gamut: p3 )':
+                ismatch=false
+                break
+            case '(color-gamut: rec2020 )':
+                ismatch=false
+                break
+            case '(color-gamut )':
+                ismatch=true
+                break
+            default:
+                console.log_copy(`MediaQueryList_matches_get -> `,matches_,`未实现!!!!!`)
+        }
+        console.log_copy(`MediaQueryList_matches_get -> matches_ `,matches_, `-> res ->${ismatch}`);
+        return ismatch
     }
     bodavm.envFunc.Node_removeChild = function () {
         if (bodavm.config.isdebug) {
@@ -4676,110 +4965,134 @@ bodavm.memory.Performance={
         let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this);
         if (bodavm.memory.cache['Element_getElementsByTagName'][targetNode.name]) {
             // debugger
-            let collection=bodavm.memory.cache['Element_getElementsByTagName'][targetNode.name]['res']
+            let collection = bodavm.memory.cache['Element_getElementsByTagName'][targetNode.name]['res']
             for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
                 // debugger
-                if (collection[key]==arguments[0]){
-                    delete collection['bo'+key]
+                if (collection[key] == arguments[0]) {
+                    delete collection['bo' + key]
                 }
             }
-            let newkeys=Object.keys(collection,'bobo')
-            let newlen=newkeys.length
+            let newkeys = Object.keys(collection, 'bobo')
+            let newlen = newkeys.length
             for (let index = 0; index < newlen; index++) {
                 // debugger
-                    Object.defineProperty(collection,'bo'+index,{
-                        value:collection[newkeys[index]],
-                        writable:false,
-                        enumerable:true,
-                        configurable:true
-                    },'bobo')
-                
+                Object.defineProperty(collection, 'bo' + index, {
+                    value: collection[newkeys[index]],
+                    writable: false,
+                    enumerable: true,
+                    configurable: true
+                }, 'bobo')
+
             }
-            delete collection['bo'+(newlen)]
+            delete collection['bo' + (newlen)]
         }
         if (bodavm.memory.cache['Document_getElementsByTagName'][targetNode.name]) {
             // debugger
-            let collection=bodavm.memory.cache['Document_getElementsByTagName'][targetNode.name]['res']
+            let collection = bodavm.memory.cache['Document_getElementsByTagName'][targetNode.name]['res']
             for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
                 // debugger
-                if (collection[key]==arguments[0]){
-                    delete collection['bo'+key]
+                if (collection[key] == arguments[0]) {
+                    delete collection['bo' + key]
                     // debugger
 
                 }
             }
             // debugger
-            let newkeys=Object.keys(collection,'bobo')
-            let newlen=newkeys.length
+            let newkeys = Object.keys(collection, 'bobo')
+            let newlen = newkeys.length
             for (let index = 0; index < newlen; index++) {
                 // debugger
-                    Object.defineProperty(collection,'bo'+index,{
-                        value:collection[newkeys[index]],
-                        writable:false,
-                        enumerable:true,
-                        configurable:true
-                    },'bobo')
-                
+                Object.defineProperty(collection, 'bo' + index, {
+                    value: collection[newkeys[index]],
+                    writable: false,
+                    enumerable: true,
+                    configurable: true
+                }, 'bobo')
+
             }
-            delete collection['bo'+(newlen)]
+            delete collection['bo' + (newlen)]
             // debugger
         }
         if (bodavm.memory.cache['Element_children_get'][thisNode.name]) {
             // debugger
-            let collection=bodavm.memory.cache['Element_children_get'][thisNode.name]['res']
+            let collection = bodavm.memory.cache['Element_children_get'][thisNode.name]['res']
             for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
                 // debugger
-                if (collection[key]==arguments[0]){
-                    delete collection['bo'+key]
+                if (collection[key] == arguments[0]) {
+                    delete collection['bo' + key]
                     // debugger
 
                 }
             }
             // debugger
-            let newkeys=Object.keys(collection,'bobo')
-            let newlen=newkeys.length
+            let newkeys = Object.keys(collection, 'bobo')
+            let newlen = newkeys.length
             for (let index = 0; index < newlen; index++) {
                 // debugger
-                    Object.defineProperty(collection,'bo'+index,{
-                        value:collection[newkeys[index]],
-                        writable:false,
-                        enumerable:true,
-                        configurable:true
-                    },'bobo')
-                
+                Object.defineProperty(collection, 'bo' + index, {
+                    value: collection[newkeys[index]],
+                    writable: false,
+                    enumerable: true,
+                    configurable: true
+                }, 'bobo')
+
             }
-            delete collection['bo'+(newlen)]
+            delete collection['bo' + (newlen)]
             // debugger
         }
         // debugger
-        if (targetNode.name=='script' &&bodavm.memory.cache['Document_scripts_get']['res'] ) {
+        if (targetNode.name == 'script' && bodavm.memory.cache['Document_scripts_get']['res']) {
             // debugger
-            let collection=bodavm.memory.cache['Document_scripts_get']['res']
+            let collection = bodavm.memory.cache['Document_scripts_get']['res']
             for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
                 // debugger
-                if (collection[key]==arguments[0]){
-                    delete collection['bo'+key]
+                if (collection[key] == arguments[0]) {
+                    delete collection['bo' + key]
                     // debugger
 
                 }
             }
             // debugger
-            let newkeys=Object.keys(collection,'bobo')
-            let newlen=newkeys.length
+            let newkeys = Object.keys(collection, 'bobo')
+            let newlen = newkeys.length
             for (let index = 0; index < newlen; index++) {
                 // debugger
-                    Object.defineProperty(collection,'bo'+index,{
-                        value:collection[newkeys[index]],
-                        writable:false,
-                        enumerable:true,
-                        configurable:true
-                    },'bobo')
-                
+                Object.defineProperty(collection, 'bo' + index, {
+                    value: collection[newkeys[index]],
+                    writable: false,
+                    enumerable: true,
+                    configurable: true
+                }, 'bobo')
+
             }
-            delete collection['bo'+(newlen)]
+            delete collection['bo' + (newlen)]
             // debugger
         }
+        if (boda$(targetNode).attr('class') &&bodavm.memory.cache['Document_getElementsByClassName'][tagName][ boda$(targetNode).attr('class')] ){
+            let collection = bodavm.memory.cache['Document_getElementsByClassName']['res']
+            for (const key in Object.getOwnPropertyDescriptors_bo(collection)) {
+                // debugger
+                if (collection[key] == arguments[0]) {
+                    delete collection['bo' + key]
+                    // debugger
 
+                }
+            }
+            // debugger
+            let newkeys = Object.keys(collection, 'bobo')
+            let newlen = newkeys.length
+            for (let index = 0; index < newlen; index++) {
+                // debugger
+                Object.defineProperty(collection, 'bo' + index, {
+                    value: collection[newkeys[index]],
+                    writable: false,
+                    enumerable: true,
+                    configurable: true
+                }, 'bobo')
+
+            }
+            delete collection['bo' + (newlen)]
+        }
 
         console.log_copy(`Node_removeChild `, `child->${arguments[0]}`);
         // debugger
@@ -4787,11 +5100,11 @@ bodavm.memory.Performance={
         let isRemove = 0
         for (let index = 0; index < childs.length; index++) {
             if (childs[index] == targetNode) {
-                if (bodavm.memory.domDocument[targetNode.name]){
-                    let deldomDocInd=bodavm.memory.domDocument[targetNode.name].indexOf(targetNode)
-                    let delalldomDocInd=bodavm.memory.domDocument['all'].indexOf(targetNode)
+                if (bodavm.memory.domDocument[targetNode.name]) {
+                    let deldomDocInd = bodavm.memory.domDocument[targetNode.name].indexOf(targetNode)
+                    let delalldomDocInd = bodavm.memory.domDocument['all'].indexOf(targetNode)
                     // debugger
-                    bodavm.memory.domDocument[targetNode.name].splice(deldomDocInd,1)
+                    bodavm.memory.domDocument[targetNode.name].splice(deldomDocInd, 1)
                     bodavm.memory.domDocument['all'].splice(delalldomDocInd)
                     boda$(thisNode).children().eq(index).remove()
                 }
@@ -4805,12 +5118,12 @@ bodavm.memory.Performance={
         }
         return arguments[0];
     };
-    bodavm.envFunc.HTMLCollection_length_get=function (){
-        let templen_=0
+    bodavm.envFunc.HTMLCollection_length_get = function () {
+        let templen_ = 0
         for (const key in Object.getOwnPropertyDescriptors_bo(this)) {
-            templen_+=1
+            templen_ += 1
         }
-        console.log_copy(`HTMLCollection_length_get res->`,templen_)
+        console.log_copy(`HTMLCollection_length_get res->`, templen_)
         return templen_
     }
     bodavm.envFunc.Element_children_get = function () {
@@ -4820,81 +5133,147 @@ bodavm.memory.Performance={
         // debugger
         if (!bodavm.memory.cache['Element_children_get'][tagName]) {
             bodavm.memory.cache['Element_children_get'][tagName] = {}
-            bodavm.memory.cache['Element_children_get'][tagName]['res']={}
+            bodavm.memory.cache['Element_children_get'][tagName]['res'] = {}
 
         }
-        if (bodavm.memory.cache['Element_children_get'][tagName]&& bodavm.memory.cache['Element_children_get'][tagName]['this'] == this) {
-            let curLen=Object.keys(bodavm.memory.cache['Element_children_get'][tagName]["res"]).length
+        if (bodavm.memory.cache['Element_children_get'][tagName] && bodavm.memory.cache['Element_children_get'][tagName]['this'] == this) {
+            let curLen = Object.keys(bodavm.memory.cache['Element_children_get'][tagName]["res"]).length
             // debugger
-            if (curLen==boda$(thisNode).children().length){
+            if (curLen == boda$(thisNode).children().length) {
                 let cacheValue = bodavm.memory.cache['Element_children_get'][tagName]["res"]
                 console.log_copy(this, `-> Element_children_get 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
                 return cacheValue
             }
-   
+
         }
         let tempCollection = []
         debugger
         let childs = boda$(thisNode).children()
         for (const child of childs) {
-            let newNode = bodavm.toolsFunc.setProto(child.name)
+            let newNode=null
+            let isliveNode=bodavm.toolsFunc.getProtoAttr.call(child,child)
+            if (isliveNode){
+                newNode=isliveNode
+            }else{
+                newNode = bodavm.toolsFunc.setProto(child.name)
+                bodavm.toolsFunc.setProtoAttr.call(child,child,newNode)
+            }   
             bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, child)
             tempCollection.push(newNode)
         }
         for (let index = 0; index < tempCollection.length; index++) {
-            Object.defineProperty(bodavm.memory.cache['Element_children_get'][tagName]['res'],index,{
-                value:tempCollection[index],
-                writable:false,
-                enumerable:true,
-                configurable:true
-            },'bobo')
+            Object.defineProperty(bodavm.memory.cache['Element_children_get'][tagName]['res'], index, {
+                value: tempCollection[index],
+                writable: false,
+                enumerable: true,
+                configurable: true
+            }, 'bobo')
         }
 
         // debugger
         bodavm.memory.cache['Element_children_get'][tagName]['res'].__proto__ = HTMLCollection.prototype
         bodavm.memory.cache['Element_children_get'][tagName]['this'] = this
         bodavm.memory.cache['Element_children_get'][tagName]['this'].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
-        bodavm.memory.cache['Element_children_get'][tagName]['res']=bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Element_children_get'][tagName]['res'],`HTMLCollection:proxyHTMLCollection`)
+        bodavm.memory.cache['Element_children_get'][tagName]['res'] = bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Element_children_get'][tagName]['res'], `HTMLCollection:proxyHTMLCollection`)
 
         console.log_copy(this, `-> Element_children_get `, ' -> res- >', bodavm.memory.cache['Element_children_get'][tagName]['res'])
         return bodavm.memory.cache['Element_children_get'][tagName]['res']
     }
 
-    bodavm.envFunc.Document_scripts_get=function (){
-        let tagName='script'
+    bodavm.envFunc.Document_scripts_get = function () {
+        let tagName = 'script'
         let tempCollection = []
-        if (bodavm.memory.cache['Document_scripts_get']['res'] ) {
-            let curLen=Object.keys(bodavm.memory.cache['Document_scripts_get']["res"]).length
-            if (curLen==bodavm.memory.domDocument[tagName].length){
+        if (bodavm.memory.cache['Document_scripts_get']['res']) {
+            let curLen = Object.keys(bodavm.memory.cache['Document_scripts_get']["res"]).length
+            if (curLen == bodavm.memory.domDocument[tagName].length) {
                 let cacheValue = bodavm.memory.cache['Document_scripts_get']["res"]
                 console.log_copy(`Document_scripts_get 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
                 return cacheValue
             }
-      
+
         }
         if (bodavm.memory.domDocument[tagName]) {
             for (let ind = 0; ind < bodavm.memory.domDocument[tagName].length; ind++) {
-                let newNode = bodavm.toolsFunc.setProto(tagName)
+                let newNode = null
                 let currNode = bodavm.memory.domDocument[tagName][ind]
+                let isliveNode=bodavm.toolsFunc.getProtoAttr.call(currNode,currNode)
+                if (isliveNode){
+                    newNode=isliveNode
+                }else{
+                    newNode=bodavm.toolsFunc.setProto(tagName)
+                    bodavm.toolsFunc.setProtoAttr.call(currNode,currNode,newNode)
+                }
                 bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, currNode)
                 tempCollection.push(newNode)
             }
         }
-        bodavm.memory.cache['Document_scripts_get']['res']={}
+        bodavm.memory.cache['Document_scripts_get']['res'] = {}
         for (let index = 0; index < tempCollection.length; index++) {
-            Object.defineProperty(bodavm.memory.cache['Document_scripts_get']['res'],index,{
-                value:tempCollection[index],
-                writable:false,
-                enumerable:true,
-                configurable:true
-            },'bobo')
+            Object.defineProperty(bodavm.memory.cache['Document_scripts_get']['res'], index, {
+                value: tempCollection[index],
+                writable: false,
+                enumerable: true,
+                configurable: true
+            }, 'bobo')
         }
         bodavm.memory.cache['Document_scripts_get']['res'].__proto__ = HTMLCollection.prototype
         bodavm.memory.cache['Document_scripts_get']['this'] = this
         bodavm.memory.cache['Document_scripts_get']['res'].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
         console.log_copy(`Document_scripts_get `, `arg ->`, tagName, ' -> res- >', bodavm.memory.cache['Document_scripts_get']['res'])
-        bodavm.memory.cache['Document_scripts_get']['res']=bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Document_scripts_get']['res'],`HTMLCollection:proxyHTMLCollection`)
+        bodavm.memory.cache['Document_scripts_get']['res'] = bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Document_scripts_get']['res'], `HTMLCollection:proxyHTMLCollection`)
         return bodavm.memory.cache['Document_scripts_get']['res'];
+
+    }
+    bodavm.envFunc.Document_getElementsByClassName = function () {
+        let tagName = arguments[0]
+        let classList = boda$(`.${tagName}`)
+        if (!bodavm.memory.cache['Document_getElementsByClassName'][tagName]) {
+            bodavm.memory.cache['Document_getElementsByClassName'][tagName] = {}
+        }
+        if (bodavm.memory.cache['Document_getElementsByClassName'][tagName] ) {
+            let curLen = Object.keys(bodavm.memory.cache['Document_getElementsByClassName'][tagName]["res"]).length
+            // debugger
+            if (curLen==bodavm.memory.cache['Document_getElementsByClassName'][tagName]['length']){
+                let cacheValue = bodavm.memory.cache['Document_getElementsByClassName'][tagName]["res"]
+                console.log_copy(`Document_getElementsByClassName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
+                return cacheValue
+            }
+ 
+        }
+        // debugger
+        // bodavm.memory.collection[tagName] = []
+        let tempCollection = []
+        if (classList) {
+            for (let ind = 0; ind < classList.length; ind++) {
+                let newNode=null
+                let isliveNode=bodavm.toolsFunc.getProtoAttr.call(classList[ind],classList[ind])
+                if (isliveNode){
+                    newNode=isliveNode
+                }else{
+                    newNode = bodavm.toolsFunc.setProto(classList[ind].name)
+                    bodavm.toolsFunc.setProtoAttr.call(classList[ind], classList[ind], newNode)
+                }
+                let currNode = classList[ind]
+                bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, currNode)
+                tempCollection = [].push(newNode)
+            }
+        }
+        for (let index = 0; index < tempCollection.length; index++) {
+            Object.defineProperty(bodavm.memory.cache['Document_getElementsByClassName'][tagName]['res'], index, {
+                value: tempCollection[index],
+                writable: false,
+                enumerable: true,
+                configurable: true
+            }, 'bobo')
+        }
+        // debugger
+        bodavm.memory.cache['Document_getElementsByClassName'][tagName]['res'].__proto__ = HTMLCollection.prototype
+        bodavm.memory.cache['Document_getElementsByClassName'][tagName]['length']=tempCollection.length
+        bodavm.memory.cache['Document_getElementsByClassName'][tagName]['res'].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+        console.log_copy(`Document_getElementsByClassName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.cache['Document_getElementsByClassName'][tagName]['res'])
+        bodavm.memory.cache['Document_getElementsByClassName'][tagName]['res'] = bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Document_getElementsByClassName'][tagName]['res'], `HTMLCollection:proxyHTMLCollection`)
+        return bodavm.memory.cache['Document_getElementsByClassName'][tagName]['res'];
+
 
     }
     bodavm.envFunc.Document_getElementsByTagName = function () {
@@ -4904,13 +5283,13 @@ bodavm.memory.Performance={
         let tagName = arguments[0]
         if (!bodavm.memory.cache['Document_getElementsByTagName'][tagName]) {
             bodavm.memory.cache['Document_getElementsByTagName'][tagName] = {}
-            bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res']={}
+            bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'] = {}
 
         }
         if (bodavm.memory.cache['Document_getElementsByTagName'][tagName] && bodavm.memory.cache['Document_getElementsByTagName'][tagName]['this'] == this) {
-            let curLen=Object.keys(bodavm.memory.cache['Document_getElementsByTagName'][tagName]["res"]).length
-                debugger
-            if (curLen==0||curLen==bodavm.memory.domDocument[tagName].length){
+            let curLen = Object.keys(bodavm.memory.cache['Document_getElementsByTagName'][tagName]["res"]).length
+            debugger
+            if (curLen == 0 || curLen == bodavm.memory.domDocument[tagName].length) {
 
                 let cacheValue = bodavm.memory.cache['Document_getElementsByTagName'][tagName]["res"]
                 console.log_copy(`Document_getElementsByTagName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
@@ -4922,19 +5301,26 @@ bodavm.memory.Performance={
         let tempCollection = []
         if (bodavm.memory.domDocument[tagName]) {
             for (let ind = 0; ind < bodavm.memory.domDocument[tagName].length; ind++) {
-                let newNode = bodavm.toolsFunc.setProto(tagName)
+                let newNode = null
                 let currNode = bodavm.memory.domDocument[tagName][ind]
+                let isliveNode=bodavm.toolsFunc.getProtoAttr.call(currNode,currNode)
+                if (isliveNode){
+                    newNode=isliveNode
+                }else{
+                    newNode=bodavm.toolsFunc.setProto(tagName)
+                    bodavm.toolsFunc.setProtoAttr.call(currNode,currNode,newNode)
+                }
                 bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, currNode)
                 tempCollection.push(newNode)
             }
         }
         for (let index = 0; index < tempCollection.length; index++) {
-            Object.defineProperty(bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'],index,{
-                value:tempCollection[index],
-                writable:false,
-                enumerable:true,
-                configurable:true
-            },'bobo')
+            Object.defineProperty(bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'], index, {
+                value: tempCollection[index],
+                writable: false,
+                enumerable: true,
+                configurable: true
+            }, 'bobo')
         }
         // debugger
         bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'].__proto__ = HTMLCollection.prototype
@@ -4942,7 +5328,7 @@ bodavm.memory.Performance={
         // bodavm.memory.cache['Document_getElementsByTagName'][tagName]['length']=bodavm.memory.domDocument[tagName].length
         bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
         console.log_copy(`Document_getElementsByTagName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'])
-        bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res']=bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'],`HTMLCollection:proxyHTMLCollection`)
+        bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'] = bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'], `HTMLCollection:proxyHTMLCollection`)
         return bodavm.memory.cache['Document_getElementsByTagName'][tagName]['res'];
     };
     bodavm.envFunc.Element_getElementsByTagName = function () {
@@ -4955,12 +5341,12 @@ bodavm.memory.Performance={
         let tagName = arguments[0]
         if (!bodavm.memory.cache['Element_getElementsByTagName'][tagName]) {
             bodavm.memory.cache['Element_getElementsByTagName'][tagName] = {}
-            bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res']={}
+            bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'] = {}
         }
-        if (bodavm.memory.cache['Element_getElementsByTagName'][tagName]&& bodavm.memory.cache['Element_getElementsByTagName'][tagName]['this'] == this) {
-            let curLen=Object.keys(bodavm.memory.cache['Element_getElementsByTagName'][tagName]["res"]).length
+        if (bodavm.memory.cache['Element_getElementsByTagName'][tagName] && bodavm.memory.cache['Element_getElementsByTagName'][tagName]['this'] == this) {
+            let curLen = Object.keys(bodavm.memory.cache['Element_getElementsByTagName'][tagName]["res"]).length
             // debugger
-            if (curLen==bodavm.memory.domDocument[tagName].length){
+            if (curLen == bodavm.memory.domDocument[tagName].length) {
                 let cacheValue = bodavm.memory.cache['Element_getElementsByTagName'][tagName]["res"]
                 console.log_copy(`Element_getElementsByTagName 已存在,直接从cache中取值`, `tagName ->`, tagName, ' -> res- >', cacheValue)
                 return cacheValue
@@ -4977,27 +5363,36 @@ bodavm.memory.Performance={
             for (let node of elesList) {
                 let indexele = childrensList.indexOf(node)
                 if (indexele != -1) {
-                    let newNode = bodavm.toolsFunc.setProto(tagName)
+                    let newNode=null
+                    let isliveNode=bodavm.toolsFunc.getProtoAttr.call(node,node)
+                    if (isliveNode){
+                        newNode=isliveNode
+                    }else{
+                        newNode= bodavm.toolsFunc.setProto(tagName)
+                        bodavm.toolsFunc.setProtoAttr.call(node, node, newNode)
+
+                    }
+                    // let newNode = bodavm.toolsFunc.setProto(tagName)
                     bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, node)
                     tempCollection.push(newNode)
                 }
             }
         }
         for (let index = 0; index < tempCollection.length; index++) {
-            Object.defineProperty(bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'],index,{
-                value:tempCollection[index],
-                writable:false,
-                enumerable:true,
-                configurable:true
-            },'bobo')
+            Object.defineProperty(bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'], index, {
+                value: tempCollection[index],
+                writable: false,
+                enumerable: true,
+                configurable: true
+            }, 'bobo')
         }
         bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'].__proto__ = HTMLCollection.prototype
-        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['this']=this
+        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['this'] = this
         // bodavm.memory.cache['Element_getElementsByTagName'][tagName]['length']=bodavm.memory.domDocument[tagName].length
         // debugger
         bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'].__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
-        console.log_copy(this,`-> Element_getElementsByTagName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'])
-        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res']=bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'],`HTMLCollection:proxyHTMLCollection`)
+        console.log_copy(this, `-> Element_getElementsByTagName `, `arg ->`, tagName, ' -> res- >', bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'])
+        bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'] = bodavm.toolsFunc.proxyHTMLCollection(bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'], `HTMLCollection:proxyHTMLCollection`)
         return bodavm.memory.cache['Element_getElementsByTagName'][tagName]['res'];
     };
 
@@ -5231,7 +5626,7 @@ bodavm.memory.Performance={
         if (!arg instanceof Node) {
             return bodavm.toolsFunc.throwError("TypeError", `Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.`);
         }
-        console.log(`MutationObserver_observe 未完善 arg->`, arguments[0], ` -> arg1 ->`, JSON.stringify_bo(arguments[1]));
+        console.log_copy(`MutationObserver_observe 未完善 arg->`, arguments[0], ` -> arg1 ->`, JSON.stringify_bo(arguments[1]));
     };
 
 
@@ -5431,25 +5826,7 @@ bodavm.memory.Performance={
     };
 
 
-    bodavm.envFunc.HTMLElement_style_get = function () {
-        if (bodavm.config.isdebug) {
-            debugger;
-        }
-        ;
-        // debugger
-     
-        if (bodavm.memory.cache["HTMLElement_style_get"]['this'] == this) {
-            let cacheValue = bodavm.memory.cache["HTMLElement_style_get"]['res'];
-            return cacheValue;
-        }
-        let _style = new CSSStyleDeclaration('bobo');
-        let thisNode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this);
-        bodavm.toolsFunc.setProtoAttr(_style, thisNode);
-        bodavm.memory.cache['HTMLElement_style_get']["res"] = _style;
-        bodavm.memory.cache['HTMLElement_style_get']["this"] = this;
-        console.log_copy(this, ` ->HTMLElement_style_get res->`, _style);
-        return _style;
-    };
+
     bodavm.envFunc.Node_parentNode_get = function () {
         if (bodavm.config.isdebug) {
             debugger;
@@ -5469,7 +5846,14 @@ bodavm.memory.Performance={
             return document
         }
         let parentNode = boda$(thisNode).parent()[0]
-        let newNode = bodavm.toolsFunc.setProto(parentNode.name);
+        let isliveNode=bodavm.toolsFunc.getProtoAttr.call(parentNode,parentNode)
+        let newNode=null
+        if (isliveNode){
+            newNode=isliveNode
+        }else{
+            newNode = bodavm.toolsFunc.setProto(parentNode.name);
+            bodavm.toolsFunc.setProtoAttr.call(parentNode,parentNode,newNode)
+        }
         bodavm.memory.cache["Node_parentNode_get"]['res'] = newNode;
         bodavm.memory.cache["Node_parentNode_get"]['this'] = this;
         // bodavm.memory.cache["Node_parentNode_get"]['ele'] = this;
@@ -5501,7 +5885,7 @@ bodavm.memory.Performance={
             console.log_copy(`Document_head_get -> `, `res -> `, headValue);
             return headValue;
         } else {
-            console.log(`Document_head_get 结果为null 需要注意!!!!!`);
+            console.log_copy(`Document_head_get 结果为null 需要注意!!!!!`);
         }
     };
     bodavm.envFunc.Document_body_get = function () {
@@ -5544,10 +5928,10 @@ bodavm.memory.Performance={
         let ele = ''
         switch (arg.toLowerCase()) {
             case "audio":
-                ele=boda$('<audio></audio>')
+                ele = boda$('<audio></audio>')
                 break;
             case 'video':
-                ele=boda$('<video></video>')
+                ele = boda$('<video></video>')
                 break
             case "iframe":
                 ele = boda$('<iframe></iframe>')
@@ -5651,10 +6035,11 @@ bodavm.memory.Performance={
                 ele = boda$('<script></script>');
                 break;
             default:
-                console.log('Document_createElement 错误!!!标签未实现-->', arg);
+                console.log_copy('Document_createElement 错误!!!标签未实现-->', arg);
         }
+        bodavm.toolsFunc.setProtoAttr.call(ele[0],ele[0],res)
         // debugger
-        res = bodavm.toolsFunc.proxy2(res, arg+':proxy2')
+        // res = bodavm.toolsFunc.proxy2(res, arg + ':proxy2')
         bodavm.toolsFunc.setProtoAttr.call(res, res, ele[0]);
         console.log_copy(`Document_createElement arg->`, arg, ' -> res->', res);
         // debugger
@@ -5695,7 +6080,7 @@ bodavm.memory.Performance={
             case "webgl":
                 // context = context.getContext('2d')
                 context = new WebGLRenderingContext('bobo')
-                
+
                 bodavm.toolsFunc.setProtoAttr.call(this, 'getContext', type)
                 bodavm.toolsFunc.setProtoAttr.call(this, 'context', context)
                 bodavm.toolsFunc.setProtoAttr.call(context, 'canvas', this)
@@ -5747,32 +6132,32 @@ bodavm.memory.Performance={
     }
     bodavm.envFunc.Event_timeStamp_get = function () {
         let times = bodavm.toolsFunc.getProtoAttr.call(this, 'times')
-        console.log('Event_timeStamp_get  res->', times)
+        console.log_copy('Event_timeStamp_get  res->', times)
 
         return times
     }
     bodavm.envFunc.MouseEvent_button_get = function () {
         let button = bodavm.toolsFunc.getProtoAttr.call(this, 'button')
-        console.log('MouseEvent_button_get  res->', button)
+        console.log_copy('MouseEvent_button_get  res->', button)
 
         return button
     }
     bodavm.envFunc.MouseEvent_screenX_get = function () {
         let screenx = bodavm.toolsFunc.getProtoAttr.call(this, 'screenx')
-        console.log('MouseEvent_screenX_get  res->', screenx)
+        console.log_copy('MouseEvent_screenX_get  res->', screenx)
 
         return screenx
     }
     bodavm.envFunc.MouseEvent_screenY_get = function () {
         let screeny = bodavm.toolsFunc.getProtoAttr.call(this, 'screeny')
-        console.log('MouseEvent_screenY_get  res->', screeny)
+        console.log_copy('MouseEvent_screenY_get  res->', screeny)
 
         return screeny
     }
     bodavm.envFunc.MouseEvent_clientY_get = function () {
         // debugger
         let Y_ = bodavm.toolsFunc.getProtoAttr.call(this, 'clientY')
-        console.log('MouseEvent_clientY_get  res->', Y_)
+        console.log_copy('MouseEvent_clientY_get  res->', Y_)
 
         return Y_
 
@@ -5780,7 +6165,7 @@ bodavm.memory.Performance={
     bodavm.envFunc.MouseEvent_clientX_get = function () {
         // debugger
         let X_ = bodavm.toolsFunc.getProtoAttr.call(this, 'clientX')
-        console.log('MouseEvent_clientX_get  res->', X_)
+        console.log_copy('MouseEvent_clientX_get  res->', X_)
         return X_
     }
     bodavm.envFunc.Event_type_get = function () {
@@ -5794,16 +6179,17 @@ bodavm.memory.Performance={
         // debugger
         let canvasType = bodavm.toolsFunc.getProtoAttr.call(this, 'getContext')
         if (canvasType == '2d') {
-            let ddres = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAQCAYAAABQrvyxAAAAAXNSR0IArs4c6QAAAjZJREFUSEvFlr9L1lEUxj8ujbU66GJ7DuGgc4lbUThJEG41uCm5hRBEPwhcMggSbE3dGpxcapAGEfoHInNoKZpcikfOgePx3O"
+            let ddres = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAAE7dJREFUeF7tm3tYVXW6x78LxA2iiAriLTMVExV1UAGbnrykaebj8W54HcbcYOd5HG1ONmmd6aSl2cXLlMImdbQxrUHlNOVzvGTeSlEyFS+ZQsRFRNAEBNkirPP81t5rs9hsEQPD3/TlL3Gvy7s+77s++/29a6GAPyRAAiQgCQFFkjgZZh0SUM1Q6/Bw0hxKsYD1Lk22XAfKBEqewF8SPoX1S6hxnweBAIX1IGThV46BwvqVgfN0dUaAwqozlPIciMKSJ1eMtDKBqsKattEbniWfQlFHGDb9EyxRq7Tfn4sLgFv5PqjKXMSZd2KWZY32/3Hm2bWCq58XWKUd1/nHHDsHqhLkOI+rOFUlptZx1Ooi5Nj51xBWDnwwFtFYjY/RC5l3BLMT3TEcc7TP/XADe7C82u1rQ5gzrNrQezD2rSysqJheUJU9ABa5ENQ+TQbOwqqr67gXYVXIaqcjzor9gRLPifhoelFdhfbvdpz7LSwhq4H4M/LQuFoBnUQ7TIIZn8CiSUrIay4mYh/eRQAK6hw7hVXnSH/1A1YIy0kCM8+guXsJ3lRUtC2xevtczWsf4mm6ERsf/99viw4rsHPiW4MHrXvqyJHxLU6eeirVbDYXiugtcbHi63Sl/UryoKhDEBt90i66bQB2AFhs//x7lLsNhNV0Q+/qTKYiDB/2wTetAlKWx/ZDvIOIvcOKijJfyC/0D96yeXF/KOqkmXOiM5zjbOyTF79lUG5kFZrOXZmxIxOyLnd7SdtHUSOgfyY6SEWNth9rGYBRju6yJumaZRkGYLSj86t8PNv1fzgrB9V1trYvCdfsxL6uulxjR1rxReTnqpOZjSmIwRPa1XTFZYcwhEAS0BtrsKkmV6ptox8rAsdwHO0R57MaqSGX8dh5IDC78mHEtuJHHP94R+BQoBu+RXt0Kr+GiNMFVbavcRB32JDCqi3B+t+/Qli2ov5ESCAqKrqpWoY/KQq+ju2L97RCPIaO5cDiEmujaxs2Ln/SWVjaDWm7SYY5OhxxsyrqCu2mFD+2pWSq9rn4EUtPIF3b137D+gf8uH7MmCVDlHLsuZOwSkoadRQxeHv/fHjK1L/cUlT8oMepi1YcvswTC9Z2xzXtXBUdWKXzOc7vqrsU1yPuQV0qumxUZbjLZasxn7Z9VzrEJz5z5uP4vSwSnu7rHbHo2wKvasIvc79cLTsjZ6P8xPLarfyy1jWrylQt5mkbvUd4HbshTvEpLFiL32udjfi3N6xYhcGVfteXbEaRVVe2f8djmIBvcRH++IPPeEzta0Fj92IMPl1ZWEUwYSLMGIYzeLr1XhwIAp44B7yXPQXomI6+HQ5iVBLgX4eNFoVV/8KpbQQVwrIXfXDwrjH9H9s61ygB/SRRx/FEqdU0d9fuqD5enjf+auywZsyYW/bjjyGjDxya+ozoqKKS8AKAQbm5Dwe7u5deL73t9VpCwvwlmugGrxugKriQ/3OrySU3vf1btkzbn5fb4fWdu6PeGznyvdJmzS6X28/5lS4i+80eJDosVUUry4cxm9q2Ob+/66OHmp49NwDZ2YGObk7EiXJEww0xsSE4oB3LcFPPnDerVHRl1hLvINE5ah3ZlkUrhLAHDVq3LDAwsVdZmYdH3pX24xo0LN2/dVj6RPMxLLPe8g7LvdIhvGHDoviAlmmC3bZKUq3cJVXM/QBM2hXwXGZ217e+PjRlshCHOJ6iIEiLTUWhG/DKmn5I1YWrx9bCL/14eZnHlx/9462IO7FLuRj6zt79f9gwbtwbyS2ap6cJNlCV1Sh3GxsVPWuKxqsf5gsu4ouoSbrf2Fw0Rmh5OgpP98bB7N9rwtoZZkW2r428ZykcwhDdz1H/Jng18TXts5rMmWLCmuBL3zYYWJgFT88bmoyMHZYurDnYi6KwM9pxxyYKww7GOVNzPB4aj6AsICS1tiVesT+FVXcs6+tIVYQ1evSylwNapkysdLMbo7PPsJw7rGcnL/T8Ka3npMOHJ3r1DN6Dpr45OHp0NKxWb4SFbVvfPWif77aEhT39/dIWC9Gpbij4ZMvraaW3PAdHRCzMUIGCdWs/6FKTDku/AfWuL+9a+wZbty6cYLv5lR0uZ1j2bmbggLVRXYISX0E5Ciyxce96Nc7/bOzoxellqscNsczUhNU58ZmbN31PfvSPt0SH+HzUrOgnoaLvhR/6r9DF4Nci3QsqNjiEdYcZnC7u/EL/PH0ZK46nKuiid4BiG/E7VLydkdHjs2vX2nRLTBwnriZv/NjFG3x8r3TdtSsqWP+ScGbn7l561WKxNOnVc1fH8PD4q5/vmHsxK7Ob/8y55oXacrkce3JyO922Wr02nj//WJPU1D4YaUrC+NB1KIU7Vh59AW5dUhDgm4lFR39CmPUS9gQDOb7A6KOAtxXaku1wIIBSD8QnRWJFwY5qh+MfBzXDktRoLGv+IS4F5d5RWNGm3SgI/R4B14EhyXZhoTWGhtmWoUJidfVDYdUVyfo7TpUl4TMjVn7Yru3ZEP0bv0po1QgrI73HqKKiZtPDQreNhxvWO7obADMONXo/OXnIhMJCv5eEsLTuJC62jVhC/jFyzkHFrSxw8+Y3HvJu8rPlbktCXVgiNr1rUBQ0vH3bw3Qp+9Hwa1fbvJ743K53KsVuF9b0af+12curYIR2fbFxRWI2NGjQurXt2p6b8NW+yO6BgUde6xKYOCTnSqdPExLmv/hQ+1MvP/30B5O1JWps3EGxNAsL3bq2V69d/RVgs6sOy+R5Y4Q2h2uVIpajti7RvuTu3Xvnn8P6bRPDm8rdWcVy0ybcRsWd9Y7vkQ4nRhq7Wmd2DUwlHbZvf3lP6S2vpaNHLT17NGlM27NnBiyImm2+ecvq+fz27Qv6Xr8e0AmA1vWtNA9WxVLvP4PX4Gff25qU9ndpgI99uyL+6B/xiLWwyuBbDMiHYB78Wqcgssd6NMXNKss8I299oL689d+qFdYQ0wm0DD3o6Kb0uda44E0oaERh1Z8aHswzVxm6h4Vvzendc6dnJWEZnwyqyglXQ3exJLyY0i/idqlpiXYzK2hovGQhk+++e7pXTYWV+M34R04mD/3C8RTQMHTPzAwa8cUX86zOndT0Az5T8/P93/X0Kspt2uzyoUozLPuScNrUlzZ7eV9vo322KuYhIQUhkR7d95r37Z/xO11YhQXNN3y8eemcwMAj/xRLWE3AsTH5Yh4U2DnxRYd0jQ8GAOhLupMnhjVMTBwb6Zhh2RkK2fXuvSukUgerD9UV9XntAQWAZ7/yX3+jwG+8WBK6u98uNHZYroR1+JtxK5KTn9o+fPj7ucVFTTse2D+jj1gO5l1tH741/hVvnZXoShunBKTkeHihD9LRorhcE1axCfisL5Dv0QBfl3fB2NPFmJKdps2zxGsHzjOsXB9gRwhcDtNF/HcTlthGk5PJ6lj+PZpqm2uJZaJ78BkK68F0Rr1GVeW1BjEXCg+LT/FrmTFP65AqZGUblpusje/0lDArKyjk5KmhgU8Njf3Ww2RdEbs67rzjnS0n0d2tw9Ju+CPjAioN6BV1Z5Q5qoE+dIeq2F610H/sUho84O8zArscnlupi7Ev2R5/fLNvtx5fJf9wLmzxvv0zY8Wge7bZ/HZhse9yo7A0ocTE9vb1zZkzZsybSQ1NJatj11gixBPDwM6JkXcSlgjF+IT1UlbXS//6/IVy/aFEh4dPRAwdYslw8yh7P3aNxUt7KFHmPgHuZf8UTx/NZvOTZWUevVNTQ/odPjKprH//T+bXpMPSBLzC8kbHTknRQV0PXWrUOH98s2ZZMy6eD8/buy9ynM6kqLhZx1OnhoS1S26ldVgHfQNw+ugIbLFu1Ibu/zJ1RVxoYwxsdALFpd7IShqINQX/60B8oTWwt4ftV+dB+r10WLrUppqmYVboKnS7XoSy5IrXGr4Os03buSSsVz88cCev8uJo8N/GdfVrkXn46tX2vqeSh+gBa0sJ8e1sLTW9c+ibiFC13O0VV681JGxf0Da4557JP6b1hpiVQH+i5rSUdNUliJlWSUnjJYMHrzvr3yJ9ycaP3okIC48fcbO4KU6dGqq9FKrNe8QQedXG/wkbsOlYQ9PNIH1Wps+vZv5luknMblIuhAZ8+eVzDR2d2LSN3t367DzQutWFkGNJo1CQ39J2zON4oviGz8vGJaHeAXnPW7ouJGRHZFZWV3E94rWGx8USUsy5qiwJXaRXn2GpKs6JwXfLBQs2GfhUvPYxyzLMp+mV/wsJ+QIXLoTnZ2UGTRIy69F97+7Q0IR2d1sS2oXVTxxDfGE098vYpqgIdFOxaI3F8qIQWdu23+PbpJG7N97cMjQaU/Bu8CKovoXaMvBza18tev3lzTY+mVrH9bs02+Bbn2EZh/HVVbOrDis1u+p7VqKD+2tYW+1QKYnDtIF+Z1MmEkLBofsDp4v6D8jln+YY5kJVXmsQA19xczQshq94zUHvYsRTL3E52tMo8YRQRV99WakPx8W2bsBx435iH33oLI4rftcHxWI+5PIz+2sM+nFVIFOcV8cZdQzjxZfzlZxOb27/bP5/4KbXCv1FUsdrD2Lo3g/znX939YRRvx770H35sxGv/NC0Sa5fpaH7XXIpYlKBUJ1PpaG7PV4FsKiAWWdquD6T4o6VbmXIrI6d/gqH/gRSVZDlGOzbzyFysjoOKbqAfIttg/XDXaoO2b/rYHtSmOEHpPn/sm5HdGT6KwvO72HpyJy3EbHp5+ZrDfUviQcpgjv+LaFDMgqaGAJ2vGZglJAQi1FYYvtKj+3Ff9ifqDnv5ywscdMZu5KyRliqvxiqHcbeqegxGZdf+v85btQVln5Q1EfFMtIoCOd9jMfUhaXPsKCo2tv04nry81uNEK9htPDPWOfR4FYr5wcL95JYIx9VxS0hJLEE12SrYIb9Wm+JLk7IFwqS3FQk1ERYhmNUvBZiyEnwTxgpRNUxBzj1sG1p1+YatK7meiPbVTQor37JV9NrdSUsV0JyPIWsw3M7x8inhDXN2oO73W/ij5/tgoou80SM40XSmuTE6Q1xfck5e870gHIFr9ZGWDU5/f3a5n7/ac79iru2x6Wwakuw/vf/TQjL3nG0d7yEeg/cDd2Y42164zL1ngR4D+e9n5tSWPeTLo99Pwn8JoRVW4DGd720pZphNlTbY9fH/hRWfVDnOeuCAIVVFxQlOwaFJVnCGK6DAIXFYiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGAIUlTaoYKAmQAIXFGiABEpCGwP8D0X2eD5sOjPUAAAAASUVORK5CYII="
 
-            console.log(`HTMLCanvasElement_toDataURL -> 2d res ->`, ddres)
+
+            console.log_copy(`HTMLCanvasElement_toDataURL -> 2d res ->`, ddres)
             return ddres
         }
 
         else {
             let webglres = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAADTZJREFUeF7tnV2IXVcVx9eeO4NIEQURLcUvVGrBolIVoQ/ePCgUBYUiUlBQFBTUhxaKgsLci4o+qIiICoqIioKIH+iD+tAZFVSMdGISMzqJTezYWBM02GqCTcmRfT8yN3fO/Tofe6+1929ec87Za/3/q7/uve7e5zjhDwVQAAWMKOCMxEmYKIACKCAAiyJAARQwowDAMmMVgaIACgAsagAFUMCMAgDLjFUEigIoALCoARRAATMKACwzVhEoCqAAwKIGUAAFzCgAsMxYRaAogAIAixpAARQwowDAMmMVgaIACgAsagAFUMCMAgDLjFUEigIoALCogcYVuFpId12k65z0Gn84D8xaAYCVtf3tJD8C1paIHHFOttsZhafmqADAytH1lnO+VsiWE+mKyLZzcqTl4Xh8RgoArIzMDpXqBLD8kH2WhqGUT38cgJW+x8EzvFZIMVVYQCu4C2kOCLDS9DVaVr5/1ZHBknD6j35WNFfSGRhgpeOlikyuFtLriGyWFBb9LBUO2Q4CYNn2T130Txaytea3NJRHxtJQnWO2AgJYtvxSH+2ThRRrIvM+FgC01LuoN0CApdcbc5H5/pWTwQxr7tdNnOPjJ+bMVRIwwFJiRAphLAss9mel4HacHABWHN2THPXqaMPoohnWKHmWhklWQbtJAax29c3q6VdH+6+WBJbXBmhlVSH1kwVY9TXkCSJyZXjgebD/agVgCf0symcVBQDWKmpx7UwFqgKLfhZFtYoCAGsVtbh2pgJPjPpXq86w6GdRVKsoALBWUYtr2wIW/SxqaykFANZSMnHRIgX+N7FhdJUe1uRz6WctUpl/B1jUQG0FfP9qbWLDaFVg0c+qbUXyDwBYyVvcfoJXRucHx6CqASyWhu3bZXoEgGXaPh3BNwwsoKXDVpVRACyVttgK6sqof9XQDGuQPP0sWzUQKlqAFUrpRMd5fLRh1MOqSWCxCz7RgqmZFsCqKWDut/+3kN6ayGYLwGJpmHtxleQPsCiKWgpcnjjw3PAMaxwX5w1rOZTWzQArLT+DZ3N54sBzS8CinxXcVb0DAiy93qiPzPevxh+caGlJyCxLfRWEDRBghdU7qdECAot+VlKVUz0ZgFVdu+zv/M/EBydanmEx08q+2oYCACwKobICEYBFP6uyW2ncCLDS8DF4FpcK6W5MnR9sq+k+lRy/GgZ3W8+AAEuPF6YiiQgs+lmmKqXZYAFWs3pm87THSg48B5ph0c/KpsoOJwqwMja/TuoKgEU/q46BRu8FWEaNix32YyUHngPPsFgaxi6CCOMDrAiiWx/S96/8htHprQwRgAW0rBfTivEDrBUF43KRS4X0OiUHniMBy1tyxDnZxpv0FQBY6XvceIa+fyUyeC3yDa+UiQgs+lmNu6zzgQBLpy+qo/r3jAPPMYHF+7NUl0xjwQGsxqTM40G+f+U/ODH+/uAkpCIDi35WBiUIsDIwuckUlQOLflaTZit8FsBSaIrmkC7NOfCsYIY1kI73wWuuoHqxAax6+mV396WpD6YqWxKO/eC8YaKVCbASNbaNtC5OfHBCaQ9rMm2g1UYRRH4mwIpsgKXhjQGLfpal4loyVoC1pFBcJvKviQ9OGJhh0c9KsGgBVoKmtpWSRWCxP6utaojzXIAVR3eTo/5zwYFnLb8SlohLP8tkxR0OGmAlYmTbafj+ld8wOu84jmJg0c9qu0ACPR9gBRLa+jAXJ17YN2srg3JgbTsnR6z7kHv8ACv3Clgy/wSA5TNlabik31ovA1hanVEW18WJ/pXRGdZYUaClrLZWCQdgraJWptf+fWLDqOEe1qR7vD/LaC0DLKPGhQz7H4X01iZe2Gd8huWlo58VsoAaHAtgNShmqo+6MLFhNJEZFv0so8UKsIwaFzLsC1Mv7EtghkU/K2QBNTgWwGpQzBQf5ftX/oMTk0dxEgKWt4x+lqHCBViGzIoRagbAop8Vo7AqjgmwKgqXy22PlrywL7EZFv0sQ8UMsAyZFSPUTIAFtGIUV4UxAVYF0XK5Zb+Q7sbo/GDCPazrdvJqZf2VDbD0exQtwv2r0t1YGx54zgFY4mTbrXHeMFrBLTEwwFpCpFwvOf/EAFaDD6ZmASxvdCF99xTp5eq59rwBlnaHIsZ3/nKGwBpD6yagFbH0Zg4NsDS6oiSm849LUbazPcFfCQ8p7p42mFTyp0wBTFFmiJZw9i9Jt+PKX9iXA7AG5w2fQT9LSz2O4wBY2hxREs/+Rel1nGzmOsMa2OD7Wc9iaaikJAdhACxNbiiK5fwF2ZLha5Elq6b7tAfXpO9uBlpaShNgaXFCWRyPPCLFrE95ZbIkvO6Iu4X/sWspT4ClxQlFceyfle5a58YDz9lsayj3Yds9j36WhhIFWBpcUBbDAFhTb2jIHFgifmn4IpaGsUsVYMV2QOH4+6eH+69YEk6Z46F1K9CKWbIAK6b6Ssfe/9Nw/xXAOmyQeyn9rJhlC7Biqq9w7LMnpLs+2n8FsEoN2nYvo58Vq3QBVizllY57dke66yUHnrPvYU365ZeGr2RpGKOEAVYM1RWP+fCDg18HDx14BlhTpvlNpXcArdClDLBCK658vId/B7CWtci9hn7Wslo1dR3AakrJRJ7z19+UH3hmhlVisF8a3sksK2TpA6yQaisf6+yvhvuvFn17MLed7nNt89B6HdAKVdoAK5TSBsY5t32wHGRbwwqG+X7WEaC1gmKVLwVYlaVL78ZzD8iWm3HgmSXhHL/9LOv1ACvEfxEAK4TKRsY497PZB54B1gwTPazuAlahShxghVJa+TinfyzdjTkHngFWybaGNwKq0GUNsEIrrnS8v/xo+MK+WbvbAdbION+vejOgilXGACuW8srGfegH8w88Zw8sv/S7G1DFLluAFdsBJeM/9L35B56zBZafUb0VUCkpU3bqajEiZhynv3PwwQmWhBNLv3sAVcy6LBubGZY2RyLEc/qb0u0sOPCczQzLL/3eAagilOFSQwKspWRK+6Iz35CttdH+q2xnWNek71127wJWmqsdYGl2J1BsZ75W/oXnbN6H5ftU7wZUgcqt1jAAq5Z89m/e/Yp0N5Y4P5jkktAv/94LqCxVMcCy5FYLse5+KUNgeVC9H1C1UE6tPxJgtS6x7gH2vnCwHFzmLQyL3uQwnompLCy/9PsgoNJdkfOjU1lXlgW1Fvve5zIAlgfVvYDKWm2yrSEFxxrOYe8zBy/sS26G5Zd+9wOqhksm6uOYYUWVP+7gu5+Ubqdz8MK+ZIDlZ1QfAlRxq6ud0QFWO7qaeOruJ4YHnsd9KfPAKkZ7qT4CrEwUYIUgAVYF0VK5Ze9jsiWjL+Qs20xf9rrgheWXf5uAKpXanJVH8LpKXVBL+f1588YX9pmcYTnpux6gslR3dWIFWHXUM3zv7keHH5xYdUOoohlW330cUBkuwUqhA6xKstm/6Y8flt761Av7TMywfEP9U4DKfgVWywBgVdPN/F279x9+YZ9qYHlQfRpQmS+8mgkArJoCWr19977DL+xTCqy++yygslpnTccNsJpW1MDzTnxAuusl779SBqy++zygMlBOQUMEWEHl1jHYAFjFcMOouqb7eC/VF4GVjmrRFQXA0uVHkGhOve/gC8/KgNV3XwZUQYrA6CAAy6hxdcI+9R51wOq7rwKqOp7mci/AysXpUZ4n3indNXdwfjDqDMv/8vd1QJVZCdZKF2DVks/ezSfergBYHlTfAlT2qid+xAArvgdBIzh5j2w5N9jlLhGa7n33bUAV1PDEBgNYiRm6KJ2TbzvoXwUDlp9RfRdQLfKGf1+sAMBarFFSV5y8+8YDz632sDyovg+okiqgyMkArMgGhBx+5y3DD07U+XzXMoefnUh/MHv7IbAK6W8OYwGsHFwe5fiHN0mvI7LZJrBEpL/xE0CVUVkFTRVgBZU77mDH7zp84LmpJaEU0n/qTwFVXIfTHx1gpe/x9QyPv+Hwgee6wPLLv5t+DqgyKqOoqQKsqPKHG3ynK91OyYHnqsDyS7+nPwCowjnISF4BgJVJHQyAVXLgeVVg+aXfM38JqDIpG3VpAix1lrQT0LE7Dz6YWqXpXhTSf/avAVU77vDUZRUAWMsqZfy6Y6+tBizfo7r5t4DKuP3JhA+wkrFydiI7r5Kum3HgedaS0C/9/F6qW34PrDIoETMpAiwzVlUPdOcVqwHLw+r5xwBVdcW5sy0FAFZbyip67s7tsw88T/Wz+i88DqgUWUcoUwoArAxKYue2+cDyfaqXnAJUGZSC+RQBlnkLFyewc2v5gWe/9LttD1AtVpArtCgAsLQ40VIcR18s3fWpA8+FSP/2M4CqJcl5bIsKAKwWxdXw6KMvkN766MCzX/q9/Byg0uALMVRTAGBV083MXQ8+V7aKQn5xx98AlRnTCHSmAgAr8eI4+hzpvfpRYJW4zdmkB7CysZpEUcC+AgDLvodkgALZKACwsrGaRFHAvgIAy76HZIAC2SgAsLKxmkRRwL4CAMu+h2SAAtkoALCysZpEUcC+Av8HwhAmtT6LhaYAAAAASUVORK5CYII='
 
-            console.log(`HTMLCanvasElement_toDataURL -> webgl res ->`, webglres)
+            console.log_copy(`HTMLCanvasElement_toDataURL -> webgl res ->`, webglres)
 
             return webglres
         }
@@ -5815,10 +6201,10 @@ bodavm.memory.Performance={
         ;
         if (!bodavm.memory.domParserScriptFlag) {
             let stateValue = 'loading';
-            console.log(`Document_readyState_get ->res`, `-> loading  需要注意`);
+            console.log_copy(`Document_readyState_get ->res`, `-> loading  需要注意`);
             return stateValue;
         }
-        console.log(`Document_readyState_get ->res`, `-> interactive 需要注意`);
+        console.log_copy(`Document_readyState_get ->res`, `-> interactive 需要注意`);
         return 'interactive';
     };
 
@@ -5843,32 +6229,32 @@ bodavm.memory.Performance={
         console.log_copy(`Document_documentElement_get -> `, ` -> res ->`, newNode);
         return newNode;
     };
-    bodavm.envFunc.Node_contains=function (){
-        let arg=arguments[0]
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        let targetNode=bodavm.toolsFunc.getProtoAttr.call(arg,arg)
+    bodavm.envFunc.Node_contains = function () {
+        let arg = arguments[0]
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        let targetNode = bodavm.toolsFunc.getProtoAttr.call(arg, arg)
         let current = targetNode;
         // debugger
         while (current) {
-          if (current === thisNode) {
-            console.log_copy(thisNode, ` -> Node_contains -> arg ->`, arg ,`-> res -> true`);
+            if (current === thisNode) {
+                console.log_copy(thisNode, ` -> Node_contains -> arg ->`, arg, `-> res -> true`);
 
                 return true;
-          }
-          current = current.parent;
+            }
+            current = current.parent;
         }
         console.log_copy(thisNode, ` -> Node_contains -> arg ->`, arg, `-> res -> false`);
 
         return false;
     }
 
-    bodavm.envFunc.Element_outerHTML_get=function (){
+    bodavm.envFunc.Element_outerHTML_get = function () {
         // debugger
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        const innerHTML = boda$(thisNode).html(); 
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        const innerHTML = boda$(thisNode).html();
         let outerHTML = `<${thisNode.name}`;
         Object.entries_bo(thisNode.attribs).forEach(([key, value]) => {
-          outerHTML += ` ${key}="${value}"`; 
+            outerHTML += ` ${key}="${value}"`;
         });
         outerHTML += '>';
         outerHTML += innerHTML;
@@ -5876,25 +6262,34 @@ bodavm.memory.Performance={
         console.log_copy(thisNode, ` -> Element_outerHTML_get -> outHtml ->`, outerHTML);
         return outerHTML
     }
-    bodavm.envFunc.Element_append=function (){
-        let arg=arguments[0]
+    bodavm.envFunc.Element_append = function () {
+        let arg = arguments[0]
         // debugger
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
-        let targetNode=bodavm.toolsFunc.getProtoAttr.call(arg,arg)?bodavm.toolsFunc.getProtoAttr.call(arg,arg):arg
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
+        let targetNode = bodavm.toolsFunc.getProtoAttr.call(arg, arg) ? bodavm.toolsFunc.getProtoAttr.call(arg, arg) : arg
         thisNode.children.push(targetNode)
         console.log_copy(this, ` -> Element_append -> arg ->`, arg);
-        if (targetNode.name=='iframe'){
+        if (targetNode.name == 'iframe') {
             // debugger
-            console.log_copy(`Element_append -> arg ->`, arguments[0],`正在往${this}中添加iframe标签`);
-            window[window.length-1]=arg.contentWindow
-            return 
+            console.log_copy(`Element_append -> arg ->`, arguments[0], `正在往${this}中添加iframe标签`);
+            window[window.length - 1] = arg.contentWindow
+            if (bodavm.memory.domParserScriptFlag == false) {
+                if (!bodavm.memory.domDocument[targetNode.name]) {
+                    bodavm.memory.domDocument[targetNode.name] = []
+                }
+                bodavm.memory.domDocument[targetNode.name].push(targetNode)
+                bodavm.memory.domDocument['all'].push(targetNode)
+                // debugger
+                //所有append元素的方法都需要添加这句话
+            }
+            return
         }
         if (bodavm.memory.domDocument['body'] && thisNode.name == 'head') {
             bodavm.memory.waitExec.push(targetNode)
         }
-        if (bodavm.memory.domParserScriptFlag==false){
-            if (!bodavm.memory.domDocument[targetNode.name]){
-                bodavm.memory.domDocument[targetNode.name]=[]
+        if (bodavm.memory.domParserScriptFlag == false) {
+            if (!bodavm.memory.domDocument[targetNode.name]) {
+                bodavm.memory.domDocument[targetNode.name] = []
             }
             bodavm.memory.domDocument[targetNode.name].push(targetNode)
             bodavm.memory.domDocument['all'].push(targetNode)
@@ -5923,20 +6318,30 @@ bodavm.memory.Performance={
             window.__proto__.__proto__[attr['id']] = arg
         }
         // debugger    
-        
+
         boda$(thisNode).append(targetNode)
         // debugger
-        if (targetNode.name=='iframe'){
-            console.log_copy(`Node_appendChild -> arg ->`, arguments[0],`正在往${this}中添加iframe标签`);
-            window[window.length-1]=arg.contentWindow
-            return 
+        if (targetNode.name == 'iframe') {
+            console.log_copy(`Node_appendChild -> arg ->`, arguments[0], `正在往${this}中添加iframe标签`);
+            window[window.length - 1] = arg.contentWindow
+            if (bodavm.memory.domParserScriptFlag == false) {
+                if (!bodavm.memory.domDocument[targetNode.name]) {
+                    bodavm.memory.domDocument[targetNode.name] = []
+                }
+                bodavm.memory.domDocument[targetNode.name].push(targetNode)
+                bodavm.memory.domDocument['all'].push(targetNode)
+                // debugger
+                //所有append元素的方法都需要添加这句话
+            }
+            return
         }
         if (bodavm.memory.domDocument['body'] && thisNode.name == 'head') {
             bodavm.memory.waitExec.push(targetNode)
         }
-        if (bodavm.memory.domParserScriptFlag==false){
-            if (!bodavm.memory.domDocument[targetNode.name]){
-                bodavm.memory.domDocument[targetNode.name]=[]
+        // debugger
+        if (bodavm.memory.domParserScriptFlag == false) {
+            if (!bodavm.memory.domDocument[targetNode.name]) {
+                bodavm.memory.domDocument[targetNode.name] = []
             }
             bodavm.memory.domDocument[targetNode.name].push(targetNode)
             bodavm.memory.domDocument['all'].push(targetNode)
@@ -5945,8 +6350,9 @@ bodavm.memory.Performance={
         }
 
         // debugger
-        console.log_copy(this, ` -> Node_appendChild -> arg ->`, arguments[0]);
+        console.log_copy(this, ` -> Node_appendChild -> arg ->`, arguments[0], ` res -> `, arg);
         // debugger
+        return arg
     };
 
 
@@ -5963,6 +6369,9 @@ bodavm.memory.Performance={
         let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         boda$(thisNode).html(arg)
         // debugger
+        if (this instanceof HTMLStyleElement) {
+            console.log_copy(this, `Element_innerHTML_set 需要注意添加的标签是否可以被解析!!!!!!!!!-->`, arg)
+        }
         console.log_copy(this, ` -> Element_innerHTML_set -> arg ->`, arg);
         return arg;
     };
@@ -6000,16 +6409,7 @@ bodavm.memory.Performance={
         };
         console.log_copy(`注册事件-->`, `EventTarget_addEventListener `, `type->${type} `, `callback->${callback.toString().length > 50 ? callback.toString().substr(0, 50) + '...' : callback} `, `options->${options ? options : []}  `);
 
-        if (bodavm.memory.listenerDone == 1) {
-            if (bodavm.memory.asyncEvent.listener2 === undefined) {
-                bodavm.memory.asyncEvent.listener2 = {};
-            }
-            if (bodavm.memory.asyncEvent.listener2[type] === undefined) {
-                bodavm.memory.asyncEvent.listener2[type] = [];
-            }
-            bodavm.memory.asyncEvent.listener2[type].push(event);
-
-        } else {
+        if (bodavm.memory.listenerFlag == 'init') {
             if (bodavm.memory.asyncEvent.listener === undefined) {
                 bodavm.memory.asyncEvent.listener = {};
             }
@@ -6017,7 +6417,9 @@ bodavm.memory.Performance={
                 bodavm.memory.asyncEvent.listener[type] = [];
             }
             bodavm.memory.asyncEvent.listener[type].push(event);
-
+        }else if(bodavm.memory.listenerFlag == 'pending'){
+            bodavm.memory.innerListener.push(event)
+            // debugger
         }
 
 
@@ -6039,7 +6441,7 @@ bodavm.memory.Performance={
         let isdefine = null
         switch (event.type) {
             case "deviceorientation":
-                let deviceorientation=new DeviceOrientationEvent('deviceorientation','bob')
+                let deviceorientation = new DeviceOrientationEvent('deviceorientation', 'bob')
                 isdefine = bodavm.toolsFunc.getProtoAttr.call(deviceorientation, 'isdefineProperty')
                 if (!isdefine) {
                     bodavm.toolsFunc.defineProperty(deviceorientation, "isTrusted", { configurable: false, enumerable: true, get: function isTrusted() { return bodavm.toolsFunc.dispatch(this, deviceorientation, "isTrusted", "isTrusted_get", arguments) }, set: undefined });
@@ -6099,8 +6501,24 @@ bodavm.memory.Performance={
                     event.callback.call(event.self, mouseMove_);
                 }
                 break;
-            
-
+            case 'mousedown':
+                let mouseDown_=new MouseEvent('mousedown','bobo')
+                isdefine = bodavm.toolsFunc.getProtoAttr.call(mouseDown_, 'isdefineProperty')
+                if (!isdefine) {
+                    bodavm.toolsFunc.defineProperty(mouseDown_, "isTrusted", { configurable: false, enumerable: true, get: function isTrusted() { return bodavm.toolsFunc.dispatch(this, mouseDown_, "isTrusted", "isTrusted_get", arguments) }, set: undefined });
+                }
+                event.callback.call(event.self, mouseDown_);
+                bodavm.toolsFunc.setProtoAttr.call(mouseDown_, 'isdefineProperty', 1)
+                break;
+            case 'mouseup':
+                let mouseUp_=new MouseEvent('mouseup','bobo')
+                isdefine = bodavm.toolsFunc.getProtoAttr.call(mouseUp_, 'isdefineProperty')
+                if (!isdefine) {
+                    bodavm.toolsFunc.defineProperty(mouseUp_, "isTrusted", { configurable: false, enumerable: true, get: function isTrusted() { return bodavm.toolsFunc.dispatch(this, mouseUp_, "isTrusted", "isTrusted_get", arguments) }, set: undefined });
+                }
+                event.callback.call(event.self, mouseUp_);
+                bodavm.toolsFunc.setProtoAttr.call(mouseUp_, 'isdefineProperty', 1)
+                break;
             default:
                 //无需实现的事件unload  popstate
                 console.log_copy(`EventTarget_dispatchEvent `, `${event.type} 未实现`);
@@ -6119,23 +6537,15 @@ bodavm.memory.Performance={
         let type = arguments[0];
         let callback = arguments[1];
         // debugger
-        if (bodavm.memory.listenerDone == 2) {
-            for (let i = 0; i < bodavm.memory.asyncEvent.listener2[type].length; i++) {
-                if (bodavm.memory.asyncEvent.listener2[type][i].callback == callback) {
-                    console.log_copy(`EventTarget_removeEventListener  `, `type->${type}`, `callback->${callback}`);
-                    bodavm.memory.asyncEvent.listener2[type].splice(i, 1);
-                    break;
-                }
-            }
-        } else {
-            for (let i = 0; i < bodavm.memory.asyncEvent.listener[type].length; i++) {
-                if (bodavm.memory.asyncEvent.listener[type][i].callback == callback) {
-                    console.log_copy(`EventTarget_removeEventListener  `, `type->${type}`, `callback->${callback}`);
-                    bodavm.memory.asyncEvent.listener[type].splice(i, 1);
-                    break;
-                }
+
+        for (let i = 0; i < bodavm.memory.asyncEvent.listener[type].length; i++) {
+            if (bodavm.memory.asyncEvent.listener[type][i].callback == callback) {
+                console.log_copy(`EventTarget_removeEventListener  `, `type->${type}`, `callback->${callback}`);
+                bodavm.memory.asyncEvent.listener[type].splice(i, 1);
+                break;
             }
         }
+        
 
     };
     bodavm.envFunc.Document_hasFocus = function () {
@@ -6187,79 +6597,79 @@ bodavm.memory.Performance={
                 res = '';
                 break;
             case 'audio/3gpp':
-                res=''
+                res = ''
                 break
             case 'audio/3gpp2':
-                res=''
+                res = ''
                 break
             case 'audio/AMR-NB':
-                res=''
+                res = ''
                 break
             case 'audio/AMR-WB':
-                res=''
+                res = ''
                 break
             case 'audio/GSM':
-                res=''
+                res = ''
                 break
             case 'audio/aac':
-                res='probably'
+                res = 'probably'
                 break
             case 'audio/basic':
-                res=''
-                break 
+                res = ''
+                break
             case 'audio/flac':
-                res='probably'
-                break  
+                res = 'probably'
+                break
             case 'audio/midi':
-                res=''
+                res = ''
                 break
             case 'audio/mpeg':
-                res='probably'
+                res = 'probably'
                 break
             case 'audio/mp4; codecs="mp4a.40.2"':
-                res='probably'
+                res = 'probably'
                 break
             case 'audio/mp4; codecs="ac-3"':
-                res=''
+                res = ''
                 break
             case 'audio/mp4; codecs="ec-3"':
-                res=''
+                res = ''
                 break
             case 'audio/ogg; codecs="flac"':
-                res='probably'
+                res = 'probably'
                 break
             case 'audio/ogg; codecs="opus"':
-                res='probably'
+                res = 'probably'
                 break
             case 'audio/webm; codecs="vorbis"':
-                res='probably'
+                res = 'probably'
                 break
             case 'audio/x-aiff':
-                res=''
+                res = ''
                 break
             case 'audio/x-mpegurl':
-                res=''
+                res = ''
                 break
             case 'video/mp4; codecs="flac"':
-                res='probably'
+                res = 'probably'
                 break
             case 'video/mp4; codecs="H.264, mp3"':
-                res=''
+                res = ''
                 break
             case 'video/mp4; codecs="H.264, aac"':
-                res=''
+                res = ''
                 break
             case 'video/mpeg; codec="H.264"':
-                res=''
+                res = ''
                 break
             case 'video/ogg; codecs="opus"':
-                res='probably'
+                res = 'probably'
                 break
             case 'video/webm; codecs="vp9, opus"':
-                res='probably'
+                res = 'probably'
                 break
             case 'audio/webm; codecs="opus"':
-                res='probably'
+                res = 'probably'
                 break
             default:
                 console.log_copy(`HTMLMediaElement_canPlayType `, `canplaytype->${canplaytype}未实现 !!!!!!!!!`);
@@ -6397,31 +6807,47 @@ bodavm.memory.Performance={
         return bodavm.memory.cache['location'];
     };
 
-
-    bodavm.envFunc.HTMLElement_offsetWidth_get = function () {
+    bodavm.envFunc.HTMLElement_style_get = function () {
+        if (bodavm.config.isdebug) {
+            debugger;
+        }
         // debugger
+        let islive = bodavm.toolsFunc.getProtoAttr.call(this, 'style')
+        if (islive) {
+            console.log_copy(this, ` -> HTMLElement_style_get  已存在直接返回`,);
+            return islive
+        }
+        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        
+        let _style = bodavm.memory.notDefined['CSSStyleDeclaration']
+        // debugger
+       
+        _style = bodavm.toolsFunc.proxyHelper(_style, 'CSSStyleDeclaration::proxyHelper')
+
+        bodavm.toolsFunc.setProtoAttr.call(this, 'style', _style);
+        bodavm.toolsFunc.setProtoAttr.call(_style, _style, thisNode);
+        console.log_copy(this, ` ->HTMLElement_style_get res->`, _style);
+        return _style;
+    };
+    bodavm.envFunc.HTMLElement_offsetWidth_get = function () {
+        debugger
         let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this) ? bodavm.toolsFunc.getProtoAttr.call(this, this) : bodavm.toolsFunc.getProtoAttr(this)
 
         let thisNodeStyle = ''
         thisNodeStyle = boda$(thisNode).attr('style')
-        // debugger
-        let fontFamily = ''
-        // debugger
 
-        if (this.style.fontFamily) {
-            fontFamily = this.style.fontFamily
-        } else {
+        let fontFamily = this.style.fontFamily
+        if (!fontFamily) {
             let fontFamilylist = thisNodeStyle.split(';')
             for (let fontList of fontFamilylist) {
                 if (fontList.indexOf('font-family') != -1) {
                     fontFamily = fontList.split(':')[1].trim()
-
                     break
                 }
             }
         }
         if (!fontFamily) {
-            console.log(this, ` -> HTMLElement_offsetWidth_get thisNodeStyle 未获取到直接返回0  `)
+            console.log_copy(this, ` -> HTMLElement_offsetWidth_get thisNodeStyle 未获取到直接返回0  `)
             return 0
         }
         if (fontFamily == ' 72px') { debugger }
@@ -6438,15 +6864,11 @@ bodavm.memory.Performance={
     bodavm.envFunc.HTMLElement_offsetHeight_get = function () {
         let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this) ? bodavm.toolsFunc.getProtoAttr.call(this, this) : bodavm.toolsFunc.getProtoAttr(this)
         let thisNodeStyle = ''
-
+        debugger
         thisNodeStyle = boda$(thisNode).attr('style')
-        // debugger
 
-        // debugger
-        let fontFamily = ''
-        if (this.style.fontFamily) {
-            fontFamily = this.style.fontFamily
-        } else {
+        let fontFamily = this.style.fontFamily
+        if (!fontFamily) {
             let fontFamilylist = thisNodeStyle.split(';')
             for (let fontList of fontFamilylist) {
                 if (fontList.indexOf('font-family') != -1) {
@@ -6456,7 +6878,7 @@ bodavm.memory.Performance={
             }
         }
         if (!fontFamily) {
-            console.log(this, ` -> HTMLElement_offsetHeight_get thisNodeStyle 未获取到直接返回0  `)
+            console.log_copy(this, ` -> HTMLElement_offsetHeight_get thisNodeStyle 未获取到直接返回0  `)
             return 0
         }
         if (bodavm.memory.globalInit.fontList.indexOf(fontFamily) != -1) {
@@ -6486,7 +6908,7 @@ bodavm.memory.Performance={
         bodavm.memory.iframe['contentDocument']['this'] = this
 
         contentDoc = bodavm.memory.iframe["contentDocument"]['res']
-        console.log(`HTMLIFrameElement_contentDocument_get ->res -> `, contentDoc)
+        console.log_copy(`HTMLIFrameElement_contentDocument_get ->res -> `, contentDoc)
 
         return contentDoc
     }
@@ -6498,29 +6920,29 @@ bodavm.memory.Performance={
         //     return  bodavm.memory.iframe['thisWindow']['this'][thiswinIndex]
 
         // }
-        
+
         // let documentBody = bodavm.toolsFunc.getProtoAttr(document.documentElement)
         // // debugger
         // let thisnode = bodavm.toolsFunc.getProtoAttr(this) ? bodavm.toolsFunc.getProtoAttr(this) : bodavm.toolsFunc.getProtoAttr.call(this, this)
 
         // let isIndex = filterThisNode.indexOf(thisnode)
         let contentwindow_ = null
-        let thisNode=bodavm.toolsFunc.getProtoAttr.call(this,this)
+        let thisNode = bodavm.toolsFunc.getProtoAttr.call(this, this)
         // debugger
-        let islive=0
-        let liveIframeList=boda$('iframe').get()
-        if(!liveIframeList){
-            console.log(this,`HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
+        let islive = 0
+        let liveIframeList = boda$('iframe').get()
+        if (!liveIframeList) {
+            console.log_copy(this, `HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
 
             return null
         }
         for (const ifELe of liveIframeList) {
-            if (ifELe ==thisNode){
-                islive=1
+            if (ifELe == thisNode) {
+                islive = 1
             }
         }
-        if (islive==0){
-            console.log(this,`HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
+        if (islive == 0) {
+            console.log_copy(this, `HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
             return null
         }
         // debugger
@@ -6532,8 +6954,8 @@ bodavm.memory.Performance={
         //     return window[isIndex]
         // // }
         for (let index = 0; index < bodavm.memory.iframe["contentWindow"].length; index++) {
-            let ele= bodavm.memory.iframe["contentWindow"][index];
-            if (ele['this']==this){
+            let ele = bodavm.memory.iframe["contentWindow"][index];
+            if (ele['this'] == this) {
                 let iframeRes = ele['res']
                 console.log_copy(`bodavm.memory.iframe['contentWindow'] 已存在 直接返回 ->`, iframeRes)
                 return iframeRes
@@ -6551,10 +6973,10 @@ bodavm.memory.Performance={
         windowIframe.iframe = windowIframe
         // contentwindow_=new Window('bobo')
         // bodavm.memory.iframe
-        let tempcontentWindow=''
-        tempcontentWindow= Object.setPrototypeOf(windowIframe, globalThis)
+        let tempcontentWindow = ''
+        tempcontentWindow = Object.setPrototypeOf(windowIframe, globalThis)
         // tempcontentWindowthis = this
-        bodavm.memory.iframe["contentWindow"].push({'res':tempcontentWindow,'this':this})
+        bodavm.memory.iframe["contentWindow"].push({ 'res': tempcontentWindow, 'this': this })
         // bodavm.memory.iframe['thisWindow']['this'].push(windowIframe)
         // debugger
         contentwindow_ = tempcontentWindow
@@ -6564,7 +6986,7 @@ bodavm.memory.Performance={
         // window[windowInd].frames = window[windowInd]
         // debugger
         // }
-        console.log(`HTMLIFrameElement_contentWindow_get ->res -> `, contentwindow_)
+        console.log_copy(`HTMLIFrameElement_contentWindow_get ->res -> `, contentwindow_)
         return contentwindow_
     }
 
@@ -6661,6 +7083,129 @@ bodavm.memory.Performance={
 // 浏览器接口具体的实现
 ;
 (function () {
+    // bodavm.envFunc.RTCPeerConnection_onicecandidate_set=function (){
+        
+    // }
+    bodavm.envFunc.OfflineAudioContext_oncomplete_set=function (){
+        let arg=arguments[0]
+        let event={
+            'self':this,
+            'callback':arg
+        }
+        bodavm.memory.asyncEvent['OfflineAudioContext']['oncomplete'].push(event)
+        bodavm.toolsFunc.setProtoAttr.call(this,'oncomplete',arg)
+        console.log_copy(`OfflineAudioContext_oncomplete_set arg -> `,arg)
+
+        return arg
+    }
+    bodavm.envFunc.OfflineAudioContext_startRendering=function (){
+        // debugger
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'startRendering')
+        if (islive){
+           console.log_copy(`OfflineAudioContext_startRendering cache已存在返回 -> `,islive)
+           return islive
+        }
+        let renderbuf=new AudioBuffer('bobo')
+        let promise=new Promise((resolve, reject) => {
+            resolve(renderbuf);
+        });
+        bodavm.toolsFunc.setProtoAttr.call(this,'startRendering',promise)
+
+        return promise
+    }
+    bodavm.envFunc.AudioScheduledSourceNode_start=function (){
+        let arg=arguments[0]
+        console.log_copy(`AudioScheduledSourceNode_start arg -> `,arg)
+    }
+    bodavm.envFunc.BaseAudioContext_destination_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'destination')
+        if (islive){
+           console.log_copy(`BaseAudioContext_destination_get cache已存在返回 -> `,islive)
+           return islive
+        }
+        let destination=new AudioDestinationNode('bobo')
+        bodavm.toolsFunc.setProtoAttr.call(this,'destination',destination)
+         console.log_copy(`BaseAudioContext_destination_get ->destination -> `,destination)
+
+    }
+    bodavm.envFunc.AudioNode_connect=function (){
+        // debugger
+        let res=arguments[0]
+        console.log_copy(`AudioNode_connect res -> `,res)
+
+        return res
+
+    }
+    bodavm.envFunc.DynamicsCompressorNode_release_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'release')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_release_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let release=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'release',release)
+         console.log_copy(`DynamicsCompressorNode_release_get ->knee -> `,release)
+
+         return release
+
+    }
+    bodavm.envFunc.DynamicsCompressorNode_attack_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'attack')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_attack_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let attack=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'attack',attack)
+         console.log_copy(`DynamicsCompressorNode_attack_get ->knee -> `,attack)
+
+         return attack
+
+    }
+    bodavm.envFunc.DynamicsCompressorNode_reduction_get=function (){
+        console.log_copy(`DynamicsCompressorNode_reduction_get 默认返回0`)
+        return 0
+    }
+    bodavm.envFunc.DynamicsCompressorNode_ratio_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'ratio')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_ratio_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let ratio=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'ratio',ratio)
+         console.log_copy(`DynamicsCompressorNode_ratio_get ->knee -> `,ratio)
+
+         return ratio
+
+    }
+    bodavm.envFunc.DynamicsCompressorNode_knee_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'knee')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_knee_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let knee=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'knee',knee)
+         console.log_copy(`DynamicsCompressorNode_knee_get ->knee -> `,knee)
+
+         return knee
+
+    }
+
+    bodavm.envFunc.DynamicsCompressorNode_threshold_get=function (){
+        let islive=bodavm.toolsFunc.getProtoAttr.call(this,'threshold')
+         if (islive){
+            console.log_copy(`DynamicsCompressorNode_threshold_get cache已存在返回 -> `,islive)
+            return islive
+         }
+         let thres=new AudioParam('bobo')
+         bodavm.toolsFunc.setProtoAttr.call(this,'threshold',thres)
+         console.log_copy(`DynamicsCompressorNode_threshold_get ->thres -> `,thres)
+
+         return thres
+
+    }
     bodavm.envFunc.WebGLRenderingContext_clear=function (){
         let arg=arguments[0]
         bodavm.toolsFunc.setProtoAttr.call(this,'clear',arg)
@@ -6845,12 +7390,15 @@ bodavm.memory.Performance={
             7938: 'WebGL 1.0 (OpenGL ES 2.0 Chromium)',
             33902: new Float32Array([1,1]),
             33901: new Float32Array([1,1024]),
-            3386: new Int32Array([32767,32767])
+            3386: new Int32Array([32767,32767]),
+            3410:8,
+            7937:'WebKit WebGL',
+            7936:'WebKit'
         }
-        res = resDict[pname]
-        if (res === undefined) return console.log_copy(`WebGLRenderingContext_getParameter `, `${pname} 未实现`);
-        console.log_copy(`WebGLRenderingContext_getParameter `, `${pname}  `, `-> res ->${res}`)
-        return res
+        let resgetParameter = resDict[pname]
+        if (resgetParameter === undefined) return console.log_copy(`WebGLRenderingContext_getParameter `, `${pname} 未实现`);
+        console.log_copy(`WebGLRenderingContext_getParameter `, `${pname}  `, `-> res ->${resgetParameter}`)
+        return resgetParameter
     }
     bodavm.envFunc.WebGLShaderPrecisionFormat_precision_get = function WebGLShaderPrecisionFormat_precision_get() {
         console.log_copy(`WebGLShaderPrecisionFormat_precision_get `, 23);
@@ -7726,7 +8274,7 @@ bodavm.toolsFunc.safeFunc(Promise.allSettled,'allSettled')
     }
     //hook console,让他自动调用printlog
     console.log_ = console.log;
-    console.log = function log(type,...args) {
+    console.log = { log(type,...args) {
 
         // let index=args[0]?args[0]:args
         // if (typeof index =='string'&&  index.indexOf('属性:')!=-1){    
@@ -7759,7 +8307,7 @@ bodavm.toolsFunc.safeFunc(Promise.allSettled,'allSettled')
 
         //自动生成hook代码
         return console.log_.apply(this, arguments)
-    };
+    }}.log
     console.log_copy=console.log
     bodavm.toolsFunc.safeFunc(console.log,'log')
     // Object.defineProperty(console,'log',{
@@ -11478,13 +12026,12 @@ bodavm.toolsFunc.defineProperty(CustomElementRegistry.prototype, "whenDefined", 
 
 Event = function Event() {
   let arg = arguments[0];
-  let arg2=arguments[1]
-  if (bodavm.memory.listenerProxy[arg]['res']){
-		  return bodavm.memory.listenerProxy[arg]['res']
-	  }
-  this.isTrusted=false
-  bodavm.toolsFunc.setProtoAttr.call(this,this,arg)
-  ;
+  let arg2 = arguments[1];
+  if (bodavm.memory.listenerProxy[arg]['res']) {
+    return bodavm.memory.listenerProxy[arg]['res'];
+  }
+  this.isTrusted = false;
+  bodavm.toolsFunc.setProtoAttr.call(this, this, arg);
   bodavm.toolsFunc.symbolProperty(this);
   if (arg2 != 'bobo') {
     console.log_copy('Event 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -11754,12 +12301,11 @@ bodavm.toolsFunc.defineProperty(UIEvent.prototype, "initUIEvent", {
 MouseEvent = function MouseEvent() {
   let arg = arguments[0];
   ;
-  
-  if (bodavm.memory.listenerProxy[arg]['res']){
-	  return bodavm.memory.listenerProxy[arg]['res']
+  if (bodavm.memory.listenerProxy[arg]['res']) {
+    return bodavm.memory.listenerProxy[arg]['res'];
   }
-  this.isTrusted=false
-  bodavm.toolsFunc.setProtoAttr.call(this,this,arg)
+  this.isTrusted = false;
+  bodavm.toolsFunc.setProtoAttr.call(this, this, arg);
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('MouseEvent 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -11979,7 +12525,6 @@ bodavm.toolsFunc.defineProperty(MouseEvent.prototype, "initMouseEvent", {
 
 Document = function Document() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Document 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -21126,9 +21671,11 @@ bodavm.toolsFunc.defineProperty(MutationRecord.prototype, "oldValue", {
   set: undefined
 });
 // webkitRequestFileSystem对象
-webkitRequestFileSystem = (a) => {
-  console.log_copy(`webkitRequestFileSystem  使用--->`,a);
-};
+webkitRequestFileSystem = {
+  webkitRequestFileSystem(a) {
+    console.log_copy(`webkitRequestFileSystem 使用-- >`, a);
+  }
+}.webkitRequestFileSystem;
 //debugger;
 bodavm.toolsFunc.safefunction(webkitRequestFileSystem, "webkitRequestFileSystem");
 bodavm.toolsFunc.defineProperty(webkitRequestFileSystem, "length", {
@@ -21265,7 +21812,6 @@ bodavm.toolsFunc.defineProperty(Attr.prototype, "specified", {
 
 Option = function Option() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Option 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -23924,7 +24470,6 @@ bodavm.toolsFunc.defineProperty(HTMLMediaElement.prototype, "setMediaKeys", {
 
 Audio = function Audio() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Audio 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -24106,7 +24651,6 @@ Comment.__proto__ = CharacterData;
 
 DocumentFragment = function DocumentFragment() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DocumentFragment 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -24285,7 +24829,6 @@ bodavm.toolsFunc.defineProperty(DocumentType.prototype, "replaceWith", {
 
 DOMParser = function DOMParser() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMParser 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -24387,13 +24930,12 @@ bodavm.toolsFunc.defineProperty(External.prototype, "IsSearchProviderInstalled",
 
 PointerEvent = function PointerEvent() {
   let arg = arguments[0];
-    let arg2=arguments[1]
-
-	if (bodavm.memory.listenerProxy[arg]['res']){
-		  return bodavm.memory.listenerProxy[arg]['res']
-	  }
-  this.isTrusted=false
-  bodavm.toolsFunc.setProtoAttr.call(this,this,arg)
+  let arg2 = arguments[1];
+  if (bodavm.memory.listenerProxy[arg]['res']) {
+    return bodavm.memory.listenerProxy[arg]['res'];
+  }
+  this.isTrusted = false;
+  bodavm.toolsFunc.setProtoAttr.call(this, this, arg);
   bodavm.toolsFunc.symbolProperty(this);
   if (arg2 != 'bobo') {
     console.log_copy('PointerEvent 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -24525,8 +25067,8 @@ bodavm.toolsFunc.defineProperty(PointerEvent.prototype, "getPredictedEvents", {
 
 WebSocket = function WebSocket() {
   let arg = arguments[0];
-  if (arg=='itsgonnafail'){
-	  bodavm.toolsFunc.throwError('DOMException',`Failed to construct 'WebSocket': The URL 'itsgonnafail' is invalid.`)
+  if (arg == 'itsgonnafail') {
+    bodavm.toolsFunc.throwError('DOMException', `Failed to construct 'WebSocket': The URL 'itsgonnafail' is invalid.`);
   }
   ;
   bodavm.toolsFunc.symbolProperty(this);
@@ -25608,10 +26150,13 @@ bodavm.toolsFunc.defineProperty(MediaEncryptedEvent.prototype, "initData", {
 // MutationObserver对象
 
 MutationObserver = function MutationObserver() {
-	//debugger
+  //debugger
   let arg = arguments[0];
- 
+  if (arguments.length < 1) {
+    return bodavm.toolsFunc.throwError('TypeError', `Failed to construct 'MutationObserver': 1 argument required, but only 0 present.`);
+  }
   ;
+  debugger;
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('MutationObserver 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -25872,7 +26417,6 @@ bodavm.toolsFunc.defineProperty(OfflineAudioContext.prototype, "suspend", {
 
 Path2D = function Path2D() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Path2D 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -27918,13 +28462,13 @@ bodavm.toolsFunc.defineProperty(SVGElement.prototype, "onbeforetoggle", {
 // DeviceOrientationEvent对象
 
 DeviceOrientationEvent = function DeviceOrientationEvent() {
-    let arg = arguments[0];
-  let arg2=arguments[1]
-  if (bodavm.memory.listenerProxy[arg]['res']){
-		  return bodavm.memory.listenerProxy[arg]['res']
-	  }
-  this.isTrusted=false
-  bodavm.toolsFunc.setProtoAttr.call(this,this,arg)
+  let arg = arguments[0];
+  let arg2 = arguments[1];
+  if (bodavm.memory.listenerProxy[arg]['res']) {
+    return bodavm.memory.listenerProxy[arg]['res'];
+  }
+  this.isTrusted = false;
+  bodavm.toolsFunc.setProtoAttr.call(this, this, arg);
   bodavm.toolsFunc.symbolProperty(this);
   if (arg2 != 'bobo') {
     console.log_copy('DeviceOrientationEvent 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -28815,9 +29359,12 @@ bodavm.toolsFunc.defineProperty(WebGLShaderPrecisionFormat.prototype, "precision
 });
 // RTCPeerConnection对象
 
-RTCPeerConnection = function RTCPeerConnection() { 
-   let arg = arguments[0];
-
+RTCPeerConnection = function RTCPeerConnection() {
+  let arg = arguments[0];
+  //debugger
+  if (JSON.stringify_bo(arg).indexOf('stun:stun1.l.google.com:19302?transport=udp') != -1) {
+    return bodavm.toolsFunc.throwError('DOMException', `Failed to construct 'RTCPeerConnection': 'stun:stun1.l.google.com:19302?transport=udp' is not a valid stun or turn URL.`);
+  }
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('RTCPeerConnection 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -30993,7 +31540,6 @@ bodavm.toolsFunc.defineProperty(XMLHttpRequest.prototype, "setRequestHeader", {
 
 AbortController = function AbortController() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('AbortController 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -31100,7 +31646,6 @@ bodavm.toolsFunc.defineProperty(AbortSignal.prototype, "throwIfAborted", {
 
 AbsoluteOrientationSensor = function AbsoluteOrientationSensor() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('AbsoluteOrientationSensor 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -31181,7 +31726,6 @@ bodavm.toolsFunc.defineProperty(AbstractRange.prototype, "collapsed", {
 
 Accelerometer = function Accelerometer() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Accelerometer 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -31224,12 +31768,17 @@ bodavm.toolsFunc.defineProperty(Accelerometer.prototype, "z", {
 // alert对象
 bodavm.memory.globalInit['alert'] = function () {};
 bodavm.toolsFunc.safeProto(bodavm.memory.globalInit['alert'], 'alert');
-bodavm.toolsFunc.defineProperty(bodavm.memory.globalInit['alert'], "length", {configurable:true, enumerable:false, writable:false, value:0});
+bodavm.toolsFunc.defineProperty(bodavm.memory.globalInit['alert'], "length", {
+  configurable: true,
+  enumerable: false,
+  writable: false,
+  value: 0
+});
 bodavm.toolsFunc.defineProperty(bodavm.memory.globalInit['alert'], "name", {
   configurable: true,
- enumerable: false,
-writable: false,
-value: "alert"
+  enumerable: false,
+  writable: false,
+  value: "alert"
 });
 //bodavm.memory.globalInit['alert']=bodavm.toolsFunc.proxy2(bodavm.memory.globalInit['alert'],'alert')
 // AnalyserNode对象
@@ -31339,7 +31888,6 @@ bodavm.toolsFunc.defineProperty(AnalyserNode.prototype, "getFloatTimeDomainData"
 
 Animation = function Animation() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Animation 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -31877,7 +32425,6 @@ bodavm.toolsFunc.defineProperty(AudioBufferSourceNode.prototype, "start", {
 
 AudioContext = function AudioContext() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   arg = arguments[0];
   if (arg != 'bobo') {
@@ -33195,7 +33742,7 @@ bodavm.toolsFunc.defineProperty(BiquadFilterNode.prototype, "getFrequencyRespons
 // Blob对象
 
 Blob = function Blob() {
-	let arg=arguments[0]
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Blob 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -34546,9 +35093,11 @@ caches = {
 };
 caches.__proto__ = CacheStorage.prototype;
 // cancelAnimationFrame对象
-cancelAnimationFrame = (a) => {
-  console.log_copy(`使用cancelAnimationFrame arg->`, a);
-};
+cancelAnimationFrame = {
+  cancelAnimationFrame(a) {
+    console.log_copy(`cancelAnimationFrame 使用-- >`, a);
+  }
+}.cancelAnimationFrame;
 bodavm.toolsFunc.safefunction(cancelAnimationFrame, "cancelAnimationFrame");
 bodavm.toolsFunc.defineProperty(cancelAnimationFrame, "length", {
   configurable: true,
@@ -34563,9 +35112,11 @@ bodavm.toolsFunc.defineProperty(cancelAnimationFrame, "name", {
   value: 'cancelAnimationFrame'
 });
 // cancelIdleCallback对象
-cancelIdleCallback = (a) => {
-  console.log_copy(`cancelIdleCallback arg->`, a);
-};
+cancelIdleCallback = {
+  cancelIdleCallback(a) {
+    console.log_copy(`cancelIdleCallback 使用-- >`, a);
+  }
+}.cancelIdleCallback;
 bodavm.toolsFunc.safefunction(cancelIdleCallback, "cancelIdleCallback");
 bodavm.toolsFunc.defineProperty(cancelIdleCallback, "length", {
   configurable: true,
@@ -34698,7 +35249,6 @@ bodavm.toolsFunc.defineProperty(CanvasPattern.prototype, "setTransform", {
 
 CaptureController = function CaptureController() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('CaptureController 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -34721,9 +35271,11 @@ bodavm.toolsFunc.defineProperty(CaptureController.prototype, "setFocusBehavior",
   }
 });
 // captureEvents对象
-captureEvents = (a) => {
-  console.log_copy(`captureEvents arg->`, a);
-};
+captureEvents = {
+  captureEvents(a) {
+    console.log_copy(`captureEvents 使用-- >`, a);
+  }
+}.captureEvents;
 bodavm.toolsFunc.safefunction(captureEvents, "captureEvents");
 bodavm.toolsFunc.defineProperty(captureEvents, "length", {
   configurable: true,
@@ -36872,6 +37424,7 @@ bodavm.toolsFunc.defineProperty(CSSStyleRule.prototype, "insertRule", {
 // CSSStyleSheet对象
 
 CSSStyleSheet = function CSSStyleSheet() {
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('CSSStyleSheet 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -37902,7 +38455,6 @@ bodavm.toolsFunc.defineProperty(DeviceMotionEventRotationRate.prototype, "gamma"
 
 DocumentTimeline = function DocumentTimeline() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DocumentTimeline 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -37922,7 +38474,6 @@ DocumentTimeline.__proto__ = AnimationTimeline;
 
 DOMMatrixReadOnly = function DOMMatrixReadOnly() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMMatrixReadOnly 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -38337,7 +38888,6 @@ bodavm.toolsFunc.defineProperty(DOMError.prototype, "message", {
 
 DOMException = function DOMException() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMException 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -38732,7 +39282,6 @@ bodavm.toolsFunc.defineProperty(DOMImplementation.prototype, "hasFeature", {
 
 DOMMatrix = function DOMMatrix() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMMatrix 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -39092,7 +39641,6 @@ bodavm.toolsFunc.defineProperty(DOMMatrix.prototype, "setMatrixValue", {
 
 DOMPointReadOnly = function DOMPointReadOnly() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMPointReadOnly 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -39166,7 +39714,6 @@ bodavm.toolsFunc.defineProperty(DOMPointReadOnly.prototype, "toJSON", {
 
 DOMPoint = function DOMPoint() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMPoint 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -39234,7 +39781,6 @@ bodavm.toolsFunc.defineProperty(DOMPoint.prototype, "w", {
 
 DOMQuad = function DOMQuad() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMQuad 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -39314,10 +39860,8 @@ bodavm.toolsFunc.defineProperty(DOMQuad.prototype, "toJSON", {
 });
 // DOMRectReadOnly对象
 
-
 DOMRectReadOnly = function DOMRectReadOnly() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMRectReadOnly 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -39414,7 +39958,7 @@ bodavm.toolsFunc.defineProperty(DOMRectReadOnly.prototype, "toJSON", {
 // DOMRect对象
 
 DOMRect = function DOMRect() {
-	let arg=arguments[0]
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('DOMRect 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -40689,7 +41233,6 @@ bodavm.toolsFunc.defineProperty(EventSource.prototype, "close", {
 
 EyeDropper = function EyeDropper() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('EyeDropper 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -40714,8 +41257,7 @@ bodavm.toolsFunc.defineProperty(EyeDropper.prototype, "open", {
 // WritableStream对象
 
 WritableStream = function WritableStream() {
-  let arg=arguments[0]
-
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('WritableStream 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -41034,7 +41576,6 @@ bodavm.toolsFunc.defineProperty(FileList.prototype, "item", {
 
 FileReader = function FileReader() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('FileReader 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -41675,7 +42216,6 @@ bodavm.toolsFunc.defineProperty(FontFaceSetLoadEvent.prototype, "fontfaces", {
 
 FormData = function FormData() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('FormData 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -42291,9 +42831,29 @@ bodavm.toolsFunc.defineProperty(GeolocationPositionError.prototype, "TIMEOUT", {
   value: 3
 });
 // getComputedStyle对象
-getComputedStyle = (a) => {
-  console.log(`使用 getComputedStyle arg->`, a);
+/*
+getComputedStyle = (ele,b) => {
+  //debugger
+  let res=bodavm.memory.notDefined['CSSStyleDeclaration']
+  bodavm.toolsFunc.proxyHelper(res,'CSSStyleDeclaration::proxyHelper')
+  let targetNode=bodavm.toolsFunc.getProtoAttr.call(ele,ele)
+  debugger
+  bodavm.toolsFunc.setProtoAttr.call(res,res,targetNode)
+  console.log(`使用 getComputedStyle args->${ele} , ${b}`,` -> res ->`,res );
+  return res
 };
+*/
+getComputedStyle = {
+  getComputedStyle(ele, b) {
+    let res = bodavm.memory.notDefined['CSSStyleDeclaration'];
+    bodavm.toolsFunc.proxyHelper(res, 'CSSStyleDeclaration::proxyHelper');
+    let targetNode = bodavm.toolsFunc.getProtoAttr.call(ele, ele);
+    //debugger
+    bodavm.toolsFunc.setProtoAttr.call(res, res, targetNode);
+    console.log_copy(`使用 getComputedStyle args->${ele} , ${b}`, ` -> res ->`, res);
+    return res;
+  }
+}.getComputedStyle;
 bodavm.toolsFunc.safefunction(getComputedStyle, "getComputedStyle");
 bodavm.toolsFunc.defineProperty(getComputedStyle, "length", {
   configurable: true,
@@ -42308,9 +42868,11 @@ bodavm.toolsFunc.defineProperty(getComputedStyle, "name", {
   value: 'getComputedStyle'
 });
 // getScreenDetails对象
-getScreenDetails = (a )=> {
-  console.log(`使用 getScreenDetails arg->`, a);
-};
+getScreenDetails = {
+  getScreenDetails(a) {
+    console.log_copy(`getScreenDetails 使用-- >`, a);
+  }
+}.getScreenDetails;
 bodavm.toolsFunc.safefunction(getScreenDetails, "getScreenDetails");
 bodavm.toolsFunc.defineProperty(getScreenDetails, "length", {
   configurable: true,
@@ -42325,9 +42887,11 @@ bodavm.toolsFunc.defineProperty(getScreenDetails, "name", {
   value: 'getScreenDetails'
 });
 // getSelection对象
-getSelection = (a) => {
-  console.log(`使用 getSelection arg->`, a);
-};
+getSelection = {
+  getSelection(a) {
+    console.log_copy(`getSelection 使用-- >`, a);
+  }
+}.getSelection;
 bodavm.toolsFunc.safefunction(getSelection, "getSelection");
 bodavm.toolsFunc.defineProperty(getSelection, "length", {
   configurable: true,
@@ -50848,7 +51412,6 @@ bodavm.toolsFunc.defineProperty(IdentityCredential.prototype, "token", {
 // IdleDeadline对象
 
 IdleDeadline = function IdleDeadline() {
-  
   let arg = arguments[0];
   if (arg != 'bobo' && !(this instanceof IdleDeadline)) {
     return bodavm.toolsFunc.throwError("TypeError", "Illegal constructor");
@@ -50976,49 +51539,282 @@ bodavm.toolsFunc.defineProperty(IIRFilterNode.prototype, "getFrequencyResponse",
   }
 });
 // Image对象
-Image = function Image(){
-	let arg=arguments[0]
-	if (arg !='bobo'){
-	console.log_copy('Image 实例化对象 --->',
-	JSON.stringify_bo(arguments,function(k,v){if (v==window){return 'window'}else{return v}}))}
-	let resEle=boda$("<img>").get()[0]
-	let newNode=bodavm.toolsFunc.setProto(resEle.name)
-	bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,resEle)
-	return newNode
-	;}
-
+Image = function Image() {
+  let arg = arguments[0];
+  if (arg != 'bobo') {
+    console.log_copy('Image 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
+      if (v == window) {
+        return 'window';
+      } else {
+        return v;
+      }
+    }));
+  }
+  let resEle = boda$("<img>").get()[0];
+  let newNode = bodavm.toolsFunc.setProto(resEle.name);
+  bodavm.toolsFunc.setProtoAttr.call(newNode, newNode, resEle);
+  return newNode;
+};
 bodavm.toolsFunc.safeProto(Image, "Image");
-Image.prototype=HTMLImageElement.prototype;
-Image.prototype.__proto__=HTMLElement.prototype;
+Image.prototype = HTMLImageElement.prototype;
+Image.prototype.__proto__ = HTMLElement.prototype;
 // Image对象
-bodavm.toolsFunc.defineProperty(Image.prototype, "alt", {configurable:true, enumerable:true, get:function alt (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "alt_get", arguments)}, set:function alt (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "alt_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "src", {configurable:true, enumerable:true, get:function src (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "src_get", arguments)}, set:function src (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "src_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "srcset", {configurable:true, enumerable:true, get:function srcset (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "srcset_get", arguments)}, set:function srcset (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "srcset_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "sizes", {configurable:true, enumerable:true, get:function sizes (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "sizes_get", arguments)}, set:function sizes (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "sizes_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "crossOrigin", {configurable:true, enumerable:true, get:function crossOrigin (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "crossOrigin_get", arguments)}, set:function crossOrigin (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "crossOrigin_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "useMap", {configurable:true, enumerable:true, get:function useMap (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "useMap_get", arguments)}, set:function useMap (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "useMap_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "isMap", {configurable:true, enumerable:true, get:function isMap (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "isMap_get", arguments)}, set:function isMap (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "isMap_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "width", {configurable:true, enumerable:true, get:function width (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "width_get", arguments)}, set:function width (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "width_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "height", {configurable:true, enumerable:true, get:function height (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "height_get", arguments)}, set:function height (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "height_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "naturalWidth", {configurable:true, enumerable:true, get:function naturalWidth (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "naturalWidth_get", arguments)}, set:undefined},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "naturalHeight", {configurable:true, enumerable:true, get:function naturalHeight (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "naturalHeight_get", arguments)}, set:undefined},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "complete", {configurable:true, enumerable:true, get:function complete (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "complete_get", arguments)}, set:undefined},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "currentSrc", {configurable:true, enumerable:true, get:function currentSrc (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "currentSrc_get", arguments)}, set:undefined},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "referrerPolicy", {configurable:true, enumerable:true, get:function referrerPolicy (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "referrerPolicy_get", arguments)}, set:function referrerPolicy (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "referrerPolicy_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "decoding", {configurable:true, enumerable:true, get:function decoding (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "decoding_get", arguments)}, set:function decoding (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "decoding_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "name", {configurable:true, enumerable:true, get:function name (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "name_get", arguments)}, set:function name (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "name_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "lowsrc", {configurable:true, enumerable:true, get:function lowsrc (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "lowsrc_get", arguments)}, set:function lowsrc (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "lowsrc_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "align", {configurable:true, enumerable:true, get:function align (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "align_get", arguments)}, set:function align (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "align_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "hspace", {configurable:true, enumerable:true, get:function hspace (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "hspace_get", arguments)}, set:function hspace (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "hspace_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "vspace", {configurable:true, enumerable:true, get:function vspace (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "vspace_get", arguments)}, set:function vspace (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "vspace_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "longDesc", {configurable:true, enumerable:true, get:function longDesc (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "longDesc_get", arguments)}, set:function longDesc (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "longDesc_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "border", {configurable:true, enumerable:true, get:function border (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "border_get", arguments)}, set:function border (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "border_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "x", {configurable:true, enumerable:true, get:function x (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "x_get", arguments)}, set:undefined},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "y", {configurable:true, enumerable:true, get:function y (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "y_get", arguments)}, set:undefined},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "decode", {configurable:true, enumerable:true, writable:true, value:function decode (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "decode", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "fetchPriority", {configurable:true, enumerable:true, get:function fetchPriority (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "fetchPriority_get", arguments)}, set:function fetchPriority (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "fetchPriority_set", arguments)}},);
-bodavm.toolsFunc.defineProperty(Image.prototype, "loading", {configurable:true, enumerable:true, get:function loading (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "loading_get", arguments)}, set:function loading (){return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "loading_set", arguments)}},);
-
+bodavm.toolsFunc.defineProperty(Image.prototype, "alt", {
+  configurable: true,
+  enumerable: true,
+  get: function alt() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "alt_get", arguments);
+  },
+  set: function alt() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "alt_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "src", {
+  configurable: true,
+  enumerable: true,
+  get: function src() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "src_get", arguments);
+  },
+  set: function src() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "src_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "srcset", {
+  configurable: true,
+  enumerable: true,
+  get: function srcset() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "srcset_get", arguments);
+  },
+  set: function srcset() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "srcset_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "sizes", {
+  configurable: true,
+  enumerable: true,
+  get: function sizes() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "sizes_get", arguments);
+  },
+  set: function sizes() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "sizes_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "crossOrigin", {
+  configurable: true,
+  enumerable: true,
+  get: function crossOrigin() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "crossOrigin_get", arguments);
+  },
+  set: function crossOrigin() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "crossOrigin_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "useMap", {
+  configurable: true,
+  enumerable: true,
+  get: function useMap() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "useMap_get", arguments);
+  },
+  set: function useMap() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "useMap_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "isMap", {
+  configurable: true,
+  enumerable: true,
+  get: function isMap() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "isMap_get", arguments);
+  },
+  set: function isMap() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "isMap_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "width", {
+  configurable: true,
+  enumerable: true,
+  get: function width() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "width_get", arguments);
+  },
+  set: function width() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "width_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "height", {
+  configurable: true,
+  enumerable: true,
+  get: function height() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "height_get", arguments);
+  },
+  set: function height() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "height_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "naturalWidth", {
+  configurable: true,
+  enumerable: true,
+  get: function naturalWidth() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "naturalWidth_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "naturalHeight", {
+  configurable: true,
+  enumerable: true,
+  get: function naturalHeight() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "naturalHeight_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "complete", {
+  configurable: true,
+  enumerable: true,
+  get: function complete() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "complete_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "currentSrc", {
+  configurable: true,
+  enumerable: true,
+  get: function currentSrc() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "currentSrc_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "referrerPolicy", {
+  configurable: true,
+  enumerable: true,
+  get: function referrerPolicy() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "referrerPolicy_get", arguments);
+  },
+  set: function referrerPolicy() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "referrerPolicy_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "decoding", {
+  configurable: true,
+  enumerable: true,
+  get: function decoding() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "decoding_get", arguments);
+  },
+  set: function decoding() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "decoding_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "name", {
+  configurable: true,
+  enumerable: true,
+  get: function name() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "name_get", arguments);
+  },
+  set: function name() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "name_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "lowsrc", {
+  configurable: true,
+  enumerable: true,
+  get: function lowsrc() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "lowsrc_get", arguments);
+  },
+  set: function lowsrc() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "lowsrc_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "align", {
+  configurable: true,
+  enumerable: true,
+  get: function align() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "align_get", arguments);
+  },
+  set: function align() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "align_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "hspace", {
+  configurable: true,
+  enumerable: true,
+  get: function hspace() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "hspace_get", arguments);
+  },
+  set: function hspace() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "hspace_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "vspace", {
+  configurable: true,
+  enumerable: true,
+  get: function vspace() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "vspace_get", arguments);
+  },
+  set: function vspace() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "vspace_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "longDesc", {
+  configurable: true,
+  enumerable: true,
+  get: function longDesc() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "longDesc_get", arguments);
+  },
+  set: function longDesc() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "longDesc_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "border", {
+  configurable: true,
+  enumerable: true,
+  get: function border() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "border_get", arguments);
+  },
+  set: function border() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "border_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "x", {
+  configurable: true,
+  enumerable: true,
+  get: function x() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "x_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "y", {
+  configurable: true,
+  enumerable: true,
+  get: function y() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "y_get", arguments);
+  },
+  set: undefined
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "decode", {
+  configurable: true,
+  enumerable: true,
+  writable: true,
+  value: function decode() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "decode", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "fetchPriority", {
+  configurable: true,
+  enumerable: true,
+  get: function fetchPriority() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "fetchPriority_get", arguments);
+  },
+  set: function fetchPriority() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "fetchPriority_set", arguments);
+  }
+});
+bodavm.toolsFunc.defineProperty(Image.prototype, "loading", {
+  configurable: true,
+  enumerable: true,
+  get: function loading() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "loading_get", arguments);
+  },
+  set: function loading() {
+    return bodavm.toolsFunc.dispatch(this, Image.prototype, "Image", "loading_set", arguments);
+  }
+});
 // ImageBitmap对象
 
 ImageBitmap = function ImageBitmap() {
@@ -56058,9 +56854,11 @@ bodavm.toolsFunc.defineProperty(NavigatorUAData.prototype, "toJSON", {
   }
 });
 // NodeFilter对象
-NodeFilter = (a) => {
-  console.log_copy(`NodeFilter 使用 arg->`, a);
-};
+NodeFilter = {
+  NodeFilter(a) {
+    console.log_copy(`NodeFilter 使用-- >`, a);
+  }
+}.NodeFilter;
 bodavm.toolsFunc.safefunction(NodeFilter, "NodeFilter");
 bodavm.toolsFunc.defineProperty(NodeFilter, "length", {
   configurable: true,
@@ -56374,9 +57172,11 @@ bodavm.toolsFunc.defineProperty(OffscreenCanvas.prototype, "transferToImageBitma
   }
 });
 // openDatabase对象
-openDatabase = (a) => {
-  console.log_copy(`openDatabase 使用 arg->`, a);
-};
+openDatabase = {
+  openDatabase(a) {
+    console.log_copy(`openDatabase 使用-- >`, a);
+  }
+}.openDatabase;
 bodavm.toolsFunc.safefunction(openDatabase, "openDatabase");
 bodavm.toolsFunc.defineProperty(openDatabase, "length", {
   configurable: true,
@@ -58228,9 +59028,11 @@ bodavm.toolsFunc.defineProperty(PopStateEvent.prototype, "state", {
   set: undefined
 });
 // postMessage对象
-postMessage = (a) => {
-  console.log_copy(`使用 postMessage arg->`, a);
-};
+postMessage = {
+  postMessage(a) {
+    console.log_copy(`postMessage 使用-- >`, a);
+  }
+}.postMessage;
 bodavm.toolsFunc.safefunction(postMessage, "postMessage");
 bodavm.toolsFunc.defineProperty(postMessage, "length", {
   configurable: true,
@@ -59006,9 +59808,11 @@ bodavm.toolsFunc.defineProperty(PushSubscriptionOptions.prototype, "applicationS
   set: undefined
 });
 // queryLocalFonts对象
-queryLocalFonts = (a) => {
-  console.log_copy(`使用 queryLocalFonts arg->`, a);
-};
+queryLocalFonts = {
+  queryLocalFonts(a) {
+    console.log_copy(`queryLocalFonts 使用-- >`, a);
+  }
+}.queryLocalFonts;
 bodavm.toolsFunc.safefunction(queryLocalFonts, "queryLocalFonts");
 bodavm.toolsFunc.defineProperty(queryLocalFonts, "length", {
   configurable: true,
@@ -59023,9 +59827,11 @@ bodavm.toolsFunc.defineProperty(queryLocalFonts, "name", {
   value: 'queryLocalFonts'
 });
 // queueMicrotask对象
-queueMicrotask = (a) => {
-  console.log_copy(`使用 queueMicrotask arg->`, a);
-};
+queueMicrotask = {
+  queueMicrotask(a) {
+    console.log_copy(`queueMicrotask 使用-- >`, a);
+  }
+}.queueMicrotask;
 bodavm.toolsFunc.safefunction(queueMicrotask, "queueMicrotask");
 bodavm.toolsFunc.defineProperty(queueMicrotask, "length", {
   configurable: true,
@@ -59076,7 +59882,6 @@ bodavm.toolsFunc.defineProperty(RadioNodeList.prototype, "value", {
 
 Range = function Range() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('Range 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -59413,7 +60218,6 @@ bodavm.toolsFunc.defineProperty(ReadableByteStreamController.prototype, "error",
 
 ReadableStream = function ReadableStream() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('ReadableStream 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -59683,7 +60487,6 @@ bodavm.toolsFunc.defineProperty(ReadableStreamDefaultReader.prototype, "cancel",
 
 RelativeOrientationSensor = function RelativeOrientationSensor() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('RelativeOrientationSensor 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -59700,9 +60503,11 @@ bodavm.toolsFunc.safeProto(RelativeOrientationSensor, "RelativeOrientationSensor
 RelativeOrientationSensor.prototype.__proto__ = OrientationSensor.prototype;
 RelativeOrientationSensor.__proto__ = OrientationSensor;
 // releaseEvents对象
-releaseEvents = (a) => {
-  console.log_copy(`使用 releaseEvents arg->`, a);
-};
+releaseEvents = {
+  releaseEvents(a) {
+    console.log_copy(`releaseEvents 使用-- >`, a);
+  }
+}.releaseEvents;
 bodavm.toolsFunc.safefunction(releaseEvents, "releaseEvents");
 bodavm.toolsFunc.defineProperty(releaseEvents, "length", {
   configurable: true,
@@ -59802,9 +60607,11 @@ bodavm.toolsFunc.defineProperty(RemotePlayback.prototype, "watchAvailability", {
   }
 });
 // reportError对象
-reportError = (a) => {
-  console.log_copy(`使用 reportError arg->`, a);
-};
+reportError = {
+  reportError(a) {
+    console.log_copy(`reportError 使用-- >`, a);
+  }
+}.reportError;
 bodavm.toolsFunc.safefunction(reportError, "reportError");
 bodavm.toolsFunc.defineProperty(reportError, "length", {
   configurable: true,
@@ -59864,9 +60671,11 @@ bodavm.toolsFunc.defineProperty(ReportingObserver.prototype, "takeRecords", {
   }
 });
 // requestAnimationFrame对象
-requestAnimationFrame = (a) => {
-  console.log_copy(`使用 requestAnimationFrame arg->`, a);
-};
+requestAnimationFrame = {
+  requestAnimationFrame(a) {
+    console.log_copy(`requestAnimationFrame 使用-- >`, a);
+  }
+}.requestAnimationFrame;
 bodavm.toolsFunc.safefunction(requestAnimationFrame, "requestAnimationFrame");
 bodavm.toolsFunc.defineProperty(requestAnimationFrame, "length", {
   configurable: true,
@@ -59881,9 +60690,11 @@ bodavm.toolsFunc.defineProperty(requestAnimationFrame, "name", {
   value: 'requestAnimationFrame'
 });
 // requestIdleCallback对象
-requestIdleCallback = (a) => {
-  console.log_copy(`使用 requestIdleCallback arg->`, a);
-};
+requestIdleCallback = {
+  requestIdleCallback(a) {
+    console.log_copy(`requestIdleCallback 使用-- >`, a);
+  }
+}.requestIdleCallback;
 bodavm.toolsFunc.safefunction(requestIdleCallback, "requestIdleCallback");
 bodavm.toolsFunc.defineProperty(requestIdleCallback, "length", {
   configurable: true,
@@ -62825,9 +63636,11 @@ bodavm.toolsFunc.defineProperty(SharedWorker.prototype, "onerror", {
   }
 });
 // showDirectoryPicker对象
-showDirectoryPicker = (a) => {
-  console.log_copy(`使用 showDirectoryPicker arg->`, a);
-};
+showDirectoryPicker = {
+  showDirectoryPicker(a) {
+    console.log_copy(`showDirectoryPicker 使用-- >`, a);
+  }
+}.showDirectoryPicker;
 bodavm.toolsFunc.safefunction(showDirectoryPicker, "showDirectoryPicker");
 bodavm.toolsFunc.defineProperty(showDirectoryPicker, "length", {
   configurable: true,
@@ -62842,9 +63655,11 @@ bodavm.toolsFunc.defineProperty(showDirectoryPicker, "name", {
   value: 'showDirectoryPicker'
 });
 // showOpenFilePicker对象
-showOpenFilePicker = (a) => {
-  console.log_copy(`使用 showOpenFilePicker arg->`, a);
-};
+showOpenFilePicker = {
+  showOpenFilePicker(a) {
+    console.log_copy(`showOpenFilePicker 使用-- >`, a);
+  }
+}.showOpenFilePicker;
 bodavm.toolsFunc.safefunction(showOpenFilePicker, "showOpenFilePicker");
 bodavm.toolsFunc.defineProperty(showOpenFilePicker, "length", {
   configurable: true,
@@ -62859,9 +63674,11 @@ bodavm.toolsFunc.defineProperty(showOpenFilePicker, "name", {
   value: 'showOpenFilePicker'
 });
 // showSaveFilePicker对象
-showSaveFilePicker = (a) => {
-  console.log_copy(`使用 showSaveFilePicker arg->`, a);
-};
+showSaveFilePicker = {
+  showSaveFilePicker(a) {
+    console.log_copy(`showSaveFilePicker 使用-- >`, a);
+  }
+}.showSaveFilePicker;
 bodavm.toolsFunc.safefunction(showSaveFilePicker, "showSaveFilePicker");
 bodavm.toolsFunc.defineProperty(showSaveFilePicker, "length", {
   configurable: true,
@@ -63174,9 +63991,11 @@ bodavm.toolsFunc.defineProperty(StereoPannerNode.prototype, "pan", {
   set: undefined
 });
 // stop对象
-stop = (a) => {
-  console.log_copy(`使用 stop arg->`, a);
-};
+stop = {
+  stop(a) {
+    console.log_copy(`stop 使用-- >`, a);
+  }
+}.stop;
 bodavm.toolsFunc.safefunction(stop, "stop");
 bodavm.toolsFunc.defineProperty(stop, "length", {
   configurable: true,
@@ -63262,9 +64081,11 @@ bodavm.toolsFunc.defineProperty(StorageEvent.prototype, "initStorageEvent", {
   }
 });
 // structuredClone对象
-structuredClone = (a) => {
-  console.log_copy(`使用 structuredClone arg->`, a);
-};
+structuredClone = {
+  structuredClone(a) {
+    console.log_copy(`structuredClone 使用-- >`, a);
+  }
+}.structuredClone;
 bodavm.toolsFunc.safefunction(structuredClone, "structuredClone");
 bodavm.toolsFunc.defineProperty(structuredClone, "length", {
   configurable: true,
@@ -70735,8 +71556,7 @@ bodavm.toolsFunc.defineProperty(TaskAttributionTiming.prototype, "toJSON", {
 // TaskController对象
 
 TaskController = function TaskController() {
-  let arg=arguments[0]
-
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('TaskController 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -71689,8 +72509,7 @@ bodavm.toolsFunc.defineProperty(TrackEvent.prototype, "track", {
 // TransformStream对象
 
 TransformStream = function TransformStream() {
-  let arg=arguments[0]
-
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('TransformStream 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -72273,8 +73092,7 @@ bodavm.toolsFunc.defineProperty(URL.prototype, "toString", {
 // URLPattern对象
 
 URLPattern = function URLPattern() {
-  let arg=arguments[0]
-
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('URLPattern 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -72371,8 +73189,7 @@ bodavm.toolsFunc.defineProperty(URLPattern.prototype, "test", {
 // URLSearchParams对象
 
 URLSearchParams = function URLSearchParams() {
-  let arg=arguments[0]
-
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('URLSearchParams 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -73440,7 +74257,7 @@ bodavm.toolsFunc.defineProperty(ValidityState.prototype, "valid", {
 // VideoColorSpace对象
 
 VideoColorSpace = function VideoColorSpace() {
-  let arg=arguments[0]
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('VideoColorSpace 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -83086,9 +83903,11 @@ WebGLVertexArrayObject = function WebGLVertexArrayObject() {
 };
 bodavm.toolsFunc.safeProto(WebGLVertexArrayObject, "WebGLVertexArrayObject");
 // webkitCancelAnimationFrame对象
-webkitCancelAnimationFrame = (a) => {
-  console.log_copy(`webkitCancelAnimationFrame 使用--->`,a);
-};
+webkitCancelAnimationFrame = {
+  webkitCancelAnimationFrame(a) {
+    console.log_copy(`webkitCancelAnimationFrame 使用-- >`, a);
+  }
+}.webkitCancelAnimationFrame;
 bodavm.toolsFunc.safefunction(webkitCancelAnimationFrame, "webkitCancelAnimationFrame");
 bodavm.toolsFunc.defineProperty(webkitCancelAnimationFrame, "length", {
   configurable: true,
@@ -83112,9 +83931,11 @@ webkitMediaStream = MediaStream;
 
 WebKitMutationObserver = MutationObserver;
 // webkitRequestAnimationFrame对象
-webkitRequestAnimationFrame = (a) => {
-  console.log_copy(`webkitRequestAnimationFrame 使用--->`,a);
-};
+webkitRequestAnimationFrame = {
+  webkitRequestAnimationFrame(a) {
+    console.log_copy(`webkitRequestAnimationFrame 使用-- >`, a);
+  }
+}.webkitRequestAnimationFrame;
 bodavm.toolsFunc.safefunction(webkitRequestAnimationFrame, "webkitRequestAnimationFrame");
 bodavm.toolsFunc.defineProperty(webkitRequestAnimationFrame, "length", {
   configurable: true,
@@ -83129,9 +83950,16 @@ bodavm.toolsFunc.defineProperty(webkitRequestAnimationFrame, "name", {
   value: 'webkitRequestAnimationFrame'
 });
 // webkitResolveLocalFileSystemURL对象
-webkitResolveLocalFileSystemURL = (a) => {
-  console.log_copy(`webkitResolveLocalFileSystemURL 使用-->`,a);
-};
+webkitResolveLocalFileSystemURL = {
+  webkitResolveLocalFileSystemURL(a) {
+    console.log_copy(`webkitResolveLocalFileSystemURL 使用-- >`, a);
+  }
+}.webkitResolveLocalFileSystemURL;
+webkitResolveLocalFileSystemURL = {
+  webkitResolveLocalFileSystemURL(a) {
+    console.log_copy(`webkitResolveLocalFileSystemURL 使用-->`, a);
+  }
+}.webkitResolveLocalFileSystemURL;
 bodavm.toolsFunc.safefunction(webkitResolveLocalFileSystemURL, "webkitResolveLocalFileSystemURL");
 bodavm.toolsFunc.defineProperty(webkitResolveLocalFileSystemURL, "length", {
   configurable: true,
@@ -83150,8 +83978,7 @@ bodavm.toolsFunc.defineProperty(webkitResolveLocalFileSystemURL, "name", {
 webkitRTCPeerConnection = RTCPeerConnection;
 // SpeechGrammar对象
 bodavm.memory.notDefined['webkitSpeechGrammar'] = function () {
-  let arg=arguments[0]
-
+  let arg = arguments[0];
   if (arg != 'bobo') {
     console.log_copy('webkitSpeechGrammar 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
       if (v == window) {
@@ -83677,7 +84504,7 @@ bodavm.toolsFunc.defineProperty(WebTransportDatagramDuplexStream.prototype, "out
 // WebTransportError对象
 
 WebTransportError = function WebTransportError() {
-  let arg=arguments[0]
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('WebTransportError 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -84251,8 +85078,7 @@ XMLHttpRequestUpload.__proto__ = XMLHttpRequestEventTarget;
 // XMLSerializer对象
 
 XMLSerializer = function XMLSerializer() {
-  let arg=arguments[0]
-
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('XMLSerializer 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -84277,7 +85103,7 @@ bodavm.toolsFunc.defineProperty(XMLSerializer.prototype, "serializeToString", {
 // XPathEvaluator对象
 
 XPathEvaluator = function XPathEvaluator() {
-  let arg=arguments[0]
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('XPathEvaluator 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -85294,7 +86120,7 @@ bodavm.toolsFunc.defineProperty(XRPose.prototype, "emulatedPosition", {
 // XRRay对象
 
 XRRay = function XRRay() {
-  let arg=arguments[0]
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('XRRay 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -85427,7 +86253,7 @@ bodavm.toolsFunc.defineProperty(XRRenderState.prototype, "baseLayer", {
 // XRRigidTransform对象
 
 XRRigidTransform = function XRRigidTransform() {
-  let arg=arguments[0]
+  let arg = arguments[0];
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('XRRigidTransform 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -86204,7 +87030,6 @@ bodavm.toolsFunc.defineProperty(XRWebGLLayer.prototype, "getViewport", {
 
 XSLTProcessor = function XSLTProcessor() {
   let arg = arguments[0];
-
   bodavm.toolsFunc.symbolProperty(this);
   if (arg != 'bobo') {
     console.log_copy('XSLTProcessor 实例化对象 --->', JSON.stringify_bo(arguments, function (k, v) {
@@ -86330,16 +87155,16 @@ bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['MemoryInfo'].prototype
 delete bodavm.memory.notDefined['MemoryInfo'].prototype.constructor;
 Object.defineProperty(console, 'memory', {
   get: function () {
-    debugger;
-    console.log(`bodavm.memory.notDefined[MemoryInfo]  console.memory get 检测 !!!`);
-    res = {
+    //debugger;
+    console.log_copy(`bodavm.memory.notDefined[MemoryInfo]  console.memory get 检测 !!!`);
+    let memoryres = {
       _boisinit: true,
       jsHeapSizeLimit: 2190000000,
       totalJSHeapSize: 15200000,
       usedJSHeapSize: 13400000
     };
-    res.__proto__ = bodavm.memory.notDefined['MemoryInfo'].prototype;
-    return res;
+    memoryres.__proto__ = bodavm.memory.notDefined['MemoryInfo'].prototype;
+    return memoryres;
   },
   set: function () {
     console.log_copy(' bodavm.memory.notDefined[MemoryInfo]  console memory set 检测');
@@ -88924,6 +89749,619 @@ bodavm.toolsFunc.defineProperty(ToggleEvent.prototype, "newState", {
   },
   set: undefined
 });
+
+bodavm.memory.notDefined['CSSStyleDeclaration']=new CSSStyleDeclaration('bobo')
+
+
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "accentColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "additiveSymbols", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "alignContent", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "alignItems", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "alignSelf", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "alignmentBaseline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "all", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animation", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationComposition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationDelay", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationDirection", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationDuration", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationFillMode", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationIterationCount", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationName", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationPlayState", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationRange", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationRangeEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationRangeStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationTimeline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "animationTimingFunction", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "appRegion", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "appearance", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "ascentOverride", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "aspectRatio", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backdropFilter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backfaceVisibility", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "background", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundAttachment", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundBlendMode", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundClip", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundImage", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundOrigin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundPosition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundPositionX", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundPositionY", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundRepeat", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundRepeatX", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundRepeatY", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "backgroundSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "basePalette", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "baselineShift", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "baselineSource", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "blockSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "border", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlock", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockEndColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockEndStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockEndWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockStartColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockStartStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockStartWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBlockWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBottom", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBottomColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBottomLeftRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBottomRightRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBottomStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderBottomWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderCollapse", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderEndEndRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderEndStartRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderImage", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderImageOutset", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderImageRepeat", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderImageSlice", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderImageSource", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderImageWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineEndColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineEndStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineEndWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineStartColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineStartStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineStartWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderInlineWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderLeft", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderLeftColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderLeftStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderLeftWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderRight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderRightColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderRightStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderRightWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderSpacing", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderStartEndRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderStartStartRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderTop", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderTopColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderTopLeftRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderTopRightRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderTopStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderTopWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "borderWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "bottom", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "boxShadow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "boxSizing", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "breakAfter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "breakBefore", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "breakInside", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "bufferedRendering", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "captionSide", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "caretColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "clear", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "clip", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "clipPath", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "clipRule", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "color", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "colorInterpolation", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "colorInterpolationFilters", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "colorRendering", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "colorScheme", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columnCount", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columnFill", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columnGap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columnRule", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columnRuleColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columnRuleStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columnRuleWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columnSpan", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columnWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "columns", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "contain", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "containIntrinsicBlockSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "containIntrinsicHeight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "containIntrinsicInlineSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "containIntrinsicSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "containIntrinsicWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "container", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "containerName", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "containerType", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "content", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "contentVisibility", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "counterIncrement", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "counterReset", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "counterSet", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "cursor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "cx", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "cy", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "d", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "descentOverride", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "direction", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "display", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "dominantBaseline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "emptyCells", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fallback", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fill", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fillOpacity", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fillRule", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "filter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "flex", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "flexBasis", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "flexDirection", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "flexFlow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "flexGrow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "flexShrink", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "flexWrap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "float", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "floodColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "floodOpacity", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "font", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontDisplay", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontFamily", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontFeatureSettings", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontKerning", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontOpticalSizing", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontPalette", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontStretch", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontSynthesis", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontSynthesisSmallCaps", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontSynthesisStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontSynthesisWeight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontVariant", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontVariantAlternates", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontVariantCaps", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontVariantEastAsian", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontVariantLigatures", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontVariantNumeric", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontVariationSettings", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "fontWeight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "forcedColorAdjust", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "grid", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridArea", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridAutoColumns", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridAutoFlow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridAutoRows", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridColumn", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridColumnEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridColumnGap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridColumnStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridGap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridRow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridRowEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridRowGap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridRowStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridTemplate", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridTemplateAreas", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridTemplateColumns", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "gridTemplateRows", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "height", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "hyphenateCharacter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "hyphenateLimitChars", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "hyphens", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "imageOrientation", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "imageRendering", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "inherits", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "initialLetter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "initialValue", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "inlineSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "inset", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "insetBlock", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "insetBlockEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "insetBlockStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "insetInline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "insetInlineEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "insetInlineStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "isolation", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "justifyContent", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "justifyItems", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "justifySelf", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "left", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "letterSpacing", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "lightingColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "lineBreak", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "lineGapOverride", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "lineHeight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "listStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "listStyleImage", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "listStylePosition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "listStyleType", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "margin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginBlock", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginBlockEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginBlockStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginBottom", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginInline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginInlineEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginInlineStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginLeft", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginRight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marginTop", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "marker", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "markerEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "markerMid", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "markerStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "mask", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "maskType", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "mathDepth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "mathShift", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "mathStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "maxBlockSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "maxHeight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "maxInlineSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "maxWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "minBlockSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "minHeight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "minInlineSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "minWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "mixBlendMode", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "negative", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "objectFit", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "objectPosition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "objectViewBox", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "offset", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "offsetDistance", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "offsetPath", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "offsetRotate", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "opacity", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "order", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "orphans", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "outline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "outlineColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "outlineOffset", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "outlineStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "outlineWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overflow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overflowAnchor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overflowClipMargin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overflowWrap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overflowX", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overflowY", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overrideColors", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overscrollBehavior", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overscrollBehaviorBlock", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overscrollBehaviorInline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overscrollBehaviorX", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overscrollBehaviorY", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "pad", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "padding", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingBlock", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingBlockEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingBlockStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingBottom", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingInline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingInlineEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingInlineStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingLeft", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingRight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paddingTop", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "page", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "pageBreakAfter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "pageBreakBefore", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "pageBreakInside", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "pageOrientation", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "paintOrder", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "perspective", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "perspectiveOrigin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "placeContent", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "placeItems", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "placeSelf", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "pointerEvents", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "position", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "prefix", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "quotes", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "r", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "range", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "resize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "right", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "rotate", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "rowGap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "rubyPosition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "rx", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "ry", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scale", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollBehavior", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMargin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginBlock", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginBlockEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginBlockStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginBottom", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginInline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginInlineEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginInlineStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginLeft", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginRight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollMarginTop", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPadding", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingBlock", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingBlockEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingBlockStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingBottom", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingInline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingInlineEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingInlineStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingLeft", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingRight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollPaddingTop", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollSnapAlign", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollSnapStop", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollSnapType", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollTimeline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollTimelineAxis", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollTimelineName", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "scrollbarGutter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "shapeImageThreshold", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "shapeMargin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "shapeOutside", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "shapeRendering", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "size", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "sizeAdjust", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "speak", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "speakAs", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "src", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "stopColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "stopOpacity", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "stroke", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "strokeDasharray", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "strokeDashoffset", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "strokeLinecap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "strokeLinejoin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "strokeMiterlimit", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "strokeOpacity", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "strokeWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "suffix", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "symbols", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "syntax", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "system", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "tabSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "tableLayout", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textAlign", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textAlignLast", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textAnchor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textCombineUpright", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textDecoration", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textDecorationColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textDecorationLine", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textDecorationSkipInk", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textDecorationStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textDecorationThickness", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textEmphasis", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textEmphasisColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textEmphasisPosition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textEmphasisStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textIndent", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textOrientation", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textOverflow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textRendering", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textShadow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textSizeAdjust", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textTransform", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textUnderlineOffset", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textUnderlinePosition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "textWrap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "top", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "touchAction", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "transform", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "transformBox", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "transformOrigin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "transformStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "transition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "transitionDelay", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "transitionDuration", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "transitionProperty", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "transitionTimingFunction", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "translate", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "unicodeBidi", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "unicodeRange", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "userSelect", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "vectorEffect", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "verticalAlign", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "viewTimeline", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "viewTimelineAxis", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "viewTimelineInset", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "viewTimelineName", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "viewTransitionName", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "visibility", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAlignContent", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAlignItems", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAlignSelf", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAnimation", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAnimationDelay", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAnimationDirection", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAnimationDuration", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAnimationFillMode", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAnimationIterationCount", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAnimationName", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAnimationPlayState", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAnimationTimingFunction", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAppRegion", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitAppearance", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBackfaceVisibility", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBackgroundClip", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBackgroundOrigin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBackgroundSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderAfter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderAfterColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderAfterStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderAfterWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderBefore", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderBeforeColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderBeforeStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderBeforeWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderBottomLeftRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderBottomRightRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderEndColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderEndStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderEndWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderHorizontalSpacing", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderImage", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderStartColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderStartStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderStartWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderTopLeftRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderTopRightRadius", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBorderVerticalSpacing", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxAlign", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxDecorationBreak", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxDirection", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxFlex", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxOrdinalGroup", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxOrient", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxPack", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxReflect", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxShadow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitBoxSizing", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitClipPath", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnBreakAfter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnBreakBefore", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnBreakInside", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnCount", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnGap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnRule", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnRuleColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnRuleStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnRuleWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnSpan", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumnWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitColumns", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFilter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFlex", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFlexBasis", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFlexDirection", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFlexFlow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFlexGrow", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFlexShrink", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFlexWrap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFontFeatureSettings", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitFontSmoothing", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitHighlight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitHyphenateCharacter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitJustifyContent", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitLineBreak", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitLineClamp", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitLocale", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitLogicalHeight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitLogicalWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMarginAfter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMarginBefore", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMarginEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMarginStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMask", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskBoxImage", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskBoxImageOutset", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskBoxImageRepeat", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskBoxImageSlice", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskBoxImageSource", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskBoxImageWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskClip", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskComposite", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskImage", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskOrigin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskPosition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskPositionX", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskPositionY", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskRepeat", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskRepeatX", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskRepeatY", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaskSize", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaxLogicalHeight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMaxLogicalWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMinLogicalHeight", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitMinLogicalWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitOpacity", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitOrder", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitPaddingAfter", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitPaddingBefore", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitPaddingEnd", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitPaddingStart", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitPerspective", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitPerspectiveOrigin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitPerspectiveOriginX", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitPerspectiveOriginY", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitPrintColorAdjust", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitRtlOrdering", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitRubyPosition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitShapeImageThreshold", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitShapeMargin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitShapeOutside", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTapHighlightColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextCombine", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextDecorationsInEffect", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextEmphasis", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextEmphasisColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextEmphasisPosition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextEmphasisStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextFillColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextOrientation", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextSecurity", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextSizeAdjust", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextStroke", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextStrokeColor", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTextStrokeWidth", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransform", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransformOrigin", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransformOriginX", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransformOriginY", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransformOriginZ", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransformStyle", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransition", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransitionDelay", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransitionDuration", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransitionProperty", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitTransitionTimingFunction", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitUserDrag", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitUserModify", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitUserSelect", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "webkitWritingMode", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "whiteSpace", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "whiteSpaceCollapse", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "widows", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "width", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "willChange", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "wordBreak", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "wordSpacing", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "wordWrap", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "writingMode", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "x", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "y", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "zIndex", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "zoom", {configurable:true, enumerable:true, writable:true, value:""});
+bodavm.toolsFunc.defineProperty(bodavm.memory.notDefined['CSSStyleDeclaration'], "overscroll-behavior", {configurable:true, enumerable:true, writable:true, value:""});
 ;;
 !function(){
 // 创建pluginArray
@@ -89251,7 +90689,7 @@ bodavm.toolsFunc.defineProperty(window, "chrome", {
 //bodavm.toolsFunc.defineProperty(window, "webkitRequestFileSystem", { writable: true, enumerable: true, configurable: true, value: function webkitRequestFileSystem() { return bodavm.toolsFunc.dispatch(this, window, "window", "webkitRequestFileSystem", arguments) } });
 bodavm.toolsFunc.defineProperty(window, "fetch", { writable: true, enumerable: true, configurable: true, value: function fetch() { return bodavm.toolsFunc.dispatch(this, window, "window", "fetch", arguments) } });
 bodavm.toolsFunc.defineProperty(window, "devicePixelRatio", { configurable: true, enumerable: true, get: function devicePixelRatio() { return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_get", arguments) }, set: function devicePixelRatio() { return bodavm.toolsFunc.dispatch(this, window, "window", "devicePixelRatio_set", arguments) } });
-//bodavm.toolsFunc.defineProperty(window, "getComputedStyle", { configurable: true, enumerable: true, writable: true, value: function getComputedStyle() { return bodavm.toolsFunc.dispatch(this, window, "window", "getComputedStyle", arguments) } });
+// bodavm.toolsFunc.defineProperty(window, "getComputedStyle", { configurable: true, enumerable: true, writable: true, value: function getComputedStyle() { return bodavm.toolsFunc.dispatch(this, window, "window", "getComputedStyle", arguments) } });
 bodavm.toolsFunc.defineProperty(window, "length", {configurable:true, enumerable:true, get:function length (){return bodavm.toolsFunc.dispatch(this, window, "window", "length_get", arguments)}, set:function length (){return bodavm.toolsFunc.dispatch(this, window, "window", "length_set", arguments)}});
 //bodavm.toolsFunc.defineProperty(window, "openDatabase", {configurable:true, enumerable:true, writable:true, value:function openDatabase (){return bodavm.toolsFunc.dispatch(this, window, "window", "openDatabase", arguments)}});
 bodavm.toolsFunc.defineProperty(window, "find", {configurable:true, enumerable:true, writable:true, value:function find (){return bodavm.toolsFunc.dispatch(this, window, "window", "find", arguments)}});
@@ -89502,10 +90940,12 @@ bodavm.memory.globalInit.pluginArrayCopy=bodavm.toolsFunc.proxyPlugin(bodavm.mem
 eval=new Proxy(eval,{
     apply(target, thisArg, argumentsList) {
         // debuggerde
+        // debugger
         if(argumentsList[0]=='!new function(){eval("this.a=1")}().a'){
             console.log('eval执行  参数  -->',argumentsList[0],` 结果为 -->`,false);
             return false
         }
+        if (argumentsList[0]=='__g'){debugger}
         let arg=argumentsList[0]
         if (arg && arg.length>100){
             arg=arg.substr(0,100)+'...太长只显示前100位'
@@ -89521,7 +90961,8 @@ eval=new Proxy(eval,{
 
         return res
     },
-  })
+  })  
+  //eval 可能被检测
 
 bodavm.toolsFunc.safefunction(eval,'eval')
 // window=bodavm.toolsFunc.proxy(window,"window")
@@ -89598,6 +91039,45 @@ axios.post=function(){
     console.log_copy(`axios.post -->`,'arg -> ',JSON.stringify(arguments))
 
 }
+//改文件下的代码 只能在windows电脑下运行
+bodavm.envFunc.Document_all_get = function Document_all_get() {
+    // debugger
+    let a = boallundefined
+    
+    // debugger
+    let tags=[]
+    for (let dom of bodavm.memory.domDocument['all']) {
+            let newNode=bodavm.toolsFunc.setProto(dom.name)
+            bodavm.toolsFunc.setProtoAttr.call(newNode,newNode,dom)
+            tags.push(newNode)
+    }
+
+    // debugger
+    a.__proto__ = HTMLAllCollection.prototype
+
+    if (tags.length !=bodavm.memory.all.length){
+        bodavm.memory.all=[]
+        for (let i = 0; i < tags.length; i++) {
+            a[i]=tags[i]
+            bodavm.memory.all[i]=tags[i]
+        }
+    }
+
+    a.__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
+    console.log("Document_all_get  ", `all ->`,a)
+    return a
+}
+
+
+//document.all[0]==document.all.item(0)存在问题  已解决
+// ldvm.toolsFunc.deleteProperty(alert,"arguments"); // 强行删除
+// ldvm.toolsFunc.deleteProperty(alert,"caller");
+// ldvm.toolsFunc.deleteProperty(alert,"prototype");
+// debugger
+
+//未解决
+// var cc=navigator.plugins[0]
+// cc[0]==cc[0]
 // 全局变量初始化
 var mytime_stamp = Date.now()
 // debugger
@@ -89614,41 +91094,41 @@ var mytime_stamp = Date.now()
         !function () {
             //固定时间值
             Date.now_ = Date.now
-            Date.now = function () {
+            Date.now = {now() {
                 console.log_copy(`Date.now=>被调用 `, `resulit is mytime_stamp:`, mytime_stamp)
                 mytime_stamp++
                 return mytime_stamp
-            }
+            }}.now
             bodavm.toolsFunc.safeFunc(Date.now, 'now')
             //固定时间值
             Date.prototype.valueOf_ = Date.prototype.valueOf
-            Date.prototype.valueOf = function valueOf() {
+            Date.prototype.valueOf = { valueOf() {
                 console.log_copy(`Date.prototype.valueOf=>被调用 `, `resulit is mytime_stamp:`, mytime_stamp)
                 mytime_stamp++
                 return mytime_stamp
-            }
+            }}.valueOf
             bodavm.toolsFunc.safeFunc(Date.prototype.valueOf, 'valueOf')
 
             Date.prototype.getTime_ = Date.prototype.getTime
-            Date.prototype.getTime = function () {
+            Date.prototype.getTime = { getTime() {
                 console.log_copy(`Date.prototype.getTime=>被调用 `, `resulit is mytime_stamp`, mytime_stamp)
                 mytime_stamp++
                 return mytime_stamp
-            }
+            }}.getTime
             bodavm.toolsFunc.safeFunc(Date.prototype.getTime, 'getTime')
             //固定随机值
             Math.random_ = Math.random;
-            Math.random = function () {
+            Math.random = { random() {
                 console.log_copy(`Math.random=>被调用  `, `resulit is Math.random:${0.5}`)
                 return 0.5
-            }
+            }}.random
             bodavm.toolsFunc.safeFunc(Math.random, 'random')
         }()
 
     }
 
     JSON.stringify_bo = JSON.stringify
-    JSON.stringify = function stringify() {
+    JSON.stringify = { stringify() {
         let stringres = ''
         let arg0 = arguments[0]
         let arg1 = arguments[1]
@@ -89696,13 +91176,13 @@ var mytime_stamp = Date.now()
         }
         return stringres
 
-    }
+    }}.stringify
 
     bodavm.toolsFunc.safefunction(JSON.stringify, 'stringify')
 
 
     JSON.parse_bo = JSON.parse
-    JSON.parse = function parse() {
+    JSON.parse = { parse() {
         let arg0 = arguments[0]
         let arg1 = arguments[1]
         try {
@@ -89714,13 +91194,13 @@ var mytime_stamp = Date.now()
 
         }
         return JSON.parse_bo.apply(this, arguments)
-    }
+    }}.parse
     bodavm.toolsFunc.safefunction(JSON.parse, 'parse')
 
 
 
     Object.getOwnPropertyDescriptor_bo = Object.getOwnPropertyDescriptor
-    Object.getOwnPropertyDescriptor = function getOwnPropertyDescriptor() {
+    Object.getOwnPropertyDescriptor = { getOwnPropertyDescriptor() {
         let obj = arguments[0]
         let prop = arguments[1]
         let desc_res;
@@ -89756,12 +91236,12 @@ var mytime_stamp = Date.now()
         }
 
         return desc_res
-    }
+    }}.getOwnPropertyDescriptor
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptor, 'getOwnPropertyDescriptor')
 
 
     Object.getOwnPropertyDescriptors_bo = Object.getOwnPropertyDescriptors
-    Object.getOwnPropertyDescriptors = function getOwnPropertyDescriptors() {
+    Object.getOwnPropertyDescriptors = { getOwnPropertyDescriptors() {
         let arg0 = arguments[0]
         let descs_res;
         try {
@@ -89793,11 +91273,11 @@ var mytime_stamp = Date.now()
 
         }
         return descs_res
-    }
+    }}.getOwnPropertyDescriptors
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyDescriptors, 'getOwnPropertyDescriptors')
 
     Object.getOwnPropertyNames_bo = Object.getOwnPropertyNames
-    Object.getOwnPropertyNames = function getOwnPropertyNames() {
+    Object.getOwnPropertyNames = { getOwnPropertyNames() {
         let arg0 = arguments[0]
         let name_res = Object.getOwnPropertyNames_bo.apply(this, arguments)
 
@@ -89834,26 +91314,24 @@ var mytime_stamp = Date.now()
         }
 
         return name_res
-    }
+    }}.getOwnPropertyNames
     bodavm.toolsFunc.safefunction(Object.getOwnPropertyNames, 'getOwnPropertyNames')
 
 
     Object.getPrototypeOf_bo = Object.getPrototypeOf
-    Object.getPrototypeOf = function (obj) {
+    Object.getPrototypeOf = {getPrototypeOf (obj) {
         try {
-            // debugger
             console.log_copy(`Object.getPrototypeOf `, `this ->`, bodavm.toolsFunc.getType(this), `->`, ` obj:`, obj, '!!!!检测');
 
         } catch (e){ console.log_copy(e.message,e.stack);
             console.log_copy(`Object.getPrototypeOf hook出错!!!!!!!!!!!!!!!!!!!!!!`)
-
         }
         return Object.getPrototypeOf_bo.apply(this, arguments)
-    }
+    }}.getPrototypeOf
     bodavm.toolsFunc.safefunction(Object.getPrototypeOf, 'getPrototypeOf')
 
     Object.getOwnPropertySymbols_bo = Object.getOwnPropertySymbols
-    Object.getOwnPropertySymbols = function getOwnPropertySymbols(arg) {
+    Object.getOwnPropertySymbols = {getOwnPropertySymbols(arg) {
         let symbols_res;
         try {
             if (arguments[0]==console){
@@ -89880,13 +91358,13 @@ var mytime_stamp = Date.now()
 
         }
         return symbols_res
-    }
+    }}.getOwnPropertySymbols
     bodavm.toolsFunc.safefunction(Object.getOwnPropertySymbols, 'getOwnPropertySymbols')
     //Plugin
 
 
     Object.defineProperty_bo = Object.defineProperty
-    Object.defineProperty = function defineProperty() {
+    Object.defineProperty = { defineProperty() {
         // debugger
         let target = arguments[0]
         let prop = arguments[1]
@@ -89898,22 +91376,17 @@ var mytime_stamp = Date.now()
             if (myfilter == 'bobo') { return Object.defineProperty_bo.call(this, target, prop, obj) }
             // debugger
             res = Object.defineProperty_bo.call(this, target, prop, obj)
-            // console.log_copy(`Object.defineProperty `, `target ->`, (target.toString()), `->`, `prop->`, (prop.toString()), `->`, `obj ->`, (obj.toString()), `->`, `res ->`, res.toString(), `!!!!!检测`)
-            // console.log_copy(`Object.defineProperty `, `target ->`,(target.toString()),`->`, `prop->`,(JSON.stringify_bo(prop)),`->`, `obj ->`,(JSON.stringify_bo(obj)),`->`, `res ->`,JSON.stringify_bo(res), `!!!!!检测`)
-
+            console.log_copy(`Object.defineProperty `, `target ->`,target.toString,`->`, `prop->`,prop,`->`, `obj ->`,obj,`->`, `res ->`,res, `!!!!!检测`)
         } catch (e){ console.log_copy(e.message,e.stack);
             debugger
             console.log_copy(`Object.defineProperty hook出错!!!!!!!!!!!!!!!!!!!!!!`)
-
         }
-
-
         return res
-    }
+    }}.defineProperty
     bodavm.toolsFunc.safefunction(Object.defineProperty, 'defineProperty')
 
     Object.defineProperties_bo = Object.defineProperties
-    Object.defineProperties = function defineProperties() {
+    Object.defineProperties = { defineProperties() {
         // debugger
 
         let target = arguments[0]
@@ -89930,14 +91403,14 @@ var mytime_stamp = Date.now()
         }
 
         return res
-    }
+    }}.defineProperties
     bodavm.toolsFunc.safefunction(Object.defineProperties, 'defineProperties')
 
 
 
 
     Object.values_bo = Object.values
-    Object.values = function values() {
+    Object.values = { values() {
         let res;
         try {
             res = Object.Object.values_bo.apply(this, arguments)
@@ -89949,12 +91422,12 @@ var mytime_stamp = Date.now()
         }
 
         return res
-    }
+    }}.values
     bodavm.toolsFunc.safefunction(Object.values, 'values')
 
 
     Object.prototype.hasOwnProperty_bo = Object.prototype.hasOwnProperty
-    Object.prototype.hasOwnProperty = function () {
+    Object.prototype.hasOwnProperty = {hasOwnProperty () {
 
         let arg = arguments[0]
         // let arg2=arguments[1]
@@ -89998,7 +91471,7 @@ var mytime_stamp = Date.now()
         }
 
         return res
-    }
+    }}.hasOwnProperty
 
     bodavm.toolsFunc.safefunction(Object.prototype.hasOwnProperty, 'hasOwnProperty')
     Object.defineProperty(Object.prototype, 'hasOwnProperty_bo', {
@@ -90011,7 +91484,7 @@ var mytime_stamp = Date.now()
     // delete desc_res['_boisinit']
     // delete desc_res['_contentiframe']
     Object.entries_bo = Object.entries
-    Object.entries = function () {
+    Object.entries = {entries () {
         let res
         try {
             let obj = arguments[0]
@@ -90030,11 +91503,11 @@ var mytime_stamp = Date.now()
         }
 
         return res
-    }
+    }}.entries
     bodavm.toolsFunc.safefunction(Object.entries, 'entries')
 
     Object.keys_ = Object.keys
-    Object.keys = function () {
+    Object.keys = {keys () {
         let res;
         try {
             // debugger
@@ -90060,7 +91533,7 @@ var mytime_stamp = Date.now()
         }
 
         return res
-    }
+    }}.keys
     bodavm.toolsFunc.safefunction(Object.keys, 'keys')
 
     // var Object_toString = Object.prototype.toString;
@@ -90252,6 +91725,14 @@ bodavm.memory.listenerProxy['mousemove']['res'] = boMouseMove
 let boMouseUp = new MouseEvent('mouseup', 'bobo')
 mousemove_ = bodavm.toolsFunc.proxy2(boMouseUp, 'mouseup')
 bodavm.memory.listenerProxy['mouseup']['res'] = boMouseUp
+
+let bomouseDown=new MouseEvent('mousedown','bobo')
+bomouseDown = bodavm.toolsFunc.proxy2(bomouseDown, 'bomouseDown')
+bodavm.memory.listenerProxy['mousedown']['res'] = bomouseDown
+
+let bomouseUp=new MouseEvent('mouseup','bobo')
+bomouseUp = bodavm.toolsFunc.proxy2(bomouseUp, 'bomouseUp')
+bodavm.memory.listenerProxy['mouseup']['res'] = bomouseUp
 
 let boClick = new PointerEvent('click', 'bobo')
 boClick = bodavm.toolsFunc.proxy2(boClick, 'click')
@@ -98784,13 +100265,14 @@ debugger
 
 if (bodavm.memory.asyncEvent.listener && bodavm.memory.asyncEvent.listener['load'] )  delete bodavm.memory.asyncEvent.listener['load']  //load事件已经执行,这边可以直接删除
 if (bodavm.memory.asyncEvent.listener) {
-    bodavm.memory.listenerDone=1
+    bodavm.memory.listenerFlag='pending'
     // debugger
     for (var key in bodavm.memory.asyncEvent.listener) {
         let event = bodavm.memory.asyncEvent.listener[key]
         // debugger
             for (let i = 0; i < event.length; i++) {
                 // debugger
+                // let innerListener=[]
                 if (!event[i]){
                     continue
                 }
@@ -98803,7 +100285,17 @@ if (bodavm.memory.asyncEvent.listener) {
                 // try{
                     // if (event[i].type=='load'){
                 window.dispatchEvent(event[i],'bobobo')
+                if (bodavm.memory.innerListener.length>0){
+                    for (let index = 0; index < bodavm.memory.innerListener.length; index++) {
+                        // debugger
+                         let eventInner=bodavm.memory.innerListener[index];
+                         console.log_copy(`当前 ${event[i].type} 事件内部创建新的事件==========开始执行`,`当前为事件类型为==>: ${eventInner.type} `);
+                         window.dispatchEvent(eventInner,'bobobo')
 
+                    }
+                
+                }
+                bodavm.memory.innerListener=[]
                     // }
                 // }catch(e){
                 //     console.log_copy(`浏览器事件执行失败==========`,`当前为事件类型为==>: ${event[i].type}`,`错误msg ->`,e.message);}
@@ -98812,29 +100304,28 @@ if (bodavm.memory.asyncEvent.listener) {
 }
 
 //执行事件内创建的新的事件  
-bodavm.memory.listenerDone=2
-if (bodavm.memory.asyncEvent.listener2) {
-    for (var key in bodavm.memory.asyncEvent.listener2) {
-        let event = bodavm.memory.asyncEvent.listener2[key]
-        // debugger
-            for (let i = 0; i < event.length; i++) {
-                // debugger
-                if (!event[i]){
-                    continue
-                }
-                if (noexecListener[event[i].type]){
-                    console.log_copy(`开始执行浏览器事件2==========`,`当前为事件类型为==>: ${event[i].type}  无需执行`);
-                    continue
-                }
-                console.log_copy(`开始执行浏览器事件2==========`,`当前为事件类型为==>: ${event[i].type} ==>`);
-                // try{
-                window.dispatchEvent(event[i],'bobobo')
-                // }catch(e){
-                //     console.log_copy(`浏览器事件执行失败==========`,`当前为事件类型为==>: ${event[i].type}`,`错误msg ->`,e.message);}
-            }
-    }
-}
-console.log_copy(`开始执行window.onload事件====>`)
+// bodavm.memory.listenerDone=2
+// if (bodavm.memory.asyncEvent.listener2) {
+//     for (var key in bodavm.memory.asyncEvent.listener2) {
+//         let event = bodavm.memory.asyncEvent.listener2[key]
+//         // debugger
+//             for (let i = 0; i < event.length; i++) {
+//                 // debugger
+//                 if (!event[i]){
+//                     continue
+//                 }
+//                 if (noexecListener[event[i].type]){
+//                     console.log_copy(`开始执行浏览器事件2==========`,`当前为事件类型为==>: ${event[i].type}  无需执行`);
+//                     continue
+//                 }
+//                 console.log_copy(`开始执行浏览器事件2==========`,`当前为事件类型为==>: ${event[i].type} ==>`);
+//                 // try{
+//                 window.dispatchEvent(event[i],'bobobo')
+//                 // }catch(e){
+//                 //     console.log_copy(`浏览器事件执行失败==========`,`当前为事件类型为==>: ${event[i].type}`,`错误msg ->`,e.message);}
+//             }
+//     }
+// }
 
 
 // debugger
