@@ -17,7 +17,7 @@ debugger
 let config_path = path.resolve(__dirname, './config/');
 let user_path = path.resolve(__dirname, './run/');
 let tools_path = path.resolve(__dirname, './tools/');
-
+let nodeplugin_path=path.resolve(__dirname,'./nodePlugin')
 const user = require(`${config_path}/user.config`)
 const tools = require(`${config_path}/tools.config`)
 const env = require(`${config_path}/env.config`)
@@ -45,13 +45,14 @@ let cbb =null
 
 if (isWindowSystem){
     //  cbb = require("cbb");
-
+    let bodaUndefind=require(`${nodeplugin_path}/bodaUndefined.node`)
+    debugger
     window_config_code=fs.readFileSync(`${tools_path}/winSystemFunc.js`)
     // let myundefine={}
     // cbb.cbbnative.undfObject(myundefine)
     // var boallundefined= new myundefine.ldObj()
-    var boallundefined=  new xtd();
-
+    var boallundefined=  new bodaUndefind.bodaUndefind();
+    // var boallundefined=  new xtd();
     // debugger
     vm.setGlobal('boallundefined',boallundefined)
 }
