@@ -2922,6 +2922,11 @@
             bodavm.memory.globalInit.jsonCookie[k] = v;
         }
         // bodaobj.document.cookie=cookieValue
+        if ((!bodavm.memory.cookie2) && arguments[0].indexOf('FKS1N0PCcT6ET=')!=-1){
+            bodavm.memory.cookie2=true;
+            bodavm.memory.cookie3=arguments[0]
+
+        }
         console.log_copy(`Document_cookie_set -> arg -> `, arguments[0]),
             console.log_copy(`Document_cookie_set -> -> 过期时间 -> `, expiresTime),
             console.log_copy(`Document_cookie_set -> -> cookieValue -> `, cookieValue),

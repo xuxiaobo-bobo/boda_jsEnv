@@ -339,34 +339,34 @@ bodavm.memory.globalInit.pluginArrayCopy=bodavm.toolsFunc.proxyPlugin(bodavm.mem
 // }
 // bodavm.toolsFunc.safefunction(eval,'eval')
 
-eval=new Proxy(eval,{
-    apply(target, thisArg, argumentsList) {
-        // debuggerde
-        // debugger
-        if(argumentsList[0]=='!new function(){eval("this.a=1")}().a'){
-            console.log('eval执行  参数  -->',argumentsList[0],` 结果为 -->`,false);
-            return false
-        }
-        if (argumentsList[0]=='__g'){debugger}
-        let arg=argumentsList[0]
-        if (arg && arg.length>100){
-            arg=arg.substr(0,100)+'...太长只显示前100位'
-        }
-        // debugger
+// eval=new Proxy(eval,{
+//     apply(target, thisArg, argumentsList) {
+//         // debuggerde
+//         // debugger
+//         if(argumentsList[0]=='!new function(){eval("this.a=1")}().a'){
+//             console.log('eval执行  参数  -->',argumentsList[0],` 结果为 -->`,false);
+//             return false
+//         }
+//         if (argumentsList[0]=='__g'){debugger}
+//         let arg=argumentsList[0]
+//         if (arg && arg.length>100){
+//             arg=arg.substr(0,100)+'...太长只显示前100位'
+//         }
+//         // debugger
 
-        console.log('eval执行  参数  -->',arg,` 结果为 -->`);
-        // debugger
-        // argumentsList[0]=argumentsList[0].replace('try{','try{debugger;')
-        let res=Reflect.apply(target, thisArg, argumentsList);
+//         console.log('eval执行  参数  -->',arg,` 结果为 -->`);
+//         // debugger
+//         // argumentsList[0]=argumentsList[0].replace('try{','try{debugger;')
+//         let res=Reflect.apply(target, thisArg, argumentsList);
         
-        console.log('eval执行 完毕  -->',` 结果为 -->`,res);
+//         console.log('eval执行 完毕  -->',` 结果为 -->`,res);
 
-        return res
-    },
-  })  
-  //eval 可能被检测
+//         return res
+//     },
+//   })  
+//   //eval 可能被检测
 
-bodavm.toolsFunc.safefunction(eval,'eval')
+// bodavm.toolsFunc.safefunction(eval,'eval')
 // window=bodavm.toolsFunc.proxy(window,"window")
 if (!bodavm.config.proxy){
 Object.defineProperty(this, 'window', {

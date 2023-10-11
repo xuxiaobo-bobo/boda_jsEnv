@@ -114,7 +114,7 @@ bodavm.config.isdebug = false;  //是否开启debugger
 // bodavm.config.getundefined=true  //暂未实现   
 bodavm.config.proxy = false; //是否代理
 bodavm.config.randomhook = false //hook随机值和时间
-bodavm.config.printLog = true; //是否打开日志
+bodavm.config.printLog = false; //是否打开日志
 bodavm.memory.proxyCache = {
  'enabledPlugin':'',
  'PluginArray':{},
@@ -548,33 +548,33 @@ bodavm.memory.IDBOpenDBRequest = {
 
 
 bodavm.memory.location={
-    origin:"http://qikan.cqvip.com",
+    origin:"http://jwxt.gzhu.edu.cn",
     hash:"",
-    pathname:"/Qikan/Search/Advance",
-    search:"?from=index",
-    href:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
+    pathname:"/jwglxt/xtgl/login_getPublicKey.html",
+    search:"",
+    href:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
     port:"",
     protocol:"http:",
-    host:"qikan.cqvip.com",
+    host:"jwxt.gzhu.edu.cn",
     ancestorOrigins:'{}',
-    hostname:"qikan.cqvip.com",
-    _href:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
-    _search:"?from=index",
+    hostname:"jwxt.gzhu.edu.cn",
+    _href:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
+    _search:"",
 
 };
 
 bodavm.memory.document={
-    URL:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
-    referrer:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
-    documentURI:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
+    URL:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
+    referrer:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
+    documentURI:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
     compatMode:"CSS1Compat",
     dir:"",
     title:'',
     designMode:"off",
-    readyState:"loading",
-    contentType:"text/html",
+    readyState:"complete",
+    contentType:"application/json",
     inputEncoding:"UTF-8",
-    domain:"qikan.cqvip.com",
+    domain:"jwxt.gzhu.edu.cn",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
@@ -615,8 +615,8 @@ bodavm.memory.screen={
 
 bodavm.memory.navigator={
     language:"zh-CN",
-    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
-    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
     vendor:"Google Inc.",
     appName:"Netscape",
     appCodeName:"Mozilla",
@@ -635,8 +635,8 @@ bodavm.memory.navigator={
     maxTouchPoints:0
 };
 bodavm.memory.window={
-    name:"$_YWTU=tJwmBQ4eczEzEKWGu0Ugf4dnMOJlHAGaVpPh8wtqHe3&$_YVTX=JG&vdFm=",
-    origin:"http://qikan.cqvip.com",
+    name:"",
+    origin:"http://jwxt.gzhu.edu.cn",
     defaultStatus:undefined,
     defaultstatus:undefined,
     devicePixelRatio:1.5,
@@ -659,18 +659,18 @@ bodavm.memory.window={
     opener:null,
     // frameElement:null,
     isSecureContext:false,
-    // customElements:null
+    // customElements:[object CustomElementRegistry]
     
 
 };
 
 
-bodavm.memory.localStorage={"length":0}
+bodavm.memory.localStorage={"length":4}
 
 
 bodavm.memory.Performance={
     'getEntriesByType':[],
-    'timeOrigin':1691400728172.6
+    'timeOrigin':1697038004215.6
 
 
 

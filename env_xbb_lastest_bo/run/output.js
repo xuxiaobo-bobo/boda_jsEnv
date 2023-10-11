@@ -114,7 +114,7 @@ bodavm.config.isdebug = false;  //是否开启debugger
 // bodavm.config.getundefined=true  //暂未实现   
 bodavm.config.proxy = false; //是否代理
 bodavm.config.randomhook = false //hook随机值和时间
-bodavm.config.printLog = true; //是否打开日志
+bodavm.config.printLog = false; //是否打开日志
 bodavm.memory.proxyCache = {
  'enabledPlugin':'',
  'PluginArray':{},
@@ -548,33 +548,33 @@ bodavm.memory.IDBOpenDBRequest = {
 
 
 bodavm.memory.location={
-    origin:"http://qikan.cqvip.com",
+    origin:"http://jwxt.gzhu.edu.cn",
     hash:"",
-    pathname:"/Qikan/Search/Advance",
-    search:"?from=index",
-    href:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
+    pathname:"/jwglxt/xtgl/login_getPublicKey.html",
+    search:"",
+    href:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
     port:"",
     protocol:"http:",
-    host:"qikan.cqvip.com",
+    host:"jwxt.gzhu.edu.cn",
     ancestorOrigins:'{}',
-    hostname:"qikan.cqvip.com",
-    _href:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
-    _search:"?from=index",
+    hostname:"jwxt.gzhu.edu.cn",
+    _href:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
+    _search:"",
 
 };
 
 bodavm.memory.document={
-    URL:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
-    referrer:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
-    documentURI:"http://qikan.cqvip.com/Qikan/Search/Advance?from=index",
+    URL:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
+    referrer:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
+    documentURI:"http://jwxt.gzhu.edu.cn/jwglxt/xtgl/login_getPublicKey.html",
     compatMode:"CSS1Compat",
     dir:"",
     title:'',
     designMode:"off",
-    readyState:"loading",
-    contentType:"text/html",
+    readyState:"complete",
+    contentType:"application/json",
     inputEncoding:"UTF-8",
-    domain:"qikan.cqvip.com",
+    domain:"jwxt.gzhu.edu.cn",
     characterSet:"UTF-8",
     charset:"UTF-8",
     hidden:"false",
@@ -615,8 +615,8 @@ bodavm.memory.screen={
 
 bodavm.memory.navigator={
     language:"zh-CN",
-    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
-    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+    userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+    appVersion:"5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
     vendor:"Google Inc.",
     appName:"Netscape",
     appCodeName:"Mozilla",
@@ -635,8 +635,8 @@ bodavm.memory.navigator={
     maxTouchPoints:0
 };
 bodavm.memory.window={
-    name:"$_YWTU=tJwmBQ4eczEzEKWGu0Ugf4dnMOJlHAGaVpPh8wtqHe3&$_YVTX=JG&vdFm=",
-    origin:"http://qikan.cqvip.com",
+    name:"",
+    origin:"http://jwxt.gzhu.edu.cn",
     defaultStatus:undefined,
     defaultstatus:undefined,
     devicePixelRatio:1.5,
@@ -659,18 +659,18 @@ bodavm.memory.window={
     opener:null,
     // frameElement:null,
     isSecureContext:false,
-    // customElements:null
+    // customElements:[object CustomElementRegistry]
     
 
 };
 
 
-bodavm.memory.localStorage={"length":0}
+bodavm.memory.localStorage={"length":4}
 
 
 bodavm.memory.Performance={
     'getEntriesByType':[],
-    'timeOrigin':1691400728172.6
+    'timeOrigin':1697038004215.6
 
 
 
@@ -1410,7 +1410,7 @@ bodavm.memory.Performance={
                 return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
             }
         }
-        try {
+        // try {
 
         if (bodavm.config.issymbolProperty){
             // debugger
@@ -1440,13 +1440,13 @@ bodavm.memory.Performance={
         return bodavm.envFunc[name].apply(self, argList)
 
 
-        } catch (e) {
-            // 
-                // debugger
-                let log__ = `'[${name}]正在执行,错误信息${e.message}'`
-                console.log_copy(log__);
-                // bodavm.toolsFunc.printLog(log__)
-            }
+        // } catch (e) {
+        //     // 
+        //         // debugger
+        //         let log__ = `'[${name}]正在执行,错误信息${e.message}'`
+        //         console.log_copy(log__);
+        //         // bodavm.toolsFunc.printLog(log__)
+        //     }
     }
 
 
@@ -6793,6 +6793,11 @@ bodavm.memory.Performance={
             bodavm.memory.globalInit.jsonCookie[k] = v;
         }
         // bodaobj.document.cookie=cookieValue
+        if ((!bodavm.memory.cookie2) && arguments[0].indexOf('FKS1N0PCcT6ET=')!=-1){
+            bodavm.memory.cookie2=true;
+            bodavm.memory.cookie3=arguments[0]
+
+        }
         console.log_copy(`Document_cookie_set -> arg -> `, arguments[0]),
             console.log_copy(`Document_cookie_set -> -> 过期时间 -> `, expiresTime),
             console.log_copy(`Document_cookie_set -> -> cookieValue -> `, cookieValue),
@@ -8272,7 +8277,7 @@ bodavm.toolsFunc.safeFunc(Promise.allSettled,'allSettled')
             }
         }
         log += "\r\n"
-        bofs.appendFileSync(`D:/My_Dir2/env_xbb_lastest_bo/run/log.txt`, log)
+        bofs.appendFileSync(bodauser_path+`/log.txt`, log)
     }
     //hook console,让他自动调用printlog
     console.log_ = console.log;
@@ -8310,8 +8315,14 @@ bodavm.toolsFunc.safeFunc(Promise.allSettled,'allSettled')
         //自动生成hook代码
         return console.log_.apply(this, arguments)
     }}.log
-    console.log_copy=console.log
     bodavm.toolsFunc.safeFunc(console.log,'log')
+    if (!bodavm.config.printLog){
+        console.log_copy=function (){}
+    }else{
+        console.log_copy=console.log
+
+    }
+
     // Object.defineProperty(console,'log',{
     //     get:function (){
     //         return console.log
@@ -90939,34 +90950,34 @@ bodavm.memory.globalInit.pluginArrayCopy=bodavm.toolsFunc.proxyPlugin(bodavm.mem
 // }
 // bodavm.toolsFunc.safefunction(eval,'eval')
 
-eval=new Proxy(eval,{
-    apply(target, thisArg, argumentsList) {
-        // debuggerde
-        // debugger
-        if(argumentsList[0]=='!new function(){eval("this.a=1")}().a'){
-            console.log('eval执行  参数  -->',argumentsList[0],` 结果为 -->`,false);
-            return false
-        }
-        if (argumentsList[0]=='__g'){debugger}
-        let arg=argumentsList[0]
-        if (arg && arg.length>100){
-            arg=arg.substr(0,100)+'...太长只显示前100位'
-        }
-        // debugger
+// eval=new Proxy(eval,{
+//     apply(target, thisArg, argumentsList) {
+//         // debuggerde
+//         // debugger
+//         if(argumentsList[0]=='!new function(){eval("this.a=1")}().a'){
+//             console.log('eval执行  参数  -->',argumentsList[0],` 结果为 -->`,false);
+//             return false
+//         }
+//         if (argumentsList[0]=='__g'){debugger}
+//         let arg=argumentsList[0]
+//         if (arg && arg.length>100){
+//             arg=arg.substr(0,100)+'...太长只显示前100位'
+//         }
+//         // debugger
 
-        console.log('eval执行  参数  -->',arg,` 结果为 -->`);
-        // debugger
-        // argumentsList[0]=argumentsList[0].replace('try{','try{debugger;')
-        let res=Reflect.apply(target, thisArg, argumentsList);
+//         console.log('eval执行  参数  -->',arg,` 结果为 -->`);
+//         // debugger
+//         // argumentsList[0]=argumentsList[0].replace('try{','try{debugger;')
+//         let res=Reflect.apply(target, thisArg, argumentsList);
         
-        console.log('eval执行 完毕  -->',` 结果为 -->`,res);
+//         console.log('eval执行 完毕  -->',` 结果为 -->`,res);
 
-        return res
-    },
-  })  
-  //eval 可能被检测
+//         return res
+//     },
+//   })  
+//   //eval 可能被检测
 
-bodavm.toolsFunc.safefunction(eval,'eval')
+// bodavm.toolsFunc.safefunction(eval,'eval')
 // window=bodavm.toolsFunc.proxy(window,"window")
 if (!bodavm.config.proxy){
 Object.defineProperty(this, 'window', {
@@ -91802,7 +91813,7 @@ function bodaParseScript(thisNode) {
 
     bodaPath += 1
     try{
-      scriptCode = bofs.readFileSync('.\\env_xbb_lastest_bo\\run\\new\\' + mypath + '.js').toString()
+      scriptCode = bofs.readFileSync(bodauser_path+'\\new\\' + mypath + '.js').toString()
       console.log_copy(scriptCode)
     }catch{
       console.log_copy(`读取`,'env_xbb_lastest_bo\\run\\new\\' + mypath + '.js','失败')
@@ -91974,21 +91985,21 @@ if (bodavm.memory.asyncEvent.listener){
 
 
 
-console.log_copy(`开始执行 window.onload 事件====> load事件=============>`,);
-debugger
-if(window.onload){
-    window.onload()
-    console.log_copy(`执行结束 window.onload 事件====> load事件=============>`,);
+// console.log_copy(`开始执行 window.onload 事件====> load事件=============>`,);
+// debugger
+// if(window.onload){
+//     window.onload()
+//     console.log_copy(`执行结束 window.onload 事件====> load事件=============>`,);
 
-}else{
-    console.log_copy(`执行结束 window.onload 事件====> load事件=============>`,);
+// }else{
+//     console.log_copy(`执行结束 window.onload 事件====> load事件=============>`,);
 
-}
-
-
+// }
 
 
-debugger
+
+
+// debugger
 
 
 
@@ -92005,60 +92016,14 @@ if (bodavm.memory.waitExec.length) {
     bodavm.memory.waitExec = []
   }
 
-;
-function test_document_all(){
-  debugger
-  if (!(document.all[0])){
-      console.log(`document.all[0]可以被检测`)
-
-  }
-  if (!document.all==undefined){
-          console.log(`document.all==undefined可以被检测`)
-
-}
-if (!document.all()==document.all){
-      console.log(`!document.all()==document.all 可以被检测`)
-
-}	
-if (!document.all()==undefined){
-            console.log(`!document.all()==undefined可以被检测`)
-
-}
-
-  if (!(document.all.toString() =='[object HTMLAllCollection]')){
-      console.log(`document.all.toString()可以被检测`)
-  }
-  if (!(document.all == undefined)){
-      console.log(`document.all == undefined可以被检测`)
-
-  }
-  if (!(typeof(document.all)=='undefined')){
-      console.log(`typeof(document.all)可以被检测`)
-
-  }
-  if ( !('all' in document ==true)){
-      console.log(`'all' in document可以被检测`)
-
-  }
-  debugger
-  if (!(document.all(1))){
-      console.log(`'document.all(1)可以被检测`)
-
-  }
-  if (!(document.all()==null)){
-      console.log(`'document.all()可以被检测`)
-
-  }
-
-  if (!(document.all ==document.all)){
-      console.log(`document.all可以被检测`)
-
-  }
-  if (!(Object.apply.call(document.all,null,[1]))){
-      console.log(`Object.apply.call(document.all,null,[1]) 可以被检测`)
-  }
-}
-test_document_all()
+;function foo(){
+        console.log('aaaa',this.a);
+    }
+    var a=2;
+    var o={a: 3, foo: foo };
+    var p= { a: 4 };
+    o.foo();// 3
+    (o.foo = o.foo)()
 bodavm.memory.mousemoveListener=[
     {
         "x": 157,
@@ -94918,7 +94883,7 @@ if (setTimeEvent && bodavm.config.settime_on) {
     }
 }
 
-;debugger;debugger
+debugger
 function get_cookie(){
     debugger
     // let boxhr=new XMLHttpRequest()
@@ -94930,28 +94895,29 @@ function get_cookie(){
     //     bodavm.memory.asyncEvent.setTimeout[6].callback()
 
     // }
-    // var xhr = new XMLHttpRequest();
-    // xhr.open('POST', 'http://paas.nc.crm.jx.cmcc/', true);
-    // // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    // // xhr.onload = function () {
-    // //     // do something to response
-    // //     console.log(this.responseText);
-    // // };
-    // rsurl=xhr._url
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://etax.hebei.chinatax.gov.cn/login-web/login', true);
+
+    // xhr.open('GET', 'https://etax.hebei.chinatax.gov.cn/login-web/base/getXtcs.do', true);
+    // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    // xhr.onload = function () {
+    //     // do something to response
+    //     console.log(this.responseText);
+    // };
+    rsurl=bodavm.toolsFunc.getProtoAttr.call(xhr,'open')[1]
     // xhr.send(true && "searchParamModel=%7B%22ObjectType%22%3A1%2C%22SearchKeyList%22%3A%5B%5D%2C%22SearchExpression%22%3Anull%2C%22BeginYear%22%3Anull%2C%22EndYear%22%3Anull%2C%22UpdateTimeType%22%3Anull%2C%22JournalRange%22%3Anull%2C%22DomainRange%22%3Anull%2C%22ClusterFilter%22%3A%22%22%2C%22ClusterLimit%22%3A0%2C%22ClusterUseType%22%3A%22Article%22%2C%22UrlParam%22%3A%22%22%2C%22Sort%22%3A%220%22%2C%22SortField%22%3Anull%2C%22UserID%22%3A%220%22%2C%22PageNum%22%3A3%2C%22PageSize%22%3A20%2C%22SType%22%3Anull%2C%22StrIds%22%3Anull%2C%22IsRefOrBy%22%3A0%2C%22ShowRules%22%3A%22%22%2C%22IsNoteHistory%22%3A0%2C%22AdvShowTitle%22%3Anull%2C%22ObjectId%22%3Anull%2C%22ObjectSearchType%22%3A0%2C%22ChineseEnglishExtend%22%3A0%2C%22SynonymExtend%22%3A0%2C%22ShowTotalCount%22%3A74249929%2C%22AdvTabGuid%22%3A%22%22%7D" );
             
     
     
     let res={
         // b:new XMLHttpRequest().open(''),
-        cookie:document.cookie,
-        // url:rsurl
+        cookie:bodavm.memory.cookie3,
+        url:rsurl,
         params:window.bbb
     }
     
     return res
 }
 
-// get_cookie
+// get_cookie()
 
-;

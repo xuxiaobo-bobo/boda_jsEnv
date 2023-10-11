@@ -57,21 +57,21 @@ if (bodavm.memory.asyncEvent.listener){
 
 
 
-console.log_copy(`开始执行 window.onload 事件====> load事件=============>`,);
-debugger
-if(window.onload){
-    window.onload()
-    console.log_copy(`执行结束 window.onload 事件====> load事件=============>`,);
+// console.log_copy(`开始执行 window.onload 事件====> load事件=============>`,);
+// debugger
+// if(window.onload){
+//     window.onload()
+//     console.log_copy(`执行结束 window.onload 事件====> load事件=============>`,);
 
-}else{
-    console.log_copy(`执行结束 window.onload 事件====> load事件=============>`,);
+// }else{
+//     console.log_copy(`执行结束 window.onload 事件====> load事件=============>`,);
 
-}
-
-
+// }
 
 
-debugger
+
+
+// debugger
 
 
 

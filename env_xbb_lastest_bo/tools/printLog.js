@@ -17,7 +17,7 @@
             }
         }
         log += "\r\n"
-        bofs.appendFileSync(`D:/My_Dir2/env_xbb_lastest_bo/run/log.txt`, log)
+        bofs.appendFileSync(bodauser_path+`/log.txt`, log)
     }
     //hook console,让他自动调用printlog
     console.log_ = console.log;
@@ -55,8 +55,14 @@
         //自动生成hook代码
         return console.log_.apply(this, arguments)
     }}.log
-    console.log_copy=console.log
     bodavm.toolsFunc.safeFunc(console.log,'log')
+    if (!bodavm.config.printLog){
+        console.log_copy=function (){}
+    }else{
+        console.log_copy=console.log
+
+    }
+
     // Object.defineProperty(console,'log',{
     //     get:function (){
     //         return console.log

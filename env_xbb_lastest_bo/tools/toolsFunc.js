@@ -732,7 +732,7 @@
                 return bodavm.toolsFunc.throwError("TypeError", "Illegal invocation")
             }
         }
-        try {
+        // try {
 
         if (bodavm.config.issymbolProperty){
             // debugger
@@ -762,13 +762,13 @@
         return bodavm.envFunc[name].apply(self, argList)
 
 
-        } catch (e) {
-            // 
-                // debugger
-                let log__ = `'[${name}]正在执行,错误信息${e.message}'`
-                console.log_copy(log__);
-                // bodavm.toolsFunc.printLog(log__)
-            }
+        // } catch (e) {
+        //     // 
+        //         // debugger
+        //         let log__ = `'[${name}]正在执行,错误信息${e.message}'`
+        //         console.log_copy(log__);
+        //         // bodavm.toolsFunc.printLog(log__)
+        //     }
     }
 
 

@@ -44,13 +44,14 @@ isWindowSystem=true
 let cbb =null
 
 if (isWindowSystem){
-    //  cbb = require("cbb");
-    let bodaUndefind=require(`${nodeplugin_path}/bodaUndefined.node`)
     debugger
     window_config_code=fs.readFileSync(`${tools_path}/winSystemFunc.js`)
+    //  cbb = require("cbb");
     // let myundefine={}
     // cbb.cbbnative.undfObject(myundefine)
     // var boallundefined= new myundefine.ldObj()
+    let bodaUndefind=require(`${nodeplugin_path}/bodaUndefined.node`)
+
     var boallundefined=  new bodaUndefind.bodaUndefind();
     // var boallundefined=  new xtd();
     // debugger
@@ -109,7 +110,7 @@ const last_deal = fs.readFileSync(`${user_path}\\lastDeal.js`)
 
 // const codeTest = `${configCode};;${toolsCode};${log_code}${envCode}${userInit};;${globadlThis}${myReqCode}${window_config_code}${globalInit}${proxyObj};${beforeDomRun};try{;${scriptDom};${jscode}${asyncCode}}catch(e){console.log(e.message,e.stack);}finally{;console.table(myloglist);debugger;${last_deal};}`;
 // const codeTest=`${configCode}${log_code}${toolsCode}${envCode}${globadlThis}${globalInit}${userInit}${proxyObj}${jscode}${asyncCode};console.table(myloglist);`+"\r\n"+"debugger";
-const codeTest = `${configCode};;${toolsCode};${log_code}${envCode}${CssCode}${pluginCode}${userInit};;${globadlThis}${myReqCode}${window_config_code}${globalInit}${proxyObj};${beforeDomRun};;${scriptDom};${asyncLoadCode};${jscode}${domListener};${asyncOtherCode};debugger;${last_deal};`;
+const codeTest = `${configCode};;${toolsCode};${log_code}${envCode}${CssCode}${pluginCode}${userInit};;${globadlThis}${myReqCode}${window_config_code}${globalInit}${proxyObj};${beforeDomRun};;${scriptDom};${asyncLoadCode};${jscode}${domListener};${asyncOtherCode}${last_deal}`;
 
 // console.log(code)
 //创建执行脚本
@@ -150,7 +151,7 @@ vm.setGlobal('bodacheerio',cheerio)
 // vm.setGlobal('bodaParse5Helper',parse5 )
 vm.setGlobal('bodaParserURL',URL )
 // vm.setGlobal('cheerio',cheerio )
-
+vm.setGlobal('bodauser_path',user_path)
 // debugger
 const script = new VMScript(codeTest + ';get_cookie', "./debugJS.js")
 

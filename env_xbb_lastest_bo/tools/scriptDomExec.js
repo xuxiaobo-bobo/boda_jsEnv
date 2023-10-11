@@ -80,7 +80,7 @@ function bodaParseScript(thisNode) {
 
     bodaPath += 1
     try{
-      scriptCode = bofs.readFileSync('.\\env_xbb_lastest_bo\\run\\new\\' + mypath + '.js').toString()
+      scriptCode = bofs.readFileSync(bodauser_path+'\\new\\' + mypath + '.js').toString()
       console.log_copy(scriptCode)
     }catch{
       console.log_copy(`读取`,'env_xbb_lastest_bo\\run\\new\\' + mypath + '.js','失败')
