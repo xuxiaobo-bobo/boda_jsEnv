@@ -1,1 +1,0 @@
-// clientInformation对象

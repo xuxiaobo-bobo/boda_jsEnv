@@ -1,0 +1,1 @@
+// crossOriginIsolated对象
