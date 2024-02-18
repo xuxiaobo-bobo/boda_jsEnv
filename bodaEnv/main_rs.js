@@ -38,6 +38,7 @@ let testNum=0
         // configFormChrome 去浏览器复制一下,记得把cookie删了
         //获取前缀,getResult文件下把这个打开就行'rsurl':bodaEnv.toolsFunc.getApi(bodaConifg['apiUrl'])
         // listenerOpen 打开后 调用load事件 asyncListener文件夹下
+        // 运行时候,把run_rs.html,run_rs.js 改为run.html,run.js
         let website_ = atob('aHR0cDovL3d3dy5ubXBhLmdvdi5jbg==')
         let bohtml =''
         if (!_reqhtml){
