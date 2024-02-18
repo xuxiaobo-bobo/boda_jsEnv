@@ -65,18 +65,6 @@ function main() {
     return resultVal
 }
 
-
-    app.get('/getresult', (req, res) => {
-        console.time()
-
         let result_=main()
 
         console.log(result_)
-
-        res.send({'227':result_['227']})
-
-      });
-
-      app.listen(3022, () => {
-        console.log('监听端口3022');
-      })
