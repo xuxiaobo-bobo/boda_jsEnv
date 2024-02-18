@@ -14,15 +14,15 @@ bodaEnv.memory.globlProtoObj["XPathEvaluator"] = function XPathEvaluator() {
   ;
 };
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["XPathEvaluator"], "XPathEvaluator");
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XPathEvaluator"].prototype, "createExpresboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XPathEvaluator"].prototype, "createExpression", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    createExpresboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XPathEvaluator"].prototype, "XPathEvaluator", "createExpresboda", arguments);
+    createExpression() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XPathEvaluator"].prototype, "XPathEvaluator", "createExpression", arguments);
     }
-  }.createExpresboda
+  }.createExpression
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XPathEvaluator"].prototype, "createNSResolver", {
   configurable: true,

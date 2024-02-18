@@ -142,7 +142,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XSLTProc
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XPathResult", {configurable:true, enumerable:false, writable:true, value:function XPathResult (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XPathResult", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XPathExpresboda", {configurable:true, enumerable:false, writable:true, value:function XPathExpresboda (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XPathExpresboda", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XPathExpression", {configurable:true, enumerable:false, writable:true, value:function XPathExpression (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XPathExpression", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XPathEvaluator", {configurable:true, enumerable:false, writable:true, value:function XPathEvaluator (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XPathEvaluator", arguments)}});
 
@@ -180,7 +180,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "WebGLTex
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "WebGLSync", {configurable:true, enumerable:false, writable:true, value:function WebGLSync (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "WebGLSync", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "WebGLShaderPrecibodaFormat", {configurable:true, enumerable:false, writable:true, value:function WebGLShaderPrecibodaFormat (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "WebGLShaderPrecibodaFormat", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "WebGLShaderPrecisionFormat", {configurable:true, enumerable:false, writable:true, value:function WebGLShaderPrecisionFormat (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "WebGLShaderPrecisionFormat", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "WebGLShader", {configurable:true, enumerable:false, writable:true, value:function WebGLShader (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "WebGLShader", arguments)}});
 
@@ -548,7 +548,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "RTCTrack
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "RTCStatsReport", {configurable:true, enumerable:false, writable:true, value:function RTCStatsReport (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "RTCStatsReport", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "RTCSesbodaDescription", {configurable:true, enumerable:false, writable:true, value:function RTCSesbodaDescription (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "RTCSesbodaDescription", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "RTCSessionDescription", {configurable:true, enumerable:false, writable:true, value:function RTCSessionDescription (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "RTCSessionDescription", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "RTCSctpTransport", {configurable:true, enumerable:false, writable:true, value:function RTCSctpTransport (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "RTCSctpTransport", arguments)}});
 
@@ -770,7 +770,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "IdleDead
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "IIRFilterNode", {configurable:true, enumerable:false, writable:true, value:function IIRFilterNode (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "IIRFilterNode", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "IDBVerbodaChangeEvent", {configurable:true, enumerable:false, writable:true, value:function IDBVerbodaChangeEvent (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "IDBVerbodaChangeEvent", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "IDBVersionChangeEvent", {configurable:true, enumerable:false, writable:true, value:function IDBVersionChangeEvent (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "IDBVersionChangeEvent", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "IDBTransaction", {configurable:true, enumerable:false, writable:true, value:function IDBTransaction (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "IDBTransaction", arguments)}});
 
@@ -1014,7 +1014,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "Document
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "DelayNode", {configurable:true, enumerable:false, writable:true, value:function DelayNode (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "DelayNode", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "DecompresbodaStream", {configurable:true, enumerable:false, writable:true, value:function DecompresbodaStream (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "DecompresbodaStream", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "DecompressionStream", {configurable:true, enumerable:false, writable:true, value:function DecompressionStream (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "DecompressionStream", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "DataTransferItemList", {configurable:true, enumerable:false, writable:true, value:function DataTransferItemList (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "DataTransferItemList", arguments)}});
 
@@ -1066,7 +1066,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "Convolve
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "ConstantSourceNode", {configurable:true, enumerable:false, writable:true, value:function ConstantSourceNode (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "ConstantSourceNode", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "CompresbodaStream", {configurable:true, enumerable:false, writable:true, value:function CompresbodaStream (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "CompresbodaStream", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "CompressionStream", {configurable:true, enumerable:false, writable:true, value:function CompressionStream (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "CompressionStream", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "CompositionEvent", {configurable:true, enumerable:false, writable:true, value:function CompositionEvent (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "CompositionEvent", arguments)}});
 
@@ -1352,7 +1352,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "crypto",
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "indexedDB", {configurable:true, enumerable:true, get:function indexedDB (){return bodaEnv.toolsFunc.dispatch(this,bodaEnv.memory.globlProtoObj["self"], "self", "indexedDB_get", arguments)}, set:undefined});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "sesbodaStorage", {configurable:true, enumerable:true, get:function sesbodaStorage (){return bodaEnv.toolsFunc.dispatch(this,bodaEnv.memory.globlProtoObj["self"], "self", "sesbodaStorage_get", arguments)}, set:undefined});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "sessionStorage", {configurable:true, enumerable:true, get:function sessionStorage (){return bodaEnv.toolsFunc.dispatch(this,bodaEnv.memory.globlProtoObj["self"], "self", "sessionStorage_get", arguments)}, set:undefined});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "localStorage", {configurable:true, enumerable:true, get:function localStorage (){return bodaEnv.toolsFunc.dispatch(this,bodaEnv.memory.globlProtoObj["self"], "self", "localStorage_get", arguments)}, set:undefined});
 
@@ -1750,7 +1750,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MediaDev
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MediaKeyMessageEvent", {configurable:true, enumerable:false, writable:true, value:function MediaKeyMessageEvent (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "MediaKeyMessageEvent", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MediaKeySesboda", {configurable:true, enumerable:false, writable:true, value:function MediaKeySesboda (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "MediaKeySesboda", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MediaKeySession", {configurable:true, enumerable:false, writable:true, value:function MediaKeySession (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "MediaKeySession", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MediaKeyStatusMap", {configurable:true, enumerable:false, writable:true, value:function MediaKeyStatusMap (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "MediaKeyStatusMap", arguments)}});
 
@@ -2078,9 +2078,9 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XRRender
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XRRigidTransform", {configurable:true, enumerable:false, writable:true, value:function XRRigidTransform (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XRRigidTransform", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XRSesboda", {configurable:true, enumerable:false, writable:true, value:function XRSesboda (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XRSesboda", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XRSession", {configurable:true, enumerable:false, writable:true, value:function XRSession (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XRSession", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XRSesbodaEvent", {configurable:true, enumerable:false, writable:true, value:function XRSesbodaEvent (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XRSesbodaEvent", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XRSessionEvent", {configurable:true, enumerable:false, writable:true, value:function XRSessionEvent (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XRSessionEvent", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "XRSpace", {configurable:true, enumerable:false, writable:true, value:function XRSpace (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "XRSpace", arguments)}});
 
@@ -2158,7 +2158,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MathMLEl
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MediaMetadata", {configurable:true, enumerable:false, writable:true, value:function MediaMetadata (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "MediaMetadata", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MediaSesboda", {configurable:true, enumerable:false, writable:true, value:function MediaSesboda (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "MediaSesboda", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MediaSession", {configurable:true, enumerable:false, writable:true, value:function MediaSession (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "MediaSession", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "MutationEvent", {configurable:true, enumerable:false, writable:true, value:function MutationEvent (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "MutationEvent", arguments)}});
 
@@ -2172,9 +2172,9 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "PaymentR
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "PeriodicSyncManager", {configurable:true, enumerable:false, writable:true, value:function PeriodicSyncManager (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "PeriodicSyncManager", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "PermisbodaStatus", {configurable:true, enumerable:false, writable:true, value:function PermisbodaStatus (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "PermisbodaStatus", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "PermissionStatus", {configurable:true, enumerable:false, writable:true, value:function PermissionStatus (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "PermissionStatus", arguments)}});
 
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "Permisbodas", {configurable:true, enumerable:false, writable:true, value:function Permisbodas (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "Permisbodas", arguments)}});
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "Permissions", {configurable:true, enumerable:false, writable:true, value:function Permissions (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "Permissions", arguments)}});
 
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["self"], "PushManager", {configurable:true, enumerable:false, writable:true, value:function PushManager (){return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["self"], "self", "PushManager", arguments)}});
 

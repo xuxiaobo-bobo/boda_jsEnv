@@ -12,7 +12,7 @@ bodaEnv.memory.globlProtoObj["URL"] = function URL() {
     }));
   }
   ;
-  bodaEnv.memory.WeakMap.set(this,new bodaURL(...arguments))
+  bodaEnv.memory.WeakMap.set(this,new sionURL(...arguments))
   //debugger;
 };
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["URL"], "URL");

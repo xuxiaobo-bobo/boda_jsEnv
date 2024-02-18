@@ -1,9 +1,9 @@
-// CompresbodaStream对象
+// CompressionStream对象
 
-bodaEnv.memory.globlProtoObj["CompresbodaStream"] = function CompresbodaStream() {
+bodaEnv.memory.globlProtoObj["CompressionStream"] = function CompressionStream() {
   let arg = arguments[0];
   if (arg != 'bobo') {
-    bodaEnv.toolsFunc.console_copy('CompresbodaStream 实例化对象 --->', bodaEnv.toolsFunc.stringify_bo(arguments, function (k, v) {
+    bodaEnv.toolsFunc.console_copy('CompressionStream 实例化对象 --->', bodaEnv.toolsFunc.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';
       } else {
@@ -13,23 +13,23 @@ bodaEnv.memory.globlProtoObj["CompresbodaStream"] = function CompresbodaStream()
   }
   ;
 };
-bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["CompresbodaStream"], "CompresbodaStream");
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["CompresbodaStream"].prototype, "readable", {
+bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["CompressionStream"], "CompressionStream");
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["CompressionStream"].prototype, "readable", {
   configurable: true,
   enumerable: true,
   get: {
     readable() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["CompresbodaStream"].prototype, "CompresbodaStream", "readable_get", arguments);
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["CompressionStream"].prototype, "CompressionStream", "readable_get", arguments);
     }
   }.readable,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["CompresbodaStream"].prototype, "writable", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["CompressionStream"].prototype, "writable", {
   configurable: true,
   enumerable: true,
   get: {
     writable() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["CompresbodaStream"].prototype, "CompresbodaStream", "writable_get", arguments);
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["CompressionStream"].prototype, "CompressionStream", "writable_get", arguments);
     }
   }.writable,
   set: undefined

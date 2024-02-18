@@ -16,17 +16,17 @@ bodaEnv.memory.globlProtoObj["HTMLHtmlElement"] = function HTMLHtmlElement() {
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["HTMLHtmlElement"], "HTMLHtmlElement");
 bodaEnv.memory.globlProtoObj["HTMLHtmlElement"].prototype.__proto__ = bodaEnv.memory.globlProtoObj["HTMLElement"].prototype;
 bodaEnv.memory.globlProtoObj["HTMLHtmlElement"].__proto__ = bodaEnv.memory.globlProtoObj["HTMLElement"];
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["HTMLHtmlElement"].prototype, "verboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["HTMLHtmlElement"].prototype, "version", {
   configurable: true,
   enumerable: true,
   get: {
-    verboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["HTMLHtmlElement"].prototype, "HTMLHtmlElement", "verboda_get", arguments);
+    version() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["HTMLHtmlElement"].prototype, "HTMLHtmlElement", "version_get", arguments);
     }
-  }.verboda,
+  }.version,
   set: {
-    verboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["HTMLHtmlElement"].prototype, "HTMLHtmlElement", "verboda_set", arguments);
+    version() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["HTMLHtmlElement"].prototype, "HTMLHtmlElement", "version_set", arguments);
     }
-  }.verboda
+  }.version
 });

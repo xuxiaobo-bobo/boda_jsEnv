@@ -228,60 +228,60 @@ delete bodaEnv.memory.globlProtoObj['EXTShaderTextureLOD'].prototype.constructor
 bodaEnv.memory.globlProtoObj['EXTFragDepth'] = function EXTFragDepth() {};
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj['EXTFragDepth'], "EXTFragDepth");
 delete bodaEnv.memory.globlProtoObj['EXTFragDepth'].prototype.constructor;
-bodaEnv.memory.globlProtoObj['EXTTextureCompresbodaBPTC'] = function EXTTextureCompresbodaBPTC() {};
-bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj['EXTTextureCompresbodaBPTC'], "EXTTextureCompresbodaBPTC");
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompresbodaBPTC"].prototype, "COMPRESSED_RGBA_BPTC_UNORM_EXT", {
+bodaEnv.memory.globlProtoObj['EXTTextureCompressionBPTC'] = function EXTTextureCompressionBPTC() {};
+bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj['EXTTextureCompressionBPTC'], "EXTTextureCompressionBPTC");
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompressionBPTC"].prototype, "COMPRESSED_RGBA_BPTC_UNORM_EXT", {
   configurable: false,
   enumerable: true,
   writable: false,
   value: 36492
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompresbodaBPTC"].prototype, "COMPRESSED_SRGB_ALPHA_BPTC_UNORM_EXT", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompressionBPTC"].prototype, "COMPRESSED_SRGB_ALPHA_BPTC_UNORM_EXT", {
   configurable: false,
   enumerable: true,
   writable: false,
   value: 36493
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompresbodaBPTC"].prototype, "COMPRESSED_RGB_BPTC_SIGNED_FLOAT_EXT", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompressionBPTC"].prototype, "COMPRESSED_RGB_BPTC_SIGNED_FLOAT_EXT", {
   configurable: false,
   enumerable: true,
   writable: false,
   value: 36494
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompresbodaBPTC"].prototype, "COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_EXT", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompressionBPTC"].prototype, "COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_EXT", {
   configurable: false,
   enumerable: true,
   writable: false,
   value: 36495
 });
-delete bodaEnv.memory.globlProtoObj['EXTTextureCompresbodaBPTC'].prototype.constructor;
-bodaEnv.memory.globlProtoObj['EXTTextureCompresbodaRGTC'] = function EXTTextureCompresbodaRGTC() {};
-bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj['EXTTextureCompresbodaRGTC'], "EXTTextureCompresbodaRGTC");
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompresbodaRGTC"].prototype, "COMPRESSED_RED_RGTC1_EXT", {
+delete bodaEnv.memory.globlProtoObj['EXTTextureCompressionBPTC'].prototype.constructor;
+bodaEnv.memory.globlProtoObj['EXTTextureCompressionRGTC'] = function EXTTextureCompressionRGTC() {};
+bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj['EXTTextureCompressionRGTC'], "EXTTextureCompressionRGTC");
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompressionRGTC"].prototype, "COMPRESSED_RED_RGTC1_EXT", {
   configurable: false,
   enumerable: true,
   writable: false,
   value: 36283
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompresbodaRGTC"].prototype, "COMPRESSED_SIGNED_RED_RGTC1_EXT", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompressionRGTC"].prototype, "COMPRESSED_SIGNED_RED_RGTC1_EXT", {
   configurable: false,
   enumerable: true,
   writable: false,
   value: 36284
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompresbodaRGTC"].prototype, "COMPRESSED_RED_GREEN_RGTC2_EXT", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompressionRGTC"].prototype, "COMPRESSED_RED_GREEN_RGTC2_EXT", {
   configurable: false,
   enumerable: true,
   writable: false,
   value: 36285
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompresbodaRGTC"].prototype, "COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureCompressionRGTC"].prototype, "COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT", {
   configurable: false,
   enumerable: true,
   writable: false,
   value: 36286
 });
-delete bodaEnv.memory.globlProtoObj['EXTTextureCompresbodaRGTC'].prototype.constructor;
+delete bodaEnv.memory.globlProtoObj['EXTTextureCompressionRGTC'].prototype.constructor;
 bodaEnv.memory.globlProtoObj['EXTTextureFilterAnisotropic'] = function EXTTextureFilterAnisotropic() {};
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj['EXTTextureFilterAnisotropic'], "EXTTextureFilterAnisotropic");
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["EXTTextureFilterAnisotropic"].prototype, "TEXTURE_MAX_ANISOTROPY_EXT", {

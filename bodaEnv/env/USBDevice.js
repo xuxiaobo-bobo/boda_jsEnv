@@ -14,34 +14,34 @@ bodaEnv.memory.globlProtoObj["USBDevice"] = function USBDevice() {
   ;
 };
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["USBDevice"], "USBDevice");
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "usbVerbodaMajor", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "usbVersionMajor", {
   configurable: true,
   enumerable: true,
   get: {
-    usbVerbodaMajor() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "usbVerbodaMajor_get", arguments);
+    usbVersionMajor() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "usbVersionMajor_get", arguments);
     }
-  }.usbVerbodaMajor,
+  }.usbVersionMajor,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "usbVerbodaMinor", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "usbVersionMinor", {
   configurable: true,
   enumerable: true,
   get: {
-    usbVerbodaMinor() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "usbVerbodaMinor_get", arguments);
+    usbVersionMinor() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "usbVersionMinor_get", arguments);
     }
-  }.usbVerbodaMinor,
+  }.usbVersionMinor,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "usbVerbodaSubminor", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "usbVersionSubminor", {
   configurable: true,
   enumerable: true,
   get: {
-    usbVerbodaSubminor() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "usbVerbodaSubminor_get", arguments);
+    usbVersionSubminor() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "usbVersionSubminor_get", arguments);
     }
-  }.usbVerbodaSubminor,
+  }.usbVersionSubminor,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "deviceClass", {
@@ -94,34 +94,34 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].proto
   }.productId,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "deviceVerbodaMajor", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "deviceVersionMajor", {
   configurable: true,
   enumerable: true,
   get: {
-    deviceVerbodaMajor() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "deviceVerbodaMajor_get", arguments);
+    deviceVersionMajor() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "deviceVersionMajor_get", arguments);
     }
-  }.deviceVerbodaMajor,
+  }.deviceVersionMajor,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "deviceVerbodaMinor", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "deviceVersionMinor", {
   configurable: true,
   enumerable: true,
   get: {
-    deviceVerbodaMinor() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "deviceVerbodaMinor_get", arguments);
+    deviceVersionMinor() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "deviceVersionMinor_get", arguments);
     }
-  }.deviceVerbodaMinor,
+  }.deviceVersionMinor,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "deviceVerbodaSubminor", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "deviceVersionSubminor", {
   configurable: true,
   enumerable: true,
   get: {
-    deviceVerbodaSubminor() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "deviceVerbodaSubminor_get", arguments);
+    deviceVersionSubminor() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "USBDevice", "deviceVersionSubminor_get", arguments);
     }
-  }.deviceVerbodaSubminor,
+  }.deviceVersionSubminor,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["USBDevice"].prototype, "manufacturerName", {

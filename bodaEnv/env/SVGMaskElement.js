@@ -76,14 +76,14 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGMaskElement"].
   }.height,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGMaskElement"].prototype, "requiredExtenbodas", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGMaskElement"].prototype, "requiredExtensions", {
   configurable: true,
   enumerable: true,
   get: {
-    requiredExtenbodas() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["SVGMaskElement"].prototype, "SVGMaskElement", "requiredExtenbodas_get", arguments);
+    requiredExtensions() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["SVGMaskElement"].prototype, "SVGMaskElement", "requiredExtensions_get", arguments);
     }
-  }.requiredExtenbodas,
+  }.requiredExtensions,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGMaskElement"].prototype, "systemLanguage", {

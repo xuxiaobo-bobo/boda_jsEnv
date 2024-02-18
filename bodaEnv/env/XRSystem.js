@@ -30,33 +30,33 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRSystem"].protot
     }
   }.ondevicechange
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "isSesbodaSupported", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "isSessionSupported", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    isSesbodaSupported() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "XRSystem", "isSesbodaSupported", arguments);
+    isSessionSupported() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "XRSystem", "isSessionSupported", arguments);
     }
-  }.isSesbodaSupported
+  }.isSessionSupported
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "requestSesboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "requestSession", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    requestSesboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "XRSystem", "requestSesboda", arguments);
+    requestSession() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "XRSystem", "requestSession", arguments);
     }
-  }.requestSesboda
+  }.requestSession
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "supportsSesboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "supportsSession", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    supportsSesboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "XRSystem", "supportsSesboda", arguments);
+    supportsSession() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRSystem"].prototype, "XRSystem", "supportsSession", arguments);
     }
-  }.supportsSesboda
+  }.supportsSession
 });

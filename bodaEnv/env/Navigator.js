@@ -194,14 +194,14 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].proto
   }.appName,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].prototype, "appVerboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].prototype, "appVersion", {
   configurable: true,
   enumerable: true,
   get: {
-    appVerboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Navigator"].prototype, "Navigator", "appVerboda_get", arguments);
+    appVersion() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Navigator"].prototype, "Navigator", "appVersion_get", arguments);
     }
-  }.appVerboda,
+  }.appVersion,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].prototype, "platform", {
@@ -464,24 +464,24 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].proto
   }.mediaCapabilities,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].prototype, "mediaSesboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].prototype, "mediaSession", {
   configurable: true,
   enumerable: true,
   get: {
-    mediaSesboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Navigator"].prototype, "Navigator", "mediaSesboda_get", arguments);
+    mediaSession() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Navigator"].prototype, "Navigator", "mediaSession_get", arguments);
     }
-  }.mediaSesboda,
+  }.mediaSession,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].prototype, "permisbodas", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].prototype, "permissions", {
   configurable: true,
   enumerable: true,
   get: {
-    permisbodas() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Navigator"].prototype, "Navigator", "permisbodas_get", arguments);
+    permissions() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Navigator"].prototype, "Navigator", "permissions_get", arguments);
     }
-  }.permisbodas,
+  }.permissions,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Navigator"].prototype, "presentation", {

@@ -64,14 +64,14 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUTexture"].prot
   }.sampleCount,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUTexture"].prototype, "dimenboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUTexture"].prototype, "dimension", {
   configurable: true,
   enumerable: true,
   get: {
-    dimenboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUTexture"].prototype, "GPUTexture", "dimenboda_get", arguments);
+    dimension() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUTexture"].prototype, "GPUTexture", "dimension_get", arguments);
     }
-  }.dimenboda,
+  }.dimension,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUTexture"].prototype, "format", {

@@ -66,13 +66,13 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["PublicKeyCredenti
   }.authenticatorAttachment,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["PublicKeyCredential"].prototype, "getClientExtenbodaResults", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["PublicKeyCredential"].prototype, "getClientExtensionResults", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    getClientExtenbodaResults() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["PublicKeyCredential"].prototype, "PublicKeyCredential", "getClientExtenbodaResults", arguments);
+    getClientExtensionResults() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["PublicKeyCredential"].prototype, "PublicKeyCredential", "getClientExtensionResults", arguments);
     }
-  }.getClientExtenbodaResults
+  }.getClientExtensionResults
 });

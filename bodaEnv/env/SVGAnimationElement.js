@@ -68,14 +68,14 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGAnimationEleme
     }
   }.onrepeat
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGAnimationElement"].prototype, "requiredExtenbodas", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGAnimationElement"].prototype, "requiredExtensions", {
   configurable: true,
   enumerable: true,
   get: {
-    requiredExtenbodas() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["SVGAnimationElement"].prototype, "SVGAnimationElement", "requiredExtenbodas_get", arguments);
+    requiredExtensions() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["SVGAnimationElement"].prototype, "SVGAnimationElement", "requiredExtensions_get", arguments);
     }
-  }.requiredExtenbodas,
+  }.requiredExtensions,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGAnimationElement"].prototype, "systemLanguage", {

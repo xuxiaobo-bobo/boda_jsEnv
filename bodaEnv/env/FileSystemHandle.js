@@ -44,15 +44,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["FileSystemHandle"
     }
   }.isSameEntry
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["FileSystemHandle"].prototype, "queryPermisboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["FileSystemHandle"].prototype, "queryPermission", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    queryPermisboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["FileSystemHandle"].prototype, "FileSystemHandle", "queryPermisboda", arguments);
+    queryPermission() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["FileSystemHandle"].prototype, "FileSystemHandle", "queryPermission", arguments);
     }
-  }.queryPermisboda
+  }.queryPermission
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["FileSystemHandle"].prototype, "remove", {
   configurable: true,
@@ -64,13 +64,13 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["FileSystemHandle"
     }
   }.remove
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["FileSystemHandle"].prototype, "requestPermisboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["FileSystemHandle"].prototype, "requestPermission", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    requestPermisboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["FileSystemHandle"].prototype, "FileSystemHandle", "requestPermisboda", arguments);
+    requestPermission() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["FileSystemHandle"].prototype, "FileSystemHandle", "requestPermission", arguments);
     }
-  }.requestPermisboda
+  }.requestPermission
 });

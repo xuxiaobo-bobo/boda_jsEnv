@@ -2171,7 +2171,7 @@
     }
     bodaEnv.envFunc.HTMLCanvasElement_getContext=function(){
         let _type=arguments[0]
-        // debugger
+        debugger
         let thisNode=bodaEnv.memory.WeakMap.get(this)
         let context = null
         switch (_type) {

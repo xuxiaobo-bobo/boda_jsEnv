@@ -14,34 +14,34 @@ bodaEnv.memory.globlProtoObj["GPUSupportedLimits"] = function GPUSupportedLimits
   ;
 };
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"], "GPUSupportedLimits");
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "maxTextureDimenboda1D", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "maxTextureDimension1D", {
   configurable: true,
   enumerable: true,
   get: {
-    maxTextureDimenboda1D() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "GPUSupportedLimits", "maxTextureDimenboda1D_get", arguments);
+    maxTextureDimension1D() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "GPUSupportedLimits", "maxTextureDimension1D_get", arguments);
     }
-  }.maxTextureDimenboda1D,
+  }.maxTextureDimension1D,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "maxTextureDimenboda2D", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "maxTextureDimension2D", {
   configurable: true,
   enumerable: true,
   get: {
-    maxTextureDimenboda2D() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "GPUSupportedLimits", "maxTextureDimenboda2D_get", arguments);
+    maxTextureDimension2D() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "GPUSupportedLimits", "maxTextureDimension2D_get", arguments);
     }
-  }.maxTextureDimenboda2D,
+  }.maxTextureDimension2D,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "maxTextureDimenboda3D", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "maxTextureDimension3D", {
   configurable: true,
   enumerable: true,
   get: {
-    maxTextureDimenboda3D() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "GPUSupportedLimits", "maxTextureDimenboda3D_get", arguments);
+    maxTextureDimension3D() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "GPUSupportedLimits", "maxTextureDimension3D_get", arguments);
     }
-  }.maxTextureDimenboda3D,
+  }.maxTextureDimension3D,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "maxTextureArrayLayers", {
@@ -314,13 +314,13 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimit
   }.maxComputeWorkgroupSizeZ,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "maxComputeWorkgroupsPerDimenboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "maxComputeWorkgroupsPerDimension", {
   configurable: true,
   enumerable: true,
   get: {
-    maxComputeWorkgroupsPerDimenboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "GPUSupportedLimits", "maxComputeWorkgroupsPerDimenboda_get", arguments);
+    maxComputeWorkgroupsPerDimension() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPUSupportedLimits"].prototype, "GPUSupportedLimits", "maxComputeWorkgroupsPerDimension_get", arguments);
     }
-  }.maxComputeWorkgroupsPerDimenboda,
+  }.maxComputeWorkgroupsPerDimension,
   set: undefined
 });

@@ -19,7 +19,7 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["PushManager"], "s
   enumerable: true,
   get: {
     supportedContentEncodings() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Permisbodas"], "PushManager", "supportedContentEncodings_get", arguments);
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Permissions"], "PushManager", "supportedContentEncodings_get", arguments);
     }
   }.supportedContentEncodings,
   set: undefined
@@ -34,15 +34,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["PushManager"].pro
     }
   }.getSubscription
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["PushManager"].prototype, "permisbodaState", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["PushManager"].prototype, "permissionState", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    permisbodaState() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["PushManager"].prototype, "PushManager", "permisbodaState", arguments);
+    permissionState() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["PushManager"].prototype, "PushManager", "permissionState", arguments);
     }
-  }.permisbodaState
+  }.permissionState
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["PushManager"].prototype, "subscribe", {
   configurable: true,

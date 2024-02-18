@@ -69,88 +69,88 @@
         bodaEnv.toolsFunc.console_copy(`BaseAudioContext_sampleRate_get res->`,48000)
         return 48000
     }
-    bodaEnv.envFunc.WebGLRenderingContext_getShaderPrecibodaFormat = function WebGLRenderingContext_getShaderPrecibodaFormat() {
+    bodaEnv.envFunc.WebGLRenderingContext_getShaderPrecisionFormat = function WebGLRenderingContext_getShaderPrecisionFormat() {
         let shaderType = arguments[0]
-        let precibodaType = arguments[1]
-        bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getShaderPrecibodaFormat `, `shaderType:${shaderType} precibodaType:${precibodaType}  `);
+        let precisionType = arguments[1]
+        bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getShaderPrecisionFormat `, `shaderType:${shaderType} precisionType:${precisionType}  `);
 
-        if (shaderType == 35633 && precibodaType == 36338) {
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+        if (shaderType == 35633 && precisionType == 36338) {
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
             // shade._boisinit=true
-            // Object.setPrototypeOf(shade, bodaEnv.memory.globalobj['WebGLShaderPrecibodaFormat'].prototype)
+            // Object.setPrototypeOf(shade, bodaEnv.memory.globalobj['WebGLShaderPrecisionFormat'].prototype)
             // bodaEnv.toolsFunc.symbolProperty(shade)
             return shade
-        }else if (shaderType == 35633 && precibodaType == 36337){
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+        }else if (shaderType == 35633 && precisionType == 36337){
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
 
             return shade
-        }else if (shaderType == 35633 && precibodaType == 36336){
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+        }else if (shaderType == 35633 && precisionType == 36336){
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
 
             return shade
         }
-        else if (shaderType == 35632 && precibodaType == 36338){
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+        else if (shaderType == 35632 && precisionType == 36338){
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
 
             return shade
-        }else if (shaderType == 35632 && precibodaType == 36337){
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+        }else if (shaderType == 35632 && precisionType == 36337){
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
 
             return shade
-        }else if (shaderType == 35632 && precibodaType == 36336){
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+        }else if (shaderType == 35632 && precisionType == 36336){
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
 
             return shade
-        }else if (shaderType == 35633 && precibodaType == 36341){
+        }else if (shaderType == 35633 && precisionType == 36341){
             // debugger
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMax', 30)
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMin', 31)
-            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'preciboda', 0)
+            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'precision', 0)
             return shade
         }
-        else if (shaderType == 35633 && precibodaType == 36340){
+        else if (shaderType == 35633 && precisionType == 36340){
             // debugger
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMax', 30)
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMin', 31)
-            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'preciboda', 0)
+            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'precision', 0)
             return shade
         }
-        else if (shaderType == 35633 && precibodaType == 36339){
+        else if (shaderType == 35633 && precisionType == 36339){
             // debugger
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMax', 30)
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMin', 31)
-            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'preciboda', 0)
+            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'precision', 0)
             return shade
         }
-        else if (shaderType == 35632 && precibodaType == 36341){
+        else if (shaderType == 35632 && precisionType == 36341){
             // debugger
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMax', 30)
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMin', 31)
-            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'preciboda', 0)
+            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'precision', 0)
             return shade
         }
-        else if (shaderType == 35632 && precibodaType == 36340){
+        else if (shaderType == 35632 && precisionType == 36340){
             // debugger
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMax', 30)
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMin', 31)
-            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'preciboda', 0)
+            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'precision', 0)
             return shade
         }
-        else if (shaderType == 35632 && precibodaType == 36339){
+        else if (shaderType == 35632 && precisionType == 36339){
             // debugger
-            let shade = new WebGLShaderPrecibodaFormat('bobo')
+            let shade =new bodaEnv.memory.globlProtoObj["WebGLShaderPrecisionFormat"]('bobo')
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMax', 30)
             bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'rangeMin', 31)
-            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'preciboda', 0)
+            bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(shade, 'precision', 0)
             return shade
         }
         else{
-            bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getShaderPrecibodaFormat `, `shaderType:${shaderType} precibodaType:${precibodaType}  未实现..错误 `);
+            bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getShaderPrecisionFormat `, `shaderType:${shaderType} precisionType:${precisionType}  未实现..错误 `);
 
         }
     }
@@ -208,13 +208,13 @@
     }
     bodaEnv.envFunc.OfflineAudioContext_oncomplete_set=function (){
         let arg=arguments[0]
-        let bodaevent={
+        let sionevent={
             'self':this,
             'callback':arg
         }
-        bodaEnv.memory.asyncEvent['OfflineAudioContext']['oncomplete'].push(bodaevent)
+        bodaEnv.memory.asyncEvent['OfflineAudioContext']['oncomplete'].push(sionevent)
         bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'oncomplete',arg)
-        bodaEnv.toolsFunc.console_copy(`OfflineAudioContext_oncomplete_set 当前func 属于事件可能需要调用arg -> `,bodaevent)
+        bodaEnv.toolsFunc.console_copy(`OfflineAudioContext_oncomplete_set 当前func 属于事件可能需要调用arg -> `,sionevent)
 
         return arg
     }
@@ -386,14 +386,14 @@
         bodaEnv.toolsFunc.console_copy(`BaseAudioContext_createOscillator ->res -> `,oscillator)
         return oscillator
     }
-    bodaEnv.envFunc.WebGL2RenderingContext_getSupportedExtenbodas=function (){
+    bodaEnv.envFunc.WebGL2RenderingContext_getSupportedExtensions=function (){
         // let arg=arguments[0]
-        let ext=['EXT_color_buffer_float', 'EXT_color_buffer_half_float', 'EXT_disjoint_timer_query_webgl2', 'EXT_float_blend', 'EXT_texture_compresboda_bptc',
-         'EXT_texture_compresboda_rgtc', 'EXT_texture_filter_anisotropic', 'EXT_texture_norm16', 'KHR_parallel_shader_compile', 
+        let ext=['EXT_color_buffer_float', 'EXT_color_buffer_half_float', 'EXT_disjoint_timer_query_webgl2', 'EXT_float_blend', 'EXT_texture_compression_bptc',
+         'EXT_texture_compression_rgtc', 'EXT_texture_filter_anisotropic', 'EXT_texture_norm16', 'KHR_parallel_shader_compile', 
          'OES_draw_buffers_indexed', 'OES_texture_float_linear', 'OVR_multiview2', 
          'WEBGL_compressed_texture_s3tc', 'WEBGL_compressed_texture_s3tc_srgb', 'WEBGL_debug_renderer_info',
           'WEBGL_debug_shaders', 'WEBGL_lose_context', 'WEBGL_multi_draw', 'WEBGL_provoking_vertex']
-        bodaEnv.toolsFunc.console_copy(`WebGL2RenderingContext_getSupportedExtenbodas ->res -> `,ext)
+        bodaEnv.toolsFunc.console_copy(`WebGL2RenderingContext_getSupportedExtensions ->res -> `,ext)
         
         return ext
 
@@ -526,33 +526,33 @@
         bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getParameter `, `${pname}  `, `-> res ->${resgetParameter}`)
         return resgetParameter
     }
-    bodaEnv.envFunc.WebGLShaderPrecibodaFormat_preciboda_get = function WebGLShaderPrecibodaFormat_preciboda_get() {
-        let preciboda=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'preciboda')
-        if (preciboda === undefined) preciboda=23
+    bodaEnv.envFunc.WebGLShaderPrecisionFormat_precision_get = function WebGLShaderPrecisionFormat_precision_get() {
+        let precision=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'precision')
+        if (precision === undefined) precision=23
 
-        bodaEnv.toolsFunc.console_copy(`WebGLShaderPrecibodaFormat_preciboda_get `, preciboda);
+        bodaEnv.toolsFunc.console_copy(`WebGLShaderPrecisionFormat_precision_get `, precision);
         ;
 
-        return preciboda
+        return precision
     }
-    bodaEnv.envFunc.WebGLShaderPrecibodaFormat_rangeMax_get = function WebGLShaderPrecibodaFormat_rangeMax_get() {
+    bodaEnv.envFunc.WebGLShaderPrecisionFormat_rangeMax_get = function WebGLShaderPrecisionFormat_rangeMax_get() {
         let max=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'rangeMax')?bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'rangeMax'):127
-        bodaEnv.toolsFunc.console_copy(`WebGLShaderPrecibodaFormat_rangeMax_get `, max);
+        bodaEnv.toolsFunc.console_copy(`WebGLShaderPrecisionFormat_rangeMax_get `, max);
         ;
 
         return max
     }
-    bodaEnv.envFunc.WebGLShaderPrecibodaFormat_rangeMin_get = function WebGLShaderPrecibodaFormat_rangeMin_get() {
+    bodaEnv.envFunc.WebGLShaderPrecisionFormat_rangeMin_get = function WebGLShaderPrecisionFormat_rangeMin_get() {
         let min=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'rangeMin')?bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'rangeMin'):127
 
-        bodaEnv.toolsFunc.console_copy(`WebGLShaderPrecibodaFormat_rangeMin_get `, min);
+        bodaEnv.toolsFunc.console_copy(`WebGLShaderPrecisionFormat_rangeMin_get `, min);
         ;
 
         return min
     }
-    bodaEnv.envFunc.WebGLRenderingContext_getSupportedExtenbodas = function WebGLRenderingContext_getSupportedExtenbodas() {
+    bodaEnv.envFunc.WebGLRenderingContext_getSupportedExtensions = function WebGLRenderingContext_getSupportedExtensions() {
         
-        let SupportedExtenbodas = [
+        let SupportedExtensions = [
             "ANGLE_instanced_arrays",
             "EXT_blend_minmax",
             "EXT_color_buffer_half_float",
@@ -560,8 +560,8 @@
             "EXT_float_blend",
             "EXT_frag_depth",
             "EXT_shader_texture_lod",
-            "EXT_texture_compresboda_bptc",
-            "EXT_texture_compresboda_rgtc",
+            "EXT_texture_compression_bptc",
+            "EXT_texture_compression_rgtc",
             "EXT_texture_filter_anisotropic",
             "WEBKIT_EXT_texture_filter_anisotropic",
             "EXT_sRGB",
@@ -587,8 +587,8 @@
             "WEBKIT_WEBGL_lose_context",
             "WEBGL_multi_draw"
         ]
-        bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getSupportedExtenbodas=== `, `${SupportedExtenbodas}  `);
-        return SupportedExtenbodas
+        bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getSupportedExtensions=== `, `${SupportedExtensions}  `);
+        return SupportedExtensions
     }
     bodaEnv.envFunc.WebGLRenderingContext_canvas_get = function WebGLRenderingContext_canvas_get() {
         // debugger
@@ -927,12 +927,12 @@
         bodaEnv.toolsFunc.console_copy(`WebGLLoseContext_loseContext -> `)
     
     }
-    bodaEnv.envFunc.WebGLRenderingContext_getExtenboda = function WebGLRenderingContext_getExtenboda() {
+    bodaEnv.envFunc.WebGLRenderingContext_getExtension = function WebGLRenderingContext_getExtension() {
         
-        let getExtenboda = arguments[0]
-        bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getExtenboda `, `${getExtenboda}  `);
+        let getExtension = arguments[0]
+        bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getExtension `, `${getExtension}  `);
         let info = { _boisinit: bodaEnv.config.isinit }
-        switch (getExtenboda) {
+        switch (getExtension) {
             case "WEBGL_debug_renderer_info":
               info = Object.setPrototypeOf(info,bodaEnv.memory.globlProtoObj['WebGLDebugRendererInfo'].prototype);
               break;
@@ -965,12 +965,12 @@
               info = Object.setPrototypeOf(info,bodaEnv.memory.globlProtoObj['EXTFragDepth'].prototype);
               break;
           
-            case "EXT_texture_compresboda_bptc":
-              info = Object.setPrototypeOf(info,bodaEnv.memory.globlProtoObj['EXTTextureCompresbodaBPTC'].prototype);
+            case "EXT_texture_compression_bptc":
+              info = Object.setPrototypeOf(info,bodaEnv.memory.globlProtoObj['EXTTextureCompressionBPTC'].prototype);
               break;
           
-            case "EXT_texture_compresboda_rgtc":
-              info = Object.setPrototypeOf(info,bodaEnv.memory.globlProtoObj['EXTTextureCompresbodaRGTC'].prototype);
+            case "EXT_texture_compression_rgtc":
+              info = Object.setPrototypeOf(info,bodaEnv.memory.globlProtoObj['EXTTextureCompressionRGTC'].prototype);
               break;
           
             case "EXT_texture_filter_anisotropic":
@@ -1067,7 +1067,7 @@
               break;
           
             default:
-              bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getExtenboda `,`${getExtenboda}属性未实现' `);
+              bodaEnv.toolsFunc.console_copy(`WebGLRenderingContext_getExtension `,`${getExtension}属性未实现' `);
               break;
           }
         

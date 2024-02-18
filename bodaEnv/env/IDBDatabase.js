@@ -26,14 +26,14 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBDatabase"].pro
   }.name,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "verboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "version", {
   configurable: true,
   enumerable: true,
   get: {
-    verboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "IDBDatabase", "verboda_get", arguments);
+    version() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "IDBDatabase", "version_get", arguments);
     }
-  }.verboda,
+  }.version,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "objectStoreNames", {
@@ -88,19 +88,19 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBDatabase"].pro
     }
   }.onerror
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "onverbodachange", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "onversionchange", {
   configurable: true,
   enumerable: true,
   get: {
-    onverbodachange() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "IDBDatabase", "onverbodachange_get", arguments);
+    onversionchange() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "IDBDatabase", "onversionchange_get", arguments);
     }
-  }.onverbodachange,
+  }.onversionchange,
   set: {
-    onverbodachange() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "IDBDatabase", "onverbodachange_set", arguments);
+    onversionchange() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "IDBDatabase", "onversionchange_set", arguments);
     }
-  }.onverbodachange
+  }.onversionchange
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBDatabase"].prototype, "close", {
   configurable: true,

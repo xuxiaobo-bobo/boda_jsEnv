@@ -116,14 +116,14 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGPatternElement
   }.href,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGPatternElement"].prototype, "requiredExtenbodas", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGPatternElement"].prototype, "requiredExtensions", {
   configurable: true,
   enumerable: true,
   get: {
-    requiredExtenbodas() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["SVGPatternElement"].prototype, "SVGPatternElement", "requiredExtenbodas_get", arguments);
+    requiredExtensions() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["SVGPatternElement"].prototype, "SVGPatternElement", "requiredExtensions_get", arguments);
     }
-  }.requiredExtenbodas,
+  }.requiredExtensions,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGPatternElement"].prototype, "systemLanguage", {

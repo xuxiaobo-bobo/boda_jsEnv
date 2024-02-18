@@ -10,14 +10,14 @@ bodaEnv.memory.globlProtoObj['Database'] = function Database() {
   return bodaEnv.toolsFunc.throwError("TypeError", "Illegal constructor");
 };
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj['Database'], "Database");
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj['Database'].prototype, "verboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj['Database'].prototype, "version", {
   configurable: true,
   enumerable: true,
   get: {
-    verboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj['Database'].prototype, "Database", "verboda_get", arguments);
+    version() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj['Database'].prototype, "Database", "version_get", arguments);
     }
-  }.verboda,
+  }.version,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj['Database'].prototype, "readTransaction", {
@@ -40,15 +40,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj['Database'].protot
     }
   }.transaction
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj['Database'].prototype, "changeVerboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj['Database'].prototype, "changeVersion", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    changeVerboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj['Database'].prototype, "Database", "changeVerboda", arguments);
+    changeVersion() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj['Database'].prototype, "Database", "changeVersion", arguments);
     }
-  }.changeVerboda
+  }.changeVersion
 });
 delete bodaEnv.memory.globlProtoObj['Database'].prototype.constructor;
 bodaEnv.memory.globlProtoObj['database'] = {};

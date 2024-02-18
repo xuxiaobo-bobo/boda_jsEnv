@@ -76,14 +76,14 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["MIDIPort"].protot
   }.type,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["MIDIPort"].prototype, "verboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["MIDIPort"].prototype, "version", {
   configurable: true,
   enumerable: true,
   get: {
-    verboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["MIDIPort"].prototype, "MIDIPort", "verboda_get", arguments);
+    version() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["MIDIPort"].prototype, "MIDIPort", "version_get", arguments);
     }
-  }.verboda,
+  }.version,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["MIDIPort"].prototype, "onstatechange", {

@@ -100,15 +100,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["HTMLTrackElement"
   configurable: true,
   enumerable: true,
   get: {
-    default_boda() {
+    default_sion() {
       return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["HTMLTrackElement"].prototype, "HTMLTrackElement", "default_get", arguments);
     }
-  }.default_boda,
+  }.default_sion,
   set: {
-    default_boda() {
+    default_sion() {
       return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["HTMLTrackElement"].prototype, "HTMLTrackElement", "default_set", arguments);
     }
-  }.default_boda
+  }.default_sion
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["HTMLTrackElement"].prototype, "readyState", {
   configurable: true,

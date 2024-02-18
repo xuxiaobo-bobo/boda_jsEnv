@@ -126,19 +126,19 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Document"].protot
   }.xmlEncoding,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Document"].prototype, "xmlVerboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Document"].prototype, "xmlVersion", {
   configurable: true,
   enumerable: true,
   get: {
-    xmlVerboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Document"].prototype, "Document", "xmlVerboda_get", arguments);
+    xmlVersion() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Document"].prototype, "Document", "xmlVersion_get", arguments);
     }
-  }.xmlVerboda,
+  }.xmlVersion,
   set: {
-    xmlVerboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Document"].prototype, "Document", "xmlVerboda_set", arguments);
+    xmlVersion() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Document"].prototype, "Document", "xmlVersion_set", arguments);
     }
-  }.xmlVerboda
+  }.xmlVersion
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Document"].prototype, "xmlStandalone", {
   configurable: true,
@@ -2410,15 +2410,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Document"].protot
     }
   }.createEvent
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Document"].prototype, "createExpresboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Document"].prototype, "createExpression", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    createExpresboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Document"].prototype, "Document", "createExpresboda", arguments);
+    createExpression() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["Document"].prototype, "Document", "createExpression", arguments);
     }
-  }.createExpresboda
+  }.createExpression
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Document"].prototype, "createNSResolver", {
   configurable: true,

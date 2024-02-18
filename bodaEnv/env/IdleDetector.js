@@ -16,15 +16,15 @@ bodaEnv.memory.globlProtoObj["IdleDetector"] = function IdleDetector() {
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["IdleDetector"], "IdleDetector");
 bodaEnv.memory.globlProtoObj["IdleDetector"].prototype.__proto__ = bodaEnv.memory.globlProtoObj["EventTarget"].prototype;
 bodaEnv.memory.globlProtoObj["IdleDetector"].__proto__ = bodaEnv.memory.globlProtoObj["EventTarget"];
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IdleDetector"], "requestPermisboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IdleDetector"], "requestPermission", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    requestPermisboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IdentityCredential"], "IdleDetector", "requestPermisboda", arguments);
+    requestPermission() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IdentityCredential"], "IdleDetector", "requestPermission", arguments);
     }
-  }.requestPermisboda
+  }.requestPermission
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IdleDetector"].prototype, "userState", {
   configurable: true,

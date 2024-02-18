@@ -46,14 +46,14 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGGraphicsElemen
   }.farthestViewportElement,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGGraphicsElement"].prototype, "requiredExtenbodas", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGGraphicsElement"].prototype, "requiredExtensions", {
   configurable: true,
   enumerable: true,
   get: {
-    requiredExtenbodas() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["SVGGraphicsElement"].prototype, "SVGGraphicsElement", "requiredExtenbodas_get", arguments);
+    requiredExtensions() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["SVGGraphicsElement"].prototype, "SVGGraphicsElement", "requiredExtensions_get", arguments);
     }
-  }.requiredExtenbodas,
+  }.requiredExtensions,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["SVGGraphicsElement"].prototype, "systemLanguage", {

@@ -16,14 +16,14 @@ bodaEnv.memory.globlProtoObj["Notification"] = function Notification() {
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["Notification"], "Notification");
 bodaEnv.memory.globlProtoObj["Notification"].prototype.__proto__ = bodaEnv.memory.globlProtoObj["EventTarget"].prototype;
 bodaEnv.memory.globlProtoObj["Notification"].__proto__ = bodaEnv.memory.globlProtoObj["EventTarget"];
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Notification"], "permisboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Notification"], "permission", {
   configurable: true,
   enumerable: true,
   get: {
-    permisboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["NavigatorUAData"], "Notification", "permisboda_get", arguments, 'default');
+    permission() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["NavigatorUAData"], "Notification", "permission_get", arguments, 'default');
     }
-  }.permisboda,
+  }.permission,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Notification"], "maxActions", {
@@ -36,15 +36,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Notification"], "
   }.maxActions,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Notification"], "requestPermisboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Notification"], "requestPermission", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    requestPermisboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["NavigatorUAData"], "Notification", "requestPermisboda", arguments);
+    requestPermission() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["NavigatorUAData"], "Notification", "requestPermission", arguments);
     }
-  }.requestPermisboda
+  }.requestPermission
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["Notification"].prototype, "onclick", {
   configurable: true,

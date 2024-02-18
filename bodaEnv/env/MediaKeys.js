@@ -14,15 +14,15 @@ bodaEnv.memory.globlProtoObj["MediaKeys"] = function MediaKeys() {
   ;
 };
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["MediaKeys"], "MediaKeys");
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["MediaKeys"].prototype, "createSesboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["MediaKeys"].prototype, "createSession", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    createSesboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["MediaKeys"].prototype, "MediaKeys", "createSesboda", arguments);
+    createSession() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["MediaKeys"].prototype, "MediaKeys", "createSession", arguments);
     }
-  }.createSesboda
+  }.createSession
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["MediaKeys"].prototype, "setServerCertificate", {
   configurable: true,

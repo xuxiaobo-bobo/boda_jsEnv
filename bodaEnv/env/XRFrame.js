@@ -14,14 +14,14 @@ bodaEnv.memory.globlProtoObj["XRFrame"] = function XRFrame() {
   ;
 };
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["XRFrame"], "XRFrame");
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRFrame"].prototype, "sesboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRFrame"].prototype, "session", {
   configurable: true,
   enumerable: true,
   get: {
-    sesboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRFrame"].prototype, "XRFrame", "sesboda_get", arguments);
+    session() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRFrame"].prototype, "XRFrame", "session_get", arguments);
     }
-  }.sesboda,
+  }.session,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRFrame"].prototype, "getPose", {

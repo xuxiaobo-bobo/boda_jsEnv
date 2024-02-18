@@ -1,3 +1,3 @@
-// sesbodaStorage对象
+// sessionStorage对象
 
-bodaEnv.memory.globlProtoObj["sesbodaStorage"] = new bodaEnv.memory.globlProtoObj["Storage"]('bobo');
+bodaEnv.memory.globlProtoObj["sessionStorage"] = new bodaEnv.memory.globlProtoObj["Storage"]('bobo');

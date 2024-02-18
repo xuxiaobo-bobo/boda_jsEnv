@@ -1072,8 +1072,8 @@ function getRunCode(){
         }
     }
     // debugger
-    // traverse(ast, exportToGlobal);
-    // code=generator(ast, {minified: false}  ).code
+    traverse(ast, exportToGlobal);
+    code=generator(ast, {minified: false}  ).code
     // debugger
     // console.log('run.js 代码转换完成')
     return code

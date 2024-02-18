@@ -7600,15 +7600,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingCo
     }
   }.getError
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "getExtenboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "getExtension", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    getExtenboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "WebGL2RenderingContext", "getExtenboda", arguments);
+    getExtension() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "WebGL2RenderingContext", "getExtension", arguments);
     }
-  }.getExtenboda
+  }.getExtension
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "getFragDataLocation", {
   configurable: true,
@@ -7740,15 +7740,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingCo
     }
   }.getShaderParameter
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "getShaderPrecibodaFormat", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "getShaderPrecisionFormat", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    getShaderPrecibodaFormat() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "WebGL2RenderingContext", "getShaderPrecibodaFormat", arguments);
+    getShaderPrecisionFormat() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "WebGL2RenderingContext", "getShaderPrecisionFormat", arguments);
     }
-  }.getShaderPrecibodaFormat
+  }.getShaderPrecisionFormat
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "getShaderSource", {
   configurable: true,
@@ -7760,15 +7760,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingCo
     }
   }.getShaderSource
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "getSupportedExtenbodas", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "getSupportedExtensions", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    getSupportedExtenbodas() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "WebGL2RenderingContext", "getSupportedExtenbodas", arguments);
+    getSupportedExtensions() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "WebGL2RenderingContext", "getSupportedExtensions", arguments);
     }
-  }.getSupportedExtenbodas
+  }.getSupportedExtensions
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebGL2RenderingContext"].prototype, "getSyncParameter", {
   configurable: true,

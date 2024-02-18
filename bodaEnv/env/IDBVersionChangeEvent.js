@@ -1,9 +1,9 @@
-// IDBVerbodaChangeEvent对象
+// IDBVersionChangeEvent对象
 
-bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"] = function IDBVerbodaChangeEvent() {
+bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"] = function IDBVersionChangeEvent() {
   let arg = arguments[0];
   if (arg != 'bobo') {
-    bodaEnv.toolsFunc.console_copy('IDBVerbodaChangeEvent 实例化对象 --->', bodaEnv.toolsFunc.stringify_bo(arguments, function (k, v) {
+    bodaEnv.toolsFunc.console_copy('IDBVersionChangeEvent 实例化对象 --->', bodaEnv.toolsFunc.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';
       } else {
@@ -13,45 +13,45 @@ bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"] = function IDBVerbodaChang
   }
   ;
 };
-bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"], "IDBVerbodaChangeEvent");
-bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].prototype.__proto__ = bodaEnv.memory.globlProtoObj["Event"].prototype;
-bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].__proto__ = bodaEnv.memory.globlProtoObj["Event"];
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].prototype, "oldVerboda", {
+bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"], "IDBVersionChangeEvent");
+bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].prototype.__proto__ = bodaEnv.memory.globlProtoObj["Event"].prototype;
+bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].__proto__ = bodaEnv.memory.globlProtoObj["Event"];
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].prototype, "oldVersion", {
   configurable: true,
   enumerable: true,
   get: {
-    oldVerboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].prototype, "IDBVerbodaChangeEvent", "oldVerboda_get", arguments);
+    oldVersion() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].prototype, "IDBVersionChangeEvent", "oldVersion_get", arguments);
     }
-  }.oldVerboda,
+  }.oldVersion,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].prototype, "newVerboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].prototype, "newVersion", {
   configurable: true,
   enumerable: true,
   get: {
-    newVerboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].prototype, "IDBVerbodaChangeEvent", "newVerboda_get", arguments);
+    newVersion() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].prototype, "IDBVersionChangeEvent", "newVersion_get", arguments);
     }
-  }.newVerboda,
+  }.newVersion,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].prototype, "dataLoss", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].prototype, "dataLoss", {
   configurable: true,
   enumerable: true,
   get: {
     dataLoss() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].prototype, "IDBVerbodaChangeEvent", "dataLoss_get", arguments);
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].prototype, "IDBVersionChangeEvent", "dataLoss_get", arguments);
     }
   }.dataLoss,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].prototype, "dataLossMessage", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].prototype, "dataLossMessage", {
   configurable: true,
   enumerable: true,
   get: {
     dataLossMessage() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBVerbodaChangeEvent"].prototype, "IDBVerbodaChangeEvent", "dataLossMessage_get", arguments);
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["IDBVersionChangeEvent"].prototype, "IDBVersionChangeEvent", "dataLossMessage_get", arguments);
     }
   }.dataLossMessage,
   set: undefined

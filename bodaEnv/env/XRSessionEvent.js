@@ -1,9 +1,9 @@
-// XRSesbodaEvent对象
+// XRSessionEvent对象
 
-bodaEnv.memory.globlProtoObj["XRSesbodaEvent"] = function XRSesbodaEvent() {
+bodaEnv.memory.globlProtoObj["XRSessionEvent"] = function XRSessionEvent() {
   let arg = arguments[0];
   if (arg != 'bobo') {
-    bodaEnv.toolsFunc.console_copy('XRSesbodaEvent 实例化对象 --->', bodaEnv.toolsFunc.stringify_bo(arguments, function (k, v) {
+    bodaEnv.toolsFunc.console_copy('XRSessionEvent 实例化对象 --->', bodaEnv.toolsFunc.stringify_bo(arguments, function (k, v) {
       if (v == window) {
         return 'window';
       } else {
@@ -13,16 +13,16 @@ bodaEnv.memory.globlProtoObj["XRSesbodaEvent"] = function XRSesbodaEvent() {
   }
   ;
 };
-bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["XRSesbodaEvent"], "XRSesbodaEvent");
-bodaEnv.memory.globlProtoObj["XRSesbodaEvent"].prototype.__proto__ = bodaEnv.memory.globlProtoObj["Event"].prototype;
-bodaEnv.memory.globlProtoObj["XRSesbodaEvent"].__proto__ = bodaEnv.memory.globlProtoObj["Event"];
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRSesbodaEvent"].prototype, "sesboda", {
+bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["XRSessionEvent"], "XRSessionEvent");
+bodaEnv.memory.globlProtoObj["XRSessionEvent"].prototype.__proto__ = bodaEnv.memory.globlProtoObj["Event"].prototype;
+bodaEnv.memory.globlProtoObj["XRSessionEvent"].__proto__ = bodaEnv.memory.globlProtoObj["Event"];
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRSessionEvent"].prototype, "session", {
   configurable: true,
   enumerable: true,
   get: {
-    sesboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRSesbodaEvent"].prototype, "XRSesbodaEvent", "sesboda_get", arguments);
+    session() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRSessionEvent"].prototype, "XRSessionEvent", "session_get", arguments);
     }
-  }.sesboda,
+  }.session,
   set: undefined
 });

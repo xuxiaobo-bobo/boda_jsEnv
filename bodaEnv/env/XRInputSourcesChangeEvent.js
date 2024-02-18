@@ -16,14 +16,14 @@ bodaEnv.memory.globlProtoObj["XRInputSourcesChangeEvent"] = function XRInputSour
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["XRInputSourcesChangeEvent"], "XRInputSourcesChangeEvent");
 bodaEnv.memory.globlProtoObj["XRInputSourcesChangeEvent"].prototype.__proto__ = bodaEnv.memory.globlProtoObj["Event"].prototype;
 bodaEnv.memory.globlProtoObj["XRInputSourcesChangeEvent"].__proto__ = bodaEnv.memory.globlProtoObj["Event"];
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRInputSourcesChangeEvent"].prototype, "sesboda", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRInputSourcesChangeEvent"].prototype, "session", {
   configurable: true,
   enumerable: true,
   get: {
-    sesboda() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRInputSourcesChangeEvent"].prototype, "XRInputSourcesChangeEvent", "sesboda_get", arguments);
+    session() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XRInputSourcesChangeEvent"].prototype, "XRInputSourcesChangeEvent", "session_get", arguments);
     }
-  }.sesboda,
+  }.session,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XRInputSourcesChangeEvent"].prototype, "added", {

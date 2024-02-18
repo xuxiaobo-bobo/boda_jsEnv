@@ -35,6 +35,7 @@ const script = new VMScript(jsCode, "./debugJS.js")
 let result = vm.run(script);
 let testNum=0
     function run_rsvmp(_reqhtml,apiUrl) {
+        // configFormChrome 去浏览器复制一下,记得把cookie删了
         //获取前缀,getResult文件下把这个打开就行'rsurl':bodaEnv.toolsFunc.getApi(bodaConifg['apiUrl'])
         // listenerOpen 打开后 调用load事件 asyncListener文件夹下
         let website_ = atob('aHR0cDovL3d3dy5ubXBhLmdvdi5jbg==')

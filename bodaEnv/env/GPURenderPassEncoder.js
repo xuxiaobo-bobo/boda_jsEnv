@@ -98,15 +98,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPURenderPassEnco
     }
   }.writeTimestamp
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "beginOcclubodaQuery", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "beginOcclusionQuery", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    beginOcclubodaQuery() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "GPURenderPassEncoder", "beginOcclubodaQuery", arguments);
+    beginOcclusionQuery() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "GPURenderPassEncoder", "beginOcclusionQuery", arguments);
     }
-  }.beginOcclubodaQuery
+  }.beginOcclusionQuery
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "draw", {
   configurable: true,
@@ -158,15 +158,15 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPURenderPassEnco
     }
   }.end
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "endOcclubodaQuery", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "endOcclusionQuery", {
   configurable: true,
   enumerable: true,
   writable: true,
   value: {
-    endOcclubodaQuery() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "GPURenderPassEncoder", "endOcclubodaQuery", arguments);
+    endOcclusionQuery() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "GPURenderPassEncoder", "endOcclusionQuery", arguments);
     }
-  }.endOcclubodaQuery
+  }.endOcclusionQuery
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["GPURenderPassEncoder"].prototype, "popDebugGroup", {
   configurable: true,

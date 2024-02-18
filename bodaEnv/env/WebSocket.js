@@ -112,14 +112,14 @@ bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebSocket"].proto
     }
   }.onclose
 });
-bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebSocket"].prototype, "extenbodas", {
+bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebSocket"].prototype, "extensions", {
   configurable: true,
   enumerable: true,
   get: {
-    extenbodas() {
-      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["WebSocket"].prototype, "WebSocket", "extenbodas_get", arguments);
+    extensions() {
+      return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["WebSocket"].prototype, "WebSocket", "extensions_get", arguments);
     }
-  }.extenbodas,
+  }.extensions,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["WebSocket"].prototype, "protocol", {

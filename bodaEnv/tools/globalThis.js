@@ -8273,18 +8273,18 @@ bodaEnv.toolsFunc.defineProperty_bo(addEventListener, 'length', {
 // debugger
 
 //堆栈拦截
-// bodaError.prepareStackTrace = function () {
-//   // debugger;
-//   let _arg0 = arguments[0];
-//   let _arg1 = arguments[1];
-//   // debugger
-//   bodaEnv.toolsFunc.console_copy(`Error stack 检测 !!!!! _arg0->`, _arg0 + '');
-//   bodaEnv.toolsFunc.console_copy(`Error stack 检测 !!!!! _arg1->`, _arg1 + '');
-//   let _res = `Error
-//   at HTMLDocument.i (https://g.alicdn.com/AWSC/fireyejs/1.227.0/fireyejs.js:753:29)`;
-//   bodaEnv.toolsFunc.console_copy(`Error stack 检测 !!!!! 修改返回堆栈为->`, _res);
-//   return _res;
-// };
+bodaError.prepareStackTrace = function () {
+  // debugger;
+  let _arg0 = arguments[0];
+  let _arg1 = arguments[1];
+  // debugger
+  bodaEnv.toolsFunc.console_copy(`Error stack 检测 !!!!! _arg0->`, _arg0 + '');
+  bodaEnv.toolsFunc.console_copy(`Error stack 检测 !!!!! _arg1->`, _arg1 + '');
+  let _res = `Error
+  at HTMLDocument.i (https://g.alicdn.com/AWSC/fireyejs/1.227.0/fireyejs.js:753:29)`;
+  bodaEnv.toolsFunc.console_copy(`Error stack 检测 !!!!! 修改返回堆栈为->`, _res);
+  return _res;
+};
 
 
 bodaEnv.toolsFunc.defineProperty_bo(this, 'window', {
