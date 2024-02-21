@@ -12,7 +12,7 @@ bodaEnv.memory.globlProtoObj["TextEncoder"] = function TextEncoder() {
     }));
   }
   ;
-  bodaEnv.memory.WeakMap.set(this, new sionTextEncoder(arg));
+  bodaEnv.memory.WeakMap.set(this, new bodaTextEncoder(arg));
 };
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["TextEncoder"], "TextEncoder");
 bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["TextEncoder"].prototype, "encoding", {
