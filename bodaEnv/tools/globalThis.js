@@ -24,7 +24,7 @@ bodaEnv.toolsFunc.defineProperty(window, "atob", {
   enumerable: true,
   writable: true,
   value: {
-    atob() {
+    atob(str) {
       return bodaEnv.toolsFunc.base64.base64decode(str);
     }
   }.atob
@@ -34,7 +34,7 @@ bodaEnv.toolsFunc.defineProperty(window, "btoa", {
   enumerable: true,
   writable: true,
   value: {
-    btoa() {
+    btoa(str) {
       return bodaEnv.toolsFunc.base64.base64encode(str);
     }
   }.btoa

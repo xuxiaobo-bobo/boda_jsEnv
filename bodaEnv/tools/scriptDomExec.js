@@ -43,95 +43,6 @@ function bodaDoScript(){
       bodaEnv.memory.bodaCurrentScriptElement=null   //当前运行的script标签是哪一个    过document.currxxxscript 检测
 
 
-      function bodaBabelScript(code){
-          /*
-          转为全局变量为globlThis下的变量
-          */
-        //  debugger
-          let ast=bodaBabelParser.parse(code);
-          const exportToGlobal =
-          {
-              "Program"(path){
-                  // debugger
-                  const { body } = path.node;
-                  const newBody = [];
-              
-                  body.forEach((node) => {
-                    if (node.type === 'VariableDeclaration') {
-                      node.declarations.forEach((declaration) => {
-                        if (declaration.type === 'VariableDeclarator') {
-                          const { name } = declaration.id;
-                          const modifiedNode = {
-                            type: 'ExpresbodaStatement',
-                            expresboda: {
-                              type: 'AssignmentExpresboda',
-                              operator: '=',
-                              left: {
-                                type: 'MemberExpresboda',
-                                object: {
-                                  type: 'Identifier',
-                                  name: 'globalThis',
-                                },
-                                property: {
-                                  type: 'Identifier',
-                                  name,
-                                },
-                                computed: false,
-                              },
-                              right: declaration.init,
-                            },
-                          };
-                          newBody.push(modifiedNode);
-                        }
-                      });
-                    } 
-                    else if (node.type === 'FunctionDeclaration') {
-                      const { id } = node;
-                      const modifiedNode = {
-                        type: 'ExpresbodaStatement',
-                        expresboda: {
-                          type: 'AssignmentExpresboda',
-                          operator: '=',
-                          left: {
-                            type: 'MemberExpresboda',
-                            object: {
-                              type: 'Identifier',
-                              name: 'globalThis',
-                            },
-                            property: {
-                              type: 'Identifier',
-                              name: id.name,
-                            },
-                            computed: false,
-                          },
-                          right: {
-                            type: 'FunctionExpresboda',
-                            id: id,
-                            params: node.params,
-                            body: node.body,
-                            generator: node.generator,
-                            async: node.async,
-                          },
-                        },
-                      };
-                      // debugger
-                      newBody.push(modifiedNode);
-                  }
-                  else {
-                      newBody.push(node);
-                    }
-                  });
-                  path.node.body = newBody;
-
-              }
-          }
-          // debugger
-          bodaBabeltraverse(ast, exportToGlobal);
-          code=bodaBabelgenerator(ast,{minified: true}).code
-          
-          return code
-      }
-
       function bodaParseScript(element){
           let scriptCode=null;
           // debugger
@@ -194,12 +105,9 @@ function bodaDoScript(){
                     for (let node of bodaEnv.memory.scriptNodeNeedReads){
                       // debugger
                         let nodeNeedCode=bodaParseScript(node)
-                        if (bodaConifg['astChangeScope'] ==true){
-                          let astCode=bodaBabelScript(nodeNeedCode)
-                          eval(astCode)
-                        }else{
+ 
                           eval(nodeNeedCode)
-                        }
+                
                     }
                     bodaEnv.memory.scriptNodeNeedRead=null
                   }
