@@ -1326,9 +1326,9 @@
       return _res
 
   }
-  bodaEnv.envFunc.RTCSesbodaDescription_sdp_get = function() {
+  bodaEnv.envFunc.RTCSessionDescription_sdp_get = function() {
       let _sdp = 'v=0\r\no=- 283646262374240015 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=application 9 UDP/DTLS/SCTP webrtc-datachannel\r\nc=IN IP4 0.0.0.0\r\na=candidate:3810267142 1 udp 2113937151 c9d17d26-c64c-4f6d-8935-d34d0c8b0e25.local 51806 typ host generation 0 network-cost 999\r\na=ice-ufrag:zByE\r\na=ice-pwd:2UoKT0eOwJeeZwAgjWodRyqU\r\na=ice-options:trickle\r\na=fingerprint:sha-256 9A:C4:12:A0:BE:38:9F:A6:AA:55:24:66:A0:5F:81:91:B2:9C:27:41:67:56:3C:0F:4E:16:C0:E6:77:E3:41:C7\r\na=setup:actpass\r\na=mid:0\r\na=sctp-port:5000\r\na=max-message-size:262144\r\n'
-      bodaEnv.toolsFunc.console_copy(`RTCSesbodaDescription_sdp_get IP检测 res->`, _sdp)
+      bodaEnv.toolsFunc.console_copy(`RTCSessionDescription_sdp_get IP检测 res->`, _sdp)
 
       return _sdp
   }

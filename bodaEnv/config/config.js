@@ -63,7 +63,7 @@ bodaEnv.memory.contentWindow_keys=[
     "onbeforeinstallprompt",
     "crypto",
     "indexedDB",
-    "sesbodaStorage",
+    "sessionStorage",
     "localStorage",
     "onbeforexrselect",
     "onabort",
