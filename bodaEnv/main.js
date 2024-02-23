@@ -35,7 +35,7 @@ const script = new VMScript(jsCode, "./debugJS.js")
 let result = vm.run(script);
 let testNum=0
 function main() {
-    let website_ = 'https://passport.gds.org.cn/Account/Login'
+    let website_ = 'https://pss-system.cponline.cnipa.gov.cn/conventionalSearch'
     // console.time()
     let bohtml = fs.readFileSync(path.join(__dirname,'run','run.html'), 'utf8').toString();
     // debugger

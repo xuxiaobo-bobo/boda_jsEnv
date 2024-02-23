@@ -317,7 +317,7 @@
       if (bodaEnv.memory.asyncEvent.setTimeout.indexOf(bodaevent) != -1) {
           return bodaEnv.memory.timeoutID;
       }
-      // bodaEnv.bodaTools.symbolProperty(bodaevent)
+      // bodaEnv.sionTools.symbolProperty(bodaevent)
       bodaEnv.memory.asyncEvent.setTimeout.push(bodaevent);
       // }
 
@@ -328,7 +328,7 @@
       let func = arguments[0];
       let delay = arguments[1] || 0;
       let length = arguments.length;
-      // bodaEnv.bodaTools.symbolProperty(func)
+      // bodaEnv.sionTools.symbolProperty(func)
       let argList = [];
       for (let i = 2; i < length; i++) {
           argList.push(arguments[i]);
@@ -357,11 +357,11 @@
           bodaEnv.toolsFunc.console_copy(`window_setTimeout `, `结束后,立马调用  `);
           return bodaEnv.memory.timeoutID
       }
-      // bodaEnv.bodaTools.symbolProperty(bodaevent)
+      // bodaEnv.sionTools.symbolProperty(bodaevent)
       if (bodaEnv.memory.asyncEvent.setTimeout.indexOf(bodaevent) != -1) {
           return bodaEnv.memory.timeoutID;
       }
-      // bodaEnv.bodaTools.symbolProperty(bodaevent)
+      // bodaEnv.sionTools.symbolProperty(bodaevent)
       bodaEnv.memory.asyncEvent.setTimeout.push(bodaevent);
       // }
       return bodaEnv.memory.timeoutID;
@@ -385,12 +385,12 @@
 
       return localStorageVal
   }
-  bodaEnv.envFunc.window_sesbodaStorage_get = function() {
+  bodaEnv.envFunc.window_sessionStorage_get = function() {
 
-      let sesbodaStorageVal = bodaEnv.memory.globlProtoObj['sesbodaStorage']
-      bodaEnv.toolsFunc.console_copy(`window_localStorage_get  ->res -> `, sesbodaStorageVal)
+      let sessionStorageVal = bodaEnv.memory.globlProtoObj['sessionStorage']
+      bodaEnv.toolsFunc.console_copy(`window_localStorage_get  ->res -> `, sessionStorageVal)
 
-      return sesbodaStorageVal
+      return sessionStorageVal
   }
   bodaEnv.envFunc.window_onload_set = function() {
       bodaEnv.memory.window['onload'] = arguments[0]
@@ -452,15 +452,15 @@
   }
 
   bodaEnv.envFunc.Navigator_permissions_get = function() {
-      let islive = bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this, 'permisbodas')
+      let islive = bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this, 'permission()')
       if (islive) {
           bodaEnv.toolsFunc.console_copy(`Navigator_permissions_get 已存在返回`, islive)
           return islive
       }
-      let permisbodas = new Permissions('bobo')
-      bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'permisbodas', permisbodas)
-      bodaEnv.toolsFunc.console_copy(`Navigator_permissions_get -> permisbodas -> ${permisbodas}`)
-      return permisbodas
+      let permissions = new Permissions('bobo')
+      bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'permissions', permissions)
+      bodaEnv.toolsFunc.console_copy(`Navigator_permissions_get -> permissions -> ${permissions}`)
+      return permissions
   }
   bodaEnv.envFunc.Navigator_mediaSession_get = function() {
       let islive = bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this, 'mediaSession')
@@ -597,7 +597,7 @@
 
       // }
       // document.currentScript.src = 'https://challenges.cloudflare.com/turnstile/v0/g/313d8a27/api.js?onload=URXdVe4&render=explicit'
-      // let newcode = bodafs.readFileSync('D://My_Dir//env_xbb_lastest_bo//run//new//www.e-food.gr//onload.js').toString()
+      // let newcode = sionfs.readFileSync('D://My_Dir//env_xbb_lastest_bo//run//new//www.e-food.gr//onload.js').toString()
       // eval(newcode)
   }
 
@@ -911,7 +911,7 @@
   }
   bodaEnv.envFunc.location_replace = function() {
       let r = arguments[0]
-      debugger // res = bodaobj.location.replace(r)
+      debugger // res = sionobj.location.replace(r)
       bodaEnv.toolsFunc.console_copy(`location_replace `, `replace->${r}`, );
       bodaEnv.toolsFunc.console_copy(`--------------------页面跳转停止执行--------------------`, );
       bodaEnv.toolsFunc.console_copy(`--------------------页面跳转停止执行--------------------`, );
@@ -1225,21 +1225,21 @@
       return arg;
   }
   ;
-  bodaEnv.envFunc.Permisbodas_query = function Permisbodas_query() {
+  bodaEnv.envFunc.Permissions_query = function Permissions_query() {
 
       // debugger
       let query = arguments[0];
       if (query['name'] == 'geolocation') {
-          let res = new PermisbodaStatus('bobo');
-          // res.__proto__ = bodaEnv.memory.globalobj['PermisbodaStatus'].prototype
+          let res = new PermissionStatus('bobo');
+          // res.__proto__ = bodaEnv.memory.globalobj['PermissionStatus'].prototype
           let promise = new Promise((resolve,reject)=>{
               resolve(res);
           }
           );
-          bodaEnv.toolsFunc.console_copy(`Permisbodas_query `, `-> res ->${promise}`);
+          bodaEnv.toolsFunc.console_copy(`Permissions_query `, `-> res ->${promise}`);
           return promise;
       } else {
-          bodaEnv.toolsFunc.console_copy(`Permisbodas_query `, `${query} 未实现`);
+          bodaEnv.toolsFunc.console_copy(`Permissions_query `, `${query} 未实现`);
       }
   }
   ;
@@ -3307,49 +3307,49 @@
       return isExtended
   }
   bodaEnv.envFunc.Screen_width_get = function Screen_width_get() {
-      let width = bodaEnv.memory.screenDimenbodas['screen_width'];
+      let width = bodaEnv.memory.screenDimensions['screen_width'];
       bodaEnv.toolsFunc.console_copy(`Screen_width_get `, `${width}  `)
 
       return width
   }
   bodaEnv.envFunc.Screen_height_get = function Screen_height_get() {
-      let height = bodaEnv.memory.screenDimenbodas['screen_height'];
+      let height = bodaEnv.memory.screenDimensions['screen_height'];
       bodaEnv.toolsFunc.console_copy(`Screen_height_get `, `${height}  `)
 
       return height
   }
   bodaEnv.envFunc.Screen_availWidth_get = function Screen_availWidth_get() {
-      let availWidth = bodaEnv.memory.screenDimenbodas['screen_availWidth'];
+      let availWidth = bodaEnv.memory.screenDimensions['screen_availWidth'];
       bodaEnv.toolsFunc.console_copy(`Screen_availWidth_get `, `${availWidth}  `)
 
       return availWidth
   }
   bodaEnv.envFunc.Screen_availHeight_get = function Screen_availHeight_get() {
-      let availHeight = bodaEnv.memory.screenDimenbodas['screen_availHeight']
+      let availHeight = bodaEnv.memory.screenDimensions['screen_availHeight']
       bodaEnv.toolsFunc.console_copy(`Screen_availHeight_get `, `${availHeight}  `)
 
       return availHeight
   }
   bodaEnv.envFunc.window_innerHeight_get = function() {
-      let innerHeight = bodaEnv.memory.screenDimenbodas['window_innerHeight'];
+      let innerHeight = bodaEnv.memory.screenDimensions['window_innerHeight'];
       bodaEnv.toolsFunc.console_copy(`window_innerHeight_get `, `innerHeight ->${innerHeight}`);
       return innerHeight;
   }
   ;
   bodaEnv.envFunc.window_innerWidth_get = function() {
-      let innerWidth = bodaEnv.memory.screenDimenbodas['window_innerWidth'];;
+      let innerWidth = bodaEnv.memory.screenDimensions['window_innerWidth'];;
       bodaEnv.toolsFunc.console_copy(`window_innerWidth_get `, `innerWidth ->${innerWidth}`);
       return innerWidth;
   }
   ;
   bodaEnv.envFunc.window_outerWidth_get = function window_outerWidth_get() {
-      ;let outerWidth = bodaEnv.memory.screenDimenbodas['window_outerWidth'];
+      ;let outerWidth = bodaEnv.memory.screenDimensions['window_outerWidth'];
       bodaEnv.toolsFunc.console_copy(`window_outerWidth_get `, `outerWidth ->${outerWidth}`);
       return outerWidth;
   }
   ;
   bodaEnv.envFunc.window_outerHeight_get = function window_outerHeight_get() {
-      ;let outerHeight = bodaEnv.memory.screenDimenbodas['window_outerHeight'];
+      ;let outerHeight = bodaEnv.memory.screenDimensions['window_outerHeight'];
       bodaEnv.toolsFunc.console_copy(`window_outerHeight_get `, `outerHeight ->${outerHeight}`);
       return outerHeight;
   }

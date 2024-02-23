@@ -1066,9 +1066,9 @@
 
         // }
 
-        // let documentBody = bodaEnv.bodaTools.getProtoAttr(document.documentElement)
+        // let documentBody = bodaEnv.sionTools.getProtoAttr(document.documentElement)
         // // debugger
-        // let thisnode = bodaEnv.bodaTools.getProtoAttr(this) ? bodaEnv.bodaTools.getProtoAttr(this) : bodaEnv.bodaTools.getProtoAttr.call(this, this)
+        // let thisnode = bodaEnv.sionTools.getProtoAttr(this) ? bodaEnv.sionTools.getProtoAttr(this) : bodaEnv.sionTools.getProtoAttr.call(this, this)
 
         // let isIndex = filterThisNode.indexOf(thisnode)
         // debugger
@@ -1189,7 +1189,7 @@
         }
        let sheet = new CSSStyleSheet('bobo')
         bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'sheet', sheet)
-        // bodaEnv.bodaTools.setProtoAttr.call(sheet, sheet, thisNode)
+        // bodaEnv.sionTools.setProtoAttr.call(sheet, sheet, thisNode)
         bodaEnv.toolsFunc.console_copy(this, ` -> HTMLStyleElement_sheet_get sheet-> `, sheet)
 
         return sheet
@@ -1798,7 +1798,7 @@
         // debugger
         for (let dom of bodaEnv.memory.domDocument['all']) {
                 let newNode=bodaEnv.memory.WeakMap.get(dom)
-                // bodaEnv.bodaTools.setProtoAttr.call(newNode,newNode,dom)
+                // bodaEnv.sionTools.setProtoAttr.call(newNode,newNode,dom)
                 tags.push(newNode)
         }
         bodaEnv.memory.undefined.__proto__ = HTMLAllCollection.prototype
@@ -1822,7 +1822,7 @@
         }
         bodaEnv.memory.undefined.__proto__[Symbol.iterator] = Array.prototype[Symbol.iterator];
         bodaEnv.toolsFunc.console_copy("Document_all_get  ", `all ->`,bodaEnv.memory.undefined)
-        // a=bodaEnv.bodaTools.proxy2(a,'document.all')
+        // a=bodaEnv.sionTools.proxy2(a,'document.all')
         return bodaEnv.memory.undefined
     }
     bodaEnv.envFunc.IDBFactory_open = function () {
@@ -1839,20 +1839,20 @@
         // debugger
         let arg = arguments[0];
         if (!arg) {
-            return bodaEnv.bodaTools.throwError("TypeError", `Failed to execute 'observe' on 'MutationObserver': 1 argument required, but only 0 present.`);
+            return bodaEnv.sionTools.throwError("TypeError", `Failed to execute 'observe' on 'MutationObserver': 1 argument required, but only 0 present.`);
         }
         if (!arg instanceof Node) {
-            return bodaEnv.bodaTools.throwError("TypeError", `Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.`);
+            return bodaEnv.sionTools.throwError("TypeError", `Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.`);
         }
         bodaEnv.toolsFunc.console_copy(`MutationObserver_observe 未完善 arg->`, arguments[0], ` -> arg1 ->`, bodaEnv.toolsFunc.stringify_bo(arguments[1]));
     };
-    bodaEnv.envFunc.Document_createExpresboda=function(){
+    bodaEnv.envFunc.Document_createExpression=function(){
         let arg1=arguments[0]
         let arg2=arguments[1]
 
-        let _val=new bodaEnv.memory.globlProtoObj['XPathExpresboda']('bobo')
-        bodaEnv.toolsFunc.console_copy(`Document_createExpresboda -> ${arg1} -> ${arg2} ->`,_val);
-        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(_val,'createExpresboda',arguments)
+        let _val=new bodaEnv.memory.globlProtoObj['XPathExpression']('bobo')
+        bodaEnv.toolsFunc.console_copy(`Document_createExpression -> ${arg1} -> ${arg2} ->`,_val);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(_val,'createExpression',arguments)
         return _val
     }
 
@@ -1885,7 +1885,7 @@
                 tempCookie += `${fenhao}${key}=${jsonCookie[key]}`;
             }
         }
-        // cookie=bodaobj.document.cookie
+        // cookie=sionobj.document.cookie
         bodaEnv.toolsFunc.console_copy(`Document_cookie_get `, `cookie -> ${tempCookie}`);
         return tempCookie;
     };
@@ -1936,7 +1936,7 @@
             let v = item[1].trim();
             bodaEnv.memory.jsonCookie[k] = v;
         }
-        // bodaobj.document.cookie=cookieValue
+        // sionobj.document.cookie=cookieValue
         bodaEnv.toolsFunc.console_copy(`Document_cookie_set -> arg -> `, arguments[0])
         bodaEnv.toolsFunc.console_copy(`Document_cookie_set -> -> 过期时间 -> `, expiresTime)
         bodaEnv.toolsFunc.console_copy(`Document_cookie_set -> -> cookieValue -> `, cookieValue)
@@ -2210,8 +2210,8 @@
                 bodaEnv.memory.WeakMap.set(context,thisNode)
 
                 bodaEnv.toolsFunc.console_copy(`HTMLCanvasElement_getContext ->`, `type->${_type} `, `context->${context} !!!!!!!!!未完善!!!!!!!!!!!! `)
-                // bodaEnv.bodaTools.setProtoAttr.call(context, "canvas", this);
-                // bodaEnv.bodaTools.setProtoAttr.call(this, "type", type);
+                // bodaEnv.sionTools.setProtoAttr.call(context, "canvas", this);
+                // bodaEnv.sionTools.setProtoAttr.call(this, "type", type);
                 break
             default:
                 bodaEnv.toolsFunc.console_copy(`HTMLCanvasElement_getContext ->`, `错误${_type}属性未实现  `)

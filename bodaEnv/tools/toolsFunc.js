@@ -90,7 +90,7 @@
             'BatteryManager_chargingTime_get':bodaEnv.toolsFunc.getRandomInteger(400,1000),
             'webgl':'data:image/png;base64,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'+bodaEnv.toolsFunc.generateRandomString(36)+'=',
             'canvas':'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAEYklEQVR4Xu3UAQkAAAwCwdm/9HI83BLIOdw5AgQIRAQWySkmAQIEzmB5AgIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlACBB1YxAJfjJb2jAAAAAElFTkSuQmCC'+bodaEnv.toolsFunc.generateRandomString(36),
-            'screenDimenbodas': [
+            'screenDimensions': [
                 {'screen_width': 1440, 'screen_height': 900, 'screen_availWidth': 1400, 'screen_availHeight': 850, 'window_innerWidth': 1440, 'window_innerHeight': 791, 'window_outerWidth': 1440, 'window_outerHeight': 912},
                 {'screen_width': 1366, 'screen_height': 768, 'screen_availWidth': 1336, 'screen_availHeight': 718, 'window_innerWidth': 1360, 'window_innerHeight': 680, 'window_outerWidth': 1360, 'window_outerHeight': 800},
                 {'screen_width': 1280, 'screen_height': 800, 'screen_availWidth': 1250, 'screen_availHeight': 750, 'window_innerWidth': 1274, 'window_innerHeight': 650, 'window_outerWidth': 1274, 'window_outerHeight': 770},
@@ -118,11 +118,11 @@
         bodaEnv.memory.BatteryManager_chargingTime_get=fingerPrintList['BatteryManager_chargingTime_get']
         bodaEnv.memory.HTMLCanvasElement_toDataURL_canvas=fingerPrintList['canvas']
         bodaEnv.memory.HTMLCanvasElement_toDataURL_webgl=fingerPrintList['webgl']
-        let _screenDimenbodas=fingerPrintList['screenDimenbodas']
-        bodaEnv.memory.screenDimenbodas=_screenDimenbodas[Math.floor(Math.random() * (_screenDimenbodas.length))]
+        let _screenDimensions=fingerPrintList['screenDimensions']
+        bodaEnv.memory.screenDimensions=_screenDimensions[Math.floor(Math.random() * (_screenDimensions.length))]
         fingerPrintList=null
         getParameter_37446=null
-        screenDimenbodas_=null
+        screenDimensions_=null
     }   
 
     bodaEnv.toolsFunc.SetStyleProp=function(target){
@@ -818,9 +818,9 @@
                    }
                     return result
                   },
-                // preventExtenbodas(target) {
-                //     bodaEnv.toolsFunc.console_copy('[' + objName + ']', '-> preventExtenbodas -> 正在禁止对象扩展');
-                //     return Reflect.preventExtenbodas(target);
+                // preventExtensions(target) {
+                //     bodaEnv.toolsFunc.console_copy('[' + objName + ']', '-> preventExtensions -> 正在禁止对象扩展');
+                //     return Reflect.preventExtensions(target);
                 // },
                 //   getPrototypeOf(target) {
                 //     // debugger
@@ -966,9 +966,9 @@
             //    }
             //     return result
             //   },
-            // preventExtenbodas(target) {
-            //     bodaEnv.toolsFunc.console_copy('[' + objName + ']', '-> preventExtenbodas -> 正在禁止对象扩展');
-            //     return Reflect.preventExtenbodas(target);
+            // preventExtensions(target) {
+            //     bodaEnv.toolsFunc.console_copy('[' + objName + ']', '-> preventExtensions -> 正在禁止对象扩展');
+            //     return Reflect.preventExtensions(target);
             // },
             //   getPrototypeOf(target) {
             //     debugger
@@ -1113,9 +1113,9 @@
             //     bodaEnv.toolsFunc.console_copy('['+objName+']',`-> defineProperty -> 正在定义属性${prop}`);
             //     return Reflect.defineProperty(target, prop, descriptor);
             //   },
-            // preventExtenbodas(target) {
-            //     bodaEnv.toolsFunc.console_copy('[' + objName + ']', '-> preventExtenbodas -> 正在禁止对象扩展');
-            //     return Reflect.preventExtenbodas(target);
+            // preventExtensions(target) {
+            //     bodaEnv.toolsFunc.console_copy('[' + objName + ']', '-> preventExtensions -> 正在禁止对象扩展');
+            //     return Reflect.preventExtensions(target);
             // },
             //   getPrototypeOf(target) {
             //     debugger
