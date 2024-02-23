@@ -1,4 +1,14 @@
 ;;(function() {
+ 
+    bodaEnv.envFunc.TextDecoder_decode = function () {
+        // debugger
+        let arg0 = arguments[0]
+        let _res = new sionTextDecoder().decode(arg0)
+        bodaEnv.toolsFunc.console_copy(`TextDecoder_decode -> arg -> ${arguments[0]} ->`, `res-> ${_res}`);
+
+        return _res
+    }
+	
   bodaEnv.envFunc.NavigatorUAData_mobile_get = function() {
       // debugger
       let _res = false
@@ -548,18 +558,6 @@
       return promise;
   }
 
-  bodaEnv.envFunc.Navigator_wakeLock_get = function() {
-      if (bodaEnv.memory.cache['Navigator_wakeLock_get']) {
-          bodaEnv.toolsFunc.console_copy(`Navigator_wakeLock_get cache已存在直接返回`)
-          return bodaEnv.memory.cache['Navigator_wakeLock_get']
-      }
-
-      let lock = new WakeLock('bobo')
-      // bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(lock,'issymbolProperty',true)
-      bodaEnv.memory.cache['Navigator_wakeLock_get'] = lock
-      bodaEnv.toolsFunc.console_copy(`Navigator_wakeLock_get -> res ->`, lock)
-      return lock
-  }
   bodaEnv.envFunc.location_origin_get = function() {
       let origin = bodaEnv.memory.tempLocation.origin
       bodaEnv.toolsFunc.console_copy(`location_origin_get res->`, origin)
@@ -3356,6 +3354,179 @@
       return outerHeight;
   }
   ;
+   bodaEnv.envFunc.Navigator_virtualKeyboard_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'virtualKeyboard')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_virtualKeyboard_get `, `virtualKeyboard -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new VirtualKeyboard('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_virtualKeyboard_get `, `virtualKeyboard -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'virtualKeyboard',_res)
+        return _res
+    }
+
+    bodaEnv.envFunc.Navigator_mediaCapabilities_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'mediaCapabilities')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_mediaCapabilities_get `, `mediaCapabilities -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new MediaCapabilities('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_mediaCapabilities_get `, `mediaCapabilities -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'ink',_res)
+        return _res
+    }
+
+    bodaEnv.envFunc.Navigator_ink_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'ink')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_ink_get `, `ink -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new Ink('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_ink_get `, `ink -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'ink',_res)
+        return _res
+    }
+
+    bodaEnv.envFunc.Navigator_wakeLock_get=function(){
+        debugger
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'wakeLock')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_wakeLock_get `, `wakeLock -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new WakeLock('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_wakeLock_get `, `wakeLock -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'wakeLock',_res)
+        return _res
+    }
+
+    bodaEnv.envFunc.Navigator_serviceWorker_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'serviceWorker')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_serviceWorker_get `, `serviceWorker -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new ServiceWorkerContainer('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_serviceWorker_get `, `serviceWorker -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'serviceWorker',_res)
+        return _res
+    }
+
+    bodaEnv.envFunc.Navigator_managed_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'managed')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_managed_get `, `managed -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new NavigatorManagedData('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_managed_get `, `managed -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'managed',_res)
+        return _res
+    }
+    bodaEnv.envFunc.Navigator_bluetooth_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'bluetooth')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_bluetooth_get `, `bluetooth -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new Bluetooth('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_bluetooth_get `, `bluetooth -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'bluetooth',_res)
+        return _res
+
+    }
+    bodaEnv.envFunc.Navigator_onLine_get=function(){
+        let _res=true
+        bodaEnv.toolsFunc.console_copy(`Navigator_onLine_get `, `_res -> ${_res}`);
+
+        return _res
+
+    }
+    bodaEnv.envFunc.Navigator_webkitTemporaryStorage_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'webkitTemporaryStorage')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_webkitTemporaryStorage_get `, `webkitTemporaryStorage -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new bodaEnv.memory.globlProtoObj['DeprecatedStorageQuota']('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_webkitTemporaryStorage_get `, `webkitTemporaryStorage -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'webkitTemporaryStorage',_res)
+        return _res
+    }
+
+    bodaEnv.envFunc.Navigator_geolocation_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'geolocation')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_geolocation_get `, `geolocation -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new Geolocation('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_geolocation_get `, `geolocation -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'geolocation',_res)
+        return _res
+    }
+    bodaEnv.envFunc.Navigator_userActivation_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'UserActivation')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_userActivation_get `, `UserActivation -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new UserActivation('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_userActivation_get `, `UserActivation -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'UserActivation',_res)
+        return _res
+    }
+
+    bodaEnv.envFunc.Navigator_scheduling_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'scheduling')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_scheduling_get `, `scheduling -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new Scheduling('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_scheduling_get `, `scheduling -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'scheduling',_res)
+        return _res
+    }
+
+    bodaEnv.envFunc.Navigator_windowControlsOverlay_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'windowControlsOverlay')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_windowControlsOverlay_get `, `windowControlsOverlay -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _res=new WindowControlsOverlay('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_windowControlsOverlay_get `, `windowControlsOverlay -> ${_res}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'windowControlsOverlay',_res)
+        return _res
+    }
+    bodaEnv.envFunc.Navigator_usb_get=function(){
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'usb')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_usb_get `, `usb -> ${isliveAttr}`);
+            return isliveAttr
+        }
+        let _usb=new GPU('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_gpu_get `, `usb -> ${_usb}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'usb',_usb)
+        return _usb
+    }
+    bodaEnv.envFunc.Navigator_gpu_get = function () {
+
+        let isliveAttr=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'gpu')
+        if (isliveAttr){
+            bodaEnv.toolsFunc.console_copy(`Navigator_gpu_get `, `_gpu -> ${isliveAttr}`);
+
+            return isliveAttr
+        }
+        let _gpu=new GPU('boob')
+        bodaEnv.toolsFunc.console_copy(`Navigator_gpu_get `, `_gpu -> ${_gpu}`);
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'gpu',_gpu)
+        return _gpu
+    }
 
 }
 )()
