@@ -1,0 +1,404 @@
+window_document_get ->[object HTMLDocument]
+[object HTMLDocument]-> Document_getElementsByClassName ->  custom-dialog-wrapper -> [object HTMLCollection]
+window_document_get ->[object HTMLDocument]
+[object HTMLDocument]-> Document_getElementsByClassName ->  custom-dialog-wrapper -> [object HTMLCollection]
+      [collection::proxyHTMLCollection]   获取属性:   0   value:   undefined
+window_document_get ->[object HTMLDocument]
+Document_documentElement_get ->[object HTMLHtmlElement]
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->nc_1_n1z-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->nc_1_n1z-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->fm-login-password-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->fm-login-password-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->fm-login-id-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->fm-login-id-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->nc_1_n1z-> res ->null
+window_self_get res->window
+window_self_get res->window
+
+        使用bs64解码前:ZGVjb2Rl
+解码后decode
+window_document_get ->[object HTMLDocument]
+
+        使用bs64解码前:Y29uY2F0
+解码后concat
+
+        使用bs64解码前:cHJvdG90eXBl
+解码后prototype
+bodaEnv.memory.asyncEvent[listener] 未实现 beforeunload
+[object Window]-> EventTarget_addEventListener 注册事件 ->beforeunload ->
+bodaEnv.memory.asyncEvent[listener] 未实现 pagehide
+[object Window]-> EventTarget_addEventListener 注册事件 ->pagehide ->
+
+        使用bs64解码前:X19kcml2ZXJfdW53cmFwcGVk
+解码后__driver_unwrapped
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_document_get ->[object HTMLDocument]
+window_external_get ->[object External]
+window_external_get ->[object External]
+window_external_get ->[object External]
+window_document_get ->[object HTMLDocument]
+Document_documentElement_get ->[object HTMLHtmlElement]
+[object HTMLHtmlElement]-> Element_getAttribute -> selenium -> null
+window_document_get ->[object HTMLDocument]
+Document_documentElement_get ->[object HTMLHtmlElement]
+[object HTMLHtmlElement]-> Element_getAttribute -> webdriver -> null
+window_document_get ->[object HTMLDocument]
+Document_documentElement_get ->[object HTMLHtmlElement]
+[object HTMLHtmlElement]-> Element_getAttribute -> driver -> null
+window_navigator_get ->[object Navigator]
+Navigator_languages_get res->zh-CN,zh
+Document_createElement -> canvas -> [object HTMLCanvasElement]
+HTMLCanvasElement_getContext ->type->webgl -> res -> [object WebGLRenderingContext]
+WebGLRenderingContext_getExtension WEBGL_debug_renderer_info  
+WebGLRenderingContext_getParameter 37445  -> res ->Google Inc. (Intel)
+WebGLRenderingContext_getParameter 37446  -> res ->ANGLE (Intel, Intel(R) UHD Graphics 630 (0x00003E92) Direct3D11 vs_5_0 ps_5_0, D3D11)
+window_navigator_get ->[object Navigator]
+
+        使用bs64解码前:d2ViZHJpdmVy
+解码后webdriver
+Navigator_webdriver_get ->false
+window_navigator_get ->[object Navigator]
+Document_cookie_get cookie -> 
+
+        使用bs64解码前:
+解码后
+Document_cookie_get cookie -> 
+
+        使用bs64解码前:
+解码后
+
+        使用bs64解码前:bGVuZ3Ro
+解码后length
+
+        使用bs64解码前:c3BsaWNl
+解码后splice
+window_self_get res->window
+Document_compatMode_get -> _res -> CSS1Compat
+Document_documentElement_get ->[object HTMLHtmlElement]
+[object HTMLHtmlElement]-> Element_clientWidth_get 1440
+window_self_get res->window
+Document_compatMode_get -> _res -> CSS1Compat
+Document_documentElement_get ->[object HTMLHtmlElement]
+[object HTMLHtmlElement]-> Element_clientHeight_get 803
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+Navigator_vendorSub_get vendorSub ->
+window_navigator_get ->[object Navigator]
+Navigator_productSub_get ->20030107  
+window_navigator_get ->[object Navigator]
+Navigator_vendor_get res->Google Inc.
+window_navigator_get ->[object Navigator]
+Navigator_maxTouchPoints_get maxTouchPoints ->0
+window_navigator_get ->[object Navigator]
+Scheduling 实例化对象 --->{"0":"boob"}
+Navigator_scheduling_get scheduling -> [object Scheduling]
+window_navigator_get ->[object Navigator]
+UserActivation 实例化对象 --->{"0":"boob"}
+Navigator_userActivation_get UserActivation -> [object UserActivation]
+window_navigator_get ->[object Navigator]
+Navigator_doNotTrack_get doNotTrack ->null
+window_navigator_get ->[object Navigator]
+Geolocation 实例化对象 --->{"0":"boob"}
+Navigator_geolocation_get geolocation -> [object Geolocation]
+window_navigator_get ->[object Navigator]
+Navigator_connection_get res->[object NetworkInformation]
+window_navigator_get ->[object Navigator]
+Navigator_plugins_get res ->[object PluginArray]
+window_navigator_get ->[object Navigator]
+Navigator_mimeTypes_get - >res ->[object MimeTypeArray]
+window_navigator_get ->[object Navigator]
+Navigator_pdfViewerEnabled_get ->_res -> true
+window_navigator_get ->[object Navigator]
+DeprecatedStorageInfo 实例化对象参数为 ->{"0":"boob"}
+Navigator_webkitTemporaryStorage_get webkitTemporaryStorage -> [object DeprecatedStorageQuota]
+window_navigator_get ->[object Navigator]
+DeprecatedStorageInfo 实例化对象参数为 ->{"0":"bobo"}
+Navigator_webkitPersistentStorage_get res->[object DeprecatedStorageQuota]
+window_navigator_get ->[object Navigator]
+Navigator_hardwareConcurrency_get ->8  
+window_navigator_get ->[object Navigator]
+Navigator_cookieEnabled_get res->true
+window_navigator_get ->[object Navigator]
+Navigator_appCodeName_get -> res ->Mozilla
+window_navigator_get ->[object Navigator]
+Navigator_appName_get ->Netscape  
+window_navigator_get ->[object Navigator]
+Navigator_appVersion_get res->undefined
+window_navigator_get ->[object Navigator]
+Navigator_platform_get res->Win32
+window_navigator_get ->[object Navigator]
+Navigator_product_get product ->Gecko
+window_navigator_get ->[object Navigator]
+Navigator_userAgent_get res->Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+window_navigator_get ->[object Navigator]
+Navigator_language_get  res->zh-CN
+window_navigator_get ->[object Navigator]
+Navigator_languages_get res->zh-CN,zh
+window_navigator_get ->[object Navigator]
+Navigator_onLine_get _res -> true
+window_navigator_get ->[object Navigator]
+Navigator_webdriver_get ->false
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+Bluetooth 实例化对象 --->{"0":"boob"}
+Navigator_bluetooth_get bluetooth -> [object Bluetooth]
+window_navigator_get ->[object Navigator]
+Navigator_clipboard_get -> clipboard -> [object Clipboard]
+window_navigator_get ->[object Navigator]
+Navigator_credentials_get -> credentials -> [object CredentialsContainer]
+window_navigator_get ->[object Navigator]
+Navigator_keyboard_get -> keyboard -> [object Keyboard]
+window_navigator_get ->[object Navigator]
+NavigatorManagedData 实例化对象 --->{"0":"boob"}
+Navigator_managed_get managed -> [object NavigatorManagedData]
+window_navigator_get ->[object Navigator]
+Navigator_mediaDevices_get -> medias -> [object MediaDevices]
+window_navigator_get ->[object Navigator]
+Navigator_storage_get [object StorageManager]  
+window_navigator_get ->[object Navigator]
+ServiceWorkerContainer 实例化对象 --->{"0":"boob"}
+Navigator_serviceWorker_get serviceWorker -> [object ServiceWorkerContainer]
+window_navigator_get ->[object Navigator]
+VirtualKeyboard 实例化对象 --->{"0":"boob"}
+Navigator_virtualKeyboard_get virtualKeyboard -> [object VirtualKeyboard]
+window_navigator_get ->[object Navigator]
+WakeLock 实例化对象 --->{"0":"boob"}
+Navigator_wakeLock_get wakeLock -> [object WakeLock]
+window_navigator_get ->[object Navigator]
+Navigator_deviceMemory_get deviceMemory ->8
+window_navigator_get ->[object Navigator]
+Ink 实例化对象 --->{"0":"boob"}
+Navigator_ink_get ink -> [object Ink]
+window_navigator_get ->[object Navigator]
+Navigator_hid_get -> hid -> [object HID]
+window_navigator_get ->[object Navigator]
+Navigator_locks_get  res->[object LockManager]
+window_navigator_get ->[object Navigator]
+MediaCapabilities 实例化对象 --->{"0":"boob"}
+Navigator_mediaCapabilities_get mediaCapabilities -> [object MediaCapabilities]
+window_navigator_get ->[object Navigator]
+Navigator_mediaSession_get -> mediaSesboda -> [object MediaSession]
+window_navigator_get ->[object Navigator]
+Navigator_permissions_get -> permisbodas -> [object Permissions]
+window_navigator_get ->[object Navigator]
+Navigator_presentation_get -> presentation -> [object Presentation]
+window_navigator_get ->[object Navigator]
+Navigator_serial_get -> serial -> [object Serial]
+window_navigator_get ->[object Navigator]
+GPU 实例化对象 --->{"0":"boob"}
+Navigator_gpu_get _gpu -> [object GPU]
+window_navigator_get ->[object Navigator]
+GPU 实例化对象 --->{"0":"boob"}
+Navigator_gpu_get usb -> [object GPU]
+window_navigator_get ->[object Navigator]
+WindowControlsOverlay 实例化对象 --->{"0":"boob"}
+Navigator_windowControlsOverlay_get windowControlsOverlay -> [object WindowControlsOverlay]
+window_navigator_get ->[object Navigator]
+Navigator_xr_get -> xr -> [object XRSystem]
+window_navigator_get ->[object Navigator]
+Navigator_userAgentData_get  -> res ->[object NavigatorUAData]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+Document_cookie_get cookie -> 
+使用bs64编码:{"mousex":"10000","mousey":"10000","screenw":"1440","screenh":"803","noheader":"no","nomal":"yes","ajax":"aaaaa","now_unique":"","shebei":"Web","navigator":""}
+编码后eyJtb3VzZXgiOiIxMDAwMCIsIm1vdXNleSI6IjEwMDAwIiwic2NyZWVudyI6IjE0NDAiLCJzY3JlZW5oIjoiODAzIiwibm9oZWFkZXIiOiJubyIsIm5vbWFsIjoieWVzIiwiYWpheCI6ImFhYWFhIiwibm93X3VuaXF1ZSI6IiIsInNoZWJlaSI6IldlYiIsIm5hdmlnYXRvciI6IiJ9
+
+        使用bs64解码前:ZW5jb2Rl
+解码后encode
+使用bs64编码:170867766456JC70867766456131301111111111110711eyJtb3VzZXgiOiIxMDAwMCIsIm1vdXNleSI6IjEwMDAwIiwic2NyZWVudyI6IjE0NDAiLCJzY3JlZW5oIjoiODAzIiwibm9oZWFkZXIiOiJubyIsIm5vbWFsIjoieWVzIiwiYWpheCI6ImFhYWFhIiwibm93X3VuaXF1ZSI6IiIsInNoZWJlaSI6IldlYiIsIm5hdmlnYXRvciI6IiJ9
+编码后MTcwODY3NzY2NDU2SkM3MDg2Nzc2NjQ1NjEzMTMwMTExMTExMTExMTExMDcxMWV5SnRiM1Z6WlhnaU9pSXhNREF3TUNJc0ltMXZkWE5sZVNJNklqRXdNREF3SWl3aWMyTnlaV1Z1ZHlJNklqRTBOREFpTENKelkzSmxaVzVvSWpvaU9EQXpJaXdpYm05b1pXRmtaWElpT2lKdWJ5SXNJbTV2YldGc0lqb2llV1Z6SWl3aVlXcGhlQ0k2SW1GaFlXRmhJaXdpYm05M1gzVnVhWEYxWlNJNklpSXNJbk5vWldKbGFTSTZJbGRsWWlJc0ltNWhkbWxuWVhSdmNpSTZJaUo5
+Document_cookie_set -> arg -> HKIIUU9O618PPTHPM=MTcwODY53NzY2NDU2SkM3MDg2Nzc2NjQ1NjEzMTMwMTExMTExMTExMT1ExMDcxMWV5SnRiM1Z6WlhnaU9pSXhNRE9F3TUNJc0ltM7XZkWE5sZVNJ8Nkl81qRBXdNREF32SW6l3aWMyTnlaV1Z1ZHlJNklqRTBOREFpTENKelkzSmxaVzVvSWpvaU9EQXpJaXdpYm05b1pXRmtaWElpT2lKdWJ5SXNJbTV2YldGc0lqb2llV1Z6SWl3aVlXcGhlQ0k2SW1GaFlXRmhJaXdpYm05M1gzVnVhWEYxWlNJNklpSXNJbk5vWldKbGFTSTZJbGRsWWlJc0ltNWhkbWxuWVhSdmNpSTZJaUo5;path=/;domain=.obei.com.cn
+Document_cookie_set -> -> 过期时间 -> null
+Document_cookie_set -> -> cookieValue -> HKIIUU9O618PPTHPM=MTcwODY53NzY2NDU2SkM3MDg2Nzc2NjQ1NjEzMTMwMTExMTExMTExMT1ExMDcxMWV5SnRiM1Z6WlhnaU9pSXhNRE9F3TUNJc0ltM7XZkWE5sZVNJ8Nkl81qRBXdNREF32SW6l3aWMyTnlaV1Z1ZHlJNklqRTBOREFpTENKelkzSmxaVzVvSWpvaU9EQXpJaXdpYm05b1pXRmtaWElpT2lKdWJ5SXNJbTV2YldGc0lqb2llV1Z6SWl3aVlXcGhlQ0k2SW1GaFlXRmhJaXdpYm05M1gzVnVhWEYxWlNJNklpSXNJbk5vWldKbGFTSTZJbGRsWWlJc0ltNWhkbWxuWVhSdmNpSTZJaUo5
+Document_getElementById -> id ->iusa88fgfccmr00rPP-> res ->null
+Document_cookie_get cookie -> HKIIUU9O618PPTHPM=MTcwODY53NzY2NDU2SkM3MDg2Nzc2NjQ1NjEzMTMwMTExMTExMTExMT1ExMDcxMWV5SnRiM1Z6WlhnaU9pSXhNRE9F3TUNJc0ltM7XZkWE5sZVNJ8Nkl81qRBXdNREF32SW6l3aWMyTnlaV1Z1ZHlJNklqRTBOREFpTENKelkzSmxaVzVvSWpvaU9EQXpJaXdpYm05b1pXRmtaWElpT2lKdWJ5SXNJbTV2YldGc0lqb2llV1Z6SWl3aVlXcGhlQ0k2SW1GaFlXRmhJaXdpYm05M1gzVnVhWEYxWlNJNklpSXNJbk5vWldKbGFTSTZJbGRsWWlJc0ltNWhkbWxuWVhSdmNpSTZJaUo5
+
+        使用bs64解码前:MTcwODY3NzY2NDU2SkM3MDg2Nzc2NjQ1NjEzMTMwMTExMTExMTExMTExMDcxMWV5SnRiM1Z6WlhnaU9pSXhNREF3TUNJc0ltMXZkWE5sZVNJNklqRXdNREF3SWl3aWMyTnlaV1Z1ZHlJNklqRTBOREFpTENKelkzSmxaVzVvSWpvaU9EQXpJaXdpYm05b1pXRmtaWElpT2lKdWJ5SXNJbTV2YldGc0lqb2llV1Z6SWl3aVlXcGhlQ0k2SW1GaFlXRmhJaXdpYm05M1gzVnVhWEYxWlNJNklpSXNJbk5vWldKbGFTSTZJbGRsWWlJc0ltNWhkbWxuWVhSdmNpSTZJaUo5
+解码后170867766456JC70867766456131301111111111110711eyJtb3VzZXgiOiIxMDAwMCIsIm1vdXNleSI6IjEwMDAwIiwic2NyZWVudyI6IjE0NDAiLCJzY3JlZW5oIjoiODAzIiwibm9oZWFkZXIiOiJubyIsIm5vbWFsIjoieWVzIiwiYWpheCI6ImFhYWFhIiwibm93X3VuaXF1ZSI6IiIsInNoZWJlaSI6IldlYiIsIm5hdmlnYXRvciI6IiJ9
+window_self_get res->window
+Document_compatMode_get -> _res -> CSS1Compat
+Document_documentElement_get ->[object HTMLHtmlElement]
+[object HTMLHtmlElement]-> Element_clientWidth_get 1440
+window_self_get res->window
+Document_compatMode_get -> _res -> CSS1Compat
+Document_documentElement_get ->[object HTMLHtmlElement]
+[object HTMLHtmlElement]-> Element_clientHeight_get 803
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+Navigator_vendorSub_get vendorSub ->
+window_navigator_get ->[object Navigator]
+Navigator_productSub_get ->20030107  
+window_navigator_get ->[object Navigator]
+Navigator_vendor_get res->Google Inc.
+window_navigator_get ->[object Navigator]
+Navigator_maxTouchPoints_get maxTouchPoints ->0
+window_navigator_get ->[object Navigator]
+Navigator_scheduling_get scheduling -> [object Scheduling]
+window_navigator_get ->[object Navigator]
+Navigator_userActivation_get UserActivation -> [object UserActivation]
+window_navigator_get ->[object Navigator]
+Navigator_doNotTrack_get doNotTrack ->null
+window_navigator_get ->[object Navigator]
+Navigator_geolocation_get geolocation -> [object Geolocation]
+window_navigator_get ->[object Navigator]
+Navigator_connection_get res->[object NetworkInformation]
+window_navigator_get ->[object Navigator]
+Navigator_plugins_get res ->[object PluginArray]
+window_navigator_get ->[object Navigator]
+Navigator_mimeTypes_get - >res ->[object MimeTypeArray]
+window_navigator_get ->[object Navigator]
+Navigator_pdfViewerEnabled_get ->_res -> true
+window_navigator_get ->[object Navigator]
+Navigator_webkitTemporaryStorage_get webkitTemporaryStorage -> [object DeprecatedStorageQuota]
+window_navigator_get ->[object Navigator]
+Navigator_webkitPersistentStorage_get 已存在,直接从cache中取值res- >[object DeprecatedStorageQuota]
+window_navigator_get ->[object Navigator]
+Navigator_hardwareConcurrency_get ->8  
+window_navigator_get ->[object Navigator]
+Navigator_cookieEnabled_get res->true
+window_navigator_get ->[object Navigator]
+Navigator_appCodeName_get -> res ->Mozilla
+window_navigator_get ->[object Navigator]
+Navigator_appName_get ->Netscape  
+window_navigator_get ->[object Navigator]
+Navigator_appVersion_get res->undefined
+window_navigator_get ->[object Navigator]
+Navigator_platform_get res->Win32
+window_navigator_get ->[object Navigator]
+Navigator_product_get product ->Gecko
+window_navigator_get ->[object Navigator]
+Navigator_userAgent_get res->Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+window_navigator_get ->[object Navigator]
+Navigator_language_get  res->zh-CN
+window_navigator_get ->[object Navigator]
+Navigator_languages_get res->zh-CN,zh
+window_navigator_get ->[object Navigator]
+Navigator_onLine_get _res -> true
+window_navigator_get ->[object Navigator]
+Navigator_webdriver_get ->false
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+Navigator_bluetooth_get bluetooth -> [object Bluetooth]
+window_navigator_get ->[object Navigator]
+Navigator_clipboard_get 已存在返回[object Clipboard]
+window_navigator_get ->[object Navigator]
+Navigator_credentials_get 已存在返回[object CredentialsContainer]
+window_navigator_get ->[object Navigator]
+Navigator_keyboard_get 已存在返回[object Keyboard]
+window_navigator_get ->[object Navigator]
+Navigator_managed_get managed -> [object NavigatorManagedData]
+window_navigator_get ->[object Navigator]
+Navigator_mediaDevices_get 已存在返回[object MediaDevices]
+window_navigator_get ->[object Navigator]
+Navigator_storage_get -> cache已存在[object StorageManager]  
+window_navigator_get ->[object Navigator]
+Navigator_serviceWorker_get serviceWorker -> [object ServiceWorkerContainer]
+window_navigator_get ->[object Navigator]
+Navigator_virtualKeyboard_get virtualKeyboard -> [object VirtualKeyboard]
+window_navigator_get ->[object Navigator]
+Navigator_wakeLock_get wakeLock -> [object WakeLock]
+window_navigator_get ->[object Navigator]
+Navigator_deviceMemory_get deviceMemory ->8
+window_navigator_get ->[object Navigator]
+Navigator_ink_get ink -> [object MediaCapabilities]
+window_navigator_get ->[object Navigator]
+Navigator_hid_get 已存在返回[object HID]
+window_navigator_get ->[object Navigator]
+Navigator_locks_get  res->[object LockManager]
+window_navigator_get ->[object Navigator]
+MediaCapabilities 实例化对象 --->{"0":"boob"}
+Navigator_mediaCapabilities_get mediaCapabilities -> [object MediaCapabilities]
+window_navigator_get ->[object Navigator]
+Navigator_mediaSession_get 已存在返回[object MediaSession]
+window_navigator_get ->[object Navigator]
+Navigator_permissions_get 已存在返回[object Permissions]
+window_navigator_get ->[object Navigator]
+Navigator_presentation_get 已存在返回[object Presentation]
+window_navigator_get ->[object Navigator]
+Navigator_serial_get 已存在返回[object Serial]
+window_navigator_get ->[object Navigator]
+Navigator_gpu_get _gpu -> [object GPU]
+window_navigator_get ->[object Navigator]
+Navigator_usb_get usb -> [object GPU]
+window_navigator_get ->[object Navigator]
+Navigator_windowControlsOverlay_get windowControlsOverlay -> [object WindowControlsOverlay]
+window_navigator_get ->[object Navigator]
+Navigator_xr_get 已存在返回[object XRSystem]
+window_navigator_get ->[object Navigator]
+Navigator_userAgentData_get  -> res ->[object NavigatorUAData]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+window_navigator_get ->[object Navigator]
+Document_cookie_get cookie -> HKIIUU9O618PPTHPM=MTcwODY53NzY2NDU2SkM3MDg2Nzc2NjQ1NjEzMTMwMTExMTExMTExMT1ExMDcxMWV5SnRiM1Z6WlhnaU9pSXhNRE9F3TUNJc0ltM7XZkWE5sZVNJ8Nkl81qRBXdNREF32SW6l3aWMyTnlaV1Z1ZHlJNklqRTBOREFpTENKelkzSmxaVzVvSWpvaU9EQXpJaXdpYm05b1pXRmtaWElpT2lKdWJ5SXNJbTV2YldGc0lqb2llV1Z6SWl3aVlXcGhlQ0k2SW1GaFlXRmhJaXdpYm05M1gzVnVhWEYxWlNJNklpSXNJbk5vWldKbGFTSTZJbGRsWWlJc0ltNWhkbWxuWVhSdmNpSTZJaUo5
+使用bs64编码:{"mousex":"10000","mousey":"10000","screenw":"1440","screenh":"803","noheader":"no","nomal":"no","ajax":"aaaaa","now_unique":"","shebei":"Web","navigator":""}
+编码后eyJtb3VzZXgiOiIxMDAwMCIsIm1vdXNleSI6IjEwMDAwIiwic2NyZWVudyI6IjE0NDAiLCJzY3JlZW5oIjoiODAzIiwibm9oZWFkZXIiOiJubyIsIm5vbWFsIjoibm8iLCJhamF4IjoiYWFhYWEiLCJub3dfdW5pcXVlIjoiIiwic2hlYmVpIjoiV2ViIiwibmF2aWdhdG9yIjoiIn0=
+使用bs64编码:170867766461JCpXDn0l900zx1s1C00k6z0msn1HHcMndL00cu37R30nQ4MSd1vtnkC7QxPmBV3R37o0pbrzk0W0o896P339pcbNC37zQc7z0azkLkvWCiJ3Yn76p0u69qv46DeM1b4xPualp3nbkbgvzKd3aK3G3v3yA7umtsaxufnrn3Z3pfn3ca3ghq01117QwC7111c3ZknkeuqxLdyNk111mewdk6hw111gmK6cnibmJcuoaadcnvqnggmkdq01kqxleyJtb3VzZXgiOiIxMDAwMCIsIm1vdXNleSI6IjEwMDAwIiwic2NyZWVudyI6IjE0NDAiLCJzY3JlZW5oIjoiODAzIiwibm9oZWFkZXIiOiJubyIsIm5vbWFsIjoibm8iLCJhamF4IjoiYWFhYWEiLCJub3dfdW5pcXVlIjoiIiwic2hlYmVpIjoiV2ViIiwibmF2aWdhdG9yIjoiIn0=
+编码后MTcwODY3NzY2NDYxSkNwWERuMGw5MDB6eDFzMUMwMGs2ejBtc24xSEhjTW5kTDAwY3UzN1IzMG5RNE1TZDF2dG5rQzdReFBtQlYzUjM3bzBwYnJ6azBXMG84OTZQMzM5cGNiTkMzN3pRYzd6MGF6a0xrdldDaUozWW43NnAwdTY5cXY0NkRlTTFiNHhQdWFscDNuYmtiZ3Z6S2QzYUszRzN2M3lBN3VtdHNheHVmbnJuM1ozcGZuM2NhM2docTAxMTE3UXdDNzExMWMzWmtua2V1cXhMZHlOazExMW1ld2RrNmh3MTExZ21LNmNuaWJtSmN1b2FhZGNudnFuZ2dta2RxMDFrcXhsZXlKdGIzVnpaWGdpT2lJeE1EQXdNQ0lzSW0xdmRYTmxlU0k2SWpFd01EQXdJaXdpYzJOeVpXVnVkeUk2SWpFME5EQWlMQ0p6WTNKbFpXNW9Jam9pT0RBeklpd2libTlvWldGa1pYSWlPaUp1YnlJc0ltNXZiV0ZzSWpvaWJtOGlMQ0poYW1GNElqb2lZV0ZoWVdFaUxDSnViM2RmZFc1cGNYVmxJam9pSWl3aWMyaGxZbVZwSWpvaVYyVmlJaXdpYm1GMmFXZGhkRzl5SWpvaUluMD0=
+Document_cookie_set -> arg -> HKIIUU9O618PPTHPM=MTcwODY73NzY2NDYxSkNwWERuMGw5MDB6eDFzMUMwMGs2ejBtc24xSE6hjTW5kTDAwY3UzN1IzMG5RNE1TZDF2dG25rQzdReFBtQHlYzUjM3bzBw4YnJI76a0zBXMG841OT3ZQMzM5cGNiTkMzN3pRYzd6MGF6a0xrdldDaUozWW43NnAwdTY5cXY0NkRlTTFiNHhQdWFscDNuYmtiZ3Z6S2QzYUszRzN2M3lBN3VtdHNheHVmbnJuM1ozcGZuM2NhM2docTAxMTE3UXdDNzExMWMzWmtua2V1cXhMZHlOazExMW1ld2RrNmh3MTExZ21LNmNuaWJtSmN1b2FhZGNudnFuZ2dta2RxMDFrcXhsZXlKdGIzVnpaWGdpT2lJeE1EQXdNQ0lzSW0xdmRYTmxlU0k2SWpFd01EQXdJaXdpYzJOeVpXVnVkeUk2SWpFME5EQWlMQ0p6WTNKbFpXNW9Jam9pT0RBeklpd2libTlvWldGa1pYSWlPaUp1YnlJc0ltNXZiV0ZzSWpvaWJtOGlMQ0poYW1GNElqb2lZV0ZoWVdFaUxDSnViM2RmZFc1cGNYVmxJam9pSWl3aWMyaGxZbVZwSWpvaVYyVmlJaXdpYm1GMmFXZGhkRzl5SWpvaUluMD0@;path=/;domain=.obei.com.cn
+Document_cookie_set -> -> 过期时间 -> null
+Document_cookie_set -> -> cookieValue -> HKIIUU9O618PPTHPM=MTcwODY73NzY2NDYxSkNwWERuMGw5MDB6eDFzMUMwMGs2ejBtc24xSE6hjTW5kTDAwY3UzN1IzMG5RNE1TZDF2dG25rQzdReFBtQHlYzUjM3bzBw4YnJI76a0zBXMG841OT3ZQMzM5cGNiTkMzN3pRYzd6MGF6a0xrdldDaUozWW43NnAwdTY5cXY0NkRlTTFiNHhQdWFscDNuYmtiZ3Z6S2QzYUszRzN2M3lBN3VtdHNheHVmbnJuM1ozcGZuM2NhM2docTAxMTE3UXdDNzExMWMzWmtua2V1cXhMZHlOazExMW1ld2RrNmh3MTExZ21LNmNuaWJtSmN1b2FhZGNudnFuZ2dta2RxMDFrcXhsZXlKdGIzVnpaWGdpT2lJeE1EQXdNQ0lzSW0xdmRYTmxlU0k2SWpFd01EQXdJaXdpYzJOeVpXVnVkeUk2SWpFME5EQWlMQ0p6WTNKbFpXNW9Jam9pT0RBeklpd2libTlvWldGa1pYSWlPaUp1YnlJc0ltNXZiV0ZzSWpvaWJtOGlMQ0poYW1GNElqb2lZV0ZoWVdFaUxDSnViM2RmZFc1cGNYVmxJam9pSWl3aWMyaGxZbVZwSWpvaVYyVmlJaXdpYm1GMmFXZGhkRzl5SWpvaUluMD0@
+window_setInterval ->delay值可能会影响执行结果,如果网站中执行的方法框架内没有执行,可以与delay值有关,尝试修改判断条件
+      delay->5000 argList->  -> func ->function() {
+        _$Il();
+    }
+[object Window]-> EventTarget_addEventListener 注册事件 ->load ->
+[object HTMLDocument]-> EventTarget_addEventListener 注册事件 ->click ->
+window_navigator_get ->[object Navigator]
+Navigator_userAgent_get res->Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+Document_charset_get -> _res -> UTF-8
+window_setInterval ->delay值可能会影响执行结果,如果网站中执行的方法框架内没有执行,可以与delay值有关,尝试修改判断条件
+      delay->4000 argList->  -> func ->function() {
+    _0x319c89();
+}
+开始执行定时器异步事件===>
+定时器异步回调执行======> delay->4000  timeoutID->2 callback:function() {
+    _0x319c89();
+}
+定时器异步回调delay大于等于5000不执行======>delay->5000  timeoutID->1 callback:function() {
+        _$Il();
+    }
+window_document_get ->[object HTMLDocument]
+Document_cookie_get cookie -> HKIIUU9O618PPTHPM=MTcwODY73NzY2NDYxSkNwWERuMGw5MDB6eDFzMUMwMGs2ejBtc24xSE6hjTW5kTDAwY3UzN1IzMG5RNE1TZDF2dG25rQzdReFBtQHlYzUjM3bzBw4YnJI76a0zBXMG841OT3ZQMzM5cGNiTkMzN3pRYzd6MGF6a0xrdldDaUozWW43NnAwdTY5cXY0NkRlTTFiNHhQdWFscDNuYmtiZ3Z6S2QzYUszRzN2M3lBN3VtdHNheHVmbnJuM1ozcGZuM2NhM2docTAxMTE3UXdDNzExMWMzWmtua2V1cXhMZHlOazExMW1ld2RrNmh3MTExZ21LNmNuaWJtSmN1b2FhZGNudnFuZ2dta2RxMDFrcXhsZXlKdGIzVnpaWGdpT2lJeE1EQXdNQ0lzSW0xdmRYTmxlU0k2SWpFd01EQXdJaXdpYzJOeVpXVnVkeUk2SWpFME5EQWlMQ0p6WTNKbFpXNW9Jam9pT0RBeklpd2libTlvWldGa1pYSWlPaUp1YnlJc0ltNXZiV0ZzSWpvaWJtOGlMQ0poYW1GNElqb2lZV0ZoWVdFaUxDSnViM2RmZFc1cGNYVmxJam9pSWl3aWMyaGxZbVZwSWpvaVYyVmlJaXdpYm1GMmFXZGhkRzl5SWpvaUluMD0@
+删除window 新增属性完成

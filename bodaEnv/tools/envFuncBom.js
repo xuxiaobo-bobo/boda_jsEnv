@@ -451,27 +451,27 @@
       return presentation
   }
 
-  bodaEnv.envFunc.Navigator_permisbodas_get = function() {
+  bodaEnv.envFunc.Navigator_permissions_get = function() {
       let islive = bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this, 'permisbodas')
       if (islive) {
-          bodaEnv.toolsFunc.console_copy(`Navigator_permisbodas_get 已存在返回`, islive)
+          bodaEnv.toolsFunc.console_copy(`Navigator_permissions_get 已存在返回`, islive)
           return islive
       }
-      let permisbodas = new Permisbodas('bobo')
+      let permisbodas = new Permissions('bobo')
       bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'permisbodas', permisbodas)
-      bodaEnv.toolsFunc.console_copy(`Navigator_permisbodas_get -> permisbodas -> ${permisbodas}`)
+      bodaEnv.toolsFunc.console_copy(`Navigator_permissions_get -> permisbodas -> ${permisbodas}`)
       return permisbodas
   }
-  bodaEnv.envFunc.Navigator_mediaSesboda_get = function() {
-      let islive = bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this, 'mediaSesboda')
+  bodaEnv.envFunc.Navigator_mediaSession_get = function() {
+      let islive = bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this, 'mediaSession')
       if (islive) {
-          bodaEnv.toolsFunc.console_copy(`Navigator_mediaSesboda_get 已存在返回`, islive)
+          bodaEnv.toolsFunc.console_copy(`Navigator_mediaSession_get 已存在返回`, islive)
           return islive
       }
-      let mediaSesboda = new MediaSesboda('bobo')
-      bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'mediaSesboda', mediaSesboda)
-      bodaEnv.toolsFunc.console_copy(`Navigator_mediaSesboda_get -> mediaSesboda -> ${mediaSesboda}`)
-      return mediaSesboda
+      let mediaSession = new MediaSession('bobo')
+      bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'mediaSession', mediaSession)
+      bodaEnv.toolsFunc.console_copy(`Navigator_mediaSession_get -> mediaSesboda -> ${mediaSession}`)
+      return mediaSession
   }
 
   bodaEnv.envFunc.Navigator_keyboard_get = function() {
@@ -3526,6 +3526,12 @@
         bodaEnv.toolsFunc.console_copy(`Navigator_gpu_get `, `_gpu -> ${_gpu}`);
         bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'gpu',_gpu)
         return _gpu
+    }
+    bodaEnv.envFunc.Navigator_appVersion_get = function () {
+
+        let appVersion = bodaEnv.memory.navigator['appVersion'];
+        bodaEnv.toolsFunc.console_copy(`Navigator_appVersion_get res->`, appVersion);
+        return appVersion;
     }
 
 }

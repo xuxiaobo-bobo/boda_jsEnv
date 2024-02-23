@@ -2581,13 +2581,13 @@
     }
 	bodaEnv.envFunc.Document_charset_get=function(){
         let _res='UTF-8'
-        sionEnv.toolsFunc.console_copy(`Document_charset_get -> _res -> ${_res}`)
+        bodaEnv.toolsFunc.console_copy(`Document_charset_get -> _res -> ${_res}`)
 
         return _res
     }
     bodaEnv.envFunc.Document_compatMode_get=function(){
         let _res='CSS1Compat'
-        sionEnv.toolsFunc.console_copy(`Document_compatMode_get -> _res -> ${_res}`)
+        bodaEnv.toolsFunc.console_copy(`Document_compatMode_get -> _res -> ${_res}`)
 
         return _res
     }

@@ -269,11 +269,11 @@ bodaEnv.toolsFunc.defineProperty(window, "WebGLSync", {
   writable: true,
   value: bodaEnv.memory.globlProtoObj['WebGLSync']
 });
-bodaEnv.toolsFunc.defineProperty(window, "WebGLShaderPrecibodaFormat", {
+bodaEnv.toolsFunc.defineProperty(window, "WebGLShaderPrecisionFormat", {
   configurable: true,
   enumerable: false,
   writable: true,
-  value: bodaEnv.memory.globlProtoObj['WebGLShaderPrecibodaFormat']
+  value: bodaEnv.memory.globlProtoObj['WebGLShaderPrecisionFormat']
 });
 bodaEnv.toolsFunc.defineProperty(window, "WebGLShader", {
   configurable: true,
@@ -1373,11 +1373,11 @@ bodaEnv.toolsFunc.defineProperty(window, "RTCStatsReport", {
   writable: true,
   value: bodaEnv.memory.globlProtoObj['RTCStatsReport']
 });
-bodaEnv.toolsFunc.defineProperty(window, "RTCSesbodaDescription", {
+bodaEnv.toolsFunc.defineProperty(window, "RTCSessionDescription", {
   configurable: true,
   enumerable: false,
   writable: true,
-  value: bodaEnv.memory.globlProtoObj['RTCSesbodaDescription']
+  value: bodaEnv.memory.globlProtoObj['RTCSessionDescription']
 });
 bodaEnv.toolsFunc.defineProperty(window, "RTCSctpTransport", {
   configurable: true,
@@ -2039,11 +2039,11 @@ bodaEnv.toolsFunc.defineProperty(window, "IIRFilterNode", {
   writable: true,
   value: bodaEnv.memory.globlProtoObj['IIRFilterNode']
 });
-bodaEnv.toolsFunc.defineProperty(window, "IDBVerbodaChangeEvent", {
+bodaEnv.toolsFunc.defineProperty(window, "IDBVersionChangeEvent", {
   configurable: true,
   enumerable: false,
   writable: true,
-  value: bodaEnv.memory.globlProtoObj['IDBVerbodaChangeEvent']
+  value: bodaEnv.memory.globlProtoObj['IDBVersionChangeEvent']
 });
 bodaEnv.toolsFunc.defineProperty(window, "IDBTransaction", {
   configurable: true,
@@ -2771,11 +2771,11 @@ bodaEnv.toolsFunc.defineProperty(window, "DelayNode", {
   writable: true,
   value: bodaEnv.memory.globlProtoObj['DelayNode']
 });
-bodaEnv.toolsFunc.defineProperty(window, "DecompresbodaStream", {
+bodaEnv.toolsFunc.defineProperty(window, "DecompressionStream", {
   configurable: true,
   enumerable: false,
   writable: true,
-  value: bodaEnv.memory.globlProtoObj['DecompresbodaStream']
+  value: bodaEnv.memory.globlProtoObj['DecompressionStream']
 });
 bodaEnv.toolsFunc.defineProperty(window, "DataTransferItemList", {
   configurable: true,
@@ -2927,11 +2927,11 @@ bodaEnv.toolsFunc.defineProperty(window, "ConstantSourceNode", {
   writable: true,
   value: bodaEnv.memory.globlProtoObj['ConstantSourceNode']
 });
-bodaEnv.toolsFunc.defineProperty(window, "CompresbodaStream", {
+bodaEnv.toolsFunc.defineProperty(window, "CompressionStream", {
   configurable: true,
   enumerable: false,
   writable: true,
-  value: bodaEnv.memory.globlProtoObj['CompresbodaStream']
+  value: bodaEnv.memory.globlProtoObj['CompressionStream']
 });
 bodaEnv.toolsFunc.defineProperty(window, "CompositionEvent", {
   configurable: true,
@@ -4126,14 +4126,14 @@ bodaEnv.toolsFunc.defineProperty(window, "indexedDB", {
   }.indexedDB,
   set: undefined
 });
-bodaEnv.toolsFunc.defineProperty(window, "sesbodaStorage", {
+bodaEnv.toolsFunc.defineProperty(window, "sessionStorage", {
   configurable: true,
   enumerable: true,
   get: {
-    sesbodaStorage() {
-      return bodaEnv.toolsFunc.dispatch(this, window, "window", "sesbodaStorage_get", arguments);
+    sessionStorage() {
+      return bodaEnv.toolsFunc.dispatch(this, window, "window", "sessionStorage_get", arguments);
     }
-  }.sesbodaStorage,
+  }.sessionStorage,
   set: undefined
 });
 bodaEnv.toolsFunc.defineProperty(window, "localStorage", {
@@ -7672,11 +7672,11 @@ bodaEnv.toolsFunc.defineProperty(window, "MediaMetadata", {
   writable: true,
   value: bodaEnv.memory.globlProtoObj['MediaMetadata']
 });
-bodaEnv.toolsFunc.defineProperty(window, "MediaSesboda", {
+bodaEnv.toolsFunc.defineProperty(window, "MediaSession", {
   configurable: true,
   enumerable: false,
   writable: true,
-  value: bodaEnv.memory.globlProtoObj['MediaSesboda']
+  value: bodaEnv.memory.globlProtoObj['MediaSession']
 });
 bodaEnv.toolsFunc.defineProperty(window, "MutationEvent", {
   configurable: true,
@@ -7714,17 +7714,17 @@ bodaEnv.toolsFunc.defineProperty(window, "PeriodicSyncManager", {
   writable: true,
   value: bodaEnv.memory.globlProtoObj['PeriodicSyncManager']
 });
-bodaEnv.toolsFunc.defineProperty(window, "PermisbodaStatus", {
+bodaEnv.toolsFunc.defineProperty(window, "PermissionStatus", {
   configurable: true,
   enumerable: false,
   writable: true,
-  value: bodaEnv.memory.globlProtoObj['PermisbodaStatus']
+  value: bodaEnv.memory.globlProtoObj['PermissionStatus']
 });
-bodaEnv.toolsFunc.defineProperty(window, "Permisbodas", {
+bodaEnv.toolsFunc.defineProperty(window, "Permissions", {
   configurable: true,
   enumerable: false,
   writable: true,
-  value: bodaEnv.memory.globlProtoObj['Permisbodas']
+  value: bodaEnv.memory.globlProtoObj['Permissions']
 });
 bodaEnv.toolsFunc.defineProperty(window, "PushManager", {
   configurable: true,
