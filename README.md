@@ -1,4 +1,4 @@
-运行main_227.js 
+运行 227  ---> 把run.js 内容替换为run227.js   run.html内容替换为 run227.html   然后运行main_227.js
 
 ## 警告
 
