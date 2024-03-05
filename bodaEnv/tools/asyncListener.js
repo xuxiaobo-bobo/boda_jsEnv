@@ -26,7 +26,7 @@ if (bodaEnv.config.listenerOpen){
 
 
     ///------------------------------------------------------
-    // bodaEnv.toolsFunc.dolistener('load',bodaEnv.memory.asyncEvent['listener']['load'][0],[])  //rs
+    bodaEnv.toolsFunc.dolistener('load',bodaEnv.memory.asyncEvent['listener']['load'][0],[])  //rs
     // 只打开load 只会生成236位cookie
     // 打开下面的事件会生成300多位的cookie ,不同网站需要的事件不同,自己调试
     // bodaEnv.toolsFunc.dolistener('input',bodaEnv.memory.asyncEvent['listener']['input'][1],bodaEnv.memory.inputData)//rs
@@ -35,11 +35,12 @@ if (bodaEnv.config.listenerOpen){
 
     /// 非淘227 ----
     debugger
-    bodaEnv.toolsFunc.dolistener('mousedown',bodaEnv.memory.asyncEvent['listener']['onmousedown'][0],bodaEnv.memory.mouseDownData)
-    bodaEnv.toolsFunc.dolistener('mousedown',bodaEnv.memory.asyncEvent['listener']['mousedown'][0],bodaEnv.memory.mouseDownData)
-    bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove'][0],bodaEnv.memory.mouseMoveData)
-    bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove'][1],bodaEnv.memory.mouseMoveData)
-}
+    // bodaEnv.toolsFunc.dolistener('mousedown',bodaEnv.memory.asyncEvent['listener']['onmousedown'][0],bodaEnv.memory.mouseDownData)
+    // bodaEnv.toolsFunc.dolistener('mousedown',bodaEnv.memory.asyncEvent['listener']['mousedown'][0],bodaEnv.memory.mouseDownData)
+    // bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove'][0],bodaEnv.memory.mouseMoveData)
+    // bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove'][1],bodaEnv.memory.mouseMoveData)
+
+  }
 
 
 

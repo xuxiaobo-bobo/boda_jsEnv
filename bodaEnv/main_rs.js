@@ -39,7 +39,7 @@ let testNum=0
         //获取前缀,getResult文件下把这个打开就行'rsurl':bodaEnv.toolsFunc.getApi(bodaConifg['apiUrl'])
         // listenerOpen 打开后 调用load事件 asyncListener文件夹下
         // 运行时候,把run_rs.html,run_rs.js 改为run.html,run.js
-        let website_ = atob('aHR0cDovL3d3dy5ubXBhLmdvdi5jbg==')
+        let website_ = 'https://zscqj.hubei.gov.cn/fbjd/szdt/index_1.shtml'//atob('aHR0cDovL3d3dy5ubXBhLmdvdi5jbg==')
         let bohtml =''
         if (!_reqhtml){
             bohtml= fs.readFileSync(path.join(__dirname , 'run','run.html'), 'utf8').toString();
@@ -47,12 +47,13 @@ let testNum=0
         }else{
             bohtml=_reqhtml
         }
+        console.log(bohtml)
         let dominoWindow = domino.createWindow(bohtml, website_)
         let bodaConifg = {
             'log': false, //开启日志
             'listenerOpen':true, 
             'SetTimeOutOpen': false, //开启定时器事件,
-            'userAgent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'userAgent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36',
             'ip_addr':'192.168.2.2', //ip RTC检测
             'apiUrl':apiUrl
         }
@@ -60,6 +61,7 @@ let testNum=0
         vm.setGlobal('bodadominoWindow', dominoWindow)
         vm.setGlobal('bodaConifg', bodaConifg)
         result1 = result()
+        console.log(result1)
         bohtml = null
         dominoWindow = null
         return result1
