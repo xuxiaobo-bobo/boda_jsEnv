@@ -69,8 +69,15 @@ let testNum=0
 
 
       app.get('/cookie', (req, res) => {
+        /*
+        boHtml: 请求返回的html页面  
+        apiUrl: 接口url
+        rs 不需要用run.js 文件
+        在run/website/ 底下按照我提供的例子,放js文件
+        */
         let boHtml=req.query['boHtml']
         let apiUrl=req.query['apiUrl']
+        
         let result_=run_rsvmp(boHtml,apiUrl)
         res.send(result_)
       });

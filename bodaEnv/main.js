@@ -65,6 +65,6 @@ function main() {
     return resultVal
 }
 
-        let result_=main()
+let result_=main()
 
-        console.log(result_)
+console.log(result_)

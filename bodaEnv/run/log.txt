@@ -1,0 +1,29 @@
+window_document_get ->[object HTMLDocument]
+[object HTMLDocument]-> Document_getElementsByClassName ->  custom-dialog-wrapper -> [object HTMLCollection]
+window_document_get ->[object HTMLDocument]
+[object HTMLDocument]-> Document_getElementsByClassName ->  custom-dialog-wrapper -> [object HTMLCollection]
+      [collection::proxyHTMLCollection]   获取属性:   0   value:   undefined
+window_document_get ->[object HTMLDocument]
+Document_documentElement_get ->[object HTMLHtmlElement]
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->nc_1_n1z-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->nc_1_n1z-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->fm-login-password-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->fm-login-password-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->fm-login-id-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->fm-login-id-> res ->null
+window_document_get ->[object HTMLDocument]
+Document_getElementById -> id ->nc_1_n1z-> res ->null
+开始执行定时器异步事件===>
+window_document_get ->[object HTMLDocument]
+Document_cookie_get cookie -> 
+undefined
+undefined
+undefined
+删除window 新增属性完成
+当前已经完成 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
