@@ -11,6 +11,19 @@
         boreq.open('POST',_api,true)
         let _res=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(boreq)['open'][1]
         boreq=null
+    
+        bodaEnv.toolsFunc.defineProperty(bodaEnv.memory.globlProtoObj["XMLHttpRequest"].prototype, "open", {
+            configurable: true,
+            enumerable: true,
+            writable: true,
+            value: {
+              open() {
+                return bodaEnv.toolsFunc.dispatch(this, bodaEnv.memory.globlProtoObj["XMLHttpRequest"].prototype, "XMLHttpRequest", "open", arguments);
+              }
+            }.open
+          });
+
+
         return _res
     }
 
