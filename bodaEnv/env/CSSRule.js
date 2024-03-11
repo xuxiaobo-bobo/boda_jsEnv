@@ -2,6 +2,10 @@
 
 bodaEnv.memory.globlProtoObj["CSSRule"] = function CSSRule() {
   let arg = arguments[0];
+  // debugger;
+  if (!arg){
+    return bodaEnv.toolsFunc.throwError('TypeError',`Illegal constructor`)
+  }
   if (arg != 'bobo') {
     bodaEnv.toolsFunc.console_copy('CSSRule 实例化对象 --->', bodaEnv.toolsFunc.stringify_bo(arguments, function (k, v) {
       if (v == window) {

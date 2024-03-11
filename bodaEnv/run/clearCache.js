@@ -27,7 +27,7 @@ for (let lastind=0;lastind<bodaEnv.memory.lastWindowProp.length;lastind++){
     if (bodaEnv.memory.allwindowProp.indexOf(bodaEnv.memory.lastWindowProp[lastind])==-1){
         // debugger
         delete window[bodaEnv.memory.lastWindowProp[lastind]]
-        console.log(window[bodaEnv.memory.lastWindowProp[lastind]])
+        // console.log(window[bodaEnv.memory.lastWindowProp[lastind]])
     }
 
 
@@ -155,5 +155,5 @@ bodaconifg_=null
 bodaExecEle=null
 bodaParseScript=null
 bodaEnv.memory.documentProto=null
-console.log('当前已经完成 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+// console.log('当前已经完成 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 return bodaEnv.memory.last_value

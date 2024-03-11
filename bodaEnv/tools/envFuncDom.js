@@ -6,6 +6,20 @@
     //     debugger
 
     // }
+    bodaEnv.envFunc.Node_replaceChild=function(){
+        let arg0=arguments[0]
+        let arg1=arguments[1]
+        let thisNode=bodaEnv.memory.WeakMap.get(this)
+        // debugger
+        let target0=bodaEnv.memory.WeakMap.get(arg0)
+        let target1=bodaEnv.memory.WeakMap.get(arg1)
+        thisNode.replaceChild(target0,target1)
+
+        bodaEnv.toolsFunc.console_copy(this,`-> Node_replaceChild -> arg0 -> ${arg0}  arg1-> ${arg1}`)
+
+        return arg1
+
+    }
     bodaEnv.envFunc.Node_contains=function(){
         let arg0=arguments[0]
         let thisNode=bodaEnv.memory.WeakMap.get(this)
@@ -1078,7 +1092,7 @@
         let islive = 0
         let liveIframeList = bodaEnv.memory.tempDocument.getElementsByTagName('iframe').cache
         if (!liveIframeList) {
-            bodaEnv.toolsFunc.console_copy(this, `HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
+            bodaEnv.toolsFunc.console_copy(this, `-> HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
 
             return null
         }
@@ -1088,7 +1102,7 @@
             }
         }
         if (islive == 0) {
-            bodaEnv.toolsFunc.console_copy(this, `HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
+            bodaEnv.toolsFunc.console_copy(this, `-> HTMLIFrameElement_contentWindow_get ->未添加进body等 返回null -> `, null)
             return null
         }
 
@@ -1598,8 +1612,11 @@
     bodaEnv.envFunc.HTMLAnchorElement_toString=function(){
         // debugger
         let thisNode=bodaEnv.memory.WeakMap.get(this)
-        let _res=thisNode.toString()
-        bodaEnv.toolsFunc.console_copy(`HTMLAnchorElement_toString ->`, _res);
+        let _res=''
+        if (thisNode.href){
+            bodaEnv.toolsFunc.throwError('TypeError','HTMLAnchorElement_toString  href存在值 需要主动调整!!!')
+        }
+        bodaEnv.toolsFunc.console_copy(`HTMLAnchorElement_toString -> 可能存在检测 !!!!!`, _res);
         return _res
 
     }
@@ -2523,7 +2540,10 @@
         let _appendChild=arguments[0]
         let _targetNode=bodaEnv.memory.WeakMap.get(_appendChild)
         // debugger
-
+        if (!(_appendChild instanceof Node)){
+            bodaEnv.toolsFunc.console_copy(this,`-> Node_appendChild -> appendChild -> ${_appendChild}`,)
+            return bodaEnv.toolsFunc.throwError(`TypeError`,`Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'.`)
+        }
         //'[Node_appendChild]正在执行,错误信息HIERARCHY_REQUEST_ERR (3): the operation would yield an incorrect nodes model'
         //报错上面的原因为 thisNode 为targetNode的子节点 ,所以报错了
         let thisNode=bodaEnv.memory.WeakMap.get(this)

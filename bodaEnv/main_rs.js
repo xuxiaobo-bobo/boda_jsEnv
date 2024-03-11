@@ -22,6 +22,7 @@ let jsCode = staticCode + getRunAllCode
 vm.setGlobal('bodaRunPath', path.join(__dirname , 'run'))
 vm.setGlobal('bodafs', fs)
 var boallundefined = new bodaUndefind.bodaUndefind();
+// boallundefined={}
 vm.setGlobal('bodaallundefined', boallundefined)
 vm.setGlobal('bodaURL', URL)
 vm.setGlobal('bodaError', bodaError)
@@ -39,7 +40,7 @@ let testNum=0
         //获取前缀,getResult文件下把这个打开就行'rsurl':bodaEnv.toolsFunc.getApi(bodaConifg['apiUrl'])
         // listenerOpen 打开后 调用load事件 asyncListener文件夹下
         // 运行时候,把run_rs.html,run_rs.js 改为run.html,run.js
-        let website_ = 'https://zscqj.hubei.gov.cn/fbjd/szdt/index_1.shtml'//atob('aHR0cDovL3d3dy5ubXBhLmdvdi5jbg==')
+        let website_ = 'https://www.hubei.gov.cn/'//atob('aHR0cDovL3d3dy5ubXBhLmdvdi5jbg==')
         let bohtml =''
         if (!_reqhtml){
             bohtml= fs.readFileSync(path.join(__dirname , 'run','run.html'), 'utf8').toString();
@@ -77,8 +78,9 @@ let testNum=0
         */
         let boHtml=req.query['boHtml']
         let apiUrl=req.query['apiUrl']
-        
+        console.time()
         let result_=run_rsvmp(boHtml,apiUrl)
+        console.timeEnd()
         res.send(result_)
       });
       app.listen(3021, () => {

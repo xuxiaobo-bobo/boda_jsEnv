@@ -21,7 +21,12 @@ let jsCode = staticCode + getRunAllCode
 // debugger
 vm.setGlobal('bodaRunPath', path.join(__dirname , 'run'))
 vm.setGlobal('bodafs', fs)
-var boallundefined = new bodaUndefind.bodaUndefind();
+let boallundefined = new bodaUndefind.bodaUndefind();
+
+
+
+
+
 vm.setGlobal('bodaallundefined', boallundefined)
 vm.setGlobal('bodaURL', URL)
 vm.setGlobal('bodaError', bodaError)

@@ -1,11 +1,7 @@
 // debugger
+
 function bodaDoScript(){
       // debugger
-      
-
-
-
-
       bodaEnv.config.printLog =bodaConifg['log']
       bodaEnv.config.SetTimeOutOpen=bodaConifg['SetTimeOutOpen'] //是否开启定时器事件
       bodaEnv.config.listenerOpen=bodaConifg['listenerOpen']
@@ -109,7 +105,7 @@ function bodaDoScript(){
                           eval(nodeNeedCode)
                 
                     }
-                    bodaEnv.memory.scriptNodeNeedRead=null
+                    bodaEnv.memory.scriptNodeNeedReads=null
                   }
                   break;
               case 'iframe'.toUpperCase():

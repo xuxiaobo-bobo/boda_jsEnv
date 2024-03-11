@@ -772,9 +772,9 @@
                     return result;
                 },
                 set(target, propKey, value, receiver) {
-                    bodaEnv.toolsFunc.console_copy('      [' + objName + ']', "   设置属性:   ", propKey, "   value:   ", value);
-                    let res = Reflect.set(target, propKey, value, receiver);
-                    return res
+                        bodaEnv.toolsFunc.console_copy('      [' + objName + ']', "   设置属性:   ", propKey, "   value:   ", value);
+                        let res = Reflect.set(target, propKey, value, receiver);
+                        return res
                 },
                 // has(target, prop) {
                 //     bodaEnv.toolsFunc.console_copy('['+objName+']',`->  has -> 正在判断对象是否具有属性${prop}`);
@@ -1319,27 +1319,28 @@
         // debugger
         ////直接导出环境设置
         // if (bodaEnv.config.exportEnv){
-        //     if (!bodaEnv.config.exportEnvNameList){
-        //         bodaEnv.config.exportEnvNameList=[]  //具体方法名称 document.createElement
-        //         bodaEnv.config.exportEnvStr=''
-        //         bodaEnv.config.exportEnvObjNameList=[]   //window  document等
-        //      }
-        //     if (!bodaEnv.config.exportEnvObjNameList.includes(objName)){
-        //         bodaEnv.config.exportEnvObjNameList.push(objName)
-        //      }
-        //     if (!bodaEnv.config.exportEnvNameList.includes(name)){
+            // if (!bodaEnv.config.exportEnvNameList){
+            //     bodaEnv.config.exportEnvNameList=[]  //具体方法名称 document.createElement
+            //     bodaEnv.config.exportEnvStr=''
+            //     bodaEnv.config.exportEnvObjNameList=[]   //window  document等
+            //  }
+            // if (!bodaEnv.config.exportEnvObjNameList.includes(objName)){
+            //     bodaEnv.config.exportEnvObjNameList.push(objName)
+            //  }
+            // if (!bodaEnv.config.exportEnvNameList.includes(name)){
                
-        //         bodaEnv.config.exportEnvNameList.push(name)
-        //         bodaEnv.config.exportEnvStr=bodaEnv.config.exportEnvStr+`bodaEnv.envFunc['${name}']=${bodaEnv.envFunc[name]+''}`+'\n\r'
-        //     }
-        //     // bodaEnv.config.exportEnvList.push()
+            //     bodaEnv.config.exportEnvNameList.push(name)
+            //     bodaEnv.config.exportEnvStr=bodaEnv.config.exportEnvStr+`bodaEnv.envFunc['${name}']=${bodaEnv.envFunc[name]+''}`+'\n\r'
+            // }
+            // bodaEnv.config.exportEnvList.push()
         // }
         //可以在这添加逻辑,直接导出所使用的环境!!!!!!!!!!!!!!
+
+        // debugger
         return bodaEnv.envFunc[name].apply(self, argList)
 
 
         } catch (e) {
-            // 
                 // debugger
                 let log__ = `'[${name}]正在执行,错误信息${e.message}'`
                 bodaEnv.toolsFunc.console_copy(log__);
@@ -1378,6 +1379,8 @@
             }
             newDescriptior.set = set;
         }
+        // bodaEnv.memory.myData.set()
+        // debugger
         Object.defineProperty(obj, prop, newDescriptior, 'bobo')
         // bodaEnv.toolsFunc.symbolProperty(obj.prop)
 
@@ -1385,15 +1388,19 @@
     ;;
 
     !function(){
+        // bodaEnv.memory.myToString222=Function.prototype.toString  //保存原来的toString
         const $toString = Function.prototype.toString;
         const $callTostring = Function.prototype.call.bind($toString);
         const memoryMap = new Map();
+        // const memoryMap2 = new Map(); //存放原来的tostring
         const myToString = function toString(){
+            
             return typeof this === 'function' && memoryMap.get(this) || $callTostring(this);
         }
         Object.defineProperty(Function.prototype, "toString", {enumerable: false, configurable: true, writable: true, value: myToString},'bobo');
         function set_native(obj, value){
             memoryMap.set(obj, value);
+
         }
         set_native(Function.prototype.toString, "function toString() { [native code] }");
         bodaEnv.toolsFunc.safefunction = function setNative(func, funcname,funcNameNull){

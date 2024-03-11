@@ -8277,11 +8277,24 @@ bodaError.prepareStackTrace = function () {
   // debugger;
   let _arg0 = arguments[0];
   let _arg1 = arguments[1];
-  // debugger
+  debugger
   bodaEnv.toolsFunc.console_copy(`Error stack 检测 !!!!! _arg0->`, _arg0 + '');
   bodaEnv.toolsFunc.console_copy(`Error stack 检测 !!!!! _arg1->`, _arg1 + '');
-  let _res = `Error
-  at HTMLDocument.i (https://g.alicdn.com/AWSC/fireyejs/1.227.0/fireyejs.js:753:29)`;
+  // let _res = `Error
+  // at HTMLDocument.i (https://g.alicdn.com/AWSC/fireyejs/1.227.0/fireyejs.js:753:29)`;
+  
+  let _res=`Error
+  at P (https://www.zhipin.com/web/common/security-js/87b7f462.js:1:237643)
+  at _ (https://www.zhipin.com/web/common/security-js/87b7f462.js:1:156718)
+  at P (https://www.zhipin.com/web/common/security-js/87b7f462.js:1:187048)
+  at i (https://www.zhipin.com/web/common/security-js/87b7f462.js:1:86500)
+  at P (https://www.zhipin.com/web/common/security-js/87b7f462.js:1:188867)
+  at p (https://www.zhipin.com/web/common/security-js/87b7f462.js:1:315359)
+  at P (https://www.zhipin.com/web/common/security-js/87b7f462.js:1:242987)
+  at Object.j [as z] (https://www.zhipin.com/web/common/security-js/87b7f462.js:1:2882)
+  at r (https://static.zhipin.com/fe-zhipin-geek/web/chat/v5167/static/js/app.6e84b227.js:41181:33)
+  at https://static.zhipin.com/fe-zhipin-geek/web/chat/v5167/static/js/app.6e84b227.js:41226:21`
+
   bodaEnv.toolsFunc.console_copy(`Error stack 检测 !!!!! 修改返回堆栈为->`, _res);
   return _res;
 };

@@ -1,5 +1,37 @@
 ;;(function() {
- 
+    bodaEnv.envFunc.window_name_set = function() {
+        let _nameVal =arguments[0]
+        bodaEnv.toolsFunc.console_copy(`window_name_set  ->res -> `, _nameVal)
+        bodaEnv.memory.window['name']=_nameVal
+        return _nameVal
+    }
+    bodaEnv.envFunc.window_Function_get=function(){
+        // debugger
+        let isliveFunc=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'Function')
+        if (isliveFunc){
+            bodaEnv.toolsFunc.console_copy(`iframe window_Function_get  ->res -> iframe下的Function`)
+            return isliveFunc
+
+        }
+        let iframeFunction=bodaEnv.toolsFunc.proxyHelper(Function,'iframeFunction::proxyHelper')
+        bodaEnv.toolsFunc.console_copy(`iframe window_Function_get  ->res -> iframe下的Function`)
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'Function',iframeFunction)
+        return iframeFunction
+    }
+    bodaEnv.envFunc.window_constructor_get=function(){
+        // debugger
+        let isliveWindow=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'Window')
+        if (isliveWindow){
+            bodaEnv.toolsFunc.console_copy(`iframe window_constructor_get  ->res -> iframe下的Window`)
+            return isliveWindow
+
+        }
+        let iframeWindow=bodaEnv.toolsFunc.proxyHelper(Window,'iframeWindow::proxyHelper')
+        bodaEnv.toolsFunc.console_copy(`iframe window_constructor_get  ->res -> iframe下的Window`)
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'Window',iframeWindow)
+        return iframeWindow
+    }
+
     bodaEnv.envFunc.TextDecoder_decode = function () {
         // debugger
         let arg0 = arguments[0]
@@ -378,6 +410,7 @@
 
       return _nameVal
   }
+
   bodaEnv.envFunc.window_localStorage_get = function() {
 
       let localStorageVal = bodaEnv.memory.globlProtoObj['localStorage']
@@ -1025,8 +1058,15 @@
 
   }
   bodaEnv.envFunc.XMLHttpRequest_setRequestHeader = function() {
+    // debugger
       let header = arguments[0]
       let value = arguments[1]
+      if (header=='Param'){
+        debugger
+        globalThis.xxxxxheader=header
+        globalThis.xxxxxvalue=value
+      }
+
       bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'setRequestHeader', arguments)
       // debugger
       bodaEnv.toolsFunc.console_copy(`XMLHttpRequest_setRequestHeader `, `header -> ${header} ->value->${value}`);
@@ -1450,7 +1490,7 @@
       let url = arguments[1];
       let type = arguments[2]
       bodaEnv.toolsFunc.console_copy(`XMLHttpRequest_open `, `[${method}] `, `[${url}]  [${type}]`);
-    debugger
+    // debugger
       // this.mymethod=method
       bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'open', arguments);
     //   bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'self', this);
@@ -1536,9 +1576,12 @@
   bodaEnv.envFunc.Plugin_item = function Plugin_item() {
 
       let index = arguments[0];
-      bodaEnv.toolsFunc.console_copy(`Plugin_item - >arg ->`, index)
+      itemindex = (index % 4294967296)<=6?(index % 4294967296):(index % 42949672960)
+      //   debugger
+      let _res=this[itemindex];
+      bodaEnv.toolsFunc.console_copy(`Plugin_item - >arg ->`, index,'->_res ->',_res)
 
-      return this[index];
+      return _res
   }
   ;
   bodaEnv.envFunc.PluginArray_namedItem = function PluginArray_namedItem() {
@@ -1552,9 +1595,11 @@
   bodaEnv.envFunc.PluginArray_item = function PluginArray_item() {
 
       let index = arguments[0];
-      itemindex = index % 42949672960
-      bodaEnv.toolsFunc.console_copy(`PluginArray_item -> `, `arg -> `, index);
-      return this[itemindex];
+      itemindex = (index % 4294967296)<=6?(index % 4294967296):(index % 42949672960)
+    //   debugger
+      let _res=this[itemindex];
+      bodaEnv.toolsFunc.console_copy(`PluginArray_item -> `, `arg -> `, index,'->_res ->',_res);
+      return _res
   }
   ;
 
