@@ -40,6 +40,9 @@ if (bodaEnv.config.listenerOpen){
     // bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove'][0],bodaEnv.memory.mouseMoveData)
     // bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove'][1],bodaEnv.memory.mouseMoveData)
 
+    //tx
+    bodaEnv.toolsFunc.doRTClistener()
+
   }
 
 

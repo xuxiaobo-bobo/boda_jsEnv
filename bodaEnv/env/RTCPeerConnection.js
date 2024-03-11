@@ -2,6 +2,7 @@
 
 bodaEnv.memory.globlProtoObj["RTCPeerConnection"] = function RTCPeerConnection() {
   let arg = arguments[0];
+  //debugger;
   if (arg != 'bobo') {
     bodaEnv.toolsFunc.console_copy('RTCPeerConnection 实例化对象 --->', bodaEnv.toolsFunc.stringify_bo(arguments, function (k, v) {
       if (v == window) {

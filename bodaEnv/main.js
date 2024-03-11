@@ -45,7 +45,7 @@ function main() {
         'log': true, //开启日志
         'loadOpen': true, //开启load事件
         'SetTimeOutOpen': true, //开启定时器事件
-        'listenerOpen': false, //开启浏览器事件 mousemove mouseup mousedown 等
+        'listenerOpen': true, //开启浏览器事件 mousemove mouseup mousedown 等
         'userAgent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         'ip_addr':'192.168.2.2', //ip RTC检测,
     }

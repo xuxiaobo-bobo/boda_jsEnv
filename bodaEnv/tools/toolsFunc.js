@@ -29,6 +29,7 @@
 
     bodaEnv.toolsFunc.doRTClistener=function(){
         //RTC事件执行
+        debugger
         if (bodaEnv.memory.RTCPeerConnection.length>0){
             let _RTCList=bodaEnv.memory.RTCPeerConnection
             
@@ -44,13 +45,16 @@
                         get:function isTrusted (){return bodaEnv.toolsFunc.dispatch(this,window, "window", "isTrusted_get", arguments)}
                     })
                     bodaEnv.toolsFunc.console_copy(`开始执行 RTC 事件  当前 事件 ::  ${_RTC}`)
-                    let _localDescription=new bodaEnv.memory.globlProtoObj['RTCSesbodaDescription']('bobo')
+                    let _localDescription=new bodaEnv.memory.globlProtoObj['RTCSessionDescription']('bobo')
                     bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(_RTC,'localDescription',_localDescription)
                     _onicecandidate.call(_RTC,_event)
 
                 }
             }
+            return 
         }
+        bodaEnv.toolsFunc.console_copy(`没有 RTC 事件 需要执行`)
+
     }
     bodaEnv.toolsFunc.getRandomNumber=function (min,max) {
         // var min = 0.91;

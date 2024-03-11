@@ -1041,7 +1041,7 @@
         let arg=arguments[0]
         if (arg=='color'){
             let thisNode=bodaEnv.memory.WeakMap.get(this)
-            debugger
+            // debugger
             let color=thisNode.innerHTML
             let colorgb=''
             switch (color){
@@ -1149,7 +1149,7 @@
         return _res
     }
     bodaEnv.envFunc.Element_remove=function (){
-        debugger
+        // debugger
         let thisNode=bodaEnv.memory.WeakMap.get(this)
         if (!thisNode){
            return bodaEnv.toolsFunc.throwError('typeError','错误thisNode不存在!!!!!!!!!11')
@@ -2188,7 +2188,7 @@
     }
     bodaEnv.envFunc.HTMLCanvasElement_getContext=function(){
         let _type=arguments[0]
-        debugger
+        // debugger
         let thisNode=bodaEnv.memory.WeakMap.get(this)
         let context = null
         switch (_type) {

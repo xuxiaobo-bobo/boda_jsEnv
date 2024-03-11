@@ -1,4 +1,9 @@
 ;;(function() {
+    bodaEnv.envFunc.window_$ = function() {
+        bodaEnv.toolsFunc.console_copy(`window_$  未实现 `)
+        bodaEnv.toolsFunc.throwError('TypeError','主动报错 window_$  未实现')
+
+    }
     bodaEnv.envFunc.window_name_set = function() {
         let _nameVal =arguments[0]
         bodaEnv.toolsFunc.console_copy(`window_name_set  ->res -> `, _nameVal)
@@ -73,9 +78,7 @@
   //     bodaEnv.toolsFunc.console_copy(`window_postMessage 该事件可能需要调用 message 事件!! `, `_arg -> ${_arg}`);
 
   // }
-  bodaEnv.envFunc.window_$ = function() {
-      debugger
-  }
+
   bodaEnv.envFunc.window_requestAnimationFrame = function() {
       // debugger
       bodaEnv.toolsFunc.console_copy(`window_requestAnimationFrame `, `_arg -> ${arguments[0]}`);
