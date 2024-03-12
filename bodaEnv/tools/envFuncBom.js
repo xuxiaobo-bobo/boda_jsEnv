@@ -650,22 +650,7 @@
       return _decodedBodySize
   }
 
-  bodaEnv.envFunc.Performance_getEntriesByName = function() {
-      let _name = arguments[0]
-      let _entries = bodaEnv.memory.Performance.getEntriesByType
-      let _res = []
-      for (let _entry of _entries) {
-          if (_name == _entry['name']) {
-              let entryObj = new PerformanceResourceTiming('bobo')
-              bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(entryObj, 'getEntriesByType', _entry)
-              _res.push(entryObj)
-              break
-          }
-      }
-      bodaEnv.toolsFunc.console_copy(`Performance_getEntriesByName _name-> ${_name} _res->`, _res)
 
-      return _res
-  }
 
   bodaEnv.envFunc.Performance_setResourceTimingBufferSize = function() {
       let _arg = arguments[0]
@@ -1019,22 +1004,31 @@
   }
   ;
   bodaEnv.envFunc.Performance_getEntriesByType = function() {
-
+        // debugger
       let type = arguments[0];
       let typeList = []
-      if (type == 'resource') {
+
           let reslist = bodaEnv.memory.Performance['getEntriesByType'];
           // numm=0
           for (let res of reslist) {
-              let res_ = new PerformanceResourceTiming('bobo');
-              bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(res_, 'getEntriesByType', res)
-              typeList.push(res_)
+              let islive=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(res, 'getEntriesByType')
+              if (islive){
+                typeList.push(islive)
+              }else{
+                let res_ = new PerformanceResourceTiming('bobo');
+                res_=bodaEnv.toolsFunc.proxyPerformance(res_,'PerformanceResourceTiming ::proxyPerformance ')
+                bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(res_, 'getEntriesByType', res)
+                bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(res_, 'type',type)
+
+                bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(res, 'getEntriesByType',res_)
+                typeList.push(res_)
+              }
+
               // numm+=1
           }
           //  debugger
           bodaEnv.toolsFunc.console_copy(`Performance_getEntriesByType- >`, `arg->${type}`, `-> res ->${typeList}`);
           return typeList;
-      }
   }
   ;
 
@@ -2063,6 +2057,7 @@
       if (_retVal) {
           return _retVal;
       }
+    //   debugger
       let _val = bodaEnv.memory.globlProtoObj['performance'];
       bodaEnv.toolsFunc.console_copy(`window_performance_get ->`, _val);
       return _val;
@@ -3582,5 +3577,86 @@
         return appVersion;
     }
 
+      bodaEnv.envFunc.Performance_getEntriesByName = function() {
+      let _name = arguments[0]
+      let _entries = bodaEnv.memory.Performance.getEntriesByType
+      let _res = []
+      for (let _entry of _entries) {
+          if (_name == _entry['name']) {
+              let entryObj = new PerformanceResourceTiming('bobo')
+              bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(entryObj, 'getEntriesByType', _entry)
+              _res.push(entryObj)
+              break
+          }
+      }
+      bodaEnv.toolsFunc.console_copy(`Performance_getEntriesByName _name-> ${_name} _res->`, _res)
+
+      return _res
+  }
+  bodaEnv.envFunc.PerformanceObserver_supportedEntryTypes_get=function(){
+    // debugger
+    let _res=['element', 'event', 'first-input', 'largest-contentful-paint', 'layout-shift', 'longtask', 'mark', 'measure', 'navigation', 'paint', 'resource', 'visibility-state']
+    bodaEnv.toolsFunc.console_copy(`PerformanceObserver_supportedEntryTypes_get 可能需要根据网站修改!!!! _res->`, _res)
+
+    return _res
+  }
+  bodaEnv.envFunc.PerformanceObserver_observe=function(){
+    // debugger
+    let _obs=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this)['PerformanceObserver']
+    if (_obs){
+        let _func=_obs[0]
+        bodaEnv.toolsFunc.console_copy(`PerformanceObserver_observe 直接调用PerformanceObserver 下的func`)
+        // debugger
+        _func.call(undefined,new PerformanceObserverEntryList('bobo'),this)
+        return 
+    }
+    bodaEnv.toolsFunc.throwError('TypeError','主动报错 PerformanceObserver_observe')
+  }
+  bodaEnv.envFunc.PerformanceObserverEntryList_getEntries=function(){
+    let _res=[]
+    let islive1=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'PerformancePaintTiming_1')
+    let islive2=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this,'PerformancePaintTiming_2')
+    if (islive1 || islive2){
+        _res.push(islive1)
+        _res.push(islive1)
+    }else{
+        let _res1=new PerformancePaintTiming('bobo')
+        let _res2=new PerformancePaintTiming('bobo')
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'PerformancePaintTiming_1',_res1)
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(_res1, 'name',"first-paint")
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(_res1, 'entryType',"paint")
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(_res1, 'startTime',15854.90000000596)
+
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this, 'PerformancePaintTiming_2',_res2)
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(_res2, 'name',"first-contentful-paint")
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(_res2, 'entryType',"paint")
+        bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(_res2, 'startTime',15854.90000000596)
+
+        _res.push(_res1)
+        _res.push(_res2)
+    }
+
+    bodaEnv.toolsFunc.console_copy(`PerformanceObserverEntryList_getEntries _res ->`,_res)
+
+    return _res
+  }
+
+  bodaEnv.envFunc.PerformanceEntry_name_get=function(){
+        let _name=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this, 'name')
+        bodaEnv.toolsFunc.console_copy(`PerformanceEntry_name_get _res ->`,_name)
+
+        return _name
+  }
+
+  bodaEnv.envFunc.PerformanceEntry_startTime_get=function(){
+    let startTime=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this, 'startTime')
+    bodaEnv.toolsFunc.console_copy(`PerformanceEntry_startTime_get _res ->`,startTime)
+    return startTime
+  }
+  bodaEnv.envFunc.PerformanceEntry_entryType_get=function(){
+    let entryType=bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(this, 'entryType')
+    bodaEnv.toolsFunc.console_copy(`PerformanceEntry_entryType_get _res ->`,entryType)
+    return entryType
+  }
 }
 )()

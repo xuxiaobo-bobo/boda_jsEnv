@@ -213,8 +213,24 @@ Promise.allSettled=function (){
   bodaEnv.toolsFunc.console_copy('Promise.allSettled 暂未实现')
 
 }
-Promise.resolve=function (){
-  bodaEnv.toolsFunc.console_copy('Promise.resolve 暂未实现')
+Promise.resolve = function(val) {
+  // 如果参数是Promise实例，直接返回这个实例
+  if(val instanceof Promise) {
+    return val;
+  }
 
+  return new Promise((resolve, reject) => {
+    if(val && val instanceof Object && typeof val.then === 'function') {
+      // 如果val是thenable，把val的then方法置换到新的Promise的then方法上，实现状态同步
+      setTimeout(() => { 
+        val.then(resolve, reject);
+      }, 0);
+    } else {
+      // 如果val是其它值，将其作为成功状态的结果值
+      resolve(val);
+    }
+  });
 }
+bodaEnv.toolsFunc.safeFunc(Promise.resolve,'resolve')
+
 // debugger

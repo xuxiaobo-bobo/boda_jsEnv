@@ -35,13 +35,13 @@ if (bodaEnv.config.listenerOpen){
 
     /// 非淘227 ----
     debugger
-    // bodaEnv.toolsFunc.dolistener('mousedown',bodaEnv.memory.asyncEvent['listener']['onmousedown'][0],bodaEnv.memory.mouseDownData)
-    // bodaEnv.toolsFunc.dolistener('mousedown',bodaEnv.memory.asyncEvent['listener']['mousedown'][0],bodaEnv.memory.mouseDownData)
-    // bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove'][0],bodaEnv.memory.mouseMoveData)
-    // bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove'][1],bodaEnv.memory.mouseMoveData)
+    bodaEnv.toolsFunc.dolistener('mousedown',bodaEnv.memory.asyncEvent['listener']['onmousedown']?bodaEnv.memory.asyncEvent['listener']['onmousedown'][0]:[],bodaEnv.memory.mouseDownData)
+    bodaEnv.toolsFunc.dolistener('mousedown',bodaEnv.memory.asyncEvent['listener']['mousedown']?bodaEnv.memory.asyncEvent['listener']['mousedown'][0]:[],bodaEnv.memory.mouseDownData)
+    bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove']?bodaEnv.memory.asyncEvent['listener']['mousemove'][0]:[],bodaEnv.memory.mouseMoveData)
+    bodaEnv.toolsFunc.dolistener('mousemove',bodaEnv.memory.asyncEvent['listener']['mousemove']?bodaEnv.memory.asyncEvent['listener']['mousemove'][1]:[],bodaEnv.memory.mouseMoveData)
 
     //tx
-    bodaEnv.toolsFunc.doRTClistener()
+    // bodaEnv.toolsFunc.doRTClistener()
 
   }
 

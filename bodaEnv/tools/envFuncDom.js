@@ -899,6 +899,7 @@
     }
     bodaEnv.envFunc.Document_wasDiscarded_get = function () {
         bodaEnv.toolsFunc.console_copy(`Document_wasDiscarded_get 默认返回 false`)
+        // debugger
         return false
     }
     bodaEnv.envFunc.Document_referrer_get = function () {
@@ -2610,6 +2611,11 @@
         bodaEnv.toolsFunc.console_copy(`Document_compatMode_get -> _res -> ${_res}`)
 
         return _res
+    }
+    bodaEnv.envFunc.Document_prerendering_get=function(){
+        bodaEnv.toolsFunc.console_copy(`Document_prerendering_get -> _res -> ${false}`)
+
+        return false
     }
     
 })()

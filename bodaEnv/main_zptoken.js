@@ -16,7 +16,7 @@ fs.writeFileSync(path.join(__dirname , 'run' , 'log.txt'),'')
 //配置路径
 let vm = new VM()
 let staticCode = getCodeFunc.getStaticCode()
-let getRunAllCode = getCodeFunc.getRunAllCode()
+let getRunAllCode = getCodeFunc.getRunAllCode('zp_token')  //获取运行代码 对应run文件下的js
 let jsCode = staticCode + getRunAllCode
 // debugger
 vm.setGlobal('bodaRunPath', path.join(__dirname , 'run'))

@@ -989,9 +989,14 @@ function getStaticCode(){
 
 
 
-function getRunCode(){
+function getRunCode(runFileName){
     let code=''
-    code+=getFile("run","run") 
+    if (!runFileName){
+        code+=getFile("run","run") 
+    }else{
+        code+=getFile("run",runFileName) 
+        debugger
+    }
     // console.log('run.js 代码转换中')
 
     // debugger
@@ -1000,7 +1005,7 @@ function getRunCode(){
 }
 
 
-function getRunAllCode(website){
+function getRunAllCode(runFileName){
     let code=''
     code +='function getValue(){ \r\n'
     code +=`bodaEnv.toolsFunc.initEnvFingerPrint() \r\n`
@@ -1012,7 +1017,7 @@ function getRunAllCode(website){
     //     code+=getFile("run//website//"+website,"run")
     // }else{
         // code+=getFile("run","run")  //只需要修改这个代码就行
-    code +=getRunCode()
+    code +=getRunCode(runFileName)
     // }
     // debugger
     // code+=getFile("tools","asyncLoad")

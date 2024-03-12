@@ -48,6 +48,7 @@ bodaEnv.memory.asyncEvent.setTimeout=[]
 
 // debugger
 // config.js 回收
+
 bodaEnv.memory.documentCollection={}  //存放document.getelementbytagname
 // bodaEnv.memory.ElementCollectionMap.clear() //存放Element.getelementbytagname
 bodaEnv.memory.childrenCollectionMap.clear() ///存放Element.children
@@ -113,6 +114,8 @@ for (let _domele in bodaEnv.memory.domDocument){
     _domele=null
 }
 
+
+bodaEnv.memory.readScriptList=[]
 bodaEnv.memory.domDocument = {}
 bodaEnv.memory.domDocument = null
 bodaEnv.memory.tempDocument=null

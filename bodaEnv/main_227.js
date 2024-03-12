@@ -15,16 +15,11 @@ fs.writeFileSync(path.join(__dirname , 'run' , 'log.txt'),'')
 
 //配置路径
 let vm = new VM()
-let staticCode = getCodeFunc.getStaticCode()
-let getRunAllCode = getCodeFunc.getRunAllCode()
-let jsCode = staticCode + getRunAllCode
+
 // debugger
 vm.setGlobal('bodaRunPath', path.join(__dirname , 'run'))
 vm.setGlobal('bodafs', fs)
 let boallundefined = new bodaUndefind.bodaUndefind();
-
-
-
 
 
 vm.setGlobal('bodaallundefined', boallundefined)
@@ -36,13 +31,18 @@ vm.setGlobal('bodaBabelParser',getCodeFunc.parser)
 vm.setGlobal('bodaBabeltraverse',getCodeFunc.traverse)
 vm.setGlobal('bodaBabeltypes',getCodeFunc.types)
 vm.setGlobal('bodaBabelgenerator',getCodeFunc.generator)
+
+
+let staticCode = getCodeFunc.getStaticCode()
+let getRunAllCode = getCodeFunc.getRunAllCode('run227')  //传入需要读取的js文件
+let jsCode = staticCode + getRunAllCode
 const script = new VMScript(jsCode, "./debugJS.js")
 let result = vm.run(script);
 let testNum=0
 function main() {
     let website_ = 'https://passport.gds.org.cn/Account/Login'
     // console.time()
-    let bohtml = fs.readFileSync(path.join(__dirname,'run','run.html'), 'utf8').toString();
+    let bohtml = fs.readFileSync(path.join(__dirname,'run','run227.html'), 'utf8').toString();
     // debugger
     // console.timeEnd()
     let dominoWindow = domino.createWindow(bohtml, website_)
@@ -62,7 +62,7 @@ function main() {
     // console.time()
     resultVal = result()
     // debugger
-    console.log(resultVal)
+    // console.log(resultVal)
 
     bohtml = null
     dominoWindow = null
@@ -70,6 +70,10 @@ function main() {
     return resultVal
 }
 
-        let result_=main()
-
-        console.log(result_)
+app.get('/get227', (req, res) => {
+    let result_=main()
+    res.send(result_)
+  });
+  app.listen(3000, () => {
+    console.log('监听端口3000');
+  })

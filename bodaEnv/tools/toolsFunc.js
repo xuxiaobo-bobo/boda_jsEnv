@@ -29,7 +29,7 @@
 
     bodaEnv.toolsFunc.doRTClistener=function(){
         //RTC事件执行
-        debugger
+        // debugger
         if (bodaEnv.memory.RTCPeerConnection.length>0){
             let _RTCList=bodaEnv.memory.RTCPeerConnection
             
@@ -433,6 +433,7 @@
         event_ : 事件对象
         envnentData : 事件数据
         */ 
+        if (!event_) return 
         bodaEnv.memory.runningListern=true
         bodaEnv.memory.listenerEnd=false
         let eventType=null
@@ -866,6 +867,144 @@
 
             return proxyObj;
         
+    }
+    bodaEnv.toolsFunc.proxyPerformance=function (obj, objName) {
+        //这个方法的proxy为必要,不能关闭
+        let handler = {
+            get(target, prop, receiver) {
+                // let 
+                // if (prop=='getContext'){debugger}
+                let result = Reflect.get(target, prop, receiver)
+                // if(prop =='top:1px')debugger
+                if (bodaEnv.toolsFunc.filterProxyProp(prop)) {
+                    return result;
+                }
+                if (prop =='type'){
+                    let _type =bodaEnv.toolsFunc.getObjWeakMapProtoAttr.call(receiver)['type']
+                    
+                    switch (_type){
+                        case 'navigation':
+                            result='navigate'
+                            break
+                        default:
+                            bodaEnv.toolsFunc.console_copy('      [' + objName + ']', '   获取属性:   ', prop, '   value:   未实现!!!!',);
+                    }
+                }
+                if (prop =='activationStart'){
+                    result=0
+                }
+                // debugger
+
+                bodaEnv.toolsFunc.console_copy('      [' + objName + ']', '   获取属性:   ', prop, '   value:   ', result,);
+                return result;
+            },
+            set(target, propKey, value, receiver) {
+                
+                bodaEnv.toolsFunc.console_copy('      [' + objName + ']', "   设置属性:   ", propKey, "   value:   ", value);
+                let res = Reflect.set(target, propKey, value, receiver);
+                return res
+            },
+            // has(target, prop) {
+            //     bodaEnv.toolsFunc.console_copy('['+objName+']',`->  has -> 正在判断对象是否具有属性${prop}`);
+            //     return Reflect.has(target, prop);
+            //   },
+            // deleteProperty(target, prop) {
+            //     // debugger
+            //     if (Number(prop)>=0){
+            //         bodaEnv.toolsFunc.console_copy('      [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为-> [false]`);
+            //         return false
+            //     }
+            //     let result=null
+            //     let isbo=''
+            //     if (prop.startsWith('bo')){
+            //         isbo=prop.slice(2)
+            //     }
+            //     if (isbo){
+            //          result=Reflect.deleteProperty(target, isbo);
+
+            //     }else{
+            //          result=Reflect.deleteProperty(target, prop);
+            //          bodaEnv.toolsFunc.console_copy('     [' + objName + ']', `-> deleteProperty -> 正在删除属性${prop} 结果为 ->`,[result]);
+
+            //     }
+        
+
+            //     return result
+            // },
+            // ownKeys(target) {
+            //     // if (target._boContentWindow){
+            //     //     let resKeys=Reflect.ownKeys(target)
+            //     //     // debugger    
+            //     //     bodaEnv.toolsFunc.console_copy('['+objName+']',' ->ownKeys -> contentWindow_keys 正在获取对象的所有属性 ->',target,`-> res ->`,resKeys );
+            //     //     return resKeys
+            //     // }
+            //     bodaEnv.toolsFunc.console_copy('[' + objName + ']', ' ->ownKeys -> 正在获取对象的所有属性 ->', target);
+            //     return Reflect.ownKeys(target);
+            // },
+            //   getOwnPropertyDescriptor(target, prop) {
+            //     // debugger
+            //     bodaEnv.toolsFunc.console_copy('['+objName+']',`正在获取属性${prop}的描述符`);
+            //     return Reflect.getOwnPropertyDescriptor(target, prop);
+            // //   },
+            //   defineProperty(target, prop, descriptor) {
+            //     // debugger
+            //     if (Number(prop)>=0){
+            //         return bodaEnv.toolsFunc.throwError('TypeError',`Failed to set an indexed property on 'HTMLCollection': Index property setter is not supported.`)
+            //     }
+            //     let isbo=''
+            //     if (prop.startsWith('bo')){
+            //         isbo=prop.slice(2)
+            //     }
+            //     if (isbo){
+            //         result=Reflect.defineProperty(target, isbo,descriptor);
+
+            //    }else{
+            //         result=Reflect.defineProperty(target, prop,descriptor);
+            //         bodaEnv.toolsFunc.console_copy('      ['+objName+']',`-> defineProperty -> 正在定义属性${prop} -> res->`,result);
+
+            //    }
+            //     return result
+            //   },
+            // preventExtensions(target) {
+            //     bodaEnv.toolsFunc.console_copy('[' + objName + ']', '-> preventExtensions -> 正在禁止对象扩展');
+            //     return Reflect.preventExtensions(target);
+            // },
+            //   getPrototypeOf(target) {
+            //     debugger
+            //     bodaEnv.toolsFunc.console_copy('['+objName+']','正在获取对象的原型');
+            //     return Reflect.getPrototypeOf(target);
+            //   },
+            // setPrototypeOf(target, proto) {
+            //     bodaEnv.toolsFunc.console_copy('[' + objName + ']', '正在设置对象的原型');
+            //     return Reflect.setPrototypeOf(target, proto);
+            // },
+            apply(target, thisArg, argArray) {
+                // debugger
+                bodaEnv.toolsFunc.console_copy('      [' + objName + ']', '正在调用函数apply ->',`this 为 ->`,bodaEnv.toolsFunc.stringify_bo(thisArg),` -> arg 为 ->`,bodaEnv.toolsFunc.stringify_bo(argArray));
+                return Reflect.apply(target, thisArg, argArray);
+            },
+            construct(target, argArray, newTarget) {
+                bodaEnv.toolsFunc.console_copy('      [' + objName + ']', '正在创建对象实例construct -> argArray ->',bodaEnv.toolsFunc.stringify_bo(argArray),` -> newTarget ->`,newTarget);
+                // return new Promise222(argArray)
+                // let result=new target(...argArray)
+                // debugger
+                // result.buffer=tempBuf
+                // debugger
+                let resConstruct=Reflect.construct(target, argArray, newTarget);
+                resConstruct=bodaEnv.toolsFunc.proxyHelper(resConstruct,'proxyHelper::'+resConstruct)
+                return resConstruct
+                // return {}
+            }
+        };
+        // debugger
+        let proxyObj = new Proxy(obj, handler);
+        // Object.defineProperty(obj, bodaEnv.memory.symbolProxy, {
+        //     configurable:false,
+        //     enumerable:false,
+        //     writable:false,
+        //     value:proxyObj
+        // },'bobo');
+        return proxyObj;
     }
     bodaEnv.toolsFunc.proxyHelper=function (obj, objName) {
         //这个方法的proxy为必要,不能关闭

@@ -21,7 +21,7 @@ function bodaDoScript(){
 
 
 
-
+      bodaEnv.memory.readScriptList=[] //保存已经读取的script路径 防止重复读取
       bodaEnv.memory.domDocument = {}
       bodaEnv.memory.domDocument.all = []
       bodaEnv.memory.tempDocument=bodadominoWindow.document
@@ -47,6 +47,7 @@ function bodaDoScript(){
               let regexRule=bodaEnv.memory.regexRule['url'].exec(mypath)
                 let urlPath=regexRule?regexRule[1].split('.')[0]:null
                 // if (httpPath != -1) {
+                  // debugger
                 bodaEnv.toolsFunc.console_copy('处理script脚本代码中,获取到src标签中路径->', mypath,)
               //   bodaPath2 = bodaEnv.memory.location['host'] + '//' + urlPath[1].split('.')[0]+'.js'
                 // debugger
@@ -57,7 +58,11 @@ function bodaDoScript(){
                   
                 }
                 bodaPath2 = bodaEnv.memory.tempLocation['host'] + '//' + urlPath+'.js'
-
+                if (bodaEnv.memory.readScriptList.includes(bodaPath2)){
+                  bodaEnv.toolsFunc.console_copy(bodaPath2,'-> 已经读取过,跳过')
+                  return ''
+                }
+                bodaEnv.memory.readScriptList.push(bodaPath2)
                 bodaEnv.memory.currentFile=bodaPath2
                 bodaEnv.toolsFunc.console_copy('转换为 -> ', bodaPath2)
                 if (bodafs.existsSync(bodaRunPath+'//website//')){

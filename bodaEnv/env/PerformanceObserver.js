@@ -11,6 +11,7 @@ bodaEnv.memory.globlProtoObj["PerformanceObserver"] = function PerformanceObserv
       }
     }));
   }
+  bodaEnv.toolsFunc.setObjWeakMapProtoAttr.call(this,'PerformanceObserver',arguments)
   ;
 };
 bodaEnv.toolsFunc.safeProto(bodaEnv.memory.globlProtoObj["PerformanceObserver"], "PerformanceObserver");

@@ -6,8 +6,9 @@ const express = require('express');
 const { VM, VMScript, bodaError } = require("vm2")
 const getCodeFunc = require(path.join(__dirname,'tools','getRunCode.js'))
 
+
 const app = express();
-app.use(express.json({limit:'100mb'}));
+app.use(express.json({limit:'500mb'}));
 let bodaUndefind = require(path.join(__dirname,'nodePlugin','bodaUndefined_v18.17.0.node'))
 
 // debugger
@@ -15,9 +16,7 @@ fs.writeFileSync(path.join(__dirname , 'run' , 'log.txt'),'')
 
 //配置路径
 let vm = new VM()
-let staticCode = getCodeFunc.getStaticCode()
-let getRunAllCode = getCodeFunc.getRunAllCode()
-let jsCode = staticCode + getRunAllCode
+
 // debugger
 vm.setGlobal('bodaRunPath', path.join(__dirname , 'run'))
 vm.setGlobal('bodafs', fs)
@@ -32,15 +31,20 @@ vm.setGlobal('bodaBabelParser',getCodeFunc.parser)
 vm.setGlobal('bodaBabeltraverse',getCodeFunc.traverse)
 vm.setGlobal('bodaBabeltypes',getCodeFunc.types)
 vm.setGlobal('bodaBabelgenerator',getCodeFunc.generator)
+
+
+let staticCode = getCodeFunc.getStaticCode()
+let getRunAllCode = getCodeFunc.getRunAllCode()
+let jsCode = staticCode + getRunAllCode
 const script = new VMScript(jsCode, "./debugJS.js")
 let result = vm.run(script);
 let testNum=0
-    function run_rsvmp(_reqhtml,apiUrl) {
+    function run_rsvmp(boUrl,_reqhtml,apiUrl) {
         // configFormChrome 去浏览器复制一下,记得把cookie删了
         //获取前缀,getResult文件下把这个打开就行'rsurl':bodaEnv.toolsFunc.getApi(bodaConifg['apiUrl'])
         // listenerOpen 打开后 调用load事件 asyncListener文件夹下
         // 运行时候,把run_rs.html,run_rs.js 改为run.html,run.js
-        let website_ = 'https://www.hubei.gov.cn/'//atob('aHR0cDovL3d3dy5ubXBhLmdvdi5jbg==')
+        let website_ = boUrl//atob('aHR0cDovL3d3dy5ubXBhLmdvdi5jbg==')
         let bohtml =''
         if (!_reqhtml){
             bohtml= fs.readFileSync(path.join(__dirname , 'run','run.html'), 'utf8').toString();
@@ -48,7 +52,7 @@ let testNum=0
         }else{
             bohtml=_reqhtml
         }
-        console.log(bohtml)
+        // console.log(bohtml)
         let dominoWindow = domino.createWindow(bohtml, website_)
         let bodaConifg = {
             'log': false, //开启日志
@@ -76,11 +80,12 @@ let testNum=0
         rs 不需要用run.js 文件
         在run/website/ 底下按照我提供的例子,放js文件
         */
-        let boHtml=req.query['boHtml']
+        // debugger
+        let boUrl=req.query['boUrl']
+        let boHtml=atob(req.query['boHtml'])
         let apiUrl=req.query['apiUrl']
-        console.time()
-        let result_=run_rsvmp(boHtml,apiUrl)
-        console.timeEnd()
+        // debugger
+        let result_=run_rsvmp(boUrl,boHtml,apiUrl)
         res.send(result_)
       });
       app.listen(3021, () => {
