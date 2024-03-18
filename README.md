@@ -1,5 +1,5 @@
-运行 227  ---> 运行main_227.js 运行main_227.py
-运行 rs   ---> 运行main_rs.js  运行main_rs.py
+ 227  ---> main_227.js -> main_227.py
+rs   ---> main_rs.js  -> main_rs.py
 
 ## 警告
 

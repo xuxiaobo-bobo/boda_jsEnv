@@ -1,8 +1,8 @@
 
 // 全局变量初始化
-var mytime_stamp = Date.now()
 // debugger
 !function () {
+    let mytime_stamp = Date.now()
 
 
     if (bodaEnv.config.randomhook) {

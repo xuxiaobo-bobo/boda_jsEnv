@@ -10,7 +10,8 @@ from lxml import etree
 
 headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    }
+        }
+
 class RSVMP:
 
     def fetch(self,url,apiUrl):
@@ -35,7 +36,7 @@ class RSVMP:
 
         b64conent=base64.b64encode(response.content)
 
-        resp_=requests.get('http://127.0.0.1:3021/cookie',params={'boUrl':url,'boHtml':b64conent,'apiUrl':apiUrl}).json()
+        resp_=requests.get('http://127.0.0.1:3022/cookie',params={'boUrl':url,'boHtml':b64conent,'apiUrl':apiUrl}).json()
         print(resp_)
 
         cookie_dict = dict(item.split('=') for item in resp_['cookie'].split('; '))
@@ -47,13 +48,10 @@ class RSVMP:
         
         data ={'current': 1, 'pageSize': 10, 'modeNo': "BizAnnoVoMtable", 'pageNo': 1}
 
-        response3 = session.post(resp_['rsurl'], headers=headers ,json=data)
+        response3 = session.get(resp_['rsurl'], headers=headers)
 
         print(response3.text)
 
-if __name__ == '__main__':
-    rs=RSVMP()
-    rs.fetch('http://www.chinaunicombidding.cn/','http://www.chinaunicombidding.cn/api/v1/bizAnno/getAnnoList')
 
 
 
