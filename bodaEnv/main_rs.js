@@ -8,7 +8,12 @@ const getCodeFunc = require(path.join(__dirname,'tools','getRunCode.js'))
 
 
 const app = express();
-app.use(express.json({limit:'500mb'}));
+app.use(express.json({limit:'100mb'}));
+
+app.use(express.json()); //用于解析json类型的参数
+
+app.use(express.urlencoded({ extended: true })); //用于解析x-www-form-urlencoded类型的参数
+
 let bodaUndefind = require(path.join(__dirname,'nodePlugin','bodaUndefined_v18.17.0.node'))
 
 // debugger
@@ -73,7 +78,7 @@ let testNum=0
     }
 
 
-      app.get('/cookie', (req, res) => {
+      app.post('/cookie', (req, res) => {
         /*
         boHtml: 请求返回的html页面  
         apiUrl: 接口url
@@ -81,10 +86,11 @@ let testNum=0
         在run/website/ 底下按照我提供的例子,放js文件
         */
         // debugger
-        let boUrl=req.query['boUrl']
-        let boHtml=atob(req.query['boHtml'])
-        let apiUrl=req.query['apiUrl']
+        let boUrl=req.body['boUrl']
+        let boHtml=atob(req.body['boHtml'])
+        let apiUrl=req.body['apiUrl']
         // debugger
+        console.log(boHtml)
         let result_=run_rsvmp(boUrl,boHtml,apiUrl)
         res.send(result_)
       });

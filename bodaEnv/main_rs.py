@@ -18,7 +18,7 @@ class RSVMP:
         session=requests.Session()
         
         response = session.get(url, headers=headers)
-        # print(response.text)
+        print(response.text)
         tree=etree.HTML(response.text)
         
         ts_url=tree.xpath('//script/@src')[0]
@@ -36,8 +36,8 @@ class RSVMP:
 
         b64conent=base64.b64encode(response.content)
 
-        resp_=requests.get('http://127.0.0.1:3022/cookie',params={'boUrl':url,'boHtml':b64conent,'apiUrl':apiUrl}).json()
-        print(resp_)
+        resp_=requests.post('http://127.0.0.1:3022/cookie',data={'boUrl':url,'boHtml':b64conent,'apiUrl':apiUrl}).json()
+        # print(resp_)
 
         cookie_dict = dict(item.split('=') for item in resp_['cookie'].split('; '))
         
@@ -45,14 +45,11 @@ class RSVMP:
             session.cookies.set(cookie_name, cookie_value)
         
         resp2=session.get(url, headers=headers)
-        
+        print(resp2)
         data ={'current': 1, 'pageSize': 10, 'modeNo': "BizAnnoVoMtable", 'pageNo': 1}
 
         response3 = session.get(resp_['rsurl'], headers=headers)
 
         print(response3.text)
-
-
-
 
 
