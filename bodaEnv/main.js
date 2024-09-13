@@ -44,7 +44,7 @@ let testNum=0
         //获取前缀,getResult文件下把这个打开就行'rsurl':bodaEnv.toolsFunc.getApi(bodaConifg['apiUrl'])
         // listenerOpen 打开后 调用load事件 asyncListener文件夹下
         // 运行时候,把run_rs.html,run_rs.js 改为run.html,run.js
-        let website_ = 'https://www.dhl.com/cn-zh/home/tracking.html?tracking-id=1123123&submit=1'//atob('aHR0cDovL3d3dy5ubXBhLmdvdi5jbg==')
+        let website_ = ''//网站url
         let bohtml =''
         if (!_reqhtml){
             bohtml= fs.readFileSync(path.join(__dirname , 'run','run.html'), 'utf8').toString();
